@@ -12,16 +12,19 @@ export default function Social() {
   const links = [
     {
       icon: <LinkedInIcon sx={{ fontSize: 50 }}/>,
+      title: "Connect with me on ",
       link: "https://www.linkedin.com/in/sudippau"
     }, {
       icon: <GitHubIcon sx={{ fontSize: 50 }}/>,
+      title: "View my projects on ",
       link: "https://github.com/sudi-p"
     }
   ]
   return (
     <div>
-      {links.map(({ link, icon }) => (
-        <a href={link} target="_next" className="mr-4">
+      {links.map(({ link, icon, title }) => (
+        <a href={link} key="link" target="_next" className="mr-4 p-2 border-slate-400">
+          <span className="hidden hover:block">{title}</span>
           {icon}
         </a>
       ))}
