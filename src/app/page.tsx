@@ -20,8 +20,9 @@ export default function Home() {
         <DisplayPicture />
       </div>
       <div className="relative">
-        <div className="leading-relaxed p-4 text-center bg-blue-200 rounded-xl w-1/2 absolute inset-x-1/4 -top-[60px]">
-          Welcome to my portfolio! I am a Toronto-based Software Engineer with 5+ years of experience. Skilled in JavaScript, React, Redux, Python, Django, and more, I specialize in crafting innovative solutions and delightful user experiences. Let's connect and explore how we can collaborate on impactful projects!
+        <div className="leading-relaxed tracking-wide p-4 text-center bg-blue-200 rounded-xl w-1/2 absolute inset-x-1/4 -top-[80px]">
+          Welcome to my portfolio! I am a Toronto-based Software Engineer with 5+ years of experience. Skilled in JavaScript, React, Redux, Python, Django, and more, I specialize in crafting innovative solutions and delightful user experiences. Let's connect and explore how we can collaborate on impactful projects!<br/>
+          Projects that i have worked on
         </div>
       </div>
       <Projects />
