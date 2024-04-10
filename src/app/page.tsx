@@ -2,6 +2,7 @@
 import DisplayPicture from '@/components/home/DisplayPicture';
 import Projects from '@/components/home/Projects';
 import Social from '@/components/home/Social';
+import Testimonials from '@/components/home/Testimonials';
 export default function Home() {
   return (
     <main>
@@ -26,6 +27,7 @@ export default function Home() {
         </div>
       </div>
       <Projects />
+      <Testimonials />
     </main>
   )
 }
