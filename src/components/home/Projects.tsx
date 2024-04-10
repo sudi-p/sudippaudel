@@ -28,7 +28,9 @@ const Projects = () => {
     },
   ]
   return (
-    <div className="h-screen px-20 py-40 center">
+    <div className="p-20 pt-32 text-center">
+      <p className="font-bold text-3xl mb-4">My Recent Work</p>
+      <p className="text-xl mb-10">Here are a few projects that i've worked on.</p>
       <div className="flex gap-20 justify-center align-middle">
         {projects.map(project => (
           <Project key={project.title} {...project} />
