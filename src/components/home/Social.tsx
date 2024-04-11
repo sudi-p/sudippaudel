@@ -23,7 +23,7 @@ export default function Social() {
   return (
     <div className="flex">
       {links.map(({ link, icon, title }) => (
-        <a href={link} key="link" target="_next" className="mr-4 p-2 relative flex items-center  group hover:border border-solid focus:outline-none focus:ring active:bg-indigo-600 active:text-white">
+        <a href={link} key={link} target="_next" className="mr-4 p-2 relative flex items-center  group hover:border border-solid focus:outline-none focus:ring active:bg-indigo-600 active:text-white">
           <span className="ease absolute left-0 top-0 h-0 w-0 border-t-2 border-violet-600 transition-all duration-500 group-hover:w-full"></span>
           <span className="ease absolute right-0 top-0 h-0 w-0 border-r-2 border-violet-600 transition-all duration-500 group-hover:h-full"></span>
           <span className="ease absolute bottom-0 right-0 h-0 w-0 border-b-2 border-violet-600 transition-all duration-500 group-hover:w-full"></span>

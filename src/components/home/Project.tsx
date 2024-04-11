@@ -24,7 +24,7 @@ const Project = ({
           <div className="hidden group-hover:block p-4 text-center">{description}</div>
           <div className="gap-4 flex-wrap justify-center hidden group-hover:flex">
             {tags.map(tag => (
-              <div className="p-2 border-2 border-solid border-white rounded-sm">{tag}</div>
+              <div key={tag} className="p-2 border-2 border-solid border-white rounded-sm">{tag}</div>
             ))}
           </div>
           {link && <button className="hidden group-hover:block p-4"><a href={link}>Link to Github</a></button>}
