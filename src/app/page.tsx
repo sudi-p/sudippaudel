@@ -1,16 +1,19 @@
 'use client';
+import { useState } from 'react';
 import DisplayPicture from '@/components/home/DisplayPicture';
 import Projects from '@/components/home/Projects';
 import Social from '@/components/home/Social';
 import Testimonials from '@/components/home/Testimonials';
-import { useState } from 'react';
+import { FaHandPaper } from "react-icons/fa";
+import ContactForm from '@/components/home/ContactForm';
+
 export default function Home() {
   const [showContactForm, setShowContactForm] = useState(true)
   return (
     <main>
       <div className="relative p-10 flex gap-32 justify-center items-center h-screen border-b-2 border-solid border-gray-200">
-        <div className="p-2 bg-blue-400 text-white rounded-xl cursor-pointer font-semibold hover:bg-blue-500 absolute top-10 right-28">
-          Say Hello!
+        <div onClick={() => setShowContactForm(!showContactForm)} className="p-2 group flex items-center gap-1 bg-blue-500 text-white rounded-xl cursor-pointer font-semibold hover:bg-blue-600 absolute top-10 right-28">
+        <div className='group-hover:rotate-45'><FaHandPaper /></div>Say Hello!
         </div>
         <div className='flex flex-2 flex-col gap-10 w-1/2'>
           <header className="text-3xl font-bold">sudipPaudel</header>
@@ -33,6 +36,7 @@ export default function Home() {
       </div>
       <Projects />
       <Testimonials />
+      { showContactForm && <ContactForm setShowContactForm={setShowContactForm}/>}
     </main>
   )
 }
