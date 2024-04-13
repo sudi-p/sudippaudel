@@ -8,25 +8,27 @@ type ContactFormProps = {
   setShowContactForm: (a: boolean) => void,
 }
 const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const service = process.env.EMAILJS_SERVICE_KEY;
   console.log(service)
   const handleSubmit = () => {
-    emailjs
-      .sendForm(
-        "service_4uja4ib",
-        "template_61wikvk",
-        form.current,
-        { publicKey: "Vo0TocYXdJAx4eJ22",}
-      )
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
+    if (form !== null){
+      emailjs
+        .sendForm(
+          "service_4uja4ib",
+          "template_61wikvk",
+          form.current,
+          { publicKey: "Vo0TocYXdJAx4eJ22",}
+        )
+        .then(
+          () => {
+            console.log('SUCCESS!');
+          },
+          (error) => {
+            console.log('FAILED...', error.text);
+          },
+        );
+    }
   };
   return (
     <div className="z-20 fixed inset-0 bg-white overflow-hidden" >
