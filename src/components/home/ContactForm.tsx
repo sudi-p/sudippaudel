@@ -1,7 +1,7 @@
-'use client'
 import { TextField } from '@mui/material';
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser';
+import { MdDone } from "react-icons/md";
 import { VscClose } from "react-icons/vsc";
 
 type ContactFormProps = {
@@ -9,25 +9,26 @@ type ContactFormProps = {
 }
 const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
   const form = useRef<HTMLFormElement>(null);
-  const service = process.env.EMAILJS_SERVICE_KEY;
-  console.log(service)
+  const [emailSent, setEmailSent] = useState(false);
   const handleSubmit = () => {
-    if (form !== null){
-      emailjs
-        .sendForm(
-          "service_4uja4ib",
-          "template_61wikvk",
-          form.current,
-          { publicKey: "Vo0TocYXdJAx4eJ22",}
-        )
-        .then(
-          () => {
-            console.log('SUCCESS!');
-          },
-          (error) => {
-            console.log('FAILED...', error.text);
-          },
-        );
+    if (form.current !== null) {
+      setEmailSent(true)
+      form.current.reset();
+      //   emailjs
+      //     .sendForm(
+      //       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      //       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      //       form.current,
+      //       { publicKey: process.env.NEXT_PUBLIC_EMAILJS_USER_ID!,}
+      //     )
+      //     .then(
+      //       () => {
+      //         console.log('SUCCESS!');
+      //       },
+      //       (error) => {
+      //         console.log('FAILED...', error.text);
+      //       },
+      //     );
     }
   };
   return (
@@ -76,10 +77,11 @@ const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
           className="mb-12"
           variant="standard"
         />
-        <div onClick={handleSubmit} className="btn">Send</div>
+        {emailSent ? <div className="p-3 flex items-center gap-1 w-max rounded-md m-auto font-bold  bg-green-300 transition-all duration-200 ease-in"><MdDone/>Sent</div> : <div onClick={handleSubmit} className="btn"> Send</div>}
       </form>
     </div>
   )
 }
 
 export default ContactForm;
+
