@@ -19,6 +19,7 @@ const testimonials = [
 ]
 
 import React, { useEffect, useState } from 'react'
+import Section from './Section';
 
 const Testimonials = () => {
   const [active, setActive] = useState(0);
@@ -33,19 +34,21 @@ const Testimonials = () => {
     return ()=> clearTimeout(timeoutId)
   }, [])
   return (
-    <div className="text-center py-20 bg-blue-50 leading-relaxed">
-      <p className="font-bold text-xl mb-8">People I've worked with have said some nice things about me</p>
-      <div style={{backgroundImage: `url(${photo})`}} className='h-20 w-20 m-auto rounded-full bg-center bg-cover'></div>
-      <p className='w-1/2 mx-auto my-6 text-xl tracking-wide leading-relaxed'>"{testimonial}"</p>
-      <p>{name}</p>
-      <p>{position},{company}</p>
-      <div className="w-max mx-auto my-3 flex gap-2">
-        {testimonials.map(testimonial => (
-          <div key={testimonial.id} style={{backgroundColor: testimonial.id == active? 'gray': 'white'}} className="h-3 w-3 rounded-full border border-solid border-gray-300" onClick={()=> setActive(testimonial.id)}>
-          </div>
-        ))}
+    <Section bgColor='rgb(239 246 255)'>
+      <div className="text-center py-20 leading-relaxed">
+        <p className="font-bold text-xl mb-8">People I've worked with have said some nice things about me</p>
+        <div style={{backgroundImage: `url(${photo})`}} className='h-20 w-20 m-auto rounded-full bg-center bg-cover'></div>
+        <p className='w-1/2 mx-auto my-6 text-xl tracking-wide leading-relaxed'>"{testimonial}"</p>
+        <p>{name}</p>
+        <p>{position} , {company}</p>
+        <div className="w-max mx-auto my-3 flex gap-2">
+          {testimonials.map(testimonial => (
+            <div key={testimonial.id} style={{backgroundColor: testimonial.id == active? 'gray': 'white'}} className="h-3 w-3 rounded-full border border-solid border-gray-300" onClick={()=> setActive(testimonial.id)}>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </Section>
   )
 }
 
