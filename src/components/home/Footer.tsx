@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPeopleCarryBox } from "react-icons/fa6";
 import Section from './Section';
+import Social from './Social';
 
 type FooterProps = {
   handleClick : () => void;
@@ -20,10 +21,11 @@ const Footer = ({ handleClick}: FooterProps) => {
           <div onClick={handleClick} className="flex gap-2 items-center bg-blue-400 p-2 rounded-lg text-white font"> <FaPeopleCarryBox /> Ready to roll!</div>
         </div>
         <div>
-          <div className="p-32 text-2xl font-extralight text-center ">
-            <p>
+          <div className="p-32 text-2xl font-extralight text-center m-auto w-max flex flex-col items-center">
+            <p className="mb-8">
               "Fall seven times, stand up eight."
             </p>
+            Connect me on: <Social/>
           </div>
         </div>
       </div>
