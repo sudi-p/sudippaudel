@@ -7,7 +7,7 @@ type SectionProps = {
 
 const Section = ({children, bgColor}: SectionProps) => {
   return (
-    <div className="border-b-2 border-solid border-gray-200" style={{backgroundColor: bgColor}}>
+    <div className="border-b-2 border-solid border-gray-300 bg-blue-50 " style={{backgroundColor: bgColor}}>
       <div className="max-w-screen-xl m-auto relative ">
       {children}
         </div>
