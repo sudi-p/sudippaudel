@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Project from './Project';
 import Section from './Section';
 
-const Projects = () => {
+const Projects = forwardRef(function Projects({}, ref) {
   const projects = [
     {
       title: "FinProve",
       description: "Website to take interview for financial instituion",
       type: "Web Application",
-      tags: ["React", "DRF", "Redux", "Onelogin","MySQL"],
+      tags: ["React", "DRF", "Redux", "Onelogin", "MySQL"],
       image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688768/sudippau/photo-1_600_x.jpg",
       link: "some link"
     },
@@ -16,7 +16,7 @@ const Projects = () => {
       title: "RedLentils",
       description: "App to deliver indian food in Newyork",
       type: "Web Application",
-      tags: ["React", "DRF", "Flux", "Stripe","MySQL"],
+      tags: ["React", "DRF", "Flux", "Stripe", "MySQL"],
       image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688770/sudippau/the-best-top-10-indian-dishes.jpg",
       link: "some link"
     },
@@ -29,7 +29,7 @@ const Projects = () => {
     },
   ]
   return (
-    <Section>
+    <Section ref={ref}>
       <div className="p-20 pt-32 text-center">
         <p className="font-bold text-3xl mb-4">My Recent Work</p>
         <p className="text-xl mb-10">Here are a few projects that i've worked on.</p>
@@ -41,6 +41,6 @@ const Projects = () => {
       </div>
     </Section>
   )
-}
+});
 
 export default Projects
