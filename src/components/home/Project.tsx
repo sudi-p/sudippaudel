@@ -28,7 +28,7 @@ const Project = ({
               <div key={tag} className="px-4 py-2 border-2 border-solid border-white rounded-3xl">{tag}</div>
             ))}
           </div>
-          {link && <a href={link} className="hidden opacity-90 hover:opacity-100 group-hover:flex items-center justify-center gap-2 p-2 rounded-xl mt-10 border-2 border-solid w-full border-white text-center text-xl"> <FaGithub/>Source</a>}
+          {link && <a href={link} target="_next" className="hidden opacity-90 hover:opacity-100 group-hover:flex items-center justify-center gap-2 p-2 rounded-xl mt-10 border-2 border-solid w-full border-white text-center text-xl"> <FaGithub/>Source</a>}
         </div>
     </div>
   )
