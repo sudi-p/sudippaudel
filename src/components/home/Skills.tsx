@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Section from './Section'
 import { MdCloudDone } from "react-icons/md";
 
@@ -26,7 +26,7 @@ const Skills = () => {
     { skill: "Jest" },
   ]
   return (
-    <Section>
+    <Section id="skills">
       <div className="py-20 text-center">
         <p className="font-bold text-3xl my-10">My Skills</p>
         <div className="flex flex-wrap gap-10">
@@ -37,7 +37,7 @@ const Skills = () => {
       </div>
     </Section>
   )
-}
+};
 
 export default Skills;
 
@@ -52,7 +52,7 @@ type BoxProps = {
 
 const Box = ({ title, skills }: BoxProps) => {
   return (
-    <div className='p-7 flex-1 border border-solid border-gray-300 rounded-3xl bg-blue-100 '>
+    <div className='z-10 p-7 flex-1 rounded-3xl bg-opacity-10 bg-blue-300 backdrop-blur-md border border-blue-300  shadow-md'>
       <p className="font-bold p-4 text-xl">{title}</p>
       <div className="flex flex-wrap">
         {skills.map(({ skill, level }) => (

@@ -1,0 +1,49 @@
+import React, { ReactNode, forwardRef } from 'react';
+import { FaHome } from "react-icons/fa";
+import { MdDeveloperMode, MdContactMail } from "react-icons/md";
+import { GoCodeReview } from "react-icons/go";
+import { CgWebsite } from "react-icons/cg";
+
+type NavbarProps = {
+  homeRef: HTMLDivElement | null,
+}
+
+const Navbar = () =>{
+  const links = [
+    { icon: <FaHome />, text: "Home", id:"home" },
+    { icon: <MdDeveloperMode />, text: "Skills", id:"skills"  },
+    { icon: <GoCodeReview />, text: "Projects", id:"projects" },
+    { icon: <CgWebsite />, text: "Testimonials", id:"testimonials" },
+    { icon: <MdContactMail />, text: "Contact", id:"contact" },
+  ]
+  return (
+    <div className="z-50 fixed top-0 left-4 bottom-0 flex justify-center">
+      <ul className="text-2xl m-auto z-50 rounded-xl bg-blue-300 border border-blue-300 bg-opacity-10 backdrop-blur-md shadow-md text-center">
+        {links.map(({icon, text, id})=>(
+          <li onClick={() => {
+            const element = document.getElementById(id)
+            console.log(element)
+            element?.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }} className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-16 h-16 flex items-center justify-center ">{icon}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+};
+
+export default Navbar;
+
+// type NavBarIconProps = {
+//   icon: ReactNode,
+//   text: String,
+// }
+
+// const NavBarIcon = ({ icon }: NavBarIconProps) => {
+//   return (
+//     <li className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-16 h-16 flex items-center justify-center ">{icon}
+//     </li>
+//   );
+// }
