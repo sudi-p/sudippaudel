@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import Section from './Section'
 import { MdCloudDone } from "react-icons/md";
 
-const Skills = forwardRef(function Skills({}, ref){
+const Skills = () => {
   const front = [
     { skill: "Javascript", level: "Experienced" },
     { skill: "React", level: "Experienced" },
@@ -26,7 +26,7 @@ const Skills = forwardRef(function Skills({}, ref){
     { skill: "Jest" },
   ]
   return (
-    <Section ref={ref}>
+    <Section id="skills">
       <div className="py-20 text-center">
         <p className="font-bold text-3xl my-10">My Skills</p>
         <div className="flex flex-wrap gap-10">
@@ -37,7 +37,7 @@ const Skills = forwardRef(function Skills({}, ref){
       </div>
     </Section>
   )
-});
+};
 
 export default Skills;
 

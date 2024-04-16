@@ -21,7 +21,7 @@ const testimonials = [
 import React, { forwardRef, useEffect, useState } from 'react'
 import Section from './Section';
 
-  const Testimonials = forwardRef(function Testimonials({}, ref) {
+  const Testimonials = () => {
   const [active, setActive] = useState(0);
   const {name, position, photo, company, testimonial} = testimonials[active];
   useEffect(()=>{
@@ -34,7 +34,7 @@ import Section from './Section';
     return ()=> clearTimeout(timeoutId)
   }, [])
   return (
-    <Section ref={ref}>
+    <Section id="testimonials">
       <div className="text-center py-20 bg-blue-50 leading-relaxed">
         <p className="font-bold text-xl mb-8">People I've worked with have said some nice things about me</p>
         <div style={{backgroundImage: `url(${photo})`}} className='h-20 w-20 m-auto rounded-full bg-center bg-cover'></div>
@@ -50,6 +50,6 @@ import Section from './Section';
       </div>
     </Section>
   )
-});
+};
 
-export default Testimonials
+export default Testimonials;

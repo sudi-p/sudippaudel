@@ -10,7 +10,7 @@ type FooterProps = {
 
 const Footer = ({ handleClick}: FooterProps) => {
   return (
-    <Section>
+    <Section id="contact">
       <div className="relative">
         <div className=" leading-relaxed flex justify-between items-center max-w-screen-xl m-auto tracking-wide p-10 text-center bg-blue-200 rounded-xl w-4/5 absolute inset-x-0 -top-[60px]">
           <p className="font-bold text-2xl">Start a project</p>

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import Project from './Project';
 import Section from './Section';
 
-const Projects = forwardRef(function Projects({}, ref) {
+const Projects = () => {
   const projects = [
     {
       title: "FinProve",
@@ -29,7 +29,7 @@ const Projects = forwardRef(function Projects({}, ref) {
     },
   ]
   return (
-    <Section ref={ref}>
+    <Section id="projects">
       <div className="p-20 pt-32 text-center">
         <p className="font-bold text-3xl mb-4">My Recent Work</p>
         <p className="text-xl mb-10">Here are a few projects that i've worked on.</p>
@@ -41,6 +41,6 @@ const Projects = forwardRef(function Projects({}, ref) {
       </div>
     </Section>
   )
-});
+};
 
 export default Projects
