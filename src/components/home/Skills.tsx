@@ -8,14 +8,14 @@ const Skills = () => {
     { skill: "React", level: "Experienced" },
     { skill: "Redux", level: "Experienced" },
     { skill: "SCSS", level: "Experienced" },
-    { skill: "Next.js", level: "Experienced" },
+    { skill: "Next.js", level: "Intermediate" },
     { skill: "Html", level: "Experienced" }
   ]
   const back = [
     { skill: "Django", level: "Experienced" },
-    { skill: "Express", level: "Experienced" },
+    { skill: "Express", level: "Intermediate" },
     { skill: "MySQL", level: "Experienced" },
-    { skill: "MongoDb", level: "Experienced" },
+    { skill: "MongoDb", level: "Intermediate" },
   ]
 
   const tools = [
