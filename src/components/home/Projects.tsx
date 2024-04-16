@@ -14,7 +14,7 @@ const Projects = () => {
     },
     {
       title: "FinProve",
-      description: "Website to take interview for financial instituion",
+      description: "Website to take interview for financial institution",
       type: "Web Application",
       tags: ["React", "DRF", "Redux", "Onelogin", "MySQL"],
       image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688768/sudippau/photo-1_600_x.jpg",
