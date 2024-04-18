@@ -15,16 +15,16 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {projects.map(project => {
-        const { name, description, startTime, endTime, videos, screenshots} = project;
-        return(
-          <div className="flex">
-          <div className="pr-5">
-            {startTime.toString()} - {endTime.toString()}
-          </div>
-          <div className="border-l-2 border-gray-500 pl-5">
-            <div className='text-2xl'>{name}</div>
-            <div className="text-lg">{description}</div>
-          </div>
+        const { name, description, startTime, endTime, videos, screenshots } = project;
+        return (
+          <div key={name} className="flex">
+            <div className="pr-5">
+              {startTime.toString()} - {endTime.toString()}
+            </div>
+            <div className="border-l-2 border-gray-500 pl-5">
+              <div className='text-2xl'>{name}</div>
+              <div className="text-lg">{description}</div>
+            </div>
           </div>
         )
       })}

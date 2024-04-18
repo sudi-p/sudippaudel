@@ -36,9 +36,9 @@ import Section from './Section';
   return (
     <Section id="testimonials">
       <div className="text-center py-20 bg-blue-50 leading-relaxed">
-        <p className="font-bold text-xl mb-8">People I've worked with have said some nice things about me</p>
+        <p className="font-bold text-xl mb-8">People I&lsquo;ve worked with have said some nice things about me</p>
         <div style={{backgroundImage: `url(${photo})`}} className='h-20 w-20 m-auto rounded-full bg-center bg-cover'></div>
-        <p className='w-1/2 mx-auto my-6 font-light text-xl tracking-wide leading-relaxed'>"{testimonial}"</p>
+        <p className='w-1/2 mx-auto my-6 font-light text-xl tracking-wide leading-relaxed'>&#34;{testimonial}&#34;</p>
         <p className="text-2xl">{name}</p>
         <p>{position} , {company}</p>
         <div className="w-max mx-auto my-3 flex gap-2">

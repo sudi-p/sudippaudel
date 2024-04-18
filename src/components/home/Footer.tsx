@@ -22,7 +22,7 @@ const Footer = ({ handleClick}: FooterProps) => {
         <div>
           <div className="pt-32 pb-16 text-2xl font-extralight text-center m-auto w-max flex flex-col items-center">
             <p className="mb-12">
-              "Fall seven times, stand up eight."
+            &#34;Fall seven times, stand up eight.&#34;
             </p>
             <span className="flex item-center gap-2 mb-4">Mail me on <span className="text-blue-500 flex items-center"><CiMail /> spaudel645@gmail.com</span></span>
              Connect me on: <Social/>
