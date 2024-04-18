@@ -17,8 +17,8 @@ const Navbar = () =>{
     { icon: <MdContactMail />, text: "Contact", id:"contact" },
   ]
   return (
-    <div className="z-50 fixed top-0 left-4 bottom-0 flex justify-center">
-      <ul className="text-2xl m-auto z-50 rounded-xl bg-blue-300 bg-opacity-10 border border-blue-300 backdrop-blur-md shadow-md text-center">
+    <div className="z-50 fixed lg:top-0 left-0 lg:left-4 right-0 lg:right-auto bottom-0 flex justify-center">
+      <ul className="text-2xl m-auto z-50 flex lg:block rounded-xl bg-blue-300 bg-opacity-10 border border-blue-300 backdrop-blur-md shadow-md text-center">
         {links.map(({icon, text, id})=>(
           <li onClick={() => {
             const element = document.getElementById(id)
