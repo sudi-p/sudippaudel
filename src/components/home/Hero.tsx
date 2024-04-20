@@ -19,7 +19,7 @@ const Hero = ({ handleClick}: HeroProps) => {
           <div className='flex flex-2 flex-col gap-10 w-1/2'>
             <div className="text-3xl font-bold">Sudip Paudel</div>
             <div className="text-6xl">
-              Software Engineer
+              Software Engineera
             </div>
             <div className="text-2xl font-light">
               Full Stack Developer | React Enthusiast
