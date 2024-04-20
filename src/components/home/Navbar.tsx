@@ -25,7 +25,7 @@ const Navbar = () =>{
             element?.scrollIntoView({
               behavior: 'smooth'
             });
-          }} className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-16 h-16 flex items-center justify-center ">{icon}
+          }} className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-12 md:w-16  h-12 md:h-16 flex items-center justify-center ">{icon}
           </li>
         ))}
       </ul>
