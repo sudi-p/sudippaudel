@@ -20,7 +20,7 @@ export default function Social() {
   return (
     <div className="flex w-max">
       {links.map(({ link, icon, color }) => (
-        <a href={link} key={link} style={{ color: color}} target="_next" className={`mr-2 p-2 opacity-100 hover:opacity-70 hover:text-[${color}]`}>
+        <a href={link} key={link} style={{ color: color}} target="_next" className={`mr-2 p-2 text-xl opacity-100 hover:opacity-70 hover:text-[${color}]`}>
           {icon}
         </a>
       ))}
