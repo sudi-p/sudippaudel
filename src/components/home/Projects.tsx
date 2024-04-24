@@ -41,7 +41,7 @@ const Projects = () => {
       <div className="p-3 md:p-20 pt-32 text-center">
         <p className="font-bold text-3xl mb-4">My Recent Work</p>
         <p className="text-xl mb-10">Here are a few projects that I&#39;ve worked on.</p>
-        <div className="w-max m-auto grid md:grid-cols-2 gap-10">
+        <div className="m-auto grid md:grid-cols-2 gap-10">
           {projects.map(project => (
             <Project key={project.title} {...project} />
           ))}

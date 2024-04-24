@@ -18,7 +18,7 @@ const Project = ({
   link
 }: ProjectProps) => {
   return (
-    <div  className="h-96 md:w-96 relative group border border-solid border-blue-200 rounded-lg overflow-hidden">
+    <div  className="h-96 w-2/3 min-w-[80px] md:w-96 m-auto relative group border border-solid border-blue-200 rounded-lg overflow-hidden">
         <div style={{backgroundImage: `url(${image})`}} className="absolute overflow-hidden inset-0 z-10  bg-cover bg-center bg-no-repeat brightness-50 hover:brightness-100 "> </div>
         <div className="z-20 p-1  md:p-4 cursor-pointer h-full relative text-white flex flex-col gap-5 justify-center items-center">
           <div className="mb-4 text-4xl group-hover:hidden">{title}</div>
