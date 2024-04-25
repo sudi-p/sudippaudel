@@ -1,6 +1,8 @@
-FROM node:alpine
+FROM node:18-alpine
 
 ENV NODE_ENV development
+
+ENV CHOKIDAR_USEPOLLING=true
 
 WORKDIR /app
 
