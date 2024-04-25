@@ -18,17 +18,17 @@ const Project = ({
   link
 }: ProjectProps) => {
   return (
-    <div  className="h-96 w-2/3 min-w-[80px] md:w-96 m-auto relative group border border-solid border-blue-200 rounded-lg overflow-hidden">
-        <div style={{backgroundImage: `url(${image})`}} className="absolute overflow-hidden inset-0 z-10  bg-cover bg-center bg-no-repeat brightness-50 hover:brightness-100 "> </div>
-        <div className="z-20 p-1  md:p-4 cursor-pointer h-full relative text-white flex flex-col gap-5 justify-center items-center">
-          <div className="mb-4 text-4xl group-hover:hidden">{title}</div>
-          <div className="hidden group-hover:block p-4 text-center text-xl">{description}</div>
-          <div className="gap-4 flex-wrap justify-center hidden group-hover:flex">
+    <div  className="flex gap-10 m-auto border-b border-solid border-gray-300 mb-10">
+        <div style={{backgroundImage: `url(${image})`}} className=" h-96 w-96 z-10 flex-1 bg-cover bg-center bg-no-repeat rounded-lg" />
+        <div className="z-20 flex flex-1 flex-col text-left">
+          <span className="text-3xl font-bold mb-8">{title}</span>
+          <div className="text-xl leading-7 mb-5">{description}</div>
+          <div className="gap-4 flex-wrap flex">
             {tags.map(tag => (
-              <div key={tag} className="px-4 py-2 border-2 border-solid border-white rounded-3xl">{tag}</div>
+              <div key={tag} className="px-4 py-2 border-2 border-solid border-gray-300 rounded-3xl">{tag}</div>
             ))}
           </div>
-          {link && <a href={link} target="_next" className="hidden opacity-90 hover:opacity-100 group-hover:flex items-center justify-center gap-2 p-2 rounded-xl mt-10 border-2 border-solid w-full border-white text-center text-xl"> <FaGithub/>Source</a>}
+          {link && <a href={link} target="_next" className="opacity-90 hover:opacity-100 flex items-center justify-center gap-2 p-2 mb-5 rounded-xl mt-10 border-2 border-solid w-full border-gray-300 text-center text-xl"> <FaGithub/>Source</a>}
         </div>
     </div>
   )
