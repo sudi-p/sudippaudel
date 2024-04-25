@@ -17,15 +17,15 @@ const Navbar = () =>{
     { icon: <MdContactMail />, text: "Contact", id:"contact" },
   ]
   return (
-    <div className="z-50 fixed top-0 left-4 bottom-0 flex justify-center">
-      <ul className="text-2xl m-auto z-50 rounded-xl bg-blue-300 bg-opacity-10 border border-blue-300 backdrop-blur-md shadow-md text-center">
+    <div className="z-50 fixed lg:top-0 left-0 lg:left-4 right-0 lg:right-auto bottom-0 flex justify-center">
+      <ul className="text-2xl m-auto z-50 flex lg:block rounded-xl bg-blue-300 bg-opacity-10 border border-blue-300 backdrop-blur-md shadow-md text-center">
         {links.map(({icon, text, id})=>(
           <li key={text} onClick={() => {
             const element = document.getElementById(id)
             element?.scrollIntoView({
               behavior: 'smooth'
             });
-          }} className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-16 h-16 flex items-center justify-center ">{icon}
+          }} className="group hover:text-3xl hover:text-blue-600 cursor-pointer w-12 md:w-16  h-12 md:h-16 flex items-center justify-center ">{icon}
           </li>
         ))}
       </ul>
