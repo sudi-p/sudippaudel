@@ -21,10 +21,10 @@ const Project = ({
   link
 }: ProjectProps) => {
   return (
-    <div className="flex gap-10 m-auto border-b border-solid border-gray-300 mb-10">
+    <div className="lg:flex gap-10 m-auto border-b border-solid border-gray-300 mb-10">
       <Screenshots images={images} screenshotsAvailable={screenshotsAvailable}/>
       <div className="z-20 flex flex-1 flex-col text-left">
-        <span className="text-3xl font-bold mb-8">{title}</span>
+        <span className="text-3xl font-bold mt-4 mb-8">{title}</span>
         <div className="text-xl leading-7 mb-5">{description}</div>
         <div className="gap-4 flex-wrap flex items-center">
           Tags: 
