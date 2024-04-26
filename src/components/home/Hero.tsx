@@ -22,7 +22,7 @@ const Hero = ({ handleClick}: HeroProps) => {
               Software Engineer
             </div>
             <div className="text-lg md:text-2xl font-light">
-              Full Stack Developer | React Enthusiasta
+              Full Stack Developer | React Enthusiast
             </div>
             <Social />
           </div>
