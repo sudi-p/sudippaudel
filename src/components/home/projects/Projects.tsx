@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import Project from './Project';
-import Section from './Section';
+import Section from '../Section';
 
 const Projects = () => {
   const projects = [
@@ -9,7 +9,14 @@ const Projects = () => {
       description: "This project is a comprehensive web-based platform tailored to the unique needs of international students seeking job opportunities and rental accommodations in Canada.",
       type: "Web Application",
       tags: ["MERN", "Next.js", "Redux"],
-      image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714031023/sudippau/canada.jpg",
+      screenshotsAvailable: true,
+      images: [
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714159619/GlobalAid/Website%20Screenshots/home.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714159616/GlobalAid/Website%20Screenshots/jobs.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714159613/GlobalAid/Website%20Screenshots/rentals.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714159610/GlobalAid/Website%20Screenshots/login.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1714159607/GlobalAid/Website%20Screenshots/signup.png",
+      ],
       link: "https://github.com/sudi-p/globalaid"
     },
     {
@@ -17,15 +24,24 @@ const Projects = () => {
       description: "This project is a web-based platform tailored for conducting interviews in the financial sector, providing a seamless and efficient solution for hiring processes in financial institutions.",
       type: "Web Application",
       tags: ["React", "DRF", "Redux", "Onelogin", "MySQL"],
-      image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688768/sudippau/photo-1_600_x.jpg",
-      link: "https://github.com/sudi-p/finprove"
+      screenshotsAvailable: true,
+      images: [
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1618150372/FinProve/Dashboard.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1624676341/FinProve/CaseStudies.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1624676341/FinProve/Job_Candidates.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1618150009/FinProve/invite.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1618149616/FinProve/add_editor.png",
+        "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1581519382/FinProve/test.png",
+      ],
+      link: "https://github.com/sudi-p/finprove",
     },
     {
       title: "RedLentils",
       description: "This project is a website designed and developed to facilitate the delivery of authentic Indian cuisine to customers in New York.",
       type: "Web Application",
       tags: ["React", "DRF", "Flux", "Stripe", "MySQL"],
-      image: "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688770/sudippau/the-best-top-10-indian-dishes.jpg",
+      screenshotsAvailable: false,
+      images: ["https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688770/sudippau/the-best-top-10-indian-dishes.jpg"],
       link: "https://github.com/sudi-p/redlentils"
     },
     // {
