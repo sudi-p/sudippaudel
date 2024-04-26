@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import Section from './Section'
 import { MdCloudDone } from "react-icons/md";
+import { RoughNotation } from "react-rough-notation";
 
 const Skills = () => {
   const front = [
@@ -28,7 +29,10 @@ const Skills = () => {
   return (
     <Section id="skills">
       <div className="py-20 text-center">
-        <p className="font-bold text-3xl my-10">My Skills</p>
+        <div className="font-light leading-relaxed max-w-screen-xl m-auto tracking-wide p-4 text-2xl w-4/5 text-center mb-10">
+          Welcome to my portfolio! I am a Toronto-based Software Engineer with 5+ years of experience. Skilled in JavaScript, React, Redux, Python, Django, and more, I specialize in crafting innovative solutions and delightful user experiences. Let&#39;s connect and explore how we can collaborate on impactful projects!<br />
+          I am looking for a new role as a developer. <RoughNotation type="circle" show={true} color="rgb(216 180 254)"> <span className="font-bold p-2">Hire me!</span></RoughNotation>
+        </div>
         <div className="flex flex-wrap gap-10">
           <Box skills={front} title="Frontend Development" />
           <Box skills={back} title="Backend Development" />

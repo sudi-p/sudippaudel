@@ -1,0 +1,21 @@
+.typingEffect {
+  border-right: 2px solid #333; /* Add a cursor effect */
+  padding-right: 5px; /* Add some padding to the right of the text */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+}
+
+.typingEffect span {
+  display: inline-block;
+  vertical-align: middle;
+  animation: blink-caret 0.75s step-end infinite; /* Add blinking cursor animation */
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #333; /* Adjust cursor color */
+  }
+}

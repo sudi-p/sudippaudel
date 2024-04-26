@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useState } from 'react';
-import Projects from '@/components/home/Projects';
+import Projects from '@/components/home/projects/Projects';
 
 import Testimonials from '@/components/home/Testimonials';
 import ContactForm from '@/components/home/ContactForm';
