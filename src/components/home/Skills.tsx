@@ -25,15 +25,16 @@ const Skills = () => {
     { skill: "Git" },
     { skill: "Axios" },
     { skill: "Jest" },
+    { skill: "Docker" },
   ]
   return (
     <Section id="skills">
-      <div className="py-20 text-center">
-        <div className="font-light leading-relaxed max-w-screen-xl m-auto tracking-wide p-4 text-2xl w-4/5 text-center mb-10">
+      <div className="py-10 lg:py-20 text-center">
+        <div className="font-light leading-relaxed max-w-screen-xl m-auto tracking-wide p-4 text-lg md:text-2xl w-4/5 text-center mb-10">
           Welcome to my portfolio! I am a Toronto-based Software Engineer with 5+ years of experience. Skilled in JavaScript, React, Redux, Python, Django, and more, I specialize in crafting innovative solutions and delightful user experiences. Let&#39;s connect and explore how we can collaborate on impactful projects!<br />
           I am looking for a new role as a developer. <RoughNotation type="circle" show={true} color="rgb(216 180 254)"> <span className="font-bold p-2">Hire me!</span></RoughNotation>
         </div>
-        <div className="flex flex-wrap gap-10">
+        <div className="flex flex-wrap gap-10 justify-center">
           <Box skills={front} title="Frontend Development" />
           <Box skills={back} title="Backend Development" />
           <Box skills={tools} title="Tools & Technologies" />
@@ -56,11 +57,11 @@ type BoxProps = {
 
 const Box = ({ title, skills }: BoxProps) => {
   return (
-    <div className='z-10 p-7 flex-1 rounded-3xl bg-opacity-10 bg-blue-300 backdrop-blur-md border border-blue-300  shadow-md'>
+    <div className='z-10 p-4 w-96 rounded-3xl bg-opacity-10 bg-blue-300 backdrop-blur-md border border-blue-300  shadow-md'>
       <p className="font-bold p-4 text-xl">{title}</p>
       <div className="flex flex-wrap">
         {skills.map(({ skill, level }) => (
-          <div key={skill} className='w-40 p-4 flex items-start gap-5 leading-relaxed'>
+          <div key={skill} className='w-40 p-3 flex items-start gap-3 leading-relaxed'>
             <MdCloudDone className="text-lg" />
             <div className="text-left">
               <p className="font-bold"> {skill} </p>

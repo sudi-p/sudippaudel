@@ -14,11 +14,11 @@ const Screenshots = ({ images, screenshotsAvailable }: ScreenshotsProps) => {
         if (p == images.length - 1) return 0;
         else return p + 1;
       })
-    }, 1000)
+    }, 5000)
     return () => clearTimeout(timeoutId)
   }, [])
   return (
-    <div className='relative w-1/2 bg-gray-300 from-gray-300'>
+    <div className='relative lg:w-1/2 bg-gray-300 from-gray-300'>
       <div style={{ backgroundImage: `url(${image})` }} className=" h-96 w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto " />
       {!screenshotsAvailable && <div className=" absolute z-20 text-white text-4xl flex items-center text-center justify-center inset-0 leading-relaxed">
         Screenshots <br />Coming<br /> Soon
