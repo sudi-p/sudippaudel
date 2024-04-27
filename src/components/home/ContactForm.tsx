@@ -17,9 +17,6 @@ const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
   const [emailSent, setEmailSent] = useState(false);
   const handleSubmit = () => {
     if (nameRef.current && emailRef.current && messageRef.current) {
-      console.log(nameRef.current.value)
-      console.log(emailRef.current.value)
-      console.log(messageRef.current.value)
       if (!nameRef.current.value || !emailRef.current.value || !messageRef.current.value) setError("Please complete the form.")
       else {
         emailjs
@@ -59,12 +56,12 @@ const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
           <VscClose />
         </div>
       </div>
-      <form ref={form} className="mx-auto text-center w-2/5 my-10">
+      <form ref={form} className="mx-auto text-center w-4/5 lg:w-3/5 xl:w-2/5 my-10">
         <div className="text-3xl leading-normal mb-10">
           Thanks for taking the time to reach out.<br />
           How can I help you today?
         </div>
-        <div className="flex gap-10 w-full mb-10">
+        <div className="flex flex-col sm:flex-row gap-10 w-full mb-10">
           <TextField
             id="standard-multiline-flexible"
             label="Name"
