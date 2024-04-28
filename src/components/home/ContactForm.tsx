@@ -56,7 +56,6 @@ const ContactForm = ({ setShowContactForm }: ContactFormProps) => {
       }
     }
   };
-
   return (
     <div className="z-50 fixed inset-0 bg-white overflow-scroll">
       <div className="flex p-8 border-b border-solid border-gray-300 h-32">
