@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from "./styles/Screenshots.module.scss";
 
 type ScreenshotsProps = {
   images: Array<string>;
@@ -18,11 +19,16 @@ const Screenshots = ({ images, screenshotsAvailable }: ScreenshotsProps) => {
     return () => clearTimeout(timeoutId);
   }, [images.length]);
   return (
-    <div className="relative lg:w-1/2 bg-gray-300 from-gray-300">
-      <div
-        style={{ backgroundImage: `url(${image})` }}
-        className=" h-96 w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto "
-      />
+    <div
+      className={`relative lg:w-1/2 bg-gray-300 from-gray-300 overflow-hidden ${styles.imageWrapper}`}
+    >
+      {images.map((image, index) => (
+        <div
+          key={image}
+          style={{ backgroundImage: `url(${image})` }}
+          className={`h-96 ${index !== active && "hidden "} w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto ${styles.screenshot}`}
+        />
+      ))}
       {!screenshotsAvailable && (
         <div className=" absolute z-20 text-white text-4xl flex items-center text-center justify-center inset-0 leading-relaxed">
           Screenshots <br />
@@ -49,3 +55,16 @@ const Screenshots = ({ images, screenshotsAvailable }: ScreenshotsProps) => {
 };
 
 export default Screenshots;
+
+type ImageProps = {
+  image: string;
+};
+
+const Image = ({ image }: ImageProps) => {
+  return (
+    <div
+      style={{ backgroundImage: `url(${image})` }}
+      className={`h-96 w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto ${styles.screenshot}`}
+    />
+  );
+};

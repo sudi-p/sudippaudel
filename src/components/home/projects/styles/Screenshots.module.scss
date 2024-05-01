@@ -1,0 +1,15 @@
+@keyframes slideInRight {
+  from {
+    transform: translateX(150px)
+  } 
+  to {
+    transform: translateY(0)
+  }
+}
+
+.screenshot{
+  animation: slideInRight 0.5s ease forwards;
+}
+.imageWrapper{
+  cursor: url(https://static.thenounproject.com/png/1188204-200.png) auto;
+}
