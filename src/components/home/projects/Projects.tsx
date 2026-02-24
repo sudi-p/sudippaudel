@@ -127,15 +127,6 @@ const Projects = () => {
             <Project key={`${experience.title}-${index}`} {...experience} />
           ))}
         </div>
-
-        <a
-          href="/resume"
-          className="mt-12 inline-flex items-center gap-2 rounded-xl border border-blue-600 px-6 py-3 font-semibold text-blue-600 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-600 hover:text-white"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <IoMdDocument className="text-lg" /> View My Resume
-        </a>
       </div>
     </Section>
   );
