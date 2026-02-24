@@ -81,6 +81,8 @@ const Skills = () => {
   ];
 
   const toolSkills: SkillItem[] = [
+    { skill: "LLM Integration" },
+    { skill: "OpenAI API" },
     { skill: "Lighthouse" },
     { skill: "Sendgrid" },
     { skill: "Git" },
@@ -101,7 +103,8 @@ const Skills = () => {
           </h2>
           <p className="text-base leading-relaxed text-slate-600 md:text-lg">
             I build clean, high-impact products with a full-stack approach—from
-            polished interfaces to reliable backend systems.
+            polished interfaces to reliable backend systems, including
+            AI-powered workflows and production-grade LLM integrations.
           </p>
         </div>
 

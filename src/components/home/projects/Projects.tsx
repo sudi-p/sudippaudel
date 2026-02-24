@@ -18,9 +18,9 @@ const experiences: ProjectData[] = [
   {
     title: "Shiboleth.ai",
     description:
-      "Built OFAC Geo-Fencing and Call Monitoring tools using Django + HTMX, integrating LLMs to automate workflows and reduce manual effort by ~72%. Improved app responsiveness and UX with Tailwind CSS and utilized OpenAI API for smarter data automation.",
+      "Built OFAC Geo-Fencing and Call Monitoring products with Django + HTMX, integrating LLM pipelines to automate workflows and reduce manual effort by ~72%. Improved app responsiveness with Tailwind CSS and used OpenAI API for intelligent data automation.",
     type: "Web Application",
-    tags: ["Django", "HTMX", "Tailwind CSS", "OpenAI API"],
+    tags: ["Django", "HTMX", "Tailwind CSS", "LLMs", "OpenAI API"],
     screenshotsAvailable: false,
     images: [],
     live_url: "www.shiboleth.ai",
@@ -28,9 +28,16 @@ const experiences: ProjectData[] = [
   {
     title: "Bestsr.ai",
     description:
-      "Developed an AI-based recommendation system with OpenAI API to optimize product attributes, boosting Amazon product rankings by 23%. Enhanced backend scalability with Django + PostgreSQL and improved UI/UX with React + Tailwind CSS.",
+      "Developed an AI recommendation system with LLM-backed prompt workflows and OpenAI API to optimize product attributes, boosting Amazon product rankings by 23%. Enhanced backend scalability with Django + PostgreSQL and improved UI/UX with React + Tailwind CSS.",
     type: "Web Application",
-    tags: ["Django", "React", "PostgreSQL", "Tailwind CSS", "OpenAI API"],
+    tags: [
+      "Django",
+      "React",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "LLMs",
+      "OpenAI API",
+    ],
     screenshotsAvailable: false,
     images: [],
     live_url: "www.bestsr.ai",
@@ -110,7 +117,8 @@ const Projects = () => {
           </h2>
           <p className="text-base leading-relaxed text-slate-600 md:text-lg">
             A collection of product-focused projects where I handled design,
-            architecture, and implementation across frontend and backend.
+            architecture, and implementation across frontend, backend, and
+            AI/LLM integrations.
           </p>
         </div>
 
