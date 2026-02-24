@@ -1,7 +1,7 @@
 "use client";
 
 import { EB_Garamond, Source_Sans_3 } from "next/font/google";
-import { resumeData } from "./data";
+import { resumeData } from "../../data/data";
 import SectionTitle from "@/components/resume/SectionTitle";
 import ExperienceItem from "@/components/resume/ExperienceItem";
 import EducationItem from "@/components/resume/EducationItem";

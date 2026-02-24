@@ -2,7 +2,7 @@ import {
   formatDateRange,
   getRangeSortTimestamp,
   resumeData,
-} from "../resume/data";
+} from "../../data/data";
 
 export default function ProjectsPage() {
   const timelineItems = [

@@ -1,7 +1,7 @@
 import {
   formatDateRange,
   type EducationItem as EducationData,
-} from "@/app/resume/data";
+} from "@/data/data";
 
 type EducationItemProps = {
   item: EducationData;
