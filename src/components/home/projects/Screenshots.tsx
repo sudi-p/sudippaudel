@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles/Screenshots.module.scss";
+import styles from "./styles/Screenshots.module.scss"; // Use your existing custom styles
 
 type ScreenshotsProps = {
   images: Array<string>;
@@ -8,45 +8,41 @@ type ScreenshotsProps = {
 
 const Screenshots = ({ images, screenshotsAvailable }: ScreenshotsProps) => {
   const [active, setActive] = useState(0);
-  const image = images[active];
+
   useEffect(() => {
-    const timeoutId = setInterval(() => {
-      setActive((p) => {
-        if (p == images.length - 1) return 0;
-        else return p + 1;
-      });
+    const intervalId = setInterval(() => {
+      setActive((prevActive) => (prevActive === images.length - 1 ? 0 : prevActive + 1));
     }, 5000);
-    return () => clearTimeout(timeoutId);
+    return () => clearInterval(intervalId);
   }, [images.length]);
+
   return (
-    <div
-      className={`relative lg:w-1/2 bg-gray-300 from-gray-300 overflow-hidden ${styles.imageWrapper}`}
-    >
+    <div className={`relative h-48 overflow-hidden rounded-lg bg-gray-100 ${styles.imageWrapper}`}>
       {images.map((image, index) => (
         <div
           key={image}
           style={{ backgroundImage: `url(${image})` }}
-          className={`h-96 ${index !== active && "hidden "} w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto ${styles.screenshot}`}
+          className={`transition-opacity duration-500 ease-in-out ${
+            index === active ? "opacity-100" : "opacity-0"
+          } absolute inset-0 bg-center bg-cover`}
         />
       ))}
       {!screenshotsAvailable && (
-        <div className=" absolute z-20 text-white text-4xl flex items-center text-center justify-center inset-0 leading-relaxed">
-          Screenshots <br />
-          Coming
-          <br /> Soon
+        <div className="absolute inset-0 flex items-center justify-center bg-opacity-75 bg-black text-white text-xl">
+          Screenshots Coming Soon
         </div>
       )}
       {images.length > 1 && (
-        <div className="w-max mx-auto my-3 flex gap-2 absolute bottom-0 left-0 right-0">
-          {images.map((image, id) => (
-            <div
-              key={image}
-              style={{
-                backgroundColor: id == active ? "rgb(59 130 246)" : "white",
-              }}
-              className="h-3 w-3 rounded-full border border-solid border-gray-300"
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {images.map((_, id) => (
+            <button
+              key={id}
+              className={`h-3 w-3 rounded-full ${
+                id === active ? "bg-blue-600" : "bg-white"
+              } border border-blue-600`}
               onClick={() => setActive(id)}
-            ></div>
+              aria-label={`Show screenshot ${id + 1}`}
+            ></button>
           ))}
         </div>
       )}
@@ -55,16 +51,3 @@ const Screenshots = ({ images, screenshotsAvailable }: ScreenshotsProps) => {
 };
 
 export default Screenshots;
-
-type ImageProps = {
-  image: string;
-};
-
-const Image = ({ image }: ImageProps) => {
-  return (
-    <div
-      style={{ backgroundImage: `url(${image})` }}
-      className={`h-96 w-auto z-10 bg-contain bg-center bg-no-repeat rounded-lg m-auto ${styles.screenshot}`}
-    />
-  );
-};

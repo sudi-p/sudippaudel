@@ -8,6 +8,7 @@ import Skills from '@/components/home/Skills';
 import Footer from '@/components/home/Footer';
 import Navbar from '@/components/home/Navbar';
 import Hero from '@/components/home/Hero';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Testimonials />
       <Footer handleClick={() => setShowContactForm(true)} />
       {showContactForm && <ContactForm setShowContactForm={setShowContactForm} />}
+      <SpeedInsights />
     </body >
   )
 }

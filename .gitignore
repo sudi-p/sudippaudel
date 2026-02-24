@@ -25,6 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 process.env
 .env.local
@@ -38,3 +39,5 @@ process.env
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+*storybook.log
