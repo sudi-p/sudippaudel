@@ -1,100 +1,146 @@
-// components/VerticalTimeline.js
-"use client";
-import React from "react";
-import { FaCode, FaServer, FaBriefcase, FaProjectDiagram, FaRocket } from "react-icons/fa";
-import { motion } from "framer-motion";
+import {
+  formatDateRange,
+  getRangeSortTimestamp,
+  resumeData,
+} from "../resume/data";
 
-const experiences = [
-  {
-    company: "Shiboleth.ai",
-    role: "Software Engineer",
-    startTime: new Date("2024-06"),
-    endTime: "Present",
-    description:
-      "Designed and developed web applications, including OFAC Geo-Fencing and Call Monitoring, reducing manual processes by 70%.",
-    icon: <FaRocket className="text-blue-500" />,
-  },
-  {
-    company: "Bestsr.ai",
-    role: "Software Developer",
-    startTime: new Date("2024-05"),
-    endTime: "Present",
-    description:
-      "Developed tools enabling Amazon sellers to test product attributes, improving product rankings by up to 15%.",
-    icon: <FaProjectDiagram className="text-green-500" />,
-  },
-  {
-    company: "FinProve Inc.",
-    role: "Senior Software Engineer",
-    startTime: new Date("2017-12"),
-    endTime: new Date("2021-11"),
-    description:
-      "Gathered requirements and designed the core product architecture, ensuring robustness and scalability.",
-    icon: <FaCode className="text-purple-500" />,
-  },
-  {
-    company: "RedLentils Freelance Project",
-    role: "Software Engineer",
-    startTime: new Date("2017-04"),
-    endTime: new Date("2017-11"),
-    description:
-      "Coordinated on both front-end and back-end development, integrating credit card payment functionality via Stripe.",
-    icon: <FaServer className="text-red-500" />,
-  },
-  {
-    company: "Pagevamp/Outside Tech",
-    role: "Web Developer",
-    startTime: new Date("2017-02"),
-    endTime: new Date("2017-04"),
-    description:
-      "Reduced system downtime by 20% through application maintenance and quick issue resolution.",
-    icon: <FaBriefcase className="text-yellow-500" />,
-  },
-];
+export default function ProjectsPage() {
+  const timelineItems = [
+    ...resumeData.experience.map((item) => ({
+      kind: "experience" as const,
+      id: `${item.company}-${item.startDate.toISOString()}`,
+      startDate: item.startDate,
+      endDate: item.endDate,
+      isPresent: item.isPresent,
+      title: item.title,
+      subtitle: item.company,
+      bullets: item.bullets,
+      tags: item.technologies.split(",").map((tech) => tech.trim()),
+    })),
+    ...resumeData.education.map((item) => ({
+      kind: "education" as const,
+      id: `${item.degree}-${item.startDate.toISOString()}`,
+      startDate: item.startDate,
+      endDate: item.endDate,
+      isPresent: false,
+      title: item.degree,
+      subtitle: item.school,
+      bullets: [] as string[],
+      tags: [] as string[],
+    })),
+  ].sort((left, right) => {
+    const rightDate = getRangeSortTimestamp(
+      right.startDate,
+      right.endDate,
+      right.isPresent,
+    );
+    const leftDate = getRangeSortTimestamp(
+      left.startDate,
+      left.endDate,
+      left.isPresent,
+    );
 
-const formatDate = (date) => {
-  const options = { year: "numeric", month: "short" };
-  return typeof date === "string"
-    ? date
-    : new Intl.DateTimeFormat("en-US", options).format(date);
-};
+    return rightDate - leftDate;
+  });
 
-export default function VerticalTimeline() {
   return (
-    <main className="bg-gray-50 min-h-screen flex flex-col items-center py-12 px-4">
-      <h1 className="text-4xl font-bold mb-12 text-center">Career Timeline</h1>
-      <div className="relative w-full max-w-2xl">
-        {/* Vertical Line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full border-l-4 border-blue-500"></div>
-        <div className="space-y-10">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={`${exp.company}-${index}`}
-              className={`flex justify-between items-center w-full ${
-                index % 2 === 0 ? "flex-row-reverse" : ""
-              }`}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <div className="w-5/12">
-                <div className="bg-white shadow-lg rounded-lg p-6 transform transition-all duration-300 hover:scale-105">
-                  <div className="text-lg font-bold">{exp.company}</div>
-                  <div className="text-sm text-gray-700 mb-2">{exp.role}</div>
-                  <p className="text-gray-600">{exp.description}</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-center w-0 flex-1">
-                {exp.icon}
-              </div>
-              <div className="hidden lg:block w-5/12 text-center lg:text-left">
-                <div className="text-gray-700 text-sm">
-                  {formatDate(exp.startTime)} - {formatDate(exp.endTime)}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-blue-50/40 px-4 py-14 md:px-8">
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-12 text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+            Professional Journey
+          </p>
+          <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
+            Experience & Education Timeline
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+            A unified timeline from my resume that combines career impact and
+            academic background in one continuous journey.
+          </p>
+        </header>
+
+        <section className="relative pl-8 md:pl-10">
+          <div className="absolute left-2.5 top-0 h-full w-px bg-gradient-to-b from-blue-400 via-blue-300 to-transparent md:left-3" />
+
+          <div className="space-y-8">
+            {timelineItems.map((item, index) => {
+              const isEducation = item.kind === "education";
+
+              return (
+                <article
+                  key={item.id}
+                  className={`relative rounded-2xl bg-white/90 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${
+                    isEducation
+                      ? "border border-indigo-100 shadow-indigo-100/50 hover:shadow-indigo-200/60"
+                      : "border border-blue-100 shadow-blue-100/50 hover:shadow-blue-200/60"
+                  }`}
+                >
+                  <span
+                    className={`absolute -left-[2.1rem] top-7 h-4 w-4 rounded-full border-4 border-white shadow md:-left-[2.35rem] ${
+                      isEducation ? "bg-indigo-500" : "bg-blue-500"
+                    }`}
+                  />
+
+                  <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                      {formatDateRange(
+                        item.startDate,
+                        item.endDate,
+                        item.isPresent,
+                      )}
+                    </span>
+                    <span
+                      className={`text-xs font-semibold ${
+                        isEducation ? "text-indigo-600" : "text-blue-600"
+                      }`}
+                    >
+                      {isEducation ? "EDU" : "EXP"} #
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  <h2 className="text-2xl font-bold text-slate-900">
+                    {item.title}
+                  </h2>
+                  <p className="mb-4 mt-1 text-sm font-medium text-slate-600">
+                    {item.subtitle}
+                  </p>
+
+                  {item.bullets.length > 0 && (
+                    <ul className="mb-5 space-y-2">
+                      {item.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="flex gap-2 text-sm leading-relaxed text-slate-700 md:text-base"
+                        >
+                          <span
+                            className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                              isEducation ? "bg-indigo-500" : "bg-blue-500"
+                            }`}
+                          />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {item.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={`${item.id}-${tag}`}
+                          className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </main>
   );

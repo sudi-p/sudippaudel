@@ -1,10 +1,40 @@
-import React, { forwardRef } from "react";
-// import Project from "./Project";
+import React from "react";
 import Section from "../Section";
 import { IoMdDocument } from "react-icons/io";
+import Project from "./Project";
 
-const experiences = [
-    
+type ProjectData = {
+  title: string;
+  description: string;
+  type: string;
+  images: string[];
+  screenshotsAvailable: boolean;
+  link?: string;
+  live_url?: string;
+  tags: string[];
+};
+
+const experiences: ProjectData[] = [
+  {
+    title: "Shiboleth.ai",
+    description:
+      "Built OFAC Geo-Fencing and Call Monitoring tools using Django + HTMX, integrating LLMs to automate workflows and reduce manual effort by ~72%. Improved app responsiveness and UX with Tailwind CSS and utilized OpenAI API for smarter data automation.",
+    type: "Web Application",
+    tags: ["Django", "HTMX", "Tailwind CSS", "OpenAI API"],
+    screenshotsAvailable: false,
+    images: [],
+    live_url: "www.shiboleth.ai",
+  },
+  {
+    title: "Bestsr.ai",
+    description:
+      "Developed an AI-based recommendation system with OpenAI API to optimize product attributes, boosting Amazon product rankings by 23%. Enhanced backend scalability with Django + PostgreSQL and improved UI/UX with React + Tailwind CSS.",
+    type: "Web Application",
+    tags: ["Django", "React", "PostgreSQL", "Tailwind CSS", "OpenAI API"],
+    screenshotsAvailable: false,
+    images: [],
+    live_url: "www.bestsr.ai",
+  },
   {
     title: "FinProve",
     description:
@@ -34,10 +64,9 @@ const experiences = [
     ],
     link: "https://github.com/sudi-p/redlentils",
   },
-  
 ];
 
-const projects = [
+const projects: ProjectData[] = [
   {
     title: "GlobalAid",
     description:
@@ -59,88 +88,48 @@ const projects = [
     description: "App to load top 50 news summary in a day",
     type: "Android Application",
     tags: ["Flask", "CSS"],
-    images: ["https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688768/sudippau/The_Indianapolis_Star__2011.jpg"],
+    screenshotsAvailable: false,
+    images: [
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1712688768/sudippau/The_Indianapolis_Star__2011.jpg",
+    ],
   },
-]
+];
 
+const allProjects: ProjectData[] = [...experiences, ...projects];
 
 const Projects = () => {
   return (
     <Section id="projects" bgColor="#f7fafc">
-      <div className="p-6 md:p-10 lg:pt-20 text-center">
-        <h2 className="font-bold text-4xl mb-6">My Recent Work</h2>
-        <p className="text-lg mb-12 mx-auto max-w-2xl">
-          Here are a few projects that I've worked on, showcasing my experiences and technical expertise.
-        </p>
-        <div className="flex flex-wrap justify-center gap-10">
-          {experiences.concat(projects).map((experience, index) => (
-            <Project key={index} {...experience} />
+      <div className="mx-auto max-w-screen-xl px-4 py-20 text-center md:px-8">
+        <div className="mx-auto mb-12 max-w-3xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+            Featured Portfolio
+          </p>
+          <h2 className="mb-4 text-4xl font-bold text-slate-900 md:text-5xl">
+            My Recent Work
+          </h2>
+          <p className="text-base leading-relaxed text-slate-600 md:text-lg">
+            A collection of product-focused projects where I handled design,
+            architecture, and implementation across frontend and backend.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {allProjects.map((experience, index) => (
+            <Project key={`${experience.title}-${index}`} {...experience} />
           ))}
         </div>
+
         <a
-          href="https://drive.google.com/file/d/1aPIWI4fltMoyKiizSBXPJjpIEbv8sgSo/view?usp=sharing"
-          className="mt-10 inline-flex items-center px-6 py-3 border border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition"
+          href="/resume"
+          className="mt-12 inline-flex items-center gap-2 rounded-xl border border-blue-600 px-6 py-3 font-semibold text-blue-600 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-600 hover:text-white"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <IoMdDocument className="mr-2" /> View My Resume
+          <IoMdDocument className="text-lg" /> View My Resume
         </a>
       </div>
     </Section>
   );
 };
 export default Projects;
-
-// // components/Project.js
-// import React from "react";
-import { FaGithub } from "react-icons/fa";
-import Screenshots from "./Screenshots";
-
-type ProjectProps = {
-  title: string;
-  description: string;
-  type: string;
-  images: Array<string>;
-  screenshotsAvailable: boolean;
-  link?: string;
-  tags: Array<string>;
-};
-
-const Project = ({
-  title,
-  description,
-  tags,
-  screenshotsAvailable,
-  images,
-  link,
-}: ProjectProps) => {
-  return (
-    <div className="max-w-md bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300">
-      <Screenshots images={images} screenshotsAvailable={screenshotsAvailable} />
-      <div className="p-6">
-        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
-            <span key={tag} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">
-              {tag}
-            </span>
-          ))}
-        </div>
-        {link && (
-          <a
-            href={link}
-            className="flex items-center text-blue-500 hover:text-blue-700"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub className="mr-1" /> View Source
-          </a>
-        )}
-      </div>
-    </div>
-  );
-};
-
-
-// export default Project
