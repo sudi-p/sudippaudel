@@ -3,6 +3,7 @@ import { FaHome } from "react-icons/fa";
 import { MdDeveloperMode, MdContactMail } from "react-icons/md";
 import { GoCodeReview } from "react-icons/go";
 import { CgWebsite } from "react-icons/cg";
+import { IoNewspaperOutline } from "react-icons/io5";
 
 type NavbarProps = {
   homeRef: HTMLDivElement | null,
@@ -13,6 +14,7 @@ const Navbar = () =>{
     { icon: <FaHome />, text: "Home", id:"home" },
     { icon: <MdDeveloperMode />, text: "Skills", id:"skills"  },
     { icon: <GoCodeReview />, text: "Projects", id:"projects" },
+    { icon: <IoNewspaperOutline />, text: "Blogs", id:"blogs" },
     { icon: <CgWebsite />, text: "Testimonials", id:"testimonials" },
     { icon: <MdContactMail />, text: "Contact", id:"contact" },
   ]

@@ -1,28 +1,31 @@
-'use client';
-import { useRef, useState } from 'react';
-import Projects from '@/components/home/projects/Projects';
+"use client";
+import { useState } from "react";
+import Projects from "@/components/home/projects/Projects";
 
-import Testimonials from '@/components/home/Testimonials';
-import ContactForm from '@/components/home/ContactForm';
-import Skills from '@/components/home/Skills';
-import Footer from '@/components/home/Footer';
-import Navbar from '@/components/home/Navbar';
-import Hero from '@/components/home/Hero';
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
+import Testimonials from "@/components/home/Testimonials";
+import ContactForm from "@/components/home/ContactForm";
+import Skills from "@/components/home/Skills";
+import Footer from "@/components/home/Footer";
+import Navbar from "@/components/home/Navbar";
+import Hero from "@/components/home/Hero";
+import Blogs from "@/components/home/Blogs";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function Home() {
   const [showContactForm, setShowContactForm] = useState(false);
   return (
     <body style={{ overflow: showContactForm ? "hidden" : "auto" }}>
       <Navbar />
-      <Hero handleClick={() => setShowContactForm(true)}/>
+      <Hero handleClick={() => setShowContactForm(true)} />
       <Skills />
       <Projects />
+      <Blogs />
       <Testimonials />
       <Footer handleClick={() => setShowContactForm(true)} />
-      {showContactForm && <ContactForm setShowContactForm={setShowContactForm} />}
+      {showContactForm && (
+        <ContactForm setShowContactForm={setShowContactForm} />
+      )}
       <SpeedInsights />
-    </body >
-  )
+    </body>
+  );
 }
