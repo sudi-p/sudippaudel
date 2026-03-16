@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
-    "@vercel/analytics": "^1.2.2",
+    "@vercel/analytics": "^1.6.1",
     "@vercel/speed-insights": "^1.1.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.15.0",
