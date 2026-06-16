@@ -1,0 +1,707 @@
+// @ts-nocheck
+/* eslint-disable */
+"use client";
+
+import { useEffect } from "react";
+
+export default function CelpipSpeakingTask2Page() {
+  useEffect(() => {
+    document.title = "CELPIP Speaking — Task 2 Study Guide";
+
+        // Vocab bank rendering for Task 2
+        function initializeVocabBank() {
+          const vocabFilters = document.getElementById('vocab-filters');
+          const vocabContent = document.getElementById('vocab-content');
+
+          if (!vocabFilters) return;
+
+          // Get unique types for task 2
+          const task2Words = window.VOCAB.filter(v => v.task === '2');
+          const types = ['all', ...new Set(task2Words.map(v => v.type))];
+
+          // Create filter buttons
+          types.forEach(type => {
+            const btn = document.createElement('button');
+            btn.className = `vocab-filter-btn ${type === 'all' ? 'filter-active' : 'filter-inactive'} px-4 py-1.5 rounded-full border text-xs font-medium`;
+            btn.textContent = type === 'all' ? 'All Words' : type;
+            btn.dataset.vocabType = type;
+
+            btn.addEventListener('click', () => {
+              vocabFilters.querySelectorAll('.vocab-filter-btn').forEach(b => {
+                b.classList.remove('filter-active');
+                b.classList.add('filter-inactive');
+              });
+              btn.classList.add('filter-active');
+              btn.classList.remove('filter-inactive');
+              renderVocabWords(type);
+            });
+
+            vocabFilters.appendChild(btn);
+          });
+
+          // Initial render
+          renderVocabWords('all');
+        }
+
+        function renderVocabWords(filterType) {
+          const vocabContent = document.getElementById('vocab-content');
+          let filtered = window.VOCAB.filter(v => v.task === '2');
+
+          if (filterType !== 'all') {
+            filtered = filtered.filter(v => v.type === filterType);
+          }
+
+          vocabContent.innerHTML = filtered.map(word => `
+            <div class="bg-white rounded-xl border border-mist p-4">
+              <p class="text-sm font-semibold text-ink mb-1">${word.word}</p>
+              <p class="text-xs text-slate mb-2"><strong>Meaning:</strong> ${word.meaning}</p>
+              <p class="text-xs text-slate italic"><strong>Example:</strong> "${word.example}"</p>
+              <span class="inline-block mt-3 text-xs font-medium text-emerald2 bg-emerald2-light px-2 py-1 rounded">${word.type}</span>
+            </div>
+          `).join('');
+        }
+
+        // Tab and pane management
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const panes = document.querySelectorAll('.pane');
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tabName = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => {
+              b.classList.remove('tab-active');
+              b.classList.add('tab-inactive');
+            });
+            btn.classList.add('tab-active');
+            btn.classList.remove('tab-inactive');
+            panes.forEach(pane => pane.classList.remove('active'));
+            document.getElementById(`pane-${tabName}`).classList.add('active');
+          });
+        });
+
+        // Accordion functionality
+        const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+        accordionTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const targetId = trigger.getAttribute('data-target');
+            const body = document.getElementById(targetId);
+            const chevron = trigger.querySelector('.chevron');
+            body.classList.toggle('open');
+            chevron.classList.toggle('rotated');
+          });
+        });
+
+        // Tips filtering (Pro Tips section only)
+        const tipPane = document.getElementById('pane-tips');
+        if (tipPane) {
+          const tipFilterBtns = tipPane.querySelectorAll('.filter-btn');
+          const tipCards = tipPane.querySelectorAll('.tip-card');
+
+          tipFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const category = btn.getAttribute('data-category');
+              tipFilterBtns.forEach(b => {
+                b.classList.remove('filter-active');
+                b.classList.add('filter-inactive');
+              });
+              btn.classList.add('filter-active');
+              btn.classList.remove('filter-inactive');
+
+              tipCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                  card.style.display = 'block';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            });
+          });
+        }
+
+        // Mobile menu toggle
+        const navbarBurger = document.getElementById('navbar-burger');
+        const navbarMenu = document.getElementById('navbar-menu');
+        navbarBurger?.addEventListener('click', () => {
+          navbarMenu?.classList.toggle('hidden');
+        });
+
+        // Auth button placeholders (would integrate with actual auth system)
+        const authBtns = document.querySelectorAll('#nav-auth-btn, #nav-auth-btn-mobile');
+        authBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            alert('Sign in functionality would be integrated here');
+          });
+        });
+
+        // Initialize vocab bank on page load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initializeVocabBank);
+        } else {
+          initializeVocabBank();
+        }
+  
+  }, []);
+
+  return (
+    <>
+
+
+  
+
+        {/* ─── HERO ─── */}
+        <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
+          <div className="animate-fade-up">
+            <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">Speaking · Task 2 of 8</p>
+            <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-5">
+              Tell a <span className="hero-line italic">personal</span> story
+            </h1>
+            <p className="text-lg text-slate max-w-xl leading-relaxed">
+              Everything you need to score 9+ on Task 2 — structure, vocab, scoring rubric, practice scenarios, and delivery tips.
+            </p>
+          </div>
+
+          {/* Quick stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 animate-fade-up" style={{animationDelay: '.1s'}}>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Speaking time</div>
+              <div className="font-display text-3xl text-ink">90<span className="text-lg">s</span></div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Prep time</div>
+              <div className="font-display text-3xl text-ink">90<span className="text-lg">s</span></div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Score scale</div>
+              <div className="font-display text-3xl text-ink">1–12</div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Target band</div>
+              <div className="font-display text-3xl text-ink">8–10</div>
+            </div>
+          </div>
+        </header>
+
+        {/* ─── MAIN CONTENT ─── */}
+        <main className="max-w-6xl mx-auto px-6 pb-24">
+
+          {/* TAB BAR */}
+          <div className="flex flex-wrap gap-2 mb-8 animate-fade-up" style={{animationDelay: '.15s'}} id="tab-bar">
+            <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
+            <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
+            <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
+            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
+            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
+            <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: OVERVIEW
+          ══════════════════════════════════════════ */}
+          <div id="pane-overview" className="pane active space-y-5">
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">What the task involves</p>
+              <p className="text-base leading-relaxed text-ink">You will be asked to describe a personal experience or memorable event. You have <strong>90 seconds to prepare</strong> and <strong>90 seconds to speak</strong>. There is no writing — only speaking about something from your own life.</p>
+              <p className="text-base leading-relaxed text-ink mt-3">The examiner is testing your ability to organize a narrative, use varied vocabulary and grammar naturally, include vivid sensory details, and deliver smoothly without sounding memorized.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">What examiners score you on</p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Fluency</span>
+                  <p className="text-sm leading-relaxed text-ink">Smooth, natural delivery with minimal hesitation. Filler words like "um" or "uh" signal low fluency.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-emerald2-light text-emerald2-dark shrink-0 mt-0.5">Grammar</span>
+                  <p className="text-sm leading-relaxed text-ink">Accurate sentence structure and tense control. Complex sentences show range; simple errors cost points.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Vocabulary</span>
+                  <p className="text-sm leading-relaxed text-ink">Word choice that fits the topic and shows range. Repetition (saying the same word over and over) is a red flag.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-rose2-light text-rose2-dark shrink-0 mt-0.5">Coherence</span>
+                  <p className="text-sm leading-relaxed text-ink">Your story has a clear beginning, middle, and end. Ideas connect logically; transitions are smooth.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-ink rounded-2xl p-6 text-fog">
+              <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">The 90-second blueprint</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-gold text-sm">1</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-gold">Opening (20s)</p>
+                    <p className="text-xs text-fog/80">Name the event, when it happened, why it mattered</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-fog/20 border border-fog/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-fog text-sm">2</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-fog">Body (50s)</p>
+                    <p className="text-xs text-fog/80">Describe one key moment with sensory details; show emotion shift</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-gold text-sm">3</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-gold">Closing (20s)</p>
+                    <p className="text-xs text-fog/80">Reflect on what you learned or how it changed you</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: STRUCTURE / TEMPLATE
+          ══════════════════════════════════════════ */}
+          <div id="pane-structure" className="pane space-y-4">
+            <p className="text-sm text-slate">A 3-part structure to internalize — not a word-for-word script.</p>
+
+            {/* Part 1: Opening */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-1">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-sapphire text-white text-xs font-semibold flex items-center justify-center shrink-0">1</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Opening</span>
+                    <span className="text-xs text-slate ml-2">~20 seconds</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-1" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate">Anchor the listener immediately — who, where, when, and why it matters to you.</p>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Name the event.</strong> Be specific. "A camping trip" is vague. "A solo camping trip in Banff" is vivid.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Say roughly when.</strong> "A few years ago," "during university," "last summer" — doesn't need to be exact.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Give a quick reason it stuck with you.</strong> One sentence that hooks the listener.</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example openings</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"A few years back, I did something I'd been putting off for years — I went on a solo road trip up the coast."</p>
+                  <p className="text-sm text-ink italic leading-relaxed mt-2">"There's one weekend from university I still think about — the time I almost dropped out, but decided to stay."</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 2: Body */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-2">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-emerald2 text-white text-xs font-semibold flex items-center justify-center shrink-0">2</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Body</span>
+                    <span className="text-xs text-slate ml-2">~50 seconds · the heart of your story</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-2" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate">Make the listener feel like they were there. This is where your score is won or lost.</p>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Zoom into one key moment,</strong> not the whole timeline. One well-told scene beats five vaguely mentioned ones.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Include a sensory detail.</strong> What did you see, hear, smell, or feel? This is the single strongest fluency signal.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Show an emotional shift.</strong> How you felt before vs. after (nervous → calm, doubtful → proud) creates narrative arc and shows grammar naturally.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Say what was unique or challenging.</strong> One sentence on what made this moment stand out.</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sensory detail examples</p>
+                  <div className="space-y-1 text-sm text-ink italic">
+                    <p>"The air smelled like pine and rain."</p>
+                    <p>"The crowd noise was physically overwhelming."</p>
+                    <p>"My hands were shaking as I reached the summit."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 3: Closing */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden" style={{marginBottom: '2rem'}}>
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-3">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-amber2 text-white text-xs font-semibold flex items-center justify-center shrink-0">3</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Closing</span>
+                    <span className="text-xs text-slate ml-2">~20 seconds</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-3" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate">Land the story cleanly with a personal takeaway. Don't trail off — finish strong.</p>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Reflect on what you learned.</strong> How did the experience change or teach you? One genuine sentence is enough.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Optional: say whether you'd repeat it.</strong> A simple "I'd do it again in a heartbeat" or "I wouldn't change it" closes naturally.</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example closings</p>
+                  <div className="space-y-1 text-sm text-ink italic">
+                    <p>"Looking back, that trip showed me I'm more capable than I thought."</p>
+                    <p>"It wasn't easy, but I came out more confident — and I'd do it again."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Complete Scenario Examples */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-examples">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-ink">Complete Personal Experience Examples</span>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-examples" className="accordion-body border-t border-mist px-6 py-5 space-y-6">
+                <div className="border-l-3 border-sapphire pl-4">
+                  <p className="text-sm font-semibold text-ink mb-3">Example 1: Overcoming Fear</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Opening:</strong> "A few years ago, I decided to take a solo backpacking trip through Southeast Asia for three months. I'd never traveled alone before, and honestly, I was terrified."</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "The first week was in Thailand. I remember walking through Bangkok's night market at dusk — the smell of grilled seafood was everywhere, and the crowd noise was physically overwhelming. My hands were shaking as I tried to navigate the streets with just a map. But then this street vendor noticed I was lost and helped me find my hostel. After that moment, something shifted. I realized people were genuinely kind, and I could handle being uncomfortable."</p>
+                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "That trip taught me I'm braver than I thought. I came home knowing I could handle anything, and I've since traveled to ten more countries. I wouldn't trade that experience for anything."</p>
+                </div>
+
+                <div className="border-l-3 border-emerald2 pl-4">
+                  <p className="text-sm font-semibold text-ink mb-3">Example 2: Learning a Skill</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Opening:</strong> "Last year, I decided to learn guitar even though I had no musical background whatsoever. My brother had left his old guitar at my place, and one day I just picked it up."</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "The first month was frustrating. My fingers would hurt after just ten minutes of practice, and the strings buzzed when I played chords. I wanted to give up. But then one afternoon, I sat down and played 'Wonderwall' all the way through for the first time. I remember my heart racing and my hands trembling with excitement. That moment changed everything because it showed me that persistence actually works."</p>
+                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "Now I play three times a week, and I'm learning more complex songs. It's taught me that you don't need talent to start — you just need patience. If I could go back, I'd tell my younger self to stick with it."</p>
+                </div>
+
+                <div className="border-l-3 border-amber2 pl-4">
+                  <p className="text-sm font-semibold text-ink mb-3">Example 3: A Memorable Celebration</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Opening:</strong> "One night that still stands out is my grandmother's 80th birthday party. The whole extended family came from different cities — we hadn't all been together in five years."</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "We had dinner at her favorite restaurant by the riverside. The moment I'll never forget is when the waiter brought out the cake — it was shaped like a lotus flower, her favorite flower. My grandmother's eyes actually teared up. The room went silent for a moment, and then everyone started clapping and singing. I could smell jasmine flowers on the table and taste the sweetness of the cake when we cut it together. But what hit me most was seeing her surrounded by people who loved her, laughing and telling old stories."</p>
+                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "That night made me realize how precious those moments are. I'm so grateful I was there, and now I make sure to visit her every month."</p>
+                </div>
+
+                <div className="border-l-3 border-rose2 pl-4">
+                  <p className="text-sm font-semibold text-ink mb-3">Example 4: An Unexpected Decision</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Opening:</strong> "During my second year of university, I had a scholarship to study engineering. But halfway through the semester, I realized I hated it. So I made a big decision — I switched to studying environmental science instead."</p>
+                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "The day I told my parents, I was so anxious. I could feel my stomach twisting as I made the call. But to my surprise, my father said, 'If you're not happy, change it. Life is too short to spend it doing something you don't believe in.' That moment lifted this huge weight off my shoulders. I'd been so worried about disappointing him that I hadn't even considered what I actually wanted. The switch was tough — I had to retake some classes — but suddenly, going to class didn't feel like a burden anymore."</p>
+                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "That decision was scary at the time, but it was exactly right. Now I work for an environmental NGO, and I couldn't imagine a different path. It taught me to listen to my gut."</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Storytelling & Personal Experience Language Toolkit */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-toolkit">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-ink">Storytelling & Personal Experience Language Toolkit</span>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-toolkit" className="accordion-body border-t border-mist px-6 py-5 space-y-6">
+                <div>
+                  <p className="text-sm font-semibold text-ink mb-3 text-sapphire">Past Tense Structures (Essential Grammar for Narrative)</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Simple Past (main action)</p>
+                      <p className="text-sm text-ink italic">"I went on a road trip..."</p>
+                      <p className="text-sm text-ink italic">"The moment I saw it, I knew..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Past Continuous (background action)</p>
+                      <p className="text-sm text-ink italic">"I was walking through the market when..."</p>
+                      <p className="text-sm text-ink italic">"My hands were shaking as I..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Past Perfect (earlier action)</p>
+                      <p className="text-sm text-ink italic">"I had been nervous before, but..."</p>
+                      <p className="text-sm text-ink italic">"I'd never traveled alone until that moment..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Used to / Would (past habits)</p>
+                      <p className="text-sm text-ink italic">"I used to be afraid of heights..."</p>
+                      <p className="text-sm text-ink italic">"Every summer we would visit..."</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-ink mb-3 text-emerald2">Emotional Expression Vocabulary</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Fear / Anxiety</p>
+                      <p className="text-sm text-ink italic">"I was terrified... petrified... my heart was racing..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Excitement / Joy</p>
+                      <p className="text-sm text-ink italic">"I was thrilled... my hands trembled with excitement... I felt alive..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Sadness / Disappointment</p>
+                      <p className="text-sm text-ink italic">"I felt devastated... crushed... my heart sank..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Pride / Confidence</p>
+                      <p className="text-sm text-ink italic">"I felt proud... accomplished... capable... confident..."</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-ink mb-3 text-amber2">Sensory Detail Phrases (Show, Don't Tell)</p>
+                  <div className="bg-fog rounded-lg p-4">
+                    <p className="text-xs font-semibold text-slate mb-3">Use specific sensory language instead of vague adjectives:</p>
+                    <div className="space-y-2">
+                      <div>
+                        <p className="text-xs font-semibold text-slate">❌ Weak:</p>
+                        <p className="text-sm text-ink italic">"It was nice and quiet."</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-slate">✓ Strong:</p>
+                        <p className="text-sm text-ink italic">"The air smelled like pine and rain. I could hear the creek flowing softly in the distance."</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2 mt-3">
+                      <p className="text-xs font-semibold text-slate">Examples:</p>
+                      <p className="text-sm text-ink italic">"The crowd noise was physically overwhelming..."</p>
+                      <p className="text-sm text-ink italic">"I could taste the saltiness of the sea spray..."</p>
+                      <p className="text-sm text-ink italic">"The warm sand beneath my feet..."</p>
+                      <p className="text-sm text-ink italic">"My stomach twisted as I opened the letter..."</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-ink mb-3 text-rose2">Time Transitions & Narrative Flow</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Starting the story</p>
+                      <p className="text-sm text-ink italic">"A few years back... One night... There's one moment..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Showing progression</p>
+                      <p className="text-sm text-ink italic">"As the day went on... The moment I... Suddenly..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Emphasizing a key moment</p>
+                      <p className="text-sm text-ink italic">"But then... And that's when... The turning point was..."</p>
+                    </div>
+                    <div className="bg-fog rounded-lg p-3">
+                      <p className="text-xs font-semibold text-slate mb-1">Concluding</p>
+                      <p className="text-sm text-ink italic">"Looking back... From that moment on... Now, whenever..."</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-ink mb-3 text-violet2">Reflection & Conclusion Phrases (Show Depth)</p>
+                  <div className="bg-fog rounded-lg p-4 space-y-2">
+                    <p className="text-sm text-ink italic">"...and that's when I realized I was capable of..."</p>
+                    <p className="text-sm text-ink italic">"...it taught me that..." </p>
+                    <p className="text-sm text-ink italic">"...I came out of that experience more..."</p>
+                    <p className="text-sm text-ink italic">"...it completely changed my perspective on..."</p>
+                    <p className="text-sm text-ink italic">"...now whenever I face a challenge, I think back to..."</p>
+                    <p className="text-sm text-ink italic">"...I'd do it again in a heartbeat because..."</p>
+                    <p className="text-sm text-ink italic">"...it showed me that I'm capable of more than I thought..."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: VOCAB BANK
+          ══════════════════════════════════════════ */}
+          <div id="pane-vocab" className="pane space-y-4">
+            <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
+            <div id="vocab-content" className="space-y-4"></div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: PRACTICE
+          ══════════════════════════════════════════ */}
+          <div id="pane-practice" className="pane space-y-4">
+            <p className="text-sm text-slate">Five realistic practice scenarios. Pick one and speak for 90 seconds.</p>
+
+            <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Practice scenario 1</p>
+                <p className="text-sm font-semibold text-ink mb-3">Talk about a time you overcame a challenge or fear.</p>
+                <p className="text-sm text-slate leading-relaxed">Remember: be specific about what the challenge was, include one moment where you felt the shift in confidence, and reflect on how it changed you.</p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Practice scenario 2</p>
+                <p className="text-sm font-semibold text-ink mb-3">Describe a memorable meal or celebration you attended.</p>
+                <p className="text-sm text-slate leading-relaxed">Focus on sensory details — what did you see, smell, taste? Who was there? What made it stand out from other meals or celebrations?</p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Practice scenario 3</p>
+                <p className="text-sm font-semibold text-ink mb-3">Talk about a skill you learned recently.</p>
+                <p className="text-sm text-slate leading-relaxed">When did you start? What was the first moment it clicked? Include a small setback to show it wasn't easy, then how you persisted.</p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Practice scenario 4</p>
+                <p className="text-sm font-semibold text-ink mb-3">Describe a time you traveled somewhere unfamiliar.</p>
+                <p className="text-sm text-slate leading-relaxed">What surprised you? Include one moment where you felt lost or confused, then how you adapted. Show growth.</p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Practice scenario 5</p>
+                <p className="text-sm font-semibold text-ink mb-3">Talk about a decision you made that had unexpected consequences.</p>
+                <p className="text-sm text-slate leading-relaxed">What did you decide? What outcome did you expect? What actually happened? Did it turn out better or worse than you thought?</p>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: SCORING
+          ══════════════════════════════════════════ */}
+          <div id="pane-scoring" className="pane space-y-4">
+            <p className="text-sm text-slate">How examiners score Task 2 on a 12-point scale. The bands below show typical language for each score tier.</p>
+
+            <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                  <span className="font-display text-xl text-emerald2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Speaks naturally with very few pauses or filler words. Rhythm is conversational.</p>
+                  <p><strong>Grammar:</strong> Consistent use of complex sentences with minimal errors. Tense control is secure.</p>
+                  <p><strong>Vocabulary:</strong> Precise word choice; shows range and avoids repetition. Phrasal verbs or advanced collocations appear naturally.</p>
+                  <p><strong>Coherence:</strong> Story flows seamlessly. Transitions feel organic, not forced. Clear cause-and-effect.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                  <span className="font-display text-xl text-amber2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses to think. Some filler words but not excessive.</p>
+                  <p><strong>Grammar:</strong> Mostly accurate; some complex sentences mixed with simple ones. Minor errors don't disrupt meaning.</p>
+                  <p><strong>Vocabulary:</strong> Good range; some attempt at less common words. Occasional repetition of key terms.</p>
+                  <p><strong>Coherence:</strong> Story is organized and easy to follow. Transitions are present but sometimes basic ("and then," "so").</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                  <span className="font-display text-xl text-rose2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Noticeable pauses; some filler words. May lose thread of thought mid-sentence.</p>
+                  <p><strong>Grammar:</strong> Mix of simple and complex structures; some errors in tense or agreement. Meaning is usually clear.</p>
+                  <p><strong>Vocabulary:</strong> Basic vocabulary; frequent repetition. Limited range; mostly high-frequency words.</p>
+                  <p><strong>Coherence:</strong> Story is present but may jump around. Transitions are weak or missing.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                  <span className="font-display text-xl text-slate">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Frequent hesitation; heavy reliance on filler words or silence. Choppy delivery.</p>
+                  <p><strong>Grammar:</strong> Frequent errors in basic structures (subject-verb, tense). Meaning is sometimes unclear.</p>
+                  <p><strong>Vocabulary:</strong> Very limited; heavy repetition. Mostly basic, everyday words only.</p>
+                  <p><strong>Coherence:</strong> Story is disjointed or incomplete. Difficult to follow the narrative thread.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-fog rounded-2xl p-6 mt-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+              <p className="text-sm text-ink">A 9–10 speaker tells a coherent story with natural pacing and good vocabulary. They are <strong>not</strong> perfect; they may use simple sentences alongside complex ones, and that's fine. What matters: do the story and grammar feel intentional, or accidental?</p>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: PRO TIPS
+          ══════════════════════════════════════════ */}
+          <div id="pane-tips" className="pane space-y-4">
+            <div className="flex flex-wrap gap-2 mb-4">
+              <button className="filter-btn filter-active px-4 py-1.5 rounded-full border text-xs font-medium" data-category="all">All</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="prep">Prep</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="delivery">Delivery</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="language">Language</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="mistakes">Mistakes</button>
+            </div>
+
+            <div className="space-y-3">
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="prep">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Prep</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't memorize — outline instead.</p>
+                <p className="text-xs text-slate">During prep, scribble 3–4 key words for each part (opening event, key moment detail, closing reflection). Then speak from those cues, not from memory. Examiners can tell.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="prep">
+                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Prep</p>
+                <p className="text-sm font-semibold text-ink mb-2">Pick a story you know well.</p>
+                <p className="text-xs text-slate">If you're thinking hard about whether something happened or when, your fluency suffers. Choose an experience you've already told friends about multiple times.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
+                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Delivery</p>
+                <p className="text-sm font-semibold text-ink mb-2">Speak as if you're telling a friend, not an examiner.</p>
+                <p className="text-xs text-slate">Overly formal language signals nervousness. Talk naturally. "I was like..." or "So anyway..." are fine — better than stilted phrasing.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
+                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Delivery</p>
+                <p className="text-sm font-semibold text-ink mb-2">Pause &gt; filler words.</p>
+                <p className="text-xs text-slate">A 2-second silence while you think is better than "um" or "uh." Examiners know you're gathering thoughts. Filler suggests you're losing control.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
+                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Language</p>
+                <p className="text-sm font-semibold text-ink mb-2">One strong sensory detail beats five vague ones.</p>
+                <p className="text-xs text-slate">"The air smelled like pine and rain" is worth more than "it was nice and quiet and peaceful." Specific → fluent.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
+                <p className="text-xs font-semibold text-violet2 uppercase tracking-widest mb-2">Language</p>
+                <p className="text-sm font-semibold text-ink mb-2">Show, don't tell.</p>
+                <p className="text-xs text-slate">Instead of "I was really nervous," say "My heart was pounding as I stepped forward." Specific language shows grammar range.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Mistakes</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't stop or correct yourself.</p>
+                <p className="text-xs text-slate">If you misspeak or notice a grammar error, keep going. Stopping to say "wait, I meant..." signals anxiety. Examiners understand imperfection.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Mistakes</p>
+                <p className="text-sm font-semibold text-ink mb-2">Avoid "I want to talk about..." opening.</p>
+                <p className="text-xs text-slate">Jump straight into the story: "A few years back, I..." This signals confidence and uses time efficiently.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Mistakes</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't finish early and go silent.</p>
+                <p className="text-xs text-slate">If you run out of ideas, add one more detail to a key moment or expand your reflection. 90 seconds should feel natural, not rushed or cut short.</p>
+              </div>
+            </div>
+          </div>
+
+        </main>
+
+        <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">
+          <p className="text-xs text-slate mb-4">CELPIP Prep — Speaking Task 2 Study Guide</p>
+          <p className="text-xs text-slate/60">Build your fluency one story at a time. Practice with real scenarios, internalize the structure, and let your natural voice shine through.</p>
+        </footer>
+
+  
+  
+
+    </>
+  );
+}

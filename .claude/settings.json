@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p public/celpip)",
+      "Bash(cp \"src/app/celpip/vocab_data.js\" public/celpip/vocab_data.js)"
+    ]
+  }
+}

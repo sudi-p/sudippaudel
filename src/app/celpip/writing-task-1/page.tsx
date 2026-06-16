@@ -1,0 +1,1378 @@
+// @ts-nocheck
+/* eslint-disable */
+"use client";
+
+import { useEffect } from "react";
+
+export default function CelpipWritingTask1Page() {
+  useEffect(() => {
+    document.title = "CELPIP Writing — Task 1 Study Guide";
+
+        function initializeVocabBank() {
+          const filterContainer = document.getElementById('vocab-filters');
+          const contentContainer = document.getElementById('vocab-content');
+
+          if (!window.VOCAB) return;
+
+          const taskVocab = window.VOCAB.filter(v => v.task === 'W1');
+          const types = ['All', ...new Set(taskVocab.map(v => v.type))];
+
+          filterContainer.innerHTML = types.map(type =>
+            `<button class="vocab-filter-btn ${type === 'All' ? 'filter-active' : 'filter-inactive'} px-4 py-1.5 rounded-full border text-xs font-medium" data-type="${type}">${type}</button>`
+          ).join('');
+
+          renderVocabWords('All');
+
+          const vocabFilterBtns = filterContainer.querySelectorAll('.vocab-filter-btn');
+          vocabFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              vocabFilterBtns.forEach(b => {
+                b.classList.remove('filter-active');
+                b.classList.add('filter-inactive');
+              });
+              btn.classList.add('filter-active');
+              btn.classList.remove('filter-inactive');
+              const type = btn.getAttribute('data-type');
+              renderVocabWords(type);
+            });
+          });
+        }
+
+        function renderVocabWords(filterType) {
+          const contentContainer = document.getElementById('vocab-content');
+
+          if (!window.VOCAB) return;
+
+          const taskVocab = window.VOCAB.filter(v => v.task === 'W1');
+          const filtered = filterType === 'All' ? taskVocab : taskVocab.filter(v => v.type === filterType);
+
+          contentContainer.innerHTML = filtered.map(word => `
+            <div class="bg-white rounded-xl border border-mist p-4">
+              <p class="text-sm font-semibold text-ink mb-1">${word.word}</p>
+              <p class="text-xs text-slate mb-2">${word.meaning}</p>
+              <p class="text-xs text-sapphire italic">"${word.example}"</p>
+            </div>
+          `).join('');
+        }
+
+        // Tab and pane management
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const panes = document.querySelectorAll('.pane');
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tabName = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => {
+              b.classList.remove('tab-active');
+              b.classList.add('tab-inactive');
+            });
+            btn.classList.add('tab-active');
+            btn.classList.remove('tab-inactive');
+            panes.forEach(pane => pane.classList.remove('active'));
+            document.getElementById(`pane-${tabName}`).classList.add('active');
+          });
+        });
+
+        // Accordion functionality
+        const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+        accordionTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const targetId = trigger.getAttribute('data-target');
+            const body = document.getElementById(targetId);
+            const chevron = trigger.querySelector('.chevron');
+            body.classList.toggle('open');
+            chevron.classList.toggle('rotated');
+          });
+        });
+
+        // Tips filtering (scoped to tips pane only)
+        const tipsPane = document.getElementById('pane-tips');
+        if (tipsPane) {
+          const tipFilterBtns = tipsPane.querySelectorAll('.filter-btn');
+          const tipCards = tipsPane.querySelectorAll('.tip-card');
+
+          tipFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const category = btn.getAttribute('data-category');
+              tipFilterBtns.forEach(b => {
+                b.classList.remove('filter-active');
+                b.classList.add('filter-inactive');
+              });
+              btn.classList.add('filter-active');
+              btn.classList.remove('filter-inactive');
+
+              tipCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                  card.style.display = 'block';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            });
+          });
+        }
+
+        // Email-type (formality) toggle
+        const formalityBtns = document.querySelectorAll('.formality-btn');
+        const formalityCards = document.querySelectorAll('.formality-card');
+        formalityBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-formality');
+            formalityBtns.forEach(b => {
+              b.classList.remove('filter-active');
+              b.classList.add('filter-inactive');
+            });
+            btn.classList.add('filter-active');
+            btn.classList.remove('filter-inactive');
+            formalityCards.forEach(card => {
+              card.classList.toggle('hidden', card.getAttribute('data-formality') !== type);
+            });
+          });
+        });
+
+        // Mobile menu toggle
+        const navbarBurger = document.getElementById('navbar-burger');
+        const navbarMenu = document.getElementById('navbar-menu');
+        navbarBurger?.addEventListener('click', () => {
+          navbarMenu?.classList.toggle('hidden');
+        });
+
+        // Auth button placeholders (would integrate with actual auth system)
+        const authBtns = document.querySelectorAll('#nav-auth-btn, #nav-auth-btn-mobile');
+        authBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            alert('Sign in functionality would be integrated here');
+          });
+        });
+
+        initializeVocabBank();
+  
+  }, []);
+
+  return (
+    <>
+
+
+  
+
+        {/* ─── HERO ─── */}
+        <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
+          <div className="animate-fade-up">
+            <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">Writing · Task 1 of 2</p>
+            <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-5">
+              Write a professional <span className="hero-line italic">email</span>
+            </h1>
+            <p className="text-lg text-slate max-w-xl leading-relaxed">
+              Everything you need to score 9+ on Task 1 — structure, vocab, scoring rubric, practice scenarios, and delivery tips.
+            </p>
+          </div>
+
+          {/* Quick stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 animate-fade-up" style={{animationDelay: '.1s'}}>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Word count</div>
+              <div className="font-display text-3xl text-ink">180–199</div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Time allowed</div>
+              <div className="font-display text-3xl text-ink">27 minutes</div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Score scale</div>
+              <div className="font-display text-3xl text-ink">1–12</div>
+            </div>
+            <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
+              <div className="text-xs text-slate uppercase tracking-wider mb-1">Target band</div>
+              <div className="font-display text-3xl text-ink">10–12</div>
+            </div>
+          </div>
+        </header>
+
+        {/* ─── MAIN CONTENT ─── */}
+        <main className="max-w-6xl mx-auto px-6 pb-24">
+
+          {/* TAB BAR */}
+          <div className="flex flex-wrap gap-2 mb-8 animate-fade-up" style={{animationDelay: '.15s'}} id="tab-bar">
+            <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
+            <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
+            <button data-tab="formality" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Email Types</button>
+            <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
+            <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: OVERVIEW
+          ══════════════════════════════════════════ */}
+          <div id="pane-overview" className="pane active space-y-5">
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">What the task involves</p>
+              <p className="text-base leading-relaxed text-ink">You are asked to write a professional email (180–199 words) in response to a business scenario. You have <strong>27 minutes</strong> to plan, write, and revise.</p>
+              <p className="text-base leading-relaxed text-ink mt-3">The examiner is testing your ability to communicate professionally, organize information clearly, use appropriate tone and register, and demonstrate grammar and vocabulary control in a practical business context.</p>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">What examiners score you on</p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Task Fulfillment</span>
+                  <p className="text-sm leading-relaxed text-ink">Did you address all requirements? Did you hit the word count (180–199 words)?</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-emerald2-light text-emerald2-dark shrink-0 mt-0.5">Coherence</span>
+                  <p className="text-sm leading-relaxed text-ink">Is the email organized logically? Does it flow from greeting to closing?</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Vocabulary</span>
+                  <p className="text-sm leading-relaxed text-ink">Professional tone, varied word choice, and appropriate register for business communication.</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-rose2-light text-rose2-dark shrink-0 mt-0.5">Grammar</span>
+                  <p className="text-sm leading-relaxed text-ink">Accurate sentence structure, spelling, and punctuation with minimal errors.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-ink rounded-2xl p-6 text-fog">
+              <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">The 4-part structure</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-gold text-sm">1</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-gold">Greeting (1–2 lines)</p>
+                    <p className="text-xs text-fog/80">Professional salutation (Dear [Name] or Dear Sir/Madam)</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-fog/20 border border-fog/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-fog text-sm">2</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-fog">Opening (2–3 sentences)</p>
+                    <p className="text-xs text-fog/80">State the purpose of the email clearly and politely</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-gold text-sm">3</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-gold">Body (3–4 sentences)</p>
+                    <p className="text-xs text-fog/80">Provide details, explanation, or key information</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-fog/20 border border-fog/40 flex items-center justify-center shrink-0">
+                    <span className="font-display text-fog text-sm">4</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-fog">Closing (1–2 sentences)</p>
+                    <p className="text-xs text-fog/80">Polite sign-off with your name</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ─── Scoring bands ─── */}
+            <div>
+              <p className="text-sm text-slate mb-3">How examiners score Task 1 on a 12-point scale. The bands below show typical email characteristics at each level.</p>
+
+              <div className="space-y-3">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Task Fulfillment:</strong> Meets all requirements. Word count is 180–199 words. Email is complete with all requested elements. Completed within time constraints.</p>
+                    <p><strong>Coherence:</strong> Email flows naturally from greeting to closing. Ideas are organized logically.</p>
+                    <p><strong>Vocabulary:</strong> Professional register throughout. Varied word choice. Uses appropriate phrases (e.g., "I would appreciate it if...").</p>
+                    <p><strong>Grammar:</strong> Grammar and spelling are near-perfect. Sentences are well-constructed with good variety.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Task Fulfillment:</strong> Addresses main requirements. Word count is close to 180–199. Most elements are included.</p>
+                    <p><strong>Coherence:</strong> Email is organized and easy to follow. Transitions are present.</p>
+                    <p><strong>Vocabulary:</strong> Generally professional tone. Some variety in word choice. Occasional repetition of simple words.</p>
+                    <p><strong>Grammar:</strong> Grammar is mostly accurate. Minor errors present but don't disrupt meaning. Spelling is correct.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Task Fulfillment:</strong> Partially addresses requirements. Word count may be below or above the range. Some elements missing.</p>
+                    <p><strong>Coherence:</strong> Email is present but may lack clear organization. Some ideas don't connect smoothly.</p>
+                    <p><strong>Vocabulary:</strong> Basic tone, sometimes too casual. Limited word range. Frequent repetition.</p>
+                    <p><strong>Grammar:</strong> Several grammatical errors. Some spelling mistakes. Meaning is usually clear but sometimes unclear.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Task Fulfillment:</strong> Does not fully address requirements. Significantly below or above word count. Missing key elements.</p>
+                    <p><strong>Coherence:</strong> Email is disorganized or incomplete. Difficult to follow.</p>
+                    <p><strong>Vocabulary:</strong> Not professional. Very limited vocabulary range.</p>
+                    <p><strong>Grammar:</strong> Frequent and serious errors. Spelling mistakes. Meaning is sometimes unclear.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">A 10–12 email is well-organized, professional in tone, and nearly error-free. It hits the word count and addresses all requirements within 27 minutes. It is <strong>not</strong> perfect, and that's fine — what matters is that it demonstrates professional communication with clear purpose and good control of language.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: STRUCTURE / TEMPLATE
+          ══════════════════════════════════════════ */}
+          <div id="pane-structure" className="pane space-y-4">
+            <p className="text-sm text-slate"><strong>Key to high scores:</strong> Clear structure + Professional tone + Varied vocabulary + Complex sentences. Hit 180–199 words and address all prompt requirements.</p>
+
+            {/* Part 1: Greeting */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-1">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-sapphire text-white text-xs font-semibold flex items-center justify-center shrink-0">1</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Greeting</span>
+                    <span className="text-xs text-slate ml-2">1–2 lines · professional salutation</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-1" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate">Start with a professional, appropriate salutation. Formality depends on the recipient and context.</p>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>With a known name:</strong> "Dear Ms. Chen," or "Dear Mr. Johnson," (use last name unless very casual relationship)</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Without a name (formal):</strong> "Dear Sir or Madam," or "To Whom It May Concern,"</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>After greeting:</strong> Use comma (North American) or colon (British), then press Enter for a new line.</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Examples</p>
+                  <div className="space-y-1 text-sm text-ink">
+                    <p>Dear Mr. Johnson,</p>
+                    <p>Dear Sir or Madam,</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 2: Opening (Purpose) */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-2">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-emerald2 text-white text-xs font-semibold flex items-center justify-center shrink-0">2</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Opening (State Purpose)</span>
+                    <span className="text-xs text-slate ml-2">1 sentence · why you are writing</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-2" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate"><strong>Use one clear sentence to state your purpose.</strong> Pick the row below that matches your prompt and fill in the blank — that single sentence is your whole opening.</p>
+                <div className="bg-sapphire-light rounded-xl p-4 mb-3 overflow-x-auto">
+                  <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-3">✅ Purpose → Opening sentence (ready to use)</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left text-sapphire-dark">
+                        <th className="border border-sapphire/30 px-3 py-2 font-semibold w-2/5">Purpose</th>
+                        <th className="border border-sapphire/30 px-3 py-2 font-semibold">Opening sentence</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Complaint</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to express my dissatisfaction regarding [issue].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Suggestion / Recommendation</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to suggest an improvement regarding [topic].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Request (Action / Help)</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to request your assistance with [specific issue].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Request (Information)</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to inquire about [specific information or service].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Apology</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to sincerely apologize for [situation].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Appreciation</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing to express my appreciation for [event/service].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">Response / Follow-up</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am writing in response to [your previous email / advertisement regarding ...].</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-sapphire/30 px-3 py-2 font-semibold">General opener (any purpose)</td>
+                        <td className="border border-sapphire/30 px-3 py-2 italic">I am contacting you regarding... / The purpose of this email is to... (slightly formal)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>One sentence only:</strong> Don't delay or pad — state why you're writing, then move straight to the details paragraph.</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example</p>
+                  <div className="text-sm text-ink italic">
+                    <p>"I am writing to express my dissatisfaction regarding a laptop I recently purchased from your online store."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 3: Paragraph 1 — Answer point 1 (the facts) */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-3">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-amber2 text-white text-xs font-semibold flex items-center justify-center shrink-0">3</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Paragraph 1 — Explain the Details</span>
+                    <span className="text-xs text-slate ml-2">answer point 1 · facts only, no emotions yet</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-3" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate"><strong>Answer the first point of the prompt with specific, factual details.</strong> Keep this paragraph neutral — save how you <em>feel</em> for the next paragraph.</p>
+                <div className="bg-amber2-light rounded-lg p-3 mb-3">
+                  <p className="text-xs font-semibold text-amber2-dark mb-2">Linking phrases for details:</p>
+                  <ul className="space-y-1 text-xs text-amber2-dark">
+                    <li>• "The situation is..." / "The main reason is..."</li>
+                    <li>• "Specifically, ..." / "To be more specific, ..."</li>
+                    <li>• "In addition, ..." / "Furthermore, ..." / "Moreover, ..."</li>
+                    <li>• "As a result, ..." / "Consequently, ..."</li>
+                    <li>• "For example, ..." / "For instance, ..."</li>
+                  </ul>
+                </div>
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Include specific details:</strong> Dates, order numbers, product names, times, amounts</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Use varied sentence structures:</strong> Mix simple, compound, and complex sentences</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Stay factual:</strong> Describe <em>what happened</em>, not how you feel about it — that comes in Paragraph 2</li>
+                </ul>
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example (facts only)</p>
+                  <div className="text-sm text-ink italic">
+                    <p>"The laptop I purchased on March 10th (Order #AB123456) arrived with a cracked screen, and the box contained no protective cushioning. When I attempted to start the device, the screen failed to display any image, and it shut down after a few seconds."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 4: Paragraph 2 — Answer point 2 (feelings + softeners) */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-violet2 text-white text-xs font-semibold flex items-center justify-center shrink-0">4</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Paragraph 2 — How You Feel, Politely</span>
+                    <span className="text-xs text-slate ml-2">answer point 2 · emotions · softeners</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-4" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate"><strong>Answer the second point and express how you feel</strong> — pleased, grateful, disappointed, or frustrated. The skill is conveying emotion <em>professionally</em>, especially in a complaint.</p>
+
+                {/* Emotion vocabulary table */}
+                <div className="bg-violet2-light rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-violet2-dark uppercase tracking-wider mb-3">Emotion → professional expression</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left text-violet2-dark">
+                        <th className="border border-violet2/30 px-3 py-2 font-semibold w-2/5">Emotion</th>
+                        <th className="border border-violet2/30 px-3 py-2 font-semibold">Professional expression</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Pleased / Happy</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I was delighted to... / I was very pleased with...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Grateful</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I am sincerely grateful for... / I truly appreciate...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Impressed</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I was thoroughly impressed by... / I was struck by...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Concerned</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I am rather concerned that... / It is worrying that...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Disappointed</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I was quite disappointed to find... / Regrettably, ...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Frustrated</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I found it frustrating that... / It was frustrating to discover...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-violet2/30 px-3 py-2 font-semibold">Dissatisfied</td>
+                        <td className="border border-violet2/30 px-3 py-2 italic">I am not entirely satisfied with... / I am dissatisfied with...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <p className="text-sm text-slate"><strong>Complain without sounding rude.</strong> Use a <em>softener</em> to reduce directness so the reader stays cooperative — soften the emotion, not the facts. State the feeling, attach it to the fact, and stay courteous: "I must admit I was disappointed to find the screen cracked."</p>
+
+                {/* Universal Tone Softeners table */}
+                <div className="bg-ink rounded-xl p-4 text-fog overflow-x-auto">
+                  <p className="text-xs font-semibold text-gold uppercase tracking-wider mb-1">🎯 Universal Tone Softeners (reusable across tasks)</p>
+                  <p className="text-xs text-fog/70 mb-3">Whether to use them depends on the situation. To sound firm in a strong complaint, fewer or no softeners may be more suitable.</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left text-gold">
+                        <th className="border border-fog/20 px-3 py-2 font-semibold w-2/5">Softener type</th>
+                        <th className="border border-fog/20 px-3 py-2 font-semibold">High-utility expressions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-fog">
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Hedging starters (reduce directness)</td>
+                        <td className="border border-fog/20 px-3 py-2">I would like to... / I would like to take a moment to...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Indirect requests</td>
+                        <td className="border border-fog/20 px-3 py-2">I would appreciate it if you could... / I was wondering if you could...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Soft opinion / attitude</td>
+                        <td className="border border-fog/20 px-3 py-2">I must admit that... / I believe that...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Possibility / flexibility signals</td>
+                        <td className="border border-fog/20 px-3 py-2">It would be helpful if... / It might be beneficial to...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Polite framing add-ons</td>
+                        <td className="border border-fog/20 px-3 py-2">If possible, ... / At your convenience, ...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Respectful tone markers</td>
+                        <td className="border border-fog/20 px-3 py-2">I kindly request that... / I would be grateful if...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-fog/20 px-3 py-2 font-semibold">Acknowledging reader (softens impact)</td>
+                        <td className="border border-fog/20 px-3 py-2">I understand that... / I appreciate that...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example (frustrated, but polite)</p>
+                  <div className="text-sm text-ink italic">
+                    <p>"I must admit that I was quite disappointed by this experience, particularly given the cost of the device. I understand that occasional defects can occur, but I had expected a noticeably higher standard of quality control."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 5: Paragraph 3 — Answer point 3 (resolution + closing) */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-5">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-rose2 text-white text-xs font-semibold flex items-center justify-center shrink-0">5</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Paragraph 3 — Resolution / Your Request</span>
+                    <span className="text-xs text-slate ml-2">answer point 3 · what you want to happen next</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-5" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate"><strong>Answer the third point: say what you want to happen next</strong> — a refund, a repair, information, or a decision. Keep the request softened so it stays courteous. (Your closing sentence and sign-off come in the next section.)</p>
+
+                {/* Use-case → request phrase table */}
+                <div className="bg-rose2-light rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-rose2-dark uppercase tracking-wider mb-3">Use case → request / next-step phrase</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left text-rose2-dark">
+                        <th className="border border-rose2/30 px-3 py-2 font-semibold w-2/5">Use case</th>
+                        <th className="border border-rose2/30 px-3 py-2 font-semibold">Phrase to use</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Refund / replacement</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">I would appreciate a full refund or a replacement at your earliest convenience.</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Repair / action</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">I would be grateful if you could arrange for a technician to attend to this.</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Information</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">Could you please provide further details regarding...?</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Suggestion / resolution</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">It would be helpful if you could consider...</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Setting a deadline (polite)</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">I would appreciate a response by [date], if possible.</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-rose2/30 px-3 py-2 font-semibold">Offering flexibility</td>
+                        <td className="border border-rose2/30 px-3 py-2 italic">Please let me know a time that is convenient for you.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <p className="text-xs text-slate"><strong>Tip:</strong> Soften the request with the softeners from Paragraph 2 — "I would appreciate it if you could..." lands far better than "You must...".</p>
+
+                <div className="bg-fog rounded-xl p-4">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example (the request)</p>
+                  <div className="text-sm text-ink italic">
+                    <p>"I would appreciate a full refund or a replacement device, sent with proper packaging, at your earliest convenience."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Part 6: Closing Sentence & Sign-off */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-6">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-gold text-ink text-xs font-semibold flex items-center justify-center shrink-0">6</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Closing Sentence &amp; Sign-off</span>
+                    <span className="text-xs text-slate ml-2">end politely · match the tone · then your name</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-6" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                <p className="text-sm text-slate"><strong>Finish with one courteous closing sentence, then a sign-off and your full name on the next line.</strong> Match both to the email's tone — a formal complaint and a note to a friend close very differently.</p>
+
+                {/* Closing sentence + sign-off by tone */}
+                <div className="bg-gold-light rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-gold-dark uppercase tracking-wider mb-3">Closing sentence &amp; sign-off → by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left text-gold-dark">
+                        <th className="border border-gold/40 px-3 py-2 font-semibold">Email type</th>
+                        <th className="border border-gold/40 px-3 py-2 font-semibold">Closing sentence</th>
+                        <th className="border border-gold/40 px-3 py-2 font-semibold">Sign-off</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr>
+                        <td className="border border-gold/40 px-3 py-2 font-semibold align-top">Formal<br /><span className="text-xs font-normal text-slate">strangers, officials, companies, complaints</span></td>
+                        <td className="border border-gold/40 px-3 py-2 italic">"Thank you for your prompt attention to this matter; I look forward to your response."</td>
+                        <td className="border border-gold/40 px-3 py-2">Yours faithfully, / Sincerely,</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gold/40 px-3 py-2 font-semibold align-top">Semi-formal<br /><span className="text-xs font-normal text-slate">a manager, coworker, or landlord you know</span></td>
+                        <td className="border border-gold/40 px-3 py-2 italic">"Thank you so much for your help — I really appreciate it. Please let me know if you need anything further from me."</td>
+                        <td className="border border-gold/40 px-3 py-2">Best regards, / Kind regards,</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gold/40 px-3 py-2 font-semibold align-top">Informal<br /><span className="text-xs font-normal text-slate">a friend, family member, or close colleague</span></td>
+                        <td className="border border-gold/40 px-3 py-2 italic">"Let me know if you can make it — can't wait to catch up properly!"</td>
+                        <td className="border border-gold/40 px-3 py-2">Cheers, / Take care, / Talk soon,</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <ul className="space-y-2 text-sm text-ink">
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>One sentence is enough:</strong> Thank the reader and/or signal the next step — don't add new information here.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Sign-off then name:</strong> Put the sign-off on its own line, with your full name on the line directly below.</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>Stay consistent:</strong> Don't pair a formal sign-off ("Yours faithfully,") with a casual closing line, or vice versa.</li>
+                </ul>
+
+                <div className="bg-fog rounded-xl p-4 space-y-3">
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example — Formal</p>
+                    <div className="text-sm text-ink italic">
+                      <p>"Thank you for your prompt attention to this matter; I look forward to your response.</p>
+                      <p className="mt-1">Sincerely,<br />Jennifer Martinez"</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example — Semi-formal</p>
+                    <div className="text-sm text-ink italic">
+                      <p>"Thank you so much for considering my request — I really appreciate your understanding. Please let me know if you need anything further from me.</p>
+                      <p className="mt-1">Best regards,<br />Priya Sharma"</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Example — Informal</p>
+                    <div className="text-sm text-ink italic">
+                      <p>"Let me know if you can make it, and feel free to bring someone along — can't wait to catch up!</p>
+                      <p className="mt-1">Cheers,<br />Leo"</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bonus: Email Writing Language & Phrases Toolkit */}
+            <div className="bg-sapphire-light rounded-2xl border border-sapphire overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-sapphire/5 transition-colors" data-target="struct-email-language">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-ink">Professional Email Language & Phrases Toolkit</span>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-email-language" className="accordion-body border-t border-sapphire/30 px-6 py-5 space-y-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-ink">
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Opening Phrases (State Purpose):</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• I am writing to...</li>
+                      <li>• I am contacting you regarding...</li>
+                      <li>• I would like to inquire about...</li>
+                      <li>• I would like to request...</li>
+                      <li>• I am writing in response to...</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Polite Request Phrases:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• I would appreciate...</li>
+                      <li>• I would greatly appreciate...</li>
+                      <li>• Could you please...?</li>
+                      <li>• I kindly request...</li>
+                      <li>• I would be grateful if...</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Body Transitions & Linking:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Specifically, / To be specific,</li>
+                      <li>• Furthermore, / Additionally,</li>
+                      <li>• In addition to that, / Moreover,</li>
+                      <li>• As a result, / Consequently,</li>
+                      <li>• The main reason is... / The reason for my concern is...</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Explaining Details:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• For example, / For instance,</li>
+                      <li>• This shows that... / This demonstrates...</li>
+                      <li>• I have attached... / Please see enclosed...</li>
+                      <li>• The situation is... / The issue involves...</li>
+                      <li>• I believe this requires... / This needs...</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Closing/Call to Action:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Thank you in advance for...</li>
+                      <li>• I look forward to...</li>
+                      <li>• Please advise on... / Please let me know...</li>
+                      <li>• I would appreciate your prompt attention to...</li>
+                      <li>• I hope to hear from you soon.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sapphire-dark mb-2">Avoid (Too Casual/Weak):</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• "Hi" / "Hey" / "Thanks a lot"</li>
+                      <li>• Contractions: "don't," "isn't," "can't"</li>
+                      <li>• "ASAP" / "BTW" / "FYI"</li>
+                      <li>• "Really," "Very," "Definitely"</li>
+                      <li>• "Just," "Like," "Stuff," "Thing"</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bonus: Complete Email Scenarios */}
+            <div className="bg-violet2-light rounded-2xl border border-violet2 overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-violet2/5 transition-colors" data-target="struct-scenarios">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-ink">6 Worked Examples — Question → Thinking → Template → Answer</span>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-scenarios" className="accordion-body border-t border-violet2/30 px-6 py-5 space-y-5">
+                <p className="text-sm text-violet2-dark">Each example shows the full journey: the <strong>Question</strong>, the <strong>Thought process</strong> (how the reader, purpose, and three points drive the plan), the <strong>Template</strong> skeleton built from the sections above, and the finished <strong>Answer</strong> — written in real paragraphs, not one block.</p>
+
+                {/* ===== Scenario 1 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 1 — Online Order Problem <span className="text-xs font-normal text-slate">· Complaint · Formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">You recently bought a laptop online that arrived damaged. Write an email to the company's customer service. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>explain what you ordered and what was wrong with it</li>
+                      <li>describe how the problem has affected you</li>
+                      <li>say what you would like the company to do</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> a company I don't know → <em>Formal</em> (Email Types): no contractions, polite forms.</li>
+                      <li><strong>Purpose → opening sentence:</strong> it's a complaint → Opening table row "Complaint".</li>
+                      <li><strong>Point 1 → Paragraph 1 (facts):</strong> order number, date, exactly what was damaged — no feelings yet.</li>
+                      <li><strong>Point 2 → Paragraph 2 (feelings):</strong> "disappointed" (Emotion table) + how it affected me; a light softener ("I must admit…"), but kept firm because it's a complaint.</li>
+                      <li><strong>Point 3 → Paragraph 3 (request):</strong> use-case "Refund / replacement".</li>
+                      <li><strong>Closing:</strong> formal closing sentence + "Sincerely," (Closing &amp; Sign-off → Formal).</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Customer Service Manager]</span>,</p>
+                      <p>I am writing to express my dissatisfaction regarding <span className="text-violet2">[the damaged laptop]</span>.</p>
+                      <p><span className="text-violet2">[Order #, date, what was wrong — facts only]</span></p>
+                      <p>I must admit I was <span className="text-violet2">[disappointed]</span> because <span className="text-violet2">[effect on me]</span>.</p>
+                      <p>I would appreciate <span className="text-violet2">[refund / replacement]</span>.</p>
+                      <p>Thank you for your prompt attention to this matter; I look forward to your response.</p>
+                      <p>Sincerely,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Customer Service Manager,</p>
+                      <p>I am writing to express my dissatisfaction regarding a laptop I purchased from your online store on March 10th (Order #WX789456). When the package arrived yesterday, I was dismayed to find the screen badly cracked, and the box itself contained no protective cushioning whatsoever. It was clear that the item had not been packed with reasonable care before shipping.</p>
+                      <p>I must admit I was quite disappointed by this experience, particularly given the substantial purchase price of $1,200. As the device is now completely unusable, I have been unable to begin the important work for which I originally bought it, and this delay has caused me considerable inconvenience this week.</p>
+                      <p>I would therefore appreciate either a full refund to my original payment method or a replacement unit, sent with proper protective packaging to prevent further damage. For your reference, I have attached several clear photographs that show both the cracked screen and the inadequate packaging in detail.</p>
+                      <p>Thank you for your prompt attention to this matter; I look forward to receiving your response and a swift resolution.</p>
+                      <p>Sincerely,<br />Mark Thompson</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ===== Scenario 2 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 2 — Course Inquiry <span className="text-xs font-normal text-slate">· Inquiry · Formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">You want to take an English course at a local institute. Write an email to the admissions office. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>say which course you are interested in and why</li>
+                      <li>ask about the details you need (deadline, schedule, fees)</li>
+                      <li>ask about the enrollment requirements</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> an admissions office I don't know → <em>Formal</em>, but warm — no complaint here.</li>
+                      <li><strong>Purpose → opening sentence:</strong> Opening table row "Request (Information)" — "I am writing to inquire about…".</li>
+                      <li><strong>Point 1 → Paragraph 1:</strong> which course and why I want it (facts about me).</li>
+                      <li><strong>Point 2 → Paragraph 2 (feelings flex):</strong> the emotion here is positive — "keen / eager" (Emotion table) — expressed politely.</li>
+                      <li><strong>Point 3 → Paragraph 3 (request):</strong> the specific questions, softened with "Could you please…" and "I would also like to know…".</li>
+                      <li><strong>Closing:</strong> "I look forward to hearing from you." + "Best regards," (a warm-formal sign-off).</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Admissions Officer]</span>,</p>
+                      <p>I am writing to inquire about <span className="text-violet2">[the course]</span>.</p>
+                      <p><span className="text-violet2">[Which course + why I want it]</span></p>
+                      <p>I am particularly keen to <span className="text-violet2">[goal / motivation]</span>.</p>
+                      <p>Could you please <span className="text-violet2">[questions: deadline, schedule, fees, requirements]</span>?</p>
+                      <p>Thank you for your assistance; I look forward to hearing from you.</p>
+                      <p>Best regards,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Admissions Officer,</p>
+                      <p>I am writing to inquire about enrolment in your English Conversation Course for Spring 2026, which a friend recently recommended to me. I am currently studying at ABC Institute and am hoping to strengthen my speaking and listening skills before I begin university later this year.</p>
+                      <p>I am particularly keen to join this programme because I have heard that its small class sizes give students a great deal of individual speaking practice. As someone who learns best through regular conversation, I believe this approach would suit my goals extremely well and help me build confidence.</p>
+                      <p>Before applying, I would be grateful for some further information. Could you please let me know the enrolment deadline, the weekly class schedule, and the full tuition fees? I would also like to confirm the entry requirements, as I understand that an intermediate level of English is expected, and to ask whether any flexible payment options are available.</p>
+                      <p>Thank you very much for your assistance with these questions. I look forward to hearing from you soon and hope to join the course this spring.</p>
+                      <p>Best regards,<br />Sophia Chen</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ===== Scenario 3 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 3 — Heating Repair <span className="text-xs font-normal text-slate">· Request / Complaint · Semi-formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">The heating in your apartment has stopped working. Write an email to your landlord. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>explain the problem and when it started</li>
+                      <li>describe how it is affecting you</li>
+                      <li>ask the landlord to take action</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> a landlord I already know → <em>Semi-formal</em> — polite and warm, but firm because it's urgent.</li>
+                      <li><strong>Purpose → opening sentence:</strong> Opening table row "Request (Action / Help)".</li>
+                      <li><strong>Point 1 → Paragraph 1 (facts):</strong> unit number, what failed, when it started.</li>
+                      <li><strong>Point 2 → Paragraph 2 (feelings):</strong> "concerned" (Emotion table) about the cold and my belongings — softened but firm.</li>
+                      <li><strong>Point 3 → Paragraph 3 (request):</strong> use-case "Repair / action" + "Setting a deadline (polite)".</li>
+                      <li><strong>Closing:</strong> semi-formal closing sentence + "Best regards,".</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Mr. Jackson]</span>,</p>
+                      <p>I am writing to request your assistance with <span className="text-violet2">[the broken heating]</span>.</p>
+                      <p><span className="text-violet2">[Unit #, what failed, when it started]</span></p>
+                      <p>I am rather concerned because <span className="text-violet2">[effect — cold, belongings, safety]</span>.</p>
+                      <p>I would be grateful if you could <span className="text-violet2">[arrange a repair by a date]</span>.</p>
+                      <p>Thank you for your understanding; I look forward to hearing from you.</p>
+                      <p>Best regards,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Mr. Jackson,</p>
+                      <p>I am writing to request your urgent assistance with the heating system in my apartment, Unit 304 at 250 Main Street. The system stopped working completely four days ago, and since then the indoor temperature has dropped close to freezing, even with extra blankets and a small portable heater.</p>
+                      <p>I am rather concerned about the situation, as the persistent cold is beginning to damage some of my belongings and is making the apartment genuinely difficult to live in. I reported the problem by phone earlier in the week, but unfortunately it has not yet been looked at, and the weather forecast suggests conditions will only get colder.</p>
+                      <p>I would be grateful if you could arrange for a qualified technician to carry out the necessary repairs as soon as possible, ideally within the next two days. If it would help, I am happy to be at home to provide access at whatever time is most convenient for the technician.</p>
+                      <p>Thank you for your understanding and for treating this as a priority; I look forward to hearing from you very soon.</p>
+                      <p>Best regards,<br />Robert Kim</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ===== Scenario 4 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 4 — Thank a Colleague <span className="text-xs font-normal text-slate">· Appreciation · Semi-formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">A colleague helped you a great deal on a recent project. Write an email to thank them. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>explain what they helped you with</li>
+                      <li>describe the difference it made</li>
+                      <li>say what you hope for in the future</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> a colleague I know → <em>Semi-formal</em> — warm and personal.</li>
+                      <li><strong>Purpose → opening sentence:</strong> Opening table row "Appreciation".</li>
+                      <li><strong>Point 1 → Paragraph 1 (facts):</strong> exactly what they helped with.</li>
+                      <li><strong>Point 2 → Paragraph 2 (feelings):</strong> "grateful / impressed" (Emotion table) — here the emotion is the point, so lead with it.</li>
+                      <li><strong>Point 3 → Paragraph 3:</strong> the "request" is softer — a hope to work together again.</li>
+                      <li><strong>Closing:</strong> warm closing sentence + "Best regards,".</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Ms. Rodriguez]</span>,</p>
+                      <p>I am writing to express my appreciation for <span className="text-violet2">[their help]</span>.</p>
+                      <p><span className="text-violet2">[What exactly they did]</span></p>
+                      <p>I am sincerely grateful, as <span className="text-violet2">[the difference it made]</span>.</p>
+                      <p>I hope <span className="text-violet2">[to work together again / future wish]</span>.</p>
+                      <p>Thank you once again for everything.</p>
+                      <p>Best regards,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Ms. Rodriguez,</p>
+                      <p>I am writing to express my sincere appreciation for the support you gave me during our recent product launch. In particular, your patient guidance on the final presentation and your detailed feedback on my early drafts made an enormous difference to my work.</p>
+                      <p>I am sincerely grateful for the time and energy you devoted to helping me, especially as I know how busy your own schedule was. Thanks to your advice, the presentation was far clearer and more confident than my first attempt, and several colleagues commented on how smoothly the entire launch went. More than that, I valued the calm, encouraging way you explained things, which helped me genuinely learn rather than simply fix mistakes.</p>
+                      <p>I sincerely hope we have the opportunity to collaborate again on a future project, as I am certain there is a great deal more I could learn from working alongside you. Please do not hesitate to let me know if there is ever any way I can return the favour.</p>
+                      <p>Thank you once again for everything; your support genuinely made this project a success, and it was truly appreciated.</p>
+                      <p>Best regards,<br />David Wong</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ===== Scenario 5 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 5 — Restaurant Feedback <span className="text-xs font-normal text-slate">· Feedback / Suggestion · Formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">You recently had dinner at a restaurant and want to share feedback. Write an email to the manager. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>describe what you enjoyed about your visit</li>
+                      <li>explain what was disappointing</li>
+                      <li>suggest how they could improve</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> a manager I don't know → <em>Formal</em> and balanced — not an angry complaint.</li>
+                      <li><strong>Purpose → opening sentence:</strong> Opening table row "Suggestion / Recommendation".</li>
+                      <li><strong>Point 1 → Paragraph 1 (facts):</strong> what was good — start positive.</li>
+                      <li><strong>Point 2 → Paragraph 2 (feelings):</strong> "disappointed" (Emotion table) about the slow service, softened with "However…" and "I must admit…".</li>
+                      <li><strong>Point 3 → Paragraph 3 (request):</strong> use-case "Suggestion / resolution" — a constructive recommendation.</li>
+                      <li><strong>Closing:</strong> formal closing sentence + "Sincerely,".</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Restaurant Manager]</span>,</p>
+                      <p>I am writing to suggest an improvement regarding <span className="text-violet2">[my recent visit]</span>.</p>
+                      <p><span className="text-violet2">[What was good — facts]</span></p>
+                      <p>However, I must admit I was <span className="text-violet2">[disappointed by ...]</span>.</p>
+                      <p>It would be helpful if you could <span className="text-violet2">[suggestion]</span>.</p>
+                      <p>Thank you for considering this feedback.</p>
+                      <p>Sincerely,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Restaurant Manager,</p>
+                      <p>I am writing to suggest a small improvement following my dinner at your restaurant last Friday evening. I should begin by saying that the food itself was genuinely excellent: both the flavours and the presentation of every dish were outstanding, and my guests and I thoroughly enjoyed the meal from start to finish.</p>
+                      <p>However, I must admit that I was rather disappointed by the standard of service that evening. We waited more than forty minutes for our appetizers, even though the restaurant was only half full, and our server appeared unfamiliar with several items on the menu and could not answer our questions about them.</p>
+                      <p>It would be helpful if you could consider introducing a short staff-training session covering both the menu and the management of waiting times during busier periods. I believe a modest change of this kind would allow the quality of the service to match the very high standard of the food, which would greatly enhance the overall experience for your guests.</p>
+                      <p>Thank you for taking the time to consider this feedback; I genuinely hope to return and enjoy another meal soon.</p>
+                      <p>Sincerely,<br />Patricia Adams</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ===== Scenario 6 ===== */}
+                <div className="bg-white rounded-xl border border-violet2/30 p-4 space-y-4">
+                  <p className="text-sm font-semibold text-violet2-dark">Scenario 6 — Community Welcome Party <span className="text-xs font-normal text-slate">· Suggestion / Recommendation · Semi-formal</span></p>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-violet2 text-white mb-2">Question</span>
+                    <p className="text-sm text-ink">You are a member of a youth committee planning a welcome party for newcomers to the neighbourhood. Write an email to the Chairperson of the Community Committee. In your email:</p>
+                    <ul className="mt-1 text-sm text-ink list-disc pl-5 space-y-0.5">
+                      <li>suggest two activities that would help newcomers meet local residents</li>
+                      <li>explain why these activities would be beneficial for young people and families</li>
+                      <li>recommend where the committee can obtain the food, decorations, and other supplies</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-sapphire text-white mb-2">Thought process</span>
+                    <ul className="space-y-1 text-sm text-ink">
+                      <li><strong>Reader → tone:</strong> the committee Chairperson, a known official → <em>Semi-formal</em> — professional and warm, since we work together.</li>
+                      <li><strong>Purpose → opening sentence:</strong> Opening table row "Suggestion / Recommendation".</li>
+                      <li><strong>Point 1 → Paragraph 1:</strong> the two activities, signposted with "Firstly… Secondly…".</li>
+                      <li><strong>Point 2 → Paragraph 2:</strong> here this paragraph carries the <em>reasoning / benefits</em> rather than personal emotion, opened with a confident "I believe…".</li>
+                      <li><strong>Point 3 → Paragraph 3:</strong> the recommendation — use-case "Suggestion / resolution" — naming where to source supplies.</li>
+                      <li><strong>Closing:</strong> offer to help + semi-formal closing sentence + "Best regards,".</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-amber2 text-white mb-2">Template</span>
+                    <div className="bg-fog rounded-lg p-3 text-[13px] font-mono text-ink leading-relaxed space-y-1">
+                      <p>Dear <span className="text-violet2">[Mr. Bennett / Chairperson]</span>,</p>
+                      <p>I am writing to suggest <span className="text-violet2">[two activities + supply ideas]</span>.</p>
+                      <p>Firstly, <span className="text-violet2">[activity 1]</span>. Secondly, <span className="text-violet2">[activity 2]</span>.</p>
+                      <p>I believe these would benefit <span className="text-violet2">[young people and families]</span> because <span className="text-violet2">[reasons]</span>.</p>
+                      <p>I would recommend <span className="text-violet2">[where to obtain food, decorations, supplies]</span>.</p>
+                      <p>Thank you for considering these ideas; I would be glad to help.</p>
+                      <p>Best regards,<br /><span className="text-violet2">[Your Name]</span></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded bg-emerald2 text-white mb-2">Answer</span>
+                    <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
+                      <p>Dear Mr. Bennett,</p>
+                      <p>I am writing to suggest two activities for the upcoming welcome party for newcomers, along with some recommendations for sourcing the supplies we will need.</p>
+                      <p>Firstly, I would suggest organising a friendly neighbourhood potluck, where each family brings a dish that represents their culture. Secondly, we could arrange a series of small group games and an outdoor scavenger hunt that pairs newcomers with long-time residents.</p>
+                      <p>I believe these activities would be especially beneficial for young people and families. Sharing food naturally encourages conversation and helps break the ice, while the team games give children and teenagers a relaxed, enjoyable way to make new friends.</p>
+                      <p>For the food, decorations, and other supplies, I would recommend approaching the local grocery store and bakery on Main Street, as both have generously supported community events in the past. In addition, the craft shop near the library often donates decorations, and we could borrow tables and chairs from the community hall at no cost.</p>
+                      <p>Thank you for considering these ideas; I would be glad to help organise the event in any way I can.</p>
+                      <p>Best regards,<br />Daniel Cruz</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: EMAIL TYPES (Formal / Semi-formal / Informal)
+          ══════════════════════════════════════════ */}
+          <div id="pane-formality" className="pane space-y-5">
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Read the prompt — who is the reader?</p>
+              <p className="text-sm leading-relaxed text-ink">CELPIP Task 1 always names a recipient. <strong>Match your tone to that reader.</strong> Writing too formally to a friend, or too casually to a manager, costs you points on tone and register. Use the toggle below to see the right template for each situation.</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+                <div className="bg-sapphire-light rounded-xl p-3">
+                  <p className="text-xs font-semibold text-sapphire-dark mb-1">Formal</p>
+                  <p className="text-xs text-sapphire-dark/80">Strangers, officials, companies, complaints. No contractions.</p>
+                </div>
+                <div className="bg-emerald2-light rounded-xl p-3">
+                  <p className="text-xs font-semibold text-emerald2-dark mb-1">Semi-formal</p>
+                  <p className="text-xs text-emerald2-dark/80">Managers, coworkers, landlords you know. Polite but warmer.</p>
+                </div>
+                <div className="bg-amber2-light rounded-xl p-3">
+                  <p className="text-xs font-semibold text-amber2-dark mb-1">Informal</p>
+                  <p className="text-xs text-amber2-dark/80">Friends, family, close colleagues. Relaxed, contractions OK.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Toggle */}
+            <div className="flex flex-wrap gap-2" id="formality-toggle">
+              <button className="formality-btn filter-active px-5 py-2 rounded-full border text-sm font-medium transition-all" data-formality="formal">Formal</button>
+              <button className="formality-btn filter-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all" data-formality="semiformal">Semi-formal</button>
+              <button className="formality-btn filter-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all" data-formality="informal">Informal</button>
+            </div>
+
+            {/* FORMAL */}
+            <div className="formality-card" data-formality="formal">
+              <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+                <div className="bg-sapphire px-6 py-4">
+                  <p className="text-xs font-semibold text-white/70 uppercase tracking-widest mb-1">Formal Email</p>
+                  <p className="text-sm text-white">For people you don't know, officials, businesses, or complaints. No contractions, full polite forms.</p>
+                </div>
+                <div className="px-6 py-5 space-y-4">
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Fill-in template</p>
+                    <div className="bg-fog rounded-xl p-4 text-sm text-ink leading-relaxed space-y-2 font-mono text-[13px]">
+                      <p>Dear <span className="text-sapphire">[Mr./Ms. Last Name OR Sir or Madam]</span>,</p>
+                      <p>I am writing to <span className="text-sapphire">[state purpose — request / inquire about / complain about]</span>. <span className="text-sapphire">[One sentence of context.]</span></p>
+                      <p>The main reason is that <span className="text-sapphire">[explain detail 1 with specifics — dates, numbers]</span>. Furthermore, <span className="text-sapphire">[detail 2]</span>. <span className="text-sapphire">[Detail 3 / consequence.]</span></p>
+                      <p>I would appreciate it if you could <span className="text-sapphire">[your specific request / next step]</span>. Thank you for your prompt attention to this matter. I look forward to your response.</p>
+                      <p>Sincerely,<br /><span className="text-sapphire">[Your Full Name]</span></p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Worked example (complaint)</p>
+                    <div className="bg-sapphire-light rounded-xl p-4 text-sm text-ink leading-relaxed italic">
+                      <p>Dear Mr. Holloway,</p>
+                      <p className="mt-2">I am writing to formally complain about the faulty dishwasher delivered to my home on June 2nd (Order #DW40219). I purchased the appliance from your store expecting reliable performance.</p>
+                      <p className="mt-2">The main reason for my complaint is that the unit failed to operate on its first use, displaying an error code and leaking water onto the floor. Furthermore, the installation technician left without confirming it was working. As a result, my kitchen sustained minor water damage.</p>
+                      <p className="mt-2">I would appreciate it if you could arrange a full replacement and inspection at your earliest convenience. Thank you for your prompt attention to this matter. I look forward to your response.</p>
+                      <p className="mt-2">Sincerely,<br />Daniel Pierce</p>
+                    </div>
+                  </div>
+                  <div className="bg-fog rounded-xl p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Phrases that fit</p>
+                    <p className="text-xs text-slate"><strong>Greeting:</strong> Dear Mr./Ms. [Name], · Dear Sir or Madam, · To Whom It May Concern,</p>
+                    <p className="text-xs text-slate mt-1"><strong>Open:</strong> I am writing to… · I am writing in response to… · I wish to bring to your attention…</p>
+                    <p className="text-xs text-slate mt-1"><strong>Close:</strong> I would appreciate it if… · I look forward to your response. · Yours faithfully, · Sincerely,</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SEMI-FORMAL */}
+            <div className="formality-card hidden" data-formality="semiformal">
+              <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+                <div className="bg-emerald2 px-6 py-4">
+                  <p className="text-xs font-semibold text-white/70 uppercase tracking-widest mb-1">Semi-formal Email</p>
+                  <p className="text-sm text-white">For a manager, coworker, or landlord you already know. Polite and professional, but warmer and more personal.</p>
+                </div>
+                <div className="px-6 py-5 space-y-4">
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Fill-in template</p>
+                    <div className="bg-fog rounded-xl p-4 text-sm text-ink leading-relaxed space-y-2 font-mono text-[13px]">
+                      <p>Dear <span className="text-emerald2">[First Name OR Mr./Ms. Last Name]</span>,</p>
+                      <p>I hope you are doing well. I am writing to <span className="text-emerald2">[state purpose — ask about / let you know / request]</span>. <span className="text-emerald2">[One sentence of friendly context.]</span></p>
+                      <p><span className="text-emerald2">[Explain the situation with details.]</span> In addition, <span className="text-emerald2">[second point]</span>. <span className="text-emerald2">[Reassurance or extra info.]</span></p>
+                      <p>Could you please <span className="text-emerald2">[your request]</span>? Thank you so much for your help — I really appreciate it. Please let me know if you need anything from me.</p>
+                      <p>Best regards,<br /><span className="text-emerald2">[Your Name]</span></p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Worked example (time off request)</p>
+                    <div className="bg-emerald2-light rounded-xl p-4 text-sm text-ink leading-relaxed italic">
+                      <p>Dear Ms. Carter,</p>
+                      <p className="mt-2">I hope you are doing well. I am writing to request a week of leave from Monday, June 15th to Friday, June 19th due to a family matter that requires my attention.</p>
+                      <p className="mt-2">I have already reviewed my current projects, and everything is on track to be completed before I leave. In addition, I have spoken with Raj, who has kindly agreed to cover any urgent client requests while I am away. I will also be reachable by email for anything truly time-sensitive.</p>
+                      <p className="mt-2">Could you please let me know if these dates work for the team? Thank you so much for considering my request — I really appreciate your understanding. Please let me know if you need anything further from me.</p>
+                      <p className="mt-2">Best regards,<br />Priya Sharma</p>
+                    </div>
+                  </div>
+                  <div className="bg-fog rounded-xl p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Phrases that fit</p>
+                    <p className="text-xs text-slate"><strong>Greeting:</strong> Dear [First Name], · Hello [Name], · Dear Mr./Ms. [Name],</p>
+                    <p className="text-xs text-slate mt-1"><strong>Open:</strong> I hope you are doing well. · I wanted to reach out about… · I am writing to…</p>
+                    <p className="text-xs text-slate mt-1"><strong>Close:</strong> Could you please… · Thank you so much for your help. · Best regards, · Kind regards,</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* INFORMAL */}
+            <div className="formality-card hidden" data-formality="informal">
+              <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+                <div className="bg-amber2 px-6 py-4">
+                  <p className="text-xs font-semibold text-white/70 uppercase tracking-widest mb-1">Informal Email</p>
+                  <p className="text-sm text-white">For a friend, family member, or close colleague. Relaxed and friendly — contractions and casual phrases are fine. Still organized.</p>
+                </div>
+                <div className="px-6 py-5 space-y-4">
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Fill-in template</p>
+                    <div className="bg-fog rounded-xl p-4 text-sm text-ink leading-relaxed space-y-2 font-mono text-[13px]">
+                      <p>Hi <span className="text-amber2">[First Name]</span>,</p>
+                      <p>How are you? <span className="text-amber2">[Friendly opener — Hope you're doing great! / It's been a while!]</span> I'm writing to <span className="text-amber2">[reason — tell you about / ask you / invite you]</span>.</p>
+                      <p><span className="text-amber2">[Give the details casually.]</span> Also, <span className="text-amber2">[second point]</span>. <span className="text-amber2">[Add a personal touch or feeling.]</span></p>
+                      <p>Let me know <span className="text-amber2">[what you need / if you can make it]</span>! Can't wait to hear back from you. <span className="text-amber2">[Take care! / Talk soon!]</span></p>
+                      <p>Cheers,<br /><span className="text-amber2">[Your Name]</span></p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Worked example (invitation)</p>
+                    <div className="bg-amber2-light rounded-xl p-4 text-sm text-ink leading-relaxed italic">
+                      <p>Hi Marcus,</p>
+                      <p className="mt-2">How have you been? It feels like ages since we last caught up! I'm writing because I'm throwing a small barbecue at my place on Saturday, June 20th, and I'd love for you to come.</p>
+                      <p className="mt-2">It's nothing fancy — just a few friends, some good food, and hopefully decent weather for once. I'm planning to fire up the grill around 4 p.m., so feel free to drop by whenever works for you. Also, my neighbour is bringing his guitar, so it should be a fun, relaxed evening.</p>
+                      <p className="mt-2">Let me know if you can make it, and bring someone along if you'd like! Can't wait to catch up properly. Take care and talk soon.</p>
+                      <p className="mt-2">Cheers,<br />Leo</p>
+                    </div>
+                  </div>
+                  <div className="bg-fog rounded-xl p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Phrases that fit</p>
+                    <p className="text-xs text-slate"><strong>Greeting:</strong> Hi [Name], · Hey [Name], · Hello [Name],</p>
+                    <p className="text-xs text-slate mt-1"><strong>Open:</strong> How are you? · Hope you're doing well! · It's been a while! · I'm writing because…</p>
+                    <p className="text-xs text-slate mt-1"><strong>Close:</strong> Let me know! · Can't wait to hear back. · Take care, · Talk soon, · Cheers,</p>
+                    <p className="text-xs text-amber2-dark mt-2"><strong>Note:</strong> Even informal emails should still be organized and address the prompt — don't use slang or text-speak ("u", "thx", "lol").</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: VOCAB BANK
+          ══════════════════════════════════════════ */}
+          <div id="pane-vocab" className="pane space-y-4">
+            <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
+            <div id="vocab-content" className="space-y-4"></div>
+          </div>
+
+          {/* ══════════════════════════════════════════
+               PANE: PRO TIPS
+          ══════════════════════════════════════════ */}
+          <div id="pane-tips" className="pane space-y-4">
+            <div className="flex flex-wrap gap-2 mb-4">
+              <button className="filter-btn filter-active px-4 py-1.5 rounded-full border text-xs font-medium" data-category="all">All</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="structure">Structure</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="tone">Tone</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="language">Language</button>
+              <button className="filter-btn filter-inactive px-4 py-1.5 rounded-full border text-xs font-medium" data-category="mistakes">Mistakes to Avoid</button>
+            </div>
+
+            <div className="space-y-3">
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="structure">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Structure</p>
+                <p className="text-sm font-semibold text-ink mb-2">Follow the 4-part structure every time.</p>
+                <p className="text-xs text-slate">Greeting → Opening → Body → Closing. This is expected and makes your email immediately professional.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="structure">
+                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Structure</p>
+                <p className="text-sm font-semibold text-ink mb-2">Keep paragraphs short and clear.</p>
+                <p className="text-xs text-slate">Each paragraph should have one main idea. Use line breaks (empty lines) to separate sections.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="tone">
+                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Tone</p>
+                <p className="text-sm font-semibold text-ink mb-2">Be professional and polite, even if making a complaint.</p>
+                <p className="text-xs text-slate">Use "I would appreciate..." instead of "I need..." Avoid all caps, excessive exclamation marks, or casual language.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="tone">
+                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Tone</p>
+                <p className="text-sm font-semibold text-ink mb-2">Match the formality of the original request.</p>
+                <p className="text-xs text-slate">If the prompt uses formal language, stay formal. If it's slightly casual, you can adjust accordingly — but never go too casual.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
+                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Language</p>
+                <p className="text-sm font-semibold text-ink mb-2">Use linking words to connect ideas.</p>
+                <p className="text-xs text-slate">Words like "Furthermore," "However," "As a result" make your email flow better and show advanced writing.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
+                <p className="text-xs font-semibold text-violet2 uppercase tracking-widest mb-2">Language</p>
+                <p className="text-sm font-semibold text-ink mb-2">Be specific with details.</p>
+                <p className="text-xs text-slate">Instead of "I need time off," write "I need time off from Monday, March 15 to Friday, March 19." Details show careful communication.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Mistakes to Avoid</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't be too casual or slang.</p>
+                <p className="text-xs text-slate">No "Hey," "Thanks a ton," "BTW," or "ASAP." These are too informal for professional communication.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Mistakes to Avoid</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't ignore word count.</p>
+                <p className="text-xs text-slate">180–199 words is the target within 27 minutes. Too short (under 150) or too long (over 220) is a clear signal you don't manage time well or ignore instructions.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
+                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Mistakes to Avoid</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't forget to proofread.</p>
+                <p className="text-xs text-slate">Within the 27-minute window, allocate time to check spelling, grammar, and punctuation. Typos are avoidable and cost points.</p>
+              </div>
+            </div>
+          </div>
+
+        </main>
+
+        <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">
+          <p className="text-xs text-slate mb-4">CELPIP Prep — Writing Task 1 Study Guide</p>
+          <p className="text-xs text-slate/60">Master professional email writing. Practice with realistic scenarios, follow the structure, and let your professional tone shine through.</p>
+        </footer>
+
+  
+  
+
+    </>
+  );
+}

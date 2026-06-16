@@ -1,0 +1,126 @@
+/* Shared styles for the CELPIP study section.
+   Scoped under .celpip-page so the generic class names below
+   (tab-active, pane, accordion-body, etc.) never leak into the rest of the app. */
+
+.celpip-page {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  background-color: #f5f4f0;
+  color: #0f0f0f;
+  min-height: 100vh;
+}
+
+.celpip-page .font-display {
+  font-family: var(--font-dm-serif), 'DM Serif Display', serif;
+}
+
+.celpip-page .tab-active {
+  background-color: #0f0f0f !important;
+  color: #f5f4f0 !important;
+  border-color: #0f0f0f !important;
+}
+.celpip-page .tab-inactive {
+  background-color: transparent;
+  color: #6b6a64;
+  border-color: #d4d2ca;
+}
+.celpip-page .tab-inactive:hover {
+  background-color: #eceae3;
+  color: #0f0f0f;
+}
+
+.celpip-page .filter-active {
+  background-color: #0f0f0f !important;
+  color: #f5f4f0 !important;
+  border-color: #0f0f0f !important;
+}
+.celpip-page .filter-inactive {
+  background-color: transparent;
+  color: #6b6a64;
+  border-color: #d4d2ca;
+}
+.celpip-page .filter-inactive:hover {
+  background-color: #eceae3;
+}
+
+.celpip-page .accordion-body {
+  display: none;
+}
+.celpip-page .accordion-body.open {
+  display: block;
+}
+.celpip-page .chevron {
+  transition: transform 0.25s ease;
+}
+.celpip-page .chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.celpip-page .pane {
+  display: none;
+  animation: celpipFadeIn 0.3s ease;
+}
+.celpip-page .pane.active {
+  display: block;
+}
+@keyframes celpipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.celpip-page .hero-line {
+  position: relative;
+  display: inline-block;
+}
+.celpip-page .hero-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 3px;
+  background: #c9a84c;
+  border-radius: 2px;
+}
+
+.celpip-page .score-bar {
+  height: 6px;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.celpip-page .card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.celpip-page .card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.celpip-page .tip-card {
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.celpip-page .tip-card:hover {
+  background: #eceae3;
+}
+
+/* Vocab quiz option buttons */
+.celpip-page .option-btn {
+  transition: all 0.2s ease;
+}
+.celpip-page .option-btn.correct {
+  background-color: #d8efe3 !important;
+  color: #1a4530 !important;
+  border-color: #2a6b4a !important;
+}
+.celpip-page .option-btn.incorrect {
+  background-color: #f5dde0 !important;
+  color: #6e1e28 !important;
+  border-color: #a83240 !important;
+}

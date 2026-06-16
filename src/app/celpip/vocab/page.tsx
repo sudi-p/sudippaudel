@@ -1,0 +1,554 @@
+// @ts-nocheck
+/* eslint-disable */
+"use client";
+
+import { useEffect } from "react";
+
+export default function CelpipVocabPage() {
+  useEffect(() => {
+    document.title = "CELPIP Vocabulary Bank";
+
+        const TASK_COLORS = {
+          all: { bg: 'bg-ink', text: 'text-fog' },
+          0: { bg: 'bg-sapphire-light', text: 'text-sapphire-dark' },
+          1: { bg: 'bg-sapphire-light', text: 'text-sapphire-dark' },
+          2: { bg: 'bg-emerald2-light', text: 'text-emerald2-dark' },
+          3: { bg: 'bg-amber2-light', text: 'text-amber2-dark' },
+          4: { bg: 'bg-rose2-light', text: 'text-rose2-dark' },
+          5: { bg: 'bg-violet2-light', text: 'text-violet2-dark' },
+          6: { bg: 'bg-sapphire-light', text: 'text-sapphire-dark' },
+          7: { bg: 'bg-emerald2-light', text: 'text-emerald2-dark' },
+          8: { bg: 'bg-amber2-light', text: 'text-amber2-dark' },
+          9: { bg: 'bg-violet2-light', text: 'text-violet2-dark' },
+          10: { bg: 'bg-violet2-light', text: 'text-violet2-dark' },
+        };
+
+        const TASK_LABELS = {
+          all: 'All Tasks',
+          0: 'General',
+          1: 'Task 1',
+          2: 'Task 2',
+          3: 'Task 3',
+          4: 'Task 4',
+          5: 'Task 5',
+          6: 'Task 6',
+          7: 'Task 7',
+          8: 'Task 8',
+          9: 'Writing Task 1',
+          10: 'Writing Task 2',
+        };
+
+        let listFilters = { task: 'all' };
+        let quizState = {
+          currentQuestionIndex: 0,
+          score: 0,
+          totalQuestions: 0,
+          quizVocab: [],
+          selectedTask: 'all',
+          currentQuestion: null,
+        };
+
+        // ─── Setup filter buttons ───────────────────────────────────────────
+        function setupFilterButtons() {
+          const taskFilters = document.getElementById('task-filters');
+          const quizFilterButtons = document.getElementById('quiz-filter-buttons');
+
+          ['all', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].forEach(task => {
+            const color = TASK_COLORS[task];
+
+            // Word list filter
+            const btn1 = document.createElement('button');
+            btn1.className = `px-4 py-2 rounded-full border font-medium text-sm transition-all ${task === 'all' ? 'bg-ink text-fog border-ink' : 'bg-white border-mist text-slate hover:bg-fog'}`;
+            btn1.textContent = TASK_LABELS[task];
+            btn1.dataset.filterValue = task;
+            btn1.dataset.filterType = 'task';
+            btn1.addEventListener('click', () => {
+              document.querySelectorAll('[data-filter-type="task"]').forEach(b => {
+                b.classList.remove('bg-ink', 'text-fog', 'border-ink');
+                b.classList.add('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+              });
+              btn1.classList.remove('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+              btn1.classList.add('bg-ink', 'text-fog', 'border-ink');
+              listFilters.task = task;
+              renderWordList();
+            });
+            taskFilters.appendChild(btn1);
+
+            // Quiz filter
+            const btn2 = document.createElement('button');
+            btn2.className = `px-4 py-2 rounded-full border font-medium text-sm transition-all quiz-filter-btn ${task === 'all' ? 'bg-ink text-fog border-ink' : 'bg-white border-mist text-slate hover:bg-fog'}`;
+            btn2.textContent = TASK_LABELS[task];
+            btn2.dataset.quizTask = task;
+            btn2.addEventListener('click', () => {
+              document.querySelectorAll('.quiz-filter-btn').forEach(b => {
+                b.classList.remove('bg-ink', 'text-fog', 'border-ink');
+                b.classList.add('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+              });
+              btn2.classList.remove('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+              btn2.classList.add('bg-ink', 'text-fog', 'border-ink');
+              quizState.selectedTask = task;
+            });
+            quizFilterButtons.appendChild(btn2);
+          });
+        }
+
+        // ─── Word List Rendering ───────────────────────────────────────────
+        function renderWordList() {
+          const content = document.getElementById('vocab-content');
+          const emptyState = document.getElementById('empty-state');
+
+          let filtered = window.VOCAB.filter(v => {
+            const taskMatch = listFilters.task === 'all' || String(v.task) === listFilters.task;
+            return taskMatch;
+          });
+
+          if (filtered.length === 0) {
+            content.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            return;
+          }
+
+          emptyState.classList.add('hidden');
+
+          const grouped = {};
+          filtered.forEach(vocab => {
+            if (!grouped[vocab.type]) grouped[vocab.type] = [];
+            grouped[vocab.type].push(vocab);
+          });
+
+          let html = '';
+          Object.keys(grouped).sort().forEach(typeKey => {
+            const words = grouped[typeKey];
+            html += `
+              <div>
+                <h3 class="font-display text-lg text-ink mb-4">${typeKey}</h3>
+                <div class="space-y-3">
+                  ${words.map(v => `
+                    <div class="bg-white rounded-xl border border-mist p-4 card-hover">
+                      <div class="font-semibold text-ink mb-2">${v.word}</div>
+                      <p class="text-sm text-slate mb-2">${v.meaning}</p>
+                      <p class="text-xs text-slate italic">"${v.example}"</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          });
+
+          content.innerHTML = html;
+        }
+
+        // ─── Quiz Logic ────────────────────────────────────────────────────
+        function getRandomOptions(correctEntry, count = 4) {
+          const otherOptions = window.VOCAB.filter(v => v.word !== correctEntry.word);
+          const shuffled = otherOptions.sort(() => Math.random() - 0.5).slice(0, count - 1);
+          return [correctEntry, ...shuffled].sort(() => Math.random() - 0.5);
+        }
+
+        function generateRandomQuestionType() {
+          return Math.random() < 0.5 ? 'word-to-meaning' : 'meaning-to-word';
+        }
+
+        function renderQuestion() {
+          const vocab = quizState.quizVocab[quizState.currentQuestionIndex];
+          const questionType = generateRandomQuestionType();
+          quizState.currentQuestion = { vocab, type: questionType };
+
+          const questionText = document.getElementById('question-text');
+          const optionsContainer = document.getElementById('options-container');
+
+          if (questionType === 'word-to-meaning') {
+            questionText.textContent = `What does "${vocab.word}" mean?`;
+            const options = getRandomOptions(vocab);
+            quizState.currentQuestion.correctAnswer = vocab.word;
+            optionsContainer.innerHTML = options.map(opt => `
+              <button class="option-btn w-full px-4 py-3 rounded-lg border border-mist bg-white text-slate hover:bg-fog transition-colors text-left" data-answer="${opt.word}">
+                ${opt.meaning}
+              </button>
+            `).join('');
+          } else {
+            questionText.textContent = `Which word means "${vocab.meaning}"?`;
+            const options = getRandomOptions(vocab);
+            quizState.currentQuestion.correctAnswer = vocab.word;
+            optionsContainer.innerHTML = options.map(opt => `
+              <button class="option-btn w-full px-4 py-3 rounded-lg border border-mist bg-white text-slate hover:bg-fog transition-colors text-left" data-answer="${opt.word}">
+                ${opt.word}
+              </button>
+            `).join('');
+          }
+
+          document.getElementById('question-number').textContent = `Question ${quizState.currentQuestionIndex + 1} of ${quizState.totalQuestions}`;
+          document.getElementById('score-display').textContent = `Score: ${quizState.score}`;
+
+          const progressPercent = ((quizState.currentQuestionIndex + 1) / quizState.totalQuestions) * 100;
+          document.getElementById('progress-fill').style.width = progressPercent + '%';
+
+          document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', handleAnswer);
+          });
+        }
+
+        function handleAnswer(e) {
+          const selectedAnswer = e.target.dataset.answer;
+          const isCorrect = selectedAnswer === quizState.currentQuestion.correctAnswer;
+
+          if (isCorrect) {
+            quizState.score++;
+            e.target.classList.add('correct');
+          } else {
+            e.target.classList.add('incorrect');
+            document.querySelectorAll('.option-btn').forEach(btn => {
+              if (btn.dataset.answer === quizState.currentQuestion.correctAnswer) {
+                btn.classList.add('correct');
+              }
+            });
+          }
+
+          document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+          const feedback = document.getElementById('feedback');
+          feedback.textContent = isCorrect ? '✓ Correct!' : '✗ Incorrect';
+          feedback.classList.remove('hidden', 'bg-mist', 'text-slate');
+          feedback.classList.add(isCorrect ? 'bg-emerald2-light text-emerald2-dark' : 'bg-rose2-light text-rose2-dark');
+
+          document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function goToNextQuestion() {
+          quizState.currentQuestionIndex++;
+
+          if (quizState.currentQuestionIndex < quizState.totalQuestions) {
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+            renderQuestion();
+          } else {
+            showQuizResults();
+          }
+        }
+
+        function showQuizResults() {
+          document.getElementById('quiz-question-container').classList.add('hidden');
+          document.getElementById('quiz-results').classList.remove('hidden');
+
+          const percentage = Math.round((quizState.score / quizState.totalQuestions) * 100);
+          document.getElementById('final-score').textContent = quizState.score;
+          document.getElementById('total-questions').textContent = quizState.totalQuestions;
+
+          let message = '';
+          if (percentage === 100) message = 'Perfect! You\'re a vocab master! 🎉';
+          else if (percentage >= 80) message = 'Great job! Keep practicing to improve! 🌟';
+          else if (percentage >= 60) message = 'Good effort! Review the words you missed. 📚';
+          else message = 'Keep studying! You\'ll improve with practice. 💪';
+
+          document.getElementById('result-message').textContent = message;
+        }
+
+        function startQuiz() {
+          const selectedTask = quizState.selectedTask;
+          quizState.quizVocab = selectedTask === 'all'
+            ? window.VOCAB
+            : window.VOCAB.filter(v => String(v.task) === selectedTask);
+
+          if (quizState.quizVocab.length === 0) {
+            alert('No words available for the selected task.');
+            return;
+          }
+
+          quizState.currentQuestionIndex = 0;
+          quizState.score = 0;
+          quizState.totalQuestions = quizState.quizVocab.length;
+
+          document.getElementById('quiz-setup').classList.add('hidden');
+          document.getElementById('quiz-question-container').classList.remove('hidden');
+          document.getElementById('quiz-results').classList.add('hidden');
+
+          renderQuestion();
+        }
+
+        // ─── Emotions Vocabulary ───────────────────────────────────────────
+        const EMOTIONS = [
+          {
+            emotion: 'Happy', emoji: '😊',
+            words: [
+              { word: 'Content', intensity: 'Mild', meaning: 'Quietly satisfied and at ease.', examples: ['I felt content sitting by the window with a warm cup of tea.', "She's content with a simple life and doesn't need much to be happy."] },
+              { word: 'Cheerful', intensity: 'Mild', meaning: 'Visibly happy and in good spirits.', examples: ['He gave a cheerful wave as he walked into the office.', 'Despite the rain, she stayed cheerful all morning.'] },
+              { word: 'Delighted', intensity: 'Moderate', meaning: 'Very pleased about something.', examples: ['I was delighted to hear that you got the job.', 'They were delighted with the surprise party we arranged.'] },
+              { word: 'Thrilled', intensity: 'Strong', meaning: 'Filled with excitement and joy.', examples: ['She was thrilled when she opened the acceptance letter.', "We're absolutely thrilled to be moving into our new home."] },
+              { word: 'Ecstatic', intensity: 'Strong', meaning: 'Overwhelmingly happy; full of joy.', examples: ['The fans were ecstatic when the team scored in the final minute.', 'I was ecstatic the moment I crossed the finish line.'] },
+            ],
+          },
+          {
+            emotion: 'Sad', emoji: '😔',
+            words: [
+              { word: 'Down', intensity: 'Mild', meaning: 'Slightly low or unhappy.', examples: ["I've been feeling a bit down since the holidays ended.", 'He seemed down after hearing the news.'] },
+              { word: 'Disheartened', intensity: 'Moderate', meaning: 'Having lost confidence or hope.', examples: ['She felt disheartened after failing the test twice.', 'The team was disheartened by the slow progress.'] },
+              { word: 'Miserable', intensity: 'Strong', meaning: 'Deeply unhappy and uncomfortable.', examples: ['I was miserable being stuck indoors with the flu.', 'He looked miserable standing alone in the cold rain.'] },
+              { word: 'Heartbroken', intensity: 'Strong', meaning: 'Crushed by grief or deep disappointment.', examples: ['She was heartbroken when her childhood pet passed away.', 'They were heartbroken to leave the city they loved.'] },
+              { word: 'Devastated', intensity: 'Strong', meaning: 'Completely overwhelmed by sorrow.', examples: ['He was devastated when he heard about the accident.', 'We were devastated to lose the championship by one point.'] },
+            ],
+          },
+          {
+            emotion: 'Angry', emoji: '😠',
+            words: [
+              { word: 'Annoyed', intensity: 'Mild', meaning: 'Mildly bothered or irritated.', examples: ['I was annoyed that the bus was late again.', 'She got annoyed by the constant interruptions.'] },
+              { word: 'Frustrated', intensity: 'Moderate', meaning: 'Upset at being unable to achieve something.', examples: ['He felt frustrated when the project kept getting delayed.', "I'm frustrated that I can't fix this on my own."] },
+              { word: 'Furious', intensity: 'Strong', meaning: 'Extremely angry.', examples: ['She was furious when she found out the truth.', 'He was furious about being blamed for someone else’s mistake.'] },
+              { word: 'Enraged', intensity: 'Strong', meaning: 'Filled with violent, intense anger.', examples: ['The crowd was enraged by the unfair decision.', 'He was enraged when he saw the damage to his car.'] },
+              { word: 'Livid', intensity: 'Strong', meaning: 'So angry one can barely speak.', examples: ['My manager was livid about the missed deadline.', 'She was livid when she discovered the lie.'] },
+            ],
+          },
+          {
+            emotion: 'Afraid', emoji: '😨',
+            words: [
+              { word: 'Uneasy', intensity: 'Mild', meaning: 'Slightly worried or uncomfortable.', examples: ['I felt uneasy walking home in the dark.', 'Something about the silence made her uneasy.'] },
+              { word: 'Anxious', intensity: 'Moderate', meaning: 'Nervous and worried about what might happen.', examples: ['He was anxious before his first job interview.', "I'm anxious about the results of the medical test."] },
+              { word: 'Frightened', intensity: 'Moderate', meaning: 'Scared by something sudden or threatening.', examples: ['The loud thunder frightened the children.', 'She was frightened when the lights suddenly went out.'] },
+              { word: 'Terrified', intensity: 'Strong', meaning: 'Extremely afraid.', examples: ['I was terrified during the turbulent flight.', 'He was terrified of speaking in front of large crowds.'] },
+              { word: 'Petrified', intensity: 'Strong', meaning: 'So scared one is frozen with fear.', examples: ['She was petrified when she saw the snake on the trail.', 'He stood petrified as the storm grew closer.'] },
+            ],
+          },
+          {
+            emotion: 'Surprised', emoji: '😲',
+            words: [
+              { word: 'Startled', intensity: 'Mild', meaning: 'Briefly shocked by something sudden.', examples: ['I was startled by the knock at the door.', 'The cat was startled by the loud noise.'] },
+              { word: 'Amazed', intensity: 'Moderate', meaning: 'Filled with wonder or admiration.', examples: ['We were amazed by the view from the mountain top.', 'She was amazed at how quickly he learned the language.'] },
+              { word: 'Astonished', intensity: 'Strong', meaning: 'Greatly surprised; hard to believe.', examples: ['I was astonished to see how much the city had changed.', 'They were astonished by the size of the crowd.'] },
+              { word: 'Flabbergasted', intensity: 'Strong', meaning: 'Utterly shocked and lost for words.', examples: ['He was flabbergasted when he won the lottery.', 'I was flabbergasted by the unexpected apology.'] },
+            ],
+          },
+          {
+            emotion: 'Excited', emoji: '🤩',
+            words: [
+              { word: 'Eager', intensity: 'Mild', meaning: 'Keen and looking forward to something.', examples: ['The students were eager to start the new project.', "I'm eager to see how the story ends."] },
+              { word: 'Enthusiastic', intensity: 'Moderate', meaning: 'Full of energy and interest.', examples: ['She was enthusiastic about joining the volunteer program.', 'He gave an enthusiastic response to the new idea.'] },
+              { word: 'Thrilled', intensity: 'Strong', meaning: 'Extremely excited and pleased.', examples: ['We were thrilled to be invited to the wedding.', 'I was thrilled to finally meet my favourite author.'] },
+              { word: 'Exhilarated', intensity: 'Strong', meaning: 'Energized and thrilled with excitement.', examples: ['I felt exhilarated after finishing the marathon.', 'The roller coaster left us feeling exhilarated.'] },
+            ],
+          },
+          {
+            emotion: 'Calm', emoji: '😌',
+            words: [
+              { word: 'Relaxed', intensity: 'Mild', meaning: 'Free from tension and stress.', examples: ['I felt relaxed after a long walk on the beach.', 'She looked relaxed once the exams were over.'] },
+              { word: 'At ease', intensity: 'Mild', meaning: 'Comfortable and untroubled.', examples: ['He immediately put me at ease with his friendly smile.', 'I felt at ease in the quiet, familiar room.'] },
+              { word: 'Serene', intensity: 'Moderate', meaning: 'Peaceful and untroubled.', examples: ['The lake was serene in the early morning light.', 'She had a serene expression even under pressure.'] },
+              { word: 'Tranquil', intensity: 'Strong', meaning: 'Deeply calm and peaceful.', examples: ['We spent a tranquil weekend in the countryside.', 'The garden offered a tranquil escape from the busy city.'] },
+            ],
+          },
+          {
+            emotion: 'Confused', emoji: '😕',
+            words: [
+              { word: 'Puzzled', intensity: 'Mild', meaning: 'Unable to understand something.', examples: ['I was puzzled by the strange instructions.', 'She gave me a puzzled look when I asked the question.'] },
+              { word: 'Perplexed', intensity: 'Moderate', meaning: 'Confused and unable to find an answer.', examples: ['He was perplexed by the sudden change in plans.', 'The results left the scientists perplexed.'] },
+              { word: 'Baffled', intensity: 'Strong', meaning: 'Completely unable to understand.', examples: ['The detectives were baffled by the missing evidence.', "I'm baffled by how the machine stopped working."] },
+              { word: 'Bewildered', intensity: 'Strong', meaning: 'Deeply confused and disoriented.', examples: ['The tourists looked bewildered in the busy station.', 'She was bewildered by the conflicting advice she received.'] },
+            ],
+          },
+        ];
+
+        const INTENSITY_STYLES = {
+          Mild: 'bg-emerald2-light text-emerald2-dark',
+          Moderate: 'bg-amber2-light text-amber2-dark',
+          Strong: 'bg-rose2-light text-rose2-dark',
+        };
+
+        function renderEmotions() {
+          const content = document.getElementById('emotions-content');
+          content.innerHTML = EMOTIONS.map(group => `
+            <section>
+              <h2 class="font-display text-3xl text-ink mb-1 flex items-center gap-3">
+                <span>${group.emoji}</span>${group.emotion}
+              </h2>
+              <div class="w-12 h-0.5 bg-gold rounded-full mb-5"></div>
+              <div class="grid gap-4 md:grid-cols-2">
+                ${group.words.map(w => `
+                  <div class="bg-white rounded-xl border border-mist p-5 card-hover">
+                    <div class="flex items-center justify-between gap-3 mb-2">
+                      <span class="font-semibold text-lg text-ink">${w.word}</span>
+                      <span class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${INTENSITY_STYLES[w.intensity]}">${w.intensity}</span>
+                    </div>
+                    <p class="text-sm text-slate mb-3">${w.meaning}</p>
+                    <ul class="space-y-1.5">
+                      ${w.examples.map(ex => `
+                        <li class="text-xs text-slate italic flex gap-2">
+                          <span class="text-gold not-italic">›</span><span>"${ex}"</span>
+                        </li>
+                      `).join('')}
+                    </ul>
+                  </div>
+                `).join('')}
+              </div>
+            </section>
+          `).join('');
+        }
+
+        // ─── Event Listeners ────────────────────────────────────────────────
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => {
+              b.classList.remove('border-ink', 'text-ink');
+              b.classList.add('border-transparent', 'text-slate');
+            });
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+            btn.classList.remove('border-transparent', 'text-slate');
+            btn.classList.add('border-ink', 'text-ink');
+            document.getElementById(tab).classList.remove('hidden');
+          });
+        });
+
+        document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
+        document.getElementById('next-btn').addEventListener('click', goToNextQuestion);
+        document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+          document.getElementById('quiz-setup').classList.remove('hidden');
+          document.getElementById('quiz-results').classList.add('hidden');
+          document.querySelectorAll('.quiz-filter-btn').forEach(b => {
+            b.classList.remove('bg-ink', 'text-fog', 'border-ink');
+            b.classList.add('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+          });
+          document.querySelector('[data-quiz-task="all"]').classList.remove('bg-white', 'border-mist', 'text-slate', 'hover:bg-fog');
+          document.querySelector('[data-quiz-task="all"]').classList.add('bg-ink', 'text-fog', 'border-ink');
+          quizState.selectedTask = 'all';
+        });
+
+        // Initialize
+        setupFilterButtons();
+        renderWordList();
+        renderEmotions();
+  
+  }, []);
+
+  return (
+    <>
+
+
+  
+
+        {/* ─── HERO ─── */}
+        <header className="max-w-6xl mx-auto px-6 pt-16 pb-8">
+          <div className="animate-fade-up">
+            <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">Build Your Vocabulary</p>
+            <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-3">
+              Vocabulary <span className="hero-line italic">Bank</span>
+            </h1>
+            <p className="text-lg text-slate max-w-xl leading-relaxed">
+              Learn essential vocabulary for each CELPIP task. Review word lists or test yourself with interactive quizzes.
+            </p>
+          </div>
+        </header>
+
+        {/* ─── MAIN CONTENT ─── */}
+        <main className="max-w-6xl mx-auto px-6 pb-24">
+          {/* Tab buttons */}
+          <div className="flex gap-2 mb-8 border-b border-mist">
+            <button className="tab-btn active px-6 py-3 text-sm font-medium text-ink border-b-2 border-ink transition-all" data-tab="word-list">
+              Word List
+            </button>
+            <button className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all" data-tab="quiz">
+              Quiz
+            </button>
+            <button className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all" data-tab="emotions">
+              Emotions
+            </button>
+          </div>
+
+          {/* Word List Tab */}
+          <div id="word-list" className="tab-content">
+            <div className="mb-8">
+              <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-3">Filter by task</p>
+              <div id="task-filters" className="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div id="vocab-content" className="space-y-8"></div>
+
+            <div id="empty-state" className="hidden text-center py-16">
+              <p className="text-lg text-slate">No words found for the selected filters.</p>
+            </div>
+          </div>
+
+          {/* Quiz Tab */}
+          <div id="quiz" className="tab-content hidden">
+            {/* Quiz Setup */}
+            <div id="quiz-setup" className="max-w-2xl mx-auto">
+              <div className="bg-white rounded-2xl border border-mist p-8">
+                <h2 className="font-display text-2xl text-ink mb-3">Start a Vocabulary Quiz</h2>
+                <p className="text-slate mb-6">Choose which tasks to practice, then test your vocabulary knowledge:</p>
+
+                <div className="mb-6">
+                  <p className="text-sm font-medium text-slate mb-3">Select task:</p>
+                  <div id="quiz-filter-buttons" className="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div id="quiz-question-count" className="mb-6 text-center"></div>
+
+                <button id="start-quiz-btn" className="w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors">
+                  Start Quiz
+                </button>
+              </div>
+            </div>
+
+            {/* Quiz Question */}
+            <div id="quiz-question-container" className="hidden max-w-2xl mx-auto">
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span id="question-number" className="text-sm font-medium text-slate"></span>
+                  <span className="text-sm text-slate" id="score-display"></span>
+                </div>
+                <div className="w-full bg-mist rounded-full h-2 overflow-hidden">
+                  <div id="progress-fill" className="bg-sapphire h-full transition-all duration-300" style={{width: '0%'}}></div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-8 mb-6">
+                <p id="question-text" className="font-display text-xl text-ink mb-6"></p>
+                <div id="options-container" className="space-y-3"></div>
+                <div id="feedback" className="hidden mt-6 p-4 rounded-lg text-center font-semibold"></div>
+              </div>
+
+              <button id="next-btn" className="hidden w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors">
+                Next Question
+              </button>
+            </div>
+
+            {/* Quiz Results */}
+            <div id="quiz-results" className="hidden max-w-2xl mx-auto">
+              <div className="bg-white rounded-2xl border border-mist p-8 text-center">
+                <h2 className="font-display text-3xl text-ink mb-4">Quiz Complete!</h2>
+                <div className="flex items-baseline justify-center gap-2 mb-6">
+                  <span className="font-display text-5xl text-sapphire" id="final-score"></span>
+                  <span className="text-2xl text-slate">/ <span id="total-questions"></span></span>
+                </div>
+                <p id="result-message" className="text-lg text-slate mb-8"></p>
+                <button id="restart-quiz-btn" className="w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors">
+                  Take Another Quiz
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Emotions Tab */}
+          <div id="emotions" className="tab-content hidden">
+            <div className="mb-8">
+              <p className="text-slate max-w-2xl leading-relaxed">
+                Build a precise emotional vocabulary. Each emotion is shown from
+                <span className="font-semibold text-emerald2-dark">mild</span> to
+                <span className="font-semibold text-rose2-dark">strong</span> intensity, so you can
+                choose the exact word for how you feel.
+              </p>
+            </div>
+
+            <div id="emotions-content" className="space-y-12"></div>
+          </div>
+        </main>
+
+        {/* ─── FOOTER ─── */}
+        <footer className="border-t border-mist bg-fog py-8 px-6 text-center">
+          <p className="text-xs text-slate">CELPIP Vocabulary Bank · Master essential words for test success.</p>
+        </footer>
+
+  
+  
+    </>
+  );
+}
