@@ -82,6 +82,8 @@ export default function CelpipSpeakingTask3Page() {
         // Accordion functionality
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -189,8 +191,6 @@ export default function CelpipSpeakingTask3Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -256,6 +256,71 @@ export default function CelpipSpeakingTask3Page() {
                     <p className="text-xs text-fog/80">What do you think or feel about the scene? Is it peaceful, chaotic, beautiful, ordinary?</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Scoring — folded in from the old Scoring tab */}
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">How you are scored</p>
+              <p className="text-sm text-slate">How examiners score Task 3 on a 12-point scale. The bands below show typical language for each score tier.</p>
+
+              <div className="space-y-3 mt-4">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Precise descriptive language. Uses spatial language ("foreground," "nestled") naturally. Adjectives are varied and appropriate ("vibrant" vs. "bright").</p>
+                    <p><strong>Coherence:</strong> Description follows a logical path (e.g., foreground → background). Transitions are smooth and natural.</p>
+                    <p><strong>Fluency:</strong> Speaks smoothly with very few pauses. Rhythm is natural, not rushed or halting.</p>
+                    <p><strong>Accuracy:</strong> Present continuous tense for actions is consistent. Grammar is accurate; sentences are varied.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Good range of descriptive words. Spatial language is used but may not always be flawless. Some repetition of adjectives.</p>
+                    <p><strong>Coherence:</strong> Description is organized but transitions may be basic ("and then," "also"). Generally easy to follow.</p>
+                    <p><strong>Fluency:</strong> Mostly fluent with occasional pauses to think. Some hesitation but not excessive.</p>
+                    <p><strong>Accuracy:</strong> Present continuous is mostly correct. Some minor grammatical errors that don't disrupt meaning.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Basic descriptive words. May struggle with spatial language. Heavy repetition ("there is," "I see").</p>
+                    <p><strong>Coherence:</strong> Description may jump around or lack clear organization. Difficult to follow the spatial layout.</p>
+                    <p><strong>Fluency:</strong> Noticeable pauses and hesitations. May lose track mid-description.</p>
+                    <p><strong>Accuracy:</strong> Errors in present continuous or other tenses. Some sentences are unclear.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Very limited range. Little to no spatial language. Heavy repetition or inaccuracy.</p>
+                    <p><strong>Coherence:</strong> Description is disjointed or very brief. No clear logical flow.</p>
+                    <p><strong>Fluency:</strong> Frequent hesitations, filler words, or long silences. Choppy delivery.</p>
+                    <p><strong>Accuracy:</strong> Frequent grammatical errors. Meaning is sometimes unclear.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">A 9–10 speaker describes the scene with natural pacing and good vocabulary. They use some spatial language, their descriptions are organized (even if not perfectly), and their grammar is mostly accurate. They are <strong>not</strong> perfect, and that's fine.</p>
               </div>
             </div>
           </div>
@@ -424,6 +489,108 @@ export default function CelpipSpeakingTask3Page() {
                 </div>
               </div>
             </div>
+
+            {/* Sample Answers — full 60-second responses built from the templates above */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-samples">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">★</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Sample Answers</span>
+                    <span className="text-xs text-slate ml-2">full 60-second responses · Setting → Details → Impression</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-samples" className="accordion-body border-t border-mist px-6 py-5 space-y-5">
+                <p className="text-sm text-slate">Each sample combines the three parts above into a complete answer. Since Task 3 always shows a photograph, an <strong>image prompt</strong> is included so you can generate the scene and practise describing it aloud.</p>
+
+                {/* Sample 1: Market */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-gold uppercase tracking-widest">Scenario 1 · Bustling outdoor market</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setting:</span> "This is a vibrant outdoor market scene, taken during the day. The atmosphere looks bustling and lively, and the colours immediately stand out."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Details:</span> "In the foreground, there are colourful fruit and vegetable stalls overflowing with fresh produce. The vendors are wearing traditional clothing and are actively arranging their items. In the middle section, customers are browsing and selecting goods, and some are carrying shopping bags. I can see vibrant blues, reds, yellows, and greens everywhere. In the background, more stalls are visible, and there are tall buildings rising above the crowd."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Impression:</span> "Overall, the scene captures the energy and vibrancy of a bustling marketplace. It looks like a place full of life and cultural richness, and I would really enjoy visiting somewhere like this."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 2: Beach sunset */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-sapphire uppercase tracking-widest">Scenario 2 · Peaceful beach sunset</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setting:</span> "The image shows a quiet, serene beach at sunset. The colours are very warm and peaceful, with the sky glowing in shades of orange and pink."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Details:</span> "The foreground shows golden sand where a few people are walking slowly along the shore. The water in the middle is a calm blue colour, and it reflects the warm light of the setting sun. To the left, there are some palm trees swaying gently, and in the background I can see small beach huts and a few scattered clouds in the sky. Everything looks soft and still."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Impression:</span> "This is a very peaceful, serene moment. The combination of the sunset colours and the relaxed atmosphere would make it an ideal place to unwind after a long day."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 3: Café interior */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest">Scenario 3 · Cozy café interior</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setting:</span> "This photograph captures a cozy café interior. The lighting is warm, and it appears to be a relaxing, welcoming space."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Details:</span> "The foreground shows several small tables where customers are sitting and enjoying beverages or food. I can see chairs in different colours and styles. To the left and right, more seating areas are visible, with some people reading books and others working on laptops. The walls are decorated with paintings and warm lighting fixtures. Behind the counter, staff members are preparing drinks, and natural light is coming through the large windows."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Impression:</span> "Overall, the café looks like a cozy retreat where people can relax and socialise. I think it would be a pleasant place to spend an afternoon with a good book."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 4: Mountain landscape */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-amber2 uppercase tracking-widest">Scenario 4 · Mountain landscape</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setting:</span> "This image shows a breathtaking mountain landscape, taken during the day. The scene feels vast, fresh, and very peaceful."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Details:</span> "In the foreground, there are tall green pine trees and some large rocks scattered across the ground. In the middle, a wide valley stretches out, and I can see a winding river running through it. In the background, there are tall, snow-capped peaks rising into a clear blue sky with a few white clouds. The colours range from deep greens to soft greys and bright whites, which gives the scene a real sense of scale."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Impression:</span> "Overall, the landscape looks calm and majestic. It reminds me of peaceful hiking trips, and it would be a wonderful place to escape from the noise of the city."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 5: Street festival */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-rose2 uppercase tracking-widest">Scenario 5 · Street festival</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setting:</span> "This image shows a lively street festival or cultural celebration. The atmosphere looks joyful and energetic, and the whole street is full of colour."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Details:</span> "In the foreground, large crowds of people are celebrating, and many of them are smiling and taking photos. To the left and right, colourful decorations and banners are hanging across the street. In the middle, performers in traditional costumes are dancing, while food stalls line both sides of the road. In the background, I can see festive lights and even more people gathered together. The bright colours really stand out against the busy scene."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Impression:</span> "Overall, the scene captures the excitement and community spirit of a cultural festival. It looks like the kind of event where people of all ages come together to celebrate, and I would love to experience it in person."</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ══════════════════════════════════════════
@@ -432,111 +599,6 @@ export default function CelpipSpeakingTask3Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five realistic scene description scenarios. Pick one and speak for 60 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Practice scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a bustling outdoor market or street bazaar.</p>
-                <p className="text-sm text-slate leading-relaxed">Focus on vendor stalls, colors of goods, crowd activity, and atmosphere. Use "foreground," "background," and spatial language throughout.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Practice scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a peaceful beach sunset.</p>
-                <p className="text-sm text-slate leading-relaxed">Paint the scene: colors in the sky, people on shore, water, buildings nearby. Use mood words like "serene" and "golden."</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Practice scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe the interior of a cozy café.</p>
-                <p className="text-sm text-slate leading-relaxed">Furniture, lighting, customers, decor. Describe what people are doing (present continuous) and the overall feel of the space.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Practice scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a mountain landscape or scenic nature view.</p>
-                <p className="text-sm text-slate leading-relaxed">Foreground features (trees, rocks), mid-ground (valleys, terrain), background (peaks, sky). Describe colors, scale, and atmosphere.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Practice scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a street festival or cultural celebration scene.</p>
-                <p className="text-sm text-slate leading-relaxed">Decorations, crowds, activities, colors, energy level. Show how you'd organize the description spatially (left to right, near to far).</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 3 on a 12-point scale. The bands below show typical language for each score tier.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Vocabulary:</strong> Precise descriptive language. Uses spatial language ("foreground," "nestled") naturally. Adjectives are varied and appropriate ("vibrant" vs. "bright").</p>
-                  <p><strong>Coherence:</strong> Description follows a logical path (e.g., foreground → background). Transitions are smooth and natural.</p>
-                  <p><strong>Fluency:</strong> Speaks smoothly with very few pauses. Rhythm is natural, not rushed or halting.</p>
-                  <p><strong>Accuracy:</strong> Present continuous tense for actions is consistent. Grammar is accurate; sentences are varied.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Vocabulary:</strong> Good range of descriptive words. Spatial language is used but may not always be flawless. Some repetition of adjectives.</p>
-                  <p><strong>Coherence:</strong> Description is organized but transitions may be basic ("and then," "also"). Generally easy to follow.</p>
-                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses to think. Some hesitation but not excessive.</p>
-                  <p><strong>Accuracy:</strong> Present continuous is mostly correct. Some minor grammatical errors that don't disrupt meaning.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Vocabulary:</strong> Basic descriptive words. May struggle with spatial language. Heavy repetition ("there is," "I see").</p>
-                  <p><strong>Coherence:</strong> Description may jump around or lack clear organization. Difficult to follow the spatial layout.</p>
-                  <p><strong>Fluency:</strong> Noticeable pauses and hesitations. May lose track mid-description.</p>
-                  <p><strong>Accuracy:</strong> Errors in present continuous or other tenses. Some sentences are unclear.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Vocabulary:</strong> Very limited range. Little to no spatial language. Heavy repetition or inaccuracy.</p>
-                  <p><strong>Coherence:</strong> Description is disjointed or very brief. No clear logical flow.</p>
-                  <p><strong>Fluency:</strong> Frequent hesitations, filler words, or long silences. Choppy delivery.</p>
-                  <p><strong>Accuracy:</strong> Frequent grammatical errors. Meaning is sometimes unclear.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A 9–10 speaker describes the scene with natural pacing and good vocabulary. They use some spatial language, their descriptions are organized (even if not perfectly), and their grammar is mostly accurate. They are <strong>not</strong> perfect, and that's fine.</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════

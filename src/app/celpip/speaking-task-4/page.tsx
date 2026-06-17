@@ -82,6 +82,8 @@ export default function CelpipSpeakingTask4Page() {
         // Accordion functionality
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -189,8 +191,6 @@ export default function CelpipSpeakingTask4Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -256,6 +256,71 @@ export default function CelpipSpeakingTask4Page() {
                     <p className="text-xs text-fog/80">Explain why these predictions make sense. Link to real-world factors.</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Scoring — folded in from the old Scoring tab */}
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">How you are scored</p>
+              <p className="text-sm text-slate">How examiners score Task 4 on a 12-point scale. The bands below show typical language for each score tier.</p>
+
+              <div className="space-y-3 mt-4">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Logic:</strong> Predictions are insightful, well-reasoned, and clearly supported. Connects to real-world factors naturally.</p>
+                    <p><strong>Vocabulary:</strong> Uses sophisticated conditional and predictive structures. Range is impressive ("will likely," "might well," "I'd argue that").</p>
+                    <p><strong>Fluency:</strong> Speaks naturally with clear organization. Minimal hesitation; pacing is conversational.</p>
+                    <p><strong>Accuracy:</strong> Grammar is nearly always correct. Future tense and conditionals are used precisely.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Logic:</strong> Predictions are logical and generally well-supported. Reasoning is clear.</p>
+                    <p><strong>Vocabulary:</strong> Uses conditional and predictive language consistently. Some variety in phrasing but may repeat structures.</p>
+                    <p><strong>Fluency:</strong> Mostly fluent with occasional pauses. Some hesitation but overall organized and natural.</p>
+                    <p><strong>Accuracy:</strong> Grammar is mostly accurate. Minor errors in conditionals or tense don't disrupt meaning.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Logic:</strong> Predictions are basic but sometimes vague. Reasoning may be weak or incomplete.</p>
+                    <p><strong>Vocabulary:</strong> Limited range of conditional language. Repetitive. May not use conditional structures correctly.</p>
+                    <p><strong>Fluency:</strong> Noticeable pauses and hesitations. Some filler sounds. May lose track of thought.</p>
+                    <p><strong>Accuracy:</strong> Several grammatical errors. Tense errors are common. Meaning is usually clear but sometimes unclear.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Logic:</strong> Predictions are unclear, illogical, or barely present. Little or no reasoning provided.</p>
+                    <p><strong>Vocabulary:</strong> Very limited. Little to no use of conditional or predictive language.</p>
+                    <p><strong>Fluency:</strong> Frequent hesitations or long silences. Choppy delivery. Difficult to follow.</p>
+                    <p><strong>Accuracy:</strong> Many grammatical errors. Meaning is sometimes unclear. Tense control is weak.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">A 9–10 speaker makes logical predictions with natural conditional language. They support predictions with reasons and speak confidently. They are <strong>not</strong> perfect; they may use simple structures alongside complex ones, and that's fine. What matters: do the predictions and reasoning feel intentional and credible?</p>
               </div>
             </div>
           </div>
@@ -440,6 +505,108 @@ export default function CelpipSpeakingTask4Page() {
                 </div>
               </div>
             </div>
+
+            {/* Sample Answers — full 60-second responses built from the templates above */}
+            <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+              <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-samples">
+                <div className="flex items-center gap-3">
+                  <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">★</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Sample Answers</span>
+                    <span className="text-xs text-slate ml-2">full 60-second responses · Recap → Predictions → Reasoning</span>
+                  </div>
+                </div>
+                <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+              </button>
+              <div id="struct-samples" className="accordion-body border-t border-mist px-6 py-5 space-y-5">
+                <p className="text-sm text-slate">Each sample combines the three parts above into a complete answer. Task 4 builds on a Task 3 image, so an <strong>image prompt</strong> is included so you can generate the scene, describe the current state, and then predict what happens next.</p>
+
+                {/* Sample 1: Market */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-gold uppercase tracking-widest">Scenario 1 · Bustling outdoor market</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Recap:</span> "Currently, the market is bustling with activity — the vendors are arranging their produce, and the customers are browsing the colourful stalls."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Predictions:</span> "Looking ahead, I predict that in the next 30 minutes the crowd will become even larger because it's the evening shopping rush. The vendors will probably lower some prices to encourage final purchases before closing. Meanwhile, some visitors might start heading home with their full shopping bags. By the end of the evening, the market will likely become much quieter as the vendors begin to pack up their stalls."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Reasoning:</span> "Overall, the scene will look quite different in an hour, mainly because markets naturally wind down once it gets dark and people return home for dinner."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 2: Beach sunset */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-sapphire uppercase tracking-widest">Scenario 2 · Peaceful beach sunset</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Recap:</span> "The beach is beautiful and peaceful right now — the sun is low on the horizon, and a few families are still enjoying the shore."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Predictions:</span> "I believe that as the sun sets lower, the temperature will drop noticeably, and people will probably start gathering their belongings. The swimmers are going to come out of the water soon because it will get too dark to swim safely. Some families might turn on lights or build small fires to keep enjoying the evening. Eventually, the beach will become much quieter as most visitors leave for home."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Reasoning:</span> "In conclusion, I predict the atmosphere will shift from relaxed and active to calm and almost empty, simply because nightfall makes the beach colder and harder to enjoy."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 3: Café interior */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest">Scenario 3 · Cozy café interior</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Recap:</span> "The café is cozy and calm right now, with customers reading or working on laptops while the staff are preparing drinks."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Predictions:</span> "I anticipate that later in the evening, the atmosphere will change. More people might arrive after finishing work, so the café could become busier than it is now. The staff will probably be getting more coffee ready in preparation for the rush. Some of the current customers are going to leave to make room for new ones. Eventually, the quiet, relaxed mood will shift into something more lively and social."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Reasoning:</span> "That's why I believe the café's energy will rise as the day goes on, because cafés tend to fill up once the workday ends and people look for a place to unwind."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 4: Mountain landscape */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-amber2 uppercase tracking-widest">Scenario 4 · Mountain landscape</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Recap:</span> "Right now, the mountain landscape looks calm and clear — the sky is bright, and a few hikers are making their way along the trail in the foreground."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Predictions:</span> "Looking ahead, I expect the weather in the mountains will change quickly, as it often does at high altitude. Clouds will likely roll in over the peaks, and the temperature is going to drop in the late afternoon. The hikers will probably start descending soon to reach safety before dark. Meanwhile, the light will fade, and the snow-capped peaks might be hidden behind mist."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Reasoning:</span> "Overall, the scene will likely become colder and less visible within a few hours, because mountain weather is unpredictable and daylight disappears fast in the valleys."</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 5: Street festival */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-rose2 uppercase tracking-widest">Scenario 5 · Street festival</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Recap:</span> "At the moment, the street festival is full of energy — large crowds are celebrating, performers are dancing, and the food stalls are doing brisk business."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Predictions:</span> "I predict that as the day turns into evening, the festival will become even more crowded because more people will arrive after work. The festive lights will be switched on, and the atmosphere is going to feel more dramatic and exciting. The performers will probably move on to bigger shows, while the food stalls might start selling out of popular items. Later in the night, however, families with young children will likely begin heading home."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Reasoning:</span> "In conclusion, the celebration will likely peak in the evening and then gradually wind down, because festivals naturally build toward a night-time climax before the crowds disperse."</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ══════════════════════════════════════════
@@ -448,111 +615,6 @@ export default function CelpipSpeakingTask4Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five realistic prediction scenarios. Pick one and speak for 60 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Practice scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Breakthrough in electric car technology</p>
-                <p className="text-sm text-slate leading-relaxed">Predict how this will affect car manufacturers, the oil industry, consumer behavior, and the environment. Link predictions to real-world factors.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Practice scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">Remote work becomes permanent in most industries</p>
-                <p className="text-sm text-slate leading-relaxed">Predict impacts on office real estate, employee morale, company productivity, hiring, and urban development.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Practice scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">A close friend receives a job offer abroad</p>
-                <p className="text-sm text-slate leading-relaxed">Predict how this decision will affect their career, relationships, financial security, and personal growth.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Practice scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Social media platforms introduce strict privacy rules</p>
-                <p className="text-sm text-slate leading-relaxed">Predict how users, advertisers, and the platforms themselves will respond. Will adoption increase or decrease?</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Practice scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Your city invests billions in public transportation</p>
-                <p className="text-sm text-slate leading-relaxed">Predict the effects on traffic congestion, property values, air quality, and how residents will adapt.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 4 on a 12-point scale. The bands below show typical language for each score tier.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Logic:</strong> Predictions are insightful, well-reasoned, and clearly supported. Connects to real-world factors naturally.</p>
-                  <p><strong>Vocabulary:</strong> Uses sophisticated conditional and predictive structures. Range is impressive ("will likely," "might well," "I'd argue that").</p>
-                  <p><strong>Fluency:</strong> Speaks naturally with clear organization. Minimal hesitation; pacing is conversational.</p>
-                  <p><strong>Accuracy:</strong> Grammar is nearly always correct. Future tense and conditionals are used precisely.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Logic:</strong> Predictions are logical and generally well-supported. Reasoning is clear.</p>
-                  <p><strong>Vocabulary:</strong> Uses conditional and predictive language consistently. Some variety in phrasing but may repeat structures.</p>
-                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses. Some hesitation but overall organized and natural.</p>
-                  <p><strong>Accuracy:</strong> Grammar is mostly accurate. Minor errors in conditionals or tense don't disrupt meaning.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Logic:</strong> Predictions are basic but sometimes vague. Reasoning may be weak or incomplete.</p>
-                  <p><strong>Vocabulary:</strong> Limited range of conditional language. Repetitive. May not use conditional structures correctly.</p>
-                  <p><strong>Fluency:</strong> Noticeable pauses and hesitations. Some filler sounds. May lose track of thought.</p>
-                  <p><strong>Accuracy:</strong> Several grammatical errors. Tense errors are common. Meaning is usually clear but sometimes unclear.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Logic:</strong> Predictions are unclear, illogical, or barely present. Little or no reasoning provided.</p>
-                  <p><strong>Vocabulary:</strong> Very limited. Little to no use of conditional or predictive language.</p>
-                  <p><strong>Fluency:</strong> Frequent hesitations or long silences. Choppy delivery. Difficult to follow.</p>
-                  <p><strong>Accuracy:</strong> Many grammatical errors. Meaning is sometimes unclear. Tense control is weak.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A 9–10 speaker makes logical predictions with natural conditional language. They support predictions with reasons and speak confidently. They are <strong>not</strong> perfect; they may use simple structures alongside complex ones, and that's fine. What matters: do the predictions and reasoning feel intentional and credible?</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════

@@ -74,6 +74,8 @@ export default function CelpipSpeakingTask5Page() {
 
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -140,7 +142,7 @@ export default function CelpipSpeakingTask5Page() {
               Compare &amp; <span className="hero-line italic">persuade</span>
             </h1>
             <p className="text-lg text-slate max-w-xl leading-relaxed">
-              Master the art of persuasive argumentation — structure your comparison, build strong reasons, and convince the listener with confidence.
+              You're shown two options with pictures and details. Choose one, then persuade a specific person why your pick is the better choice.
             </p>
           </div>
 
@@ -173,8 +175,6 @@ export default function CelpipSpeakingTask5Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -184,28 +184,28 @@ export default function CelpipSpeakingTask5Page() {
           <div id="pane-overview" className="pane active space-y-5">
             <div className="bg-white rounded-2xl border border-mist p-6">
               <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">What the task involves</p>
-              <p className="text-base leading-relaxed text-ink">You are presented with two options and asked to compare them and persuade the listener which one is better. For example: <em className="text-steel">"Which is better for the environment — public transit or electric cars?"</em></p>
-              <p className="text-base leading-relaxed text-ink mt-3">The examiner is testing your ability to construct logical arguments, use persuasive language, compare systematically, and defend your position with examples.</p>
+              <p className="text-base leading-relaxed text-ink">You are shown <strong>two options as pictures with written details</strong> (prices, features), and you must <strong>choose one</strong> and then <strong>persuade a specific person</strong> — a friend, family member, or colleague — that your choice is the better one. For example: <em className="text-steel">"Your family is buying a birthday gift. Choose between a tablet ($300) and a smartwatch ($100), and persuade your friend John why your choice is better."</em></p>
+              <p className="text-base leading-relaxed text-ink mt-3">It runs in <strong>two parts</strong>: first you get <strong>60 seconds to compare the options and choose</strong> (no speaking), then <strong>60 seconds to prepare</strong> and <strong>60 seconds to speak</strong>. The examiner is testing whether you can compare the options with comparative language and specific numbers, and persuade the person warmly and convincingly.</p>
             </div>
 
             <div className="bg-white rounded-2xl border border-mist p-6">
               <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">What examiners score you on</p>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Fluency</span>
-                  <p className="text-sm leading-relaxed text-ink">Natural pacing and minimal hesitation. Complex ideas delivered smoothly signal high fluency.</p>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Comparison</span>
+                  <p className="text-sm leading-relaxed text-ink">Clear comparative language ("much cheaper," "more durable") and use of the specific details — especially prices and numbers — from the pictures.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-emerald2-light text-emerald2-dark shrink-0 mt-0.5">Coherence</span>
-                  <p className="text-sm leading-relaxed text-ink">Argument flows logically: comparison → supporting points → conclusion. Clear structure is essential.</p>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-emerald2-light text-emerald2-dark shrink-0 mt-0.5">Persuasion</span>
+                  <p className="text-sm leading-relaxed text-ink">You clearly choose one option, address the person directly, gently dismiss their choice, and ask for their agreement. Don't sit on the fence.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Vocabulary</span>
-                  <p className="text-sm leading-relaxed text-ink">Persuasive language, comparison phrases, and topic-specific vocabulary show range.</p>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Coherence</span>
+                  <p className="text-sm leading-relaxed text-ink">A logical flow: opening → 2–3 compared points → conclusion. Transitions make it easy to follow.</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-xs font-semibold px-3 py-1 rounded-md bg-rose2-light text-rose2-dark shrink-0 mt-0.5">Grammar</span>
-                  <p className="text-sm leading-relaxed text-ink">Complex sentences, conditionals, and comparative structures demonstrate control.</p>
+                  <p className="text-sm leading-relaxed text-ink">Accurate comparative structures (avoid "more cheaper") and varied, complex sentences.</p>
                 </div>
               </div>
             </div>
@@ -218,8 +218,8 @@ export default function CelpipSpeakingTask5Page() {
                     <span className="font-display text-gold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gold">Introduction (10s)</p>
-                    <p className="text-xs text-fog/80">State both options, then declare your position clearly</p>
+                    <p className="text-xs font-semibold text-gold">Opening &amp; Soft Rejection (10s)</p>
+                    <p className="text-xs text-fog/80">Greet the person, acknowledge their option, and state which one you've chosen</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -227,8 +227,8 @@ export default function CelpipSpeakingTask5Page() {
                     <span className="font-display text-fog text-sm">2</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-fog">Body (40s)</p>
-                    <p className="text-xs text-fog/80">2–3 strong reasons why your choice is better, with examples</p>
+                    <p className="text-xs font-semibold text-fog">Compare 2–3 Points (40s)</p>
+                    <p className="text-xs text-fog/80">Price first, then value, then one detail — comparing your choice against theirs</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -236,10 +236,75 @@ export default function CelpipSpeakingTask5Page() {
                     <span className="font-display text-gold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gold">Closing (10s)</p>
-                    <p className="text-xs text-fog/80">Restate your position and summarize why it's the better choice</p>
+                    <p className="text-xs font-semibold text-gold">Conclusion (10s)</p>
+                    <p className="text-xs text-fog/80">Restate your choice and ask for their agreement</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Scoring — folded in from the old Scoring tab */}
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">How you are scored</p>
+              <p className="text-sm text-slate">How examiners score Task 5 on a 12-point scale. Strong comparison and a clear, persuasive choice matter most.</p>
+
+              <div className="space-y-3 mt-4">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Comparison:</strong> Rich comparative language and confident use of the specific prices/details from both options.</p>
+                    <p><strong>Persuasion:</strong> Clearly chooses one option, addresses the person warmly, softly rejects their choice, and asks for agreement.</p>
+                    <p><strong>Coherence:</strong> Opening → compared points → conclusion flows seamlessly.</p>
+                    <p><strong>Grammar:</strong> Accurate comparatives and complex structures throughout.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Comparison:</strong> Good comparative language with 2 clear points; uses some specific details.</p>
+                    <p><strong>Persuasion:</strong> Chooses an option and persuades, though the soft rejection or the request for agreement may be thin.</p>
+                    <p><strong>Coherence:</strong> Logical and mostly easy to follow; transitions may be basic.</p>
+                    <p><strong>Grammar:</strong> Mostly accurate; minor comparative errors don't impede meaning.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Comparison:</strong> Basic comparison; rarely uses the specific prices/details. Asserts rather than compares.</p>
+                    <p><strong>Persuasion:</strong> The choice may be unclear, or it doesn't sound like persuading a real person.</p>
+                    <p><strong>Coherence:</strong> Some structure, but the flow jumps around or one point dominates.</p>
+                    <p><strong>Grammar:</strong> Comparative errors ("more cheaper"); meaning sometimes unclear.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Comparison:</strong> Little or no real comparison; no use of the details provided.</p>
+                    <p><strong>Persuasion:</strong> No clear choice, or doesn't address a person at all.</p>
+                    <p><strong>Coherence:</strong> Disjointed or very brief. Hard to follow.</p>
+                    <p><strong>Grammar:</strong> Frequent errors. Meaning is often unclear.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">The "right" option doesn't matter — <strong>how well you compare and persuade does</strong>. Pick one clearly, lead with price, use the actual numbers from the pictures, gently dismiss the other choice, and finish by asking the person to agree. Confident comparison beats perfect grammar.</p>
               </div>
             </div>
           </div>
@@ -248,7 +313,7 @@ export default function CelpipSpeakingTask5Page() {
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
           <div id="pane-structure" className="pane space-y-4">
-            <p className="text-sm text-slate">A 3-part framework for building a strong persuasive argument — not a memorized speech.</p>
+            <p className="text-sm text-slate">A 3-part framework for persuading a person to pick your option — greet them, compare price-first, and ask for their agreement.</p>
 
             {/* Part 1 */}
             <div className="bg-white rounded-2xl border border-mist overflow-hidden">
@@ -256,26 +321,26 @@ export default function CelpipSpeakingTask5Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-sapphire text-white text-xs font-semibold flex items-center justify-center shrink-0">1</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">Introduction</span>
+                    <span className="text-sm font-semibold text-ink">Opening &amp; Soft Rejection</span>
                     <span className="text-xs text-slate ml-2">~10 seconds</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-1" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Clearly state both options and declare which one you prefer immediately.</p>
+                <p className="text-sm text-slate">Greet the person by name, acknowledge the option they were leaning toward, then pivot to the one you've chosen. This "soft rejection" sounds collaborative, not pushy.</p>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"When choosing between [option A] and [option B], I would choose [your choice] because [one key reason]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"Hi [name], I saw you were leaning toward [their option]. I understand why, but I actually think [your option] is the better choice for us."</p>
                 </div>
                 <div className="bg-sapphire-light rounded-xl p-4 border-l-4 border-sapphire" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-sapphire-dark italic leading-relaxed">"When choosing between public transit and electric cars, I would choose public transit because of its environmental and economic benefits."</p>
+                  <p className="text-sm text-sapphire-dark italic leading-relaxed">"Hi John, I saw you suggested the tablet for his birthday. I get why — it has a big screen — but I really think the smartwatch is the better choice."</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Name both options clearly</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>State your preference immediately — no fence-sitting</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Give one preview reason to hook them</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Address the person directly by name</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Acknowledge their option before pivoting ("I understand why, but...")</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>State your choice clearly — no fence-sitting</li>
                 </ul>
               </div>
             </div>
@@ -286,26 +351,34 @@ export default function CelpipSpeakingTask5Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-emerald2 text-white text-xs font-semibold flex items-center justify-center shrink-0">2</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">Supporting Points</span>
-                    <span className="text-xs text-slate ml-2">~40 seconds · 2–3 reasons</span>
+                    <span className="text-sm font-semibold text-ink">Compare 2–3 Points</span>
+                    <span className="text-xs text-slate ml-2">~40 seconds · the core of your response</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-2" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Develop 2–3 strong reasons. Each reason should have an example or detail to make it concrete.</p>
+                <p className="text-sm text-slate"><strong>The heart of your response.</strong> Compare your choice against theirs on 2–3 points. <strong>Lead with price</strong>, then value/usefulness, then one specific detail — always using the actual numbers from the pictures.</p>
+                <div className="bg-sapphire-light rounded-lg p-3 mb-3">
+                  <p className="text-xs font-semibold text-sapphire-dark mb-2">Comparison order that works:</p>
+                  <ul className="space-y-1 text-xs text-sapphire-dark">
+                    <li>• <strong>Price first:</strong> "Mine costs $100, which is much cheaper than the $300 option."</li>
+                    <li>• <strong>Value:</strong> why your option's feature matters for this person/situation</li>
+                    <li>• <strong>One detail:</strong> a final concrete advantage to seal it</li>
+                  </ul>
+                </div>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"First, [reason 1]. For example, [specific example]. Second, [reason 2], which means [consequence]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"First, regarding price, [your option] costs [X], which is much cheaper than [their option] at [Y]. Also, it [key benefit], which is more useful because [reason]. Finally, [one specific detail]."</p>
                 </div>
                 <div className="bg-emerald2-light rounded-xl p-4 border-l-4 border-emerald2" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-emerald2-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-emerald2-dark italic leading-relaxed">"First, public transit reduces per-person emissions significantly. For example, one bus removes 40 cars from the road. Second, it's more cost-effective, which means commuters save money."</p>
+                  <p className="text-sm text-emerald2-dark italic leading-relaxed">"First, the smartwatch only costs a hundred dollars — that's much cheaper than the tablet at three hundred, so we'd save money for the party. Also, it has fitness tracking, which is more useful since he loves running. Finally, it's water-resistant, so it'll last far longer than the tablet."</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use transitions: "First," "Second," "Additionally"</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Support each point with a specific example or number</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Compare subtly: mention drawbacks of the other option</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Always start with price and use the exact numbers shown</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use comparatives: "cheaper," "more durable," "much more useful"</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Compare directly against their option, not in isolation</li>
                 </ul>
               </div>
             </div>
@@ -316,65 +389,163 @@ export default function CelpipSpeakingTask5Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">3</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">Closing</span>
+                    <span className="text-sm font-semibold text-ink">Conclusion &amp; Ask for Agreement</span>
                     <span className="text-xs text-slate ml-2">~10 seconds</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-3" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Restate your position firmly and summarize why it's the stronger choice.</p>
+                <p className="text-sm text-slate">Restate your choice, sum up the strongest reason, and finish by gently asking the person to agree with you.</p>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"In conclusion, [option] is the better choice because [strongest reason]. It is clear that [restate your position]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"So for these reasons, I really think we should go with [your option]. Let me know if you agree!"</p>
                 </div>
                 <div className="bg-gold-light rounded-xl p-4 border-l-4 border-gold" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-gold-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-gold-dark italic leading-relaxed">"In conclusion, public transit is the better choice because of its environmental and economic benefits. It is clear that sustainability and affordability are the strongest factors."</p>
+                  <p className="text-sm text-gold-dark italic leading-relaxed">"So for those reasons, I really think the smartwatch is the smarter pick — it's cheaper and more practical. Let me know if you agree, and we can order it today!"</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Restate your preference — no fence-sitting at the end</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Summarize your strongest reason</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Keep it brief — 2–3 sentences maximum</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Restate your choice — stay committed to the end</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Sum up your strongest reason in a few words</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Close by asking for agreement ("Let me know if you agree")</li>
                 </ul>
               </div>
             </div>
 
-            {/* Complete Comparison & Persuasion Examples */}
+            {/* Sample Answers — two-option persuasions, each with image prompts for both options */}
             <div className="bg-white rounded-2xl border border-mist overflow-hidden">
               <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-examples">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-ink">Complete Comparison & Persuasion Examples</span>
+                  <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">★</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Sample Answers</span>
+                    <span className="text-xs text-slate ml-2">full persuasions · Opening → Compare → Ask for agreement</span>
+                  </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
-              <div id="struct-examples" className="accordion-body border-t border-mist px-6 py-5 space-y-6">
-                <div className="border-l-3 border-sapphire pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 1: Work Location (Remote vs. Office)</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Introduction:</strong> "When choosing between working remotely and working in an office, I believe remote work is the better option because it improves productivity and reduces stress."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "First, regarding cost, remote work eliminates commuting expenses. You save approximately one hundred dollars per month on transportation and meals. Second, it offers better work-life balance — you can spend more time with family, which improves mental health. Additionally, remote workers report fewer distractions and better focus, which actually increases productivity. Studies show remote employees complete tasks 30% faster than office workers."</p>
-                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "In conclusion, remote work is the better choice because it's more cost-effective and improves both productivity and well-being. For these reasons, I recommend choosing remote work."</p>
+              <div id="struct-examples" className="accordion-body border-t border-mist px-6 py-5 space-y-5">
+                <p className="text-sm text-slate">Task 5 always shows <strong>two options as pictures with details</strong>. For each scenario below, an <strong>image prompt is included for both options</strong> so you can generate the pair, choose one, and practise persuading the person.</p>
+
+                {/* Sample 1: Birthday gift */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-gold uppercase tracking-widest">Scenario 1 · A birthday gift (persuading your friend John)</p>
+                  <p className="text-xs text-slate"><strong>Options:</strong> Tablet ($300) vs. Smartwatch ($100). <strong>Chosen:</strong> Smartwatch.</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option A — Tablet</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A modern black tablet with a large glossy screen displaying a movie, standing upright on a desk, price tag reading $300, clean studio product photography, white background, photorealistic."</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option B — Smartwatch</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A sleek fitness smartwatch with a round screen showing a step-count and heart-rate display, silicone sport band, price tag reading $100, clean studio product photography, white background, photorealistic."</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Opening:</span> "Hi John! I saw you were leaning toward the tablet for his birthday. I totally get why — the big screen is nice — but I really think the smartwatch is the better pick."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Compare:</span> "First, on price, the smartwatch is only a hundred dollars, which is much cheaper than the tablet at three hundred — so we'd have plenty left for the party. Also, it has fitness and heart-rate tracking, which is far more useful for him since he loves running, whereas the tablet is mostly for watching movies. On top of that, it's water-resistant, so it'll last much longer than a fragile tablet screen."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Conclusion:</span> "So for those reasons, I really think we should go with the smartwatch — it's cheaper and more practical. Let me know if you agree and we can order it today!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-emerald2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 2: Learning Method (Books vs. Online Videos)</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Introduction:</strong> "Between learning from books and learning from online videos, I would choose books as the more effective method because they develop deeper understanding and critical thinking."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "First, in terms of retention, reading requires active engagement with the material. You must process information mentally, which strengthens memory. Research shows people retain 65% of information from reading compared to only 35% from videos. Second, books provide structure and depth. Unlike videos which can be long and scattered, books are organized logically chapter by chapter. Additionally, reading improves vocabulary and writing skills, which videos simply don't develop. While videos are convenient, they can be passive — you can zone out easily."</p>
-                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "In conclusion, books are the more effective learning method because of superior retention, better organization, and skill development. I strongly believe books should be the primary learning tool."</p>
+                {/* Sample 2: Family celebration venue */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-sapphire uppercase tracking-widest">Scenario 2 · A family celebration venue (persuading your sister)</p>
+                  <p className="text-xs text-slate"><strong>Options:</strong> Downtown restaurant ($60/person) vs. Lakeside park pavilion ($150 total). <strong>Chosen:</strong> Park pavilion.</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option A — Restaurant</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"An elegant downtown restaurant interior with formal table settings, warm chandelier lighting, waiters in the background, a small sign reading $60 per person, photorealistic, wide interior shot."</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option B — Park pavilion</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A bright lakeside park pavilion with picnic tables under a wooden shelter, green trees and a calm lake behind it, families gathering, a small sign reading $150 total rental, sunny day, photorealistic, wide shot."</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Opening:</span> "Hey Sara, I know you had your eye on the downtown restaurant for Mom's celebration. It does look lovely, but honestly I think the lakeside park pavilion would be the better choice for us."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Compare:</span> "First, the cost: the pavilion is just a hundred and fifty dollars for the whole group, whereas the restaurant is sixty dollars per person — for fifteen people that's nine hundred dollars, so the park is far cheaper. Also, the pavilion gives the kids space to run around by the lake, which is much more relaxing than a quiet restaurant. And we can bring Mom's favourite homemade food instead of being limited to a set menu."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Conclusion:</span> "So for those reasons, I really think the park pavilion is the smarter, more fun option. Let me know if you're on board and I'll book it!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-amber2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 3: Living Location (Big City vs. Small Town)</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Introduction:</strong> "When comparing living in a big city versus a small town, I would choose a big city because of superior career opportunities and cultural access."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "First, regarding job opportunities, big cities have significantly more companies and industries. There are five times more job openings in cities compared to small towns. This means better career growth and higher wages — city dwellers earn 25% more on average. Second, cities provide cultural and social opportunities that small towns cannot match. You have access to theaters, museums, restaurants from different cuisines, and diverse communities. While small towns offer lower costs and quiet living, young professionals need career advancement and cultural engagement to thrive. Small towns lack both."</p>
-                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "In conclusion, big cities are the better choice for anyone pursuing a career because of abundant job opportunities and superior cultural access. For personal and professional growth, cities are essential."</p>
+                {/* Sample 3: Office desk */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest">Scenario 3 · A new office desk (persuading your colleague)</p>
+                  <p className="text-xs text-slate"><strong>Options:</strong> Large L-shaped desk ($450) vs. Compact standing desk ($250). <strong>Chosen:</strong> Standing desk.</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option A — L-shaped desk</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A large wooden L-shaped office desk with plenty of surface space in a modern office, a price tag reading $450, clean lighting, photorealistic, product shot."</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option B — Standing desk</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A compact electric height-adjustable standing desk raised to standing position with a laptop on top, in a modern office, a price tag reading $250, clean lighting, photorealistic, product shot."</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Opening:</span> "Hi Priya, I noticed you preferred the big L-shaped desk for the office. I see the appeal of all that space, but I actually think the compact standing desk is the better choice for us."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Compare:</span> "First, on price, the standing desk is two hundred and fifty dollars, which is two hundred dollars cheaper than the L-shaped one — so we could buy two for the team. Second, it's adjustable, so it's much healthier for our backs since we sit all day, whereas the L-shaped desk keeps you seated. And because it's compact, it fits our small office far better and leaves room to move around."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Conclusion:</span> "So for those reasons, I really think we should go with the standing desk — it's cheaper, healthier, and space-friendly. Let me know if you agree!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-rose2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 4: Purchase Decision (New vs. Secondhand Products)</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Introduction:</strong> "Between buying new products and buying secondhand, I believe buying secondhand is the smarter choice because it saves money and helps the environment."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Body:</strong> "First, the cost difference is dramatic. A secondhand smartphone costs three hundred dollars while a new one costs a thousand dollars. That's a 70% saving. Second, buying secondhand reduces electronic waste. Approximately 50 million tons of e-waste are generated annually. Every secondhand product purchased keeps one item out of landfills. While some people worry about quality, most secondhand products from reputable sellers come with guarantees and function perfectly. Yes, new products offer warranties, but secondhand items are often barely used."</p>
-                  <p className="text-sm text-slate italic"><strong>Closing:</strong> "In conclusion, buying secondhand is the better choice both financially and environmentally. It offers massive savings and positive environmental impact, which makes it the responsible choice."</p>
+                {/* Sample 4: Family vacation */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-amber2 uppercase tracking-widest">Scenario 4 · A family vacation (persuading your partner)</p>
+                  <p className="text-xs text-slate"><strong>Options:</strong> Beach resort package ($2,000) vs. Mountain cabin getaway ($1,200). <strong>Chosen:</strong> Mountain cabin.</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option A — Beach resort</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A luxury tropical beach resort with palm trees, a large pool beside white sand and turquoise sea, sun loungers, a small sign reading $2000 per week, bright sunny day, photorealistic, wide shot."</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option B — Mountain cabin</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A cozy wooden mountain cabin surrounded by pine forest and snowy peaks, smoke rising from the chimney, a small sign reading $1200 per week, crisp daylight, photorealistic, wide shot."</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Opening:</span> "Hey love, I know you were dreaming about the beach resort. It does look amazing, but I really think the mountain cabin would be the better trip for us this year."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Compare:</span> "First, on cost, the cabin is twelve hundred dollars compared to two thousand for the resort — that's eight hundred dollars saved, which we could put toward next year's holiday. Second, the cabin is far more peaceful and private, which is more relaxing than a crowded resort pool. And the kids would love hiking and seeing the snow, which is something completely new for them."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Conclusion:</span> "So for those reasons, I really think the cabin is the smarter, cosier choice. Let me know if you're happy with it and I'll book the dates!"</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample 5: Family car */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-rose2 uppercase tracking-widest">Scenario 5 · A new family car (persuading your spouse)</p>
+                  <p className="text-xs text-slate"><strong>Options:</strong> Spacious SUV ($35,000) vs. Fuel-efficient hybrid sedan ($28,000). <strong>Chosen:</strong> Hybrid sedan.</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option A — SUV</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A large modern silver SUV parked in a dealership, spacious and tall, a price tag reading $35,000, clean showroom lighting, photorealistic, three-quarter front view."</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-mist p-4">
+                      <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Option B — Hybrid sedan</p>
+                      <p className="text-sm text-ink italic leading-relaxed">"A sleek modern blue hybrid sedan parked in a dealership, a small green hybrid badge, a price tag reading $28,000, clean showroom lighting, photorealistic, three-quarter front view."</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Opening:</span> "Hi honey, I know you were leaning toward the big SUV. I understand — it's roomy — but I genuinely think the hybrid sedan is the better choice for our family."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Compare:</span> "First, on price, the hybrid is twenty-eight thousand dollars, which is seven thousand cheaper than the thirty-five-thousand-dollar SUV. Second, it's far more fuel-efficient, so we'd save a lot on gas every month — much more practical for our daily commute. And it's easier to park in the city than a large SUV, which matters since we drive downtown a lot."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Conclusion:</span> "So for those reasons, I really think the hybrid sedan is the smarter buy — cheaper to own and easier to drive. Let me know if you agree and we can test-drive it this weekend!"</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -419,41 +590,41 @@ export default function CelpipSpeakingTask5Page() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-emerald2">Reasoning Structures (Build Strong Arguments)</p>
+                  <p className="text-sm font-semibold mb-3 text-emerald2">Reasoning Structures (Build Strong Arguments)</p>
                   <div className="bg-fog rounded-lg p-4 space-y-3">
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Inductive (Examples Support Claim)</p>
-                      <p className="text-sm text-ink italic">"For example, a bus removes 40 cars from the road. Similarly, every public transit rider saves money. These examples show public transit is superior."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Value-for-money (Strongest Angle)</p>
+                      <p className="text-sm text-ink italic">"It's $200 cheaper and does everything we need, so we get better value for our money."</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Causal (Cause & Effect)</p>
-                      <p className="text-sm text-ink italic">"Because remote work eliminates commuting, it saves money. This leads to less stress, which improves productivity."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Causal (Cause &amp; Effect)</p>
+                      <p className="text-sm text-ink italic">"Because it's water-resistant, it'll last longer, which means we won't have to replace it soon."</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Analogical (Comparison to Similar Situation)</p>
-                      <p className="text-sm text-ink italic">"Just like how professional athletes train systematically, students must study with books rather than passive videos."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Fit-for-the-person (Why It Suits Them)</p>
+                      <p className="text-sm text-ink italic">"Since he loves running, the fitness tracking is far more useful for him than a bigger screen."</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Numbers & Statistics (Most Persuasive)</p>
-                      <p className="text-sm text-ink italic">"Studies show people retain 65% of information from reading vs. 35% from videos. City dwellers earn 25% more on average."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Numbers from the Pictures (Most Persuasive)</p>
+                      <p className="text-sm text-ink italic">"Mine is $100 versus $300 — that's a 67% saving we can put toward the party."</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-amber2">Acknowledging & Countering (Sophisticated Persuasion)</p>
+                  <p className="text-sm font-semibold mb-3 text-amber2">Soft Rejection (Acknowledge Their Choice First)</p>
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Acknowledge the Other Option</p>
-                      <p className="text-sm text-ink italic">"While option A has convenience..."</p>
-                      <p className="text-sm text-ink italic">"I understand why you prefer B, however..."</p>
-                      <p className="text-sm text-ink italic">"Some might argue that... but..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Acknowledge Their Option</p>
+                      <p className="text-sm text-ink italic">"I saw you were leaning toward [their option]..."</p>
+                      <p className="text-sm text-ink italic">"I understand why you chose it, but..."</p>
+                      <p className="text-sm text-ink italic">"That's a good idea, however, to be honest..."</p>
                     </div>
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Counter with Stronger Point</p>
-                      <p className="text-sm text-ink italic">"...it doesn't compare to the cost savings."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Pivot to Yours</p>
+                      <p className="text-sm text-ink italic">"...I actually think [my option] is better."</p>
+                      <p className="text-sm text-ink italic">"...looking at the bigger picture, mine wins."</p>
                       <p className="text-sm text-ink italic">"...the benefits far outweigh the drawbacks."</p>
-                      <p className="text-sm text-ink italic">"...my option is superior because..."</p>
                     </div>
                   </div>
                 </div>
@@ -479,14 +650,13 @@ export default function CelpipSpeakingTask5Page() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-violet2">Closing & Conviction Phrases</p>
+                  <p className="text-sm font-semibold mb-3 text-violet2">Closing &amp; Asking for Agreement</p>
                   <div className="bg-fog rounded-lg p-4 space-y-2">
-                    <p className="text-sm text-ink italic">"In conclusion, [option] is the better choice because..."</p>
-                    <p className="text-sm text-ink italic">"It is clear that [option] is superior due to..."</p>
-                    <p className="text-sm text-ink italic">"For these reasons, I strongly recommend [option]..."</p>
-                    <p className="text-sm text-ink italic">"The evidence shows that [option] is the best choice because..."</p>
-                    <p className="text-sm text-ink italic">"I am confident that [option] will [achieve desired outcome]..."</p>
-                    <p className="text-sm text-ink italic">"Ultimately, the choice is clear — [option] offers [key benefit]..."</p>
+                    <p className="text-sm text-ink italic">"So for these reasons, I really think we should go with [option]."</p>
+                    <p className="text-sm text-ink italic">"Let me know if you agree!"</p>
+                    <p className="text-sm text-ink italic">"I hope you can see why [option] is the better pick."</p>
+                    <p className="text-sm text-ink italic">"What do you say — shall we go with [option]?"</p>
+                    <p className="text-sm text-ink italic">"I'm confident [option] is the smarter choice for us."</p>
                   </div>
                 </div>
               </div>
@@ -499,111 +669,6 @@ export default function CelpipSpeakingTask5Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five realistic scenarios. Pick one and defend your position for 60 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Remote work vs. working in an office — which is better?</p>
-                <p className="text-sm text-slate leading-relaxed">Consider: productivity, collaboration, work-life balance, cost. Build at least 2 strong reasons for your position.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">Learning by reading books vs. learning from online videos — which is more effective?</p>
-                <p className="text-sm text-slate leading-relaxed">Focus on: retention, engagement, accessibility, pace. Use specific examples.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Living in a big city vs. living in a small town — which offers a better lifestyle?</p>
-                <p className="text-sm text-slate leading-relaxed">Consider: opportunities, cost of living, community, pace of life.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Buying new products vs. buying secondhand — which is the better choice?</p>
-                <p className="text-sm text-slate leading-relaxed">Address: cost, quality, environmental impact, reliability.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Traveling solo vs. traveling with friends — which is more enjoyable?</p>
-                <p className="text-sm text-slate leading-relaxed">Think about: freedom, cost sharing, social aspect, self-discovery.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 5. Argument strength and clarity are critical.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Natural delivery with excellent control. Complex ideas expressed smoothly. No filler words.</p>
-                  <p><strong>Coherence:</strong> Argument is logically structured, clear, and persuasive. Transitions are seamless.</p>
-                  <p><strong>Vocabulary:</strong> Sophisticated persuasion and comparison language. Shows range and precision.</p>
-                  <p><strong>Grammar:</strong> Consistent control of complex structures. Comparative forms and conditionals used accurately.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses. Generally smooth and natural.</p>
-                  <p><strong>Coherence:</strong> Argument is clear with 2 supporting points. Mostly logical flow; transitions present.</p>
-                  <p><strong>Vocabulary:</strong> Good range of persuasive and comparison words. Some repetition acceptable.</p>
-                  <p><strong>Grammar:</strong> Mostly accurate; some errors in complex structures don't impede understanding.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Noticeable pauses; some filler words. Choppy delivery at times.</p>
-                  <p><strong>Coherence:</strong> Argument present but may lack clear structure. One strong point, others less developed.</p>
-                  <p><strong>Vocabulary:</strong> Basic persuasion words; frequent repetition. Limited range.</p>
-                  <p><strong>Grammar:</strong> Mix of simple and complex sentences; errors don't always obscure meaning.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Frequent hesitation; heavy filler use. Difficult to follow.</p>
-                  <p><strong>Coherence:</strong> Argument is unclear or disjointed. May not clearly state preference.</p>
-                  <p><strong>Vocabulary:</strong> Very limited; mostly basic words. Cannot adequately express comparison.</p>
-                  <p><strong>Grammar:</strong> Frequent errors in basic structures; meaning often obscured.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A high score requires a <strong>defensible position with 2–3 solid reasons</strong>. The "right" choice doesn't matter — how well you argue it does. Confidence in your argument matters more than perfect grammar.</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════
@@ -627,14 +692,14 @@ export default function CelpipSpeakingTask5Page() {
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="prep">
                 <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Prep</p>
-                <p className="text-sm font-semibold text-ink mb-2">Write one specific example per reason.</p>
-                <p className="text-xs text-slate">"It's cheaper" is weak. "It costs 50% less" is strong. Numbers and specifics make your argument concrete.</p>
+                <p className="text-sm font-semibold text-ink mb-2">Use the actual prices and details from the pictures.</p>
+                <p className="text-xs text-slate">"It's cheaper" is weak. "It's $100 vs. $300, so $200 cheaper" is strong. The numbers shown in both options are your best evidence — quote them.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
                 <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Delivery</p>
-                <p className="text-sm font-semibold text-ink mb-2">Speak as if you really believe your argument.</p>
-                <p className="text-xs text-slate">Confidence is contagious. If you sound uncertain, the examiner doubts your reasoning. Commit to your position.</p>
+                <p className="text-sm font-semibold text-ink mb-2">Talk to the person — greet them by name.</p>
+                <p className="text-xs text-slate">This is a conversation, not a speech. Open with "Hi [name]," acknowledge their choice, and sound warm and confident throughout, as if you're really persuading them.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
@@ -673,7 +738,7 @@ export default function CelpipSpeakingTask5Page() {
 
         <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">
           <p className="text-xs text-slate mb-4">CELPIP Prep — Speaking Task 5 Study Guide</p>
-          <p className="text-xs text-slate/60">Strong arguments are built, not inherited. Practice defending positions you believe in — and some you don't. Flexibility and confidence are what examiners listen for.</p>
+          <p className="text-xs text-slate/60">Comparing and persuading is about one clear choice, well argued to a real person. Lead with price, use the numbers from the pictures, compare with confident comparatives, and finish by asking them to agree.</p>
         </footer>
 
   

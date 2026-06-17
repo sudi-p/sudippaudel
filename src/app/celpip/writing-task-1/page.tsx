@@ -76,6 +76,8 @@ export default function CelpipWritingTask1Page() {
         // Accordion functionality
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -195,7 +197,6 @@ export default function CelpipWritingTask1Page() {
           <div className="flex flex-wrap gap-2 mb-8 animate-fade-up" style={{animationDelay: '.15s'}} id="tab-bar">
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
-            <button data-tab="formality" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Email Types</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
@@ -358,6 +359,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-1" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">Dear Mr./Ms. [Last Name], &middot; Dear Sir or Madam, &middot; To Whom It May Concern,</td>
+                        <td className="border border-mist px-3 py-2 italic">Dear [First Name], &middot; Hello [Name],</td>
+                        <td className="border border-mist px-3 py-2 italic">Hi [Name], &middot; Hey [Name],</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate">Start with a professional, appropriate salutation. Formality depends on the recipient and context.</p>
                 <ul className="space-y-2 text-sm text-ink">
                   <li className="flex gap-2"><span className="text-gold shrink-0">✦</span><strong>With a known name:</strong> "Dear Ms. Chen," or "Dear Mr. Johnson," (use last name unless very casual relationship)</li>
@@ -387,6 +408,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-2" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">I am writing to [request / inquire about / complain about] [topic]. [One sentence of context.]</td>
+                        <td className="border border-mist px-3 py-2 italic">I hope you are doing well. I am writing to [ask about / let you know about] [topic].</td>
+                        <td className="border border-mist px-3 py-2 italic">How are you? I&apos;m writing to [tell you about / invite you to] [topic].</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate"><strong>Use one clear sentence to state your purpose.</strong> Pick the row below that matches your prompt and fill in the blank — that single sentence is your whole opening.</p>
                 <div className="bg-sapphire-light rounded-xl p-4 mb-3 overflow-x-auto">
                   <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-3">✅ Purpose → Opening sentence (ready to use)</p>
@@ -458,6 +499,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-3" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">The main reason is that [detail with specifics — dates, numbers]. Furthermore, [detail 2].</td>
+                        <td className="border border-mist px-3 py-2 italic">[Explain the situation with details.] In addition, [second point].</td>
+                        <td className="border border-mist px-3 py-2 italic">So here&apos;s what happened — [the details]. Also, [second point].</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate"><strong>Answer the first point of the prompt with specific, factual details.</strong> Keep this paragraph neutral — save how you <em>feel</em> for the next paragraph.</p>
                 <div className="bg-amber2-light rounded-lg p-3 mb-3">
                   <p className="text-xs font-semibold text-amber2-dark mb-2">Linking phrases for details:</p>
@@ -496,6 +557,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-4" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">I must admit I was quite disappointed to find [fact]. / I was very pleased with [fact].</td>
+                        <td className="border border-mist px-3 py-2 italic">I have to say I was a little disappointed that [fact]. / I was really happy with [fact].</td>
+                        <td className="border border-mist px-3 py-2 italic">Honestly, I was pretty disappointed that [fact]. / I was so happy with [fact]!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate"><strong>Answer the second point and express how you feel</strong> — pleased, grateful, disappointed, or frustrated. The skill is conveying emotion <em>professionally</em>, especially in a complaint.</p>
 
                 {/* Emotion vocabulary table */}
@@ -609,6 +690,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-5" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">I would appreciate it if you could [request] at your earliest convenience.</td>
+                        <td className="border border-mist px-3 py-2 italic">Could you please [request] when you get a chance?</td>
+                        <td className="border border-mist px-3 py-2 italic">Let me know if you can [request]!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate"><strong>Answer the third point: say what you want to happen next</strong> — a refund, a repair, information, or a decision. Keep the request softened so it stays courteous. (Your closing sentence and sign-off come in the next section.)</p>
 
                 {/* Use-case → request phrase table */}
@@ -674,6 +775,26 @@ export default function CelpipWritingTask1Page() {
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-6" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
+                {/* Template for this part, by email type */}
+                <div className="bg-fog rounded-xl p-4 overflow-x-auto">
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">📋 This part — by email type</p>
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="text-left">
+                        <th className="border border-mist px-3 py-2 font-semibold text-sapphire-dark bg-sapphire-light align-top w-1/3">Formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-emerald2-dark bg-emerald2-light align-top w-1/3">Semi-formal</th>
+                        <th className="border border-mist px-3 py-2 font-semibold text-amber2-dark bg-amber2-light align-top w-1/3">Informal</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-ink">
+                      <tr className="align-top">
+                        <td className="border border-mist px-3 py-2 italic">Thank you for your prompt attention to this matter. I look forward to your response. &mdash; Sincerely, / Yours faithfully,</td>
+                        <td className="border border-mist px-3 py-2 italic">Thank you so much for your help — I really appreciate it. &mdash; Best regards, / Kind regards,</td>
+                        <td className="border border-mist px-3 py-2 italic">Can&apos;t wait to hear back from you! &mdash; Cheers, / Take care,</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <p className="text-sm text-slate"><strong>Finish with one courteous closing sentence, then a sign-off and your full name on the next line.</strong> Match both to the email's tone — a formal complaint and a note to a friend close very differently.</p>
 
                 {/* Closing sentence + sign-off by tone */}
@@ -1138,12 +1259,15 @@ export default function CelpipWritingTask1Page() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: EMAIL TYPES (Formal / Semi-formal / Informal)
-          ══════════════════════════════════════════ */}
-          <div id="pane-formality" className="pane space-y-5">
+          {/* Folded in from the old "Email Types" tab: full sample emails by formality */}
+          <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+            <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-email-types">
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-semibold text-ink">Full Sample Emails — by type (Formal &middot; Semi-formal &middot; Informal)</span>
+              </div>
+              <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="struct-email-types" className="accordion-body border-t border-mist px-6 py-5 space-y-5">
             <div className="bg-white rounded-2xl border border-mist p-6">
               <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Read the prompt — who is the reader?</p>
               <p className="text-sm leading-relaxed text-ink">CELPIP Task 1 always names a recipient. <strong>Match your tone to that reader.</strong> Writing too formally to a friend, or too casually to a manager, costs you points on tone and register. Use the toggle below to see the right template for each situation.</p>
@@ -1284,6 +1408,8 @@ export default function CelpipWritingTask1Page() {
                 </div>
               </div>
             </div>
+          </div>
+          </div>
           </div>
 
           {/* ══════════════════════════════════════════

@@ -80,6 +80,8 @@ export default function CelpipSpeakingTask1Page() {
 
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -176,7 +178,6 @@ export default function CelpipSpeakingTask1Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -548,45 +549,6 @@ export default function CelpipSpeakingTask1Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five advice-giving scenarios. Choose one and practice responding in 90 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">A friend wants to change careers but is nervous about starting over.</p>
-                <p className="text-sm text-slate leading-relaxed">Give advice on overcoming fear, planning the transition, and building confidence.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">A colleague is struggling with time management at work.</p>
-                <p className="text-sm text-slate leading-relaxed">Offer practical strategies for organizing tasks and prioritizing work.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Someone is feeling lonely and wants to build new friendships.</p>
-                <p className="text-sm text-slate leading-relaxed">Suggest ways to meet people, join communities, and develop connections.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">A family member wants to start a new hobby but doesn't know where to begin.</p>
-                <p className="text-sm text-slate leading-relaxed">Guide them on research, resources, practice, and finding communities of interest.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Someone is trying to improve their English skills and needs guidance.</p>
-                <p className="text-sm text-slate leading-relaxed">Advise on study methods, practice opportunities, and staying motivated.</p>
-              </div>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════

@@ -76,6 +76,8 @@ export default function CelpipWritingTask2Page() {
         // Accordion functionality
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -178,8 +180,6 @@ export default function CelpipWritingTask2Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -324,6 +324,68 @@ export default function CelpipWritingTask2Page() {
                   <div className="rounded-xl bg-emerald2-light border border-emerald2/30 p-4 text-center"><p className="text-sm font-semibold text-emerald2-dark">Quality of Life / Equity</p></div>
                 </div>
               </div>
+            </div>
+
+            {/* Scoring */}
+            <p className="text-sm text-slate">How examiners score Task 2 on a 12-point scale. The bands below show typical essay characteristics at each level.</p>
+
+            <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                  <span className="font-display text-xl text-emerald2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Task Fulfillment:</strong> Clear position taken. Word count 180–199. Well-developed argument with compelling evidence. Completed within time constraints.</p>
+                  <p><strong>Coherence:</strong> Essay flows logically. Strong paragraph structure and transitions. Ideas build toward a conclusion.</p>
+                  <p><strong>Vocabulary:</strong> Academic register throughout. Sophisticated transitions and persuasive language. Varied word choice.</p>
+                  <p><strong>Grammar:</strong> Grammar and spelling are nearly perfect. Varied sentence structures demonstrate control.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                  <span className="font-display text-xl text-amber2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Task Fulfillment:</strong> Position is clear. Word count generally within range. Argument is supported but could be stronger.</p>
+                  <p><strong>Coherence:</strong> Essay is organized and easy to follow. Most paragraphs have clear topic sentences. Some transitions present.</p>
+                  <p><strong>Vocabulary:</strong> Generally academic tone. Some variety in word choice. Occasional repetition of key terms.</p>
+                  <p><strong>Grammar:</strong> Grammar is mostly accurate. Minor errors present but don't disrupt meaning.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                  <span className="font-display text-xl text-rose2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Task Fulfillment:</strong> Position exists but may be unclear. Word count may be below range. Argument is basic and underdeveloped.</p>
+                  <p><strong>Coherence:</strong> Essay structure exists but may lack clear organization. Transitions are basic or missing.</p>
+                  <p><strong>Vocabulary:</strong> Some academic vocabulary but often basic. Limited variety. Repetitive word choice.</p>
+                  <p><strong>Grammar:</strong> Several grammatical errors. Some spelling mistakes. Meaning is usually clear but sometimes unclear.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                  <span className="font-display text-xl text-slate">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Task Fulfillment:</strong> Position unclear or missing. Word count significantly below range. Minimal development of argument.</p>
+                  <p><strong>Coherence:</strong> Organization is weak or absent. Difficult to follow. No clear paragraph structure.</p>
+                  <p><strong>Vocabulary:</strong> Very basic vocabulary. Not academic in register. Heavy repetition.</p>
+                  <p><strong>Grammar:</strong> Frequent and serious errors. Meaning is sometimes unclear.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-fog rounded-2xl p-6 mt-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+              <p className="text-sm text-ink">A 10–12 essay takes a clear position, develops it with two distinct arguments (the second reinforced by an "Admittedly...However" concession), and uses sophisticated language. It is well-organized and nearly error-free. It demonstrates persuasive writing with logical structure, good command of English, and efficient use of the 26-minute time frame. It is <strong>not</strong> perfect, and that's fine — what matters is that you deliver quality ideas concisely.</p>
             </div>
           </div>
 
@@ -754,111 +816,6 @@ export default function CelpipWritingTask2Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five realistic essay prompts. Write 180–199 words for each, taking a clear position within 26 minutes.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Practice prompt 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Remote work vs. office work</p>
-                <p className="text-sm text-slate leading-relaxed">Which is better for productivity and employee well-being? Take a position and support it with reasoning and examples.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Practice prompt 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">University education vs. practical training</p>
-                <p className="text-sm text-slate leading-relaxed">Is a university degree essential for success? Argue for or against university education as the primary path.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Practice prompt 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Social media's impact on society</p>
-                <p className="text-sm text-slate leading-relaxed">Is social media more beneficial or harmful overall? Take a position and support it with specific arguments.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Practice prompt 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Environment vs. economic growth</p>
-                <p className="text-sm text-slate leading-relaxed">Should countries prioritize environmental protection over economic development? Argue for one position.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Practice prompt 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Career vs. family balance</p>
-                <p className="text-sm text-slate leading-relaxed">What matters more: building a successful career or prioritizing family time? Take a position and defend it.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 2 on a 12-point scale. The bands below show typical essay characteristics at each level.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Task Fulfillment:</strong> Clear position taken. Word count 180–199. Well-developed argument with compelling evidence. Completed within time constraints.</p>
-                  <p><strong>Coherence:</strong> Essay flows logically. Strong paragraph structure and transitions. Ideas build toward a conclusion.</p>
-                  <p><strong>Vocabulary:</strong> Academic register throughout. Sophisticated transitions and persuasive language. Varied word choice.</p>
-                  <p><strong>Grammar:</strong> Grammar and spelling are nearly perfect. Varied sentence structures demonstrate control.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Task Fulfillment:</strong> Position is clear. Word count generally within range. Argument is supported but could be stronger.</p>
-                  <p><strong>Coherence:</strong> Essay is organized and easy to follow. Most paragraphs have clear topic sentences. Some transitions present.</p>
-                  <p><strong>Vocabulary:</strong> Generally academic tone. Some variety in word choice. Occasional repetition of key terms.</p>
-                  <p><strong>Grammar:</strong> Grammar is mostly accurate. Minor errors present but don't disrupt meaning.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Task Fulfillment:</strong> Position exists but may be unclear. Word count may be below range. Argument is basic and underdeveloped.</p>
-                  <p><strong>Coherence:</strong> Essay structure exists but may lack clear organization. Transitions are basic or missing.</p>
-                  <p><strong>Vocabulary:</strong> Some academic vocabulary but often basic. Limited variety. Repetitive word choice.</p>
-                  <p><strong>Grammar:</strong> Several grammatical errors. Some spelling mistakes. Meaning is usually clear but sometimes unclear.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Task Fulfillment:</strong> Position unclear or missing. Word count significantly below range. Minimal development of argument.</p>
-                  <p><strong>Coherence:</strong> Organization is weak or absent. Difficult to follow. No clear paragraph structure.</p>
-                  <p><strong>Vocabulary:</strong> Very basic vocabulary. Not academic in register. Heavy repetition.</p>
-                  <p><strong>Grammar:</strong> Frequent and serious errors. Meaning is sometimes unclear.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A 10–12 essay takes a clear position, develops it with two distinct arguments (the second reinforced by an "Admittedly...However" concession), and uses sophisticated language. It is well-organized and nearly error-free. It demonstrates persuasive writing with logical structure, good command of English, and efficient use of the 26-minute time frame. It is <strong>not</strong> perfect, and that's fine — what matters is that you deliver quality ideas concisely.</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════

@@ -82,6 +82,8 @@ export default function CelpipSpeakingTask2Page() {
         // Accordion functionality
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -189,8 +191,6 @@ export default function CelpipSpeakingTask2Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -257,6 +257,68 @@ export default function CelpipSpeakingTask2Page() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Scoring bands */}
+            <p className="text-sm text-slate pt-2">How examiners score Task 2 on a 12-point scale. The bands below show typical language for each score tier.</p>
+
+            <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                  <span className="font-display text-xl text-emerald2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Speaks naturally with very few pauses or filler words. Rhythm is conversational.</p>
+                  <p><strong>Grammar:</strong> Consistent use of complex sentences with minimal errors. Tense control is secure.</p>
+                  <p><strong>Vocabulary:</strong> Precise word choice; shows range and avoids repetition. Phrasal verbs or advanced collocations appear naturally.</p>
+                  <p><strong>Coherence:</strong> Story flows seamlessly. Transitions feel organic, not forced. Clear cause-and-effect.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                  <span className="font-display text-xl text-amber2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses to think. Some filler words but not excessive.</p>
+                  <p><strong>Grammar:</strong> Mostly accurate; some complex sentences mixed with simple ones. Minor errors don't disrupt meaning.</p>
+                  <p><strong>Vocabulary:</strong> Good range; some attempt at less common words. Occasional repetition of key terms.</p>
+                  <p><strong>Coherence:</strong> Story is organized and easy to follow. Transitions are present but sometimes basic ("and then," "so").</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                  <span className="font-display text-xl text-rose2">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Noticeable pauses; some filler words. May lose thread of thought mid-sentence.</p>
+                  <p><strong>Grammar:</strong> Mix of simple and complex structures; some errors in tense or agreement. Meaning is usually clear.</p>
+                  <p><strong>Vocabulary:</strong> Basic vocabulary; frequent repetition. Limited range; mostly high-frequency words.</p>
+                  <p><strong>Coherence:</strong> Story is present but may jump around. Transitions are weak or missing.</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-mist p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                  <span className="font-display text-xl text-slate">●</span>
+                </div>
+                <div className="space-y-2 text-sm text-slate">
+                  <p><strong>Fluency:</strong> Frequent hesitation; heavy reliance on filler words or silence. Choppy delivery.</p>
+                  <p><strong>Grammar:</strong> Frequent errors in basic structures (subject-verb, tense). Meaning is sometimes unclear.</p>
+                  <p><strong>Vocabulary:</strong> Very limited; heavy repetition. Mostly basic, everyday words only.</p>
+                  <p><strong>Coherence:</strong> Story is disjointed or incomplete. Difficult to follow the narrative thread.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-fog rounded-2xl p-6 mt-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+              <p className="text-sm text-ink">A 9–10 speaker tells a coherent story with natural pacing and good vocabulary. They are <strong>not</strong> perfect; they may use simple sentences alongside complex ones, and that's fine. What matters: do the story and grammar feel intentional, or accidental?</p>
             </div>
           </div>
 
@@ -516,111 +578,6 @@ export default function CelpipSpeakingTask2Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five realistic practice scenarios. Pick one and speak for 90 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Practice scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Talk about a time you overcame a challenge or fear.</p>
-                <p className="text-sm text-slate leading-relaxed">Remember: be specific about what the challenge was, include one moment where you felt the shift in confidence, and reflect on how it changed you.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Practice scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a memorable meal or celebration you attended.</p>
-                <p className="text-sm text-slate leading-relaxed">Focus on sensory details — what did you see, smell, taste? Who was there? What made it stand out from other meals or celebrations?</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Practice scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Talk about a skill you learned recently.</p>
-                <p className="text-sm text-slate leading-relaxed">When did you start? What was the first moment it clicked? Include a small setback to show it wasn't easy, then how you persisted.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Practice scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Describe a time you traveled somewhere unfamiliar.</p>
-                <p className="text-sm text-slate leading-relaxed">What surprised you? Include one moment where you felt lost or confused, then how you adapted. Show growth.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Practice scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Talk about a decision you made that had unexpected consequences.</p>
-                <p className="text-sm text-slate leading-relaxed">What did you decide? What outcome did you expect? What actually happened? Did it turn out better or worse than you thought?</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 2 on a 12-point scale. The bands below show typical language for each score tier.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Speaks naturally with very few pauses or filler words. Rhythm is conversational.</p>
-                  <p><strong>Grammar:</strong> Consistent use of complex sentences with minimal errors. Tense control is secure.</p>
-                  <p><strong>Vocabulary:</strong> Precise word choice; shows range and avoids repetition. Phrasal verbs or advanced collocations appear naturally.</p>
-                  <p><strong>Coherence:</strong> Story flows seamlessly. Transitions feel organic, not forced. Clear cause-and-effect.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Mostly fluent with occasional pauses to think. Some filler words but not excessive.</p>
-                  <p><strong>Grammar:</strong> Mostly accurate; some complex sentences mixed with simple ones. Minor errors don't disrupt meaning.</p>
-                  <p><strong>Vocabulary:</strong> Good range; some attempt at less common words. Occasional repetition of key terms.</p>
-                  <p><strong>Coherence:</strong> Story is organized and easy to follow. Transitions are present but sometimes basic ("and then," "so").</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Noticeable pauses; some filler words. May lose thread of thought mid-sentence.</p>
-                  <p><strong>Grammar:</strong> Mix of simple and complex structures; some errors in tense or agreement. Meaning is usually clear.</p>
-                  <p><strong>Vocabulary:</strong> Basic vocabulary; frequent repetition. Limited range; mostly high-frequency words.</p>
-                  <p><strong>Coherence:</strong> Story is present but may jump around. Transitions are weak or missing.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Frequent hesitation; heavy reliance on filler words or silence. Choppy delivery.</p>
-                  <p><strong>Grammar:</strong> Frequent errors in basic structures (subject-verb, tense). Meaning is sometimes unclear.</p>
-                  <p><strong>Vocabulary:</strong> Very limited; heavy repetition. Mostly basic, everyday words only.</p>
-                  <p><strong>Coherence:</strong> Story is disjointed or incomplete. Difficult to follow the narrative thread.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A 9–10 speaker tells a coherent story with natural pacing and good vocabulary. They are <strong>not</strong> perfect; they may use simple sentences alongside complex ones, and that's fine. What matters: do the story and grammar feel intentional, or accidental?</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════

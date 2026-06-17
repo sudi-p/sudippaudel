@@ -74,6 +74,8 @@ export default function CelpipSpeakingTask8Page() {
 
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -137,10 +139,10 @@ export default function CelpipSpeakingTask8Page() {
           <div className="animate-fade-up">
             <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">Speaking · Task 8 of 8</p>
             <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-5">
-              Handle an unusual <span className="hero-line italic">situation</span>
+              Describe an unusual <span className="hero-line italic">situation</span>
             </h1>
             <p className="text-lg text-slate max-w-xl leading-relaxed">
-              Respond to an unexpected scenario calmly, showing flexibility and quick thinking under pressure.
+              You're shown a strange or unexpected image. Describe it vividly to someone who can't see it — then ask them a specific question.
             </p>
           </div>
 
@@ -173,8 +175,6 @@ export default function CelpipSpeakingTask8Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -184,28 +184,28 @@ export default function CelpipSpeakingTask8Page() {
           <div id="pane-overview" className="pane active space-y-5">
             <div className="bg-white rounded-2xl border border-mist p-6">
               <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">What the task involves</p>
-              <p className="text-base leading-relaxed text-ink">You are given an unexpected or unusual scenario and asked to describe what happened, how you reacted, and what you would do to handle it. For example: <em className="text-steel">"Your flight is cancelled and you're stranded in an unfamiliar city."</em></p>
-              <p className="text-base leading-relaxed text-ink mt-3">The examiner is testing your composure, adaptability, and ability to think on your feet under pressure. How you handle stress matters as much as what you say.</p>
+              <p className="text-base leading-relaxed text-ink">You are shown an <strong>image of an unusual or unexpected situation, object, or scene</strong>, and asked to call a friend or family member to describe it — because they cannot see it. The prompt always ends with a specific request. For example: <em className="text-steel">"You are in a furniture store and you see an unusual bed you'd like to buy, but you can't take a photo. Telephone a family member, describe the bed in detail, and ask whether you should buy it."</em></p>
+              <p className="text-base leading-relaxed text-ink mt-3">The examiner is testing how clearly and vividly you can <strong>paint a picture with words</strong>: a strong overview, organized spatial detail, precise vocabulary, and a natural closing question. You have <strong>30 seconds to prepare</strong> and <strong>60 seconds to speak</strong>.</p>
             </div>
 
             <div className="bg-white rounded-2xl border border-mist p-6">
               <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">What examiners score you on</p>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Fluency</span>
-                  <p className="text-sm leading-relaxed text-ink">Smooth speech even when discussing stress. Shows composure and confidence under pressure.</p>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-sapphire-light text-sapphire-dark shrink-0 mt-0.5">Vocabulary</span>
+                  <p className="text-sm leading-relaxed text-ink">Precise, vivid descriptive language — strong adjectives, collocations, and spatial phrases instead of "big" and "nice."</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-xs font-semibold px-3 py-1 rounded-md bg-emerald2-light text-emerald2-dark shrink-0 mt-0.5">Coherence</span>
-                  <p className="text-sm leading-relaxed text-ink">Clear narrative arc: what happened, how you felt, and what you did. Logic and organization matter.</p>
+                  <p className="text-sm leading-relaxed text-ink">Logical spatial organization: overview first, then detail by detail (left → right, foreground → background) so the listener can picture it.</p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Vocabulary</span>
-                  <p className="text-sm leading-relaxed text-ink">Words that express problem-solving, emotion, and action. Show you can describe complexity under stress.</p>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-md bg-amber2-light text-amber2-dark shrink-0 mt-0.5">Fluency</span>
+                  <p className="text-sm leading-relaxed text-ink">Smooth, confident delivery with minimal hesitation. You sound like you're genuinely describing something to a real person.</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-xs font-semibold px-3 py-1 rounded-md bg-rose2-light text-rose2-dark shrink-0 mt-0.5">Grammar</span>
-                  <p className="text-sm leading-relaxed text-ink">Accurate structures, especially for describing past events and hypothetical solutions.</p>
+                  <p className="text-sm leading-relaxed text-ink">Accurate structures — present continuous for actions, prepositions of place, and a clear question at the end.</p>
                 </div>
               </div>
             </div>
@@ -218,8 +218,8 @@ export default function CelpipSpeakingTask8Page() {
                     <span className="font-display text-gold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gold">The Situation (15s)</p>
-                    <p className="text-xs text-fog/80">Describe what happened and why it was unusual or unexpected</p>
+                    <p className="text-xs font-semibold text-gold">Setup &amp; Overview (15s)</p>
+                    <p className="text-xs text-fog/80">Greet the person, say why you're calling, and give a one-line overview of what you're looking at</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -227,8 +227,8 @@ export default function CelpipSpeakingTask8Page() {
                     <span className="font-display text-fog text-sm">2</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-fog">Your Reaction (20s)</p>
-                    <p className="text-xs text-fog/80">How you felt initially and your first instinct</p>
+                    <p className="text-xs font-semibold text-fog">Detailed Description (35s)</p>
+                    <p className="text-xs text-fog/80">Walk through the image spatially; describe colours, shapes, actions, and what makes it unusual</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -236,10 +236,75 @@ export default function CelpipSpeakingTask8Page() {
                     <span className="font-display text-gold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-gold">Your Solution (25s)</p>
-                    <p className="text-xs text-fog/80">The steps you took or would take to resolve it</p>
+                    <p className="text-xs font-semibold text-gold">Closing Question (10s)</p>
+                    <p className="text-xs text-fog/80">Ask the specific question from the prompt and end the call naturally</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Scoring — folded in from the old Scoring tab */}
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">How you are scored</p>
+              <p className="text-sm text-slate">How examiners score Task 8 on a 12-point scale. Vivid description and clear spatial organization are the key indicators of a high score.</p>
+
+              <div className="space-y-3 mt-4">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Precise, sophisticated descriptive language. Strong adjectives and collocations ("a sleek, contoured frame") instead of basic words.</p>
+                    <p><strong>Coherence:</strong> Overview followed by a clear spatial tour. The listener can easily picture the scene.</p>
+                    <p><strong>Fluency:</strong> Natural, confident delivery with very few pauses. Sounds like a real phone call.</p>
+                    <p><strong>Grammar:</strong> Accurate present continuous, prepositions of place, and a well-formed closing question.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Good descriptive range with some strong adjectives, though a few basic words ("big," "nice") slip in.</p>
+                    <p><strong>Coherence:</strong> Generally organized; spatial language is used but transitions may be basic.</p>
+                    <p><strong>Fluency:</strong> Mostly smooth with occasional pauses to think. Still easy to follow.</p>
+                    <p><strong>Grammar:</strong> Mostly accurate; minor errors don't disrupt the description.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Basic, repetitive words ("there is," "I see"). Little vivid or precise description.</p>
+                    <p><strong>Coherence:</strong> Description jumps around; hard for the listener to picture the layout.</p>
+                    <p><strong>Fluency:</strong> Noticeable pauses and hesitations. May lose track mid-description.</p>
+                    <p><strong>Grammar:</strong> Errors in tense or prepositions; the closing question may be missing or unclear.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Vocabulary:</strong> Very limited range. Almost no descriptive detail.</p>
+                    <p><strong>Coherence:</strong> Description is disjointed or very brief. No clear organization.</p>
+                    <p><strong>Fluency:</strong> Frequent hesitations, fillers, or long silences. Choppy delivery.</p>
+                    <p><strong>Grammar:</strong> Frequent errors. Meaning is often unclear; no closing question.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">The listener <strong>can't see the image</strong> — so your job is to make them picture it. Lead with an overview, move through the scene in a logical order, use vivid words, point out what's unusual, and finish with the question from the prompt. That's what scores high.</p>
               </div>
             </div>
           </div>
@@ -248,7 +313,7 @@ export default function CelpipSpeakingTask8Page() {
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
           <div id="pane-structure" className="pane space-y-4">
-            <p className="text-sm text-slate">A 3-part framework for handling unusual situations — demonstrate calm, resourceful thinking.</p>
+            <p className="text-sm text-slate">A 3-part framework for describing an unusual image to someone who can't see it — overview, vivid detail, then the question from the prompt.</p>
 
             {/* Part 1 */}
             <div className="bg-white rounded-2xl border border-mist overflow-hidden">
@@ -256,26 +321,26 @@ export default function CelpipSpeakingTask8Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-sapphire text-white text-xs font-semibold flex items-center justify-center shrink-0">1</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">The Situation</span>
+                    <span className="text-sm font-semibold text-ink">Setup &amp; Overview</span>
                     <span className="text-xs text-slate ml-2">~15 seconds</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-1" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Paint a clear picture of what happened. Include context so the listener understands why it was unusual or stressful.</p>
+                <p className="text-sm text-slate">Greet the person, explain why you're calling, and give a single-sentence overview so they know what to picture before you dive into detail.</p>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"One time, I was [situation], when suddenly [unexpected event] happened. The core issue was [what made it difficult]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"Hi [name], I'm calling because I'm looking at [the unusual thing] right now, and it's the strangest thing I've ever seen. Let me describe it — it's basically [one-line overview of what it is and its size/shape]."</p>
                 </div>
                 <div className="bg-sapphire-light rounded-xl p-4 border-l-4 border-sapphire" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-sapphire-dark italic leading-relaxed">"One time, I was traveling overseas for work when my luggage went missing. The core issue was that I needed professional clothes for a client meeting the next morning."</p>
+                  <p className="text-sm text-sapphire-dark italic leading-relaxed">"Hi Mom, I'm calling from the furniture store because I've found the most unusual bed and I can't take a photo. It's a single bed, but the whole frame and mattress are curved into the shape of a person lying on their side."</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Start with "One time," "I remember," or "I once had to..."</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Be specific about the context (where, when, why it mattered)</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Clearly state what made it unusual or challenging</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Address the listener directly ("Hi Mom," "Hey George")</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Give the overview first — what is it, roughly how big, what shape</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Signal that it's unusual ("the strangest thing," "you won't believe this")</li>
                 </ul>
               </div>
             </div>
@@ -286,26 +351,27 @@ export default function CelpipSpeakingTask8Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-emerald2 text-white text-xs font-semibold flex items-center justify-center shrink-0">2</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">Your Reaction</span>
-                    <span className="text-xs text-slate ml-2">~20 seconds</span>
+                    <span className="text-sm font-semibold text-ink">Detailed Description</span>
+                    <span className="text-xs text-slate ml-2">~35 seconds · the core of your response</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-2" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Show your initial feelings and your mindset. This demonstrates emotional intelligence — you acknowledge stress but stay focused on solutions.</p>
+                <p className="text-sm text-slate"><strong>The heart of your response.</strong> Walk through the image in a logical order so the listener can build the picture in their mind. Move from the most prominent feature to the smaller details, and point out what makes it unusual.</p>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"At first, I felt [emotion], but I quickly realized that [what mattered]. I took a breath and [what you did next]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"On the left/in the centre, there's [main feature]. Next to it / behind it, you can see [detail]. What makes it really unusual is [the odd part]. It's [colour/material/texture], and it looks like [comparison]."</p>
                 </div>
                 <div className="bg-emerald2-light rounded-xl p-4 border-l-4 border-emerald2" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-emerald2-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-emerald2-dark italic leading-relaxed">"At first, I felt panicked, but I quickly realized that panicking wouldn't help. I took a breath and decided to focus on finding a solution before my meeting."</p>
+                  <p className="text-sm text-emerald2-dark italic leading-relaxed">"The frame is made of pale wood with a soft grey mattress on top. Instead of being flat, it dips and curves so your body slots into it perfectly — there's even a hollow for your head and a raised section for your knees. What makes it really unusual is that you can only sleep on your left side; there's no way to lie on your back."</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Name the emotion to show self-awareness</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Show how you shifted from stress to problem-solving mode</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use phrases like "I took a step back," "I decided to," "I focused on"</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use spatial language: "on the left," "in the centre," "towards the back"</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Describe colour, material, size, and shape with precise adjectives</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use present continuous for any actions: "the players are wearing..."</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Highlight the unusual part and, if you can, guess why it exists</li>
                 </ul>
               </div>
             </div>
@@ -316,187 +382,241 @@ export default function CelpipSpeakingTask8Page() {
                 <div className="flex items-center gap-3">
                   <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">3</span>
                   <div>
-                    <span className="text-sm font-semibold text-ink">Your Solution</span>
-                    <span className="text-xs text-slate ml-2">~25 seconds</span>
+                    <span className="text-sm font-semibold text-ink">Closing Question</span>
+                    <span className="text-xs text-slate ml-2">~10 seconds</span>
                   </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-3" className="accordion-body border-t border-mist px-6 py-5 space-y-4">
-                <p className="text-sm text-slate">Detail the specific steps you took (or would take) to handle it. Show practical thinking and resourcefulness.</p>
+                <p className="text-sm text-slate">Finish by asking the <strong>specific question stated in the prompt</strong> — whether you should buy it, whether they'd want to try it, what they think it is. Then close the call naturally.</p>
                 <div className="bg-fog rounded-xl p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Template</p>
-                  <p className="text-sm text-ink italic leading-relaxed">"First, I [action 1]. Then, I [action 2] to [purpose]. Finally, I [action 3], which [positive result]."</p>
+                  <p className="text-sm text-ink italic leading-relaxed">"So, what do you think — [the question from the prompt]? Let me know soon because [reason / time pressure]. Talk to you in a bit!"</p>
                 </div>
                 <div className="bg-gold-light rounded-xl p-4 border-l-4 border-gold" style={{borderRadius: '0 12px 12px 0', borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}}>
                   <p className="text-xs font-semibold text-gold-dark uppercase tracking-wider mb-2">Example</p>
-                  <p className="text-sm text-gold-dark italic leading-relaxed">"First, I contacted the airline to track my luggage. Then, I called a friend in the city to borrow appropriate clothes for the meeting. Finally, I arrived at the meeting on time, looking professional despite the chaos."</p>
+                  <p className="text-sm text-gold-dark italic leading-relaxed">"So, do you think I should actually buy it? It's a bit pricey, and I know it's strange, but it looks incredibly comfortable. Let me know quickly because the store closes in 20 minutes. Thanks, talk soon!"</p>
                 </div>
                 <ul className="space-y-1.5 text-sm text-ink">
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Use action verbs: "contacted," "called," "found," "arranged," "negotiated"</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Show multiple steps, not just luck or passive waiting</li>
-                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>End with a positive resolution or lesson learned</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Ask the exact question the prompt requires — don't forget this</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>Add a quick reason or time pressure to make it sound real</li>
+                  <li className="flex gap-2"><span className="text-gold shrink-0">✦</span>End naturally — a short sign-off, not an abrupt stop</li>
                 </ul>
               </div>
             </div>
 
-            {/* Complete Unusual Situation Examples */}
+            {/* Sample Answers — full responses built from the templates above, each with an image prompt */}
             <div className="bg-white rounded-2xl border border-mist overflow-hidden">
               <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-examples">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-ink">Complete Unusual Situation Examples</span>
+                  <span className="w-7 h-7 rounded-full bg-gold text-white text-xs font-semibold flex items-center justify-center shrink-0">★</span>
+                  <div>
+                    <span className="text-sm font-semibold text-ink">Sample Answers</span>
+                    <span className="text-xs text-slate ml-2">full 60-second responses · Setup → Description → Question</span>
+                  </div>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
-              <div id="struct-examples" className="accordion-body border-t border-mist px-6 py-5 space-y-6">
-                <div className="border-l-3 border-sapphire pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 1: Luggage Missing During Work Trip</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Situation:</strong> "I was traveling overseas for an important client presentation when my luggage went missing at the airport. The core issue was that I needed professional clothes for the meeting the next morning."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Reaction:</strong> "At first, I felt panicked because the presentation couldn't be postponed. But I quickly realized panicking wouldn't help. I took a breath and decided to focus on finding a solution before the meeting."</p>
-                  <p className="text-sm text-slate italic"><strong>Solution:</strong> "First, I contacted the airline immediately and filed a detailed lost luggage report. Then, I called my hotel's concierge to ask about emergency clothing options in the city. Finally, I visited a local department store early in the morning and bought appropriate business attire. I arrived at the meeting on time, professional and confident, despite the chaos. This taught me to always travel with important documents and one change of clothes in my carry-on."</p>
+              <div id="struct-examples" className="accordion-body border-t border-mist px-6 py-5 space-y-5">
+                <p className="text-sm text-slate">Task 8 always shows an <strong>unusual image</strong>. For each scenario below, an <strong>image prompt</strong> is included so you can generate the picture, then practise describing it to someone who can't see it and ask the closing question.</p>
+
+                {/* Sample 1: Curved sleeping bed */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-gold uppercase tracking-widest">Scenario 1 · An unusual bed in a furniture store</p>
+                  <p className="text-xs text-slate"><strong>Prompt:</strong> You're in a furniture store and see a bed you'd like to buy, but you can't take a photo. Call a family member, describe the bed, and ask whether you should buy it.</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"An unusual single bed in a modern furniture store, the pale wooden frame and soft grey mattress contoured into the shape of a person lying on their side, with a hollow for the head and a raised section for the knees, only allowing left-side sleeping, bright showroom lighting, photorealistic, product display shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setup:</span> "Hi Mom, I'm calling from the furniture store because I've found the strangest bed and I can't take a photo. It's a single bed, but the whole thing is curved into the shape of a person lying on their side."</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Description:</span> "The frame is made of pale wood with a soft grey mattress on top. Instead of being flat, it dips and curves so your body slots right into it — there's even a hollow for your head and a raised part for your knees. What makes it really unusual is that you can only sleep on your left side; there's no way to lie on your back. It actually looks incredibly comfortable, almost like a cocoon."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Question:</span> "So, do you think I should buy it? It's a little pricey and definitely odd, but I love it. Let me know quickly because the store closes in 20 minutes. Thanks, talk soon!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-emerald2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 2: Elevator Stuck Between Floors</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Situation:</strong> "One time, I was in an elevator at my office when it suddenly stopped between the 15th and 16th floors. The core issue was that I was claustrophobic and felt trapped, plus I had an important meeting in 20 minutes."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Reaction:</strong> "My initial instinct was to panic — my heart was racing and I felt my anxiety rising. But I recognized this was a normal mechanical issue, not a real danger. I took several deep breaths and focused on staying calm."</p>
-                  <p className="text-sm text-slate italic"><strong>Solution:</strong> "First, I pressed the alarm button and spoke to the building operator. They assured me help was coming within 10 minutes. Then, I sat down, called my colleague to postpone the meeting by 15 minutes, and practiced breathing techniques to manage my anxiety. Finally, the technician arrived and freed us safely. I made it to my rescheduled meeting on time. This experience taught me that staying calm actually gets better results than panicking."</p>
+                {/* Sample 2: Chess boxing */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-sapphire uppercase tracking-widest">Scenario 2 · A strange sport at a sports centre</p>
+                  <p className="text-xs text-slate"><strong>Prompt:</strong> You see two people playing an unusual sport at a sports centre. Call a friend, describe what the sport is and what each player is doing, and ask if they'd like to try it.</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"Two athletes inside a boxing ring wearing boxing gloves and shorts, but seated at a small table in the centre playing a game of chess while wearing noise-cancelling headphones, a referee standing beside them, a crowd watching in an indoor arena, bright spotlights, photorealistic, wide shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setup:</span> "Hey George, you won't believe what I'm watching at the sports centre. There are two people in a boxing ring, but instead of fighting, they're playing chess!"</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Description:</span> "Both players are wearing boxing gloves and shorts, and they're sitting at a small table right in the centre of the ring. They've got big headphones on, probably to block out the crowd. One of them is leaning forward, carefully moving a chess piece, while the other is waiting with his gloves resting on the table. There's a referee standing beside them and a whole audience watching. Apparently it's a real sport where you switch between boxing rounds and chess rounds."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Question:</span> "It looks fascinating — would you be interested in trying it with me sometime? I think it would be a fun challenge. Let me know what you think!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-amber2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 3: Event Scheduled for Wrong Day</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Situation:</strong> "I arrived early at an important networking event, only to discover that the event was scheduled for the following day, not today. The core issue was that I had cleared my entire afternoon for this, and I felt embarrassed."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Reaction:</strong> "My first reaction was disappointment and frustration with myself. But I quickly realized this wasn't the end of the world — it was just a scheduling mix-up."</p>
-                  <p className="text-sm text-slate italic"><strong>Solution:</strong> "First, I contacted the event organizer to confirm the correct date and apologize for the confusion. Then, instead of wasting the afternoon, I used the time to research the speakers and prepare intelligent questions. Finally, I attended the event the next day feeling confident and informed. I actually had more meaningful conversations because I'd prepared well. This taught me the value of adaptability and making the most of unexpected free time."</p>
+                {/* Sample 3: Upside-down house */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest">Scenario 3 · A bizarre building on the street</p>
+                  <p className="text-xs text-slate"><strong>Prompt:</strong> You're walking through town and see an unusual building. Call a friend, describe it in detail, and ask if they want to visit it with you this weekend.</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A completely upside-down house built as a tourist attraction, the roof on the ground and the foundation pointing at the sky, an upside-down car parked on the inverted driveway, bright blue sky, people taking photos in front of it, daytime, photorealistic, wide street view."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setup:</span> "Hi Priya, I'm walking through town and I'm standing in front of the most bizarre building — it's a whole house built completely upside down!"</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Description:</span> "The roof is sitting flat on the ground, and the foundation is pointing straight up at the sky. Even the windows and the front door are upside down. On the driveway, there's a car parked upside down too, as if it crashed from above. It's painted in bright colours, and there's a crowd of people in front taking photos. Apparently you can go inside, where the furniture is also mounted on the ceiling."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Question:</span> "It's such a fun attraction — do you want to come and visit it with me this weekend? I think it'd make for some hilarious photos. Let me know!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-rose2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 4: Computer Crash Before Presentation</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Situation:</strong> "Just before delivering a major presentation to senior management, my laptop completely crashed. The core issue was that all my slides were on that computer, and I had no backup copies easily accessible."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Reaction:</strong> "My initial panic was intense — this felt catastrophic. But I realized that the technical issue was fixable, and I had the knowledge in my head regardless of slides."</p>
-                  <p className="text-sm text-slate italic"><strong>Solution:</strong> "First, I borrowed a colleague's laptop immediately. Then, I tried to recover my files from cloud storage — fortunately, I had auto-save enabled. Finally, I delivered the presentation from memory, supported by the recovered slides. The presentation went well because my expertise came through, not just the visuals. This taught me to always use cloud backup and to remember that technology is just a tool — my actual knowledge is what matters."</p>
+                {/* Sample 4: Giant rubber duck */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-amber2 uppercase tracking-widest">Scenario 4 · An unusual sight at the harbour</p>
+                  <p className="text-xs text-slate"><strong>Prompt:</strong> You're at the waterfront and see something unexpected floating in the harbour. Call a family member, describe what you see, and ask if they've heard anything about it.</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"A giant inflatable yellow rubber duck, several storeys tall, floating in a city harbour next to the waterfront, dwarfing the boats around it, crowds of people gathered on the pier taking photos, blue sky with light clouds, daytime, photorealistic, wide-angle shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setup:</span> "Hi Dad, I'm down at the harbour and there's a giant rubber duck floating in the water — and I mean enormous, several storeys tall!"</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Description:</span> "It's a bright yellow inflatable duck, the kind you'd see in a bathtub, except it completely dwarfs the boats around it. It's bobbing gently in the middle of the harbour, right next to the pier. There's a huge crowd gathered along the waterfront, and almost everyone is taking photos. It looks cheerful and a little surreal against the city skyline behind it. I think it might be some kind of public art installation."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Question:</span> "Have you heard anything about it on the news? I'm curious how long it'll be here. Call me back when you can!"</p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="border-l-3 border-violet2 pl-4">
-                  <p className="text-sm font-semibold text-ink mb-3">Example 5: Unexpected Critical Feedback in Meeting</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Situation:</strong> "During a team meeting, my boss suddenly criticized my recent work in front of 10 colleagues, saying it didn't meet expectations. The core issue was that the feedback was unexpected, public, and felt harsh."</p>
-                  <p className="text-sm text-slate italic mb-2"><strong>Reaction:</strong> "My first instinct was to feel defensive and humiliated. But I recognized that getting defensive would only make things worse, so I chose to listen and stay composed."</p>
-                  <p className="text-sm text-slate italic"><strong>Solution:</strong> "First, I listened to the feedback without interrupting or making excuses. Then, I asked clarifying questions: 'Which aspects specifically need improvement, and what's the timeline for revision?' This showed I was taking it seriously. Finally, I asked for a private follow-up meeting to discuss a concrete improvement plan. In that meeting, I presented my proposal for addressing the concerns within a week. My boss appreciated my professional response and collaborative approach. This taught me that how you respond to criticism matters more than the criticism itself."</p>
+                {/* Sample 5: Vending machine */}
+                <div className="bg-fog rounded-xl p-5 space-y-4">
+                  <p className="text-xs font-semibold text-rose2 uppercase tracking-widest">Scenario 5 · A strange vending machine</p>
+                  <p className="text-xs text-slate"><strong>Prompt:</strong> You spot an unusual vending machine in a mall. Call a friend, describe what it sells and how it looks, and ask if they think you should try it.</p>
+                  <div className="bg-white rounded-lg border border-mist p-4">
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">🖼️ Image generation prompt</p>
+                    <p className="text-sm text-ink italic leading-relaxed">"An unusual vending machine in a shopping mall that dispenses live potted plants instead of snacks, glass front showing rows of small green succulents and flowers in pots, glowing interior lights, a digital touchscreen on the front, modern mall corridor in the background, photorealistic, eye-level shot."</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">Sample answer</p>
+                    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                      <p><span className="not-italic font-semibold text-sapphire">Setup:</span> "Hey Sam, I'm at the mall and I've just found the weirdest vending machine — it doesn't sell snacks, it sells live plants!"</p>
+                      <p><span className="not-italic font-semibold text-emerald2">Description:</span> "It's about the size of a normal drinks machine, with a big glass front. Inside, there are rows and rows of little potted plants — mostly succulents and small flowers — all lit up with soft glowing lights. On the front there's a digital touchscreen where you pick the plant you want, pay, and it drops down gently like a chocolate bar would. It looks really modern and the plants seem perfectly healthy. I've honestly never seen anything like it."</p>
+                      <p><span className="not-italic font-semibold text-amber2">Question:</span> "Do you think I should try it and grab one for my desk? Let me know — I'm tempted to buy a little cactus right now!"</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Unusual Situation Handling Language Toolkit */}
+            {/* Description Language Toolkit */}
             <div className="bg-white rounded-2xl border border-mist overflow-hidden">
               <button className="accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors" data-target="struct-toolkit">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-ink">Unusual Situation Handling Language Toolkit</span>
+                  <span className="text-sm font-semibold text-ink">Description Language Toolkit</span>
                 </div>
                 <svg className="chevron w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
               </button>
               <div id="struct-toolkit" className="accordion-body border-t border-mist px-6 py-5 space-y-6">
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-sapphire">Describing the Unexpected Event (Setting the Scene)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-sapphire">Opening &amp; Overview (Setting the Scene)</p>
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="bg-fog rounded-lg p-3">
                       <p className="text-xs font-semibold text-slate mb-1">Opening Lines</p>
-                      <p className="text-sm text-ink italic">"One time, I was [doing X] when..."</p>
-                      <p className="text-sm text-ink italic">"I remember a situation where..."</p>
-                      <p className="text-sm text-ink italic">"There was this unusual incident when..."</p>
+                      <p className="text-sm text-ink italic">"Hi [name], you won't believe what I'm looking at..."</p>
+                      <p className="text-sm text-ink italic">"I'm calling because I've just seen the strangest thing..."</p>
+                      <p className="text-sm text-ink italic">"Let me describe it since you can't see it..."</p>
                     </div>
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Showing Unexpectedness</p>
-                      <p className="text-sm text-ink italic">"...suddenly [unexpected thing] happened."</p>
-                      <p className="text-sm text-ink italic">"...when unexpectedly [situation] occurred."</p>
-                      <p className="text-sm text-ink italic">"...I was faced with an unusual challenge..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Giving the Overview</p>
+                      <p className="text-sm text-ink italic">"Basically, it's a [thing] about the size of [comparison]."</p>
+                      <p className="text-sm text-ink italic">"At first glance it looks like [X], but..."</p>
+                      <p className="text-sm text-ink italic">"The whole thing is roughly [shape/size]."</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-emerald2">Showing Emotional Intelligence (First Reaction)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-emerald2">Spatial Language (Guiding the Listener)</p>
                   <div className="bg-fog rounded-lg p-4 space-y-3">
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Acknowledging Emotions</p>
-                      <p className="text-sm text-ink italic">"At first, I felt [emotion], but I quickly realized..."</p>
-                      <p className="text-sm text-ink italic">"My initial reaction was [panic/frustration], however..."</p>
-                      <p className="text-sm text-ink italic">"I was nervous at the beginning, but then I..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Position &amp; Location</p>
+                      <p className="text-sm text-ink italic">"On the left / on the right / in the centre..."</p>
+                      <p className="text-sm text-ink italic">"In the foreground / towards the back..."</p>
+                      <p className="text-sm text-ink italic">"At the top / along the bottom / in the corner..."</p>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-slate mb-1">Shifting to Problem-Solving</p>
-                      <p className="text-sm text-ink italic">"I took a step back and realized..."</p>
-                      <p className="text-sm text-ink italic">"I took a deep breath and decided to focus on..."</p>
-                      <p className="text-sm text-ink italic">"I recognized that staying calm would help me think clearly..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Connecting Details</p>
+                      <p className="text-sm text-ink italic">"Next to it / beside that / right above..."</p>
+                      <p className="text-sm text-ink italic">"Behind it / in front of / surrounding it..."</p>
+                      <p className="text-sm text-ink italic">"Attached to / sitting on top of..."</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-amber2">Action Words (Showing Resourcefulness)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-amber2">Describing Shape, Size, Material & Colour</p>
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Taking Initiative</p>
-                      <p className="text-sm text-ink italic">"I immediately contacted..."</p>
-                      <p className="text-sm text-ink italic">"I reached out to..."</p>
-                      <p className="text-sm text-ink italic">"I took charge by..."</p>
-                      <p className="text-sm text-ink italic">"I arranged for..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Shape & Size</p>
+                      <p className="text-sm text-ink italic">"It's curved / contoured / cylindrical..."</p>
+                      <p className="text-sm text-ink italic">"Roughly [X] metres tall / wide..."</p>
+                      <p className="text-sm text-ink italic">"About the size of a [comparison]..."</p>
                     </div>
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Problem-Solving Actions</p>
-                      <p className="text-sm text-ink italic">"I identified alternative options..."</p>
-                      <p className="text-sm text-ink italic">"I negotiated a solution..."</p>
-                      <p className="text-sm text-ink italic">"I improvised by..."</p>
-                      <p className="text-sm text-ink italic">"I prioritized by..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Material & Texture</p>
+                      <p className="text-sm text-ink italic">"Made of pale wood / brushed metal / glass..."</p>
+                      <p className="text-sm text-ink italic">"It has a smooth / glossy / matte finish..."</p>
+                      <p className="text-sm text-ink italic">"The surface looks soft / sleek / textured..."</p>
                     </div>
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Communicating Clearly</p>
-                      <p className="text-sm text-ink italic">"I explained the situation..."</p>
-                      <p className="text-sm text-ink italic">"I informed [person] about..."</p>
-                      <p className="text-sm text-ink italic">"I asked for assistance from..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Colour</p>
+                      <p className="text-sm text-ink italic">"A vibrant / muted / deep shade of..."</p>
+                      <p className="text-sm text-ink italic">"Bright yellow / pale grey / dark green..."</p>
                     </div>
                     <div className="bg-fog rounded-lg p-3">
-                      <p className="text-xs font-semibold text-slate mb-1">Following Through</p>
-                      <p className="text-sm text-ink italic">"I ensured that..."</p>
-                      <p className="text-sm text-ink italic">"I confirmed that..."</p>
-                      <p className="text-sm text-ink italic">"I verified the solution..."</p>
+                      <p className="text-xs font-semibold text-slate mb-1">Comparisons</p>
+                      <p className="text-sm text-ink italic">"It looks like a giant [X]..."</p>
+                      <p className="text-sm text-ink italic">"It reminds me of [familiar object]..."</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-rose2">Sequencing Your Actions (Clear Timeline)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-rose2">Upgrade Basic Adjectives (Level 9 Words)</p>
                   <div className="bg-fog rounded-lg p-4 space-y-2">
-                    <p className="text-sm text-ink italic">"First, I [action 1]..."</p>
-                    <p className="text-sm text-ink italic">"Then, I [action 2] in order to [purpose]..."</p>
-                    <p className="text-sm text-ink italic">"After that, I [action 3]..."</p>
-                    <p className="text-sm text-ink italic">"Finally, I [action 4], which resulted in..."</p>
-                    <p className="text-sm text-ink italic">"In the end, [positive result]..."</p>
+                    <p className="text-sm text-ink"><strong>Big</strong> → sizable, massive, enormous, colossal</p>
+                    <p className="text-sm text-ink"><strong>Pretty / nice</strong> → stunning, striking, exquisite, eye-catching</p>
+                    <p className="text-sm text-ink"><strong>Interesting</strong> → fascinating, intriguing, captivating, peculiar</p>
+                    <p className="text-sm text-ink"><strong>Strange</strong> → bizarre, unusual, quirky, one-of-a-kind</p>
+                    <p className="text-sm text-ink"><strong>Good</strong> → superb, impressive, remarkable, well-made</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-violet2">Reflection & Growth (Showing Maturity)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-violet2">Pointing Out What's Unusual & Speculating</p>
                   <div className="bg-fog rounded-lg p-4 space-y-2">
-                    <p className="text-sm text-ink italic">"This taught me that..."</p>
-                    <p className="text-sm text-ink italic">"I learned the importance of..."</p>
-                    <p className="text-sm text-ink italic">"This experience showed me that staying calm is..."</p>
-                    <p className="text-sm text-ink italic">"It made me realize that resourcefulness and [skill] matter..."</p>
-                    <p className="text-sm text-ink italic">"Now, I always... to prevent [similar situation]."</p>
+                    <p className="text-sm text-ink italic">"What makes it really unusual is..."</p>
+                    <p className="text-sm text-ink italic">"The strangest part is that..."</p>
+                    <p className="text-sm text-ink italic">"I've never seen anything quite like it..."</p>
+                    <p className="text-sm text-ink italic">"I think it might be for [purpose]..."</p>
+                    <p className="text-sm text-ink italic">"My guess is that it's used to..."</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-ink mb-3 text-gold">Composure & Calm Language (Critical for Task 8)</p>
+                  <p className="text-sm font-semibold text-ink mb-3 text-gold">Closing Question (Don't Forget This!)</p>
                   <div className="bg-fog rounded-lg p-4 space-y-3">
-                    <p className="text-xs font-semibold text-slate mb-2">How to Sound Calm While Describing Stress</p>
-                    <div>
-                      <p className="text-sm text-ink italic"><strong>❌ Sounds Stressed:</strong> "I was freaking out! I couldn't believe it! I was so panicked!"</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-ink italic"><strong>✓ Sounds Composed:</strong> "At first, I felt anxious, but I took a moment to think clearly. I realized the key was to stay focused on the solution rather than the problem."</p>
-                    </div>
+                    <p className="text-xs font-semibold text-slate mb-2">Always end with the exact request from the prompt</p>
+                    <p className="text-sm text-ink italic">"So, what do you think — should I buy it?"</p>
+                    <p className="text-sm text-ink italic">"Would you be interested in trying it sometime?"</p>
+                    <p className="text-sm text-ink italic">"Have you ever heard of anything like this?"</p>
                     <p className="text-xs font-semibold text-slate mt-3">Key Principle:</p>
-                    <p className="text-sm text-ink italic">Describe stress without sounding stressed. Tell the story calmly to show you've grown beyond the initial panic. Examiners reward composure under pressure.</p>
+                    <p className="text-sm text-ink italic">The listener can't see the image, so describe it in a logical order and use vivid words — but never forget to ask the specific question the prompt requires. Missing the question costs you marks.</p>
                   </div>
                 </div>
               </div>
@@ -509,111 +629,6 @@ export default function CelpipSpeakingTask8Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five unusual-situation scenarios. Pick one and show how you'd handle it calmly for 60 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Your elevator breaks down and you're stuck between floors.</p>
-                <p className="text-sm text-slate leading-relaxed">Focus on: your immediate reaction, how you stay calm, who you contact, what you do while waiting.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">You arrive at an important event and discover it was scheduled for tomorrow, not today.</p>
-                <p className="text-sm text-slate leading-relaxed">Address: your initial reaction, how you contact the organizers, what you do with your free time instead.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Your luggage goes missing during a work trip with important documents inside.</p>
-                <p className="text-sm text-slate leading-relaxed">Consider: how you locate it, what alternative steps you take, how you handle the meeting without the materials.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Your computer crashes right before an important presentation.</p>
-                <p className="text-sm text-slate leading-relaxed">Think about: how you recover the files, your backup plan, how you deliver the presentation.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">You receive unexpected critical feedback from your boss during a meeting.</p>
-                <p className="text-sm text-slate leading-relaxed">Address: your emotional reaction, how you listen, what you say in response, how you follow up.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 8. Composure and adaptability are key indicators of a high score.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Natural, confident speech even when describing stressful situations. No nervous hedging.</p>
-                  <p><strong>Coherence:</strong> Clear story arc (problem → reaction → solution). Easy to follow and logically organized.</p>
-                  <p><strong>Vocabulary:</strong> Rich problem-solving and action words. Shows sophisticated thinking about handling difficulty.</p>
-                  <p><strong>Grammar:</strong> Accurate past tenses and conditional structures. Varied sentence complexity throughout.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Mostly smooth with minor hesitations. Generally confident delivery despite topic difficulty.</p>
-                  <p><strong>Coherence:</strong> Clear story with 2–3 steps in the solution. Flow is mostly logical.</p>
-                  <p><strong>Vocabulary:</strong> Good range of action and emotion words; some repetition acceptable.</p>
-                  <p><strong>Grammar:</strong> Mostly accurate; some errors in complex structures don't significantly affect understanding.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Noticeable pauses and hesitations, especially when discussing the problem.</p>
-                  <p><strong>Coherence:</strong> Story is present but may lack detail. Solution may be vague or incomplete.</p>
-                  <p><strong>Vocabulary:</strong> Basic words; limited range in describing problem-solving or emotions.</p>
-                  <p><strong>Grammar:</strong> Mix of simple and complex sentences; some errors obscure meaning occasionally.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Frequent hesitation and long pauses. May sound stressed or uncertain.</p>
-                  <p><strong>Coherence:</strong> Story is unclear or incomplete. Solution is missing or vague.</p>
-                  <p><strong>Vocabulary:</strong> Very limited; mostly simple, everyday words only.</p>
-                  <p><strong>Grammar:</strong> Frequent errors in basic structures; meaning often unclear.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">Examiners want to see how you <strong>think and act under pressure</strong>. A perfect story doesn't exist — they want to hear your genuine problem-solving approach. Show composure, take action, and explain your reasoning. That's what scores high.</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════
@@ -631,50 +646,50 @@ export default function CelpipSpeakingTask8Page() {
             <div className="space-y-3">
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="prep">
                 <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Prep</p>
-                <p className="text-sm font-semibold text-ink mb-2">Pick a real situation you've experienced or can vividly imagine.</p>
-                <p className="text-xs text-slate">Real experiences have believable details. You'll speak more naturally about something concrete than a made-up scenario.</p>
+                <p className="text-sm font-semibold text-ink mb-2">In 30 seconds, lock in an overview + the order you'll describe things.</p>
+                <p className="text-xs text-slate">Decide your one-line overview and a path through the image (left → right, or biggest feature → smallest). Note the closing question so you don't forget it.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
                 <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Delivery</p>
-                <p className="text-sm font-semibold text-ink mb-2">Speak calmly even when describing chaos.</p>
-                <p className="text-xs text-slate">Don't rush. Don't sound panicked. The examiner is assessing how you remain composed. Your calm delivery proves you can handle pressure.</p>
+                <p className="text-sm font-semibold text-ink mb-2">Talk like it's a real phone call.</p>
+                <p className="text-xs text-slate">Greet the person, sound a little excited about how unusual it is, and speak naturally. The task is framed as calling a friend or family member — so make it sound conversational.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
                 <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Language</p>
-                <p className="text-sm font-semibold text-ink mb-2">Use past tense for what happened; conditionals for how you'd handle it.</p>
-                <p className="text-xs text-slate">"I was stuck when my flight cancelled. I would first check alternate routes." Mixing tenses shows you understand the situation's temporal flow.</p>
+                <p className="text-sm font-semibold text-ink mb-2">Lead with an overview before the details.</p>
+                <p className="text-xs text-slate">"Basically, it's a bed shaped like a sleeping person" gives the listener a frame. Then fill in the details so they can build the picture in their mind.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
                 <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Language</p>
-                <p className="text-sm font-semibold text-ink mb-2">Include 2–3 concrete action steps, not just feelings.</p>
-                <p className="text-xs text-slate">Saying "I felt stressed" doesn't score high. Saying "I called, I emailed, I found an alternative" shows practical problem-solving.</p>
+                <p className="text-sm font-semibold text-ink mb-2">Use spatial language and present continuous.</p>
+                <p className="text-xs text-slate">"On the left, a man is moving a chess piece; behind him, a referee is standing." Prepositions of place plus present continuous make the scene vivid and easy to follow.</p>
+              </div>
+
+              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="language">
+                <p className="text-xs font-semibold text-violet2 uppercase tracking-widest mb-2">Language</p>
+                <p className="text-sm font-semibold text-ink mb-2">Swap "baby English" for precise adjectives.</p>
+                <p className="text-xs text-slate">Replace "big," "nice," and "strange" with "enormous," "striking," and "bizarre." Precise, vivid vocabulary is what pushes you into the 9+ band.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
                 <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Mistakes</p>
-                <p className="text-sm font-semibold text-ink mb-2">Don't blame others or make excuses.</p>
-                <p className="text-xs text-slate">"It wasn't my fault, the airline messed up" makes you sound passive. Better: "I handled the airline's mistake by taking initiative."</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't forget the closing question.</p>
+                <p className="text-xs text-slate">Every prompt ends with a specific request — should I buy it, would you try it, have you seen this. Skipping it is one of the biggest score-killers on this task.</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="mistakes">
                 <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Mistakes</p>
-                <p className="text-sm font-semibold text-ink mb-2">Don't end with "and it turned out fine anyway."</p>
-                <p className="text-xs text-slate">Show your actions caused the positive outcome, not luck. "I contacted the hotel and they held my reservation" beats "luckily it worked out."</p>
+                <p className="text-sm font-semibold text-ink mb-2">Don't just list objects randomly.</p>
+                <p className="text-xs text-slate">"There's a duck. There's a boat. There are people." is hard to picture. Connect details spatially: "In the middle of the harbour, a giant duck is floating, dwarfing the boats around it."</p>
               </div>
 
               <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="delivery">
-                <p className="text-xs font-semibold text-violet2 uppercase tracking-widest mb-2">Delivery</p>
-                <p className="text-sm font-semibold text-ink mb-2">Show emotional intelligence, then move to solutions.</p>
-                <p className="text-xs text-slate">"I was frustrated, but I realized worrying wouldn't help. So I..." This shows maturity and self-awareness.</p>
-              </div>
-
-              <div className="tip-card bg-white rounded-xl border border-mist p-4" data-category="prep">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Prep</p>
-                <p className="text-sm font-semibold text-ink mb-2">Have 2–3 backup stories in mind.</p>
-                <p className="text-xs text-slate">You might get asked about a specific type of unusual situation (travel, work, family). Prepare stories from different life areas so you're ready.</p>
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Delivery</p>
+                <p className="text-sm font-semibold text-ink mb-2">Point out — and guess at — what's unusual.</p>
+                <p className="text-xs text-slate">Name the odd part clearly ("what makes it strange is...") and offer a quick guess at why it exists. This shows engagement and fills your 60 seconds naturally.</p>
               </div>
             </div>
           </div>
@@ -683,7 +698,7 @@ export default function CelpipSpeakingTask8Page() {
 
         <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">
           <p className="text-xs text-slate mb-4">CELPIP Prep — Speaking Task 8 Study Guide</p>
-          <p className="text-xs text-slate/60">Unusual situations reveal character. Your calm response, quick thinking, and resourceful action are what examiners listen for. Show composure, take initiative, and prove you can handle pressure with grace.</p>
+          <p className="text-xs text-slate/60">Describe the unusual image so vividly that the listener can picture it without seeing it. Lead with an overview, move through the scene in a logical order, use precise vocabulary, and always finish with the question from the prompt.</p>
         </footer>
 
   

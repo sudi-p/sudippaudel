@@ -74,6 +74,8 @@ export default function CelpipSpeakingTask7Page() {
 
         const accordionTriggers = document.querySelectorAll('.accordion-trigger');
         accordionTriggers.forEach(trigger => {
+          if (trigger.dataset.accordionBound) return;
+          trigger.dataset.accordionBound = '1';
           trigger.addEventListener('click', () => {
             const targetId = trigger.getAttribute('data-target');
             const body = document.getElementById(targetId);
@@ -173,8 +175,6 @@ export default function CelpipSpeakingTask7Page() {
             <button data-tab="overview"  className="tab-btn tab-active  px-5 py-2 rounded-full border text-sm font-medium transition-all">Overview</button>
             <button data-tab="structure" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">My Template</button>
             <button data-tab="vocab"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Vocab Bank</button>
-            <button data-tab="practice" className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Practice</button>
-            <button data-tab="scoring"  className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Scoring</button>
             <button data-tab="tips"     className="tab-btn tab-inactive px-5 py-2 rounded-full border text-sm font-medium transition-all">Pro Tips</button>
           </div>
 
@@ -240,6 +240,71 @@ export default function CelpipSpeakingTask7Page() {
                     <p className="text-xs text-fog/80">Restate your position and summarize why</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Scoring — folded in from the old Scoring tab */}
+            <div className="bg-white rounded-2xl border border-mist p-6">
+              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">How you are scored</p>
+              <p className="text-sm text-slate">How examiners score Task 7 on a 12-point scale. Clarity of opinion and quality of support matter most.</p>
+
+              <div className="space-y-3 mt-4">
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
+                    <span className="font-display text-xl text-emerald2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Fluency:</strong> Natural, confident delivery. No hesitation. Sounds like genuine expression.</p>
+                    <p><strong>Coherence:</strong> Opinion is crystal clear. Reasons flow logically. Examples are compelling.</p>
+                    <p><strong>Vocabulary:</strong> Sophisticated opinion and reasoning words. Shows range and precision.</p>
+                    <p><strong>Grammar:</strong> Confident control of complex structures. Varied sentence types throughout.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
+                    <span className="font-display text-xl text-amber2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Fluency:</strong> Mostly fluent with minimal pauses. Delivery is generally confident.</p>
+                    <p><strong>Coherence:</strong> Opinion is clear with 2 supporting reasons. Mostly logical progression.</p>
+                    <p><strong>Vocabulary:</strong> Good range of opinion words. Some repetition is acceptable.</p>
+                    <p><strong>Grammar:</strong> Mostly accurate; some errors in complex structures don't impede understanding.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
+                    <span className="font-display text-xl text-rose2">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Fluency:</strong> Noticeable pauses. Some hesitation when expressing ideas.</p>
+                    <p><strong>Coherence:</strong> Opinion is present but may lack clear support. Organization is somewhat unclear.</p>
+                    <p><strong>Vocabulary:</strong> Basic opinion words; frequent repetition. Limited range.</p>
+                    <p><strong>Grammar:</strong> Mix of simple and complex sentences; errors don't always obscure meaning.</p>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-mist p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
+                    <span className="font-display text-xl text-slate">●</span>
+                  </div>
+                  <div className="space-y-2 text-sm text-slate">
+                    <p><strong>Fluency:</strong> Frequent hesitation or filler words. Choppy delivery.</p>
+                    <p><strong>Coherence:</strong> Opinion may be unclear or not well-supported. Disjointed explanation.</p>
+                    <p><strong>Vocabulary:</strong> Very limited; mostly basic words only.</p>
+                    <p><strong>Grammar:</strong> Frequent errors in basic structures; meaning often obscured.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-2xl p-6 mt-6">
+                <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
+                <p className="text-sm text-ink">A high score requires a <strong>clear opinion with 2–3 well-supported reasons</strong>. The opinion itself doesn't matter — your ability to defend it does. Examiners reward candidates who speak with conviction and back up their views with concrete examples.</p>
               </div>
             </div>
           </div>
@@ -517,111 +582,6 @@ export default function CelpipSpeakingTask7Page() {
           <div id="pane-vocab" className="pane space-y-4">
             <div id="vocab-filters" className="flex flex-wrap gap-2"></div>
             <div id="vocab-content" className="space-y-4"></div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: PRACTICE
-          ══════════════════════════════════════════ */}
-          <div id="pane-practice" className="pane space-y-4">
-            <p className="text-sm text-slate">Five opinion-based questions. Pick one and defend your position for 60 seconds.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-2">Scenario 1</p>
-                <p className="text-sm font-semibold text-ink mb-3">Should young people travel before starting their careers?</p>
-                <p className="text-sm text-slate leading-relaxed">Focus on: personal development, career benefits, or financial considerations. Choose a clear stance.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-sapphire uppercase tracking-widest mb-2">Scenario 2</p>
-                <p className="text-sm font-semibold text-ink mb-3">Is working from home more productive than working in an office?</p>
-                <p className="text-sm text-slate leading-relaxed">Address: distractions, collaboration, flexibility. Give examples from real situations.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-emerald2 uppercase tracking-widest mb-2">Scenario 3</p>
-                <p className="text-sm font-semibold text-ink mb-3">Should technology be limited in schools?</p>
-                <p className="text-sm text-slate leading-relaxed">Consider: learning outcomes, distraction, skill development. Be specific with reasons.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-amber2 uppercase tracking-widest mb-2">Scenario 4</p>
-                <p className="text-sm font-semibold text-ink mb-3">Is social media more harmful or beneficial to society?</p>
-                <p className="text-sm text-slate leading-relaxed">Think about: connection, mental health, information spread. Support your viewpoint with examples.</p>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <p className="text-xs font-semibold text-rose2 uppercase tracking-widest mb-2">Scenario 5</p>
-                <p className="text-sm font-semibold text-ink mb-3">Should people prioritize career success or family time?</p>
-                <p className="text-sm text-slate leading-relaxed">Address: values, long-term happiness, life balance. Show you've thought deeply about the trade-offs.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════
-               PANE: SCORING
-          ══════════════════════════════════════════ */}
-          <div id="pane-scoring" className="pane space-y-4">
-            <p className="text-sm text-slate">How examiners score Task 7. Clarity of opinion and quality of support matter most.</p>
-
-            <div className="space-y-3">
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 10–12 (Advanced)</p>
-                  <span className="font-display text-xl text-emerald2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Natural, confident delivery. No hesitation. Sounds like genuine expression.</p>
-                  <p><strong>Coherence:</strong> Opinion is crystal clear. Reasons flow logically. Examples are compelling.</p>
-                  <p><strong>Vocabulary:</strong> Sophisticated opinion and reasoning words. Shows range and precision.</p>
-                  <p><strong>Grammar:</strong> Confident control of complex structures. Varied sentence types throughout.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 7–9 (Upper-Intermediate)</p>
-                  <span className="font-display text-xl text-amber2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Mostly fluent with minimal pauses. Delivery is generally confident.</p>
-                  <p><strong>Coherence:</strong> Opinion is clear with 2 supporting reasons. Mostly logical progression.</p>
-                  <p><strong>Vocabulary:</strong> Good range of opinion words. Some repetition is acceptable.</p>
-                  <p><strong>Grammar:</strong> Mostly accurate; some errors in complex structures don't impede understanding.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 4–6 (Intermediate)</p>
-                  <span className="font-display text-xl text-rose2">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Noticeable pauses. Some hesitation when expressing ideas.</p>
-                  <p><strong>Coherence:</strong> Opinion is present but may lack clear support. Organization is somewhat unclear.</p>
-                  <p><strong>Vocabulary:</strong> Basic opinion words; frequent repetition. Limited range.</p>
-                  <p><strong>Grammar:</strong> Mix of simple and complex sentences; errors don't always obscure meaning.</p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl border border-mist p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">Score 1–3 (Below Intermediate)</p>
-                  <span className="font-display text-xl text-slate">●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  <p><strong>Fluency:</strong> Frequent hesitation or filler words. Choppy delivery.</p>
-                  <p><strong>Coherence:</strong> Opinion may be unclear or not well-supported. Disjointed explanation.</p>
-                  <p><strong>Vocabulary:</strong> Very limited; mostly basic words only.</p>
-                  <p><strong>Grammar:</strong> Frequent errors in basic structures; meaning often obscured.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">Key insight</p>
-              <p className="text-sm text-ink">A high score requires a <strong>clear opinion with 2–3 well-supported reasons</strong>. The opinion itself doesn't matter — your ability to defend it does. Examiners reward candidates who speak with conviction and back up their views with concrete examples.</p>
-            </div>
           </div>
 
           {/* ══════════════════════════════════════════
