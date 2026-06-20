@@ -726,6 +726,366 @@ export const SENTENCE_TYPES = [
   },
 ];
 
+export const PREP_GROUPS = [
+  {
+    category: "Place & Position",
+    emoji: "📍",
+    color: "#1e40af",
+    bg: "#dbeafe",
+    border: "#bfdbfe",
+    items: [
+      {
+        prep: "at",
+        rule: "Exact point or specific location.",
+        examples: ["at the door", "at school", "at 10 Main St"],
+      },
+      {
+        prep: "in",
+        rule: "Inside an enclosed space, city, country, or large area.",
+        examples: ["in the room", "in Canada", "in the box"],
+      },
+      {
+        prep: "on",
+        rule: "Surface contact — on top of something.",
+        examples: ["on the table", "on the wall", "on the floor"],
+      },
+      {
+        prep: "above",
+        rule: "Higher than, but not touching.",
+        examples: ["above the clouds", "above the shelf"],
+      },
+      {
+        prep: "below",
+        rule: "Lower than something, not touching.",
+        examples: ["below sea level", "below the sign"],
+      },
+      {
+        prep: "beside / next to",
+        rule: "Directly at the side of something.",
+        examples: ["beside the door", "next to the bank"],
+      },
+      {
+        prep: "between",
+        rule: "In the middle of two things.",
+        examples: ["between the chairs", "between Canada and Mexico"],
+      },
+      {
+        prep: "among",
+        rule: "Surrounded by or within a group of three or more.",
+        examples: ["among friends", "among the trees"],
+      },
+      {
+        prep: "behind",
+        rule: "At the back of something.",
+        examples: ["behind the building", "behind the curtain"],
+      },
+      {
+        prep: "in front of",
+        rule: "Facing the front of something.",
+        examples: ["in front of the class", "in front of the store"],
+      },
+      {
+        prep: "under / beneath",
+        rule: "Directly below and possibly touching.",
+        examples: ["under the bridge", "beneath the surface"],
+      },
+      {
+        prep: "opposite",
+        rule: "Facing something, on the other side.",
+        examples: ["opposite the park", "sitting opposite me"],
+      },
+    ],
+  },
+  {
+    category: "Time",
+    emoji: "⏰",
+    color: "#166534",
+    bg: "#dcfce7",
+    border: "#86efac",
+    items: [
+      {
+        prep: "at",
+        rule: "Exact time, holidays (general), night.",
+        examples: ["at 9 am", "at Christmas", "at night"],
+      },
+      {
+        prep: "in",
+        rule: "Months, years, seasons, centuries, parts of day.",
+        examples: ["in March", "in 2020", "in the morning"],
+      },
+      {
+        prep: "on",
+        rule: "Days and specific dates.",
+        examples: ["on Monday", "on June 5th", "on my birthday"],
+      },
+      {
+        prep: "for",
+        rule: "Duration — how long something lasts.",
+        examples: ["for three hours", "for two years", "for a moment"],
+      },
+      {
+        prep: "since",
+        rule: "From a specific point in time up to now.",
+        examples: ["since 2018", "since Monday", "since noon"],
+      },
+      {
+        prep: "during",
+        rule: "Within a period or event (not measurable duration).",
+        examples: ["during the meeting", "during winter", "during the exam"],
+      },
+      {
+        prep: "by",
+        rule: "No later than a deadline.",
+        examples: ["by Friday", "by 5 pm", "by next year"],
+      },
+      {
+        prep: "until / till",
+        rule: "Up to a point in time (continuous up to then).",
+        examples: ["until midnight", "till the end", "until she arrives"],
+      },
+      {
+        prep: "before",
+        rule: "Earlier than a time or event.",
+        examples: ["before noon", "before the meeting"],
+      },
+      {
+        prep: "after",
+        rule: "Later than a time or event.",
+        examples: ["after class", "after the interview"],
+      },
+      {
+        prep: "within",
+        rule: "Inside a time period — not exceeding it.",
+        examples: ["within an hour", "within a week"],
+      },
+      {
+        prep: "ago",
+        rule: "Measured back from now. Always follows the time expression.",
+        examples: ["two days ago", "a year ago", "five minutes ago"],
+      },
+    ],
+  },
+  {
+    category: "Direction & Movement",
+    emoji: "🧭",
+    color: "#92400e",
+    bg: "#fef3c7",
+    border: "#fde68a",
+    items: [
+      {
+        prep: "to",
+        rule: "Movement toward a destination.",
+        examples: ["go to school", "travel to Paris", "walk to the store"],
+      },
+      {
+        prep: "into",
+        rule: "Movement from outside to inside.",
+        examples: ["walk into the room", "jump into the pool"],
+      },
+      {
+        prep: "out of",
+        rule: "Movement from inside to outside.",
+        examples: ["get out of the car", "take out of the bag"],
+      },
+      {
+        prep: "onto",
+        rule: "Movement to a surface.",
+        examples: ["climb onto the roof", "step onto the stage"],
+      },
+      {
+        prep: "off",
+        rule: "Away from a surface or vehicle.",
+        examples: ["get off the bus", "fall off the ladder"],
+      },
+      {
+        prep: "through",
+        rule: "From one side to the other, inside a space.",
+        examples: ["walk through the tunnel", "drive through the city"],
+      },
+      {
+        prep: "across",
+        rule: "From one side to the opposite side (surface).",
+        examples: ["swim across the river", "walk across the street"],
+      },
+      {
+        prep: "along",
+        rule: "Following the length or path of something.",
+        examples: ["walk along the road", "jog along the beach"],
+      },
+      {
+        prep: "towards",
+        rule: "In the direction of (not necessarily reaching).",
+        examples: ["walk towards the exit", "move towards the goal"],
+      },
+      {
+        prep: "away from",
+        rule: "Moving in the opposite direction from something.",
+        examples: ["run away from danger", "step away from the edge"],
+      },
+      {
+        prep: "past",
+        rule: "Going beyond something without stopping.",
+        examples: ["drive past the school", "walk past the café"],
+      },
+      {
+        prep: "around",
+        rule: "In a circular path or on all sides.",
+        examples: ["walk around the lake", "look around the room"],
+      },
+    ],
+  },
+  {
+    category: "Cause, Reason & Purpose",
+    emoji: "🎯",
+    color: "#5b21b6",
+    bg: "#ede9fe",
+    border: "#c4b5fd",
+    items: [
+      {
+        prep: "because of",
+        rule: "Gives the reason for something (noun/noun phrase follows).",
+        examples: ["absent because of illness", "delayed because of traffic"],
+      },
+      {
+        prep: "due to",
+        rule: "Formal equivalent of 'because of'. Used after 'be'.",
+        examples: ["cancelled due to rain", "successful due to effort"],
+      },
+      {
+        prep: "for",
+        rule: "Purpose or intended use.",
+        examples: [
+          "a knife for cutting",
+          "studying for the exam",
+          "a gift for her",
+        ],
+      },
+      {
+        prep: "out of",
+        rule: "Motivation or emotional reason.",
+        examples: ["acted out of kindness", "spoke out of frustration"],
+      },
+      {
+        prep: "with",
+        rule: "Cause expressed as an accompanying state.",
+        examples: ["shaking with fear", "beaming with pride"],
+      },
+      {
+        prep: "from",
+        rule: "Origin of a condition or state.",
+        examples: ["suffering from stress", "recovering from surgery"],
+      },
+    ],
+  },
+  {
+    category: "Manner & Means",
+    emoji: "⚙️",
+    color: "#0f766e",
+    bg: "#ccfbf1",
+    border: "#5eead4",
+    items: [
+      {
+        prep: "by",
+        rule: "Method, means of transport, or agent in passive voice.",
+        examples: ["by car", "by email", "written by the author"],
+      },
+      {
+        prep: "with",
+        rule: "Using a tool or instrument.",
+        examples: ["cut with scissors", "written with a pen", "pay with cash"],
+      },
+      {
+        prep: "without",
+        rule: "In the absence of something.",
+        examples: ["left without saying goodbye", "working without a break"],
+      },
+      {
+        prep: "in",
+        rule: "Language, manner, or medium.",
+        examples: ["in English", "in writing", "speak in a loud voice"],
+      },
+      {
+        prep: "like",
+        rule: "Similar to; in the same way as.",
+        examples: ["runs like the wind", "treats her like a friend"],
+      },
+      {
+        prep: "according to",
+        rule: "Based on a source or rule.",
+        examples: ["according to the report", "according to the rules"],
+      },
+    ],
+  },
+  {
+    category: "Common Traps",
+    emoji: "⚠️",
+    color: "#be185d",
+    bg: "#fce7f3",
+    border: "#fbcfe8",
+    items: [
+      {
+        prep: "at vs. in vs. on (place)",
+        rule: "AT = point (at the bus stop). IN = enclosed space (in the office). ON = surface (on the desk).",
+        examples: [
+          "✓ She's at the airport",
+          "✓ She's in the airport lounge",
+          "✓ Her bag is on the counter",
+        ],
+      },
+      {
+        prep: "at vs. in vs. on (time)",
+        rule: "AT = clock time & night. IN = month/year/season. ON = day/date.",
+        examples: ["✓ at 3 pm", "✓ in July", "✓ on Tuesday"],
+      },
+      {
+        prep: "for vs. since",
+        rule: "FOR = duration (a length of time). SINCE = start point (a moment in time).",
+        examples: ["✓ for two hours", "✓ since 2019", "✗ since two hours"],
+      },
+      {
+        prep: "by vs. until",
+        rule: "BY = deadline (action completed no later than). UNTIL = continuous action up to a point.",
+        examples: [
+          "✓ Submit by Friday",
+          "✓ Wait until Friday",
+          "✗ Submit until Friday",
+        ],
+      },
+      {
+        prep: "in vs. into",
+        rule: "IN = location (static). INTO = movement toward inside.",
+        examples: [
+          "✓ She is in the car",
+          "✓ She got into the car",
+          "✗ She walked in the room",
+        ],
+      },
+      {
+        prep: "between vs. among",
+        rule: "BETWEEN = two things. AMONG = three or more.",
+        examples: [
+          "✓ between you and me",
+          "✓ among the students",
+          "✗ among the two options",
+        ],
+      },
+      {
+        prep: "during vs. for",
+        rule: "DURING = within an event/period (not measurable). FOR = measurable length of time.",
+        examples: ["✓ during the lecture", "✓ for an hour", "✗ during an hour"],
+      },
+      {
+        prep: "to vs. towards",
+        rule: "TO = reaching a destination. TOWARDS = direction, may not arrive.",
+        examples: [
+          "✓ walked to the office (arrived)",
+          "✓ walked towards the office (direction only)",
+        ],
+      },
+    ],
+  },
+];
+
 export const CLAUSE_TYPES = [
   {
     name: "Independent Clause",

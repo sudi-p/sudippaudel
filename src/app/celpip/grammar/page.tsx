@@ -20,6 +20,7 @@ import {
   IRREGULAR,
   FILL_SENTENCES,
   TENSES,
+  PREP_GROUPS,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -932,6 +933,81 @@ export default function CelpipVocabPage() {
       };
     }
 
+    function renderPrepositions() {
+      const content = document.getElementById("prepositions-content");
+
+      const GROUP_STYLE = {
+        card: `background:#fff;border-radius:12px;padding:0.85rem 1rem;border:1px solid #e5e7eb;`,
+      };
+
+      content.innerHTML = `
+    <style>
+      .prep-section { margin-bottom: 2.5rem; }
+      .prep-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
+      .prep-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .prep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; }
+      .prep-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; }
+      .prep-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.45rem; }
+      .prep-word { font-size: 15px; font-weight: 700; color: #111827; }
+      .prep-rule { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
+      .prep-examples { display: flex; flex-direction: column; gap: 3px; }
+      .prep-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 8px; border: 1px solid #f3f4f6; }
+      .prep-trap-card { background: #fff; border: 1px solid #fbcfe8; border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
+      .prep-trap-label { font-size: 13px; font-weight: 700; color: #be185d; margin-bottom: 0.4rem; }
+      .prep-trap-rule { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
+      .prep-trap-exs { display: flex; flex-direction: column; gap: 3px; }
+      .prep-trap-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #fff5f7; border-radius: 6px; padding: 3px 8px; border: 1px solid #fce7f3; }
+      @media (max-width: 600px) { .prep-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    ${PREP_GROUPS.map((group) => {
+      const isTraps = group.category === "Common Traps";
+      return `
+        <div class="prep-section">
+          <div class="prep-section-header">
+            <span style="font-size:1.3rem">${group.emoji}</span>
+            <span class="prep-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
+            ${!isTraps ? `<span style="font-size:12px;color:#9ca3af">${group.items.length} prepositions</span>` : ""}
+          </div>
+          ${
+            isTraps
+              ? group.items
+                  .map(
+                    (item) => `
+                <div class="prep-trap-card">
+                  <div class="prep-trap-label">${item.prep}</div>
+                  <div class="prep-trap-rule">${item.rule}</div>
+                  <div class="prep-trap-exs">
+                    ${item.examples.map((e) => `<div class="prep-trap-ex">${e}</div>`).join("")}
+                  </div>
+                </div>
+              `,
+                  )
+                  .join("")
+              : `<div class="prep-grid">
+                ${group.items
+                  .map(
+                    (item) => `
+                  <div class="prep-card" style="border-color:${group.border}">
+                    <div class="prep-card-top">
+                      <span class="prep-word">${item.prep}</span>
+                    </div>
+                    <div class="prep-rule">${item.rule}</div>
+                    <div class="prep-examples">
+                      ${item.examples.map((e) => `<div class="prep-ex">${e}</div>`).join("")}
+                    </div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>`
+          }
+        </div>
+      `;
+    }).join("")}
+  `;
+    }
+
     function renderVerbs() {
       const content = document.getElementById("verbs-content");
 
@@ -1641,6 +1717,7 @@ export default function CelpipVocabPage() {
     renderArticles();
     renderCollocations();
     renderVerbs();
+    renderPrepositions();
   }, []);
 
   return (
@@ -1669,7 +1746,7 @@ export default function CelpipVocabPage() {
         <div className="flex gap-2 mb-8 border-b border-mist">
           <button
             className="tab-btn active px-6 py-3 text-sm font-medium text-ink border-b-2 border-ink transition-all"
-            data-tab="word-list"
+            data-tab="sentence-structure"
           >
             Sentence Structure
           </button>
@@ -1679,6 +1756,12 @@ export default function CelpipVocabPage() {
             data-tab="articles"
           >
             Articles
+          </button>
+          <button
+            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
+            data-tab="prepositions"
+          >
+            Prepositions
           </button>
           <button
             className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
@@ -1696,7 +1779,7 @@ export default function CelpipVocabPage() {
 
           <button
             className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="sentence-structure"
+            data-tab="word-list"
           >
             Word List
           </button>
@@ -1787,6 +1870,23 @@ export default function CelpipVocabPage() {
           </div>
           <div id="articles-content" className="space-y-12"></div>
         </div>
+
+        {/* Prepositions Tab */}
+        <div id="prepositions" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                prepositions
+              </span>{" "}
+              — the small words that show relationships of place, time,
+              direction, and more. Learn the rules, common combinations, and
+              traps to avoid.
+            </p>
+          </div>
+          <div id="prepositions-content"></div>
+        </div>
+
         {/* Verbs Tab */}
         <div id="verbs" className="tab-content hidden">
           <div className="mb-8">
@@ -1802,7 +1902,8 @@ export default function CelpipVocabPage() {
       {/* ─── FOOTER ─── */}
       <footer className="border-t border-mist bg-fog py-8 px-6 text-center">
         <p className="text-xs text-slate">
-          CELPIP Vocabulary Bank · Master essential words for test success.
+          CELPIP Grammar & Vocabulary Bank · Master grammar and essential words
+          for test success.
         </p>
       </footer>
     </>
