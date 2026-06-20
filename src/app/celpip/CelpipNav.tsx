@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const LINKS = [
   { href: "/celpip", label: "Notes" },
-  { href: "/celpip/vocab", label: "Vocabulary" },
+  { href: "/celpip/grammar", label: "Grammar" },
   // { href: "/celpip/speaking-task-1", label: "Speaking" },
   // { href: "/celpip/writing-task-1", label: "Writing" },
   { href: "/", label: "← Portfolio" },

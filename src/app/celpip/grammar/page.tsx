@@ -11,6 +11,15 @@ import {
   SENTENCES,
   TRAPS,
   QUIZ,
+  QUIZ_QS,
+  PARTS_OF_SPEECH,
+  SENTENCE_TYPES,
+  CLAUSE_TYPES,
+  MODALS,
+  PHRASAL,
+  IRREGULAR,
+  FILL_SENTENCES,
+  TENSES,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -56,74 +65,6 @@ export default function CelpipVocabPage() {
       selectedTask: "all",
       currentQuestion: null,
     };
-
-    // ─── Setup filter buttons ───────────────────────────────────────────
-    function setupFilterButtons() {
-      const taskFilters = document.getElementById("task-filters");
-      const quizFilterButtons = document.getElementById("quiz-filter-buttons");
-
-      ["all", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"].forEach(
-        (task) => {
-          const color = TASK_COLORS[task];
-
-          // Word list filter
-          const btn1 = document.createElement("button");
-          btn1.className = `px-4 py-2 rounded-full border font-medium text-sm transition-all ${task === "all" ? "bg-ink text-fog border-ink" : "bg-white border-mist text-slate hover:bg-fog"}`;
-          btn1.textContent = TASK_LABELS[task];
-          btn1.dataset.filterValue = task;
-          btn1.dataset.filterType = "task";
-          btn1.addEventListener("click", () => {
-            document
-              .querySelectorAll('[data-filter-type="task"]')
-              .forEach((b) => {
-                b.classList.remove("bg-ink", "text-fog", "border-ink");
-                b.classList.add(
-                  "bg-white",
-                  "border-mist",
-                  "text-slate",
-                  "hover:bg-fog",
-                );
-              });
-            btn1.classList.remove(
-              "bg-white",
-              "border-mist",
-              "text-slate",
-              "hover:bg-fog",
-            );
-            btn1.classList.add("bg-ink", "text-fog", "border-ink");
-            listFilters.task = task;
-            renderWordList();
-          });
-          taskFilters.appendChild(btn1);
-
-          // Quiz filter
-          const btn2 = document.createElement("button");
-          btn2.className = `px-4 py-2 rounded-full border font-medium text-sm transition-all quiz-filter-btn ${task === "all" ? "bg-ink text-fog border-ink" : "bg-white border-mist text-slate hover:bg-fog"}`;
-          btn2.textContent = TASK_LABELS[task];
-          btn2.dataset.quizTask = task;
-          btn2.addEventListener("click", () => {
-            document.querySelectorAll(".quiz-filter-btn").forEach((b) => {
-              b.classList.remove("bg-ink", "text-fog", "border-ink");
-              b.classList.add(
-                "bg-white",
-                "border-mist",
-                "text-slate",
-                "hover:bg-fog",
-              );
-            });
-            btn2.classList.remove(
-              "bg-white",
-              "border-mist",
-              "text-slate",
-              "hover:bg-fog",
-            );
-            btn2.classList.add("bg-ink", "text-fog", "border-ink");
-            quizState.selectedTask = task;
-          });
-          quizFilterButtons.appendChild(btn2);
-        },
-      );
-    }
 
     // ─── Word List Rendering ───────────────────────────────────────────
     function renderWordList() {
@@ -367,6 +308,140 @@ export default function CelpipVocabPage() {
       ).join("");
     }
 
+    function renderSentenceStructure() {
+      const content = document.getElementById("sentence-structure-content");
+
+      content.innerHTML = `
+    <style>
+      .ss-section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #9ca3af; text-transform: uppercase; margin-bottom: 1.25rem; margin-top: 0.25rem; }
+      .ss-divider { height: 1px; background: #f3f4f6; margin: 2.5rem 0; }
+      .ss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+      .ss-pos-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.1rem 1.25rem; }
+      .ss-pos-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; }
+      .ss-pos-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.03em; }
+      .ss-pos-emoji { font-size: 1.2rem; }
+      .ss-pos-def { font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 0.65rem; }
+      .ss-pos-tips { margin-bottom: 0.65rem; }
+      .ss-pos-tip { font-size: 12px; color: #6b7280; display: flex; gap: 6px; line-height: 1.5; margin-bottom: 3px; }
+      .ss-pos-tip::before { content: "›"; color: #d1d5db; flex-shrink: 0; }
+      .ss-pos-examples { display: flex; flex-direction: column; gap: 4px; }
+      .ss-pos-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 4px 9px; }
+      .ss-pos-ex u { text-decoration-color: #9ca3af; }
+      .ss-type-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.25rem; }
+      .ss-type-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
+      .ss-type-name { font-size: 15px; font-weight: 700; color: #111827; }
+      .ss-type-formula { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; background: #f3f4f6; border-radius: 6px; padding: 3px 10px; color: #374151; margin-bottom: 0.65rem; font-family: monospace; }
+      .ss-type-def { font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 0.75rem; }
+      .ss-type-examples { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0.75rem; }
+      .ss-type-ex { font-size: 12px; color: #6b7280; font-style: italic; display: flex; gap: 7px; }
+      .ss-type-ex::before { content: "›"; color: #d1d5db; flex-shrink: 0; font-style: normal; }
+      .ss-tip-bar { font-size: 12px; color: #1e40af; background: #eff6ff; border-radius: 7px; padding: 6px 10px; border-left: 3px solid #93c5fd; }
+      .ss-tip-bar strong { font-weight: 600; }
+      .ss-clause-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.1rem 1.25rem; margin-bottom: 0.75rem; display: flex; gap: 14px; align-items: flex-start; }
+      .ss-clause-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; margin-top: 2px; }
+      .ss-clause-body { flex: 1; }
+      .ss-clause-name { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 4px; }
+      .ss-clause-def { font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 8px; }
+      .ss-clause-exs { display: flex; flex-wrap: wrap; gap: 6px; }
+      .ss-clause-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 9px; border: 1px solid #f3f4f6; }
+      .ss-anatomy-box { background: #f9fafb; border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
+      .ss-anatomy-sentence { font-size: 22px; color: #111827; line-height: 2.4; letter-spacing: 0.01em; flex-wrap: wrap; display: flex; gap: 6px; align-items: baseline; margin-bottom: 1rem; }
+      .ss-anatomy-word { padding: 2px 10px; border-radius: 6px; font-weight: 600; cursor: default; }
+      .ss-anatomy-legend { display: flex; flex-wrap: wrap; gap: 10px; }
+      .ss-anatomy-leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #6b7280; }
+      .ss-anatomy-leg-dot { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+      @media (max-width: 600px) { .ss-grid { grid-template-columns: 1fr; } .ss-anatomy-sentence { font-size: 16px; } }
+    </style>
+
+    <!-- ── Anatomy of a Sentence ── -->
+    <div class="ss-anatomy-box" style="margin-bottom:2rem;">
+      <div class="ss-section-title" style="margin-top:0">Anatomy of a Sentence</div>
+      <div class="ss-anatomy-sentence">
+        <span class="ss-anatomy-word" style="background:#dbeafe;color:#1e40af;" title="Subject">The students</span>
+        <span class="ss-anatomy-word" style="background:#dcfce7;color:#166534;" title="Auxiliary Verb">have</span>
+        <span class="ss-anatomy-word" style="background:#dcfce7;color:#166534;" title="Main Verb">submitted</span>
+        <span class="ss-anatomy-word" style="background:#ede9fe;color:#5b21b6;" title="Determiner">their</span>
+        <span class="ss-anatomy-word" style="background:#fef3c7;color:#92400e;" title="Adjective">final</span>
+        <span class="ss-anatomy-word" style="background:#f9fafb;color:#374151;border:1px solid #e5e7eb;" title="Direct Object (noun)">assignments</span>
+        <span class="ss-anatomy-word" style="background:#fce7f3;color:#be185d;" title="Preposition">before</span>
+        <span class="ss-anatomy-word" style="background:#f9fafb;color:#374151;border:1px solid #e5e7eb;" title="Object of Preposition">the deadline.</span>
+      </div>
+      <div class="ss-anatomy-legend">
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#dbeafe;border:1px solid #bfdbfe"></div>Subject</div>
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#dcfce7;border:1px solid #86efac"></div>Verb</div>
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#ede9fe;border:1px solid #c4b5fd"></div>Determiner</div>
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#fef3c7;border:1px solid #fde68a"></div>Adjective</div>
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#f9fafb;border:1px solid #e5e7eb"></div>Noun</div>
+        <div class="ss-anatomy-leg"><div class="ss-anatomy-leg-dot" style="background:#fce7f3;border:1px solid #fbcfe8"></div>Preposition</div>
+      </div>
+    </div>
+
+    <!-- ── Parts of Speech ── -->
+    <div class="ss-section-title">Parts of Speech</div>
+    <div class="ss-grid" style="margin-bottom:0">
+      ${PARTS_OF_SPEECH.map(
+        (p) => `
+        <div class="ss-pos-card">
+          <div class="ss-pos-header">
+            <span class="ss-pos-emoji">${p.emoji}</span>
+            <span class="ss-pos-badge" style="background:${p.bg};color:${p.color}">${p.tag}</span>
+          </div>
+          <div class="ss-pos-def">${p.definition}</div>
+          <div class="ss-pos-tips">
+            ${p.tips.map((t) => `<div class="ss-pos-tip">${t}</div>`).join("")}
+          </div>
+          <div class="ss-pos-examples">
+            ${p.examples.map((e) => `<div class="ss-pos-ex">${e}</div>`).join("")}
+          </div>
+        </div>
+      `,
+      ).join("")}
+    </div>
+
+    <div class="ss-divider"></div>
+
+    <!-- ── Sentence Types ── -->
+    <div class="ss-section-title">Sentence Types — By Structure & Purpose</div>
+    <div class="ss-grid">
+      ${SENTENCE_TYPES.map(
+        (s) => `
+        <div class="ss-type-card">
+          <div class="ss-type-header">
+            <span style="font-size:1.3rem">${s.emoji}</span>
+            <span class="ss-type-name">${s.name}</span>
+          </div>
+          <div class="ss-type-formula">${s.formula}</div>
+          <div class="ss-type-def">${s.definition}</div>
+          <div class="ss-type-examples">
+            ${s.examples.map((e) => `<div class="ss-type-ex">${e}</div>`).join("")}
+          </div>
+          <div class="ss-tip-bar"><strong>CELPIP tip:</strong> ${s.celpipTip}</div>
+        </div>
+      `,
+      ).join("")}
+    </div>
+
+    <div class="ss-divider"></div>
+
+    <!-- ── Clause Types ── -->
+    <div class="ss-section-title">Clause Types</div>
+    ${CLAUSE_TYPES.map(
+      (c) => `
+      <div class="ss-clause-card">
+        <span class="ss-clause-badge" style="background:${c.badgeBg};color:${c.badgeColor}">${c.badge}</span>
+        <div class="ss-clause-body">
+          <div class="ss-clause-name">${c.name}</div>
+          <div class="ss-clause-def">${c.definition}</div>
+          <div class="ss-clause-exs">
+            ${c.examples.map((e) => `<span class="ss-clause-ex">${e}</span>`).join("")}
+          </div>
+        </div>
+      </div>
+    `,
+    ).join("")}
+  `;
+    }
+
     function renderArticles() {
       const content = document.getElementById("articles-content");
 
@@ -426,7 +501,58 @@ export default function CelpipVocabPage() {
       .art-score-num { font-size: 48px; font-weight: 700; color: #111827; }
       .art-score-label { font-size: 15px; color: #6b7280; margin-top: 6px; }
       .art-tip-box { margin-top: 1rem; padding: 10px 14px; background: #f9fafb; border-radius: 8px; font-size: 13px; color: #6b7280; line-height: 1.6; }
+      
+       /* ── Position header styles ── */
+      .art-pos-header { margin-bottom: 2rem; }
+      .art-pos-title { font-size: 15px; font-weight: 600; color: #111827; margin-bottom: 0.5rem; }
+      .art-pos-desc { font-size: 13px; color: #6b7280; line-height: 1.7; margin-bottom: 1.25rem; }
+      .art-pos-tabs { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+      .art-pos-tab { padding: 6px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; background: #fff; color: #6b7280; transition: all 0.15s; }
+      .art-pos-tab.art-pos-active { background: #111827; color: #fff; border-color: #111827; }
+      .art-pos-example { background: #f9fafb; border-radius: 12px; padding: 1.25rem; border: 1px solid #e5e7eb; }
+      .art-pos-sentence { font-size: 17px; color: #111827; line-height: 2.2; margin-bottom: 10px; }
+      .art-pos-word { display: inline-block; padding: 1px 6px; border-radius: 4px; font-weight: 600; margin: 0 1px; }
+      .art-pos-word.art { background: #dbeafe; color: #1e40af; }
+      .art-pos-word.adj { background: #fef3c7; color: #92400e; }
+      .art-pos-word.adv { background: #ede9fe; color: #5b21b6; }
+      .art-pos-word.noun { background: #dcfce7; color: #166534; }
+      .art-pos-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+      .art-pos-leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #6b7280; }
+      .art-pos-leg-dot { width: 10px; height: 10px; border-radius: 3px; }
+      .art-pos-rule { font-size: 13px; color: #374151; line-height: 1.6; }
+      .art-pos-rule strong { color: #111827; }
+
+      /* ── Zero article grid ── */
+      .art-zero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+      .art-zero-cell { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; }
+      .art-zero-cell-title { font-size: 12px; font-weight: 600; color: #5b21b6; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .art-zero-cell-ex { font-size: 12px; color: #6b7280; line-height: 1.7; }
+      @media (max-width: 600px) { .art-zero-grid { grid-template-columns: 1fr; } }
+
     </style>
+
+     <!-- ══════════════════════════════════════════════════════ -->
+    <!-- POSITION HEADER — shown above all tabs                -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="art-pos-header">
+      <div class="art-pos-title">Where does the article go in a sentence?</div>
+      <div class="art-pos-desc">
+        Articles always attach to a <strong>noun phrase</strong> — but the noun doesn't have to come right after.
+        An adjective or even an adverb can sit between the article and the noun.
+        Click each pattern to see a colour-coded example.
+      </div>
+      <div class="art-pos-tabs" id="art-pos-tabs"></div>
+      <div class="art-pos-example" id="art-pos-example">
+        <div class="art-pos-legend">
+          <div class="art-pos-leg-item"><div class="art-pos-leg-dot" style="background:#bfdbfe"></div>article</div>
+          <div class="art-pos-leg-item"><div class="art-pos-leg-dot" style="background:#fde68a"></div>adjective</div>
+          <div class="art-pos-leg-item"><div class="art-pos-leg-dot" style="background:#ddd6fe"></div>adverb</div>
+          <div class="art-pos-leg-item"><div class="art-pos-leg-dot" style="background:#bbf7d0"></div>noun</div>
+        </div>
+        <div class="art-pos-sentence" id="art-pos-sentence"></div>
+        <div class="art-pos-rule" id="art-pos-rule"></div>
+      </div>
+    </div>
 
     <div class="art-tab-row">
       <button class="art-tab art-active" onclick="artShowPanel('art-rules')">Rules</button>
@@ -496,15 +622,58 @@ export default function CelpipVocabPage() {
         </div>
       </div>
       <div class="art-rule-card">
-        <div class="art-rule-title"><span class="art-badge art-badge-zero">∅</span> Zero article — no article at all</div>
-        <div class="art-rule-body">Skip the article with: plural generalizations, uncountable nouns used generally, most proper names, sports, meals, languages, academic subjects, and abstract ideas.
-          <div class="art-ex-row">
-            <span class="art-ex-pill"><em>Dogs</em> are loyal.</span>
-            <span class="art-ex-pill">I drink <em>coffee</em>.</span>
-            <span class="art-ex-pill">She loves <em>music</em>.</span>
-            <span class="art-ex-pill">We play <em>soccer</em>.</span>
-            <span class="art-ex-pill">He studies <em>biology</em>.</span>
-            <span class="art-ex-pill"><em>Canada</em> is large.</span>
+        <div class="art-rule-title"><span class="art-badge art-badge-zero">∅</span> Zero article — when NO article is used</div>
+        <div class="art-rule-body">
+          English drops the article in many predictable situations. Here is every major case:
+          <div class="art-zero-grid">
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Plural generalizations</div>
+              <div class="art-zero-cell-ex">Talking about a whole category in general — not specific members.<br><em>Dogs are loyal. Books are expensive.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Uncountable nouns (general)</div>
+              <div class="art-zero-cell-ex">Water, advice, information, furniture, money, knowledge — when used generally.<br><em>I need advice. She likes music.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Meals</div>
+              <div class="art-zero-cell-ex">breakfast, lunch, dinner, supper — when talking about the meal in general.<br><em>What's for dinner? I skipped lunch.</em><br><small>Exception: <em>a big breakfast</em> (described meal)</small></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Sports &amp; games</div>
+              <div class="art-zero-cell-ex">Never use an article before sport names.<br><em>She plays tennis. He loves chess. We watch soccer.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Languages</div>
+              <div class="art-zero-cell-ex">No article before a language name alone.<br><em>She speaks French. He is learning Mandarin.</em><br><small>Exception: <em>the French language</em> (with "language")</small></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Academic subjects</div>
+              <div class="art-zero-cell-ex">No article before school subjects.<br><em>She studies biology. He majors in economics.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Most proper nouns</div>
+              <div class="art-zero-cell-ex">People's names, most countries, cities, continents, individual mountains, lakes.<br><em>Canada, Paris, Asia, Lake Ontario, Mount Fuji.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Institutions (primary purpose)</div>
+              <div class="art-zero-cell-ex">school, university, hospital, church, prison, bed, work, home — when used for their core purpose.<br><em>She's in hospital. He's at work. I go to school.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Abstract nouns (general truth)</div>
+              <div class="art-zero-cell-ex">When stating a general truth or universal concept.<br><em>Love is powerful. Honesty matters. Freedom is precious.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Transport &amp; communication (by + noun)</div>
+              <div class="art-zero-cell-ex">No article after "by" for modes of transport or communication.<br><em>by car, by bus, by train, by phone, by email.</em></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Days, months, seasons (general)</div>
+              <div class="art-zero-cell-ex">No article for general references to days, months, and seasons.<br><em>I love winter. She was born in March. See you on Monday.</em><br><small>Exception: <em>the Monday before last</em> (specific)</small></div>
+            </div>
+            <div class="art-zero-cell">
+              <div class="art-zero-cell-title">Streets, roads, squares, parks (named)</div>
+              <div class="art-zero-cell-ex">Most named streets and parks drop the article.<br><em>She lives on King Street. We walked through Central Park.</em><br><small>Exception: <em>the High Street</em> (British English)</small></div>
+            </div>
           </div>
         </div>
       </div>
@@ -956,15 +1125,9 @@ export default function CelpipVocabPage() {
     </div>
 
     <!-- TENSES PANEL -->
-    <div id="vb-tenses" class="vb-panel">
-      <div class="vb-nav-row">
-        <button class="vb-nav-btn" id="vb-tense-prev" onclick="vbMoveTense(-1)" disabled>← prev</button>
-        <span style="font-size:13px;color:#6b7280;" id="vb-tense-counter"></span>
-        <button class="vb-nav-btn" id="vb-tense-next" onclick="vbMoveTense(1)">next →</button>
-      </div>
-      <div class="vb-slide-box" id="vb-tense-slide"></div>
-      <div id="vb-tense-timeline" style="margin-top:0.75rem;"></div>
-    </div>
+<div id="vb-tenses" class="vb-panel">
+  <div id="vb-tenses-all"></div>
+</div>
 
     <!-- FORMS PANEL -->
     <div id="vb-forms" class="vb-panel">
@@ -1066,727 +1229,6 @@ export default function CelpipVocabPage() {
     </div>
   `;
 
-      // ── DATA ──────────────────────────────────────────────────────────────
-
-      const TENSES = [
-        {
-          group: "Simple tenses",
-          name: "Present simple",
-          form: "V / V-s (he/she/it)",
-          use: "Habits, facts, schedules, permanent situations.",
-          signal: "always, usually, every day, never",
-          examples: [
-            "She <em>works</em> at a hospital.",
-            "The train <em>leaves</em> at 8 am.",
-            "Water <em>boils</em> at 100°C.",
-          ],
-        },
-        {
-          group: "Simple tenses",
-          name: "Past simple",
-          form: "V-ed (regular) / irregular form",
-          use: "Completed actions at a specific time in the past.",
-          signal: "yesterday, last year, in 2020, ago",
-          examples: [
-            "She <em>worked</em> all night.",
-            "He <em>went</em> to Paris last summer.",
-            "They <em>finished</em> the project on Friday.",
-          ],
-        },
-        {
-          group: "Simple tenses",
-          name: "Future simple",
-          form: "will + V",
-          use: "Predictions, spontaneous decisions, promises.",
-          signal: "tomorrow, next week, soon, I think",
-          examples: [
-            "It <em>will rain</em> tomorrow.",
-            "I <em>will call</em> you back.",
-            "She <em>will be</em> a great doctor.",
-          ],
-        },
-        {
-          group: "Continuous tenses",
-          name: "Present continuous",
-          form: "am/is/are + V-ing",
-          use: "Actions happening right now or temporary situations.",
-          signal: "now, at the moment, currently, today",
-          examples: [
-            "She <em>is studying</em> for her exam.",
-            "They <em>are building</em> a new bridge.",
-            "I <em>am leaving</em> tomorrow. (planned future)",
-          ],
-        },
-        {
-          group: "Continuous tenses",
-          name: "Past continuous",
-          form: "was/were + V-ing",
-          use: "Action in progress at a specific past moment, or interrupted by another action.",
-          signal: "while, when, at 5pm yesterday",
-          examples: [
-            "She <em>was sleeping</em> when I called.",
-            "They <em>were arguing</em> all morning.",
-            "I <em>was reading</em> when the lights went out.",
-          ],
-        },
-        {
-          group: "Continuous tenses",
-          name: "Future continuous",
-          form: "will be + V-ing",
-          use: "Action in progress at a future moment.",
-          signal: "at this time tomorrow, by noon",
-          examples: [
-            "This time next week, I <em>will be flying</em> to Tokyo.",
-            "She <em>will be working</em> when you arrive.",
-          ],
-        },
-        {
-          group: "Perfect tenses",
-          name: "Present perfect",
-          form: "have/has + past participle",
-          use: "Past action with present relevance; experience; actions that started in the past and continue.",
-          signal: "just, already, yet, ever, never, since, for",
-          examples: [
-            "She <em>has lived</em> here for five years.",
-            "I <em>have already eaten</em>.",
-            "Have you ever <em>visited</em> Nepal?",
-          ],
-        },
-        {
-          group: "Perfect tenses",
-          name: "Past perfect",
-          form: "had + past participle",
-          use: 'Action completed before another past action. The "further back" past.',
-          signal: "before, after, already, by the time",
-          examples: [
-            "She <em>had left</em> before I arrived.",
-            "By 2020, he <em>had published</em> three books.",
-            "They <em>had never met</em> before the conference.",
-          ],
-        },
-        {
-          group: "Perfect tenses",
-          name: "Future perfect",
-          form: "will have + past participle",
-          use: "Action that will be completed before a specific future time.",
-          signal: "by next year, by the time, before",
-          examples: [
-            "By Friday, I <em>will have finished</em> the report.",
-            "She <em>will have graduated</em> by next June.",
-          ],
-        },
-        {
-          group: "Perfect continuous",
-          name: "Present perfect continuous",
-          form: "have/has been + V-ing",
-          use: "Action that started in the past, is still continuing, and shows duration.",
-          signal: "for, since, how long",
-          examples: [
-            "She <em>has been working</em> here for three years.",
-            "I <em>have been waiting</em> since noon.",
-            "Why is he tired? — He <em>has been running</em>.",
-          ],
-        },
-        {
-          group: "Perfect continuous",
-          name: "Past perfect continuous",
-          form: "had been + V-ing",
-          use: "Ongoing action that was in progress before another past action.",
-          signal: "for, since, before, when",
-          examples: [
-            "She <em>had been studying</em> for hours before she slept.",
-            "He was exhausted — he <em>had been working</em> all day.",
-          ],
-        },
-        {
-          group: "Perfect continuous",
-          name: "Future perfect continuous",
-          form: "will have been + V-ing",
-          use: "Duration of an action up to a specific future point. (Formal/advanced)",
-          signal: "by, for",
-          examples: [
-            "By July, she <em>will have been teaching</em> for ten years.",
-            "I <em>will have been waiting</em> for an hour by the time you arrive.",
-          ],
-        },
-      ];
-
-      const MODALS = [
-        {
-          modal: "can",
-          meanings: [
-            "Ability (present)",
-            "Permission (informal)",
-            "Possibility",
-          ],
-          examples: [
-            "She <em>can</em> speak three languages. (ability)",
-            "You <em>can</em> leave early today. (permission)",
-            "It <em>can</em> get very cold here in winter. (possibility)",
-          ],
-          negative: "can't / cannot",
-          note: 'Use "could" for past ability: He could swim when he was five.',
-        },
-        {
-          modal: "could",
-          meanings: [
-            "Past ability",
-            "Polite request",
-            "Weak possibility",
-            "Suggestion",
-          ],
-          examples: [
-            "She <em>could</em> run very fast as a child. (past ability)",
-            "<em>Could</em> you please open the window? (polite request)",
-            "It <em>could</em> rain tonight. (weak possibility)",
-          ],
-          negative: "couldn't",
-          note: '"Could" is softer and more polite than "can" for requests.',
-        },
-        {
-          modal: "may",
-          meanings: ["Formal permission", "Possibility (50%)"],
-          examples: [
-            "You <em>may</em> use a dictionary during the exam. (permission)",
-            "She <em>may</em> be late — I'm not sure. (possibility)",
-            "It <em>may</em> snow this weekend.",
-          ],
-          negative: "may not",
-          note: 'More formal than "can" for permission. "Might" is slightly less certain than "may".',
-        },
-        {
-          modal: "might",
-          meanings: ["Weak possibility (< 50%)", "Polite suggestion"],
-          examples: [
-            "He <em>might</em> come to the party — but I doubt it.",
-            "You <em>might</em> want to reconsider that decision.",
-            "She <em>might</em> have missed the bus.",
-          ],
-          negative: "might not",
-          note: 'Use "might have + past participle" for speculation about the past.',
-        },
-        {
-          modal: "must",
-          meanings: ["Strong obligation", "Logical deduction (certainty)"],
-          examples: [
-            "You <em>must</em> wear a seatbelt. (obligation)",
-            "She <em>must</em> be exhausted — she worked 14 hours. (deduction)",
-            "I <em>must</em> call my parents today.",
-          ],
-          negative: "mustn't (prohibition) / don't have to (no obligation)",
-          note: '"Mustn\'t" = forbidden. "Don\'t have to" = not necessary (very different!)',
-        },
-        {
-          modal: "should",
-          meanings: [
-            "Advice / recommendation",
-            "Expectation",
-            "Mild obligation",
-          ],
-          examples: [
-            "You <em>should</em> see a doctor about that cough. (advice)",
-            "The package <em>should</em> arrive by Friday. (expectation)",
-            "We <em>should</em> respect others.",
-          ],
-          negative: "shouldn't",
-          note: 'Use "should have + past participle" for past regrets: You should have called earlier.',
-        },
-        {
-          modal: "will",
-          meanings: [
-            "Future fact / prediction",
-            "Promise",
-            "Spontaneous decision",
-          ],
-          examples: [
-            "I <em>will</em> finish this by tonight. (promise)",
-            "It <em>will</em> be a sunny day tomorrow. (prediction)",
-            "I'll get the door — stay seated. (spontaneous)",
-          ],
-          negative: "won't",
-          note: '"Will" for predictions is based on what the speaker believes. Use "going to" for evidence-based future.',
-        },
-        {
-          modal: "would",
-          meanings: ["Conditional", "Polite request", "Past habit", "Wish"],
-          examples: [
-            "I <em>would</em> travel more if I had time. (conditional)",
-            "<em>Would</em> you like some coffee? (polite offer)",
-            "As a child, we <em>would</em> play outside all day. (past habit)",
-          ],
-          negative: "wouldn't",
-          note: '"Would" is the most versatile modal — it appears in conditionals, polite speech, and narrative.',
-        },
-        {
-          modal: "shall",
-          meanings: ["Formal future (I/we)", "Offer", "Suggestion"],
-          examples: [
-            "<em>Shall</em> we begin? (suggestion)",
-            "I <em>shall</em> return. (formal promise)",
-            "<em>Shall</em> I open the window for you? (offer)",
-          ],
-          negative: "shan't (rare)",
-          note: '"Shall" is formal and mostly British English. In everyday speech, "will" and "should" replace it.',
-        },
-        {
-          modal: "ought to",
-          meanings: ["Moral duty / advice", "Expectation"],
-          examples: [
-            "You <em>ought to</em> apologize to her.",
-            "The results <em>ought to</em> be ready by now.",
-            "We <em>ought to</em> help those in need.",
-          ],
-          negative: "ought not to",
-          note: '"Ought to" is similar to "should" but slightly stronger in moral implication.',
-        },
-      ];
-
-      const PHRASAL = [
-        {
-          verb: "give up",
-          meaning: "stop doing something / quit",
-          separable: true,
-          examples: [
-            "She gave <em>up</em> smoking last year.",
-            "Don't give up on your dreams.",
-          ],
-        },
-        {
-          verb: "look after",
-          meaning: "take care of",
-          separable: false,
-          examples: [
-            "She looks after her elderly parents.",
-            "Can you look after the kids tonight?",
-          ],
-        },
-        {
-          verb: "bring up",
-          meaning: "raise a child / mention a topic",
-          separable: true,
-          examples: [
-            "She was brought up in Toronto.",
-            "He brought up an interesting point.",
-          ],
-        },
-        {
-          verb: "run out of",
-          meaning: "have no more of something",
-          separable: false,
-          examples: [
-            "We've run out of milk.",
-            "I ran out of time during the exam.",
-          ],
-        },
-        {
-          verb: "put off",
-          meaning: "postpone / delay",
-          separable: true,
-          examples: [
-            "Don't put off your work until tomorrow.",
-            "The meeting was put off until Friday.",
-          ],
-        },
-        {
-          verb: "get over",
-          meaning: "recover from (illness or emotion)",
-          separable: false,
-          examples: [
-            "It took her a month to get over the flu.",
-            "He never got over the breakup.",
-          ],
-        },
-        {
-          verb: "come across",
-          meaning: "find or meet by chance",
-          separable: false,
-          examples: [
-            "I came across an old photo album.",
-            "She comes across as very confident.",
-          ],
-        },
-        {
-          verb: "turn down",
-          meaning: "reject / refuse an offer",
-          separable: true,
-          examples: [
-            "He turned down the job offer.",
-            "She turned the volume down.",
-          ],
-        },
-        {
-          verb: "look into",
-          meaning: "investigate / examine",
-          separable: false,
-          examples: [
-            "The police are looking into the matter.",
-            "I'll look into it.",
-          ],
-        },
-        {
-          verb: "make up",
-          meaning: "invent / reconcile after argument",
-          separable: true,
-          examples: [
-            "She made up an excuse.",
-            "They argued but quickly made up.",
-          ],
-        },
-        {
-          verb: "take on",
-          meaning: "accept responsibility / hire",
-          separable: true,
-          examples: [
-            "She took on a new project.",
-            "The company took on 50 new staff.",
-          ],
-        },
-        {
-          verb: "set up",
-          meaning: "establish / arrange",
-          separable: true,
-          examples: [
-            "They set up a new business.",
-            "Can you set up a meeting?",
-          ],
-        },
-        {
-          verb: "break down",
-          meaning: "stop working / lose emotional control",
-          separable: false,
-          examples: [
-            "The car broke down on the highway.",
-            "She broke down in tears.",
-          ],
-        },
-        {
-          verb: "carry out",
-          meaning: "perform / complete a task",
-          separable: true,
-          examples: [
-            "The team carried out a detailed inspection.",
-            "Carry out the plan.",
-          ],
-        },
-        {
-          verb: "go through",
-          meaning: "experience something difficult / examine",
-          separable: false,
-          examples: [
-            "She went through a tough divorce.",
-            "Let's go through the report together.",
-          ],
-        },
-      ];
-
-      const IRREGULAR = [
-        { base: "be", past: "was/were", pp: "been", pattern: "unique" },
-        { base: "beat", past: "beat", pp: "beaten", pattern: "A-A-B" },
-        { base: "begin", past: "began", pp: "begun", pattern: "vowel change" },
-        { base: "bite", past: "bit", pp: "bitten", pattern: "A-B-B+en" },
-        { base: "blow", past: "blew", pp: "blown", pattern: "ew/own" },
-        { base: "break", past: "broke", pp: "broken", pattern: "A-B-B+en" },
-        { base: "bring", past: "brought", pp: "brought", pattern: "A-B-B" },
-        { base: "build", past: "built", pp: "built", pattern: "A-B-B" },
-        { base: "buy", past: "bought", pp: "bought", pattern: "A-B-B" },
-        { base: "catch", past: "caught", pp: "caught", pattern: "A-B-B" },
-        { base: "choose", past: "chose", pp: "chosen", pattern: "A-B-B+en" },
-        { base: "come", past: "came", pp: "come", pattern: "A-B-A" },
-        { base: "cut", past: "cut", pp: "cut", pattern: "A-A-A" },
-        { base: "do", past: "did", pp: "done", pattern: "unique" },
-        { base: "drink", past: "drank", pp: "drunk", pattern: "vowel change" },
-        { base: "drive", past: "drove", pp: "driven", pattern: "A-B-B+en" },
-        { base: "eat", past: "ate", pp: "eaten", pattern: "A-B-B+en" },
-        { base: "fall", past: "fell", pp: "fallen", pattern: "A-B-B+en" },
-        { base: "feel", past: "felt", pp: "felt", pattern: "A-B-B" },
-        { base: "fight", past: "fought", pp: "fought", pattern: "A-B-B" },
-        { base: "find", past: "found", pp: "found", pattern: "A-B-B" },
-        { base: "fly", past: "flew", pp: "flown", pattern: "ew/own" },
-        {
-          base: "forget",
-          past: "forgot",
-          pp: "forgotten",
-          pattern: "A-B-B+en",
-        },
-        { base: "get", past: "got", pp: "got/gotten", pattern: "A-B-B" },
-        { base: "give", past: "gave", pp: "given", pattern: "A-B-B+en" },
-        { base: "go", past: "went", pp: "gone", pattern: "unique" },
-        { base: "grow", past: "grew", pp: "grown", pattern: "ew/own" },
-        { base: "have", past: "had", pp: "had", pattern: "A-B-B" },
-        { base: "hear", past: "heard", pp: "heard", pattern: "A-B-B" },
-        { base: "hide", past: "hid", pp: "hidden", pattern: "A-B-B+en" },
-        { base: "hold", past: "held", pp: "held", pattern: "A-B-B" },
-        { base: "keep", past: "kept", pp: "kept", pattern: "A-B-B" },
-        { base: "know", past: "knew", pp: "known", pattern: "ew/own" },
-        { base: "lead", past: "led", pp: "led", pattern: "A-B-B" },
-        { base: "leave", past: "left", pp: "left", pattern: "A-B-B" },
-        { base: "let", past: "let", pp: "let", pattern: "A-A-A" },
-        { base: "lie", past: "lay", pp: "lain", pattern: "vowel change" },
-        { base: "lose", past: "lost", pp: "lost", pattern: "A-B-B" },
-        { base: "make", past: "made", pp: "made", pattern: "A-B-B" },
-        { base: "meet", past: "met", pp: "met", pattern: "A-B-B" },
-        { base: "pay", past: "paid", pp: "paid", pattern: "A-B-B" },
-        { base: "put", past: "put", pp: "put", pattern: "A-A-A" },
-        {
-          base: "read",
-          past: "read",
-          pp: "read",
-          pattern: "A-A-A (pronunciation changes)",
-        },
-        { base: "ride", past: "rode", pp: "ridden", pattern: "A-B-B+en" },
-        { base: "ring", past: "rang", pp: "rung", pattern: "vowel change" },
-        { base: "rise", past: "rose", pp: "risen", pattern: "vowel change" },
-        { base: "run", past: "ran", pp: "run", pattern: "A-B-A" },
-        { base: "say", past: "said", pp: "said", pattern: "A-B-B" },
-        { base: "see", past: "saw", pp: "seen", pattern: "unique" },
-        { base: "sell", past: "sold", pp: "sold", pattern: "A-B-B" },
-        { base: "send", past: "sent", pp: "sent", pattern: "A-B-B" },
-        { base: "set", past: "set", pp: "set", pattern: "A-A-A" },
-        { base: "show", past: "showed", pp: "shown", pattern: "A-B-B+en" },
-        { base: "sing", past: "sang", pp: "sung", pattern: "vowel change" },
-        { base: "sit", past: "sat", pp: "sat", pattern: "A-B-B" },
-        { base: "sleep", past: "slept", pp: "slept", pattern: "A-B-B" },
-        { base: "speak", past: "spoke", pp: "spoken", pattern: "A-B-B+en" },
-        { base: "spend", past: "spent", pp: "spent", pattern: "A-B-B" },
-        { base: "stand", past: "stood", pp: "stood", pattern: "A-B-B" },
-        { base: "steal", past: "stole", pp: "stolen", pattern: "A-B-B+en" },
-        { base: "swim", past: "swam", pp: "swum", pattern: "vowel change" },
-        { base: "take", past: "took", pp: "taken", pattern: "A-B-B+en" },
-        { base: "teach", past: "taught", pp: "taught", pattern: "A-B-B" },
-        { base: "tell", past: "told", pp: "told", pattern: "A-B-B" },
-        { base: "think", past: "thought", pp: "thought", pattern: "A-B-B" },
-        { base: "throw", past: "threw", pp: "thrown", pattern: "ew/own" },
-        {
-          base: "understand",
-          past: "understood",
-          pp: "understood",
-          pattern: "A-B-B",
-        },
-        { base: "wake", past: "woke", pp: "woken", pattern: "A-B-B+en" },
-        { base: "wear", past: "wore", pp: "worn", pattern: "A-B-B+en" },
-        { base: "win", past: "won", pp: "won", pattern: "A-B-B" },
-        { base: "write", past: "wrote", pp: "written", pattern: "A-B-B+en" },
-      ];
-
-      const FILL_SENTENCES = [
-        {
-          before: "She",
-          after: "here for five years.",
-          answer: "has lived",
-          options: ["lives", "has lived", "lived", "is living"],
-          explain:
-            "Action that started in the past and continues → <strong>present perfect</strong>: has + past participle.",
-        },
-        {
-          before: "When I arrived, he",
-          after: "already left.",
-          answer: "had already left",
-          options: [
-            "already left",
-            "has already left",
-            "had already left",
-            "was leaving",
-          ],
-          explain:
-            "Action completed before another past action → <strong>past perfect</strong>: had + past participle.",
-        },
-        {
-          before: "I",
-          after: "a strange noise while I was sleeping.",
-          answer: "heard",
-          options: ["hear", "heard", "have heard", "was hearing"],
-          explain:
-            "Completed action at a specific past time → <strong>past simple</strong>.",
-        },
-        {
-          before: "The report",
-          after: "by the team last week.",
-          answer: "was written",
-          options: ["wrote", "has written", "was written", "is written"],
-          explain:
-            "Passive voice: subject receives the action → <strong>be + past participle</strong>.",
-        },
-        {
-          before: "By next month, she",
-          after: "the project.",
-          answer: "will have completed",
-          options: [
-            "will complete",
-            "completes",
-            "has completed",
-            "will have completed",
-          ],
-          explain:
-            "Action completed before a future point → <strong>future perfect</strong>: will have + past participle.",
-        },
-        {
-          before: "You",
-          after: "smoke in this building.",
-          answer: "must not",
-          options: ["should not", "must not", "do not have to", "cannot"],
-          explain:
-            '"Must not" = prohibition (forbidden). "Do not have to" would mean it is not necessary — very different.',
-        },
-        {
-          before: "He",
-          after: "when the accident happened.",
-          answer: "was driving",
-          options: ["drove", "has driven", "was driving", "drives"],
-          explain:
-            "Action in progress when interrupted → <strong>past continuous</strong>: was/were + V-ing.",
-        },
-        {
-          before: "I enjoy",
-          after: "on weekends.",
-          answer: "hiking",
-          options: ["to hike", "hike", "hiking", "hiked"],
-          explain:
-            '"Enjoy" is always followed by a <strong>gerund</strong> (V-ing), never an infinitive.',
-        },
-        {
-          before: "If I",
-          after: "more time, I would travel the world.",
-          answer: "had",
-          options: ["have", "had", "would have", "will have"],
-          explain:
-            "Second conditional (unreal present): <strong>if + past simple</strong>, would + base verb.",
-        },
-        {
-          before: "The children",
-          after: "in the garden all afternoon.",
-          answer: "have been playing",
-          options: [
-            "played",
-            "are playing",
-            "have been playing",
-            "were playing",
-          ],
-          explain:
-            "Ongoing action from past to now with emphasis on duration → <strong>present perfect continuous</strong>.",
-        },
-        {
-          before: "She",
-          after: "Spanish for two years before she moved to Mexico.",
-          answer: "had been studying",
-          options: [
-            "studied",
-            "has been studying",
-            "had been studying",
-            "was studying",
-          ],
-          explain:
-            "Ongoing action completed before another past event → <strong>past perfect continuous</strong>.",
-        },
-        {
-          before: "You",
-          after: "see a doctor — that cough sounds serious.",
-          answer: "should",
-          options: ["must", "should", "can", "will"],
-          explain:
-            '"Should" = advice/recommendation. "Must" would be very strong obligation here.',
-        },
-      ];
-
-      const QUIZ_QS = [
-        {
-          q: '"I have been waiting for an hour." — What tense is this?',
-          opts: [
-            "Present perfect",
-            "Past continuous",
-            "Present perfect continuous",
-            "Past perfect",
-          ],
-          ans: 2,
-          exp: "<strong>have/has been + V-ing</strong> = present perfect continuous. Shows an action in progress from past to now with duration.",
-        },
-        {
-          q: "Which sentence is correct?",
-          opts: [
-            "I am knowing the answer.",
-            "I know the answer.",
-            "I am knowing answer.",
-            "I have been knowing the answer.",
-          ],
-          ans: 1,
-          exp: '"Know" is a <strong>stative verb</strong> — it describes a state, not an action. Stative verbs are not used in continuous tenses.',
-        },
-        {
-          q: 'Choose the correct modal: "You ___ take off your shoes — it\'s optional."',
-          opts: ["must", "should", "don't have to", "mustn't"],
-          ans: 2,
-          exp: '"Don\'t have to" = not necessary / optional. "Mustn\'t" = forbidden. These are opposite in meaning!',
-        },
-        {
-          q: '"She ___ to the party if she had known about it." What fits?',
-          opts: ["would come", "would have come", "will come", "came"],
-          ans: 1,
-          exp: "Third conditional (unreal past): <strong>would have + past participle</strong>.",
-        },
-        {
-          q: "Which verb is intransitive?",
-          opts: [
-            "She bought a car.",
-            "He kicked the ball.",
-            "The baby arrived.",
-            "I love music.",
-          ],
-          ans: 2,
-          exp: '"Arrived" takes no direct object — the action stays with the subject. It is <strong>intransitive</strong>.',
-        },
-        {
-          q: '"By July, she ___ here for ten years." Which form fits?',
-          opts: [
-            "will work",
-            "will have worked",
-            "has worked",
-            "will be working",
-          ],
-          ans: 1,
-          exp: '"By July" + duration → <strong>future perfect</strong>: will have + past participle.',
-        },
-        {
-          q: 'What follows "avoid"?',
-          opts: ["to eat", "eat", "eating", "eaten"],
-          ans: 2,
-          exp: '"Avoid" is always followed by a <strong>gerund</strong> (V-ing): avoid eating, avoid making.',
-        },
-        {
-          q: '"The window was broken by the wind." — What voice is this?',
-          opts: ["Active", "Passive", "Causative", "Conditional"],
-          ans: 1,
-          exp: "<strong>Passive voice</strong>: be + past participle. The subject receives the action.",
-        },
-        {
-          q: "Which is a linking verb?",
-          opts: ["run", "eat", "seem", "build"],
-          ans: 2,
-          exp: '"Seem" is a <strong>linking verb</strong> — it connects the subject to a description: She seems tired.',
-        },
-        {
-          q: '"She ___ when the phone rang." Choose the correct form.',
-          opts: ["slept", "was sleeping", "has slept", "had slept"],
-          ans: 1,
-          exp: "Action in progress when interrupted → <strong>past continuous</strong>: was/were + V-ing.",
-        },
-        {
-          q: 'Which sentence uses "should have" correctly?',
-          opts: [
-            "You should have called earlier.",
-            "You should called earlier.",
-            "You should have call earlier.",
-            "You should calling earlier.",
-          ],
-          ans: 0,
-          exp: '"Should have" expresses past regret: <strong>should + have + past participle</strong>.',
-        },
-        {
-          q: '"Get" in "I got my hair cut" is a ___ verb.',
-          opts: ["linking", "auxiliary", "causative", "modal"],
-          ans: 2,
-          exp: '"Get" here is a <strong>causative verb</strong> — someone else performs the action on your behalf.',
-        },
-      ];
-
       // ── Panel switching ────────────────────────────────────────────────────
       window.vbShowPanel = function (id) {
         document
@@ -1817,36 +1259,105 @@ export default function CelpipVocabPage() {
       };
 
       // ── Tenses panel ───────────────────────────────────────────────────────
-      let vbTI = 0;
       function initVbTenses() {
         window._vbTenseInit = true;
-        vbRenderTense();
+
+        const GROUP_COLORS = {
+          "Simple tenses": {
+            badge: "#dbeafe",
+            badgeText: "#1e40af",
+            border: "#bfdbfe",
+            header: "#eff6ff",
+          },
+          "Continuous tenses": {
+            badge: "#dcfce7",
+            badgeText: "#166534",
+            border: "#86efac",
+            header: "#f0fdf4",
+          },
+          "Perfect tenses": {
+            badge: "#fef3c7",
+            badgeText: "#92400e",
+            border: "#fde68a",
+            header: "#fffbeb",
+          },
+          "Perfect continuous": {
+            badge: "#ede9fe",
+            badgeText: "#5b21b6",
+            border: "#c4b5fd",
+            header: "#faf5ff",
+          },
+        };
+
+        // Group tenses
+        const groups = {};
+        TENSES.forEach((t) => {
+          if (!groups[t.group]) groups[t.group] = [];
+          groups[t.group].push(t);
+        });
+
+        const container = document.getElementById("vb-tenses-all");
+        container.innerHTML = `
+    <style>
+      .vbt-group { margin-bottom: 2rem; }
+      .vbt-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
+      .vbt-group-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .vbt-group-count { font-size: 12px; color: #9ca3af; }
+      .vbt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 0.85rem; }
+      .vbt-card { border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; background: #fff; }
+      .vbt-card-head { padding: 0.75rem 1rem 0.6rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+      .vbt-card-name { font-size: 14px; font-weight: 700; color: #111827; line-height: 1.3; }
+      .vbt-card-form { font-size: 11px; font-family: monospace; font-weight: 600; padding: 2px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+      .vbt-card-body { padding: 0 1rem 0.85rem; }
+      .vbt-card-use { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
+      .vbt-card-signal { font-size: 11px; color: #9ca3af; margin-bottom: 0.6rem; }
+      .vbt-card-signal strong { color: #6b7280; }
+      .vbt-card-exs { display: flex; flex-direction: column; gap: 4px; }
+      .vbt-card-ex { font-size: 12px; color: #374151; background: #f9fafb; border: 1px solid #f3f4f6; border-radius: 6px; padding: 4px 9px; line-height: 1.5; }
+      .vbt-card-ex em { color: #2563eb; font-style: normal; font-weight: 600; }
+      @media (max-width: 600px) { .vbt-grid { grid-template-columns: 1fr; } }
+    </style>
+    ${Object.entries(groups)
+      .map(([groupName, tenses]) => {
+        const c = GROUP_COLORS[groupName] || {
+          badge: "#f3f4f6",
+          badgeText: "#374151",
+          border: "#e5e7eb",
+          header: "#f9fafb",
+        };
+        return `
+        <div class="vbt-group">
+          <div class="vbt-group-header">
+            <span class="vbt-group-badge" style="background:${c.badge};color:${c.badgeText}">${groupName}</span>
+            <span class="vbt-group-count">${tenses.length} tense${tenses.length > 1 ? "s" : ""}</span>
+          </div>
+          <div class="vbt-grid">
+            ${tenses
+              .map(
+                (t) => `
+              <div class="vbt-card" style="border-color:${c.border}">
+                <div class="vbt-card-head" style="background:${c.header}">
+                  <div class="vbt-card-name">${t.name}</div>
+                  <span class="vbt-card-form" style="background:${c.badge};color:${c.badgeText}">${t.form}</span>
+                </div>
+                <div class="vbt-card-body">
+                  <div class="vbt-card-use">${t.use}</div>
+                  <div class="vbt-card-signal"><strong>Signal words:</strong> ${t.signal}</div>
+                  <div class="vbt-card-exs">
+                    ${t.examples.map((e) => `<div class="vbt-card-ex">${e}</div>`).join("")}
+                  </div>
+                </div>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        </div>
+      `;
+      })
+      .join("")}
+  `;
       }
-      function vbRenderTense() {
-        const t = TENSES[vbTI];
-        document.getElementById("vb-tense-counter").textContent =
-          `${vbTI + 1} of ${TENSES.length}`;
-        document.getElementById("vb-tense-prev").disabled = vbTI === 0;
-        document.getElementById("vb-tense-next").disabled =
-          vbTI === TENSES.length - 1;
-        document.getElementById("vb-tense-slide").innerHTML = `
-      <div class="vb-slide-label">${t.group}</div>
-      <div class="vb-slide-title">${t.name}</div>
-      <div style="margin-bottom:8px;">
-        <span class="vb-tense-key">Form</span>
-        <span style="font-size:13px;color:#374151;margin-left:6px;font-family:monospace;">${t.form}</span>
-      </div>
-      <div class="vb-slide-desc">${t.use}</div>
-      <div style="font-size:12px;color:#9ca3af;margin-bottom:10px;"><strong style="color:#6b7280;">Signal words:</strong> ${t.signal}</div>
-      <div class="vb-slide-examples">
-        ${t.examples.map((e) => `<div class="vb-slide-ex">${e}</div>`).join("")}
-      </div>
-    `;
-      }
-      window.vbMoveTense = function (dir) {
-        vbTI = Math.max(0, Math.min(TENSES.length - 1, vbTI + dir));
-        vbRenderTense();
-      };
 
       // ── Modal panel ────────────────────────────────────────────────────────
       function initVbModal() {
@@ -2123,44 +1634,10 @@ export default function CelpipVocabPage() {
       });
     });
 
-    document
-      .getElementById("start-quiz-btn")
-      .addEventListener("click", startQuiz);
-    document
-      .getElementById("next-btn")
-      .addEventListener("click", goToNextQuestion);
-    document
-      .getElementById("restart-quiz-btn")
-      .addEventListener("click", () => {
-        document.getElementById("quiz-setup").classList.remove("hidden");
-        document.getElementById("quiz-results").classList.add("hidden");
-        document.querySelectorAll(".quiz-filter-btn").forEach((b) => {
-          b.classList.remove("bg-ink", "text-fog", "border-ink");
-          b.classList.add(
-            "bg-white",
-            "border-mist",
-            "text-slate",
-            "hover:bg-fog",
-          );
-        });
-        document
-          .querySelector('[data-quiz-task="all"]')
-          .classList.remove(
-            "bg-white",
-            "border-mist",
-            "text-slate",
-            "hover:bg-fog",
-          );
-        document
-          .querySelector('[data-quiz-task="all"]')
-          .classList.add("bg-ink", "text-fog", "border-ink");
-        quizState.selectedTask = "all";
-      });
-
     // Initialize
-    setupFilterButtons();
     renderWordList();
     renderEmotions();
+    renderSentenceStructure();
     renderArticles();
     renderCollocations();
     renderVerbs();
@@ -2172,14 +1649,16 @@ export default function CelpipVocabPage() {
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-8">
         <div className="animate-fade-up">
           <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">
-            Build Your Vocabulary
+            Build Your English
           </p>
           <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-3">
-            Vocabulary <span className="hero-line italic">Bank</span>
+            Grammar &amp; Vocabulary{" "}
+            <span className="hero-line italic">Bank</span>
           </h1>
           <p className="text-lg text-slate max-w-xl leading-relaxed">
-            Learn essential vocabulary for each CELPIP task. Review word lists
-            or test yourself with interactive quizzes.
+            Master words, grammar rules, and sentence structures for every
+            CELPIP task. Review concepts or test yourself with interactive
+            practice.
           </p>
         </div>
       </header>
@@ -2192,26 +1671,9 @@ export default function CelpipVocabPage() {
             className="tab-btn active px-6 py-3 text-sm font-medium text-ink border-b-2 border-ink transition-all"
             data-tab="word-list"
           >
-            Word List
+            Sentence Structure
           </button>
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="quiz"
-          >
-            Quiz
-          </button>
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="emotions"
-          >
-            Emotions
-          </button>
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="collocations"
-          >
-            Collocations
-          </button>
+
           <button
             className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
             data-tab="articles"
@@ -2224,10 +1686,31 @@ export default function CelpipVocabPage() {
           >
             Verbs
           </button>
+
+          <button
+            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
+            data-tab="collocations"
+          >
+            Collocations
+          </button>
+
+          <button
+            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
+            data-tab="sentence-structure"
+          >
+            Word List
+          </button>
+
+          <button
+            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
+            data-tab="emotions"
+          >
+            Emotions
+          </button>
         </div>
 
         {/* Word List Tab */}
-        <div id="word-list" className="tab-content">
+        <div id="word-list" className="tab-content hidden">
           <div className="mb-8">
             <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-3">
               Filter by task
@@ -2244,108 +1727,6 @@ export default function CelpipVocabPage() {
           </div>
         </div>
 
-        {/* Quiz Tab */}
-        <div id="quiz" className="tab-content hidden">
-          {/* Quiz Setup */}
-          <div id="quiz-setup" className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl border border-mist p-8">
-              <h2 className="font-display text-2xl text-ink mb-3">
-                Start a Vocabulary Quiz
-              </h2>
-              <p className="text-slate mb-6">
-                Choose which tasks to practice, then test your vocabulary
-                knowledge:
-              </p>
-
-              <div className="mb-6">
-                <p className="text-sm font-medium text-slate mb-3">
-                  Select task:
-                </p>
-                <div
-                  id="quiz-filter-buttons"
-                  className="flex flex-wrap gap-2"
-                ></div>
-              </div>
-
-              <div id="quiz-question-count" className="mb-6 text-center"></div>
-
-              <button
-                id="start-quiz-btn"
-                className="w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors"
-              >
-                Start Quiz
-              </button>
-            </div>
-          </div>
-
-          {/* Quiz Question */}
-          <div
-            id="quiz-question-container"
-            className="hidden max-w-2xl mx-auto"
-          >
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <span
-                  id="question-number"
-                  className="text-sm font-medium text-slate"
-                ></span>
-                <span className="text-sm text-slate" id="score-display"></span>
-              </div>
-              <div className="w-full bg-mist rounded-full h-2 overflow-hidden">
-                <div
-                  id="progress-fill"
-                  className="bg-sapphire h-full transition-all duration-300"
-                  style={{ width: "0%" }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-mist p-8 mb-6">
-              <p
-                id="question-text"
-                className="font-display text-xl text-ink mb-6"
-              ></p>
-              <div id="options-container" className="space-y-3"></div>
-              <div
-                id="feedback"
-                className="hidden mt-6 p-4 rounded-lg text-center font-semibold"
-              ></div>
-            </div>
-
-            <button
-              id="next-btn"
-              className="hidden w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors"
-            >
-              Next Question
-            </button>
-          </div>
-
-          {/* Quiz Results */}
-          <div id="quiz-results" className="hidden max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl border border-mist p-8 text-center">
-              <h2 className="font-display text-3xl text-ink mb-4">
-                Quiz Complete!
-              </h2>
-              <div className="flex items-baseline justify-center gap-2 mb-6">
-                <span
-                  className="font-display text-5xl text-sapphire"
-                  id="final-score"
-                ></span>
-                <span className="text-2xl text-slate">
-                  / <span id="total-questions"></span>
-                </span>
-              </div>
-              <p id="result-message" className="text-lg text-slate mb-8"></p>
-              <button
-                id="restart-quiz-btn"
-                className="w-full px-6 py-3 rounded-lg bg-ink text-fog font-semibold hover:bg-steel transition-colors"
-              >
-                Take Another Quiz
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Emotions Tab */}
         <div id="emotions" className="tab-content hidden">
           <div className="mb-8">
@@ -2358,6 +1739,25 @@ export default function CelpipVocabPage() {
           </div>
 
           <div id="emotions-content" className="space-y-12"></div>
+        </div>
+
+        {/* Sentence Structure Tab */}
+        <div id="sentence-structure" className="tab-content">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Understand how English sentences are built — from individual{" "}
+              <span className="font-semibold text-sapphire-dark">
+                word roles
+              </span>{" "}
+              to complete{" "}
+              <span className="font-semibold text-emerald2-dark">
+                sentence types
+              </span>
+              . Master these structures to write and speak with precision on
+              CELPIP.
+            </p>
+          </div>
+          <div id="sentence-structure-content"></div>
         </div>
 
         {/* Collocations Tab */}
