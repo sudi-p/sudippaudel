@@ -21,6 +21,7 @@ import {
   FILL_SENTENCES,
   TENSES,
   PREP_GROUPS,
+  CONJ_GROUPS,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -1008,6 +1009,80 @@ export default function CelpipVocabPage() {
   `;
     }
 
+    function renderConjunctions() {
+      const content = document.getElementById("conjunctions-content");
+      content.innerHTML = `
+    <style>
+      .conj-section { margin-bottom: 2.5rem; }
+      .conj-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
+      .conj-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .conj-intro { font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 1rem; padding: 10px 14px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #e5e7eb; }
+      .conj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; }
+      .conj-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; }
+      .conj-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 0.4rem; }
+      .conj-word { font-size: 15px; font-weight: 700; color: #111827; }
+      .conj-meaning { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
+      .conj-examples { display: flex; flex-direction: column; gap: 3px; margin-bottom: 0.5rem; }
+      .conj-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 8px; border: 1px solid #f3f4f6; }
+      .conj-tip { font-size: 11.5px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 4px 9px; line-height: 1.5; }
+      .conj-trap-card { background: #fff; border: 1px solid #fbcfe8; border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
+      .conj-trap-word { font-size: 13px; font-weight: 700; color: #be185d; margin-bottom: 0.35rem; }
+      .conj-trap-meaning { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
+      .conj-trap-exs { display: flex; flex-direction: column; gap: 3px; }
+      .conj-trap-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #fff5f7; border-radius: 6px; padding: 3px 8px; border: 1px solid #fce7f3; }
+      @media (max-width: 600px) { .conj-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    ${CONJ_GROUPS.map((group) => {
+      const isTraps = group.category === "Common Traps";
+      return `
+        <div class="conj-section">
+          <div class="conj-section-header">
+            <span style="font-size:1.3rem">${group.emoji}</span>
+            <span class="conj-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
+            ${!isTraps ? `<span style="font-size:12px;color:#9ca3af">${group.items.length} conjunctions</span>` : ""}
+          </div>
+          ${group.intro ? `<div class="conj-intro">${group.intro}</div>` : ""}
+          ${
+            isTraps
+              ? group.items
+                  .map(
+                    (item) => `
+                <div class="conj-trap-card">
+                  <div class="conj-trap-word">${item.word}</div>
+                  <div class="conj-trap-meaning">${item.meaning}</div>
+                  <div class="conj-trap-exs">
+                    ${item.examples.map((e) => `<div class="conj-trap-ex">${e}</div>`).join("")}
+                  </div>
+                </div>
+              `,
+                  )
+                  .join("")
+              : `<div class="conj-grid">
+                ${group.items
+                  .map(
+                    (item) => `
+                  <div class="conj-card" style="border-color:${group.border}">
+                    <div class="conj-card-top">
+                      <span class="conj-word">${item.word}</span>
+                    </div>
+                    <div class="conj-meaning">${item.meaning}</div>
+                    <div class="conj-examples">
+                      ${item.examples.map((e) => `<div class="conj-ex">${e}</div>`).join("")}
+                    </div>
+                    ${item.tip ? `<div class="conj-tip">💡 ${item.tip}</div>` : ""}
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>`
+          }
+        </div>
+      `;
+    }).join("")}
+  `;
+    }
+
     function renderVerbs() {
       const content = document.getElementById("verbs-content");
 
@@ -1697,15 +1772,14 @@ export default function CelpipVocabPage() {
       btn.addEventListener("click", () => {
         const tab = btn.dataset.tab;
         document.querySelectorAll(".tab-btn").forEach((b) => {
-          b.classList.remove("border-ink", "text-ink");
-          b.classList.add("border-transparent", "text-slate");
+          b.classList.remove("bg-ink", "text-fog");
+          b.classList.add("bg-fog", "text-slate");
         });
         document
           .querySelectorAll(".tab-content")
           .forEach((c) => c.classList.add("hidden"));
-
-        btn.classList.remove("border-transparent", "text-slate");
-        btn.classList.add("border-ink", "text-ink");
+        btn.classList.remove("bg-fog", "text-slate");
+        btn.classList.add("bg-ink", "text-fog");
         document.getElementById(tab).classList.remove("hidden");
       });
     });
@@ -1718,6 +1792,7 @@ export default function CelpipVocabPage() {
     renderCollocations();
     renderVerbs();
     renderPrepositions();
+    renderConjunctions();
   }, []);
 
   return (
@@ -1743,53 +1818,75 @@ export default function CelpipVocabPage() {
       {/* ─── MAIN CONTENT ─── */}
       <main className="max-w-6xl mx-auto px-6 pb-24">
         {/* Tab buttons */}
-        <div className="flex gap-2 mb-8 border-b border-mist">
-          <button
-            className="tab-btn active px-6 py-3 text-sm font-medium text-ink border-b-2 border-ink transition-all"
-            data-tab="sentence-structure"
-          >
-            Sentence Structure
-          </button>
+        <div className="mb-8">
+          {/* Vocabulary group */}
+          <div className="mb-1">
+            <p className="text-xs font-semibold tracking-widest text-slate uppercase mb-2 px-1">
+              Vocabulary
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className="tab-btn active px-4 py-2 text-sm font-medium rounded-lg bg-ink text-fog transition-all"
+                data-tab="word-list"
+              >
+                Word List
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="emotions"
+              >
+                Emotions
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="collocations"
+              >
+                Collocations
+              </button>
+            </div>
+          </div>
 
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="articles"
-          >
-            Articles
-          </button>
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="prepositions"
-          >
-            Prepositions
-          </button>
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="verbs"
-          >
-            Verbs
-          </button>
+          <div className="my-4 border-t border-mist" />
 
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="collocations"
-          >
-            Collocations
-          </button>
+          {/* Grammar group */}
+          <div>
+            <p className="text-xs font-semibold tracking-widest text-slate uppercase mb-2 px-1">
+              Grammar
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="sentence-structure"
+              >
+                Sentence Structure
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="articles"
+              >
+                Articles
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="conjunctions"
+              >
+                Conjunctions
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="prepositions"
+              >
+                Prepositions
+              </button>
 
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="word-list"
-          >
-            Word List
-          </button>
-
-          <button
-            className="tab-btn px-6 py-3 text-sm font-medium text-slate hover:text-ink border-b-2 border-transparent transition-all"
-            data-tab="emotions"
-          >
-            Emotions
-          </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="verbs"
+              >
+                Verbs
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Word List Tab */}
@@ -1808,6 +1905,22 @@ export default function CelpipVocabPage() {
               No words found for the selected filters.
             </p>
           </div>
+        </div>
+
+        {/* Conjunctions Tab */}
+        <div id="conjunctions" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                conjunctions
+              </span>{" "}
+              — the linking words that connect ideas, clauses, and sentences.
+              Learn coordinating, subordinating, and correlative types with
+              examples and common traps.
+            </p>
+          </div>
+          <div id="conjunctions-content"></div>
         </div>
 
         {/* Emotions Tab */}

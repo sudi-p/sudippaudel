@@ -726,6 +726,466 @@ export const SENTENCE_TYPES = [
   },
 ];
 
+export const CONJ_GROUPS = [
+  {
+    category: "Coordinating Conjunctions",
+    emoji: "🔗",
+    color: "#1e40af",
+    bg: "#dbeafe",
+    border: "#bfdbfe",
+    intro:
+      "Join two independent clauses, words, or phrases of equal grammatical rank. Remember: FANBOYS.",
+    items: [
+      {
+        word: "For",
+        meaning: "Gives a reason (formal, like 'because').",
+        examples: [
+          "She rested, for she was exhausted.",
+          "He stayed indoors, for it was raining.",
+        ],
+        tip: "Rarely used in modern spoken English — prefer 'because'.",
+      },
+      {
+        word: "And",
+        meaning: "Adds one idea to another.",
+        examples: [
+          "She studied hard and passed the exam.",
+          "He bought milk, bread, and eggs.",
+        ],
+        tip: "Don't use a comma with 'and' when joining only two items.",
+      },
+      {
+        word: "Nor",
+        meaning: "Presents an additional negative alternative.",
+        examples: [
+          "She didn't call, nor did she text.",
+          "He neither apologized nor explained.",
+        ],
+        tip: "Invert the subject and verb after 'nor': nor did she, nor was he.",
+      },
+      {
+        word: "But",
+        meaning: "Shows contrast or exception.",
+        examples: [
+          "I wanted to go, but I was tired.",
+          "She is talented but modest.",
+        ],
+        tip: "Use a comma before 'but' when joining two full clauses.",
+      },
+      {
+        word: "Or",
+        meaning: "Presents an alternative or choice.",
+        examples: [
+          "You can call or send an email.",
+          "Is she coming today or tomorrow?",
+        ],
+        tip: "Can imply a warning: Study hard, or you will fail.",
+      },
+      {
+        word: "Yet",
+        meaning: "Shows contrast, similar to 'but' (more formal).",
+        examples: [
+          "He works hard, yet he never complains.",
+          "It was cold, yet sunny.",
+        ],
+        tip: "More formal and emphatic than 'but'.",
+      },
+      {
+        word: "So",
+        meaning: "Shows result or consequence.",
+        examples: ["It was late, so we left.", "She studied, so she passed."],
+        tip: "Always use a comma before 'so' when joining two clauses.",
+      },
+    ],
+  },
+  {
+    category: "Subordinating Conjunctions",
+    emoji: "🔀",
+    color: "#166534",
+    bg: "#dcfce7",
+    border: "#86efac",
+    intro:
+      "Introduce a dependent (subordinate) clause and connect it to an independent clause. They show relationships like time, cause, condition, and contrast.",
+    items: [
+      {
+        word: "because",
+        meaning: "Gives the reason for something.",
+        examples: [
+          "She left early because she had an appointment.",
+          "He failed because he didn't study.",
+        ],
+        tip: "Do not start a sentence with 'because' in formal writing unless the independent clause follows.",
+      },
+      {
+        word: "although / though / even though",
+        meaning: "Shows unexpected contrast.",
+        examples: [
+          "Although it rained, we enjoyed the trip.",
+          "She passed, even though she was nervous.",
+        ],
+        tip: "'Even though' is stronger and more emphatic than 'although'.",
+      },
+      {
+        word: "while",
+        meaning: "Simultaneous actions OR contrast.",
+        examples: [
+          "She cooked while he cleaned.",
+          "While I agree with you, I have concerns.",
+        ],
+        tip: "Context determines meaning — time or contrast.",
+      },
+      {
+        word: "if",
+        meaning: "States a condition.",
+        examples: [
+          "If you study, you will succeed.",
+          "Call me if you need help.",
+        ],
+        tip: "Use simple present (not future) in the 'if' clause: If she arrives, not if she will arrive.",
+      },
+      {
+        word: "unless",
+        meaning: "Except if; only if not.",
+        examples: [
+          "Unless you hurry, we'll be late.",
+          "Don't call unless it's urgent.",
+        ],
+        tip: "Never use 'unless' with a negative verb: unless you don't → incorrect.",
+      },
+      {
+        word: "when",
+        meaning: "At the time that something happens.",
+        examples: [
+          "Call me when you arrive.",
+          "When she spoke, everyone listened.",
+        ],
+        tip: "Like 'if', use present tense in the 'when' clause for future events.",
+      },
+      {
+        word: "before / after",
+        meaning: "Shows time sequence.",
+        examples: [
+          "Review your notes before you sleep.",
+          "She felt better after she rested.",
+        ],
+        tip: "The subordinate clause can come first or second — use a comma if it comes first.",
+      },
+      {
+        word: "since",
+        meaning: "From the time that; or because (formal).",
+        examples: [
+          "Since you asked, I'll explain.",
+          "It's been quiet since she left.",
+        ],
+        tip: "Can be ambiguous — 'since we moved' (time) vs 'since you insist' (reason). Context matters.",
+      },
+      {
+        word: "until / till",
+        meaning: "Up to the point in time when.",
+        examples: ["Wait until I return.", "She studied till midnight."],
+        tip: "'Till' is informal but correct. 'Til' is non-standard — avoid it.",
+      },
+      {
+        word: "as soon as",
+        meaning: "Immediately when something happens.",
+        examples: [
+          "Call me as soon as you land.",
+          "She left as soon as the meeting ended.",
+        ],
+        tip: "Emphasizes immediacy. Use present tense in the dependent clause.",
+      },
+      {
+        word: "so that / in order that",
+        meaning: "States the purpose or goal.",
+        examples: [
+          "She spoke slowly so that everyone understood.",
+          "He saved money in order that he could travel.",
+        ],
+        tip: "'So that' is far more common in everyday English.",
+      },
+      {
+        word: "as long as / provided that",
+        meaning: "States a condition that must be met.",
+        examples: [
+          "You can borrow it as long as you return it.",
+          "Provided that she agrees, we can proceed.",
+        ],
+        tip: "More formal alternatives to 'if'.",
+      },
+      {
+        word: "whereas / while",
+        meaning: "Contrast between two facts.",
+        examples: [
+          "She prefers tea, whereas he drinks coffee.",
+          "Toronto is large, while Banff is small.",
+        ],
+        tip: "'Whereas' is more formal. Both highlight a direct contrast.",
+      },
+    ],
+  },
+  {
+    category: "Correlative Conjunctions",
+    emoji: "⚖️",
+    color: "#92400e",
+    bg: "#fef3c7",
+    border: "#fde68a",
+    intro:
+      "Work in pairs to connect two equal grammatical elements. The key rule: both parts must be followed by the same grammatical structure (parallel structure).",
+    items: [
+      {
+        word: "both … and",
+        meaning: "Adds two items together (inclusive).",
+        examples: [
+          "She is both intelligent and hardworking.",
+          "Both the manager and the team agreed.",
+        ],
+        tip: "Verb agrees with plural: Both the cat and the dog are hungry.",
+      },
+      {
+        word: "either … or",
+        meaning: "Presents two alternatives (one or the other).",
+        examples: [
+          "Either call me or send a message.",
+          "You can either stay or leave.",
+        ],
+        tip: "Verb agrees with the nearest subject: Either the students or the teacher is responsible.",
+      },
+      {
+        word: "neither … nor",
+        meaning: "Negates both options.",
+        examples: [
+          "Neither the food nor the service was good.",
+          "She is neither rude nor unkind.",
+        ],
+        tip: "Never use 'not' with 'neither…nor' — it's already negative.",
+      },
+      {
+        word: "not only … but also",
+        meaning: "Emphasizes that two things are true.",
+        examples: [
+          "She is not only smart but also kind.",
+          "He not only passed but also scored highest.",
+        ],
+        tip: "When 'not only' starts a sentence, invert the subject and verb: Not only did she win, but she also broke the record.",
+      },
+      {
+        word: "whether … or",
+        meaning: "Presents two possibilities, often in indirect questions.",
+        examples: [
+          "I don't know whether to call or text.",
+          "Whether you agree or not, it's the rule.",
+        ],
+        tip: "Do not confuse with 'if' — 'whether…or' always implies two options.",
+      },
+      {
+        word: "as … as",
+        meaning: "Compares two equal things.",
+        examples: [
+          "She is as tall as her brother.",
+          "The test was as hard as expected.",
+        ],
+        tip: "Use subject pronoun after the second 'as' in formal writing: as tall as I (not me).",
+      },
+      {
+        word: "no sooner … than",
+        meaning: "Shows that one action happened immediately after another.",
+        examples: [
+          "No sooner had she left than it started raining.",
+          "No sooner did he sit than the phone rang.",
+        ],
+        tip: "Always invert subject and verb after 'no sooner': No sooner had I, not No sooner I had.",
+      },
+      {
+        word: "the more … the more",
+        meaning: "Shows proportional relationship between two things.",
+        examples: [
+          "The more you practice, the better you get.",
+          "The harder she worked, the more she earned.",
+        ],
+        tip: "Both clauses use comparative adjectives or adverbs.",
+      },
+    ],
+  },
+  {
+    category: "Conjunctive Adverbs",
+    emoji: "🔄",
+    color: "#5b21b6",
+    bg: "#ede9fe",
+    border: "#c4b5fd",
+    intro:
+      "Act like conjunctions but are actually adverbs. They connect two independent clauses and must be preceded by a semicolon (or period) and followed by a comma.",
+    items: [
+      {
+        word: "however",
+        meaning: "Shows contrast or contradiction.",
+        examples: [
+          "She studied hard; however, she didn't pass.",
+          "The plan was good; however, it failed.",
+        ],
+        tip: "Do not use a comma alone before 'however' — use a semicolon: ✗ She tried, however she failed.",
+      },
+      {
+        word: "therefore",
+        meaning: "Shows a logical result or conclusion.",
+        examples: [
+          "He missed the bus; therefore, he was late.",
+          "The evidence is clear; therefore, we conclude.",
+        ],
+        tip: "Very common in formal and academic writing.",
+      },
+      {
+        word: "furthermore / moreover",
+        meaning: "Adds an additional, stronger point.",
+        examples: [
+          "The product is affordable; furthermore, it's durable.",
+          "She's experienced; moreover, she's reliable.",
+        ],
+        tip: "'Moreover' is slightly more formal than 'furthermore'.",
+      },
+      {
+        word: "nevertheless / nonetheless",
+        meaning: "Shows that something is true despite what was just said.",
+        examples: [
+          "It was risky; nevertheless, she tried.",
+          "The results were mixed; nonetheless, we continued.",
+        ],
+        tip: "Stronger concession than 'however' — implies overcoming an obstacle.",
+      },
+      {
+        word: "consequently",
+        meaning: "Shows a direct result or effect.",
+        examples: [
+          "He didn't prepare; consequently, he failed.",
+          "Traffic was heavy; consequently, she was late.",
+        ],
+        tip: "More formal than 'so'. Common in academic and formal writing.",
+      },
+      {
+        word: "meanwhile",
+        meaning: "Shows two things happening at the same time.",
+        examples: [
+          "She cooked dinner; meanwhile, he set the table.",
+          "I worked on the report; meanwhile, she answered emails.",
+        ],
+        tip: "Signals simultaneous actions — similar to 'at the same time'.",
+      },
+      {
+        word: "otherwise",
+        meaning: "Shows what would happen if the condition is not met.",
+        examples: [
+          "Leave now; otherwise, you'll miss the train.",
+          "Study daily; otherwise, you'll fall behind.",
+        ],
+        tip: "Similar to 'or else' — implies a warning or consequence.",
+      },
+      {
+        word: "indeed",
+        meaning: "Confirms or emphasizes a point strongly.",
+        examples: [
+          "The results were surprising; indeed, no one expected this.",
+          "She worked hard; indeed, she was the best candidate.",
+        ],
+        tip: "Can also appear mid-sentence for emphasis without a semicolon.",
+      },
+    ],
+  },
+  {
+    category: "Common Traps",
+    emoji: "⚠️",
+    color: "#be185d",
+    bg: "#fce7f3",
+    border: "#fbcfe8",
+    items: [
+      {
+        word: "because vs. because of",
+        meaning:
+          "BECAUSE = conjunction (followed by a clause). BECAUSE OF = preposition (followed by a noun).",
+        examples: [
+          "✓ She left because she was tired.",
+          "✓ She left because of her illness.",
+          "✗ She left because of she was tired.",
+        ],
+        tip: "",
+      },
+      {
+        word: "although vs. despite / in spite of",
+        meaning:
+          "ALTHOUGH = conjunction (clause follows). DESPITE / IN SPITE OF = preposition (noun or gerund follows).",
+        examples: [
+          "✓ Although it was cold, she went out.",
+          "✓ Despite the cold, she went out.",
+          "✗ Despite it was cold, she went out.",
+        ],
+        tip: "",
+      },
+      {
+        word: "so vs. so that",
+        meaning:
+          "SO = result (coordinating conjunction). SO THAT = purpose (subordinating).",
+        examples: [
+          "✓ It was late, so we left. (result)",
+          "✓ She spoke slowly so that we understood. (purpose)",
+          "✗ It was late, so that we left.",
+        ],
+        tip: "",
+      },
+      {
+        word: "while vs. whereas",
+        meaning:
+          "Both show contrast. WHILE can also show time (simultaneous actions). WHEREAS is contrast only.",
+        examples: [
+          "✓ While she cooked, he cleaned. (time)",
+          "✓ She prefers tea, whereas he drinks coffee. (contrast)",
+          "✓ While I agree, I have concerns. (contrast)",
+        ],
+        tip: "",
+      },
+      {
+        word: "comma splice with however",
+        meaning:
+          "HOWEVER is not a coordinating conjunction — you cannot join two clauses with just a comma.",
+        examples: [
+          "✗ She tried, however she failed.",
+          "✓ She tried; however, she failed.",
+          "✓ She tried. However, she failed.",
+        ],
+        tip: "",
+      },
+      {
+        word: "unless vs. if not",
+        meaning:
+          "UNLESS = only if not. Never use 'unless' with a negative verb.",
+        examples: [
+          "✓ Unless you hurry, we'll be late.",
+          "✗ Unless you don't hurry, we'll be late.",
+          "✓ If you don't hurry, we'll be late.",
+        ],
+        tip: "",
+      },
+      {
+        word: "neither…nor with verb agreement",
+        meaning: "Verb agrees with the subject closest to the verb.",
+        examples: [
+          "✓ Neither the students nor the teacher is ready.",
+          "✓ Neither the teacher nor the students are ready.",
+          "✗ Neither the teacher nor the students is ready.",
+        ],
+        tip: "",
+      },
+      {
+        word: "not only…but also — word order",
+        meaning:
+          "When 'not only' starts a sentence, the subject and auxiliary verb must be inverted.",
+        examples: [
+          "✓ Not only did she win, but she also broke the record.",
+          "✗ Not only she won, but she also broke the record.",
+        ],
+        tip: "",
+      },
+    ],
+  },
+];
+
 export const PREP_GROUPS = [
   {
     category: "Place & Position",
