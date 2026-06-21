@@ -346,6 +346,9 @@ export default function CelpipVocabPage() {
       .ss-clause-def { font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 8px; }
       .ss-clause-exs { display: flex; flex-wrap: wrap; gap: 6px; }
       .ss-clause-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 9px; border: 1px solid #f3f4f6; }
+      .ss-clause-ex-block { display: flex; flex-direction: column; gap: 2px; margin-bottom: 6px; }
+.ss-clause-ex-block:last-child { margin-bottom: 0; }
+.ss-clause-ex-explanation { font-size: 11.5px; color: #6b7280; line-height: 1.55; padding: 3px 10px 3px 14px; border-left: 2px solid #e5e7eb; margin-left: 4px; }
       .ss-clause-intro { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.25rem; }
 .ss-clause-intro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.9rem; }
 .ss-clause-intro-item { display: flex; align-items: flex-start; gap: 10px; }
@@ -470,8 +473,17 @@ export default function CelpipVocabPage() {
           <div class="ss-clause-name">${c.name}</div>
           <div class="ss-clause-def">${c.definition}</div>
           <div class="ss-clause-exs">
-            ${c.examples.map((e) => `<span class="ss-clause-ex">${e}</span>`).join("")}
-          </div>
+  ${c.examples
+    .map(
+      (e) => `
+    <div class="ss-clause-ex-block">
+      <span class="ss-clause-ex">${e.text}</span>
+      ${e.explanation ? `<span class="ss-clause-ex-explanation">→ ${e.explanation}</span>` : ""}
+    </div>
+  `,
+    )
+    .join("")}
+</div>
         </div>
       </div>
     `,

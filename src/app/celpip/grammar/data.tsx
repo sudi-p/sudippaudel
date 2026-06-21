@@ -808,6 +808,10 @@ export const CONJ_GROUPS = [
     color: "#166534",
     bg: "#dcfce7",
     border: "#86efac",
+    comments: [
+      "If a subordinate clause comes first → use a comma : Before you sleep, do your homework.",
+      "If it comes second → usually no comma: Do your homework before you sleep.",
+    ],
     intro:
       "Introduce a dependent (subordinate) clause and connect it to an independent clause. They show relationships like time, cause, condition, and contrast.",
     items: [
@@ -923,7 +927,7 @@ export const CONJ_GROUPS = [
           "She prefers tea, whereas he drinks coffee.",
           "Toronto is large, while Banff is small.",
         ],
-        tip: "'Whereas' is more formal. Both highlight a direct contrast.",
+        tip: "'Whereas' is more formal. Both highlight a direct contrast. When whereas / while = contrast between two ideas → comma before it When while = time → no comma",
       },
     ],
   },
@@ -968,7 +972,7 @@ export const CONJ_GROUPS = [
         meaning: "Emphasizes that two things are true.",
         examples: [
           "She is not only smart but also kind.",
-          "He not only passed but also scored highest.",
+          "Not only did she win, but she also broke the record",
         ],
         tip: "When 'not only' starts a sentence, invert the subject and verb: Not only did she win, but she also broke the record.",
       },
@@ -1016,6 +1020,9 @@ export const CONJ_GROUPS = [
     color: "#5b21b6",
     bg: "#ede9fe",
     border: "#c4b5fd",
+    comments: [
+      "Therefore and Consequently are interchangeable, but 'therefore' is more common in everyday and academic English, while 'consequently' is slightly more formal and emphasizes the resulting effect.",
+    ],
     intro:
       "Act like conjunctions but are actually adverbs. They connect two independent clauses and must be preceded by a semicolon (or period) and followed by a comma.",
     items: [
@@ -1558,7 +1565,18 @@ export const CLAUSE_TYPES = [
     badgeBg: "#dbeafe",
     definition:
       "A clause that can stand alone as a complete sentence. Has a subject and a verb.",
-    examples: ["She finished the project.", "The results were impressive."],
+    examples: [
+      {
+        text: "She finished the project.",
+        explanation:
+          "'She' is the subject and 'finished' is the verb. This is a complete thought on its own.",
+      },
+      {
+        text: "The results were impressive.",
+        explanation:
+          "'The results' is the subject and 'were' is the linking verb. Stands alone as a full sentence.",
+      },
+    ],
   },
   {
     name: "Dependent (Subordinate) Clause",
@@ -1568,9 +1586,21 @@ export const CLAUSE_TYPES = [
     definition:
       "Cannot stand alone. Must be attached to an independent clause. Begins with a subordinating conjunction or relative pronoun.",
     examples: [
-      "Because she worked hard…",
-      "…who called yesterday.",
-      "Although the weather was bad…",
+      {
+        text: "Because she worked hard…",
+        explanation:
+          "'Because' is the subordinating conjunction. 'She' is the subject, 'worked' is the verb. Incomplete on its own — needs a main clause.",
+      },
+      {
+        text: "…who called yesterday.",
+        explanation:
+          "'Who' is the relative pronoun acting as the subject, 'called' is the verb. This fragment must attach to a noun it describes.",
+      },
+      {
+        text: "Although the weather was bad…",
+        explanation:
+          "'Although' is the subordinating conjunction. 'The weather' is the subject, 'was' is the verb. Leaves the reader waiting for the main clause.",
+      },
     ],
   },
   {
@@ -1581,9 +1611,21 @@ export const CLAUSE_TYPES = [
     definition:
       "A dependent clause that modifies a noun, introduced by who, whom, whose, which, or that.",
     examples: [
-      "The man who called is here.",
-      "The book that I recommended.",
-      "The city where she grew up.",
+      {
+        text: "The man who called is here.",
+        explanation:
+          "'who called' is the relative clause — 'who' is the subject, 'called' is the verb. It modifies the noun 'man'.",
+      },
+      {
+        text: "The book that I recommended is nice.",
+        explanation:
+          "'that I recommended' is the relative clause — 'I' is the subject, 'recommended' is the verb, and 'that' is the relative pronoun acting as the object.",
+      },
+      {
+        text: "The city where she grew up is very far.",
+        explanation:
+          "'where she grew up' is the relative clause — 'she' is the subject, 'grew up' is the verb, and 'where' refers to the city (place).",
+      },
     ],
   },
   {
@@ -1594,9 +1636,21 @@ export const CLAUSE_TYPES = [
     definition:
       "A dependent clause that functions as a noun — can be a subject, object, or complement.",
     examples: [
-      "What she said surprised me.",
-      "I know that he is honest.",
-      "The question is whether we should go.",
+      {
+        text: "What she said surprised me.",
+        explanation:
+          "'What she said' is the noun clause acting as the subject of the sentence. 'She' is the subject inside the clause, 'said' is the verb.",
+      },
+      {
+        text: "I know that he is honest.",
+        explanation:
+          "'that he is honest' is the noun clause acting as the object of 'know'. 'He' is the subject, 'is' is the verb inside the clause.",
+      },
+      {
+        text: "The question is whether we should go.",
+        explanation:
+          "'whether we should go' is the noun clause acting as the subject complement. 'We' is the subject, 'should go' is the verb phrase inside the clause.",
+      },
     ],
   },
   {
@@ -1607,9 +1661,21 @@ export const CLAUSE_TYPES = [
     definition:
       "A dependent clause that functions as an adverb — tells when, where, how, why, or under what condition.",
     examples: [
-      "When the meeting ends, we'll debrief.",
-      "She smiled because she was happy.",
-      "If you need help, ask.",
+      {
+        text: "When the meeting ends, we'll debrief.",
+        explanation:
+          "'When the meeting ends' is the adverbial clause telling when. 'The meeting' is the subject, 'ends' is the verb. The comma separates it from the main clause.",
+      },
+      {
+        text: "She smiled because she was happy.",
+        explanation:
+          "'because she was happy' is the adverbial clause telling why. 'She' is the subject, 'was' is the verb. No comma needed when the adverbial clause comes after the main clause.",
+      },
+      {
+        text: "If you need help, ask.",
+        explanation:
+          "'If you need help' is the adverbial clause telling under what condition. 'You' is the subject, 'need' is the verb. The main clause 'ask' is an imperative.",
+      },
     ],
   },
 ];
