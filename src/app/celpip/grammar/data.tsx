@@ -735,6 +735,10 @@ export const CONJ_GROUPS = [
     border: "#bfdbfe",
     intro:
       "Join two independent clauses, words, or phrases of equal grammatical rank. Remember: FANBOYS.",
+    comments: [
+      "When and/but/or/so joins two complete sentences, use a comma before it. When they join only words, phrases, or parts inside one clause, skip the comma.",
+      "Use a comma before “yet” when it means “but” joining two independent clauses, but don’t use a comma when “yet” means “still” inside a sentence, and use a comma after it only when it starts a sentence for emphasis.",
+    ],
     items: [
       {
         word: "For",

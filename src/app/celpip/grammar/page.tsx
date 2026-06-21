@@ -346,6 +346,13 @@ export default function CelpipVocabPage() {
       .ss-clause-def { font-size: 13px; color: #374151; line-height: 1.55; margin-bottom: 8px; }
       .ss-clause-exs { display: flex; flex-wrap: wrap; gap: 6px; }
       .ss-clause-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 9px; border: 1px solid #f3f4f6; }
+      .ss-clause-intro { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.25rem; }
+.ss-clause-intro-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.9rem; }
+.ss-clause-intro-item { display: flex; align-items: flex-start; gap: 10px; }
+.ss-clause-intro-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.ss-clause-intro-heading { font-size: 12px; font-weight: 700; color: #111827; margin-bottom: 3px; }
+.ss-clause-intro-text { font-size: 12.5px; color: #6b7280; line-height: 1.55; }
+.ss-clause-intro-text strong { color: #374151; }
       .ss-anatomy-box { background: #f9fafb; border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
       .ss-anatomy-sentence { font-size: 22px; color: #111827; line-height: 2.4; letter-spacing: 0.01em; flex-wrap: wrap; display: flex; gap: 6px; align-items: baseline; margin-bottom: 1rem; }
       .ss-anatomy-word { padding: 2px 10px; border-radius: 6px; font-weight: 600; cursor: default; }
@@ -427,6 +434,34 @@ export default function CelpipVocabPage() {
 
     <!-- ── Clause Types ── -->
     <div class="ss-section-title">Clause Types</div>
+
+    <div class="ss-clause-intro">
+  <div class="ss-clause-intro-grid">
+    <div class="ss-clause-intro-item">
+      <span class="ss-clause-intro-icon">📝</span>
+      <div>
+        <div class="ss-clause-intro-heading">What is a clause?</div>
+        <div class="ss-clause-intro-text">A group of words that contains both a <strong>subject</strong> and a <strong>verb</strong>.</div>
+      </div>
+    </div>
+    <div class="ss-clause-intro-item">
+      <span class="ss-clause-intro-icon">💡</span>
+      <div>
+        <div class="ss-clause-intro-heading">Complete thought?</div>
+        <div class="ss-clause-intro-text">A clause may or may not be a complete thought on its own — that's what separates independent from dependent clauses.</div>
+      </div>
+    </div>
+    <div class="ss-clause-intro-item">
+      <span class="ss-clause-intro-icon">🧱</span>
+      <div>
+        <div class="ss-clause-intro-heading">Building blocks</div>
+        <div class="ss-clause-intro-text">Every sentence is made up of <strong>one or more clauses</strong> — they are the core unit of English sentences.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </p>
     ${CLAUSE_TYPES.map(
       (c) => `
       <div class="ss-clause-card">
@@ -1030,6 +1065,14 @@ export default function CelpipVocabPage() {
       .conj-trap-meaning { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
       .conj-trap-exs { display: flex; flex-direction: column; gap: 3px; }
       .conj-trap-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #fff5f7; border-radius: 6px; padding: 3px 8px; border: 1px solid #fce7f3; }
+      .conj-comments { margin-top: 1rem; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 0.85rem 1rem; }
+.conj-comments-header { display: flex; align-items: center; gap: 7px; margin-bottom: 0.6rem; }
+.conj-comments-icon { font-size: 14px; }
+.conj-comments-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #0369a1; }
+.conj-comments-list { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.conj-comment-item { display: flex; align-items: flex-start; gap: 8px; }
+.conj-comment-dot { width: 6px; height: 6px; border-radius: 50%; background: #38bdf8; flex-shrink: 0; margin-top: 5px; }
+.conj-comment-text { font-size: 13px; color: #0c4a6e; line-height: 1.6; }
       @media (max-width: 600px) { .conj-grid { grid-template-columns: 1fr; } }
     </style>
 
@@ -1043,6 +1086,7 @@ export default function CelpipVocabPage() {
             ${!isTraps ? `<span style="font-size:12px;color:#9ca3af">${group.items.length} conjunctions</span>` : ""}
           </div>
           ${group.intro ? `<div class="conj-intro">${group.intro}</div>` : ""}
+          
           ${
             isTraps
               ? group.items
@@ -1076,6 +1120,30 @@ export default function CelpipVocabPage() {
                   )
                   .join("")}
               </div>`
+          }
+          ${
+            group.comments && group.comments.length
+              ? `
+  <div class="conj-comments">
+    <div class="conj-comments-header">
+      <span class="conj-comments-icon">💬</span>
+      <span class="conj-comments-label">Notes</span>
+    </div>
+    <ul class="conj-comments-list">
+      ${group.comments
+        .map(
+          (c) => `
+        <li class="conj-comment-item">
+          <span class="conj-comment-dot"></span>
+          <span class="conj-comment-text">${c}</span>
+        </li>
+      `,
+        )
+        .join("")}
+    </ul>
+  </div>
+`
+              : ""
           }
         </div>
       `;
