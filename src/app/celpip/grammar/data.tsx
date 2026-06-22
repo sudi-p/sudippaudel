@@ -393,9 +393,9 @@ export const PARTS_OF_SPEECH = [
       "Ask 'who?' or 'what?' before the verb to find it.",
     ],
     examples: [
-      "<u>She</u> runs every morning.",
-      "<u>The old library</u> was demolished.",
-      "<u>Running</u> is her hobby.",
+      "<u>She</u> submitted the application on time.",
+      "<u>The community centre</u> was renovated last year.",
+      "<u>Working remotely</u> has become very common.",
     ],
   },
   {
@@ -411,9 +411,9 @@ export const PARTS_OF_SPEECH = [
       "Auxiliary verbs (have, will, can) support the main verb.",
     ],
     examples: [
-      "She <u>runs</u> every morning.",
-      "They <u>have been studying</u> for hours.",
-      "The cake <u>smells</u> delicious.",
+      "She <u>submitted</u> the form before the deadline.",
+      "They <u>have been waiting</u> for a response for two weeks.",
+      "The new policy <u>seems</u> reasonable.",
     ],
   },
   {
@@ -429,9 +429,9 @@ export const PARTS_OF_SPEECH = [
       "Not all verbs take objects (intransitive verbs).",
     ],
     examples: [
-      "She kicked <u>the ball</u>. (direct)",
-      "He gave <u>her</u> a gift. (indirect)",
-      "They built <u>a house</u>.",
+      "She emailed <u>the manager</u>. (direct)",
+      "He sent <u>her</u> the updated schedule. (indirect)",
+      "They completed <u>the application</u>.",
     ],
   },
   {
@@ -443,12 +443,12 @@ export const PARTS_OF_SPEECH = [
     tips: [
       "Usually placed before the noun it describes.",
       "Can follow linking verbs as a predicate adjective.",
-      "Comparative: bigger. Superlative: biggest.",
+      "Comparative: more affordable. Superlative: most affordable.",
     ],
     examples: [
-      "A <u>bright</u> idea.",
-      "The soup is <u>hot</u>.",
-      "She felt <u>confident</u> and <u>prepared</u>.",
+      "A <u>detailed</u> response is expected.",
+      "The instructions were <u>unclear</u>.",
+      "She felt <u>confident</u> and <u>well-prepared</u>.",
     ],
   },
   {
@@ -461,12 +461,12 @@ export const PARTS_OF_SPEECH = [
     tips: [
       "Many adverbs end in -ly.",
       "Can appear at the start, middle, or end of a sentence.",
-      "Never modifies a noun (that's an adjective's job).",
+      "Never modifies a noun (that is an adjective's job).",
     ],
     examples: [
-      "She runs <u>quickly</u>.",
-      "<u>Yesterday</u>, he called.",
-      "The test was <u>extremely</u> hard.",
+      "She responded <u>promptly</u> to the complaint.",
+      "<u>Recently</u>, the transit authority announced new routes.",
+      "The task was <u>surprisingly</u> straightforward.",
     ],
   },
   {
@@ -479,12 +479,12 @@ export const PARTS_OF_SPEECH = [
     tips: [
       "FANBOYS = For, And, Nor, But, Or, Yet, So (coordinating).",
       "Subordinating: because, although, when, if, since.",
-      "Correlative: either…or, neither…nor, both…and.",
+      "Correlative: either...or, neither...nor, both...and.",
     ],
     examples: [
-      "I was tired, <u>but</u> I kept going.",
-      "<u>Although</u> it rained, we played.",
-      "<u>Both</u> speed <u>and</u> accuracy matter.",
+      "The commute was long, <u>but</u> the job was worth it.",
+      "<u>Although</u> the rent increased, she decided to renew the lease.",
+      "<u>Both</u> clarity <u>and</u> tone matter in professional emails.",
     ],
   },
   {
@@ -495,14 +495,14 @@ export const PARTS_OF_SPEECH = [
     definition:
       "Shows the relationship between a noun/pronoun and another word — usually location, time, or direction.",
     tips: [
-      "Always followed by a noun or pronoun (its 'object').",
+      "Always followed by a noun or pronoun (its object).",
       "Common prepositions: in, on, at, by, for, with, about, under, through.",
       "Avoid ending formal sentences with a preposition.",
     ],
     examples: [
-      "The book is <u>on</u> the table.",
-      "We met <u>at</u> noon.",
-      "She walked <u>through</u> the park.",
+      "The form is <u>on</u> the front desk.",
+      "Please submit your documents <u>by</u> Friday.",
+      "She walked <u>through</u> the main entrance.",
     ],
   },
   {
@@ -518,9 +518,9 @@ export const PARTS_OF_SPEECH = [
       "Relative: who, which, that (introduce clauses).",
     ],
     examples: [
-      "<u>She</u> called <u>him</u>.",
-      "This is <u>mine</u>.",
-      "The man <u>who</u> called is here.",
+      "<u>She</u> contacted <u>him</u> about the complaint.",
+      "The decision is <u>theirs</u> to make.",
+      "The supervisor <u>who</u> reviewed the file approved it.",
     ],
   },
   {
@@ -536,9 +536,9 @@ export const PARTS_OF_SPEECH = [
       "Use 'an' before vowel sounds, not vowel letters.",
     ],
     examples: [
-      "I saw <u>a</u> bird.",
-      "<u>The</u> bird flew away.",
-      "She has <u>an</u> idea.",
+      "She submitted <u>a</u> complaint.",
+      "<u>The</u> complaint was reviewed within two days.",
+      "It was <u>an</u> unexpected outcome.",
     ],
   },
   {
@@ -554,9 +554,9 @@ export const PARTS_OF_SPEECH = [
       "Use sparingly in formal writing.",
     ],
     examples: [
-      "<u>Wow!</u> That's impressive.",
-      "<u>Oh</u>, I didn't realize.",
-      "<u>Ouch!</u> That hurt.",
+      "<u>Wow!</u> That is an impressive improvement.",
+      "<u>Oh</u>, I did not realize the office had moved.",
+      "<u>Great!</u> I will send the confirmation right away.",
     ],
   },
   {
@@ -572,9 +572,9 @@ export const PARTS_OF_SPEECH = [
       "Possessives: my, your, his, her, its, our, their.",
     ],
     examples: [
-      "<u>Many</u> students passed.",
-      "<u>Each</u> answer matters.",
-      "<u>Her</u> plan worked well.",
+      "<u>Many</u> applicants submitted their forms late.",
+      "<u>Each</u> section of the test has a time limit.",
+      "<u>Her</u> written response was well-organized.",
     ],
   },
   {
@@ -590,9 +590,9 @@ export const PARTS_OF_SPEECH = [
       "Differs from an adverb — it describes a noun, not a verb.",
     ],
     examples: [
-      "She is a <u>doctor</u>. (subject complement)",
-      "They named him <u>captain</u>. (object complement)",
-      "The coffee tastes <u>bitter</u>.",
+      "She became <u>the team lead</u> after six months. (subject complement)",
+      "The board appointed him <u>director</u>. (object complement)",
+      "The new scheduling system seems <u>efficient</u>.",
     ],
   },
 ];
@@ -607,9 +607,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Contains one independent clause with a subject and a predicate. Expresses one complete thought.",
     examples: [
-      "She laughed.",
-      "The dog chased the ball.",
-      "My sister works at a hospital.",
+      "She submitted the form.",
+      "The landlord increased the rent.",
+      "My colleague works at the downtown office.",
     ],
     celpipTip:
       "Use simple sentences for clear, direct statements in Writing Task 1.",
@@ -623,9 +623,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Two or more independent clauses joined by a coordinating conjunction (FANBOYS) or a semicolon.",
     examples: [
-      "I was tired, but I finished the task.",
-      "She studied hard; she passed the exam.",
-      "He wanted coffee, yet he ordered tea.",
+      "I wanted to attend the session, but I had a shift that evening.",
+      "She updated her resume; she applied to three positions.",
+      "He requested a transfer, yet his manager denied it.",
     ],
     celpipTip:
       "Shows logical relationships — great for Writing Task 2 argument paragraphs.",
@@ -640,12 +640,12 @@ export const SENTENCE_TYPES = [
     definition:
       "One independent clause and one or more dependent (subordinate) clauses. Shows cause, contrast, time, or condition.",
     examples: [
-      "Although it rained, we went hiking.",
-      "She left early because she had an appointment.",
-      "If you study consistently, you will improve.",
+      "Although the commute was long, she accepted the position.",
+      "She left the meeting early because she had another appointment.",
+      "If you practise speaking daily, your fluency will improve.",
     ],
     celpipTip:
-      "Demonstrates range and sophistication — aim for this in Speaking Task 5–8.",
+      "Demonstrates range and sophistication — aim for this in Speaking Tasks 5 to 8.",
   },
   {
     name: "Compound-Complex Sentence",
@@ -656,8 +656,8 @@ export const SENTENCE_TYPES = [
     definition:
       "Combines both compound and complex structures. Most elaborate type — requires careful punctuation.",
     examples: [
-      "Although she was nervous, she gave the speech, and the audience applauded.",
-      "Because he trained daily, his speed improved, but his technique still needed work.",
+      "Although she was nervous, she delivered the presentation clearly, and the team responded positively.",
+      "Because the transit line was delayed, many employees arrived late, but the meeting was rescheduled.",
     ],
     celpipTip:
       "Use sparingly for high-level writing — shows mastery of English structure.",
@@ -671,9 +671,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Makes a statement or provides information. Ends with a period. Most common sentence type.",
     examples: [
-      "The meeting starts at 9 AM.",
-      "Canada has ten provinces.",
-      "She completed the assignment.",
+      "The registration deadline is Friday at 5 pm.",
+      "Canada has ten provinces and three territories.",
+      "She completed the writing task in under 25 minutes.",
     ],
     celpipTip: "The backbone of all CELPIP writing and speaking tasks.",
   },
@@ -686,9 +686,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Asks a question. Ends with a question mark. Often inverts subject-verb order.",
     examples: [
-      "Have you seen the report?",
-      "Where does she work?",
-      "What time does the train leave?",
+      "Have you received the confirmation email?",
+      "Where is the nearest transit station?",
+      "What time does the community centre close?",
     ],
     celpipTip: "Useful in Speaking Task 3 (giving directions or instructions).",
   },
@@ -701,9 +701,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Gives a command, instruction, or request. Subject 'you' is usually implied, not stated.",
     examples: [
-      "Please submit your form by Friday.",
-      "Turn left at the intersection.",
-      "Be specific in your answer.",
+      "Please submit your application by the deadline.",
+      "Turn left at the intersection and continue for two blocks.",
+      "Be specific and organized in your written response.",
     ],
     celpipTip:
       "Appears in instructions and advice — useful in Writing Task 1 (emails).",
@@ -717,9 +717,9 @@ export const SENTENCE_TYPES = [
     definition:
       "Expresses strong emotion or surprise. Ends with an exclamation mark. Avoid in formal writing.",
     examples: [
-      "What a fantastic presentation!",
-      "How quickly time flies!",
-      "That was an incredible effort!",
+      "What a well-organized response!",
+      "How quickly the time passed!",
+      "That was an excellent suggestion!",
     ],
     celpipTip:
       "Avoid in formal tasks. Acceptable in informal letter-writing (Task 1).",
