@@ -1197,6 +1197,752 @@ export const CONJ_GROUPS = [
   },
 ];
 
+export const IDIOM_GROUPS = [
+  {
+    category: "Work & Career",
+    emoji: "💼",
+    color: "#1e40af",
+    bg: "#dbeafe",
+    border: "#bfdbfe",
+    items: [
+      {
+        idiom: "get the ball rolling",
+        meaning: "To start a project or activity.",
+        example: "Let's get the ball rolling on the new campaign.",
+      },
+      {
+        idiom: "think outside the box",
+        meaning: "To think creatively, beyond conventional ideas.",
+        example: "We need to think outside the box to solve this problem.",
+      },
+      {
+        idiom: "on the same page",
+        meaning: "To have the same understanding or agreement.",
+        example:
+          "Before we proceed, let's make sure we're all on the same page.",
+      },
+      {
+        idiom: "go the extra mile",
+        meaning: "To put in more effort than is required.",
+        example: "She always goes the extra mile for her clients.",
+      },
+      {
+        idiom: "touch base",
+        meaning: "To make brief contact with someone to share updates.",
+        example: "I'll touch base with you after the meeting.",
+      },
+      {
+        idiom: "bite off more than you can chew",
+        meaning: "To take on more responsibility than you can handle.",
+        example:
+          "He bit off more than he could chew by managing three projects at once.",
+      },
+      {
+        idiom: "back to the drawing board",
+        meaning: "To start something over after a failure.",
+        example: "The prototype failed, so it's back to the drawing board.",
+      },
+      {
+        idiom: "burn the midnight oil",
+        meaning: "To work very late into the night.",
+        example: "She burned the midnight oil to finish the report on time.",
+      },
+      {
+        idiom: "cut corners",
+        meaning: "To do something the easy way, often sacrificing quality.",
+        example:
+          "The contractor cut corners, and the building failed inspection.",
+      },
+      {
+        idiom: "in the loop",
+        meaning: "Informed about what is happening.",
+        example: "Please keep me in the loop about any changes.",
+      },
+      {
+        idiom: "learn the ropes",
+        meaning: "To learn the basics of a job or activity.",
+        example: "It takes a few weeks to learn the ropes in any new job.",
+      },
+      {
+        idiom: "ahead of the curve",
+        meaning: "More advanced than the current trend or standard.",
+        example:
+          "Our company is ahead of the curve when it comes to AI adoption.",
+      },
+    ],
+  },
+  {
+    category: "Time & Urgency",
+    emoji: "⏰",
+    color: "#166534",
+    bg: "#dcfce7",
+    border: "#86efac",
+    items: [
+      {
+        idiom: "in the nick of time",
+        meaning: "At the last possible moment.",
+        example: "She arrived in the nick of time to catch her flight.",
+      },
+      {
+        idiom: "once in a blue moon",
+        meaning: "Very rarely.",
+        example: "He only visits once in a blue moon.",
+      },
+      {
+        idiom: "beat the clock",
+        meaning: "To finish something before a deadline.",
+        example: "We barely beat the clock to submit the application.",
+      },
+      {
+        idiom: "buy time",
+        meaning: "To delay something in order to have more time.",
+        example:
+          "He asked extra questions to buy time during the presentation.",
+      },
+      {
+        idiom: "around the clock",
+        meaning: "All day and all night, continuously.",
+        example: "The team worked around the clock to meet the deadline.",
+      },
+      {
+        idiom: "at the eleventh hour",
+        meaning: "At the last minute, almost too late.",
+        example: "The deal was signed at the eleventh hour.",
+      },
+      {
+        idiom: "kill time",
+        meaning: "To do something to pass time while waiting.",
+        example: "She read a magazine to kill time before the interview.",
+      },
+      {
+        idiom: "pressed for time",
+        meaning: "In a hurry, not having enough time.",
+        example: "I can't talk now — I'm really pressed for time.",
+      },
+    ],
+  },
+  {
+    category: "Feelings & Attitude",
+    emoji: "😊",
+    color: "#92400e",
+    bg: "#fef3c7",
+    border: "#fde68a",
+    items: [
+      {
+        idiom: "on cloud nine",
+        meaning: "Extremely happy.",
+        example: "She was on cloud nine after getting the promotion.",
+      },
+      {
+        idiom: "under the weather",
+        meaning: "Feeling slightly ill.",
+        example: "I'm a bit under the weather today, so I'll work from home.",
+      },
+      {
+        idiom: "bite the bullet",
+        meaning: "To endure a painful or difficult situation.",
+        example: "Just bite the bullet and get the dentist appointment done.",
+      },
+      {
+        idiom: "have a chip on your shoulder",
+        meaning: "To feel resentful or bitter about something.",
+        example:
+          "He's had a chip on his shoulder since he was passed over for promotion.",
+      },
+      {
+        idiom: "keep your chin up",
+        meaning: "To stay positive in a difficult situation.",
+        example: "Keep your chin up — things will get better.",
+      },
+      {
+        idiom: "let the cat out of the bag",
+        meaning: "To accidentally reveal a secret.",
+        example: "She let the cat out of the bag about the surprise party.",
+      },
+      {
+        idiom: "get cold feet",
+        meaning: "To suddenly feel nervous or reluctant about something.",
+        example: "He got cold feet right before the job interview.",
+      },
+      {
+        idiom: "lose your cool",
+        meaning: "To become angry or lose emotional control.",
+        example:
+          "He lost his cool during the argument and said things he regretted.",
+      },
+      {
+        idiom: "over the moon",
+        meaning: "Extremely pleased or happy.",
+        example: "She was over the moon when she found out she got in.",
+      },
+      {
+        idiom: "drive someone up the wall",
+        meaning: "To irritate someone greatly.",
+        example: "The constant noise drove her up the wall.",
+      },
+    ],
+  },
+  {
+    category: "Communication & Relationships",
+    emoji: "🗣️",
+    color: "#5b21b6",
+    bg: "#ede9fe",
+    border: "#c4b5fd",
+    items: [
+      {
+        idiom: "beat around the bush",
+        meaning: "To avoid getting to the main point.",
+        example: "Stop beating around the bush and tell me what happened.",
+      },
+      {
+        idiom: "spill the beans",
+        meaning: "To reveal secret information.",
+        example: "Who spilled the beans about the merger?",
+      },
+      {
+        idiom: "hit the nail on the head",
+        meaning: "To describe something exactly right.",
+        example: "You hit the nail on the head with that analysis.",
+      },
+      {
+        idiom: "read between the lines",
+        meaning: "To understand the hidden meaning of something.",
+        example:
+          "Read between the lines — she's clearly unhappy with the decision.",
+      },
+      {
+        idiom: "give someone the cold shoulder",
+        meaning: "To deliberately ignore someone.",
+        example: "After the argument, she gave him the cold shoulder all week.",
+      },
+      {
+        idiom: "break the ice",
+        meaning:
+          "To do or say something to relieve tension in a new situation.",
+        example: "He told a joke to break the ice at the start of the meeting.",
+      },
+      {
+        idiom: "see eye to eye",
+        meaning: "To agree with someone.",
+        example:
+          "They don't always see eye to eye, but they work well together.",
+      },
+      {
+        idiom: "sit on the fence",
+        meaning: "To avoid taking a side in an argument.",
+        example: "You can't sit on the fence forever — you need to decide.",
+      },
+      {
+        idiom: "bury the hatchet",
+        meaning: "To end a conflict and make peace.",
+        example:
+          "After years of disagreement, they finally buried the hatchet.",
+      },
+      {
+        idiom: "pull someone's leg",
+        meaning: "To joke or tease someone.",
+        example: "Are you serious or just pulling my leg?",
+      },
+    ],
+  },
+  {
+    category: "Money & Resources",
+    emoji: "💰",
+    color: "#0f766e",
+    bg: "#ccfbf1",
+    border: "#5eead4",
+    items: [
+      {
+        idiom: "cost an arm and a leg",
+        meaning: "To be very expensive.",
+        example: "That new phone costs an arm and a leg.",
+      },
+      {
+        idiom: "break the bank",
+        meaning: "To cost more money than one can afford.",
+        example:
+          "We want a nice vacation, but nothing that will break the bank.",
+      },
+      {
+        idiom: "tighten your belt",
+        meaning: "To spend less money due to financial difficulty.",
+        example: "With the pay cut, we had to tighten our belts.",
+      },
+      {
+        idiom: "make ends meet",
+        meaning: "To have just enough money for basic needs.",
+        example: "With two part-time jobs, she barely makes ends meet.",
+      },
+      {
+        idiom: "a dime a dozen",
+        meaning: "Very common and of little value.",
+        example: "Good ideas are a dime a dozen — execution is what matters.",
+      },
+      {
+        idiom: "on a shoestring",
+        meaning: "With a very small budget.",
+        example: "They launched the startup on a shoestring.",
+      },
+      {
+        idiom: "penny-wise, pound-foolish",
+        meaning: "Careful with small expenses but wasteful with large ones.",
+        example:
+          "Skipping the maintenance check was penny-wise, pound-foolish.",
+      },
+      {
+        idiom: "hit the jackpot",
+        meaning: "To have great success or luck.",
+        example: "They hit the jackpot with that real estate investment.",
+      },
+    ],
+  },
+  {
+    category: "Challenges & Problem Solving",
+    emoji: "🧩",
+    color: "#be185d",
+    bg: "#fce7f3",
+    border: "#fbcfe8",
+    items: [
+      {
+        idiom: "hit a brick wall",
+        meaning: "To reach a point where no progress is possible.",
+        example: "We hit a brick wall in the negotiations.",
+      },
+      {
+        idiom: "in hot water",
+        meaning: "In trouble or a difficult situation.",
+        example: "He found himself in hot water after missing the deadline.",
+      },
+      {
+        idiom: "between a rock and a hard place",
+        meaning: "Facing two equally difficult options.",
+        example:
+          "She was between a rock and a hard place choosing between the two jobs.",
+      },
+      {
+        idiom: "bite the dust",
+        meaning: "To fail or come to an end.",
+        example: "Three of our competitors bit the dust during the recession.",
+      },
+      {
+        idiom: "throw in the towel",
+        meaning: "To give up and admit defeat.",
+        example: "After months of losses, the startup threw in the towel.",
+      },
+      {
+        idiom: "jump through hoops",
+        meaning: "To do many difficult things in order to achieve something.",
+        example: "I had to jump through hoops to get the visa approved.",
+      },
+      {
+        idiom: "cross that bridge when you come to it",
+        meaning: "To deal with a problem only when it actually happens.",
+        example:
+          "Don't worry about the final exam yet — cross that bridge when you come to it.",
+      },
+      {
+        idiom: "the last straw",
+        meaning:
+          "The final problem in a series that causes one to lose patience.",
+        example: "Being late again was the last straw for her manager.",
+      },
+      {
+        idiom: "a blessing in disguise",
+        meaning: "Something that seems bad at first but turns out to be good.",
+        example:
+          "Losing that job was a blessing in disguise — I found a much better one.",
+      },
+      {
+        idiom: "weather the storm",
+        meaning: "To survive a difficult period.",
+        example:
+          "The company managed to weather the storm of the economic crisis.",
+      },
+    ],
+  },
+];
+
+export const GROUPS = [
+  {
+    category: "Types of Nouns",
+    emoji: "🏷️",
+    color: "#1e40af",
+    bg: "#dbeafe",
+    border: "#bfdbfe",
+    intro:
+      "A noun names a person, place, thing, or idea. There are several types, each with different rules for capitalization, pluralization, and article use.",
+    items: [
+      {
+        word: "Common Noun",
+        meaning:
+          "A general name for a person, place, or thing. Not capitalized.",
+        examples: ["city, teacher, book, car, idea"],
+        tip: "Use 'a/an' or 'the' with singular common nouns.",
+      },
+      {
+        word: "Proper Noun",
+        meaning:
+          "The specific name of a person, place, or organization. Always capitalized.",
+        examples: ["Toronto, Dr. Smith, Google, Canada"],
+        tip: "Never use 'a/an' with proper nouns: ✗ a Canada → ✓ Canada.",
+      },
+      {
+        word: "Concrete Noun",
+        meaning:
+          "Something you can perceive with your senses — see, touch, hear, smell, or taste.",
+        examples: ["table, rain, music, coffee, dog"],
+        tip: "Can be countable or uncountable depending on the noun.",
+      },
+      {
+        word: "Abstract Noun",
+        meaning:
+          "An idea, quality, feeling, or concept that cannot be physically touched.",
+        examples: ["freedom, happiness, courage, knowledge, time"],
+        tip: "Often uncountable: ✗ a happiness → ✓ happiness or a sense of happiness.",
+      },
+      {
+        word: "Countable Noun",
+        meaning:
+          "Can be counted individually. Has both singular and plural forms.",
+        examples: [
+          "one book / two books",
+          "a chair / three chairs",
+          "an idea / many ideas",
+        ],
+        tip: "Use a/an with singular: a dog. Use numbers or many/few with plural.",
+      },
+      {
+        word: "Uncountable Noun",
+        meaning:
+          "Cannot be counted individually. Has no plural form. Treated as singular.",
+        examples: ["water, information, advice, furniture, luggage"],
+        tip: "Never use a/an or a number directly: ✗ an advice → ✓ a piece of advice.",
+      },
+      {
+        word: "Collective Noun",
+        meaning: "Refers to a group of people or things as a single unit.",
+        examples: ["team, committee, family, staff, audience"],
+        tip: "In North American English, collective nouns take singular verbs: The team is ready.",
+      },
+      {
+        word: "Compound Noun",
+        meaning: "Made of two or more words that together name one thing.",
+        examples: ["toothbrush, post office, mother-in-law, bus stop"],
+        tip: "Pluralize the main noun: mothers-in-law, not mother-in-laws.",
+      },
+      {
+        word: "Possessive Noun",
+        meaning: "Shows ownership or relationship using an apostrophe + s.",
+        examples: [
+          "the teacher's desk",
+          "Canada's economy",
+          "the students' results",
+        ],
+        tip: "Singular: add 's. Plural ending in s: add only '. Plural not ending in s: add 's (children's).",
+      },
+    ],
+  },
+  {
+    category: "Noun Pluralization Rules",
+    emoji: "🔢",
+    color: "#166534",
+    bg: "#dcfce7",
+    border: "#86efac",
+    intro:
+      "Most nouns form their plural by adding -s, but many follow special rules. Knowing these prevents common spelling and grammar errors.",
+    items: [
+      {
+        word: "Regular: add -s",
+        meaning: "Most nouns simply add -s.",
+        examples: ["book → books", "car → cars", "idea → ideas"],
+        tip: "",
+      },
+      {
+        word: "Add -es (s, sh, ch, x, z endings)",
+        meaning: "Nouns ending in s, sh, ch, x, or z add -es.",
+        examples: [
+          "bus → buses",
+          "dish → dishes",
+          "watch → watches",
+          "box → boxes",
+        ],
+        tip: "These endings make an extra syllable when spoken.",
+      },
+      {
+        word: "Consonant + y → -ies",
+        meaning: "Nouns ending in consonant + y drop the y and add -ies.",
+        examples: ["city → cities", "baby → babies", "story → stories"],
+        tip: "Vowel + y just adds -s: day → days, key → keys.",
+      },
+      {
+        word: "Nouns ending in -f or -fe",
+        meaning: "Many change f/fe to v and add -es.",
+        examples: ["leaf → leaves", "wife → wives", "knife → knives"],
+        tip: "Exceptions: roof → roofs, belief → beliefs, chef → chefs.",
+      },
+      {
+        word: "Irregular Plurals",
+        meaning: "These plurals must be memorized — they follow no pattern.",
+        examples: [
+          "man → men",
+          "child → children",
+          "mouse → mice",
+          "foot → feet",
+          "tooth → teeth",
+          "person → people",
+        ],
+        tip: "Never add -s to these: ✗ mans, ✗ childs, ✗ mouses.",
+      },
+      {
+        word: "Same Singular & Plural",
+        meaning: "Some nouns do not change form in the plural.",
+        examples: [
+          "sheep → sheep",
+          "deer → deer",
+          "fish → fish",
+          "species → species",
+        ],
+        tip: "The verb must agree with context: One sheep is here. Three sheep are there.",
+      },
+      {
+        word: "Latin/Greek origin nouns",
+        meaning:
+          "Some academic/scientific nouns retain their original plural forms.",
+        examples: [
+          "criterion → criteria",
+          "phenomenon → phenomena",
+          "analysis → analyses",
+          "datum → data",
+        ],
+        tip: "'Data' is plural — use 'The data show', not 'The data shows' in formal writing.",
+      },
+    ],
+  },
+  {
+    category: "Personal Pronouns",
+    emoji: "👤",
+    color: "#92400e",
+    bg: "#fef3c7",
+    border: "#fde68a",
+    intro:
+      "Replace nouns to avoid repetition. Change form based on their role in the sentence: subject, object, or possessive.",
+    items: [
+      {
+        word: "Subject Pronouns",
+        meaning: "Used as the subject of a verb — the one doing the action.",
+        examples: [
+          "I, you, he, she, it, we, they",
+          "She called me.",
+          "They finished early.",
+          "He and I went together.",
+        ],
+        tip: "Use subject pronouns after linking verbs in formal writing: It is I (not me).",
+      },
+      {
+        word: "Object Pronouns",
+        meaning:
+          "Used as the object of a verb or preposition — the one receiving the action.",
+        examples: [
+          "me, you, him, her, it, us, them",
+          "She called me.",
+          "Give it to him.",
+          "Between you and me…",
+        ],
+        tip: "✗ Between you and I → ✓ Between you and me. Prepositions take object pronouns.",
+      },
+      {
+        word: "Possessive Pronouns",
+        meaning: "Show ownership. Stand alone — never followed by a noun.",
+        examples: [
+          "mine, yours, his, hers, its, ours, theirs",
+          "That book is mine.",
+          "The mistake was theirs.",
+        ],
+        tip: "Don't confuse with possessive adjectives (my, your, his) which must precede a noun.",
+      },
+      {
+        word: "Possessive Adjectives",
+        meaning: "Show ownership but must be followed by a noun.",
+        examples: [
+          "my, your, his, her, its, our, their",
+          "my book",
+          "their results",
+          "its colour",
+        ],
+        tip: "✗ The book is my → ✓ The book is mine. Use possessive pronoun when standing alone.",
+      },
+      {
+        word: "Reflexive Pronouns",
+        meaning:
+          "Refer back to the subject. Used when subject and object are the same person, or for emphasis.",
+        examples: [
+          "myself, yourself, himself, herself, itself, ourselves, yourselves, themselves",
+          "She hurt herself.",
+          "I did it myself.",
+        ],
+        tip: "✗ He gave it to myself → ✓ He gave it to me. Don't use reflexive as a plain object.",
+      },
+    ],
+  },
+  {
+    category: "Other Pronoun Types",
+    emoji: "♻️",
+    color: "#5b21b6",
+    bg: "#ede9fe",
+    border: "#c4b5fd",
+    intro:
+      "Beyond personal pronouns, English uses several other pronoun categories to refer to things, quantities, and relationships.",
+    items: [
+      {
+        word: "Demonstrative Pronouns",
+        meaning:
+          "Point to specific nouns. Change based on distance and number.",
+        examples: [
+          "this (near, singular)",
+          "that (far, singular)",
+          "these (near, plural)",
+          "those (far, plural)",
+          "This is great. Those were difficult.",
+        ],
+        tip: "When followed by a noun, they become demonstrative adjectives: this book, those results.",
+      },
+      {
+        word: "Relative Pronouns",
+        meaning:
+          "Introduce relative clauses and connect them to the noun they modify.",
+        examples: [
+          "who (people, subject)",
+          "whom (people, object)",
+          "whose (possession)",
+          "which (things)",
+          "that (people or things)",
+          "The woman who called is here.",
+        ],
+        tip: "Use 'who' for people, 'which' for things. 'That' can be used for both in informal English.",
+      },
+      {
+        word: "Indefinite Pronouns",
+        meaning:
+          "Refer to non-specific people or things. Many are always singular.",
+        examples: [
+          "everyone, someone, anyone, no one",
+          "everything, something, nothing",
+          "each, either, neither, one",
+          "Everyone is ready. Nothing was said.",
+        ],
+        tip: "Singular indefinite pronouns take singular verbs: Everyone is (not are) responsible.",
+      },
+      {
+        word: "Interrogative Pronouns",
+        meaning: "Used to ask questions.",
+        examples: [
+          "who, whom, whose, which, what",
+          "Who called?",
+          "Whom did you meet?",
+          "Which is correct?",
+        ],
+        tip: "Who = subject. Whom = object. Whom did you see? (you saw whom → object).",
+      },
+      {
+        word: "Reciprocal Pronouns",
+        meaning: "Express a mutual relationship between two or more people.",
+        examples: [
+          "each other (two people)",
+          "one another (three or more)",
+          "They helped each other.",
+          "The team supported one another.",
+        ],
+        tip: "In modern English, 'each other' and 'one another' are often used interchangeably.",
+      },
+    ],
+  },
+  {
+    category: "Common Traps",
+    emoji: "⚠️",
+    color: "#be185d",
+    bg: "#fce7f3",
+    border: "#fbcfe8",
+    items: [
+      {
+        word: "its vs. it's",
+        meaning:
+          "ITS = possessive adjective (belonging to it). IT'S = contraction of 'it is' or 'it has'.",
+        examples: [
+          "✓ The dog wagged its tail.",
+          "✓ It's a beautiful day. (= It is)",
+          "✗ The dog wagged it's tail.",
+        ],
+        tip: "",
+      },
+      {
+        word: "their / there / they're",
+        meaning:
+          "THEIR = possessive. THERE = place or existence. THEY'RE = they are.",
+        examples: [
+          "✓ Their results were excellent.",
+          "✓ There is a problem.",
+          "✓ They're working on it.",
+        ],
+        tip: "",
+      },
+      {
+        word: "who vs. whom",
+        meaning:
+          "WHO = subject (doing the action). WHOM = object (receiving the action).",
+        examples: [
+          "✓ Who called? (subject)",
+          "✓ Whom did you call? (object — you called whom)",
+          "✗ Who did you give it to? → ✓ To whom did you give it?",
+        ],
+        tip: "",
+      },
+      {
+        word: "Reflexive pronoun misuse",
+        meaning:
+          "Reflexive pronouns (myself, himself) cannot replace plain subject or object pronouns.",
+        examples: [
+          "✗ Please contact myself if you have questions.",
+          "✓ Please contact me if you have questions.",
+          "✓ I did it myself. (emphasis — correct)",
+        ],
+        tip: "",
+      },
+      {
+        word: "Uncountable noun with a/an",
+        meaning: "Uncountable nouns cannot be preceded by a/an directly.",
+        examples: [
+          "✗ an advice",
+          "✓ a piece of advice",
+          "✗ a furniture → ✓ a piece of furniture",
+        ],
+        tip: "",
+      },
+      {
+        word: "Collective noun verb agreement",
+        meaning:
+          "In North American English, collective nouns take singular verbs.",
+        examples: [
+          "✓ The committee has decided. (not have)",
+          "✓ The team is ready. (not are)",
+          "✓ The staff was informed.",
+        ],
+        tip: "",
+      },
+      {
+        word: "Pronoun-antecedent agreement",
+        meaning:
+          "A pronoun must agree in number and gender with the noun it replaces.",
+        examples: [
+          "✗ Each student must submit their assignment by Friday. (informal but accepted)",
+          "✓ Each student must submit his or her assignment.",
+          "✓ All students must submit their assignments.",
+        ],
+        tip: "",
+      },
+    ],
+  },
+];
+
 export const PREP_GROUPS = [
   {
     category: "Place & Position",
@@ -1917,6 +2663,7 @@ export const MODALS = [
       "I <em>would</em> travel more if I had time. (conditional)",
       "<em>Would</em> you like some coffee? (polite offer)",
       "As a child, we <em>would</em> play outside all day. (past habit)",
+      "It <em>would</em> be nice to have a day off.",
     ],
     negative: "wouldn't",
     note: '"Would" is the most versatile modal — it appears in conditionals, polite speech, and narrative.',
@@ -1942,6 +2689,939 @@ export const MODALS = [
     ],
     negative: "ought not to",
     note: '"Ought to" is similar to "should" but slightly stronger in moral implication.',
+  },
+];
+
+export const COMPLEX_SENTENCES = [
+  // ── COMPOUND SENTENCES (10) ──────────────────────────────────────────
+
+  {
+    type: "compound",
+    emoji: "📧",
+    scenario:
+      "CELPIP Writing Task 1 — Emailing a landlord about a broken heater in winter",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence: "The heating system stopped working on Monday evening.",
+        thought:
+          "IC1 — I state the problem clearly with a time marker. This is a complete fact the landlord needs.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "the temperature inside the apartment has dropped significantly.",
+        thought:
+          "IC2 — I explain the consequence at home. Both ideas are equally important to establish urgency.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "and",
+        thought:
+          '"And" connects two related facts in sequence. The broken heater caused the temperature drop — "and" links them naturally.',
+      },
+    ],
+    final:
+      "The heating system stopped working on Monday evening, <strong>and</strong> the temperature inside the apartment has dropped significantly.",
+    tip: "In a complaint email (Task 1), compound sentences help you state the problem AND its impact clearly and professionally in one breath.",
+  },
+  {
+    type: "compound",
+    emoji: "🏙️",
+    scenario:
+      "CELPIP Speaking Task 6 — Describing changes in your neighbourhood over time",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "Several new restaurants and cafés have opened along the main street.",
+        thought:
+          "IC1 — a specific, observable change. I can visualize and describe it clearly.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence: "the area has become much more vibrant and lively.",
+        thought:
+          "IC2 — the overall effect of those changes. A natural result worth adding.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "so",
+        thought:
+          '"So" signals that IC2 is the result of IC1. New openings → vibrancy. This cause-effect relationship sounds analytical and fluent.',
+      },
+    ],
+    final:
+      "Several new restaurants and cafés have opened along the main street, <strong>so</strong> the area has become much more vibrant and lively.",
+    tip: 'For Speaking Task 6 (describe a scene or change), compound sentences with "so" help you go beyond basic description into analysis — exactly what earns higher scores.',
+  },
+  {
+    type: "compound",
+    emoji: "🤝",
+    scenario:
+      "CELPIP Speaking Task 5 — Giving advice to a friend who got a poor performance review at work",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "You should speak with your manager privately to understand the feedback.",
+        thought:
+          "IC1 — the first piece of advice. Direct, actionable, complete.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "you could ask a trusted colleague to help you identify areas for improvement.",
+        thought:
+          "IC2 — a second option. These are two equally valid suggestions.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "or",
+        thought:
+          '"Or" presents IC2 as an alternative to IC1. I am giving two options, not forcing one solution — this sounds considerate and helpful.',
+      },
+    ],
+    final:
+      "You should speak with your manager privately to understand the feedback, <strong>or</strong> you could ask a trusted colleague to help you identify areas for improvement.",
+    tip: 'In Speaking Task 5 (advice), using "or" to offer two options shows flexibility and empathy — qualities that make advice sound natural rather than rigid.',
+  },
+  {
+    type: "compound",
+    emoji: "🌆",
+    scenario:
+      "CELPIP Writing Task 2 — Opinion essay: Should cities invest in public transit or road expansion?",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "Expanding road infrastructure may reduce congestion in the short term.",
+        thought:
+          "IC1 — I acknowledge the opposing side fairly. This shows balanced thinking.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "it does not address the long-term environmental consequences of increased car use.",
+        thought: "IC2 — my counter-argument. I am pivoting to my position.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "but",
+        thought:
+          '"But" is perfect for acknowledging a point and then refuting it. It\'s the most common connector in academic argument for this purpose.',
+      },
+    ],
+    final:
+      "Expanding road infrastructure may reduce congestion in the short term, <strong>but</strong> it does not address the long-term environmental consequences of increased car use.",
+    tip: 'In Writing Task 2, using "but" to concede and then counter is a high-scoring strategy. It shows critical thinking rather than one-sided opinion.',
+  },
+  {
+    type: "compound",
+    emoji: "📞",
+    scenario:
+      "CELPIP Speaking Task 1 — Leaving a voicemail to reschedule a doctor's appointment",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence: "I have an appointment scheduled for Thursday at 2 pm.",
+        thought:
+          "IC1 — I identify the appointment clearly. The listener needs context first.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "I am afraid I will not be able to make it due to an urgent work commitment.",
+        thought:
+          "IC2 — I explain why I need to reschedule. Polite and specific.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "but",
+        thought:
+          '"But" signals the contrast: I have the appointment, BUT I cannot attend. It\'s natural and polite in spoken English.',
+      },
+    ],
+    final:
+      "I have an appointment scheduled for Thursday at 2 pm, <strong>but</strong> I am afraid I will not be able to make it due to an urgent work commitment.",
+    tip: 'In Task 1 speaking (phone messages), compound sentences with "but" let you state the fact and the problem in one clear, professional sentence.',
+  },
+  {
+    type: "compound",
+    emoji: "🏫",
+    scenario:
+      "CELPIP Writing Task 2 — Should schools replace textbooks with tablets?",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "Tablets give students access to a vast range of updated educational resources.",
+        thought: "IC1 — a clear benefit supporting one side of the argument.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "many schools in lower-income communities cannot afford to provide them for every student.",
+        thought:
+          "IC2 — a real practical limitation. Adding this makes the argument nuanced.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "yet",
+        thought:
+          '"Yet" is like "but" but more formal — ideal for academic writing. It signals a surprising or important counterpoint.',
+      },
+    ],
+    final:
+      "Tablets give students access to a vast range of updated educational resources, <strong>yet</strong> many schools in lower-income communities cannot afford to provide them for every student.",
+    tip: '"Yet" as a conjunction is a mark of formal writing. Using it in Writing Task 2 instead of "but" lifts the register and shows range of vocabulary.',
+  },
+  {
+    type: "compound",
+    emoji: "🧳",
+    scenario:
+      "CELPIP Speaking Task 8 — Expressing and defending an opinion about working from home vs. office",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "Working from home offers greater flexibility and reduces commute time.",
+        thought:
+          "IC1 — I state the main benefit of my preferred option clearly.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "it can also lead to feelings of isolation and reduced team collaboration.",
+        thought:
+          "IC2 — I acknowledge a downside. Showing balance in Speaking Task 8 earns higher marks.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "but",
+        thought:
+          '"But" pivots from my positive claim to a concession. I am not ignoring the other side — I am showing I have thought about it.',
+      },
+    ],
+    final:
+      "Working from home offers greater flexibility and reduces commute time, <strong>but</strong> it can also lead to feelings of isolation and reduced team collaboration.",
+    tip: "For Speaking Task 8 (defend your opinion), showing both sides before picking one demonstrates sophisticated thinking — exactly what the highest band descriptors reward.",
+  },
+  {
+    type: "compound",
+    emoji: "🛒",
+    scenario:
+      "CELPIP Writing Task 1 — Email to a store about a defective product received online",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence: "I ordered a blender from your website three weeks ago.",
+        thought: "IC1 — context. Time and action are both clear.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "it arrived with a cracked base and does not function properly.",
+        thought:
+          "IC2 — the problem. Both facts together form the complaint — one without the other is incomplete.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "but",
+        thought:
+          '"But" contrasts the expectation (a working product) with the reality (a defective one). Natural for complaints.',
+      },
+    ],
+    final:
+      "I ordered a blender from your website three weeks ago, <strong>but</strong> it arrived with a cracked base and does not function properly.",
+    tip: "Task 1 emails need a clear problem statement early. This compound sentence achieves that in one polished line — context + problem.",
+  },
+  {
+    type: "compound",
+    emoji: "🌳",
+    scenario:
+      "CELPIP Writing Task 2 — Should city parks be converted into housing developments?",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "Green spaces provide residents with vital areas for recreation and mental well-being.",
+        thought:
+          "IC1 — a strong benefit of keeping parks. I want to now add a counterpoint the opposition might use.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "the city is facing a severe housing shortage that cannot be ignored.",
+        thought:
+          "IC2 — the reality of the opposing argument. I'm being fair before making my case.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "and",
+        thought:
+          '"And" here doesn\'t contrast — it adds. I am saying both things are true simultaneously, which makes the dilemma feel real.',
+      },
+    ],
+    final:
+      "Green spaces provide residents with vital areas for recreation and mental well-being, <strong>and</strong> the city is facing a severe housing shortage that cannot be ignored.",
+    tip: 'Using "and" to introduce a genuine tension (not just contrast) is a sophisticated move in essays — it sets up the complexity before you offer your resolution.',
+  },
+  {
+    type: "compound",
+    emoji: "👩‍⚕️",
+    scenario:
+      "CELPIP Speaking Task 7 — Proposing a solution to reduce wait times at a community health clinic",
+    steps: [
+      {
+        label: "Simple clause 1",
+        sentence:
+          "The clinic could introduce an online booking system for routine appointments.",
+        thought: "IC1 — a concrete solution proposal. Clear and practical.",
+      },
+      {
+        label: "Simple clause 2",
+        sentence:
+          "this would significantly reduce the number of walk-in patients during peak hours.",
+        thought:
+          "IC2 — the expected benefit of the solution. Together, solution + impact = a complete proposal.",
+      },
+      {
+        label: "Choose connector",
+        sentence: "and",
+        thought:
+          '"And" links the solution to its benefit. This is the most natural connector when adding a positive consequence to a positive suggestion.',
+      },
+    ],
+    final:
+      "The clinic could introduce an online booking system for routine appointments, <strong>and</strong> this would significantly reduce the number of walk-in patients during peak hours.",
+    tip: 'In Speaking Task 7 (solution proposal), structure your answer as: solution + "and" + benefit. It sounds organized and professional even without rehearsing.',
+  },
+
+  // ── COMPLEX SENTENCES (10) ──────────────────────────────────────────
+
+  {
+    type: "complex",
+    emoji: "✉️",
+    scenario:
+      "CELPIP Writing Task 1 — Requesting a deadline extension from a professor",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "I am writing to request a brief extension on the assignment deadline.",
+        thought:
+          "IC — the main purpose of my email. Clear and direct. But I want to explain WHY I need it.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "because I have been dealing with a family emergency this week",
+        thought:
+          'DC — the reason. It cannot stand alone — it depends on the IC to give it purpose. "Because" introduces the explanation.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "because",
+        thought:
+          '"Because" answers "why?" It makes the DC subordinate — the reason supports the request, it isn\'t the main message.',
+      },
+    ],
+    final:
+      "I am writing to request a brief extension on the assignment deadline <strong>because</strong> I have been dealing with a family emergency this week.",
+    tip: "In formal Task 1 emails, lead with your purpose (IC) and follow with the reason (because + DC). This order feels professional — you state what you want before justifying it.",
+  },
+  {
+    type: "complex",
+    emoji: "🏙️",
+    scenario:
+      "CELPIP Writing Task 2 — Arguing that cities should invest in cycling infrastructure",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence: "Urban air quality would improve dramatically.",
+        thought:
+          "IC — my main claim. It's a strong, confident statement. Now I want to make it conditional.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "if more residents chose cycling over driving for short distances",
+        thought:
+          'DC — the condition under which IC is true. "If" creates a first conditional — realistic and possible.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "if",
+        thought:
+          '"If" creates a conditional relationship. The improvement (IC) depends on the behaviour change (DC). This is persuasive writing logic.',
+      },
+    ],
+    final:
+      "Urban air quality would improve dramatically <strong>if</strong> more residents chose cycling over driving for short distances.",
+    tip: 'Conditional complex sentences ("would… if…") are powerful in essays — they make your argument feel logical and evidence-based rather than just opinion.',
+  },
+  {
+    type: "complex",
+    emoji: "🗣️",
+    scenario:
+      "CELPIP Speaking Task 4 — Describing a solution to a problem shown in a set of images (construction noise near a school)",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "The school board should reschedule noisy construction work for after school hours.",
+        thought:
+          "IC — my proposed solution. Direct, clear, stands alone. I want to add WHEN this matters most.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "so that students can concentrate during examinations and important lessons",
+        thought:
+          'DC — purpose clause. "So that" introduces the reason for the solution. It depends on the IC.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "so that",
+        thought:
+          '"So that" = purpose. I am not just saying what should happen — I am saying WHY, which makes the argument stronger.',
+      },
+    ],
+    final:
+      "The school board should reschedule noisy construction work for after school hours <strong>so that</strong> students can concentrate during examinations and important lessons.",
+    tip: '"So that" + can/could signals purpose — a sign of sophisticated grammar. In speaking tasks, using it shows you can express reasoning, not just facts.',
+  },
+  {
+    type: "complex",
+    emoji: "💼",
+    scenario:
+      "CELPIP Speaking Task 5 — Advising a friend who is considering quitting a stable job to start a business",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "You might want to test your business idea on a smaller scale first.",
+        thought:
+          "IC — careful, measured advice. Not telling them what to do — suggesting. I want to add a time condition.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "before you make any final decisions about leaving your current position",
+        thought:
+          'DC — a time clause. "Before" tells them WHEN to test. This makes the advice feel protective and thoughtful.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "before",
+        thought:
+          '"Before" subordinates the quitting decision to the testing phase. It implies: test first, THEN decide. Sequencing advice this way sounds mature.',
+      },
+    ],
+    final:
+      "You might want to test your business idea on a smaller scale first <strong>before</strong> you make any final decisions about leaving your current position.",
+    tip: 'In Speaking Task 5, using "before" to sequence advice makes you sound cautious and well-reasoned — qualities that score well in the Coherence and Precision criteria.',
+  },
+  {
+    type: "complex",
+    emoji: "🏥",
+    scenario:
+      "CELPIP Writing Task 2 — Should governments fund preventive healthcare or treatment?",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "Governments would spend significantly less on treating chronic diseases.",
+        thought:
+          "IC — a key claim in my argument. Complete on its own. But I need to add the condition.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "if they invested more heavily in preventive health education and community programs",
+        thought:
+          'DC — the condition. My IC is a consequence of this investment. "If" makes it a conditional argument.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "if",
+        thought:
+          '"If" creates a second conditional here (would + if + past) — a hypothetical but realistic policy scenario. Perfect for essay arguments.',
+      },
+    ],
+    final:
+      "Governments would spend significantly less on treating chronic diseases <strong>if</strong> they invested more heavily in preventive health education and community programs.",
+    tip: 'Second conditional ("would… if… past tense") in essays signals a policy recommendation — "this hypothetical change would produce this outcome." It\'s a high-scoring structure.',
+  },
+  {
+    type: "complex",
+    emoji: "🧒",
+    scenario:
+      "CELPIP Speaking Task 6 — Describing a childhood memory for a personal question",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence: "I remember feeling incredibly nervous.",
+        thought:
+          "IC — a personal emotional memory. Short and vivid. I want to add WHEN this happened to give context.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "when I performed in my first school play at the age of seven",
+        thought:
+          'DC — a time clause. "When" pins the feeling to a specific moment. It depends on IC to make full sense.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "when",
+        thought:
+          '"When" connects the emotion (IC) to the specific event (DC). It creates a vivid, story-like quality that sounds natural in spoken English.',
+      },
+    ],
+    final:
+      "I remember feeling incredibly nervous <strong>when</strong> I performed in my first school play at the age of seven.",
+    tip: 'For personal experience questions in Speaking (Tasks 6, 7, 8), "when" clauses instantly create narrative and context — they make your answer sound like a story, not a list.',
+  },
+  {
+    type: "complex",
+    emoji: "🌐",
+    scenario:
+      "CELPIP Writing Task 2 — Should social media companies be regulated by governments?",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "Social media platforms often fail to adequately protect users' personal data.",
+        thought:
+          "IC — a claim that supports regulation. I want to add context — this is especially true in one situation.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "although many of them claim to have strict privacy policies in place",
+        thought:
+          'DC — a concession. "Although" shows I am aware of the counter-argument. This makes my IC stronger by contrast.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "although",
+        thought:
+          '"Although" signals: I know the other side\'s argument — and yet my claim still stands. This concede-then-argue structure is a top essay technique.',
+      },
+    ],
+    final:
+      "Social media platforms often fail to adequately protect users' personal data, <strong>although</strong> many of them claim to have strict privacy policies in place.",
+    tip: 'Placing "although" mid-sentence (IC + although + DC) is common in formal writing. It lets you make your claim FIRST, then acknowledge the counter — keeping your position dominant.',
+  },
+  {
+    type: "complex",
+    emoji: "📬",
+    scenario:
+      "CELPIP Writing Task 1 — Email to a community centre requesting a refund for a cancelled fitness class",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "I would like to request a full refund for the eight-week yoga program I registered for.",
+        thought:
+          "IC — the request is clear and polite. Now I need to explain the reason.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "since the program was cancelled without prior notice on your part",
+        thought:
+          'DC — "since" here means "because" (causal). It gives the reason for the refund request and assigns responsibility professionally.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "since",
+        thought:
+          '"Since" (causal) is slightly more formal than "because." It implies the reason is known and undeniable — a stronger tone for a legitimate complaint.',
+      },
+    ],
+    final:
+      "I would like to request a full refund for the eight-week yoga program I registered for, <strong>since</strong> the program was cancelled without prior notice on your part.",
+    tip: 'In complaint emails, causal "since" sounds more formal and assertive than "because" — it implies the connection is obvious and the request is justified.',
+  },
+  {
+    type: "complex",
+    emoji: "🚌",
+    scenario:
+      "CELPIP Speaking Task 7 — Recommending improvements to a city's public transit system",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence: "More residents would use public transit regularly.",
+        thought:
+          "IC — a confident prediction. My argument is: usage would go up. But this needs a condition.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "if bus routes were expanded to reach suburban neighbourhoods that are currently underserved",
+        thought:
+          'DC — the condition. "If" + past tense = second conditional recommendation. This is the change I am proposing.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "if",
+        thought:
+          '"If" makes this a policy recommendation: I am saying what WOULD happen if a specific change were made. It\'s persuasive and structured.',
+      },
+    ],
+    final:
+      "More residents would use public transit regularly <strong>if</strong> bus routes were expanded to reach suburban neighbourhoods that are currently underserved.",
+    tip: 'Second conditional complex sentences ("would… if… were/past tense") are ideal for Speaking Task 7 solution proposals — they sound confident without being absolute.',
+  },
+  {
+    type: "complex",
+    emoji: "👨‍👩‍👧",
+    scenario:
+      "CELPIP Speaking Task 8 — Defending the opinion that parents should limit children's screen time",
+    steps: [
+      {
+        label: "Independent clause",
+        sentence:
+          "Children are more likely to develop strong social skills and healthy habits.",
+        thought:
+          "IC — my main claim. Strong, positive, complete. But I need to show WHEN or UNDER WHAT CONDITION.",
+      },
+      {
+        label: "Dependent clause",
+        sentence:
+          "when parents actively limit their screen time and encourage outdoor activities instead",
+        thought:
+          'DC — the condition using "when." It explains what parents need to do for the IC to be true.',
+      },
+      {
+        label: "Choose connector",
+        sentence: "when",
+        thought:
+          '"When" here functions as a conditional — "in situations where parents do this, children benefit." It\'s softer than "if" and sounds more like an observed truth.',
+      },
+    ],
+    final:
+      "Children are more likely to develop strong social skills and healthy habits <strong>when</strong> parents actively limit their screen time and encourage outdoor activities instead.",
+    tip: 'Using "when" (instead of "if") makes your claim sound like an established pattern rather than a hypothetical — a subtle but powerful distinction in persuasive speaking.',
+  },
+
+  // ── COMPOUND-COMPLEX SENTENCES (10) ────────────────────────────────
+
+  {
+    type: "compound-complex",
+    emoji: "📧",
+    scenario:
+      "CELPIP Writing Task 1 — Email to a neighbour about noise during night hours",
+    steps: [
+      {
+        label: "Independent clause 1",
+        sentence:
+          "I have genuinely enjoyed living next door to you over the past two years.",
+        thought:
+          "IC1 — I open positively to avoid sounding aggressive. This is good email strategy.",
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "I wanted to raise a concern about the noise levels late at night",
+        thought:
+          'IC2 — the actual purpose of the email. "But" will contrast the positive IC1 with this concern.',
+      },
+      {
+        label: "Add dependent clause",
+        sentence:
+          "because it has been making it difficult for me to sleep before work",
+        thought:
+          'DC — the impact on me. "Because" subordinates this reason to IC2, adding necessary detail without making it the main message.',
+      },
+    ],
+    final:
+      "I have genuinely enjoyed living next door to you over the past two years, <strong>but</strong> I wanted to raise a concern about the noise levels late at night <strong>because</strong> it has been making it difficult for me to sleep before work.",
+    tip: 'This structure — positive IC + "but" + concern IC + "because" + reason — is the ideal formula for a polite complaint email in Task 1. It\'s firm but not confrontational.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🏫",
+    scenario:
+      "CELPIP Writing Task 2 — Should uniforms be mandatory in public schools?",
+    steps: [
+      {
+        label: "Independent clause 1 + dependent clause",
+        sentence:
+          "Although school uniforms may restrict individual expression, they create a sense of equality among students",
+        thought:
+          'Leading DC = "Although… expression." IC1 = "they create a sense of equality." "Although" concedes, IC1 argues. Comma after DC.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "and they reduce the social pressure associated with branded clothing",
+        thought:
+          'IC2 — a second benefit. "And" adds it to IC1. Together IC1 + IC2 form a compound structure supporting uniforms.',
+      },
+      {
+        label: "Assemble",
+        sentence: 'DC, IC1 + "and" + IC2',
+        thought:
+          'One dependent clause + two independent clauses joined by "and." Classic compound-complex pattern for a body paragraph.',
+      },
+    ],
+    final:
+      "<strong>Although</strong> school uniforms may restrict individual expression, they create a sense of equality among students, <strong>and</strong> they reduce the social pressure associated with branded clothing.",
+    tip: 'This pattern — "Although [concession], [argument], and [second argument]" — is one of the most effective essay sentence structures for CELPIP Writing Task 2 body paragraphs.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🗣️",
+    scenario:
+      "CELPIP Speaking Task 8 — Agreeing or disagreeing: remote work should be a permanent option for all office workers",
+    steps: [
+      {
+        label: "Independent clause 1",
+        sentence:
+          "Remote work has proven to be highly effective for many professionals.",
+        thought:
+          "IC1 — I establish my position with a confident claim backed by general observation.",
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "some roles genuinely require in-person collaboration and cannot function well remotely",
+        thought:
+          'IC2 — I acknowledge the counter-argument honestly. "But" will signal this turn.',
+      },
+      {
+        label: "Add dependent clause",
+        sentence:
+          "which is why a flexible hybrid model may be the most practical solution",
+        thought:
+          'DC introduced by "which is why" — a relative clause that draws a conclusion from IC2. It depends on IC2 to make sense.',
+      },
+    ],
+    final:
+      "Remote work has proven to be highly effective for many professionals, <strong>but</strong> some roles genuinely require in-person collaboration and cannot function well remotely, <strong>which is why</strong> a flexible hybrid model may be the most practical solution.",
+    tip: '"Which is why" is a relative clause connector that draws logical conclusions — it sounds highly fluent and is rarely used by lower-band candidates. Use it to impress.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🌆",
+    scenario:
+      "CELPIP Speaking Task 7 — Proposing a solution to overcrowding on city buses during rush hour",
+    steps: [
+      {
+        label: "Independent clause 1 + dependent clause",
+        sentence:
+          "Since many commuters travel during the same two-hour window each morning, the buses become dangerously overcrowded",
+        thought:
+          'Leading DC = "Since… morning." IC1 = "the buses become dangerously overcrowded." "Since" = because. Comma after DC.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "so the city should consider introducing staggered shift incentives for local businesses",
+        thought:
+          'IC2 — the proposed solution. "So" = result/recommendation. It flows from the problem stated in IC1.',
+      },
+      {
+        label: "Assemble",
+        sentence: 'DC, IC1 + "so" + IC2',
+        thought:
+          'DC explains the cause → IC1 describes the problem → "so" leads to IC2 (solution). Perfect problem-solution structure.',
+      },
+    ],
+    final:
+      "<strong>Since</strong> many commuters travel during the same two-hour window each morning, the buses become dangerously overcrowded, <strong>so</strong> the city should consider introducing staggered shift incentives for local businesses.",
+    tip: 'The pattern "Since [cause], [problem], so [solution]" packs an entire argument into one elegant compound-complex sentence — ideal for speaking tasks where time is limited.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🌿",
+    scenario:
+      "CELPIP Writing Task 2 — Should individuals or governments take responsibility for reducing plastic waste?",
+    steps: [
+      {
+        label: "Independent clause 1",
+        sentence:
+          "Individuals can make meaningful choices to reduce plastic use in their daily lives.",
+        thought:
+          "IC1 — one side of the argument. I want to balance it with a government responsibility (IC2).",
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "governments must also enforce regulations that hold corporations accountable",
+        thought:
+          'IC2 — the other side. "And" connects both sides as equally important.',
+      },
+      {
+        label: "Add dependent clause",
+        sentence:
+          "since consumer-level changes alone are insufficient to address industrial-scale pollution",
+        thought:
+          'DC — "since" = because. It justifies why IC2 (government action) is necessary. It depends on IC2.',
+      },
+    ],
+    final:
+      "Individuals can make meaningful choices to reduce plastic use in their daily lives, <strong>and</strong> governments must also enforce regulations that hold corporations accountable, <strong>since</strong> consumer-level changes alone are insufficient to address industrial-scale pollution.",
+    tip: 'Using "since" to justify the second IC in a compound-complex sentence is a mark of mature essay writing — it shows you can reason, not just list points.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "👩‍💼",
+    scenario:
+      "CELPIP Speaking Task 5 — Advising a friend who is feeling burned out and overworked",
+    steps: [
+      {
+        label: "Independent clause 1 + dependent clause",
+        sentence:
+          "Even though it might feel impossible to slow down right now, you need to start setting clear boundaries with your employer",
+        thought:
+          'Leading DC = "Even though… right now." IC1 = "you need to start setting clear boundaries." Concession + direct advice.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "and you should also consider speaking to a counsellor who specialises in workplace stress",
+        thought:
+          'IC2 — a second recommendation. "And" adds it equally alongside IC1.',
+      },
+      {
+        label: "Assemble",
+        sentence: 'DC, IC1 + "and" + IC2',
+        thought:
+          "Concede the difficulty first (DC), then give two concrete action steps (IC1 + IC2). This structure sounds empathetic and helpful.",
+      },
+    ],
+    final:
+      "<strong>Even though</strong> it might feel impossible to slow down right now, you need to start setting clear boundaries with your employer, <strong>and</strong> you should also consider speaking to a counsellor who specialises in workplace stress.",
+    tip: 'Opening with "Even though I understand it\'s hard..." before your advice makes it land better. The compound-complex structure lets you be empathetic AND give two recommendations in one sentence.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🏡",
+    scenario:
+      "CELPIP Writing Task 1 — Email to a property management company about an unresolved maintenance request",
+    steps: [
+      {
+        label: "Independent clause 1",
+        sentence:
+          "I submitted a maintenance request for the broken bathroom window over three weeks ago.",
+        thought:
+          "IC1 — establishes the timeline clearly. The reader immediately understands the delay.",
+      },
+      {
+        label: "Independent clause 2",
+        sentence: "no one has come to inspect or repair it yet",
+        thought:
+          'IC2 — the unresolved status. "But" contrasts what I did (submitted request) with what didn\'t happen (no repair).',
+      },
+      {
+        label: "Add dependent clause",
+        sentence:
+          "which has become a serious safety and security concern for my household",
+        thought:
+          'DC — "which" relative clause showing impact. It depends on IC2 and adds urgency to the complaint.',
+      },
+    ],
+    final:
+      "I submitted a maintenance request for the broken bathroom window over three weeks ago, <strong>but</strong> no one has come to inspect or repair it yet, <strong>which</strong> has become a serious safety and security concern for my household.",
+    tip: '"Which has become…" is a non-restrictive relative clause — it adds consequence without starting a new sentence. In formal complaint emails, this structure escalates urgency elegantly.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "📊",
+    scenario:
+      "CELPIP Writing Task 2 — Is technology making people more or less productive?",
+    steps: [
+      {
+        label: "Independent clause 1 + dependent clause",
+        sentence:
+          "While technology has undoubtedly streamlined many workplace tasks, it has also introduced significant distractions",
+        thought:
+          'DC = "While… tasks." IC1 = "it has also introduced significant distractions." "While" = contrast (whereas). Comma after DC.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "so the overall impact on productivity depends largely on how intentionally it is used",
+        thought:
+          'IC2 — a nuanced conclusion. "So" shows this follows from the tension set up by DC + IC1.',
+      },
+      {
+        label: "Assemble",
+        sentence: 'DC, IC1 + "so" + IC2',
+        thought:
+          "This entire sentence makes a balanced argument: acknowledge benefits (DC) + note drawbacks (IC1) + draw conclusion (IC2). Three ideas, one sentence.",
+      },
+    ],
+    final:
+      "<strong>While</strong> technology has undoubtedly streamlined many workplace tasks, it has also introduced significant distractions, <strong>so</strong> the overall impact on productivity depends largely on how intentionally it is used.",
+    tip: "This sentence could serve as a thesis statement for Writing Task 2 — it presents both sides and your position in one compound-complex sentence. A very efficient and impressive structure.",
+  },
+  {
+    type: "compound-complex",
+    emoji: "🎙️",
+    scenario:
+      "CELPIP Speaking Task 3 — Describing what is happening in a news broadcast image",
+    steps: [
+      {
+        label: "Independent clause 1",
+        sentence:
+          "It appears that a large crowd has gathered outside the city hall.",
+        thought:
+          'IC1 — careful language ("it appears that") for describing an image where I am not 100% certain. Sounds fluent and natural.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence: "many of them are holding signs and appear to be chanting",
+        thought:
+          'IC2 — specific observable details. "And" adds this second observation.',
+      },
+      {
+        label: "Add dependent clause",
+        sentence:
+          "which suggests that this may be a community protest or public demonstration",
+        thought:
+          'DC — "which suggests" is a conclusion relative clause. It draws a logical inference from what I observe. High-scoring language.',
+      },
+    ],
+    final:
+      "It appears that a large crowd has gathered outside the city hall, <strong>and</strong> many of them are holding signs and appear to be chanting, <strong>which suggests</strong> that this may be a community protest or public demonstration.",
+    tip: '"Which suggests that…" is a sophisticated inference marker — it shows you can move from observation to interpretation, which is exactly what Speaking Task 3 requires.',
+  },
+  {
+    type: "compound-complex",
+    emoji: "🏙️",
+    scenario:
+      "CELPIP Writing Task 2 — Conclusion paragraph: Should cities prioritise affordable housing over cultural landmarks?",
+    steps: [
+      {
+        label: "Independent clause 1 + dependent clause",
+        sentence:
+          "Although preserving cultural landmarks is important for a city's identity, the urgent need for affordable housing must take priority in areas where residents are being displaced",
+        thought:
+          'DC = "Although… identity." IC1 = "the urgent need… must take priority." Long but structured. "Where" adds a relative clause inside IC1.',
+      },
+      {
+        label: "Independent clause 2",
+        sentence:
+          "and both goals can ultimately be achieved through thoughtful, long-term urban planning",
+        thought:
+          'IC2 — the optimistic resolution. "And" bridges the tension into a conclusion. Strong essay closing move.',
+      },
+      {
+        label: "Assemble",
+        sentence: 'DC, IC1 + "and" + IC2',
+        thought:
+          "Concede (DC) + argue (IC1) + resolve (IC2). This is the structure of a high-scoring conclusion paragraph.",
+      },
+    ],
+    final:
+      "<strong>Although</strong> preserving cultural landmarks is important for a city's identity, the urgent need for affordable housing must take priority in areas where residents are being displaced, <strong>and</strong> both goals can ultimately be achieved through thoughtful, long-term urban planning.",
+    tip: "A conclusion paragraph in Task 2 should concede, argue, and resolve. This compound-complex sentence does all three — making it a nearly complete conclusion on its own.",
   },
 ];
 
