@@ -2306,66 +2306,6 @@ export default function CelpipVocabPage() {
       </div>
     </div>
 
-    <!-- Present Simple 3rd person -->
-    <div class="vb-card">
-      <div class="vb-card-title">
-        <span class="vb-form-label vb-form-vs">V5</span>
-        Present simple (3rd person -s)
-      </div>
-      <div class="vb-card-body">Add -s or -es for he/she/it. Verbs ending in -ch, -sh, -x, -o, -ss get -es.
-        <div class="vb-ex-row">
-          <span class="vb-ex-pill">run → run<em>s</em></span>
-          <span class="vb-ex-pill">teach → teach<em>es</em></span>
-          <span class="vb-ex-pill">go → go<em>es</em></span>
-        </div>
-        <table class="vb-form-table">
-          <thead><tr><th>Word</th><th>V1-s (he/she/it)</th></tr></thead>
-          <tbody>
-            <tr><td>run</td><td>runs</td></tr>
-            <tr><td>teach</td><td>teaches</td></tr>
-            <tr><td>go</td><td>goes</td></tr>
-            <tr><td>watch</td><td>watches</td></tr>
-            <tr><td>play</td><td>plays</td></tr>
-            <tr><td>fix</td><td>fixes</td></tr>
-            <tr><td>study</td><td>studies</td></tr>
-            <tr><td>do</td><td>does</td></tr>
-            <tr><td>have</td><td>has</td></tr>
-            <tr><td>miss</td><td>misses</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Present Participle -->
-    <div class="vb-card">
-      <div class="vb-card-title">
-        <span class="vb-form-label vb-form-ving">V4</span>
-        Present participle (-ing)
-      </div>
-      <div class="vb-card-body">Used for continuous tenses and as gerunds. Double the consonant after a short stressed vowel.
-        <div class="vb-ex-row">
-          <span class="vb-ex-pill">run → runn<em>ing</em></span>
-          <span class="vb-ex-pill">write → writ<em>ing</em></span>
-          <span class="vb-ex-pill">play → play<em>ing</em></span>
-        </div>
-        <table class="vb-form-table">
-          <thead><tr><th>Word</th><th>V-ing</th><th>Rule</th></tr></thead>
-          <tbody>
-            <tr><td>run</td><td>running</td><td>double consonant</td></tr>
-            <tr><td>write</td><td>writing</td><td>drop silent -e</td></tr>
-            <tr><td>play</td><td>playing</td><td>add -ing</td></tr>
-            <tr><td>sit</td><td>sitting</td><td>double consonant</td></tr>
-            <tr><td>make</td><td>making</td><td>drop silent -e</td></tr>
-            <tr><td>read</td><td>reading</td><td>add -ing</td></tr>
-            <tr><td>swim</td><td>swimming</td><td>double consonant</td></tr>
-            <tr><td>come</td><td>coming</td><td>drop silent -e</td></tr>
-            <tr><td>study</td><td>studying</td><td>add -ing</td></tr>
-            <tr><td>begin</td><td>beginning</td><td>double consonant</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
     <!-- Past Simple -->
     <div class="vb-card">
       <div class="vb-card-title">
@@ -2425,6 +2365,68 @@ export default function CelpipVocabPage() {
         </table>
       </div>
     </div>
+
+    <!-- Present Participle -->
+    <div class="vb-card">
+      <div class="vb-card-title">
+        <span class="vb-form-label vb-form-ving">V4</span>
+        Present participle (-ing)
+      </div>
+      <div class="vb-card-body">Used for continuous tenses and as gerunds. Double the consonant after a short stressed vowel.
+        <div class="vb-ex-row">
+          <span class="vb-ex-pill">run → runn<em>ing</em></span>
+          <span class="vb-ex-pill">write → writ<em>ing</em></span>
+          <span class="vb-ex-pill">play → play<em>ing</em></span>
+        </div>
+        <table class="vb-form-table">
+          <thead><tr><th>Word</th><th>V-ing</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>run</td><td>running</td><td>double consonant</td></tr>
+            <tr><td>write</td><td>writing</td><td>drop silent -e</td></tr>
+            <tr><td>play</td><td>playing</td><td>add -ing</td></tr>
+            <tr><td>sit</td><td>sitting</td><td>double consonant</td></tr>
+            <tr><td>make</td><td>making</td><td>drop silent -e</td></tr>
+            <tr><td>read</td><td>reading</td><td>add -ing</td></tr>
+            <tr><td>swim</td><td>swimming</td><td>double consonant</td></tr>
+            <tr><td>come</td><td>coming</td><td>drop silent -e</td></tr>
+            <tr><td>study</td><td>studying</td><td>add -ing</td></tr>
+            <tr><td>begin</td><td>beginning</td><td>double consonant</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Present Simple 3rd person -->
+    <div class="vb-card">
+      <div class="vb-card-title">
+        <span class="vb-form-label vb-form-vs">V5</span>
+        Present simple (3rd person -s)
+      </div>
+      <div class="vb-card-body">Add -s or -es for he/she/it. Verbs ending in -ch, -sh, -x, -o, -ss get -es.
+        <div class="vb-ex-row">
+          <span class="vb-ex-pill">run → run<em>s</em></span>
+          <span class="vb-ex-pill">teach → teach<em>es</em></span>
+          <span class="vb-ex-pill">go → go<em>es</em></span>
+        </div>
+        <table class="vb-form-table">
+          <thead><tr><th>Word</th><th>V1-s (he/she/it)</th></tr></thead>
+          <tbody>
+            <tr><td>run</td><td>runs</td></tr>
+            <tr><td>teach</td><td>teaches</td></tr>
+            <tr><td>go</td><td>goes</td></tr>
+            <tr><td>watch</td><td>watches</td></tr>
+            <tr><td>play</td><td>plays</td></tr>
+            <tr><td>fix</td><td>fixes</td></tr>
+            <tr><td>study</td><td>studies</td></tr>
+            <tr><td>do</td><td>does</td></tr>
+            <tr><td>have</td><td>has</td></tr>
+            <tr><td>miss</td><td>misses</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
 
     <!-- Gerund -->
     <div class="vb-card">
