@@ -8,6 +8,7 @@ import {
   COLLOCATIONS,
   INTENSITY_STYLES,
   SOUND_WORDS,
+  VERB_TYPES,
   SENTENCES,
   TRAPS,
   QUIZ,
@@ -25,6 +26,10 @@ import {
   GROUPS,
   IDIOM_GROUPS,
   COMPLEX_SENTENCES,
+  VOWEL_SOUNDS,
+  CONSONANT_SOUNDS,
+  STRESS_RULES,
+  CONNECTED_SPEECH,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -123,6 +128,39 @@ export default function CelpipVocabPage() {
 
       content.innerHTML = html;
     }
+
+    // preload voices so they're ready when user clicks
+    if (window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    function phSpeak(text, rate = 0.85) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.lang = "en-US";
+      utt.rate = rate;
+      utt.pitch = 1;
+
+      // prefer a natural-sounding voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const preferred =
+        voices.find(
+          (v) =>
+            v.lang.startsWith("en") &&
+            (v.name.includes("Samantha") ||
+              v.name.includes("Google US") ||
+              v.name.includes("Daniel") ||
+              v.name.includes("Karen")),
+        ) || voices.find((v) => v.lang.startsWith("en"));
+      if (preferred) utt.voice = preferred;
+
+      window.speechSynthesis.speak(utt);
+    }
+    window.phSpeak = phSpeak;
 
     // ─── Quiz Logic ────────────────────────────────────────────────────
     function getRandomOptions(correctEntry, count = 4) {
@@ -1482,6 +1520,230 @@ export default function CelpipVocabPage() {
   `;
     }
 
+    function renderPhonetics() {
+      const content = document.getElementById("phonetics-content");
+
+      content.innerHTML = `
+    <style>
+      .ph-section { margin-bottom: 2.5rem; }
+      .ph-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
+      .ph-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .ph-intro { font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 1rem; padding: 10px 14px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #e5e7eb; }
+
+      /* Vowel / consonant cards */
+      .ph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; }
+      .ph-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.45rem; }
+      .ph-card-top { display: flex; align-items: center; gap: 10px; }
+      .ph-ipa { font-size: 22px; font-weight: 800; color: #111827; font-family: monospace; min-width: 36px; }
+      .ph-name { font-size: 13px; font-weight: 700; color: #374151; }
+      .ph-spelling { font-size: 11px; color: #9ca3af; font-style: italic; }
+      .ph-mouth { font-size: 12.5px; color: #374151; line-height: 1.55; padding: 5px 8px; background: #f9fafb; border-radius: 6px; border-left: 3px solid #e5e7eb; }
+      .ph-words { display: flex; flex-wrap: wrap; gap: 4px; }
+      .ph-word { font-size: 11.5px; color: #2563eb; font-weight: 600; background: #eff6ff; padding: 2px 8px; border-radius: 5px; font-style: italic; }
+      .ph-minimal { font-size: 11px; color: #6b7280; }
+      .ph-minimal strong { color: #374151; }
+      .ph-trap { font-size: 11.5px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 4px 9px; line-height: 1.5; }
+
+      /* Consonant extras */
+      .ph-con-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+      .ph-badge-type { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #f3f4f6; color: #374151; }
+      .ph-badge-voiced { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+      .ph-pair { font-size: 11px; color: #9ca3af; }
+      .ph-pair strong { color: #6b7280; }
+
+      /* Stress rules */
+      .ph-stress-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
+      .ph-stress-rule { font-size: 13px; font-weight: 700; color: #111827; margin-bottom: 3px; }
+      .ph-stress-pattern { font-size: 12px; font-weight: 600; color: #1e40af; background: #dbeafe; padding: 2px 9px; border-radius: 6px; display: inline-block; margin-bottom: 0.5rem; }
+      .ph-stress-words { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.4rem; }
+      .ph-stress-word { font-size: 13px; font-style: italic; color: #374151; background: #f9fafb; border-radius: 6px; padding: 3px 9px; border: 1px solid #f3f4f6; }
+      .ph-stress-note { font-size: 11px; color: #9ca3af; margin-left: 4px; }
+
+      /* Connected speech */
+      .ph-cs-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; margin-bottom: 0.75rem; }
+      .ph-cs-top { display: flex; align-items: center; gap: 8px; margin-bottom: 0.4rem; }
+      .ph-cs-emoji { font-size: 1.2rem; }
+      .ph-cs-feature { font-size: 14px; font-weight: 700; color: #111827; }
+      .ph-cs-desc { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.6rem; }
+      .ph-cs-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+      .ph-cs-table th { text-align: left; padding: 5px 8px; color: #9ca3af; font-weight: 600; border-bottom: 1px solid #f3f4f6; }
+      .ph-cs-table td { padding: 5px 8px; border-bottom: 1px solid #f9fafb; color: #374151; }
+      .ph-cs-table tr:last-child td { border-bottom: none; }
+      .ph-cs-table td:nth-child(2) { color: #2563eb; font-weight: 600; font-family: monospace; }
+      .ph-cs-table td:nth-child(3) { color: #9ca3af; font-style: italic; }
+
+      .ph-speak-btn { background: none; border: none; cursor: pointer; padding: 3px 5px; border-radius: 6px; font-size: 14px; line-height: 1; color: #9ca3af; transition: all 0.15s; display: inline-flex; align-items: center; }
+.ph-speak-btn:hover { background: #eff6ff; color: #2563eb; }
+.ph-speak-btn:active { transform: scale(0.92); }
+.ph-speak-btn.ph-speaking { color: #2563eb; background: #eff6ff; animation: ph-pulse 0.6s infinite alternate; }
+@keyframes ph-pulse { from { opacity: 1; } to { opacity: 0.5; } }
+      @media (max-width: 600px) { .ph-grid { grid-template-columns: 1fr; } }
+
+    </style>
+
+    <!-- ① Vowel Sounds -->
+    <div class="ph-section">
+      <div class="ph-section-header">
+        <span style="font-size:1.3rem">🗣️</span>
+        <span class="ph-section-badge" style="background:#dbeafe;color:#1e40af">Vowel Sounds</span>
+        <span style="font-size:12px;color:#9ca3af">${VOWEL_SOUNDS.length} sounds</span>
+      </div>
+      <div class="ph-intro">English has around 20 vowel sounds but only 5 vowel letters — the same letter can represent many sounds. Learning the IPA symbol for each sound helps you look up pronunciation in any dictionary.</div>
+      <div class="ph-grid">
+        ${VOWEL_SOUNDS.map(
+          (v) => `
+          <div class="ph-card">
+            <div class="ph-card-top">
+  <div class="ph-ipa">/${v.ipa}/</div>
+  <div style="flex:1">
+    <div class="ph-name">${v.name}</div>
+    <div class="ph-spelling">Spelling: ${v.spelling}</div>
+  </div>
+  <button class="ph-speak-btn" style="font-size:18px" data-speak="${v.ipa}" data-rate="0.6" title="Hear this sound">🔊</button>
+</div>
+            <div class="ph-mouth">👄 ${v.mouth}</div>
+            <div class="ph-words">
+  ${v.words
+    .map(
+      (w) => `
+    <span class="ph-word" style="display:inline-flex;align-items:center;gap:3px;">
+      ${w}
+      <button class="ph-speak-btn" onclick="phSpeak('${w}')" title="Hear '${w}'">🔊</button>
+    </span>
+  `,
+    )
+    .join("")}
+</div>
+            ${v.minimal.length ? `<div class="ph-minimal"><strong>Minimal pairs:</strong> ${v.minimal.join(" · ")}</div>` : ""}
+            ${v.trap ? `<div class="ph-trap">⚠️ ${v.trap}</div>` : ""}
+          </div>
+        `,
+        ).join("")}
+      </div>
+    </div>
+
+    <!-- ② Consonant Sounds -->
+    <div class="ph-section">
+      <div class="ph-section-header">
+        <span style="font-size:1.3rem">🔤</span>
+        <span class="ph-section-badge" style="background:#dcfce7;color:#166534">Consonant Sounds</span>
+        <span style="font-size:12px;color:#9ca3af">${CONSONANT_SOUNDS.length} sounds</span>
+      </div>
+      <div class="ph-intro">English consonants come in voiced/voiceless pairs — same mouth position, but one uses the voice (feel your throat) and one is just air. Many spelling patterns are silent or irregular.</div>
+      <div class="ph-grid">
+        ${CONSONANT_SOUNDS.map(
+          (c) => `
+          <div class="ph-card">
+            <div class="ph-card-top">
+  <div class="ph-ipa">/${c.ipa}/</div>
+  <div style="flex:1">
+    <div class="ph-name">${c.name}</div>
+    <div class="ph-spelling">Spelling: ${c.spelling}</div>
+  </div>
+  <button class="ph-speak-btn" style="font-size:18px" data-speak="${c.words[0]}" data-rate="0.6" title="Hear this sound">🔊</button>
+</div>
+            <div class="ph-con-meta">
+              <span class="ph-badge-type">${c.type}</span>
+              <span class="ph-badge-voiced" style="${c.voiced ? "background:#dcfce7;color:#166534" : "background:#fee2e2;color:#991b1b"}">${c.voiced ? "Voiced" : "Voiceless"}</span>
+              ${c.pair ? `<span class="ph-pair">pair: <strong>/${c.pair}/</strong></span>` : ""}
+            </div>
+            <div class="ph-mouth">👄 ${c.mouth}</div>
+            <div class="ph-words">
+  ${c.words
+    .map(
+      (w) => `
+    <span class="ph-word" style="display:inline-flex;align-items:center;gap:3px;">
+      ${w}
+      <button class="ph-speak-btn" onclick="phSpeak('${w}')" title="Hear '${w}'">🔊</button>
+    </span>
+  `,
+    )
+    .join("")}
+</div>
+            ${c.tip ? `<div class="ph-trap">💡 ${c.tip}</div>` : ""}
+          </div>
+        `,
+        ).join("")}
+      </div>
+    </div>
+
+    <!-- ③ Word Stress -->
+    <div class="ph-section">
+      <div class="ph-section-header">
+        <span style="font-size:1.3rem">🎯</span>
+        <span class="ph-section-badge" style="background:#fef3c7;color:#92400e">Word Stress</span>
+      </div>
+      <div class="ph-intro">Every English word with more than one syllable has one syllable that is louder, longer, and higher in pitch. Stressing the wrong syllable can make a word unrecognizable — even if every sound is correct.</div>
+      ${STRESS_RULES.map(
+        (s) => `
+        <div class="ph-stress-card">
+          <div class="ph-stress-rule">${s.rule}</div>
+          <div class="ph-stress-pattern">${s.pattern}</div>
+          <div class="ph-stress-words">
+  ${s.examples
+    .map(
+      (e) => `
+    <span class="ph-stress-word" style="display:inline-flex;align-items:center;gap:4px;">
+      ${e.word}
+      ${e.note ? `<span class="ph-stress-note">(${e.note})</span>` : ""}
+      <button class="ph-speak-btn" onclick="phSpeak('${e.word.replace(/[A-Z]+/g, (s) => s.toLowerCase())}')" title="Hear pronunciation">🔊</button>
+    </span>
+  `,
+    )
+    .join("")}
+</div>
+          ${s.tip ? `<div class="ph-trap">💡 ${s.tip}</div>` : ""}
+        </div>
+      `,
+      ).join("")}
+    </div>
+
+    <!-- ④ Connected Speech -->
+    <div class="ph-section">
+      <div class="ph-section-header">
+        <span style="font-size:1.3rem">🌊</span>
+        <span class="ph-section-badge" style="background:#ede9fe;color:#5b21b6">Connected Speech</span>
+      </div>
+      <div class="ph-intro">Native speakers don't say each word separately — sounds blend, disappear, and change in natural speech. Understanding these patterns helps you hear and sound more natural.</div>
+      ${CONNECTED_SPEECH.map(
+        (cs) => `
+        <div class="ph-cs-card">
+          <div class="ph-cs-top">
+            <span class="ph-cs-emoji">${cs.emoji}</span>
+            <span class="ph-cs-feature">${cs.feature}</span>
+          </div>
+          <div class="ph-cs-desc">${cs.description}</div>
+          <table class="ph-cs-table">
+            <thead><tr><th>Phrase</th><th>How it sounds</th><th>Note</th></tr></thead>
+            <tbody>
+              ${cs.examples
+                .map(
+                  (e) => `
+                <tr>
+                  <td>
+  ${e.phrase}
+  <button class="ph-speak-btn" onclick="phSpeak('${e.phrase}')" title="Hear natural speech">🔊</button>
+</td>
+                  <td>${e.linked}</td>
+                  <td>${e.note}</td>
+                </tr>
+              `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      `,
+      ).join("")}
+    </div>
+  `;
+      content.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-speak]");
+        if (!btn) return;
+        phSpeak(btn.dataset.speak, parseFloat(btn.dataset.rate || "0.85"));
+      });
+    }
+
     function renderVerbs() {
       const content = document.getElementById("verbs-content");
 
@@ -1588,91 +1850,9 @@ export default function CelpipVocabPage() {
     </div>
 
     <!-- TYPES PANEL -->
-    <div id="vb-types" class="vb-panel vb-active">
-      <div class="vb-grid">
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-action">Action</span> Action verbs</div>
-          <div class="vb-card-body">Express a physical or mental action. The most common type.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">run, eat, think</span>
-              <span class="vb-ex-pill">write, decide, jump</span>
-              <span class="vb-ex-pill">She <em>runs</em> every day.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-linking">Linking</span> Linking verbs</div>
-          <div class="vb-card-body">Connect the subject to a description. They do not show action.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">be, seem, appear</span>
-              <span class="vb-ex-pill">feel, look, become</span>
-              <span class="vb-ex-pill">She <em>seems</em> tired.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-aux">Auxiliary</span> Auxiliary (helping) verbs</div>
-          <div class="vb-card-body">Help the main verb express tense, voice, or mood. Always paired with another verb.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">be, have, do</span>
-              <span class="vb-ex-pill">She <em>is running</em>.</span>
-              <span class="vb-ex-pill">He <em>has eaten</em>.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-modal">Modal</span> Modal verbs</div>
-          <div class="vb-card-body">Express ability, possibility, permission, obligation. Never change form.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">can, could, may</span>
-              <span class="vb-ex-pill">must, should, will</span>
-              <span class="vb-ex-pill">You <em>should</em> rest.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-trans">Transitive</span> Transitive verbs</div>
-          <div class="vb-card-body">Require a direct object — the action passes to something/someone.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">She <em>bought</em> a car.</span>
-              <span class="vb-ex-pill">He <em>kicked</em> the ball.</span>
-              <span class="vb-ex-pill">I <em>love</em> music.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-intrans">Intransitive</span> Intransitive verbs</div>
-          <div class="vb-card-body">Do NOT need a direct object. The action stays with the subject.
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">She <em>arrived</em>.</span>
-              <span class="vb-ex-pill">The baby <em>slept</em>.</span>
-              <span class="vb-ex-pill">He <em>laughed</em>.</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-phrase">Stative</span> Stative verbs</div>
-          <div class="vb-card-body">Express a state, not an action. <strong>Not normally used in continuous tenses.</strong>
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">know, believe, own</span>
-              <span class="vb-ex-pill">love, hate, want</span>
-              <span class="vb-ex-pill">✗ I am knowing → ✓ I know</span>
-            </div>
-          </div>
-        </div>
-        <div class="vb-card">
-          <div class="vb-card-title"><span class="vb-badge vb-badge-irreg">Causative</span> Causative verbs</div>
-          <div class="vb-card-body">Show that someone causes something to happen (by themselves or via someone else).
-            <div class="vb-ex-row">
-              <span class="vb-ex-pill">make, let, have, get</span>
-              <span class="vb-ex-pill">She <em>made</em> him apologize.</span>
-              <span class="vb-ex-pill">I <em>got</em> my car fixed.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="vb-tip"><strong>Key insight:</strong> Many verbs can be both transitive and intransitive depending on context. "She <em>runs</em> the company" (transitive) vs. "She <em>runs</em> every morning" (intransitive).</div>
-    </div>
+<div id="vb-types" class="vb-panel vb-active">
+  <div id="vb-types-content"></div>
+</div>
 
     <!-- TENSES PANEL -->
 <div id="vb-tenses" class="vb-panel">
@@ -2635,6 +2815,151 @@ export default function CelpipVocabPage() {
         modBuildCertBars();
         modBuildMatrix();
       }
+      // Render Types panel from VERB_TYPES data
+      (function () {
+        const CATS = {
+          function: { color: "#185FA5", bg: "#E6F1FB", label: "Function" },
+          object: { color: "#3B6D11", bg: "#EAF3DE", label: "Object need" },
+          state: { color: "#854F0B", bg: "#FAEEDA", label: "State/action" },
+          special: { color: "#A32D2D", bg: "#FCEBEB", label: "Special role" },
+        };
+
+        let selected = null;
+
+        const root = document.getElementById("vb-types-content");
+        root.innerHTML = `
+    <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1rem;padding:10px 14px;border-left:3px solid #d1d5db;border-radius:0;">
+      These types are <strong style="color:#111827">not mutually exclusive</strong> — a single verb can belong to multiple types at once. Click any card to explore its relationships.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.25rem;" id="vbt-legend"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:1.25rem;" id="vbt-grid"></div>
+    <div id="vbt-detail" style="display:none;"></div>
+  `;
+
+        const legendEl = document.getElementById("vbt-legend");
+        Object.values(CATS).forEach((c) => {
+          legendEl.innerHTML += `<div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280">
+      <div style="width:10px;height:10px;border-radius:50%;background:${c.color};flex-shrink:0"></div>${c.label}
+    </div>`;
+        });
+
+        function getCat(id) {
+          const t = VERB_TYPES.find((t) => t.id === id);
+          return t ? CATS[t.cat] : null;
+        }
+
+        function renderGrid() {
+          const grid = document.getElementById("vbt-grid");
+          grid.innerHTML = VERB_TYPES.map((t) => {
+            const cat = CATS[t.cat];
+            let opacity = "1";
+            let borderStyle = `1.5px solid #e5e7eb`;
+            let bg = "#fff";
+            if (selected) {
+              if (selected === t.id) {
+                borderStyle = `2px solid ${cat.color}`;
+              } else if (
+                VERB_TYPES.find((x) => x.id === selected)?.overlaps.some(
+                  (o) => o.with === t.id,
+                ) ||
+                VERB_TYPES.find((x) => x.id === t.id)?.overlaps.some(
+                  (o) => o.with === selected,
+                )
+              ) {
+                bg = "#f9fafb";
+              } else {
+                opacity = "0.35";
+              }
+            }
+            return `
+        <div onclick="vbtSelect('${t.id}')" style="background:${bg};border:${borderStyle};border-radius:12px;padding:12px 14px;cursor:pointer;opacity:${opacity};transition:opacity 0.15s;">
+          <div style="display:flex;align-items:center;margin-bottom:5px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:${cat.color};display:inline-block;margin-right:6px;flex-shrink:0"></span>
+            <span style="font-size:14px;font-weight:500;color:#111827">${t.name}</span>
+          </div>
+          <div style="font-size:12px;color:#6b7280;line-height:1.5;margin-bottom:8px">${t.def}</div>
+          ${t.examples.map((e) => `<div style="font-size:11.5px;color:#6b7280;font-style:italic;background:#f9fafb;border-radius:5px;padding:3px 8px;margin-bottom:3px;line-height:1.4">${e}</div>`).join("")}
+          ${t.overlaps.length ? `<div style="font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;margin-top:6px;display:inline-block;background:${cat.bg};color:${cat.color}">${t.overlaps.length} overlap${t.overlaps.length > 1 ? "s" : ""}</div>` : ""}
+        </div>
+      `;
+          }).join("");
+        }
+
+        window.vbtSelect = function (id) {
+          if (selected === id) {
+            selected = null;
+            document.getElementById("vbt-detail").style.display = "none";
+            renderGrid();
+            return;
+          }
+          selected = id;
+          renderGrid();
+          const t = VERB_TYPES.find((x) => x.id === id);
+          const cat = CATS[t.cat];
+          const detail = document.getElementById("vbt-detail");
+          const colors = ["#185FA5", "#3B6D11", "#854F0B", "#A32D2D"];
+          const bgs = ["#E6F1FB", "#EAF3DE", "#FAEEDA", "#FCEBEB"];
+          detail.style.display = "block";
+          detail.innerHTML = `
+      <div style="border:0.5px solid #e5e7eb;border-radius:12px;padding:1.25rem;background:#fff;margin-bottom:1rem;">
+        <div style="font-size:18px;font-weight:500;color:#111827;margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:${cat.color};display:inline-block"></span>
+          ${t.name}
+          <span style="font-size:12px;font-weight:400;color:#6b7280;margin-left:4px;">(${cat.label})</span>
+        </div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1rem">${t.def}</div>
+
+        ${
+          t.overlaps.length
+            ? `
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin-bottom:8px">Overlaps with</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${t.overlaps
+              .map((o) => {
+                const oCat = getCat(o.with);
+                const oType = VERB_TYPES.find((x) => x.id === o.with);
+                return `<div style="background:#f9fafb;border-radius:8px;padding:10px 12px;">
+                <div style="margin-bottom:3px;"><span style="background:${oCat?.bg};color:${oCat?.color};font-size:11px;padding:2px 7px;border-radius:4px;font-weight:500">${oType?.name || o.with}</span></div>
+                <div style="font-size:12px;color:#6b7280;line-height:1.5;margin-bottom:5px">${o.desc}</div>
+                <div style="font-size:12px;font-style:italic;color:#6b7280;background:#fff;border-radius:5px;padding:4px 9px;border:0.5px solid #e5e7eb">${o.sentence}</div>
+              </div>`;
+              })
+              .join("")}
+          </div>
+        `
+            : ""
+        }
+
+        ${
+          t.exclusive
+            ? `
+          <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:1rem 0 8px">What makes it distinct</div>
+          <div style="font-size:12px;color:#6b7280;background:#f9fafb;border-radius:8px;padding:8px 12px;line-height:1.6">${t.exclusive}</div>
+        `
+            : ""
+        }
+
+        ${
+          t.spotlightVerb
+            ? `
+          <div style="margin-top:1rem">
+            <div style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin-bottom:6px">Verb spotlight — "<strong style="color:#111827">${t.spotlightVerb}</strong>"</div>
+            <div style="font-size:12px;color:#6b7280;margin-bottom:6px">This single verb can wear multiple hats:</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              ${t.spotlightTags.map((tag, i) => `<span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;background:${bgs[i % 4]};color:${colors[i % 4]}">${tag}</span>`).join("")}
+            </div>
+          </div>
+        `
+            : ""
+        }
+
+        <div style="font-size:12px;color:#9ca3af;text-align:right;margin-top:10px;cursor:pointer" onclick="vbtSelect('${t.id}')">↑ click to collapse</div>
+      </div>
+    `;
+        };
+
+        renderGrid();
+      })();
       // ── Phrasal panel ──────────────────────────────────────────────────────
       function initVbPhrusal() {
         window._vbPhrasalInit = true;
@@ -2896,6 +3221,7 @@ export default function CelpipVocabPage() {
     renderNounsPronouns();
     renderCollocations();
     renderVerbs();
+    renderPhonetics();
     renderPrepositions();
     renderConjunctions();
     renderIdioms();
@@ -3003,6 +3329,12 @@ export default function CelpipVocabPage() {
               >
                 Verbs
               </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="phonetics"
+              >
+                Phonetics
+              </button>
             </div>
           </div>
         </div>
@@ -3023,6 +3355,22 @@ export default function CelpipVocabPage() {
               No words found for the selected filters.
             </p>
           </div>
+        </div>
+
+        {/* Phonetics Tab */}
+        <div id="phonetics" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                pronunciation
+              </span>{" "}
+              — learn how vowels, consonants, and stress patterns work so you
+              can speak clearly and understand native speakers in every CELPIP
+              task.
+            </p>
+          </div>
+          <div id="phonetics-content"></div>
         </div>
 
         {/* Idioms Tab */}

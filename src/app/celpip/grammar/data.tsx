@@ -726,6 +726,552 @@ export const SENTENCE_TYPES = [
   },
 ];
 
+// ── PHONETICS DATA ────────────────────────────────────────────────────
+
+export const VOWEL_SOUNDS = [
+  {
+    ipa: "iː",
+    name: "Long EE",
+    spelling: "ee, ea, e, ie, ey",
+    mouth: "Lips spread wide, tongue high and forward.",
+    words: ["feet", "sea", "me", "believe", "key"],
+    minimal: ["ship / sheep", "bit / beat", "fill / feel"],
+    trap: "Don't cut it short — 'ship' and 'sheep' are different words.",
+  },
+  {
+    ipa: "ɪ",
+    name: "Short I",
+    spelling: "i, y, ui, e",
+    mouth: "Lips slightly spread, tongue high but relaxed.",
+    words: ["sit", "gym", "build", "women"],
+    minimal: ["sit / seat", "bit / beat", "fill / feel"],
+    trap: "Common error: saying 'sheep' when you mean 'ship'.",
+  },
+  {
+    ipa: "e",
+    name: "Short E",
+    spelling: "e, ea, a",
+    mouth: "Mouth half open, lips slightly spread.",
+    words: ["bed", "head", "any"],
+    minimal: ["bed / bad", "pen / pan", "get / gut"],
+    trap: "Don't confuse with /æ/ — 'bed' and 'bad' mean different things.",
+  },
+  {
+    ipa: "æ",
+    name: "Short A",
+    spelling: "a",
+    mouth: "Mouth open wide, tongue low and forward — say 'ah' then smile.",
+    words: ["cat", "man", "happy", "apple"],
+    minimal: ["cat / cut", "bad / bed", "pan / pen"],
+    trap: "Canadian/American English — this sound is very open. Don't raise it to /e/.",
+  },
+  {
+    ipa: "ɑː",
+    name: "Long AH",
+    spelling: "a, ar, o",
+    mouth: "Jaw dropped, tongue low and back, mouth wide open.",
+    words: ["father", "car", "hot", "palm"],
+    minimal: ["cot / coat", "calm / come"],
+    trap: "In Canadian English, 'cot' and 'caught' often sound the same (cot-caught merger).",
+  },
+  {
+    ipa: "ɔː",
+    name: "Long AW",
+    spelling: "aw, au, or, oor, al",
+    mouth: "Lips rounded, mouth half open, tongue back.",
+    words: ["law", "cause", "more", "floor", "all"],
+    minimal: ["caught / cot", "saw / so", "law / low"],
+    trap: "Many Canadian speakers merge this with /ɑː/ — context helps distinguish.",
+  },
+  {
+    ipa: "ʊ",
+    name: "Short OO",
+    spelling: "u, oo, ou",
+    mouth: "Lips loosely rounded, tongue high and back but relaxed.",
+    words: ["book", "put", "could", "wolf"],
+    minimal: ["book / boot", "pull / pool", "full / fool"],
+    trap: "Don't use the full long /uː/ — 'book' is short and relaxed.",
+  },
+  {
+    ipa: "uː",
+    name: "Long OO",
+    spelling: "oo, u, ew, ue, ou",
+    mouth: "Lips tightly rounded and pushed forward, tongue high and back.",
+    words: ["food", "rule", "new", "blue", "soup"],
+    minimal: ["fool / full", "pool / pull", "boot / book"],
+    trap: "Hold the sound longer than /ʊ/ — it's a tense, sustained sound.",
+  },
+  {
+    ipa: "ʌ",
+    name: "Short U",
+    spelling: "u, o, ou, oo",
+    mouth: "Mouth half open, tongue in centre, lips neutral.",
+    words: ["cup", "come", "young", "flood"],
+    minimal: ["cup / cap", "cut / cat", "gun / gone"],
+    trap: "This is the most common vowel sound in English — also found in unstressed syllables.",
+  },
+  {
+    ipa: "ə",
+    name: "Schwa",
+    spelling: "any vowel (unstressed)",
+    mouth: "Mouth relaxed, tongue central — the laziest vowel sound.",
+    words: ["about", "sofa", "taken", "famous", "pencil"],
+    minimal: ["above / a-bove (stress shift)", "photograph / photography"],
+    trap: "The schwa ONLY appears in unstressed syllables. It's the most common sound in English.",
+  },
+  {
+    ipa: "eɪ",
+    name: "Long A",
+    spelling: "a, ai, ay, ea, ey",
+    mouth:
+      "Start with /e/ then glide toward /ɪ/ — it's a diphthong (two sounds).",
+    words: ["face", "rain", "day", "great", "they"],
+    minimal: ["face / fuss", "late / let", "say / so"],
+    trap: "It's a glide — don't hold it flat. The mouth moves from open to closed.",
+  },
+  {
+    ipa: "oʊ",
+    name: "Long O",
+    spelling: "o, oa, ow, oe",
+    mouth: "Start with /o/ then glide toward /ʊ/ — lips round and close.",
+    words: ["go", "boat", "know", "toe"],
+    minimal: ["go / goo", "coat / cut", "low / law"],
+    trap: "In American/Canadian English this is a diphthong — don't say a flat 'oh'.",
+  },
+  {
+    ipa: "aɪ",
+    name: "Long I",
+    spelling: "i, igh, y, ie, uy",
+    mouth: "Start open /ɑ/ then glide up to /ɪ/ — wide movement.",
+    words: ["time", "high", "my", "pie", "buy"],
+    minimal: ["time / team", "ride / read", "mine / mean"],
+    trap: "A clear diphthong — both parts must be audible or it sounds like /ɑː/.",
+  },
+  {
+    ipa: "aʊ",
+    name: "OW sound",
+    spelling: "ou, ow",
+    mouth: "Start open /ɑ/ then round lips toward /ʊ/.",
+    words: ["out", "now", "house", "cow"],
+    minimal: ["out / oat", "cow / coat", "found / fond"],
+    trap: "In Canadian English this is noticeably different before voiceless consonants — 'about' vs 'out'.",
+  },
+  {
+    ipa: "ɔɪ",
+    name: "OY sound",
+    spelling: "oi, oy",
+    mouth: "Start rounded /ɔ/ then glide to /ɪ/.",
+    words: ["boy", "coin", "joy", "noise"],
+    minimal: ["coin / con", "boy / bay"],
+    trap: "Don't flatten it — both parts of the diphthong should be clear.",
+  },
+];
+
+export const CONSONANT_SOUNDS = [
+  {
+    ipa: "p",
+    name: "P",
+    type: "Stop",
+    voiced: false,
+    spelling: "p, pp",
+    mouth: "Lips pressed together, then released with a puff of air.",
+    words: ["pen", "apple", "cap"],
+    pair: "b",
+    tip: "At the start of a word, English /p/ has a strong puff of air (aspiration): 'pin' vs 'bin'.",
+  },
+  {
+    ipa: "b",
+    name: "B",
+    type: "Stop",
+    voiced: true,
+    spelling: "b, bb",
+    mouth:
+      "Lips pressed together, released — but voice is on (feel throat vibrate).",
+    words: ["bed", "abbey", "cab"],
+    pair: "p",
+    tip: "At the end of words, the final /b/ is often unreleased — lips close but don't pop.",
+  },
+  {
+    ipa: "t",
+    name: "T",
+    type: "Stop",
+    voiced: false,
+    spelling: "t, tt, ed",
+    mouth: "Tongue tip touches the ridge behind upper teeth, then releases.",
+    words: ["top", "butter", "cat"],
+    pair: "d",
+    tip: "In North American English, /t/ between vowels often sounds like a quick /d/ (flap): 'butter' → 'budder'.",
+  },
+  {
+    ipa: "d",
+    name: "D",
+    type: "Stop",
+    voiced: true,
+    spelling: "d, dd, ed",
+    mouth: "Same position as /t/ but with voice.",
+    words: ["dog", "ladder", "bad"],
+    pair: "t",
+    tip: "Past tense -ed is /d/ after voiced sounds: 'called', 'played', 'loved'.",
+  },
+  {
+    ipa: "k",
+    name: "K",
+    type: "Stop",
+    voiced: false,
+    spelling: "k, c, ck, ch, qu",
+    mouth: "Back of tongue touches soft palate, then releases.",
+    words: ["cat", "king", "back", "school"],
+    pair: "g",
+    tip: "Silent 'k' before 'n': know, knock, knife.",
+  },
+  {
+    ipa: "g",
+    name: "G",
+    type: "Stop",
+    voiced: true,
+    spelling: "g, gg, gh",
+    mouth: "Same as /k/ but with voice.",
+    words: ["go", "egg", "ghost"],
+    pair: "k",
+    tip: "'gh' is usually silent: through, though, night, right.",
+  },
+  {
+    ipa: "f",
+    name: "F",
+    type: "Fricative",
+    voiced: false,
+    spelling: "f, ff, ph, gh",
+    mouth: "Upper teeth lightly touch lower lip, air flows through.",
+    words: ["fish", "off", "phone", "enough"],
+    pair: "v",
+    tip: "'ph' always makes /f/ in English: phone, photo, graph.",
+  },
+  {
+    ipa: "v",
+    name: "V",
+    type: "Fricative",
+    voiced: true,
+    spelling: "v, f (of)",
+    mouth: "Same as /f/ but with voice — feel the vibration on your lip.",
+    words: ["very", "love", "of"],
+    pair: "f",
+    tip: "The word 'of' is pronounced /ʌv/ — the f is voiced.",
+  },
+  {
+    ipa: "θ",
+    name: "TH (voiceless)",
+    type: "Fricative",
+    voiced: false,
+    spelling: "th",
+    mouth: "Tongue tip lightly between or behind upper teeth, air flows out.",
+    words: ["think", "bath", "three", "both"],
+    pair: "ð",
+    tip: "One of the hardest sounds for non-native speakers. Tongue must touch teeth — not /t/ or /s/.",
+  },
+  {
+    ipa: "ð",
+    name: "TH (voiced)",
+    type: "Fricative",
+    voiced: true,
+    spelling: "th",
+    mouth: "Same as /θ/ but with voice — feel vibration.",
+    words: ["the", "this", "that", "mother", "breathe"],
+    pair: "θ",
+    tip: "Function words (the, this, that, they, them) use voiced /ð/. Content words often use voiceless /θ/.",
+  },
+  {
+    ipa: "s",
+    name: "S",
+    type: "Fricative",
+    voiced: false,
+    spelling: "s, ss, c, sc",
+    mouth: "Tongue near ridge behind teeth, air creates a hiss.",
+    words: ["sit", "pass", "city", "scene"],
+    pair: "z",
+    tip: "Plural -s and possessive -s are /s/ after voiceless sounds: cats, books, cups.",
+  },
+  {
+    ipa: "z",
+    name: "Z",
+    type: "Fricative",
+    voiced: true,
+    spelling: "z, zz, s, x",
+    mouth: "Same as /s/ but with voice.",
+    words: ["zoo", "jazz", "is", "exact"],
+    pair: "s",
+    tip: "Plural -s and possessive -s are /z/ after voiced sounds: dogs, cars, trees.",
+  },
+  {
+    ipa: "ʃ",
+    name: "SH",
+    type: "Fricative",
+    voiced: false,
+    spelling: "sh, ti, ci, ch, si",
+    mouth: "Lips slightly rounded, tongue raised — a wide hiss.",
+    words: ["she", "nation", "special", "chef", "mission"],
+    pair: "ʒ",
+    tip: "Very common in English endings: -tion, -sion, -cial, -tial all use /ʃ/.",
+  },
+  {
+    ipa: "ʒ",
+    name: "ZH",
+    type: "Fricative",
+    voiced: true,
+    spelling: "si, ge, s",
+    mouth: "Same as /ʃ/ but with voice.",
+    words: ["measure", "genre", "vision", "beige"],
+    pair: "ʃ",
+    tip: "Rare in English — mainly in borrowed French words and -sion/-sure endings.",
+  },
+  {
+    ipa: "tʃ",
+    name: "CH",
+    type: "Affricate",
+    voiced: false,
+    spelling: "ch, tch, t",
+    mouth: "Start with /t/ then release into /ʃ/ — a combined sound.",
+    words: ["chair", "watch", "nature"],
+    pair: "dʒ",
+    tip: "Don't separate into t+sh — it's one flowing sound.",
+  },
+  {
+    ipa: "dʒ",
+    name: "J",
+    type: "Affricate",
+    voiced: true,
+    spelling: "j, g, dge, d",
+    mouth: "Start with /d/ then release into /ʒ/.",
+    words: ["jump", "gem", "bridge", "soldier"],
+    pair: "tʃ",
+    tip: "'g' before e/i/y is usually /dʒ/: gym, gem, giraffe. But: get, give = /g/.",
+  },
+  {
+    ipa: "m",
+    name: "M",
+    type: "Nasal",
+    voiced: true,
+    spelling: "m, mm, mb",
+    mouth: "Lips closed, air flows through the nose.",
+    words: ["man", "summer", "lamb"],
+    pair: null,
+    tip: "Silent 'mb' at the end of words: lamb, comb, bomb, thumb.",
+  },
+  {
+    ipa: "n",
+    name: "N",
+    type: "Nasal",
+    voiced: true,
+    spelling: "n, nn, kn, gn",
+    mouth: "Tongue tip on ridge behind upper teeth, air through nose.",
+    words: ["no", "dinner", "know", "gnome"],
+    pair: null,
+    tip: "Silent 'kn' at the start: know, knife, knock, knee.",
+  },
+  {
+    ipa: "ŋ",
+    name: "NG",
+    type: "Nasal",
+    voiced: true,
+    spelling: "ng, n (before k/g)",
+    mouth: "Back of tongue on soft palate, air through nose — no /g/ release.",
+    words: ["sing", "ring", "think", "bank"],
+    pair: null,
+    tip: "No /g/ sound after -ng in most words: sing = /sɪŋ/ not /sɪŋg/. But: finger, angry do have /g/.",
+  },
+  {
+    ipa: "l",
+    name: "L",
+    type: "Lateral",
+    voiced: true,
+    spelling: "l, ll",
+    mouth: "Tongue tip on ridge, air flows around the sides.",
+    words: ["light", "ball", "milk"],
+    pair: null,
+    tip: "Clear /l/ at start of syllables. Dark /l/ (tongue pulled back) at end: feel, ball, milk.",
+  },
+  {
+    ipa: "r",
+    name: "R",
+    type: "Approximant",
+    voiced: true,
+    spelling: "r, rr, wr",
+    mouth: "Tongue curls back, never touches the roof — lips slightly rounded.",
+    words: ["red", "carry", "write"],
+    pair: null,
+    tip: "North American /r/ is 'rhotic' — always pronounced, even after vowels: car, bird, her.",
+  },
+  {
+    ipa: "j",
+    name: "Y",
+    type: "Approximant",
+    voiced: true,
+    spelling: "y, i, j (in some words)",
+    mouth: "Tongue high and forward, glides quickly to the next sound.",
+    words: ["yes", "you", "beyond", "few (=fyoo)"],
+    pair: null,
+    tip: "Many words starting with 'u' use /j/: use = /juːz/, union = /juːniən/.",
+  },
+  {
+    ipa: "w",
+    name: "W",
+    type: "Approximant",
+    voiced: true,
+    spelling: "w, wh, u (after q)",
+    mouth: "Lips tightly rounded then release into the next vowel.",
+    words: ["wet", "when", "quick"],
+    pair: null,
+    tip: "Silent 'w' in: write, wrap, wrist, wrong — and in 'who', 'whole'.",
+  },
+  {
+    ipa: "h",
+    name: "H",
+    type: "Fricative",
+    voiced: false,
+    spelling: "h, wh",
+    mouth: "Mouth open in position of next vowel, air rushes out.",
+    words: ["hat", "who", "ahead"],
+    pair: null,
+    tip: "Silent 'h' in: hour, honest, heir, honour — and in unstressed 'him/her/have' mid-sentence.",
+  },
+];
+
+export const STRESS_RULES = [
+  {
+    rule: "Two-syllable nouns & adjectives",
+    pattern: "Stress on the FIRST syllable",
+    examples: [
+      { word: "PREsent", note: "noun/adjective" },
+      { word: "TAble", note: "" },
+      { word: "HAPpy", note: "" },
+      { word: "CLEver", note: "" },
+    ],
+    tip: "Most two-syllable nouns and adjectives follow this pattern.",
+  },
+  {
+    rule: "Two-syllable verbs",
+    pattern: "Stress on the SECOND syllable",
+    examples: [
+      { word: "preSENT", note: "verb" },
+      { word: "reLAX", note: "" },
+      { word: "deCIDE", note: "" },
+      { word: "beGIN", note: "" },
+    ],
+    tip: "Noun/verb pairs shift stress: REcord (noun) → reCORD (verb). PERmit → perMIT.",
+  },
+  {
+    rule: "Words ending in -ic, -ical",
+    pattern: "Stress on syllable BEFORE the suffix",
+    examples: [
+      { word: "photoGRAPHic", note: "" },
+      { word: "econOMic", note: "" },
+      { word: "gramMAtical", note: "" },
+    ],
+    tip: "",
+  },
+  {
+    rule: "Words ending in -tion, -sion",
+    pattern: "Stress on syllable BEFORE the suffix",
+    examples: [
+      { word: "inforMAtion", note: "" },
+      { word: "commuNIcation", note: "" },
+      { word: "deCIsion", note: "" },
+    ],
+    tip: "The -tion ending is always pronounced /ʃən/ — never /tiːɒn/.",
+  },
+  {
+    rule: "Words ending in -ity, -ety, -ity",
+    pattern: "Stress on syllable BEFORE the suffix",
+    examples: [
+      { word: "posSIbility", note: "" },
+      { word: "comMUnity", note: "" },
+      { word: "anxiEty", note: "" },
+    ],
+    tip: "",
+  },
+  {
+    rule: "Compound nouns",
+    pattern: "Stress on the FIRST word",
+    examples: [
+      { word: "BLACKbird", note: "vs. black BIRD (any black bird)" },
+      { word: "GREENhouse", note: "" },
+      { word: "AIRport", note: "" },
+    ],
+    tip: "Compound nouns have one primary stress on the first element. Noun phrases stress the second.",
+  },
+  {
+    rule: "Prefixes",
+    pattern: "Usually NO stress on the prefix",
+    examples: [
+      { word: "unHAPpy", note: "" },
+      { word: "rePEAT", note: "" },
+      { word: "disCOVer", note: "" },
+    ],
+    tip: "Exceptions: some prefixes carry stress in nouns: EX-wife, CO-worker.",
+  },
+];
+
+export const CONNECTED_SPEECH = [
+  {
+    feature: "Linking",
+    emoji: "🔗",
+    description:
+      "When a word ends in a consonant and the next begins with a vowel, they link together as if one word.",
+    examples: [
+      {
+        phrase: "pick it up",
+        linked: "pi-ki-tup",
+        note: "consonant + vowel linking",
+      },
+      { phrase: "turn off", linked: "tur-noff", note: "" },
+      { phrase: "an apple", linked: "a-napple", note: "" },
+    ],
+  },
+  {
+    feature: "Elision",
+    emoji: "✂️",
+    description:
+      "Sounds are dropped in fast speech, especially /t/ and /d/ between consonants.",
+    examples: [
+      { phrase: "last night", linked: "las' night", note: "/t/ dropped" },
+      { phrase: "next day", linked: "nex' day", note: "/t/ dropped" },
+      { phrase: "hold on", linked: "hol' on", note: "/d/ dropped" },
+    ],
+  },
+  {
+    feature: "Assimilation",
+    emoji: "🔄",
+    description: "A sound changes to become more like a neighbouring sound.",
+    examples: [
+      { phrase: "ten pins", linked: "tem pins", note: "/n/ → /m/ before /p/" },
+      { phrase: "good boy", linked: "goob boy", note: "/d/ → /b/ before /b/" },
+      {
+        phrase: "that case",
+        linked: "thak case",
+        note: "/t/ → /k/ before /k/",
+      },
+    ],
+  },
+  {
+    feature: "Weak Forms",
+    emoji: "🔉",
+    description:
+      "Function words are reduced to the schwa /ə/ in unstressed positions in natural speech.",
+    examples: [
+      { phrase: "can", linked: "/kən/", note: "strong: /kæn/, weak: /kən/" },
+      {
+        phrase: "and",
+        linked: "/ənd/ or /ən/",
+        note: "bread and butter → /brɛd ən ˈbʌtər/",
+      },
+      {
+        phrase: "for",
+        linked: "/fər/",
+        note: "waiting for you → /ˈweɪtɪŋ fər juː/",
+      },
+    ],
+  },
+];
+
 export const CONJ_GROUPS = [
   {
     category: "Coordinating Conjunctions",
@@ -1949,6 +2495,249 @@ export const GROUPS = [
   },
 ];
 
+export const VERB_TYPES = [
+  {
+    id: "action",
+    name: "Action verb",
+    cat: "function",
+    def: "Expresses a physical or mental action — the subject actively does something.",
+    examples: [
+      "She <em>runs</em> every morning.",
+      "He <em>decided</em> to quit.",
+    ],
+    overlaps: [
+      {
+        with: "transitive",
+        desc: "Most action verbs are also transitive — the action passes to an object.",
+        sentence: "She <em>kicked</em> the ball.",
+      },
+      {
+        with: "intransitive",
+        desc: "Some action verbs need no object at all.",
+        sentence: "The baby <em>cried</em>.",
+      },
+      {
+        with: "auxiliary",
+        desc: '"Do" is both an action verb and an auxiliary.',
+        sentence: "I <em>do</em> yoga. / I <em>do not</em> know.",
+      },
+    ],
+    exclusive:
+      "Action vs stative is often the sharpest distinction — most pure stative verbs (know, believe, own) cannot be action verbs.",
+    spotlightVerb: "run",
+    spotlightTags: ["action", "intransitive"],
+  },
+  {
+    id: "linking",
+    name: "Linking verb",
+    cat: "function",
+    def: "Connects the subject to a description (adjective or noun). Does not show action — describes a state.",
+    examples: ["She <em>seems</em> tired.", "He <em>became</em> a doctor."],
+    overlaps: [
+      {
+        with: "stative",
+        desc: "Linking verbs are almost always stative — they describe a state, not an action.",
+        sentence: "The soup <em>smells</em> delicious.",
+      },
+      {
+        with: "action",
+        desc: 'Verbs like "smell", "taste", "look" can be linking OR action depending on meaning.',
+        sentence:
+          "She <em>looked</em> sad. (linking) / She <em>looked</em> at me. (action)",
+      },
+    ],
+    exclusive:
+      'Linking verbs cannot be transitive — they never take a direct object. "She seems a doctor" needs "to be" in between.',
+    spotlightVerb: "smell",
+    spotlightTags: [
+      "linking (linking use)",
+      "action (action use)",
+      "stative (linking use)",
+    ],
+  },
+  {
+    id: "auxiliary",
+    name: "Auxiliary verb",
+    cat: "function",
+    def: "Helps the main verb express tense, voice, mood, or aspect. Always paired with another verb.",
+    examples: [
+      "She <em>is running</em>.",
+      "He <em>has eaten</em>.",
+      "I <em>did not know</em>.",
+    ],
+    overlaps: [
+      {
+        with: "modal",
+        desc: "All modal verbs ARE auxiliary verbs — a subset of the auxiliary category.",
+        sentence: "<em>Can</em> you help? / She <em>will</em> arrive.",
+      },
+      {
+        with: "action",
+        desc: '"Have", "do", "be" can each function as a full action verb OR as an auxiliary.',
+        sentence:
+          "I <em>have</em> a car. (action) / I <em>have</em> eaten. (auxiliary)",
+      },
+    ],
+    exclusive:
+      "When functioning as auxiliaries, these verbs have no independent meaning — they only modify the main verb.",
+    spotlightVerb: "have",
+    spotlightTags: [
+      'action ("I have a car")',
+      'auxiliary ("I have eaten")',
+      'causative ("I had it fixed")',
+    ],
+  },
+  {
+    id: "modal",
+    name: "Modal verb",
+    cat: "special",
+    def: "A subset of auxiliary verbs that express ability, possibility, permission, or obligation. Never change form.",
+    examples: [
+      "You <em>should</em> rest.",
+      "She <em>might</em> come.",
+      "He <em>must</em> leave.",
+    ],
+    overlaps: [
+      {
+        with: "auxiliary",
+        desc: "Every modal IS an auxiliary — modal is a specific type within the auxiliary family.",
+        sentence: "<em>Must</em> = auxiliary that expresses obligation.",
+      },
+    ],
+    exclusive:
+      'Modals are unique: they never take -s, -ed, or -ing. You cannot say "she cans swim" or "he musted go."',
+    spotlightVerb: "can",
+    spotlightTags: ["modal", "auxiliary"],
+  },
+  {
+    id: "transitive",
+    name: "Transitive verb",
+    cat: "object",
+    def: "Requires a direct object — the action passes from subject to something or someone.",
+    examples: ["She <em>bought</em> a car.", "He <em>loves</em> music."],
+    overlaps: [
+      {
+        with: "action",
+        desc: "Most transitive verbs are also action verbs — the subject actively does something to the object.",
+        sentence: "She <em>kicked</em> the ball.",
+      },
+      {
+        with: "stative",
+        desc: "Some stative verbs are also transitive — the subject holds a state toward an object.",
+        sentence: "I <em>own</em> a house. (stative + transitive)",
+      },
+      {
+        with: "causative",
+        desc: "Causative verbs are always transitive — they need both an object and an action done to it.",
+        sentence: "She <em>had</em> her hair <em>cut</em>.",
+      },
+    ],
+    exclusive: null,
+    spotlightVerb: "love",
+    spotlightTags: ["transitive", "stative"],
+  },
+  {
+    id: "intransitive",
+    name: "Intransitive verb",
+    cat: "object",
+    def: "Does NOT take a direct object. The action stays with the subject.",
+    examples: ["The baby <em>slept</em>.", "She <em>arrived</em> early."],
+    overlaps: [
+      {
+        with: "action",
+        desc: "Intransitive verbs are usually action verbs — the subject does something, just to no object.",
+        sentence: "He <em>laughed</em>.",
+      },
+      {
+        with: "linking",
+        desc: '"Appear", "seem", "become" are intransitive linking verbs — they describe, not act.',
+        sentence: "She <em>appears</em> happy.",
+      },
+    ],
+    exclusive:
+      'The transitive/intransitive divide is the most fluid — many verbs work both ways. "She runs" (intransitive) vs "she runs a company" (transitive).',
+    spotlightVerb: "run",
+    spotlightTags: [
+      "action",
+      'intransitive ("She runs")',
+      'transitive ("She runs a company")',
+    ],
+  },
+  {
+    id: "stative",
+    name: "Stative verb",
+    cat: "state",
+    def: "Describes a state, not an action. Usually not used in continuous tenses.",
+    examples: [
+      "I <em>know</em> the answer.",
+      "She <em>believes</em> him.",
+      "He <em>owns</em> a car.",
+    ],
+    overlaps: [
+      {
+        with: "linking",
+        desc: "Stative verbs and linking verbs heavily overlap — both describe states rather than actions.",
+        sentence: "The cake <em>tastes</em> sweet. (stative + linking)",
+      },
+      {
+        with: "transitive",
+        desc: "Many stative verbs are transitive — they hold a state toward an object.",
+        sentence: "I <em>love</em> her. / She <em>wants</em> more.",
+      },
+      {
+        with: "action",
+        desc: "Some verbs switch between stative and action meaning — changing the meaning entirely.",
+        sentence:
+          "I <em>think</em> it is wrong. (stative) / I <em>am thinking</em> about it. (action)",
+      },
+    ],
+    exclusive:
+      'The one firm rule: stative verbs cannot use continuous tenses for their stative meaning. "I am knowing" is always wrong. But the same verb in action meaning can: "I am thinking hard."',
+    spotlightVerb: "think",
+    spotlightTags: [
+      'stative ("I think it\'s true")',
+      'action ("I am thinking about it")',
+    ],
+  },
+  {
+    id: "causative",
+    name: "Causative verb",
+    cat: "special",
+    def: "Shows that the subject causes or arranges for something to happen, often via someone else.",
+    examples: [
+      "She <em>made</em> him apologize.",
+      "I <em>got</em> my hair cut.",
+      "He <em>had</em> it repaired.",
+    ],
+    overlaps: [
+      {
+        with: "transitive",
+        desc: "Causative verbs are always transitive — they must have both an object and a following action.",
+        sentence: "She <em>made</em> him leave.",
+      },
+      {
+        with: "auxiliary",
+        desc: '"Have" and "get" are commonly both auxiliaries and causatives depending on context.',
+        sentence:
+          "I <em>had</em> the car fixed. (causative) / I <em>had</em> eaten. (auxiliary)",
+      },
+      {
+        with: "action",
+        desc: "Causative verbs are action verbs — the subject is actively causing or arranging something.",
+        sentence: "She <em>let</em> the children play outside.",
+      },
+    ],
+    exclusive:
+      'The causative meaning depends on structure, not just the verb. "Have" alone is not causative — it must be followed by object + past participle (had it fixed) or object + base verb (had him wait).',
+    spotlightVerb: "have",
+    spotlightTags: [
+      'action ("I have a car")',
+      'auxiliary ("I have eaten")',
+      'causative ("I had it fixed")',
+    ],
+  },
+];
+
 export const PREP_GROUPS = [
   {
     category: "Place & Position",
@@ -2774,7 +3563,6 @@ export const MODALS = [
 
 export const COMPLEX_SENTENCES = [
   // ── COMPOUND SENTENCES (10) ──────────────────────────────────────────
-
   {
     type: "compound",
     emoji: "📧",
@@ -2803,20 +3591,20 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "The heating system stopped working on Monday evening, <strong>and</strong> the temperature inside the apartment has dropped significantly.",
-    tip: "In a complaint email (Task 1), compound sentences help you state the problem AND its impact clearly and professionally in one breath.",
+    tip: 'Useful for <strong>Writing Task 1 (email)</strong>. In complaint emails, compound sentences with "and" let you state the problem AND its impact in one professional sentence — examiners reward clear problem framing in the opening lines.',
   },
   {
     type: "compound",
     emoji: "🏙️",
     scenario:
-      "CELPIP Speaking Task 6 — Describing changes in your neighbourhood over time",
+      "CELPIP Speaking Task 2 — Talking about a Personal Experience: Describing changes in your old neighbourhood over time",
     steps: [
       {
         label: "Simple clause 1",
         sentence:
           "Several new restaurants and cafés have opened along the main street.",
         thought:
-          "IC1 — a specific, observable change. I can visualize and describe it clearly.",
+          "IC1 — a specific, observable change from a past memory. I can visualize and describe it clearly.",
       },
       {
         label: "Simple clause 2",
@@ -2833,13 +3621,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Several new restaurants and cafés have opened along the main street, <strong>so</strong> the area has become much more vibrant and lively.",
-    tip: 'For Speaking Task 6 (describe a scene or change), compound sentences with "so" help you go beyond basic description into analysis — exactly what earns higher scores.',
+    tip: 'Useful for <strong>Speaking Task 2 (Personal Experience)</strong>. Using "so" to show cause and effect moves your past narrative beyond simple description into reflective analysis — a key differentiator between CLB 7 and CLB 9+ responses.',
   },
   {
     type: "compound",
     emoji: "🤝",
     scenario:
-      "CELPIP Speaking Task 5 — Giving advice to a friend who got a poor performance review at work",
+      "CELPIP Speaking Task 1 — Giving Advice to a friend who got a poor performance review at work",
     steps: [
       {
         label: "Simple clause 1",
@@ -2864,7 +3652,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "You should speak with your manager privately to understand the feedback, <strong>or</strong> you could ask a trusted colleague to help you identify areas for improvement.",
-    tip: 'In Speaking Task 5 (advice), using "or" to offer two options shows flexibility and empathy — qualities that make advice sound natural rather than rigid.',
+    tip: 'Useful for <strong>Speaking Task 1 (Giving Advice)</strong>. Offering alternative solutions with "or" shows flexibility and empathy — both qualities that score exceptionally well on Task Fulfillment and Coherence criteria.',
   },
   {
     type: "compound",
@@ -2894,26 +3682,26 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Expanding road infrastructure may reduce congestion in the short term, <strong>but</strong> it does not address the long-term environmental consequences of increased car use.",
-    tip: 'In Writing Task 2, using "but" to concede and then counter is a high-scoring strategy. It shows critical thinking rather than one-sided opinion.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong> and <strong>Speaking Task 7 (Expressing Opinions)</strong>. The concede-then-counter pattern with "but" is a high-scoring move — it shows you can acknowledge the other option before defending your own choice.',
   },
   {
     type: "compound",
     emoji: "📞",
     scenario:
-      "CELPIP Speaking Task 1 — Leaving a voicemail to reschedule a doctor's appointment",
+      "CELPIP Speaking Task 6 — Dealing with a Difficult Situation: Calling a medical clinic to reschedule a last-minute appointment",
     steps: [
       {
         label: "Simple clause 1",
         sentence: "I have an appointment scheduled for Thursday at 2 pm.",
         thought:
-          "IC1 — I identify the appointment clearly. The listener needs context first.",
+          "IC1 — I identify the appointment clearly. The receptionist needs context first.",
       },
       {
         label: "Simple clause 2",
         sentence:
           "I am afraid I will not be able to make it due to an urgent work commitment.",
         thought:
-          "IC2 — I explain why I need to reschedule. Polite and specific.",
+          "IC2 — I explain why I need to break the commitment. Polite and specific.",
       },
       {
         label: "Choose connector",
@@ -2924,7 +3712,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I have an appointment scheduled for Thursday at 2 pm, <strong>but</strong> I am afraid I will not be able to make it due to an urgent work commitment.",
-    tip: 'In Task 1 speaking (phone messages), compound sentences with "but" let you state the fact and the problem in one clear, professional sentence.',
+    tip: "Useful for <strong>Speaking Task 6 (Dealing with a Difficult Situation)</strong>. This context-then-problem compound structure sets up an official concession beautifully before you offer alternatives to resolve the conflict.",
   },
   {
     type: "compound",
@@ -2954,13 +3742,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Tablets give students access to a vast range of updated educational resources, <strong>yet</strong> many schools in lower-income communities cannot afford to provide them for every student.",
-    tip: '"Yet" as a conjunction is a mark of formal writing. Using it in Writing Task 2 instead of "but" lifts the register and shows range of vocabulary.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong>. Replacing "but" with "yet" raises your vocabulary register instantly — a practical swap that signals writing maturity and can push your Lexical Range score from CLB 7 to CLB 9.',
   },
   {
     type: "compound",
     emoji: "🧳",
     scenario:
-      "CELPIP Speaking Task 8 — Expressing and defending an opinion about working from home vs. office",
+      "CELPIP Speaking Task 7 — Expressing Opinions: Working from home vs. working in a corporate office",
     steps: [
       {
         label: "Simple clause 1",
@@ -2974,7 +3762,7 @@ export const COMPLEX_SENTENCES = [
         sentence:
           "it can also lead to feelings of isolation and reduced team collaboration.",
         thought:
-          "IC2 — I acknowledge a downside. Showing balance in Speaking Task 8 earns higher marks.",
+          "IC2 — I acknowledge a downside. Showing balance in Speaking Task 7 earns higher marks.",
       },
       {
         label: "Choose connector",
@@ -2985,7 +3773,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Working from home offers greater flexibility and reduces commute time, <strong>but</strong> it can also lead to feelings of isolation and reduced team collaboration.",
-    tip: "For Speaking Task 8 (defend your opinion), showing both sides before picking one demonstrates sophisticated thinking — exactly what the highest band descriptors reward.",
+    tip: "Useful for <strong>Speaking Task 7 (Expressing Opinions)</strong>. Showing both sides of a debate before landing on your core position fulfills the Coherence/Content criteria — it signals a mature, analytical thinker under pressure.",
   },
   {
     type: "compound",
@@ -3014,7 +3802,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I ordered a blender from your website three weeks ago, <strong>but</strong> it arrived with a cracked base and does not function properly.",
-    tip: "Task 1 emails need a clear problem statement early. This compound sentence achieves that in one polished line — context + problem.",
+    tip: "Useful for <strong>Writing Task 1 (formal complaint email)</strong>. This two-part compound structure — context + problem — is the ideal opening sentence for any complaint email. Examiners look for clear purpose in the first two lines; this delivers it efficiently.",
   },
   {
     type: "compound",
@@ -3045,13 +3833,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Green spaces provide residents with vital areas for recreation and mental well-being, <strong>and</strong> the city is facing a severe housing shortage that cannot be ignored.",
-    tip: 'Using "and" to introduce a genuine tension (not just contrast) is a sophisticated move in essays — it sets up the complexity before you offer your resolution.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong> and <strong>Speaking Task 7 (Expressing Opinions)</strong>. Using "and" to present a genuine tension — rather than taking a side immediately — is a sophisticated setup that shows examiners you understand the full complexity of the issue before committing to your position.',
   },
   {
     type: "compound",
     emoji: "👩‍⚕️",
     scenario:
-      "CELPIP Speaking Task 7 — Proposing a solution to reduce wait times at a community health clinic",
+      "CELPIP Speaking Task 7 — Expressing Opinions: Proposing a solution to reduce wait times at a community health clinic",
     steps: [
       {
         label: "Simple clause 1",
@@ -3075,11 +3863,9 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "The clinic could introduce an online booking system for routine appointments, <strong>and</strong> this would significantly reduce the number of walk-in patients during peak hours.",
-    tip: 'In Speaking Task 7 (solution proposal), structure your answer as: solution + "and" + benefit. It sounds organized and professional even without rehearsing.',
+    tip: 'Useful for <strong>Speaking Task 7 (Expressing Opinions)</strong>. The solution + "and" + benefit formula is the most efficient structure for any policy proposal response — it answers both "what" and "why" in one fluent sentence within your 90-second limit.',
   },
-
   // ── COMPLEX SENTENCES (10) ──────────────────────────────────────────
-
   {
     type: "complex",
     emoji: "✉️",
@@ -3109,7 +3895,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I am writing to request a brief extension on the assignment deadline <strong>because</strong> I have been dealing with a family emergency this week.",
-    tip: "In formal Task 1 emails, lead with your purpose (IC) and follow with the reason (because + DC). This order feels professional — you state what you want before justifying it.",
+    tip: "Useful for <strong>Writing Task 1 (formal or semi-formal email)</strong>. Leading with your purpose (IC) before your reason (because + DC) is standard professional email structure. Examiners for Task 1 specifically assess whether your email purpose is clear within the first sentence — this pattern guarantees it.",
   },
   {
     type: "complex",
@@ -3139,69 +3925,69 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Urban air quality would improve dramatically <strong>if</strong> more residents chose cycling over driving for short distances.",
-    tip: 'Conditional complex sentences ("would… if…") are powerful in essays — they make your argument feel logical and evidence-based rather than just opinion.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong> and <strong>Speaking Task 7 (Expressing Opinions)</strong>. Second conditional sentences ("would… if…") are one of the most powerful structures in CELPIP writing — they make your argument sound logical and forward-thinking rather than purely opinion-based.',
   },
   {
     type: "complex",
     emoji: "🗣️",
     scenario:
-      "CELPIP Speaking Task 4 — Describing a solution to a problem shown in a set of images (construction noise near a school)",
+      "CELPIP Speaking Task 4 — Making Predictions: Anticipating how people will react to construction noise near a school classroom",
     steps: [
       {
         label: "Independent clause",
         sentence:
-          "The school board should reschedule noisy construction work for after school hours.",
+          "The school board will likely ask to reschedule noisy construction work for after school hours.",
         thought:
-          "IC — my proposed solution. Direct, clear, stands alone. I want to add WHEN this matters most.",
+          "IC — my prediction. Direct, clear, stands alone based on what I see. I want to add why it will happen.",
       },
       {
         label: "Dependent clause",
         sentence:
           "so that students can concentrate during examinations and important lessons",
         thought:
-          'DC — purpose clause. "So that" introduces the reason for the solution. It depends on the IC.',
+          'DC — purpose clause. "So that" introduces the logic for the prediction. It depends on the IC.',
       },
       {
         label: "Choose connector",
         sentence: "so that",
         thought:
-          '"So that" = purpose. I am not just saying what should happen — I am saying WHY, which makes the argument stronger.',
+          '"So that" = purpose. I am not just saying what will happen — I am saying WHY based on the visual context, which makes the prediction stronger.',
       },
     ],
     final:
-      "The school board should reschedule noisy construction work for after school hours <strong>so that</strong> students can concentrate during examinations and important lessons.",
-    tip: '"So that" + can/could signals purpose — a sign of sophisticated grammar. In speaking tasks, using it shows you can express reasoning, not just facts.',
+      "The school board will likely ask to reschedule noisy construction work for after school hours <strong>so that</strong> students can concentrate during examinations and important lessons.",
+    tip: 'Useful for <strong>Speaking Task 4 (Making Predictions)</strong>. "So that" + modal verb is a purpose clause that signals sophisticated grammar — it connects a visual trend to a logical consequence, boosting your Content/Coherence score.',
   },
   {
     type: "complex",
     emoji: "💼",
     scenario:
-      "CELPIP Speaking Task 5 — Advising a friend who is considering quitting a stable job to start a business",
+      "CELPIP Speaking Task 5 — Comparing and Persuading: Advising a colleague why your chosen business layout is safer",
     steps: [
       {
         label: "Independent clause",
         sentence:
-          "You might want to test your business idea on a smaller scale first.",
+          "We should test our service on a smaller focus group using my option first.",
         thought:
-          "IC — careful, measured advice. Not telling them what to do — suggesting. I want to add a time condition.",
+          "IC — structured persuasion. Suggesting a compromise layout strategy. I want to add a timeline condition.",
       },
       {
         label: "Dependent clause",
         sentence:
-          "before you make any final decisions about leaving your current position",
+          "before we make any final commitments to the management about the floor plan",
         thought:
-          'DC — a time clause. "Before" tells them WHEN to test. This makes the advice feel protective and thoughtful.',
+          'DC — a time clause. "Before" tells them WHEN to test. This makes the argument feel protective and analytical.',
       },
       {
         label: "Choose connector",
         sentence: "before",
         thought:
-          '"Before" subordinates the quitting decision to the testing phase. It implies: test first, THEN decide. Sequencing advice this way sounds mature.',
+          '"Before" subordinates the final decision to the safer testing phase. It implies a strategic process, which sounds professional.',
       },
     ],
     final:
-      "You might want to test your business idea on a smaller scale first <strong>before</strong> you make any final decisions about leaving your current position.",
-    tip: 'In Speaking Task 5, using "before" to sequence advice makes you sound cautious and well-reasoned — qualities that score well in the Coherence and Precision criteria.',
+      "We should test our service on a smaller focus group using my option first <strong>before</strong> we make any final commitments to the management about the floor plan.",
+    tip: 'Useful for <strong>Speaking Task 5 (Comparing and Persuading)</strong>. Sequencing your persuasive arguments chronologically with "before" signals structural control, helping you break down complex choices cleanly in under 60 seconds.',
   },
   {
     type: "complex",
@@ -3232,13 +4018,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Governments would spend significantly less on treating chronic diseases <strong>if</strong> they invested more heavily in preventive health education and community programs.",
-    tip: 'Second conditional ("would… if… past tense") in essays signals a policy recommendation — "this hypothetical change would produce this outcome." It\'s a high-scoring structure.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong>. The second conditional ("would… if… past tense") is the go-to structure for policy arguments in Task 2 — it frames your chosen option as the logical solution to a real problem, which is exactly the reasoning pattern examiners reward at CLB 9+.',
   },
   {
     type: "complex",
     emoji: "🧒",
     scenario:
-      "CELPIP Speaking Task 6 — Describing a childhood memory for a personal question",
+      "CELPIP Speaking Task 2 — Talking about a Personal Experience: Relating a meaningful childhood event",
     steps: [
       {
         label: "Independent clause",
@@ -3262,7 +4048,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I remember feeling incredibly nervous <strong>when</strong> I performed in my first school play at the age of seven.",
-    tip: 'For personal experience questions in Speaking (Tasks 6, 7, 8), "when" clauses instantly create narrative and context — they make your answer sound like a story, not a list.',
+    tip: 'Useful for <strong>Speaking Task 2 (Talking about a Personal Experience)</strong>. "When" clauses instantly create a clear narrative arc — they anchor an emotion to a specific historical milestone, keeping your story well-paced.',
   },
   {
     type: "complex",
@@ -3293,7 +4079,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Social media platforms often fail to adequately protect users' personal data, <strong>although</strong> many of them claim to have strict privacy policies in place.",
-    tip: 'Placing "although" mid-sentence (IC + although + DC) is common in formal writing. It lets you make your claim FIRST, then acknowledge the counter — keeping your position dominant.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong> and <strong>Speaking Task 7 (Expressing Opinions)</strong>. Placing "although" after your main claim (IC first, concession second) keeps your position dominant. This is more persuasive than leading with the concession — your argument lands first and the counter-argument is immediately weakened.',
   },
   {
     type: "complex",
@@ -3324,13 +4110,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I would like to request a full refund for the eight-week yoga program I registered for, <strong>since</strong> the program was cancelled without prior notice on your part.",
-    tip: 'In complaint emails, causal "since" sounds more formal and assertive than "because" — it implies the connection is obvious and the request is justified.',
+    tip: 'Useful for <strong>Writing Task 1 (formal complaint or request email)</strong>. Swapping "because" for causal "since" is a quick vocabulary upgrade that raises your Lexical Range score. It also sounds more assertive — implying the reason is self-evident and the request is therefore undeniable.',
   },
   {
     type: "complex",
     emoji: "🚌",
     scenario:
-      "CELPIP Speaking Task 7 — Recommending improvements to a city's public transit system",
+      "CELPIP Speaking Task 7 — Expressing Opinions: Recommending structural upgrades to a transit layout",
     steps: [
       {
         label: "Independent clause",
@@ -3354,13 +4140,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "More residents would use public transit regularly <strong>if</strong> bus routes were expanded to reach suburban neighbourhoods that are currently underserved.",
-    tip: 'Second conditional complex sentences ("would… if… were/past tense") are ideal for Speaking Task 7 solution proposals — they sound confident without being absolute.',
+    tip: 'Useful for <strong>Speaking Task 7 (Expressing Opinions)</strong>. Second conditional recommendations ("would… if… were") are highly effective for abstract, opinion-based tasks — they structure a policy alternative smoothly without sounding too aggressive or definitive.',
   },
   {
     type: "complex",
     emoji: "👨‍👩‍👧",
     scenario:
-      "CELPIP Speaking Task 8 — Defending the opinion that parents should limit children's screen time",
+      "CELPIP Speaking Task 1 — Giving Advice: Advising a sibling on how to balance their kids' habits",
     steps: [
       {
         label: "Independent clause",
@@ -3385,11 +4171,9 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Children are more likely to develop strong social skills and healthy habits <strong>when</strong> parents actively limit their screen time and encourage outdoor activities instead.",
-    tip: 'Using "when" (instead of "if") makes your claim sound like an established pattern rather than a hypothetical — a subtle but powerful distinction in persuasive speaking.',
+    tip: 'Useful for <strong>Speaking Task 1 (Giving Advice)</strong>. Grounding your suggestions using an structural "when" clause makes your advice sound like an observable pattern rather than an unproven opinion, which gives your monologue added authority.',
   },
-
   // ── COMPOUND-COMPLEX SENTENCES (10) ────────────────────────────────
-
   {
     type: "compound-complex",
     emoji: "📧",
@@ -3420,7 +4204,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I have genuinely enjoyed living next door to you over the past two years, <strong>but</strong> I wanted to raise a concern about the noise levels late at night <strong>because</strong> it has been making it difficult for me to sleep before work.",
-    tip: 'This structure — positive IC + "but" + concern IC + "because" + reason — is the ideal formula for a polite complaint email in Task 1. It\'s firm but not confrontational.',
+    tip: 'Useful for <strong>Writing Task 1 (informal or semi-formal complaint email)</strong>. The structure positive IC + "but" + concern + "because" + impact is the ideal formula for any neighbour or acquaintance complaint email. It maintains tone (polite), delivers purpose (the concern), and provides justification (the impact) — all three elements that Task 1 marking requires.',
   },
   {
     type: "compound-complex",
@@ -3451,13 +4235,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "<strong>Although</strong> school uniforms may restrict individual expression, they create a sense of equality among students, <strong>and</strong> they reduce the social pressure associated with branded clothing.",
-    tip: 'This pattern — "Although [concession], [argument], and [second argument]" — is one of the most effective essay sentence structures for CELPIP Writing Task 2 body paragraphs.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong>. The pattern "Although [concession], [argument 1], and [argument 2]" is one of the most efficient body paragraph sentence structures for Task 2 — it concedes, argues, and extends all in one sentence, demonstrating exactly the range of grammar that moves scores from CLB 7 to CLB 9+.',
   },
   {
     type: "compound-complex",
     emoji: "🗣️",
     scenario:
-      "CELPIP Speaking Task 8 — Agreeing or disagreeing: remote work should be a permanent option for all office workers",
+      "CELPIP Speaking Task 7 — Expressing Opinions: Defending why hybrid workplace models are ideal",
     steps: [
       {
         label: "Independent clause 1",
@@ -3483,13 +4267,13 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Remote work has proven to be highly effective for many professionals, <strong>but</strong> some roles genuinely require in-person collaboration and cannot function well remotely, <strong>which is why</strong> a flexible hybrid model may be the most practical solution.",
-    tip: '"Which is why" is a relative clause connector that draws logical conclusions — it sounds highly fluent and is rarely used by lower-band candidates. Use it to impress.',
+    tip: 'Useful for <strong>Speaking Task 7 (Expressing Opinions)</strong>. "Which is why" introduces a relative clause of conclusion. It allows you to synthesize opposite view perspectives fluidly and deliver a balanced ultimate answer before your 90 seconds run out.',
   },
   {
     type: "compound-complex",
     emoji: "🌆",
     scenario:
-      "CELPIP Speaking Task 7 — Proposing a solution to overcrowding on city buses during rush hour",
+      "CELPIP Speaking Task 7 — Expressing Opinions: Resolving infrastructure gridlock or transit overcrowding",
     steps: [
       {
         label: "Independent clause 1 + dependent clause",
@@ -3514,7 +4298,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "<strong>Since</strong> many commuters travel during the same two-hour window each morning, the buses become dangerously overcrowded, <strong>so</strong> the city should consider introducing staggered shift incentives for local businesses.",
-    tip: 'The pattern "Since [cause], [problem], so [solution]" packs an entire argument into one elegant compound-complex sentence — ideal for speaking tasks where time is limited.',
+    tip: 'Useful for <strong>Speaking Task 7 (Expressing Opinions)</strong>. The structure "Since [cause], [problem], so [solution]" condenses a multi-step analytical argument into a single coherent framework. This showcases high-level analytical fluency to the assessors.',
   },
   {
     type: "compound-complex",
@@ -3546,38 +4330,38 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "Individuals can make meaningful choices to reduce plastic use in their daily lives, <strong>and</strong> governments must also enforce regulations that hold corporations accountable, <strong>since</strong> consumer-level changes alone are insufficient to address industrial-scale pollution.",
-    tip: 'Using "since" to justify the second IC in a compound-complex sentence is a mark of mature essay writing — it shows you can reason, not just list points.',
+    tip: 'Useful for <strong>Writing Task 2 (Survey Response)</strong>. Adding "since" to justify the second independent clause transforms a simple compound sentence into compound-complex — and shows that you can provide reasoning, not just claims. Examiners at CLB 9+ expect every argument to be supported, not just stated.',
   },
   {
     type: "compound-complex",
     emoji: "👩‍💼",
     scenario:
-      "CELPIP Speaking Task 5 — Advising a friend who is feeling burned out and overworked",
+      "CELPIP Speaking Task 6 — Dealing with a Difficult Situation: Explaining to a stressed colleague why you must decline taking on extra work",
     steps: [
       {
         label: "Independent clause 1 + dependent clause",
         sentence:
-          "Even though it might feel impossible to slow down right now, you need to start setting clear boundaries with your employer",
+          "Even though it might feel impossible to slow down right now, I need to stick to my current task list",
         thought:
-          'Leading DC = "Even though… right now." IC1 = "you need to start setting clear boundaries." Concession + direct advice.',
+          'Leading DC = "Even though… right now." IC1 = "I need to stick to my current task list." Concession + declaring your boundary.',
       },
       {
         label: "Independent clause 2",
         sentence:
-          "and you should also consider speaking to a counsellor who specialises in workplace stress",
+          "and I should also encourage you to speak with our supervisor about redistribution",
         thought:
-          'IC2 — a second recommendation. "And" adds it equally alongside IC1.',
+          'IC2 — a constructive compromise path. "And" links it cleanly to support the coworker.',
       },
       {
         label: "Assemble",
         sentence: 'DC, IC1 + "and" + IC2',
         thought:
-          "Concede the difficulty first (DC), then give two concrete action steps (IC1 + IC2). This structure sounds empathetic and helpful.",
+          "Acknowledge their stress first (DC), set your boundary firmly (IC1), then provide an actionable team step (IC2). This sounds balanced and professional.",
       },
     ],
     final:
-      "<strong>Even though</strong> it might feel impossible to slow down right now, you need to start setting clear boundaries with your employer, <strong>and</strong> you should also consider speaking to a counsellor who specialises in workplace stress.",
-    tip: 'Opening with "Even though I understand it\'s hard..." before your advice makes it land better. The compound-complex structure lets you be empathetic AND give two recommendations in one sentence.',
+      "<strong>Even though</strong> it might feel impossible to slow down right now, I need to stick to my current task list, <strong>and</strong> I should also encourage you to speak with our supervisor about redistribution.",
+    tip: "Useful for <strong>Speaking Task 6 (Dealing with a Difficult Situation)</strong>. In Task 6, you are specifically evaluated on tone and social awareness while delivering hard news. Starting with an 'even though' clause validates the situation up front, ensuring a professional delivery.",
   },
   {
     type: "compound-complex",
@@ -3608,7 +4392,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "I submitted a maintenance request for the broken bathroom window over three weeks ago, <strong>but</strong> no one has come to inspect or repair it yet, <strong>which</strong> has become a serious safety and security concern for my household.",
-    tip: '"Which has become…" is a non-restrictive relative clause — it adds consequence without starting a new sentence. In formal complaint emails, this structure escalates urgency elegantly.',
+    tip: 'Useful for <strong>Writing Task 1 (formal complaint email)</strong>. The non-restrictive relative clause "which has become…" escalates urgency without starting a new sentence — it keeps the tone controlled and professional while still communicating that the issue is serious. Task 1 formal emails are evaluated on tone as well as content.',
   },
   {
     type: "compound-complex",
@@ -3639,38 +4423,39 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "<strong>While</strong> technology has undoubtedly streamlined many workplace tasks, it has also introduced significant distractions, <strong>so</strong> the overall impact on productivity depends largely on how intentionally it is used.",
-    tip: "This sentence could serve as a thesis statement for Writing Task 2 — it presents both sides and your position in one compound-complex sentence. A very efficient and impressive structure.",
+    tip: "Useful for <strong>Writing Task 2 (Survey Response)</strong> as a thesis or conclusion sentence. This compound-complex sentence presents both sides of the argument AND your nuanced position in a single sentence — a strategy that immediately demonstrates the balanced reasoning examiners look for at CLB 9 and above.",
   },
   {
     type: "compound-complex",
     emoji: "🎙️",
     scenario:
-      "CELPIP Speaking Task 3 — Describing what is happening in a news broadcast image",
+      "CELPIP Speaking Task 8 — Describing an Unusual Situation: Calling a friend to describe an absurd, bizarre piece of public art you see",
     steps: [
       {
         label: "Independent clause 1",
         sentence:
-          "It appears that a large crowd has gathered outside the city hall.",
+          "It appears that a massive abstract structure has been installed outside the city hall.",
         thought:
-          'IC1 — careful language ("it appears that") for describing an image where I am not 100% certain. Sounds fluent and natural.',
+          'IC1 — careful language ("it appears that") to introduce a bizarre, hard-to-explain shape. Sounds fluent.',
       },
       {
         label: "Independent clause 2",
-        sentence: "many of them are holding signs and appear to be chanting",
+        sentence:
+          "a giant metallic clock face is attached directly to its base",
         thought:
-          'IC2 — specific observable details. "And" adds this second observation.',
+          'IC2 — specific, highly unusual details to paint a picture. "And" merges it naturally.',
       },
       {
         label: "Add dependent clause",
         sentence:
-          "which suggests that this may be a community protest or public demonstration",
+          "which looks incredibly bizarre because there are no hour hands on it",
         thought:
-          'DC — "which suggests" is a conclusion relative clause. It draws a logical inference from what I observe. High-scoring language.',
+          "DC — relative clause detailing the unusual trait. It relies on IC2 to complete its meaning.",
       },
     ],
     final:
-      "It appears that a large crowd has gathered outside the city hall, <strong>and</strong> many of them are holding signs and appear to be chanting, <strong>which suggests</strong> that this may be a community protest or public demonstration.",
-    tip: '"Which suggests that…" is a sophisticated inference marker — it shows you can move from observation to interpretation, which is exactly what Speaking Task 3 requires.',
+      "It appears that a massive abstract structure has been installed outside the city hall, <strong>and</strong> a giant metallic clock face is attached directly to its base, <strong>which looks incredibly bizarre</strong> because there are no hour hands on it.",
+    tip: "Useful for <strong>Speaking Task 8 (Describing an Unusual Situation)</strong>. In Task 8, you must describe an abstract or surreal scene to someone who can't see it. Using a relative clause with 'which looks...' lets you describe a complex detail and explicitly label its strangeness seamlessly.",
   },
   {
     type: "compound-complex",
@@ -3701,7 +4486,7 @@ export const COMPLEX_SENTENCES = [
     ],
     final:
       "<strong>Although</strong> preserving cultural landmarks is important for a city's identity, the urgent need for affordable housing must take priority in areas where residents are being displaced, <strong>and</strong> both goals can ultimately be achieved through thoughtful, long-term urban planning.",
-    tip: "A conclusion paragraph in Task 2 should concede, argue, and resolve. This compound-complex sentence does all three — making it a nearly complete conclusion on its own.",
+    tip: "Useful for <strong>Writing Task 2 (Survey Response)</strong> conclusion paragraph. The concede → argue → resolve structure (Although DC, IC1, and IC2) is the most powerful closing pattern for Task 2 — it shows balanced thinking, a clear position, and an optimistic forward-looking resolution, all of which are Content/Coherence markers at CLB 9+.",
   },
 ];
 
