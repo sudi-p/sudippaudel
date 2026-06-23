@@ -2659,6 +2659,8 @@ export default function CelpipVocabPage() {
     .mod-cert-pct { font-size: 11px; color: #9ca3af; width: 36px; text-align: right; flex-shrink: 0; }
     .mod-cert-caption { font-size: 11px; color: #9ca3af; width: 120px; flex-shrink: 0; font-style: italic; }
 
+    .mod-detail-ex { font-size: 13px; color: #374151; background: #f9fafb; border: 1px solid #f3f4f6; border-radius: 8px; padding: 10px 12px; line-height: 1.55; margin-bottom: 6px; }
+
     @media (max-width: 600px) {
       .mod-spectrum-label { width: 70px; font-size: 10px; }
       .mod-detail-word { font-size: 24px; }
@@ -2985,7 +2987,17 @@ export default function CelpipVocabPage() {
           .join("");
 
         document.getElementById("mod-exs").innerHTML = data.examples
-          .map((e) => `<div class="mod-detail-ex">${e}</div>`)
+          .map(
+            (e) => `
+    <div class="mod-detail-ex">
+      <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;flex-wrap:wrap;">
+        <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:#dbeafe;color:#1e40af;letter-spacing:0.04em;">${e.task}</span>
+        <span style="font-size:11px;color:#9ca3af;font-style:italic;">${e.scenario}</span>
+      </div>
+      <div style="font-size:13px;color:#374151;line-height:1.6;">"${e.sentence}"</div>
+    </div>
+  `,
+          )
           .join("");
 
         // highlight selected pill

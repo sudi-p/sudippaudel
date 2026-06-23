@@ -3669,119 +3669,285 @@ export const TENSES = [
 export const MODALS = [
   {
     modal: "can",
+    negative: "cannot / can't",
+    note: "Use 'can' for present ability, informal permission, or general possibility. Very common in CELPIP speaking tasks.",
     meanings: ["Ability (present)", "Permission (informal)", "Possibility"],
     examples: [
-      "She <em>can</em> speak three languages. (ability)",
-      "You <em>can</em> leave early today. (permission)",
-      "It <em>can</em> get very cold here in winter. (possibility)",
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Describing your own qualifications during a phone call about a job posting.",
+        sentence: "I can work flexible hours and I can start immediately.",
+      },
+      {
+        task: "Writing Task 1 (Email)",
+        scenario:
+          "Writing to a neighbour to offer help with a community event.",
+        sentence:
+          "I can bring extra chairs and I can help set up the hall before the event starts.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario: "Advising a friend on how to deal with a noisy neighbour.",
+        sentence:
+          "You can speak to the building manager — they can usually resolve these issues quickly.",
+      },
     ],
-    negative: "can't / cannot",
-    note: 'Use "could" for past ability: He could swim when he was five.',
   },
   {
     modal: "could",
-    meanings: [
-      "Past ability",
-      "Polite request",
-      "Weak possibility",
-      "Suggestion",
-    ],
+    negative: "could not / couldn't",
+    note: "Use 'could' for past ability, polite requests, or weak possibility. More tentative than 'can' — preferred in formal CELPIP writing.",
+    meanings: ["Past ability", "Polite request", "Weak possibility"],
     examples: [
-      "She <em>could</em> run very fast as a child. (past ability)",
-      "<em>Could</em> you please open the window? (polite request)",
-      "It <em>could</em> rain tonight. (weak possibility)",
+      {
+        task: "Writing Task 1 (Email)",
+        scenario: "Writing a formal email to a landlord requesting a repair.",
+        sentence:
+          "Could you please arrange for the heating system to be inspected before the weekend?",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Giving advice to someone who is stressed about a deadline at work.",
+        sentence:
+          "You could try breaking the project into smaller tasks — that could make it feel much more manageable.",
+      },
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Discussing options with a friend who is considering moving to a new city.",
+        sentence:
+          "You could look into renting first — that way you could get a feel for the neighbourhood before committing.",
+      },
     ],
-    negative: "couldn't",
-    note: '"Could" is softer and more polite than "can" for requests.',
   },
   {
     modal: "may",
-    meanings: ["Formal permission", "Possibility (50%)"],
-    examples: [
-      "You <em>may</em> use a dictionary during the exam. (permission)",
-      "She <em>may</em> be late — I'm not sure. (possibility)",
-      "It <em>may</em> snow this weekend.",
-    ],
     negative: "may not",
-    note: 'More formal than "can" for permission. "Might" is slightly less certain than "may".',
+    note: "Use 'may' for formal permission or 50/50 possibility. More formal than 'can' or 'might' — excellent in CELPIP writing tasks.",
+    meanings: ["Formal permission", "Possibility"],
+    examples: [
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario:
+          "Discussing the potential downsides of remote work in an opinion essay.",
+        sentence:
+          "Working from home may reduce collaboration among team members, which may negatively affect company culture over time.",
+      },
+      {
+        task: "Writing Task 1 (Email)",
+        scenario:
+          "Writing to a manager requesting time off for a family obligation.",
+        sentence:
+          "I may need to take Friday afternoon off, as I have a family appointment that may run longer than expected.",
+      },
+      {
+        task: "Speaking Task 8",
+        scenario: "Expressing uncertainty about a community planning decision.",
+        sentence:
+          "The new transit line may benefit commuters in the east end, but it may also increase noise levels for nearby residents.",
+      },
+    ],
   },
   {
     modal: "might",
-    meanings: ["Weak possibility (< 50%)", "Polite suggestion"],
-    examples: [
-      "He <em>might</em> come to the party — but I doubt it.",
-      "You <em>might</em> want to reconsider that decision.",
-      "She <em>might</em> have missed the bus.",
-    ],
     negative: "might not",
-    note: 'Use "might have + past participle" for speculation about the past.',
+    note: "Use 'might' for low probability or hesitant suggestions. Weaker than 'may' — useful when expressing doubt or exploring unlikely options.",
+    meanings: ["Weak possibility (< 50%)"],
+    examples: [
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Helping a friend decide whether to accept a job offer in another city.",
+        sentence:
+          "It might be worth visiting the city first — you might feel differently once you've seen the neighbourhood in person.",
+      },
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario:
+          "Acknowledging the other side of the argument about mandatory community service.",
+        sentence:
+          "While some students might resist at first, they might ultimately find the experience rewarding and career-building.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Advising a coworker who is unsure about raising a concern with their manager.",
+        sentence:
+          "You might want to send an email first — your manager might appreciate having time to think it over before a meeting.",
+      },
+    ],
   },
   {
     modal: "must",
+    negative: "must not / mustn't",
+    note: "Use 'must' for strong obligation or logical certainty. 'Must not' expresses prohibition. Common in formal writing and deduction contexts.",
     meanings: ["Strong obligation", "Logical deduction (certainty)"],
     examples: [
-      "You <em>must</em> wear a seatbelt. (obligation)",
-      "She <em>must</em> be exhausted — she worked 14 hours. (deduction)",
-      "I <em>must</em> call my parents today.",
+      {
+        task: "Writing Task 1 (Email)",
+        scenario: "Writing to a tenant about building rules after a complaint.",
+        sentence:
+          "All residents must ensure that noise levels are kept to a minimum after 10 PM, as per the building agreement.",
+      },
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario:
+          "Arguing that governments should take action on climate change.",
+        sentence:
+          "Governments must implement stricter emission regulations — the consequences of inaction must not be underestimated.",
+      },
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Discussing a candidate's qualifications while comparing two job applicants.",
+        sentence:
+          "She has three degrees and ten years of experience — she must be the strongest candidate we've seen this year.",
+      },
     ],
-    negative: "mustn't (prohibition) / don't have to (no obligation)",
-    note: '"Mustn\'t" = forbidden. "Don\'t have to" = not necessary (very different!)',
   },
   {
     modal: "should",
-    meanings: ["Advice / recommendation", "Expectation", "Mild obligation"],
+    negative: "should not / shouldn't",
+    note: "Use 'should' for advice, recommendations, and expectations. One of the most useful modals in CELPIP — natural in both speaking and writing.",
+    meanings: ["Advice / recommendation", "Mild obligation", "Expectation"],
     examples: [
-      "You <em>should</em> see a doctor about that cough. (advice)",
-      "The package <em>should</em> arrive by Friday. (expectation)",
-      "We <em>should</em> respect others.",
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Recommending a course of action to a friend dealing with a difficult coworker.",
+        sentence:
+          "You should speak to your supervisor about this — you shouldn't have to handle it on your own.",
+      },
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario: "Arguing in favour of public transportation investment.",
+        sentence:
+          "City councils should prioritize expanding bus and subway networks, as this should reduce traffic congestion significantly.",
+      },
+      {
+        task: "Speaking Task 8",
+        scenario:
+          "Discussing what a community centre should offer to attract young families.",
+        sentence:
+          "The centre should offer affordable childcare programs — that should encourage more families to use the facility regularly.",
+      },
     ],
-    negative: "shouldn't",
-    note: 'Use "should have + past participle" for past regrets: You should have called earlier.',
   },
   {
     modal: "will",
+    negative: "will not / won't",
+    note: "Use 'will' for future facts, promises, and spontaneous decisions. Essential for Writing Task 1 emails and Speaking Tasks involving future plans.",
     meanings: ["Future fact / prediction", "Promise", "Spontaneous decision"],
     examples: [
-      "I <em>will</em> finish this by tonight. (promise)",
-      "It <em>will</em> be a sunny day tomorrow. (prediction)",
-      "I'll get the door — stay seated. (spontaneous)",
+      {
+        task: "Writing Task 1 (Email)",
+        scenario: "Confirming attendance at a work event in a reply email.",
+        sentence:
+          "I will attend the orientation session on Thursday and I will bring the completed forms as requested.",
+      },
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Making a commitment during a discussion about covering for a colleague.",
+        sentence:
+          "Don't worry — I will handle the client calls while she is away and I will keep everyone updated.",
+      },
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario: "Making a prediction about the future of online education.",
+        sentence:
+          "As technology continues to advance, online learning will become the primary mode of education for millions of students worldwide.",
+      },
     ],
-    negative: "won't",
-    note: '"Will" for predictions is based on what the speaker believes. Use "going to" for evidence-based future.',
   },
   {
     modal: "would",
-    meanings: ["Conditional", "Polite request", "Past habit", "Wish"],
+    negative: "would not / wouldn't",
+    note: "Use 'would' for polite requests, conditional situations, and past habits. One of the most versatile and formal-sounding modals in English.",
+    meanings: ["Polite request", "Conditional", "Past habit", "Wish"],
     examples: [
-      "I <em>would</em> travel more if I had time. (conditional)",
-      "<em>Would</em> you like some coffee? (polite offer)",
-      "As a child, we <em>would</em> play outside all day. (past habit)",
-      "It <em>would</em> be nice to have a day off.",
+      {
+        task: "Writing Task 1 (Email)",
+        scenario:
+          "Writing a formal complaint email to a property management company.",
+        sentence:
+          "I would appreciate a prompt response to this matter, as the situation has been ongoing for several weeks.",
+      },
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario:
+          "Discussing what would happen if public transit were made free.",
+        sentence:
+          "If public transit were made free, more commuters would choose it over driving, which would reduce emissions city-wide.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Giving advice to a friend who is unhappy at their current job.",
+        sentence:
+          "If I were in your position, I would update my resume now — I wouldn't wait until things get worse.",
+      },
     ],
-    negative: "wouldn't",
-    note: '"Would" is the most versatile modal — it appears in conditionals, polite speech, and narrative.',
   },
   {
     modal: "shall",
+    negative: "shall not / shan't",
+    note: "Use 'shall' for formal offers, suggestions with I/we, and legal or official language. Less common in everyday speech but useful in formal CELPIP writing.",
     meanings: ["Formal future (I/we)", "Offer", "Suggestion"],
     examples: [
-      "<em>Shall</em> we begin? (suggestion)",
-      "I <em>shall</em> return. (formal promise)",
-      "<em>Shall</em> I open the window for you? (offer)",
+      {
+        task: "Writing Task 1 (Email)",
+        scenario:
+          "Writing a formal email to a committee chair offering to lead a session.",
+        sentence:
+          "I shall prepare a full presentation for the board and shall ensure all materials are distributed in advance.",
+      },
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Offering to take responsibility during a team discussion about an upcoming project.",
+        sentence:
+          "Shall I take the lead on the research portion? I can have a draft ready by Thursday.",
+      },
+      {
+        task: "Speaking Task 8",
+        scenario:
+          "Formally proposing a solution during a community meeting discussion.",
+        sentence:
+          "Shall we consider allocating part of the budget to green spaces? That might address several of the concerns raised.",
+      },
     ],
-    negative: "shan't (rare)",
-    note: '"Shall" is formal and mostly British English. In everyday speech, "will" and "should" replace it.',
   },
   {
     modal: "ought to",
-    meanings: ["Moral duty / advice", "Expectation"],
-    examples: [
-      "You <em>ought to</em> apologize to her.",
-      "The results <em>ought to</em> be ready by now.",
-      "We <em>ought to</em> help those in need.",
-    ],
     negative: "ought not to",
-    note: '"Ought to" is similar to "should" but slightly stronger in moral implication.',
+    note: "Use 'ought to' as a more formal or moral alternative to 'should'. Slightly stronger — implies a duty or expectation based on reason or ethics.",
+    meanings: ["Moral duty / advice"],
+    examples: [
+      {
+        task: "Writing Task 2 (Opinion Essay)",
+        scenario:
+          "Arguing that employers have a responsibility to support employee mental health.",
+        sentence:
+          "Companies ought to provide mental health resources for their staff — employees ought not to feel that seeking help will affect their careers.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Advising a friend who witnessed workplace misconduct about what to do.",
+        sentence:
+          "You really ought to report what you saw — staying silent ought not to be seen as the safer option here.",
+      },
+      {
+        task: "Speaking Task 8",
+        scenario:
+          "Discussing responsibilities of local government regarding aging infrastructure.",
+        sentence:
+          "The city council ought to address these road conditions before winter — residents ought to be able to expect safe streets year-round.",
+      },
+    ],
   },
 ];
 
