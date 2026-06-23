@@ -30,6 +30,10 @@ import {
   CONSONANT_SOUNDS,
   STRESS_RULES,
   CONNECTED_SPEECH,
+  VOICE_RULES,
+  ACTIVE_EXAMPLES,
+  PASSIVE_EXAMPLES,
+  VOICE_TRAPS,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -392,6 +396,382 @@ export default function CelpipVocabPage() {
       `;
     }).join("")}
   `;
+    }
+
+    function renderVoice() {
+      const content = document.getElementById("voice-content");
+      if (!content) return;
+
+      content.innerHTML = `
+    <style>
+      /* ── Tab row ── */
+      .vc-tab-row { display: flex; gap: 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 1.75rem; overflow-x: auto; }
+      .vc-tab { padding: 10px 18px; font-size: 13px; font-weight: 500; color: #6b7280; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; transition: color 0.15s; white-space: nowrap; }
+      .vc-tab.vc-active { color: #111827; border-bottom-color: #111827; }
+      .vc-tab:hover:not(.vc-active) { color: #111827; }
+      .vc-panel { display: none; }
+      .vc-panel.vc-active { display: block; }
+
+      /* ── Intro cards ── */
+      .vc-intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem; margin-bottom: 1.75rem; }
+      .vc-intro-card { border-radius: 14px; border: 1px solid; padding: 1.1rem 1.25rem; }
+      .vc-intro-label { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 5px; }
+      .vc-intro-title { font-size: 16px; font-weight: 700; color: #111827; margin-bottom: 6px; }
+      .vc-intro-formula { font-size: 12px; font-family: monospace; font-weight: 600; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 8px; }
+      .vc-intro-body { font-size: 13px; color: #6b7280; line-height: 1.65; }
+      .vc-intro-tip { font-size: 12px; margin-top: 10px; padding: 7px 10px; border-radius: 7px; line-height: 1.55; }
+
+      /* ── Section headings ── */
+      .vc-section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9ca3af; margin-bottom: 0.85rem; }
+
+      /* ── Tense table ── */
+      .vc-tense-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.5rem; }
+      .vc-tense-table th { background: #f3f4f6; color: #374151; font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid #e5e7eb; font-size: 12px; }
+      .vc-tense-table td { padding: 8px 12px; border: 1px solid #e5e7eb; color: #374151; vertical-align: top; }
+      .vc-tense-table tr:nth-child(even) td { background: #f9fafb; }
+      .vc-tense-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #dbeafe; color: #1e40af; margin-right: 5px; }
+      .vc-active-text { color: #166534; font-weight: 500; }
+      .vc-passive-text { color: #92400e; font-weight: 500; }
+
+      /* ── When to use table ── */
+      .vc-when-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.5rem; }
+      .vc-when-table th { background: #f3f4f6; color: #374151; font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid #e5e7eb; font-size: 12px; }
+      .vc-when-table td { padding: 8px 12px; border: 1px solid #e5e7eb; color: #374151; vertical-align: top; line-height: 1.5; }
+      .vc-when-table tr:nth-child(even) td { background: #f9fafb; }
+      .vc-voice-chip { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+      .vc-voice-chip-active { background: #dcfce7; color: #166534; }
+      .vc-voice-chip-passive { background: #fef3c7; color: #92400e; }
+
+      /* ── Example cards ── */
+      .vc-ex-list { display: flex; flex-direction: column; gap: 10px; }
+      .vc-ex-card { border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; background: #fff; }
+      .vc-ex-card-meta { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; border-bottom: 1px solid #f3f4f6; flex-wrap: wrap; }
+      .vc-ex-task-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+      .vc-ex-scenario { font-size: 12px; color: #9ca3af; line-height: 1.4; }
+      .vc-ex-sentence { font-size: 14px; color: #111827; line-height: 1.6; padding: 10px 12px; border-bottom: 1px solid #f3f4f6; font-weight: 500; }
+      .vc-ex-sentence em { font-style: normal; }
+      .vc-ex-why { font-size: 12px; color: #6b7280; line-height: 1.55; padding: 8px 12px; }
+      .vc-ex-why::before { content: "💡 "; }
+
+      /* ── Traps ── */
+      .vc-traps-list { display: flex; flex-direction: column; gap: 10px; }
+      .vc-trap-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.25rem; cursor: pointer; }
+      .vc-trap-wrong { font-size: 14px; color: #dc2626; text-decoration: line-through; margin-bottom: 5px; }
+      .vc-trap-right { font-size: 14px; color: #16a34a; font-weight: 500; margin-bottom: 6px; }
+      .vc-trap-why { font-size: 12px; color: #6b7280; line-height: 1.55; display: none; margin-top: 6px; padding-top: 6px; border-top: 1px solid #f3f4f6; }
+      .vc-trap-hint { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+
+      /* ── Conversion tool ── */
+      .vc-convert-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; }
+      .vc-convert-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #9ca3af; margin-bottom: 0.75rem; }
+      .vc-convert-pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin-bottom: 10px; }
+      .vc-convert-side { background: #fff; border: 1px solid #e5e7eb; border-radius: 9px; padding: 10px 12px; }
+      .vc-convert-side-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+      .vc-convert-text { font-size: 13px; color: #374151; line-height: 1.55; }
+      .vc-convert-text em { font-style: normal; font-weight: 600; }
+      .vc-convert-arrow { font-size: 18px; color: #9ca3af; text-align: center; flex-shrink: 0; }
+      .vc-convert-note { font-size: 11.5px; color: #6b7280; line-height: 1.5; padding: 6px 10px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; }
+      @media (max-width: 600px) {
+        .vc-convert-pair { grid-template-columns: 1fr; }
+        .vc-convert-arrow { transform: rotate(90deg); }
+      }
+    </style>
+
+    <!-- Tab bar -->
+    <div class="vc-tab-row">
+      <button class="vc-tab vc-active" onclick="vcShow('vc-overview')">Overview</button>
+      <button class="vc-tab" onclick="vcShow('vc-active')">Active Voice</button>
+      <button class="vc-tab" onclick="vcShow('vc-passive')">Passive Voice</button>
+      <button class="vc-tab" onclick="vcShow('vc-convert')">Conversion</button>
+      <button class="vc-tab" onclick="vcShow('vc-traps')">Common Traps</button>
+    </div>
+
+    <!-- ── OVERVIEW PANEL ── -->
+    <div id="vc-overview" class="vc-panel vc-active">
+
+      <!-- Intro cards -->
+      <div class="vc-intro-grid">
+        <div class="vc-intro-card" style="background:#f0fdf4;border-color:#86efac;">
+          <div class="vc-intro-label" style="color:#16a34a">Active Voice</div>
+          <div class="vc-intro-title">Subject does the action</div>
+          <div class="vc-intro-formula" style="background:#dcfce7;color:#166534">Subject + Verb + Object</div>
+          <div class="vc-intro-body">Direct, clear, and natural. The subject is the doer. Preferred in speaking tasks, advice, opinions, and personal narratives.</div>
+          <div class="vc-intro-tip" style="background:#dcfce7;color:#166534">Best for: Speaking Tasks 1–8, Writing Task 2 (thesis &amp; opinions)</div>
+        </div>
+        <div class="vc-intro-card" style="background:#fffbeb;border-color:#fde68a;">
+          <div class="vc-intro-label" style="color:#92400e">Passive Voice</div>
+          <div class="vc-intro-title">Subject receives the action</div>
+          <div class="vc-intro-formula" style="background:#fef3c7;color:#92400e">Subject + be + Past Participle (+ by agent)</div>
+          <div class="vc-intro-body">Formal, objective, impersonal. The doer is unknown, unimportant, or deliberately hidden. Common in formal writing and academic essays.</div>
+          <div class="vc-intro-tip" style="background:#fef3c7;color:#92400e">Best for: Writing Task 1 (formal emails), Writing Task 2 (body paragraphs &amp; evidence)</div>
+        </div>
+      </div>
+
+      <!-- Passive across tenses -->
+      <div class="vc-section-label">Passive voice across all tenses</div>
+      <div style="overflow-x:auto">
+        <table class="vc-tense-table">
+          <thead>
+            <tr>
+              <th>Tense</th>
+              <th>Active</th>
+              <th>Passive</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${VOICE_RULES.find((r) => r.id === "passive-tenses")
+              .tenseTable.map(
+                (row) => `
+              <tr>
+                <td><span class="vc-tense-badge">${row.tense}</span></td>
+                <td class="vc-active-text">${row.active}</td>
+                <td class="vc-passive-text">${row.passive}</td>
+              </tr>
+            `,
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- When to use -->
+      <div class="vc-section-label">When to use each voice</div>
+      <div style="overflow-x:auto">
+        <table class="vc-when-table">
+          <thead>
+            <tr>
+              <th>Situation</th>
+              <th>Voice</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${VOICE_RULES.find((r) => r.id === "when-to-use")
+              .whenTable.map(
+                (row) => `
+              <tr>
+                <td>${row.situation}</td>
+                <td><span class="vc-voice-chip ${row.voice === "Active" ? "vc-voice-chip-active" : "vc-voice-chip-passive"}">${row.voice}</span></td>
+                <td style="font-style:italic;color:#6b7280">${row.example}</td>
+              </tr>
+            `,
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ACTIVE VOICE PANEL ── -->
+    <div id="vc-active" class="vc-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;padding:8px 12px;border-left:3px solid #86efac;border-radius:0">
+        Active voice puts the <strong style="color:#111827">subject in control</strong> — it is direct, confident, and natural. Use it for opinions, advice, stories, comparisons, and scene descriptions.
+      </p>
+      <div class="vc-ex-list">
+        ${ACTIVE_EXAMPLES.map(
+          (ex) => `
+          <div class="vc-ex-card">
+            <div class="vc-ex-card-meta">
+              <span class="vc-ex-task-badge" style="background:#dcfce7;color:#166534">${ex.task}</span>
+              <span class="vc-ex-scenario">${ex.scenario}</span>
+            </div>
+            <div class="vc-ex-sentence" style="border-left:3px solid #86efac;margin:0;border-radius:0">${ex.sentence}</div>
+            <div class="vc-ex-why">${ex.why}</div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+    </div>
+
+    <!-- ── PASSIVE VOICE PANEL ── -->
+    <div id="vc-passive" class="vc-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;padding:8px 12px;border-left:3px solid #fde68a;border-radius:0">
+        Passive voice puts the <strong style="color:#111827">action or result in focus</strong> — it is formal, objective, and impersonal. Use it in complaints, formal emails, process descriptions, and essays where the doer is unknown or unimportant.
+      </p>
+      <div class="vc-ex-list">
+        ${PASSIVE_EXAMPLES.map(
+          (ex) => `
+          <div class="vc-ex-card">
+            <div class="vc-ex-card-meta">
+              <span class="vc-ex-task-badge" style="background:#fef3c7;color:#92400e">${ex.task}</span>
+              <span class="vc-ex-scenario">${ex.scenario}</span>
+            </div>
+            <div class="vc-ex-sentence" style="border-left:3px solid #fde68a;margin:0;border-radius:0">${ex.sentence}</div>
+            <div class="vc-ex-why">${ex.why}</div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+    </div>
+
+    <!-- ── CONVERSION PANEL ── -->
+    <div id="vc-convert" class="vc-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+        Study how the same idea shifts between active and passive. Pay attention to how the <strong style="color:#111827">subject changes</strong> and the <strong style="color:#111827">verb form changes</strong> in each conversion.
+      </p>
+      ${[
+        {
+          active: {
+            text: "The landlord <em>has ignored</em> my repair request for three weeks.",
+            label: "Active",
+          },
+          passive: {
+            text: "My repair request <em>has been ignored</em> by the landlord for three weeks.",
+            label: "Passive",
+          },
+          note: "Present perfect passive. The passive version is more suitable for a formal complaint email — it puts the neglected request (not the landlord) in the spotlight.",
+        },
+        {
+          active: {
+            text: "The city council <em>will review</em> all proposals before the end of the month.",
+            label: "Active",
+          },
+          passive: {
+            text: "All proposals <em>will be reviewed</em> by the city council before the end of the month.",
+            label: "Passive",
+          },
+          note: "Future passive. The passive is preferred in formal announcements and essays when the process matters more than who performs it.",
+        },
+        {
+          active: {
+            text: "I <em>submitted</em> my application two weeks ago.",
+            label: "Active",
+          },
+          passive: {
+            text: "My application <em>was submitted</em> two weeks ago.",
+            label: "Passive",
+          },
+          note: 'Past simple passive. The passive drops "by me" — natural when the focus is on what was done, not who did it. Common in formal writing.',
+        },
+        {
+          active: {
+            text: "Employees <em>are reporting</em> the issue to management.",
+            label: "Active",
+          },
+          passive: {
+            text: "The issue <em>is being reported</em> to management by employees.",
+            label: "Passive",
+          },
+          note: "Present continuous passive. The passive shifts focus to the issue — useful in a news description (Speaking Task 3) where the event is more important than the people involved.",
+        },
+        {
+          active: {
+            text: "The government <em>should fund</em> more affordable housing projects.",
+            label: "Active",
+          },
+          passive: {
+            text: "More affordable housing projects <em>should be funded</em> by the government.",
+            label: "Passive",
+          },
+          note: 'Modal passive (should). The passive version sounds more formal and is common in Writing Task 2 recommendations — "should be funded" feels like a policy statement.',
+        },
+        {
+          active: {
+            text: "Nobody <em>had informed</em> the tenants about the planned maintenance.",
+            label: "Active",
+          },
+          passive: {
+            text: "The tenants <em>had not been informed</em> about the planned maintenance.",
+            label: "Passive",
+          },
+          note: "Past perfect passive. The passive is stronger for a complaint — it focuses on what the tenants experienced (not being told), making the oversight feel more significant.",
+        },
+        {
+          active: {
+            text: "Researchers <em>have proven</em> that regular exercise reduces stress.",
+            label: "Active",
+          },
+          passive: {
+            text: "It <em>has been proven</em> that regular exercise reduces stress.",
+            label: "Passive",
+          },
+          note: 'Impersonal "it" passive. Extremely common in Writing Task 2 — "It has been proven / shown / argued that…" adds authority to a claim without requiring a named source.',
+        },
+        {
+          active: {
+            text: "We <em>must resolve</em> this issue before the lease renewal date.",
+            label: "Active",
+          },
+          passive: {
+            text: "This issue <em>must be resolved</em> before the lease renewal date.",
+            label: "Passive",
+          },
+          note: 'Modal passive (must). The passive version removes "we" and sounds more like an official condition — appropriate for formal emails where you want to state a requirement impersonally.',
+        },
+      ]
+        .map(
+          (pair) => `
+        <div class="vc-convert-box">
+          <div class="vc-convert-pair">
+            <div class="vc-convert-side">
+              <div class="vc-convert-side-label" style="color:#166534">Active</div>
+              <div class="vc-convert-text">${pair.active.text}</div>
+            </div>
+            <div class="vc-convert-arrow">⇄</div>
+            <div class="vc-convert-side">
+              <div class="vc-convert-side-label" style="color:#92400e">Passive</div>
+              <div class="vc-convert-text">${pair.passive.text}</div>
+            </div>
+          </div>
+          <div class="vc-convert-note">${pair.note}</div>
+        </div>
+      `,
+        )
+        .join("")}
+    </div>
+
+    <!-- ── TRAPS PANEL ── -->
+    <div id="vc-traps" class="vc-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">Tap each card to see why the passive version is wrong and what to use instead.</p>
+      <div class="vc-traps-list" id="vc-traps-list"></div>
+    </div>
+  `;
+
+      // ── Tab switcher ────────────────────────────────────────────────────────
+      window.vcShow = function (id) {
+        document
+          .querySelectorAll(".vc-panel")
+          .forEach((p) => p.classList.remove("vc-active"));
+        document
+          .querySelectorAll(".vc-tab")
+          .forEach((t) => t.classList.remove("vc-active"));
+        document.getElementById(id).classList.add("vc-active");
+        const ids = [
+          "vc-overview",
+          "vc-active",
+          "vc-passive",
+          "vc-convert",
+          "vc-traps",
+        ];
+        document
+          .querySelectorAll(".vc-tab")
+          [ids.indexOf(id)].classList.add("vc-active");
+        if (id === "vc-traps" && !window._vcTrapsInit) initVcTraps();
+      };
+
+      // ── Traps ───────────────────────────────────────────────────────────────
+      function initVcTraps() {
+        window._vcTrapsInit = true;
+        const list = document.getElementById("vc-traps-list");
+        list.innerHTML = VOICE_TRAPS.map(
+          (t, i) => `
+      <div class="vc-trap-card" onclick="vcToggleTrap(${i})">
+        <div class="vc-trap-wrong">${t.wrong}</div>
+        <div class="vc-trap-right">${t.right}</div>
+        <div class="vc-trap-why" id="vc-trap-why-${i}">${t.why}</div>
+        <div class="vc-trap-hint" id="vc-trap-hint-${i}">tap to see why →</div>
+      </div>
+    `,
+        ).join("");
+      }
+
+      window.vcToggleTrap = function (i) {
+        const why = document.getElementById(`vc-trap-why-${i}`);
+        const hint = document.getElementById(`vc-trap-hint-${i}`);
+        const open = why.style.display === "block";
+        why.style.display = open ? "none" : "block";
+        hint.style.display = open ? "block" : "none";
+      };
     }
 
     function renderCollocations() {
@@ -3267,6 +3647,7 @@ export default function CelpipVocabPage() {
     renderNounsPronouns();
     renderCollocations();
     renderVerbs();
+    renderVoice();
     renderPhonetics();
     renderPrepositions();
     renderConjunctions();
@@ -3387,6 +3768,12 @@ export default function CelpipVocabPage() {
               >
                 Phonetics
               </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="voice"
+              >
+                Active &amp; Passive
+              </button>
             </div>
           </div>
         </div>
@@ -3407,6 +3794,21 @@ export default function CelpipVocabPage() {
               No words found for the selected filters.
             </p>
           </div>
+        </div>
+
+        {/* Active & Passive Voice Tab */}
+        <div id="voice" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master{" "}
+              <span className="font-semibold text-emerald2-dark">active</span>{" "}
+              and{" "}
+              <span className="font-semibold text-amber2-dark">passive</span>{" "}
+              voice — when to use each, how to convert between them, and
+              CELPIP-specific examples for writing and speaking tasks.
+            </p>
+          </div>
+          <div id="voice-content"></div>
         </div>
 
         {/* Phonetics Tab */}
