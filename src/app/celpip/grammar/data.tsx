@@ -3300,16 +3300,34 @@ export const CLAUSE_TYPES = [
 // ── DATA ──────────────────────────────────────────────────────────────
 
 export const TENSES = [
+  // ── Simple tenses ──────────────────────────────────────────────────────────
   {
     group: "Simple tenses",
     name: "Present simple",
     form: "V / V-s (he/she/it)",
-    use: "Habits, facts, schedules, permanent situations.",
-    signal: "always, usually, every day, never",
+    use: "Habits, general facts, schedules, and permanent situations.",
+    signal: "always, usually, every day, never, often, generally",
     examples: [
-      "She <em>works</em> at a hospital.",
-      "The train <em>leaves</em> at 8 am.",
-      "Water <em>boils</em> at 100°C.",
+      {
+        task: "Writing Task 2",
+        scenario:
+          "Stating a general fact in an opinion essay about public transit",
+        sentence:
+          "Public transit <em>reduces</em> traffic congestion and lowers carbon emissions in dense urban areas.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario: "Expressing a general opinion about remote work",
+        sentence:
+          "Many employees <em>prefer</em> working from home because it <em>saves</em> them hours of commuting every week.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Explaining a recurring problem in a complaint email to a landlord",
+        sentence:
+          "The heating system <em>stops</em> working every time the temperature <em>drops</em> below minus ten degrees.",
+      },
     ],
   },
   {
@@ -3317,127 +3335,333 @@ export const TENSES = [
     name: "Past simple",
     form: "V-ed (regular) / irregular form",
     use: "Completed actions at a specific time in the past.",
-    signal: "yesterday, last year, in 2020, ago",
+    signal: "yesterday, last week, in 2022, ago, at that time",
     examples: [
-      "She <em>worked</em> all night.",
-      "He <em>went</em> to Paris last summer.",
-      "They <em>finished</em> the project on Friday.",
+      {
+        task: "Speaking Task 2",
+        scenario:
+          "Describing a personal experience — a time you overcame a challenge",
+        sentence:
+          "When I first <em>arrived</em> in Canada, I <em>struggled</em> to understand the local accent, but I <em>joined</em> a language group and gradually <em>improved</em>.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Explaining the background of a complaint email about a cancelled class",
+        sentence:
+          "I <em>registered</em> for the eight-week fitness program last month and <em>paid</em> the full fee in advance.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Describing a difficult situation you once handled — noise complaint from a neighbour",
+        sentence:
+          "My neighbour <em>knocked</em> on my door late at night and <em>asked</em> me to lower the volume, so I <em>apologised</em> immediately.",
+      },
     ],
   },
   {
     group: "Simple tenses",
     name: "Future simple",
     form: "will + V",
-    use: "Predictions, spontaneous decisions, promises.",
-    signal: "tomorrow, next week, soon, I think",
+    use: "Predictions, spontaneous decisions, promises, and offers.",
+    signal: "tomorrow, next week, soon, I think, I believe",
     examples: [
-      "It <em>will rain</em> tomorrow.",
-      "I <em>will call</em> you back.",
-      "She <em>will be</em> a great doctor.",
+      {
+        task: "Speaking Task 4",
+        scenario:
+          "Making a prediction about what will happen if a park is converted into a parking lot",
+        sentence:
+          "If the city removes the green space, residents <em>will lose</em> their only outdoor recreational area, and property values <em>will likely drop</em>.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario: "Making a promise or commitment at the end of a formal email",
+        sentence:
+          "I <em>will ensure</em> that the issue is resolved before the end of the week and <em>will send</em> you a confirmation once it is done.",
+      },
+      {
+        task: "Writing Task 2",
+        scenario:
+          "Predicting the outcome of a policy in an opinion essay about education funding",
+        sentence:
+          "Without additional investment in teacher training, student performance <em>will continue</em> to decline in underfunded schools.",
+      },
     ],
   },
+
+  // ── Continuous tenses ──────────────────────────────────────────────────────
   {
     group: "Continuous tenses",
     name: "Present continuous",
-    form: "am/is/are + V-ing",
-    use: "Actions happening right now or temporary situations.",
-    signal: "now, at the moment, currently, today",
+    form: "am / is / are + V-ing",
+    use: "Actions happening right now, temporary situations, or planned future arrangements.",
+    signal: "now, at the moment, currently, this week, these days",
     examples: [
-      "She <em>is studying</em> for her exam.",
-      "They <em>are building</em> a new bridge.",
-      "I <em>am leaving</em> tomorrow. (planned future)",
+      {
+        task: "Speaking Task 3",
+        scenario:
+          "Describing a scene in an image showing a busy community market",
+        sentence:
+          "In the image, vendors <em>are selling</em> fresh produce and customers <em>are browsing</em> the stalls along the street.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Explaining an ongoing problem in an email to a property manager",
+        sentence:
+          "The water <em>is leaking</em> from the bathroom ceiling, and the damage <em>is spreading</em> to the wall beside the window.",
+      },
+      {
+        task: "Speaking Task 8",
+        scenario:
+          "Describing an unusual situation — construction starting unexpectedly outside your window",
+        sentence:
+          "Workers <em>are drilling</em> into the pavement directly outside my apartment, and the noise <em>is making</em> it impossible to concentrate.",
+      },
     ],
   },
   {
     group: "Continuous tenses",
     name: "Past continuous",
-    form: "was/were + V-ing",
-    use: "Action in progress at a specific past moment, or interrupted by another action.",
-    signal: "while, when, at 5pm yesterday",
+    form: "was / were + V-ing",
+    use: "An action in progress at a specific past time, or one action interrupted by another.",
+    signal: "while, when, at that moment, at 3 pm yesterday",
     examples: [
-      "She <em>was sleeping</em> when I called.",
-      "They <em>were arguing</em> all morning.",
-      "I <em>was reading</em> when the lights went out.",
+      {
+        task: "Speaking Task 2",
+        scenario:
+          "Narrating a personal story — the moment you received important news",
+        sentence:
+          "I <em>was preparing</em> for a job interview when my phone rang and I found out I had already been offered the position.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Explaining a difficult situation involving a misunderstanding with a coworker",
+        sentence:
+          "I <em>was presenting</em> my report in the meeting when my colleague interrupted and questioned my data in front of everyone.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario: "Providing context in an email about a delivery issue",
+        sentence:
+          "I <em>was waiting</em> at home all afternoon for the delivery, but the courier marked the package as undeliverable without attempting to ring the doorbell.",
+      },
     ],
   },
   {
     group: "Continuous tenses",
     name: "Future continuous",
     form: "will be + V-ing",
-    use: "Action in progress at a future moment.",
-    signal: "at this time tomorrow, by noon",
+    use: "An action that will be in progress at a specific future moment.",
+    signal: "at this time tomorrow, by noon, next Friday at 3 pm",
     examples: [
-      "This time next week, I <em>will be flying</em> to Tokyo.",
-      "She <em>will be working</em> when you arrive.",
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Explaining why you cannot attend an event while giving advice to a friend about scheduling",
+        sentence:
+          "I <em>will be travelling</em> to Ottawa for a work conference next weekend, so I <em>will not be able</em> to help you move.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Mentioning a future schedule conflict in a polite email requesting a reschedule",
+        sentence:
+          "On the day of the proposed meeting, I <em>will be attending</em> a mandatory training session at a different location.",
+      },
+      {
+        task: "Writing Task 2",
+        scenario:
+          "Predicting ongoing societal change in an essay about technology and employment",
+        sentence:
+          "Within a decade, machines <em>will be performing</em> many of the routine tasks that currently require human workers in manufacturing and logistics.",
+      },
     ],
   },
+
+  // ── Perfect tenses ─────────────────────────────────────────────────────────
   {
     group: "Perfect tenses",
     name: "Present perfect",
-    form: "have/has + past participle",
-    use: "Past action with present relevance; experience; actions that started in the past and continue.",
-    signal: "just, already, yet, ever, never, since, for",
+    form: "have / has + past participle",
+    use: "A past action with present relevance, life experience, or an action that started in the past and continues now.",
+    signal: "just, already, yet, ever, never, since, for, recently, so far",
     examples: [
-      "She <em>has lived</em> here for five years.",
-      "I <em>have already eaten</em>.",
-      "Have you ever <em>visited</em> Nepal?",
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Establishing urgency in a complaint email about an unresolved maintenance issue",
+        sentence:
+          "I <em>have submitted</em> three maintenance requests over the past month, but the broken heating system <em>has not been repaired</em> yet.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Supporting an opinion about remote work by citing recent changes",
+        sentence:
+          "Many companies <em>have already adopted</em> hybrid work models and <em>have reported</em> higher employee satisfaction as a result.",
+      },
+      {
+        task: "Speaking Task 2",
+        scenario:
+          "Introducing a personal experience question about travel or living abroad",
+        sentence:
+          "I <em>have lived</em> in three different countries over the past eight years, and each experience <em>has shaped</em> the way I see the world.",
+      },
     ],
   },
   {
     group: "Perfect tenses",
     name: "Past perfect",
     form: "had + past participle",
-    use: 'Action completed before another past action. The "further back" past.',
-    signal: "before, after, already, by the time",
+    use: 'An action that was completed before another past action. The "further back" past.',
+    signal: "before, after, already, by the time, when, once",
     examples: [
-      "She <em>had left</em> before I arrived.",
-      "By 2020, he <em>had published</em> three books.",
-      "They <em>had never met</em> before the conference.",
+      {
+        task: "Speaking Task 2",
+        scenario:
+          "Telling a story about missing an opportunity — arriving late to a job interview",
+        sentence:
+          "By the time I arrived at the office, the hiring manager <em>had already interviewed</em> the other candidates and <em>had filled</em> the position.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Explaining the timeline of events in a complaint email about a defective product",
+        sentence:
+          "I contacted your customer service team only after I <em>had tried</em> every troubleshooting step listed in the product manual.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Describing how you resolved a conflict after a misunderstanding had already occurred",
+        sentence:
+          "I apologised to my colleague once I realised that she <em>had not received</em> my earlier message and <em>had been waiting</em> for me unnecessarily.",
+      },
     ],
   },
   {
     group: "Perfect tenses",
     name: "Future perfect",
     form: "will have + past participle",
-    use: "Action that will be completed before a specific future time.",
-    signal: "by next year, by the time, before",
+    use: "An action that will be completed before a specific point in the future.",
+    signal: "by next week, by the time, before, by then",
     examples: [
-      "By Friday, I <em>will have finished</em> the report.",
-      "She <em>will have graduated</em> by next June.",
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Making a commitment in a formal email about resolving a complaint",
+        sentence:
+          "I assure you that our team <em>will have addressed</em> the issue and sent a replacement unit before the end of the business week.",
+      },
+      {
+        task: "Writing Task 2",
+        scenario:
+          "Projecting a future outcome in an essay about urban housing policy",
+        sentence:
+          "By 2035, the city <em>will have exhausted</em> its available land for new construction if current development rates continue unchecked.",
+      },
+      {
+        task: "Speaking Task 4",
+        scenario:
+          "Predicting a positive outcome if a community garden proposal is approved",
+        sentence:
+          "If the project receives funding this spring, volunteers <em>will have planted</em> over five hundred trees in the neighbourhood by the end of summer.",
+      },
     ],
   },
+
+  // ── Perfect continuous ─────────────────────────────────────────────────────
   {
     group: "Perfect continuous",
     name: "Present perfect continuous",
-    form: "have/has been + V-ing",
-    use: "Action that started in the past, is still continuing, and shows duration.",
-    signal: "for, since, how long",
+    form: "have / has been + V-ing",
+    use: "An action that started in the past, is still ongoing, and emphasises duration or visible result.",
+    signal: "for, since, how long, lately, recently, all day",
     examples: [
-      "She <em>has been working</em> here for three years.",
-      "I <em>have been waiting</em> since noon.",
-      "Why is he tired? — He <em>has been running</em>.",
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Emphasising how long a problem has been ongoing in a complaint email about noise",
+        sentence:
+          "My neighbour <em>has been playing</em> loud music past midnight for the past three weeks, and my sleep <em>has been suffering</em> as a result.",
+      },
+      {
+        task: "Speaking Task 5",
+        scenario:
+          "Advising a friend who has been struggling with workload and burnout",
+        sentence:
+          "It sounds like you <em>have been taking</em> on too many responsibilities without enough support, and that kind of pressure adds up over time.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Expressing an opinion about transit delays supported by recent personal experience",
+        sentence:
+          "Commuters <em>have been experiencing</em> serious delays on the main subway line for months, which suggests the infrastructure urgently needs investment.",
+      },
     ],
   },
   {
     group: "Perfect continuous",
     name: "Past perfect continuous",
     form: "had been + V-ing",
-    use: "Ongoing action that was in progress before another past action.",
-    signal: "for, since, before, when",
+    use: "An ongoing action that was in progress before another past event — emphasises duration up to a past point.",
+    signal: "for, since, before, when, by the time",
     examples: [
-      "She <em>had been studying</em> for hours before she slept.",
-      "He was exhausted — he <em>had been working</em> all day.",
+      {
+        task: "Speaking Task 2",
+        scenario:
+          "Describing a personal experience — finally getting a job after a long search",
+        sentence:
+          "I <em>had been applying</em> for positions for nearly six months before I finally received an offer from a company that matched my skills.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Providing context in a formal complaint email about a service provider",
+        sentence:
+          "I <em>had been waiting</em> for a technician for over four hours when I received a message saying the appointment had been cancelled without notice.",
+      },
+      {
+        task: "Speaking Task 6",
+        scenario:
+          "Explaining the background of a tense situation before you intervened",
+        sentence:
+          "The two colleagues <em>had been disagreeing</em> over the project timeline for weeks before I stepped in and suggested a compromise.",
+      },
     ],
   },
   {
     group: "Perfect continuous",
     name: "Future perfect continuous",
     form: "will have been + V-ing",
-    use: "Duration of an action up to a specific future point. (Formal/advanced)",
-    signal: "by, for",
+    use: "Emphasises the duration of an action up to a specific future point. Formal and advanced.",
+    signal: "by, for, by the time",
     examples: [
-      "By July, she <em>will have been teaching</em> for ten years.",
-      "I <em>will have been waiting</em> for an hour by the time you arrive.",
+      {
+        task: "Writing Task 2",
+        scenario:
+          "Making a long-term argument about climate policy in an opinion essay",
+        sentence:
+          "By 2050, governments <em>will have been ignoring</em> climate warnings for nearly a century, and the consequences <em>will be</em> irreversible.",
+      },
+      {
+        task: "Speaking Task 7",
+        scenario:
+          "Expressing a strong opinion about the need for transit reform using duration",
+        sentence:
+          "By the time the new subway line opens, commuters <em>will have been tolerating</em> these delays for over a decade with no meaningful improvement.",
+      },
+      {
+        task: "Writing Task 1",
+        scenario:
+          "Emphasising duration in a formal letter requesting recognition or resolution",
+        sentence:
+          "By the end of this month, I <em>will have been renting</em> this unit for five years and have never once missed a payment or violated any terms.",
+      },
     ],
   },
 ];

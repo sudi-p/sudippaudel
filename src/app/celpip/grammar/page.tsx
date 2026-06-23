@@ -1854,9 +1854,9 @@ export default function CelpipVocabPage() {
   <div id="vb-types-content"></div>
 </div>
 
-    <!-- TENSES PANEL -->
+<!-- TENSES PANEL -->
 <div id="vb-tenses" class="vb-panel">
-  <div id="vb-tenses-all"></div>
+  <div id="vb-tense-grid"></div>
 </div>
 
     <!-- FORMS PANEL -->
@@ -2732,34 +2732,45 @@ export default function CelpipVocabPage() {
           },
         };
 
-        // Group tenses
         const groups = {};
         TENSES.forEach((t) => {
           if (!groups[t.group]) groups[t.group] = [];
           groups[t.group].push(t);
         });
 
-        const container = document.getElementById("vb-tenses-all");
+        const container = document.getElementById("vb-tense-grid");
         container.innerHTML = `
     <style>
-      .vbt-group { margin-bottom: 2rem; }
+      .vbt-group { margin-bottom: 2.25rem; }
       .vbt-group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
       .vbt-group-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
       .vbt-group-count { font-size: 12px; color: #9ca3af; }
-      .vbt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 0.85rem; }
-      .vbt-card { border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; background: #fff; }
-      .vbt-card-head { padding: 0.75rem 1rem 0.6rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-      .vbt-card-name { font-size: 14px; font-weight: 700; color: #111827; line-height: 1.3; }
-      .vbt-card-form { font-size: 11px; font-family: monospace; font-weight: 600; padding: 2px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-      .vbt-card-body { padding: 0 1rem 0.85rem; }
-      .vbt-card-use { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
-      .vbt-card-signal { font-size: 11px; color: #9ca3af; margin-bottom: 0.6rem; }
-      .vbt-card-signal strong { color: #6b7280; }
-      .vbt-card-exs { display: flex; flex-direction: column; gap: 4px; }
-      .vbt-card-ex { font-size: 12px; color: #374151; background: #f9fafb; border: 1px solid #f3f4f6; border-radius: 6px; padding: 4px 9px; line-height: 1.5; }
-      .vbt-card-ex em { color: #2563eb; font-style: normal; font-weight: 600; }
+      .vbt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.85rem; }
+
+      .vbt-card { border-radius: 14px; border: 1px solid #e5e7eb; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+      .vbt-card-head { padding: 0.85rem 1rem 0.75rem; }
+      .vbt-card-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+      .vbt-card-name { font-size: 15px; font-weight: 700; color: #111827; line-height: 1.3; }
+      .vbt-card-form { font-size: 11px; font-family: monospace; font-weight: 600; padding: 3px 9px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+      .vbt-card-use { font-size: 12.5px; color: #374151; line-height: 1.55; }
+      .vbt-card-signal-row { display: flex; align-items: center; gap: 6px; padding: 5px 1rem 0; }
+      .vbt-card-signal-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; white-space: nowrap; }
+      .vbt-card-signal-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+      .vbt-card-signal-pill { font-size: 11px; background: #f3f4f6; color: #374151; border-radius: 4px; padding: 1px 6px; }
+
+      .vbt-card-divider { height: 1px; background: #f3f4f6; margin: 0.65rem 0 0; }
+
+      .vbt-card-examples { padding: 0.65rem 1rem 0.85rem; display: flex; flex-direction: column; gap: 6px; }
+      .vbt-example { background: #f9fafb; border: 1px solid #f3f4f6; border-radius: 8px; overflow: hidden; }
+      .vbt-example-meta { display: flex; align-items: center; gap: 6px; padding: 5px 9px; border-bottom: 1px solid #f3f4f6; flex-wrap: wrap; }
+      .vbt-example-task { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+      .vbt-example-scenario { font-size: 11px; color: #9ca3af; line-height: 1.4; }
+      .vbt-example-sentence { font-size: 12.5px; color: #374151; line-height: 1.55; padding: 6px 9px; }
+      .vbt-example-sentence em { color: #2563eb; font-style: normal; font-weight: 600; }
+
       @media (max-width: 600px) { .vbt-grid { grid-template-columns: 1fr; } }
     </style>
+
     ${Object.entries(groups)
       .map(([groupName, tenses]) => {
         const c = GROUP_COLORS[groupName] || {
@@ -2779,17 +2790,52 @@ export default function CelpipVocabPage() {
               .map(
                 (t) => `
               <div class="vbt-card" style="border-color:${c.border}">
+
                 <div class="vbt-card-head" style="background:${c.header}">
-                  <div class="vbt-card-name">${t.name}</div>
-                  <span class="vbt-card-form" style="background:${c.badge};color:${c.badgeText}">${t.form}</span>
-                </div>
-                <div class="vbt-card-body">
+                  <div class="vbt-card-head-row">
+                    <div class="vbt-card-name">${t.name}</div>
+                    <span class="vbt-card-form" style="background:${c.badge};color:${c.badgeText}">${t.form}</span>
+                  </div>
                   <div class="vbt-card-use">${t.use}</div>
-                  <div class="vbt-card-signal"><strong>Signal words:</strong> ${t.signal}</div>
-                  <div class="vbt-card-exs">
-                    ${t.examples.map((e) => `<div class="vbt-card-ex">${e}</div>`).join("")}
+                </div>
+
+                <div class="vbt-card-signal-row">
+                  <span class="vbt-card-signal-label">Signals</span>
+                  <div class="vbt-card-signal-pills">
+                    ${t.signal
+                      .split(",")
+                      .map(
+                        (s) =>
+                          `<span class="vbt-card-signal-pill">${s.trim()}</span>`,
+                      )
+                      .join("")}
                   </div>
                 </div>
+
+                <div class="vbt-card-divider"></div>
+
+                <div class="vbt-card-examples">
+                  ${t.examples
+                    .map((ex) => {
+                      // support both old string format and new { task, scenario, sentence } format
+                      if (typeof ex === "string") {
+                        return `<div class="vbt-example">
+                        <div class="vbt-example-sentence" style="padding:8px 9px">${ex}</div>
+                      </div>`;
+                      }
+                      return `
+                      <div class="vbt-example">
+                        <div class="vbt-example-meta">
+                          <span class="vbt-example-task" style="background:${c.badge};color:${c.badgeText}">${ex.task}</span>
+                          <span class="vbt-example-scenario">${ex.scenario}</span>
+                        </div>
+                        <div class="vbt-example-sentence">${ex.sentence}</div>
+                      </div>
+                    `;
+                    })
+                    .join("")}
+                </div>
+
               </div>
             `,
               )
