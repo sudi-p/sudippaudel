@@ -2368,6 +2368,35 @@ export default function CelpipVocabPage() {
       .ct-filter-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; background: #fff; font-size: 12.5px; font-weight: 500; color: #6b7280; cursor: pointer; transition: all 0.15s; }
       .ct-filter-btn.ct-filter-active { background: #111827; border-color: #111827; color: #fff; }
 
+      /* ── Quiz styles ── */
+      .pq-scoreboard { display: flex; align-items: center; justify-content: space-between; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.75rem 1.25rem; margin-bottom: 1.25rem; }
+      .pq-score-live { font-size: 15px; font-weight: 700; color: #111827; }
+      .pq-counter { font-size: 12px; color: #9ca3af; }
+      .pq-bar-wrap { height: 5px; background: #e5e7eb; border-radius: 3px; margin-bottom: 1.5rem; }
+      .pq-bar-fill { height: 5px; background: #2563eb; border-radius: 3px; transition: width 0.35s; }
+      .pq-question { font-size: 17px; font-weight: 600; color: #111827; line-height: 1.55; margin-bottom: 1.25rem; }
+      .pq-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 1.25rem; }
+      .pq-opt { padding: 11px 16px; border: 1.5px solid #d1d5db; border-radius: 10px; background: #fff; font-size: 14px; font-weight: 500; color: #374151; cursor: pointer; text-align: left; transition: background 0.1s, border-color 0.1s; }
+      .pq-opt:hover:not(:disabled) { background: #f9fafb; border-color: #9ca3af; }
+      .pq-opt.pq-correct { background: #dcfce7; border-color: #16a34a; color: #166534; font-weight: 600; }
+      .pq-opt.pq-wrong { background: #fee2e2; border-color: #dc2626; color: #991b1b; font-weight: 600; }
+      .pq-feedback { border-radius: 10px; padding: 10px 14px; font-size: 13px; line-height: 1.6; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 5px; }
+      .pq-fb-ok { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+      .pq-fb-err { background: #fff1f2; border: 1px solid #fca5a5; color: #991b1b; }
+      .pq-fb-icon { font-weight: 700; font-size: 15px; }
+      .pq-fb-msg { font-weight: 500; }
+      .pq-fb-exp { font-size: 12.5px; color: #374151; line-height: 1.6; padding-top: 4px; border-top: 1px solid rgba(0,0,0,0.07); margin-top: 4px; }
+      .pq-next-btn { display: inline-block; padding: 10px 28px; background: #111827; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
+      .pq-next-btn:hover { opacity: 0.85; }
+      .pq-results { text-align: center; padding: 2rem 1rem; }
+      .pq-res-circle { width: 130px; height: 130px; border-radius: 50%; border: 4px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+      .pq-res-num { font-size: 36px; font-weight: 800; line-height: 1; }
+      .pq-res-denom { font-size: 12px; color: #6b7280; }
+      .pq-res-pct { font-size: 15px; font-weight: 700; margin-top: 2px; }
+      .pq-res-msg { font-size: 14px; color: #374151; line-height: 1.6; max-width: 380px; margin: 0 auto 1.5rem; }
+      .pq-restart-btn { padding: 10px 32px; background: #111827; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+      .pq-restart-btn:hover { opacity: 0.85; }
+
       @media (max-width: 600px) { .prep-grid { grid-template-columns: 1fr; } .ct-highlights-grid { grid-template-columns: 1fr; } }
     </style>
 
@@ -2375,6 +2404,7 @@ export default function CelpipVocabPage() {
     <div class="prep-tab-row">
       <button class="prep-tab prep-tab-active" onclick="prepShowTab('prep-reference')">📚 Preposition Reference</button>
       <button class="prep-tab" onclick="prepShowTab('prep-tasks')">🎯 CELPIP Task Samples</button>
+      <button class="prep-tab" onclick="prepShowTab('prep-quiz')">✏️ Quiz</button>
     </div>
 
     <!-- ══ PANEL 1: Reference ══ -->
@@ -2476,6 +2506,25 @@ export default function CelpipVocabPage() {
         ).join("")}
       </div>
     </div>
+
+    <!-- ══ PANEL 3: Quiz ══ -->
+    <div id="prep-quiz" class="prep-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+        55 questions covering time, place, direction, formal phrases, and common CELPIP traps. Your running score updates after every answer.
+      </p>
+      <div id="pq-body">
+        <div class="pq-scoreboard">
+          <span id="pq-score-live" class="pq-score-live">Score: 0 / 0</span>
+          <span id="pq-counter" class="pq-counter">Question 1 of 55</span>
+        </div>
+        <div class="pq-bar-wrap"><div id="pq-bar-fill" class="pq-bar-fill" style="width:0%"></div></div>
+        <div id="pq-question" class="pq-question"></div>
+        <div id="pq-options" class="pq-options"></div>
+        <div id="pq-feedback" class="pq-feedback" style="display:none"></div>
+        <button id="pq-next" class="pq-next-btn" onclick="pqNext()" style="display:none">Next →</button>
+      </div>
+      <div id="pq-results" style="display:none"></div>
+    </div>
   `;
 
       // ── Tab switcher ─────────────────────────────────────────────────────
@@ -2487,10 +2536,11 @@ export default function CelpipVocabPage() {
           .querySelectorAll(".prep-tab")
           .forEach((t) => t.classList.remove("prep-tab-active"));
         document.getElementById(id).classList.add("prep-panel-active");
-        const idx = ["prep-reference", "prep-tasks"].indexOf(id);
+        const idx = ["prep-reference", "prep-tasks", "prep-quiz"].indexOf(id);
         document
           .querySelectorAll(".prep-tab")
           [idx].classList.add("prep-tab-active");
+        if (id === "prep-quiz" && !window._prepQuizInit) initPrepQuiz();
       };
 
       // ── Filter Writing / Speaking tasks ──────────────────────────────────
@@ -2504,6 +2554,455 @@ export default function CelpipVocabPage() {
             type === "all" || block.dataset.type === type ? "block" : "none";
         });
       };
+
+      // ── Quiz data ─────────────────────────────────────────────────────────
+      const PREP_QUIZ_QUESTIONS = [
+        // Time
+        {
+          q: "The meeting is __ 9 a.m.",
+          options: ["in", "on", "at", "for"],
+          ans: 2,
+          exp: "Use <strong>at</strong> for exact clock times.",
+        },
+        {
+          q: "She has worked here __ 2019.",
+          options: ["for", "since", "during", "in"],
+          ans: 1,
+          exp: "<strong>Since</strong> marks the starting point of an ongoing action (used with perfect tenses).",
+        },
+        {
+          q: "I lived in Toronto __ three years.",
+          options: ["since", "during", "for", "until"],
+          ans: 2,
+          exp: "<strong>For</strong> shows duration — how long something lasted.",
+        },
+        {
+          q: "Please submit the report __ Friday.",
+          options: ["until", "by", "on", "at"],
+          ans: 1,
+          exp: "<strong>By</strong> means no later than a deadline.",
+        },
+        {
+          q: "The library is open __ 8 p.m.",
+          options: ["by", "at", "until", "since"],
+          ans: 2,
+          exp: "<strong>Until</strong> means up to and including that time.",
+        },
+        {
+          q: "She was born __ January.",
+          options: ["on", "at", "in", "by"],
+          ans: 2,
+          exp: "<strong>In</strong> is used with months, years, and seasons.",
+        },
+        {
+          q: "No talking is allowed __ the exam.",
+          options: ["for", "during", "while", "at"],
+          ans: 1,
+          exp: "<strong>During</strong> is used with a noun to describe something happening within that period.",
+        },
+        {
+          q: "The parcel will arrive __ two days.",
+          options: ["in", "within", "for", "by"],
+          ans: 1,
+          exp: "<strong>Within</strong> means before the end of that time frame.",
+        },
+        {
+          q: "He called me __ midnight.",
+          options: ["in", "on", "at", "by"],
+          ans: 2,
+          exp: "<strong>At</strong> is used with specific times including midnight and noon.",
+        },
+        {
+          q: "Please call me __ you arrive.",
+          options: ["since", "after", "during", "for"],
+          ans: 1,
+          exp: "<strong>After</strong> indicates something happens later in sequence.",
+        },
+        // Place
+        {
+          q: "She lives __ a small apartment.",
+          options: ["at", "on", "in", "by"],
+          ans: 2,
+          exp: "<strong>In</strong> is used for enclosed spaces and areas.",
+        },
+        {
+          q: "The keys are __ the table.",
+          options: ["in", "at", "on", "above"],
+          ans: 2,
+          exp: "<strong>On</strong> is used for surfaces.",
+        },
+        {
+          q: "He works __ the hospital.",
+          options: ["in", "at", "on", "into"],
+          ans: 1,
+          exp: "<strong>At</strong> is used for specific locations and institutions.",
+        },
+        {
+          q: "The café is __ the corner of King and Bay.",
+          options: ["on", "at", "in", "by"],
+          ans: 1,
+          exp: "<strong>At</strong> is used for a specific point or corner.",
+        },
+        {
+          q: "She lives __ the third floor.",
+          options: ["in", "at", "on", "by"],
+          ans: 2,
+          exp: "<strong>On</strong> is used with floor levels.",
+        },
+        {
+          q: "The park is __ the school and the library.",
+          options: ["among", "between", "beside", "across"],
+          ans: 1,
+          exp: "<strong>Between</strong> is used when referring to two defined points.",
+        },
+        {
+          q: "He stood __ the door, waiting.",
+          options: ["in front of", "above", "among", "through"],
+          ans: 0,
+          exp: "<strong>In front of</strong> means facing or before the entrance side.",
+        },
+        {
+          q: "There is a pharmacy __ to the clinic.",
+          options: ["next", "close", "beside", "near"],
+          ans: 0,
+          exp: "<strong>Next to</strong> means immediately adjacent.",
+        },
+        {
+          q: "The sign is __ the entrance.",
+          options: ["over", "above", "on", "across"],
+          ans: 1,
+          exp: "<strong>Above</strong> means at a higher level, without necessarily touching.",
+        },
+        {
+          q: "She sat __ her parents.",
+          options: ["among", "between", "beside", "in front of"],
+          ans: 1,
+          exp: "<strong>Between</strong> is used when one thing is in the middle of two specific others.",
+        },
+        // Direction
+        {
+          q: "She walked __ the room without knocking.",
+          options: ["to", "in", "into", "toward"],
+          ans: 2,
+          exp: "<strong>Into</strong> shows movement entering an enclosed space.",
+        },
+        {
+          q: "We drove __ the tunnel.",
+          options: ["across", "past", "through", "along"],
+          ans: 2,
+          exp: "<strong>Through</strong> means moving from one side of something to the other.",
+        },
+        {
+          q: "He ran __ the finish line.",
+          options: ["past", "through", "across", "along"],
+          ans: 0,
+          exp: "<strong>Past</strong> means moving beyond a point.",
+        },
+        {
+          q: "They jogged __ the river trail.",
+          options: ["across", "past", "through", "along"],
+          ans: 3,
+          exp: "<strong>Along</strong> means moving beside or following a path.",
+        },
+        {
+          q: "She walked __ the street to reach the store.",
+          options: ["along", "across", "through", "past"],
+          ans: 1,
+          exp: "<strong>Across</strong> means from one side to the other.",
+        },
+        {
+          q: "He was walking __ the exit when I called him.",
+          options: ["to", "into", "toward", "through"],
+          ans: 2,
+          exp: "<strong>Toward</strong> means in the direction of, without necessarily arriving.",
+        },
+        {
+          q: "The family moved __ the city last year.",
+          options: ["out", "out of", "from", "away"],
+          ans: 1,
+          exp: "<strong>Out of</strong> means exiting from inside a place.",
+        },
+        {
+          q: "She commutes __ work by subway every day.",
+          options: ["at", "to", "into", "toward"],
+          ans: 1,
+          exp: "<strong>To</strong> shows movement toward a destination.",
+        },
+        // Formal phrases
+        {
+          q: "__ the noise, there was also a bad smell.",
+          options: ["Instead of", "Due to", "In addition to", "As a result of"],
+          ans: 2,
+          exp: "<strong>In addition to</strong> adds an extra point without using 'also'.",
+        },
+        {
+          q: "The delay was __ heavy snowfall.",
+          options: ["because", "due to", "in terms of", "owing"],
+          ans: 1,
+          exp: "<strong>Due to</strong> gives a formal reason; it must be followed by a noun/noun phrase.",
+        },
+        {
+          q: "I am writing __ your complaint.",
+          options: ["with regard to", "in terms of", "instead of", "due to"],
+          ans: 0,
+          exp: "<strong>With regard to</strong> is a formal phrase used to introduce the subject of a letter or email.",
+        },
+        {
+          q: "She attended the meeting __ the director.",
+          options: ["instead of", "on behalf of", "in favour of", "due to"],
+          ans: 1,
+          exp: "<strong>On behalf of</strong> means representing or acting for someone else.",
+        },
+        {
+          q: "Residents voted __ the new park.",
+          options: [
+            "in favour of",
+            "instead of",
+            "in addition to",
+            "as a result of",
+          ],
+          ans: 0,
+          exp: "<strong>In favour of</strong> means in support of something.",
+        },
+        {
+          q: "__ replacing the park, the city should improve it.",
+          options: ["Due to", "In terms of", "Instead of", "In addition to"],
+          ans: 2,
+          exp: "<strong>Instead of</strong> presents an alternative action.",
+        },
+        {
+          q: "The project was cancelled __ budget constraints.",
+          options: ["due to", "in terms of", "with regard to", "instead of"],
+          ans: 0,
+          exp: "<strong>Due to</strong> / <strong>owing to</strong> introduce the formal cause.",
+        },
+        // Common traps
+        {
+          q: "She is very interested __ learning English.",
+          options: ["on", "in", "about", "for"],
+          ans: 1,
+          exp: "Always use <strong>interested in</strong> — 'interested on' is incorrect.",
+        },
+        {
+          q: "The result depends __ how much you study.",
+          options: ["of", "from", "on", "at"],
+          ans: 2,
+          exp: "<strong>Depend on</strong> is the correct collocation.",
+        },
+        {
+          q: "I arrived __ the airport at 6 a.m.",
+          options: ["to", "in", "at", "on"],
+          ans: 2,
+          exp: "Use <strong>arrive at</strong> for specific places (airport, station, school).",
+        },
+        {
+          q: "She arrived __ Canada in November.",
+          options: ["at", "to", "in", "on"],
+          ans: 2,
+          exp: "Use <strong>arrive in</strong> for cities and countries.",
+        },
+        {
+          q: "Let's discuss __ the proposal tomorrow.",
+          options: ["about", "on", "— (no preposition)", "for"],
+          ans: 2,
+          exp: "<strong>Discuss</strong> is transitive — no preposition needed: 'discuss the proposal'.",
+        },
+        {
+          q: "He is married __ a doctor.",
+          options: ["with", "to", "and", "by"],
+          ans: 1,
+          exp: "Always use <strong>married to</strong>, not 'married with'.",
+        },
+        {
+          q: "I love listening __ music on my commute.",
+          options: ["— (no prep)", "at", "to", "for"],
+          ans: 2,
+          exp: "<strong>Listen to</strong> always requires 'to'.",
+        },
+        {
+          q: "We usually play hockey __ the weekend.",
+          options: ["in", "at", "during", "on"],
+          ans: 3,
+          exp: "Use <strong>on</strong> for days and weekends.",
+        },
+        {
+          q: "She is very good __ public speaking.",
+          options: ["in", "at", "on", "for"],
+          ans: 1,
+          exp: "Use <strong>good at</strong> to describe a skill or ability.",
+        },
+        {
+          q: "I am not satisfied __ the results.",
+          options: ["from", "by", "with", "about"],
+          ans: 2,
+          exp: "<strong>Satisfied with</strong> is the correct collocation.",
+        },
+        // CELPIP context
+        {
+          q: "I am writing to bring this issue __ your attention.",
+          options: ["in", "to", "at", "for"],
+          ans: 1,
+          exp: "The fixed phrase is <strong>bring something to someone's attention</strong>.",
+        },
+        {
+          q: "The noise can be heard __ the walls.",
+          options: ["across", "along", "through", "past"],
+          ans: 2,
+          exp: "<strong>Through</strong> describes sound passing from one side of a barrier to the other.",
+        },
+        {
+          q: "I am concerned __ the impact on my sleep.",
+          options: ["for", "of", "about", "with"],
+          ans: 2,
+          exp: "<strong>Concerned about</strong> is the standard collocation for expressing worry.",
+        },
+        {
+          q: "The park is used __ hundreds of families every weekend.",
+          options: ["from", "with", "to", "by"],
+          ans: 3,
+          exp: "<strong>By</strong> introduces the agent in passive constructions.",
+        },
+        {
+          q: "Children rely __ the park for outdoor play.",
+          options: ["at", "in", "on", "upon"],
+          ans: 2,
+          exp: "<strong>Rely on</strong> is the correct collocation.",
+        },
+        {
+          q: "__ conclusion, I urge the city to reconsider.",
+          options: ["At", "In", "On", "By"],
+          ans: 1,
+          exp: "<strong>In conclusion</strong> is the standard linking phrase to end a formal response.",
+        },
+        {
+          q: "I look forward __ hearing from you.",
+          options: ["to", "for", "at", "about"],
+          ans: 0,
+          exp: "<strong>Look forward to</strong> — 'to' is a preposition here, so it's followed by a gerund.",
+        },
+        {
+          q: "__ the beginning, the new city felt overwhelming.",
+          options: ["At", "On", "In", "By"],
+          ans: 2,
+          exp: "<strong>In the beginning</strong> is the correct fixed phrase.",
+        },
+        {
+          q: "I went __ the same experience when I first moved.",
+          options: ["across", "over", "through", "past"],
+          ans: 2,
+          exp: "<strong>Go through</strong> means to experience something difficult.",
+        },
+        {
+          q: "Within a few months, you will feel __ home.",
+          options: ["in", "at", "like", "on"],
+          ans: 1,
+          exp: "<strong>Feel at home</strong> is the fixed expression meaning to feel comfortable.",
+        },
+      ];
+
+      // ── Quiz logic ─────────────────────────────────────────────────────────
+      function initPrepQuiz() {
+        window._prepQuizInit = true;
+        let pqIndex = 0;
+        let pqScore = 0;
+        let pqAnswered = false;
+        const total = PREP_QUIZ_QUESTIONS.length;
+
+        function pqRender() {
+          if (pqIndex >= total) {
+            pqShowResults();
+            return;
+          }
+          const q = PREP_QUIZ_QUESTIONS[pqIndex];
+          pqAnswered = false;
+          const pct = Math.round((pqIndex / total) * 100);
+          document.getElementById("pq-bar-fill").style.width = pct + "%";
+          document.getElementById("pq-counter").textContent =
+            `Question ${pqIndex + 1} of ${total}`;
+          document.getElementById("pq-score-live").textContent =
+            `Score: ${pqScore} / ${pqIndex}`;
+          document.getElementById("pq-question").textContent = q.q;
+          document.getElementById("pq-feedback").style.display = "none";
+          document.getElementById("pq-next").style.display = "none";
+          const optsEl = document.getElementById("pq-options");
+          optsEl.innerHTML = q.options
+            .map(
+              (opt, i) => `
+            <button class="pq-opt" onclick="pqAnswer(${i}, this)">${opt}</button>
+          `,
+            )
+            .join("");
+        }
+
+        window.pqAnswer = function (chosen, btn) {
+          if (pqAnswered) return;
+          pqAnswered = true;
+          const q = PREP_QUIZ_QUESTIONS[pqIndex];
+          const correct = chosen === q.ans;
+          if (correct) pqScore++;
+          document.querySelectorAll(".pq-opt").forEach((b, i) => {
+            b.disabled = true;
+            if (i === q.ans) b.classList.add("pq-correct");
+          });
+          if (!correct) btn.classList.add("pq-wrong");
+          const fb = document.getElementById("pq-feedback");
+          fb.style.display = "block";
+          fb.innerHTML = `<span class="pq-fb-icon">${correct ? "✓" : "✗"}</span><span class="pq-fb-msg">${correct ? "Correct!" : `Incorrect — the answer is <strong>${q.options[q.ans]}</strong>.`}</span><div class="pq-fb-exp">${q.exp}</div>`;
+          fb.className = "pq-feedback " + (correct ? "pq-fb-ok" : "pq-fb-err");
+          document.getElementById("pq-score-live").textContent =
+            `Score: ${pqScore} / ${pqIndex + 1}`;
+          document.getElementById("pq-next").style.display = "inline-block";
+        };
+
+        window.pqNext = function () {
+          pqIndex++;
+          pqRender();
+        };
+
+        window.pqRestart = function () {
+          pqIndex = 0;
+          pqScore = 0;
+          pqAnswered = false;
+          document.getElementById("pq-results").style.display = "none";
+          document.getElementById("pq-body").style.display = "block";
+          pqRender();
+        };
+
+        function pqShowResults() {
+          document.getElementById("pq-body").style.display = "none";
+          const pct = Math.round((pqScore / total) * 100);
+          let msg = "",
+            color = "";
+          if (pct === 100) {
+            msg = "Perfect score! You have mastered prepositions. 🎉";
+            color = "#166534";
+          } else if (pct >= 80) {
+            msg =
+              "Excellent work! Review the ones you missed and you'll be ready for CELPIP. 🌟";
+            color = "#1e40af";
+          } else if (pct >= 60) {
+            msg = "Good effort! Focus on common traps and formal phrases. 📚";
+            color = "#92400e";
+          } else {
+            msg =
+              "Keep practicing! Go through the Reference and Task Sample tabs, then try again. 💪";
+            color = "#991b1b";
+          }
+          const res = document.getElementById("pq-results");
+          res.style.display = "block";
+          res.innerHTML = `
+            <div class="pq-res-circle" style="border-color:${color}">
+              <div class="pq-res-num" style="color:${color}">${pqScore}</div>
+              <div class="pq-res-denom">out of ${total}</div>
+              <div class="pq-res-pct" style="color:${color}">${pct}%</div>
+            </div>
+            <p class="pq-res-msg" style="color:${color}">${msg}</p>
+            <button class="pq-restart-btn" onclick="pqRestart()">↺ Try Again</button>
+          `;
+        }
+
+        pqRender();
+      }
     }
 
     function renderConjunctions() {
