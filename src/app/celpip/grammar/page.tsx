@@ -1678,15 +1678,657 @@ export default function CelpipVocabPage() {
     function renderPrepositions() {
       const content = document.getElementById("prepositions-content");
 
-      const GROUP_STYLE = {
-        card: `background:#fff;border-radius:12px;padding:0.85rem 1rem;border:1px solid #e5e7eb;`,
-      };
+      // ── CELPIP Task data ─────────────────────────────────────────────────
+      const CELPIP_PREP_TASKS = [
+        {
+          type: "writing",
+          task: "Writing Task 1 — Email",
+          badge: "✉️ Writing Task 1",
+          badgeBg: "#dbeafe",
+          badgeColor: "#1e40af",
+          scenario:
+            "Your neighbour has been making loud noise late at night. Write an email to your building manager to report the problem and request action.",
+          sampleResponse: `Dear Mr. Thompson,\n\nI am writing to bring a noise concern <strong>to</strong> your attention. I live <strong>in</strong> unit 4B, <strong>on</strong> the third floor, and <strong>for</strong> the past two weeks my neighbour <strong>in</strong> unit 4C has been playing loud music late <strong>at</strong> night, often continuing well past midnight.\n\nThe noise begins <strong>around</strong> 10 p.m. and can be heard clearly <strong>through</strong> the walls. I have spoken <strong>to</strong> the neighbour directly, but the situation has not improved. I am concerned <strong>about</strong> the impact this is having <strong>on</strong> my sleep and my ability to work <strong>in</strong> the mornings.\n\nI would appreciate it if you could look <strong>into</strong> this matter and remind all residents <strong>of</strong> the quiet-hours policy. I look forward <strong>to</strong> hearing from you.\n\nSincerely,\nAlex Kim`,
+          highlights: [
+            {
+              prep: "to",
+              use: "direction / indirect object — bring something to someone's attention",
+            },
+            {
+              prep: "in",
+              use: "location — living in a unit, hearing through a wall",
+            },
+            { prep: "on", use: "floor level — on the third floor" },
+            { prep: "for", use: "duration — for the past two weeks" },
+            { prep: "at", use: "specific time — at night" },
+            { prep: "around", use: "approximate time — around 10 p.m." },
+            {
+              prep: "through",
+              use: "movement / medium — heard through the walls",
+            },
+            {
+              prep: "about",
+              use: "topic of concern — concerned about the impact",
+            },
+            { prep: "into", use: "investigation — look into a matter" },
+            { prep: "of", use: "possession — policy of the building" },
+          ],
+        },
+        {
+          type: "writing",
+          task: "Writing Task 2 — Survey Response",
+          badge: "📝 Writing Task 2",
+          badgeBg: "#dcfce7",
+          badgeColor: "#166534",
+          scenario:
+            "Your city is asking residents whether a large park should be converted into a shopping mall. Write your opinion in response to a community survey.",
+          sampleResponse: `I am strongly opposed <strong>to</strong> converting the park <strong>into</strong> a commercial mall. Green spaces play a vital role <strong>in</strong> the mental and physical health <strong>of</strong> city residents, particularly those who live <strong>in</strong> high-density apartment buildings <strong>with</strong> no access <strong>to</strong> private yards.\n\nThe park is used <strong>by</strong> hundreds of families every weekend. Children rely <strong>on</strong> it <strong>for</strong> outdoor play, and seniors gather there <strong>for</strong> morning walks and socializing. Removing this space would place a disproportionate burden <strong>on</strong> those residents who depend <strong>on</strong> it most.\n\nInstead <strong>of</strong> replacing the park, the city should invest <strong>in</strong> improving its facilities. <strong>In</strong> conclusion, I urge decision-makers to reconsider <strong>in</strong> favour <strong>of</strong> the community's long-term wellbeing.`,
+          highlights: [
+            {
+              prep: "to",
+              use: "opposition — opposed to something; access to yards",
+            },
+            {
+              prep: "into",
+              use: "transformation — converting something into something else",
+            },
+            {
+              prep: "in",
+              use: "location / domain — in the city, in conclusion, in high-density areas",
+            },
+            {
+              prep: "of",
+              use: "belonging — health of residents, role of spaces",
+            },
+            {
+              prep: "with",
+              use: "accompaniment / characteristic — buildings with no yard",
+            },
+            {
+              prep: "by",
+              use: "agent (passive) — used by hundreds of families",
+            },
+            { prep: "on", use: "reliance — rely on, burden on" },
+            {
+              prep: "for",
+              use: "purpose — for outdoor play, for morning walks",
+            },
+            {
+              prep: "instead of",
+              use: "contrast/alternative — instead of replacing",
+            },
+          ],
+        },
+        {
+          type: "speaking",
+          task: "Speaking Task 3 — Describing a Scene",
+          badge: "🗣️ Speaking Task 3",
+          badgeBg: "#fef3c7",
+          badgeColor: "#92400e",
+          scenario:
+            "You are shown an image of a busy farmer's market in a town square. Describe what you see in detail.",
+          sampleResponse: `<em>In</em> this picture, I can see a lively farmer's market taking place <em>in</em> the centre of a town square. There are several colourful stalls arranged <em>in</em> rows, and vendors are standing <em>behind</em> their tables, selling fresh produce. <em>On</em> the left side of the image, a woman is looking <em>at</em> a basket of tomatoes and speaking <em>with</em> the vendor. <em>In</em> the background, there are tall buildings <em>on</em> both sides of the street. A group of children is running <em>between</em> the stalls, and a man <em>in</em> a red jacket is walking <em>toward</em> the entrance <em>with</em> a reusable shopping bag <em>in</em> his hand. The overall atmosphere appears cheerful, and the market looks well-attended <em>by</em> people <em>of</em> all ages.`,
+          highlights: [
+            {
+              prep: "in",
+              use: "location — in the picture, in the centre, in the background, in his hand",
+            },
+            {
+              prep: "on",
+              use: "side / surface — on the left side, on both sides",
+            },
+            { prep: "behind", use: "position — standing behind the tables" },
+            { prep: "at", use: "direction of gaze — looking at something" },
+            {
+              prep: "with",
+              use: "accompaniment — speaking with the vendor, with a bag",
+            },
+            { prep: "between", use: "spatial — running between the stalls" },
+            {
+              prep: "toward",
+              use: "direction of movement — walking toward the entrance",
+            },
+            { prep: "by", use: "agent (passive) — attended by people" },
+            { prep: "of", use: "specification — people of all ages" },
+          ],
+        },
+        {
+          type: "speaking",
+          task: "Speaking Task 5 — Giving Advice",
+          badge: "💬 Speaking Task 5",
+          badgeBg: "#ede9fe",
+          badgeColor: "#5b21b6",
+          scenario:
+            "Your friend is thinking about moving to a new city for work. They are nervous about the change. Give them advice.",
+          sampleResponse: `I totally understand your concern <em>about</em> moving. It's completely normal to feel nervous <em>about</em> such a big change. First, I'd suggest doing some research <em>on</em> the city before you go. Look <em>into</em> the cost <em>of</em> living, the neighbourhoods close <em>to</em> your workplace, and what the public transit system is like.\n\nOnce you're there, try to get <em>out</em> and explore. Join a club or a group based <em>on</em> your interests — this is one <em>of</em> the best ways to meet people. Don't rely <em>on</em> technology alone to stay connected <em>with</em> friends back home. <em>In</em> the beginning it can feel overwhelming, but <em>within</em> a few months you'll start to feel <em>at</em> home. I went <em>through</em> the same experience, and it turned <em>into</em> one <em>of</em> the best decisions <em>of</em> my life.`,
+          highlights: [
+            {
+              prep: "about",
+              use: "subject of concern or emotion — concern about moving, nervous about change",
+            },
+            {
+              prep: "on",
+              use: "topic — research on the city, based on interests",
+            },
+            {
+              prep: "into",
+              use: "investigation — look into the cost; transformation — turned into",
+            },
+            {
+              prep: "of",
+              use: "belonging / specification — cost of living, one of the best",
+            },
+            {
+              prep: "to",
+              use: "proximity / direction — close to your workplace, connected to friends",
+            },
+            { prep: "out", use: "phrasal verb — get out and explore" },
+            { prep: "on", use: "dependence — rely on technology" },
+            { prep: "with", use: "connection — stay connected with friends" },
+            { prep: "in", use: "time phrase — in the beginning" },
+            { prep: "within", use: "time frame — within a few months" },
+            { prep: "at", use: "state — feel at home" },
+            {
+              prep: "through",
+              use: "experience — went through the same experience",
+            },
+          ],
+        },
+        {
+          type: "speaking",
+          task: "Speaking Task 7 — Expressing an Opinion",
+          badge: "🎤 Speaking Task 7",
+          badgeBg: "#fce7f3",
+          badgeColor: "#be185d",
+          scenario:
+            "Some people believe that children should not be allowed to use smartphones until they are teenagers. Do you agree or disagree?",
+          sampleResponse: `I agree <em>with</em> the idea that children should be limited <em>in</em> their smartphone use, but I don't think a total ban <em>until</em> the teenage years is realistic. The key issue is not access <em>to</em> the device itself, but rather what children are exposed <em>to</em> <em>on</em> those devices. Parents need to be <em>in</em> control <em>of</em> screen time <em>from</em> an early age. Instead <em>of</em> banning smartphones outright, families should focus <em>on</em> building healthy habits <em>around</em> technology. <em>For</em> example, no phones <em>during</em> meals or <em>before</em> bedtime. Children who are taught to use technology responsibly <em>from</em> a young age are better prepared <em>for</em> the digital world they will grow up <em>in</em>.`,
+          highlights: [
+            { prep: "with", use: "agreement — agree with an idea" },
+            {
+              prep: "in",
+              use: "scope/control — limited in their use, in control",
+            },
+            { prep: "until", use: "time limit — until the teenage years" },
+            {
+              prep: "to",
+              use: "direction / access — access to the device, exposed to content",
+            },
+            {
+              prep: "on",
+              use: "medium — on those devices; topic — focus on habits",
+            },
+            { prep: "of", use: "possession — control of screen time" },
+            {
+              prep: "from",
+              use: "starting point — from an early age, from a young age",
+            },
+            { prep: "instead of", use: "alternative — instead of banning" },
+            {
+              prep: "around",
+              use: "habits around something — habits around technology",
+            },
+            {
+              prep: "for",
+              use: "example marker and purpose — for example, prepared for the world",
+            },
+            { prep: "during", use: "time — during meals" },
+            { prep: "before", use: "time order — before bedtime" },
+          ],
+        },
+      ];
+
+      const CELPIP_PREP_GROUPS_INLINE = [
+        {
+          emoji: "🕐",
+          category: "Time Prepositions",
+          bg: "#dbeafe",
+          color: "#1e40af",
+          border: "#bfdbfe",
+          intro:
+            "Use these to express when something happens. Correct time prepositions are essential in CELPIP Writing emails and Speaking opinion tasks.",
+          items: [
+            {
+              prep: "at",
+              rule: "Exact times and fixed expressions.",
+              examples: [
+                "The meeting is <strong>at</strong> 9 a.m.",
+                "I work best <strong>at</strong> night.",
+                "She arrived <strong>at</strong> noon.",
+              ],
+            },
+            {
+              prep: "on",
+              rule: "Days and specific dates.",
+              examples: [
+                "The test is <strong>on</strong> Monday.",
+                "We moved <strong>on</strong> July 15th.",
+                "Classes resume <strong>on</strong> the first day of term.",
+              ],
+            },
+            {
+              prep: "in",
+              rule: "Months, years, seasons, longer periods.",
+              examples: [
+                "She graduated <strong>in</strong> 2022.",
+                "Temperatures drop <strong>in</strong> winter.",
+                "I applied <strong>in</strong> September.",
+              ],
+            },
+            {
+              prep: "for",
+              rule: "Duration — how long something lasts.",
+              examples: [
+                "I have lived here <strong>for</strong> three years.",
+                "The noise continued <strong>for</strong> hours.",
+                "She studied <strong>for</strong> the exam all week.",
+              ],
+            },
+            {
+              prep: "since",
+              rule: "Starting point up to now (used with perfect tenses).",
+              examples: [
+                "I've worked there <strong>since</strong> 2019.",
+                "The road has been closed <strong>since</strong> Monday.",
+                "He hasn't called <strong>since</strong> last week.",
+              ],
+            },
+            {
+              prep: "by",
+              rule: "Deadline — no later than.",
+              examples: [
+                "Please submit the form <strong>by</strong> Friday.",
+                "The report must be done <strong>by</strong> noon.",
+                "I need an answer <strong>by</strong> tomorrow.",
+              ],
+            },
+            {
+              prep: "until / till",
+              rule: "Continuing up to a point in time.",
+              examples: [
+                "The office is open <strong>until</strong> 6 p.m.",
+                "I waited <strong>until</strong> he arrived.",
+                "Classes run <strong>till</strong> mid-December.",
+              ],
+            },
+            {
+              prep: "during",
+              rule: "Within a period or event.",
+              examples: [
+                "Noise is not allowed <strong>during</strong> quiet hours.",
+                "I took notes <strong>during</strong> the meeting.",
+                "She visited family <strong>during</strong> the holidays.",
+              ],
+            },
+            {
+              prep: "within",
+              rule: "Inside a time frame.",
+              examples: [
+                "Please reply <strong>within</strong> two business days.",
+                "I'll finish <strong>within</strong> an hour.",
+                "Improvements were seen <strong>within</strong> weeks.",
+              ],
+            },
+            {
+              prep: "before / after",
+              rule: "Order of events.",
+              examples: [
+                "Please read the instructions <strong>before</strong> you begin.",
+                "I'll call you <strong>after</strong> the interview.",
+                "Submit your form <strong>before</strong> the deadline.",
+              ],
+            },
+          ],
+        },
+        {
+          emoji: "📍",
+          category: "Place & Position Prepositions",
+          bg: "#dcfce7",
+          color: "#166534",
+          border: "#86efac",
+          intro:
+            "Essential for Speaking Task 3 (describing a scene) and any writing where you describe a setting, layout, or location.",
+          items: [
+            {
+              prep: "at",
+              rule: "A specific point or location.",
+              examples: [
+                "She is <strong>at</strong> the bus stop.",
+                "He works <strong>at</strong> City Hall.",
+                "Meet me <strong>at</strong> the corner.",
+              ],
+            },
+            {
+              prep: "in",
+              rule: "Inside an enclosed or defined area.",
+              examples: [
+                "The folder is <strong>in</strong> my bag.",
+                "They live <strong>in</strong> a downtown apartment.",
+                "There is a park <strong>in</strong> the neighbourhood.",
+              ],
+            },
+            {
+              prep: "on",
+              rule: "A surface, floor, or street.",
+              examples: [
+                "The keys are <strong>on</strong> the table.",
+                "She lives <strong>on</strong> the fourth floor.",
+                "The store is <strong>on</strong> Main Street.",
+              ],
+            },
+            {
+              prep: "above / below",
+              rule: "Higher or lower position without touching.",
+              examples: [
+                "The sign is <strong>above</strong> the entrance.",
+                "The parking is <strong>below</strong> the building.",
+                "Temperatures dropped <strong>below</strong> freezing.",
+              ],
+            },
+            {
+              prep: "beside / next to",
+              rule: "Immediately adjacent.",
+              examples: [
+                "He sat <strong>beside</strong> me.",
+                "The pharmacy is <strong>next to</strong> the clinic.",
+                "There is a bench <strong>beside</strong> the fountain.",
+              ],
+            },
+            {
+              prep: "between",
+              rule: "In the middle of two things.",
+              examples: [
+                "The park is <strong>between</strong> the school and the library.",
+                "She sat <strong>between</strong> her parents.",
+                "There is a door <strong>between</strong> the two offices.",
+              ],
+            },
+            {
+              prep: "behind / in front of",
+              rule: "Position relative to the facing side.",
+              examples: [
+                "The child is hiding <strong>behind</strong> the tree.",
+                "A vendor is standing <strong>in front of</strong> the stall.",
+                "The car stopped <strong>in front of</strong> our house.",
+              ],
+            },
+            {
+              prep: "near / close to",
+              rule: "Not far away.",
+              examples: [
+                "There is a school <strong>near</strong> my home.",
+                "She lives <strong>close to</strong> the subway.",
+                "The hostel is <strong>near</strong> the city centre.",
+              ],
+            },
+            {
+              prep: "across from / opposite",
+              rule: "Directly facing something.",
+              examples: [
+                "The bank is <strong>across from</strong> the post office.",
+                "He sat <strong>opposite</strong> me.",
+                "There is a café <strong>across from</strong> the park.",
+              ],
+            },
+          ],
+        },
+        {
+          emoji: "➡️",
+          category: "Direction & Movement Prepositions",
+          bg: "#fef3c7",
+          color: "#92400e",
+          border: "#fde68a",
+          intro:
+            "Use these to describe motion — helpful in Speaking Task 3 when describing what people are doing in a scene.",
+          items: [
+            {
+              prep: "to",
+              rule: "Movement toward a destination.",
+              examples: [
+                "She walked <strong>to</strong> the store.",
+                "I commute <strong>to</strong> work by subway.",
+                "He is heading <strong>to</strong> the airport.",
+              ],
+            },
+            {
+              prep: "toward(s)",
+              rule: "In the direction of (may not arrive).",
+              examples: [
+                "He was walking <strong>toward</strong> the exit.",
+                "She looked <strong>toward</strong> the window.",
+                "The crowd moved <strong>toward</strong> the stage.",
+              ],
+            },
+            {
+              prep: "into",
+              rule: "Movement entering an enclosed space.",
+              examples: [
+                "She walked <strong>into</strong> the room.",
+                "He poured water <strong>into</strong> the glass.",
+                "The bus turned <strong>into</strong> the lot.",
+              ],
+            },
+            {
+              prep: "out of",
+              rule: "Movement exiting from inside.",
+              examples: [
+                "She walked <strong>out of</strong> the building.",
+                "He took the documents <strong>out of</strong> the folder.",
+                "The family moved <strong>out of</strong> the city.",
+              ],
+            },
+            {
+              prep: "through",
+              rule: "Moving from one side to the other.",
+              examples: [
+                "She walked <strong>through</strong> the park.",
+                "Sound travels <strong>through</strong> walls.",
+                "We drove <strong>through</strong> the tunnel.",
+              ],
+            },
+            {
+              prep: "past",
+              rule: "Moving beyond a point.",
+              examples: [
+                "We walked <strong>past</strong> the coffee shop.",
+                "The bus goes <strong>past</strong> my house.",
+                "She ran <strong>past</strong> the finish line.",
+              ],
+            },
+            {
+              prep: "along",
+              rule: "Moving beside or following a line.",
+              examples: [
+                "They jogged <strong>along</strong> the river trail.",
+                "Trees are planted <strong>along</strong> the road.",
+                "She walked <strong>along</strong> the beach.",
+              ],
+            },
+            {
+              prep: "across",
+              rule: "From one side to the other.",
+              examples: [
+                "She swam <strong>across</strong> the lake.",
+                "We drove <strong>across</strong> the bridge.",
+                "He walked <strong>across</strong> the street.",
+              ],
+            },
+          ],
+        },
+        {
+          emoji: "🔗",
+          category: "Prepositional Phrases in Formal Writing",
+          bg: "#ede9fe",
+          color: "#5b21b6",
+          border: "#c4b5fd",
+          intro:
+            "These multi-word prepositions are common in CELPIP Writing Task 1 emails and Task 2 opinion pieces. Mastering them makes your writing sound professional.",
+          items: [
+            {
+              prep: "in addition to",
+              rule: "Add another point without saying 'also'.",
+              examples: [
+                "<strong>In addition to</strong> the noise, the smell has become a problem.",
+                "<strong>In addition to</strong> her qualifications, she has great experience.",
+                "The plan saves money <strong>in addition to</strong> reducing emissions.",
+              ],
+            },
+            {
+              prep: "as a result of",
+              rule: "Show cause and effect formally.",
+              examples: [
+                "<strong>As a result of</strong> the construction, traffic has worsened.",
+                "She missed the deadline <strong>as a result of</strong> illness.",
+                "<strong>As a result of</strong> the policy, costs were reduced.",
+              ],
+            },
+            {
+              prep: "in terms of",
+              rule: "Specify the area you're discussing.",
+              examples: [
+                "<strong>In terms of</strong> cost, the second option is better.",
+                "The city has improved <strong>in terms of</strong> public transit.",
+                "I need guidance <strong>in terms of</strong> next steps.",
+              ],
+            },
+            {
+              prep: "with regard to",
+              rule: "Introduce a topic formally (common in emails).",
+              examples: [
+                "<strong>With regard to</strong> your complaint, we have investigated the matter.",
+                "I am writing <strong>with regard to</strong> the recent changes.",
+                "<strong>With regard to</strong> your question, please see the attached file.",
+              ],
+            },
+            {
+              prep: "on behalf of",
+              rule: "Acting for someone else.",
+              examples: [
+                "I am writing <strong>on behalf of</strong> our team.",
+                "She attended the meeting <strong>on behalf of</strong> the director.",
+                "He signed the form <strong>on behalf of</strong> his client.",
+              ],
+            },
+            {
+              prep: "in favour of",
+              rule: "Show support or preference.",
+              examples: [
+                "Residents voted <strong>in favour of</strong> the new park.",
+                "I am <strong>in favour of</strong> extending library hours.",
+                "The board decided <strong>in favour of</strong> the proposal.",
+              ],
+            },
+            {
+              prep: "due to / owing to",
+              rule: "Give a formal reason.",
+              examples: [
+                "The delay was <strong>due to</strong> heavy snowfall.",
+                "<strong>Owing to</strong> budget constraints, the project was cancelled.",
+                "Services are limited <strong>due to</strong> ongoing construction.",
+              ],
+            },
+            {
+              prep: "instead of",
+              rule: "Offer an alternative.",
+              examples: [
+                "<strong>Instead of</strong> building a mall, invest in the park.",
+                "She took the bus <strong>instead of</strong> driving.",
+                "<strong>Instead of</strong> complaining, he found a solution.",
+              ],
+            },
+          ],
+        },
+        {
+          emoji: "⚠️",
+          category: "Common Traps",
+          bg: "#fee2e2",
+          color: "#991b1b",
+          border: "#fca5a5",
+          items: [
+            {
+              prep: "❌ interested on → ✅ interested in",
+              rule: "Always use 'in' after interested.",
+              examples: [
+                "I am interested <strong>in</strong> improving my English.",
+                "She is interested <strong>in</strong> the position.",
+              ],
+            },
+            {
+              prep: "❌ depend of → ✅ depend on",
+              rule: "'Depend' always pairs with 'on'.",
+              examples: [
+                "The outcome depends <strong>on</strong> your effort.",
+                "You can depend <strong>on</strong> me.",
+              ],
+            },
+            {
+              prep: "❌ arrive to → ✅ arrive at / in",
+              rule: "Use 'at' for specific places; 'in' for cities/countries.",
+              examples: [
+                "I arrived <strong>at</strong> the airport at 6 a.m.",
+                "She arrived <strong>in</strong> Canada last year.",
+              ],
+            },
+            {
+              prep: "❌ discuss about → ✅ discuss (no preposition)",
+              rule: "'Discuss' is a transitive verb — it takes a direct object, not 'about'.",
+              examples: [
+                "We discussed <strong>the issue</strong>. (not: discussed about the issue)",
+                "Let's discuss <strong>the plan</strong> tomorrow.",
+              ],
+            },
+            {
+              prep: "❌ married with → ✅ married to",
+              rule: "Use 'to' after 'married'.",
+              examples: [
+                "She is married <strong>to</strong> a doctor.",
+                "They have been married <strong>to</strong> each other for 10 years.",
+              ],
+            },
+            {
+              prep: "❌ listen music → ✅ listen to music",
+              rule: "'Listen' always needs 'to'.",
+              examples: [
+                "I listen <strong>to</strong> podcasts on my commute.",
+                "He was listening <strong>to</strong> the radio.",
+              ],
+            },
+            {
+              prep: "❌ in the weekend → ✅ on the weekend",
+              rule: "Use 'on' for days and weekends.",
+              examples: [
+                "We play hockey <strong>on</strong> the weekend.",
+                "The market opens <strong>on</strong> Saturdays.",
+              ],
+            },
+            {
+              prep: "❌ good in → ✅ good at",
+              rule: "Use 'at' after 'good' to describe a skill.",
+              examples: [
+                "She is good <strong>at</strong> public speaking.",
+                "He is not very good <strong>at</strong> math.",
+              ],
+            },
+          ],
+        },
+      ];
 
       content.innerHTML = `
     <style>
+      /* ── Tab bar ── */
+      .prep-tab-row { display: flex; gap: 0; border-bottom: 2px solid #e5e7eb; margin-bottom: 1.75rem; overflow-x: auto; scrollbar-width: none; }
+      .prep-tab-row::-webkit-scrollbar { display: none; }
+      .prep-tab { padding: 10px 18px; font-size: 13px; font-weight: 500; color: #6b7280; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; white-space: nowrap; }
+      .prep-tab.prep-tab-active { color: #111827; border-bottom-color: #111827; }
+      .prep-tab:hover:not(.prep-tab-active) { color: #374151; }
+      .prep-panel { display: none; }
+      .prep-panel.prep-panel-active { display: block; }
+
+      /* ── Reference section styles ── */
       .prep-section { margin-bottom: 2.5rem; }
       .prep-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
       .prep-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+      .prep-section-intro { font-size: 13px; color: #6b7280; line-height: 1.65; margin-bottom: 1rem; padding: 10px 14px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #e5e7eb; }
       .prep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; }
       .prep-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; }
       .prep-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.45rem; }
@@ -1694,60 +2336,174 @@ export default function CelpipVocabPage() {
       .prep-rule { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
       .prep-examples { display: flex; flex-direction: column; gap: 3px; }
       .prep-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 3px 8px; border: 1px solid #f3f4f6; }
+
+      /* ── Traps ── */
       .prep-trap-card { background: #fff; border: 1px solid #fbcfe8; border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 0.75rem; }
       .prep-trap-label { font-size: 13px; font-weight: 700; color: #be185d; margin-bottom: 0.4rem; }
       .prep-trap-rule { font-size: 12.5px; color: #374151; line-height: 1.55; margin-bottom: 0.5rem; }
       .prep-trap-exs { display: flex; flex-direction: column; gap: 3px; }
       .prep-trap-ex { font-size: 12px; color: #6b7280; font-style: italic; background: #fff5f7; border-radius: 6px; padding: 3px 8px; border: 1px solid #fce7f3; }
-      @media (max-width: 600px) { .prep-grid { grid-template-columns: 1fr; } }
+
+      /* ── CELPIP Tasks ── */
+      .ct-task-block { margin-bottom: 2.5rem; border-radius: 16px; border: 1px solid #e5e7eb; overflow: hidden; background: #fff; }
+      .ct-task-header { display: flex; align-items: center; gap: 10px; padding: 1rem 1.25rem; border-bottom: 1px solid #e5e7eb; background: #f9fafb; }
+      .ct-task-badge { font-size: 11.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.04em; }
+      .ct-task-type { font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-left: auto; }
+      .ct-scenario-box { padding: 0.85rem 1.25rem; background: #fffbeb; border-bottom: 1px solid #fde68a; }
+      .ct-scenario-label { font-size: 10.5px; font-weight: 700; color: #92400e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+      .ct-scenario-text { font-size: 13px; color: #374151; line-height: 1.6; }
+      .ct-response-box { padding: 1rem 1.25rem; border-bottom: 1px solid #e5e7eb; }
+      .ct-response-label { font-size: 10.5px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+      .ct-response-label span { font-size: 13px; }
+      .ct-response-text { font-size: 13.5px; color: #111827; line-height: 2; white-space: pre-line; }
+      .ct-response-text strong, .ct-response-text em { color: #2563eb; font-style: normal; font-weight: 700; background: #eff6ff; border-radius: 3px; padding: 0 3px; }
+      .ct-highlights { padding: 1rem 1.25rem; }
+      .ct-highlights-label { font-size: 10.5px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+      .ct-highlights-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
+      .ct-hl-item { display: flex; gap: 8px; align-items: flex-start; background: #f9fafb; border-radius: 8px; padding: 6px 10px; border: 1px solid #f3f4f6; }
+      .ct-hl-prep { font-size: 13px; font-weight: 700; color: #2563eb; min-width: 52px; flex-shrink: 0; }
+      .ct-hl-use { font-size: 12px; color: #6b7280; line-height: 1.5; }
+
+      .ct-type-filter { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+      .ct-filter-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid #d1d5db; background: #fff; font-size: 12.5px; font-weight: 500; color: #6b7280; cursor: pointer; transition: all 0.15s; }
+      .ct-filter-btn.ct-filter-active { background: #111827; border-color: #111827; color: #fff; }
+
+      @media (max-width: 600px) { .prep-grid { grid-template-columns: 1fr; } .ct-highlights-grid { grid-template-columns: 1fr; } }
     </style>
 
-    ${PREP_GROUPS.map((group) => {
-      const isTraps = group.category === "Common Traps";
-      return `
-        <div class="prep-section">
-          <div class="prep-section-header">
-            <span style="font-size:1.3rem">${group.emoji}</span>
-            <span class="prep-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
-            ${!isTraps ? `<span style="font-size:12px;color:#9ca3af">${group.items.length} prepositions</span>` : ""}
+    <!-- ── Tab bar ── -->
+    <div class="prep-tab-row">
+      <button class="prep-tab prep-tab-active" onclick="prepShowTab('prep-reference')">📚 Preposition Reference</button>
+      <button class="prep-tab" onclick="prepShowTab('prep-tasks')">🎯 CELPIP Task Samples</button>
+    </div>
+
+    <!-- ══ PANEL 1: Reference ══ -->
+    <div id="prep-reference" class="prep-panel prep-panel-active">
+      ${CELPIP_PREP_GROUPS_INLINE.map((group) => {
+        const isTraps = group.category === "Common Traps";
+        return `
+          <div class="prep-section">
+            <div class="prep-section-header">
+              <span style="font-size:1.3rem">${group.emoji}</span>
+              <span class="prep-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
+              ${!isTraps ? `<span style="font-size:12px;color:#9ca3af">${group.items.length} prepositions</span>` : ""}
+            </div>
+            ${group.intro ? `<div class="prep-section-intro">${group.intro}</div>` : ""}
+            ${
+              isTraps
+                ? group.items
+                    .map(
+                      (item) => `
+                    <div class="prep-trap-card">
+                      <div class="prep-trap-label">${item.prep}</div>
+                      <div class="prep-trap-rule">${item.rule}</div>
+                      <div class="prep-trap-exs">
+                        ${item.examples.map((e) => `<div class="prep-trap-ex">${e}</div>`).join("")}
+                      </div>
+                    </div>
+                  `,
+                    )
+                    .join("")
+                : `<div class="prep-grid">
+                    ${group.items
+                      .map(
+                        (item) => `
+                      <div class="prep-card" style="border-color:${group.border}">
+                        <div class="prep-card-top">
+                          <span class="prep-word">${item.prep}</span>
+                        </div>
+                        <div class="prep-rule">${item.rule}</div>
+                        <div class="prep-examples">
+                          ${item.examples.map((e) => `<div class="prep-ex">${e}</div>`).join("")}
+                        </div>
+                      </div>
+                    `,
+                      )
+                      .join("")}
+                  </div>`
+            }
           </div>
-          ${
-            isTraps
-              ? group.items
+        `;
+      }).join("")}
+    </div>
+
+    <!-- ══ PANEL 2: CELPIP Tasks ══ -->
+    <div id="prep-tasks" class="prep-panel">
+      <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+        Each sample below shows a realistic CELPIP scenario. Prepositions in the response are <span style="color:#2563eb;font-weight:700;background:#eff6ff;border-radius:3px;padding:0 3px;">highlighted in blue</span>. A breakdown below each sample explains why each preposition was chosen.
+      </p>
+
+      <!-- Filter buttons -->
+      <div class="ct-type-filter">
+        <button class="ct-filter-btn ct-filter-active" onclick="prepFilter('all', this)">All Tasks</button>
+        <button class="ct-filter-btn" onclick="prepFilter('writing', this)">✉️ Writing Tasks</button>
+        <button class="ct-filter-btn" onclick="prepFilter('speaking', this)">🗣️ Speaking Tasks</button>
+      </div>
+
+      <div id="ct-task-list">
+        ${CELPIP_PREP_TASKS.map(
+          (task) => `
+          <div class="ct-task-block" data-type="${task.type}">
+            <div class="ct-task-header">
+              <span class="ct-task-badge" style="background:${task.badgeBg};color:${task.badgeColor}">${task.badge}</span>
+              <span class="ct-task-type">${task.type.toUpperCase()}</span>
+            </div>
+            <div class="ct-scenario-box">
+              <div class="ct-scenario-label">📋 Scenario</div>
+              <div class="ct-scenario-text">${task.scenario}</div>
+            </div>
+            <div class="ct-response-box">
+              <div class="ct-response-label"><span>✍️</span> Sample Response — prepositions highlighted</div>
+              <div class="ct-response-text">${task.sampleResponse}</div>
+            </div>
+            <div class="ct-highlights">
+              <div class="ct-highlights-label">🔍 Preposition Breakdown</div>
+              <div class="ct-highlights-grid">
+                ${task.highlights
                   .map(
-                    (item) => `
-                <div class="prep-trap-card">
-                  <div class="prep-trap-label">${item.prep}</div>
-                  <div class="prep-trap-rule">${item.rule}</div>
-                  <div class="prep-trap-exs">
-                    ${item.examples.map((e) => `<div class="prep-trap-ex">${e}</div>`).join("")}
-                  </div>
-                </div>
-              `,
-                  )
-                  .join("")
-              : `<div class="prep-grid">
-                ${group.items
-                  .map(
-                    (item) => `
-                  <div class="prep-card" style="border-color:${group.border}">
-                    <div class="prep-card-top">
-                      <span class="prep-word">${item.prep}</span>
-                    </div>
-                    <div class="prep-rule">${item.rule}</div>
-                    <div class="prep-examples">
-                      ${item.examples.map((e) => `<div class="prep-ex">${e}</div>`).join("")}
-                    </div>
+                    (h) => `
+                  <div class="ct-hl-item">
+                    <div class="ct-hl-prep">${h.prep}</div>
+                    <div class="ct-hl-use">${h.use}</div>
                   </div>
                 `,
                   )
                   .join("")}
-              </div>`
-          }
-        </div>
-      `;
-    }).join("")}
+              </div>
+            </div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+    </div>
   `;
+
+      // ── Tab switcher ─────────────────────────────────────────────────────
+      window.prepShowTab = function (id) {
+        document
+          .querySelectorAll(".prep-panel")
+          .forEach((p) => p.classList.remove("prep-panel-active"));
+        document
+          .querySelectorAll(".prep-tab")
+          .forEach((t) => t.classList.remove("prep-tab-active"));
+        document.getElementById(id).classList.add("prep-panel-active");
+        const idx = ["prep-reference", "prep-tasks"].indexOf(id);
+        document
+          .querySelectorAll(".prep-tab")
+          [idx].classList.add("prep-tab-active");
+      };
+
+      // ── Filter Writing / Speaking tasks ──────────────────────────────────
+      window.prepFilter = function (type, btn) {
+        document
+          .querySelectorAll(".ct-filter-btn")
+          .forEach((b) => b.classList.remove("ct-filter-active"));
+        btn.classList.add("ct-filter-active");
+        document.querySelectorAll(".ct-task-block").forEach((block) => {
+          block.style.display =
+            type === "all" || block.dataset.type === type ? "block" : "none";
+        });
+      };
     }
 
     function renderConjunctions() {
