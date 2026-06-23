@@ -1640,7 +1640,7 @@ export default function CelpipVocabPage() {
     <div class="ph-name">${c.name}</div>
     <div class="ph-spelling">Spelling: ${c.spelling}</div>
   </div>
-  <button class="ph-speak-btn" style="font-size:18px" data-speak="${c.words[0]}" data-rate="0.6" title="Hear this sound">🔊</button>
+  <button class="ph-speak-btn" style="font-size:18px" data-speak="${c.ipa}" data-rate="0.6" title="Hear this sound">🔊</button>
 </div>
             <div class="ph-con-meta">
               <span class="ph-badge-type">${c.type}</span>
@@ -3331,6 +3331,12 @@ export default function CelpipVocabPage() {
               </button>
               <button
                 className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="positional-relations"
+              >
+                Positional Relations
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
                 data-tab="phonetics"
               >
                 Phonetics
@@ -3371,6 +3377,1478 @@ export default function CelpipVocabPage() {
             </p>
           </div>
           <div id="phonetics-content"></div>
+        </div>
+
+        {/* Positional Relations Tab */}
+        <div id="positional-relations" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Learn how English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                positional prepositions
+              </span>{" "}
+              describe where things are in space — above, below, inside, beside,
+              and more. Each concept includes a visual diagram so you can see
+              the relationship at a glance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* ABOVE */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">above</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="30"
+                  y="60"
+                  width="60"
+                  height="30"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="28"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="99"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="60"
+                  y="20"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#d97706"
+                >
+                  ●
+                </text>
+                <line
+                  x1="60"
+                  y1="33"
+                  x2="60"
+                  y2="58"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                  strokeDasharray="3,2"
+                />
+              </svg>
+              <p className="text-sm text-slate">
+                Higher than something, but not touching it.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The lamp is <strong>above</strong> the table."
+              </p>
+            </div>
+
+            {/* OVER */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">over</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="20"
+                  y="62"
+                  width="80"
+                  height="28"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="30"
+                  y="48"
+                  width="60"
+                  height="14"
+                  rx="3"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="99"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="60"
+                  y="44"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  object
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Directly on top of or covering something (may touch).
+              </p>
+              <p className="text-xs text-slate italic">
+                "She held an umbrella <strong>over</strong> her head."
+              </p>
+            </div>
+
+            {/* BELOW / UNDER */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">below / under</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="20"
+                  y="10"
+                  width="80"
+                  height="30"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="72"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="60"
+                  y1="42"
+                  x2="60"
+                  y2="56"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                  strokeDasharray="3,2"
+                />
+                <text
+                  x="60"
+                  y="96"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#d97706"
+                >
+                  circle
+                </text>
+                <text
+                  x="60"
+                  y="30"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                <strong>Below</strong> = lower level (not touching).{" "}
+                <strong>Under</strong> = directly beneath (may touch).
+              </p>
+              <p className="text-xs text-slate italic">
+                "The cat hid <strong>under</strong> the bed."
+              </p>
+            </div>
+
+            {/* NEXT TO / BESIDE */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">
+                next to / beside
+              </h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="10"
+                  y="30"
+                  width="45"
+                  height="40"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="82"
+                  cy="50"
+                  r="18"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="32"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="82"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                At the side of something; adjacent.
+              </p>
+              <p className="text-xs text-slate italic">
+                "She sat <strong>next to</strong> him."
+              </p>
+            </div>
+
+            {/* BETWEEN */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">between</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="28"
+                  width="32"
+                  height="44"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="83"
+                  y="28"
+                  width="32"
+                  height="44"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="50"
+                  r="16"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="21"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  A
+                </text>
+                <text
+                  x="99"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  B
+                </text>
+                <text
+                  x="60"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                In the space separating two things.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The park is <strong>between</strong> the school and the
+                library."
+              </p>
+            </div>
+
+            {/* AMONG */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">among</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="10"
+                  width="28"
+                  height="22"
+                  rx="3"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="1.5"
+                />
+                <rect
+                  x="88"
+                  y="10"
+                  width="28"
+                  height="22"
+                  rx="3"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="1.5"
+                />
+                <rect
+                  x="5"
+                  y="68"
+                  width="28"
+                  height="22"
+                  rx="3"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="1.5"
+                />
+                <rect
+                  x="88"
+                  y="68"
+                  width="28"
+                  height="22"
+                  rx="3"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="1.5"
+                />
+                <circle
+                  cx="60"
+                  cy="50"
+                  r="16"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Surrounded by or in the middle of a group (3+ things).
+              </p>
+              <p className="text-xs text-slate italic">
+                "She was <strong>among</strong> friends."
+              </p>
+            </div>
+
+            {/* IN FRONT OF */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">in front of</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="30"
+                  y="10"
+                  width="60"
+                  height="45"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="78"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="38"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="60"
+                  y="95"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  circle
+                </text>
+                <line
+                  x1="60"
+                  y1="57"
+                  x2="60"
+                  y2="63"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                  strokeDasharray="3,2"
+                />
+              </svg>
+              <p className="text-sm text-slate">
+                Facing the front side of something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "He stood <strong>in front of</strong> the door."
+              </p>
+            </div>
+
+            {/* BEHIND */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">behind</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <circle
+                  cx="60"
+                  cy="22"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="30"
+                  y="45"
+                  width="60"
+                  height="45"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="75"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="60"
+                  y="15"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  circle
+                </text>
+                <line
+                  x1="60"
+                  y1="38"
+                  x2="60"
+                  y2="43"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                  strokeDasharray="3,2"
+                />
+              </svg>
+              <p className="text-sm text-slate">At the back of something.</p>
+              <p className="text-xs text-slate italic">
+                "The garden is <strong>behind</strong> the house."
+              </p>
+            </div>
+
+            {/* INSIDE / IN */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">inside / in</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="15"
+                  y="10"
+                  width="90"
+                  height="80"
+                  rx="6"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="50"
+                  r="18"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  circle
+                </text>
+                <text
+                  x="60"
+                  y="96"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Contained within the limits of something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The key is <strong>in</strong> the drawer."
+              </p>
+            </div>
+
+            {/* OUTSIDE */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">outside</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="30"
+                  y="20"
+                  width="60"
+                  height="60"
+                  rx="6"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="14"
+                  cy="50"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="14"
+                  y="75"
+                  textAnchor="middle"
+                  fontSize="7"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Not inside; beyond the boundary of something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "Wait <strong>outside</strong> the room."
+              </p>
+            </div>
+
+            {/* ON */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">on</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="15"
+                  y="55"
+                  width="90"
+                  height="35"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="42"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="78"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="60"
+                  y="46"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Touching and supported by a surface.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The book is <strong>on</strong> the shelf."
+              </p>
+            </div>
+
+            {/* INTO */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">into</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="40"
+                  y="15"
+                  width="70"
+                  height="70"
+                  rx="6"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="20"
+                  cy="50"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="30"
+                  y1="50"
+                  x2="55"
+                  y2="50"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr)"
+                />
+                <defs>
+                  <marker
+                    id="arr"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="75"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="20"
+                  y="75"
+                  textAnchor="middle"
+                  fontSize="7"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Movement toward the inside of something (direction + entry).
+              </p>
+              <p className="text-xs text-slate italic">
+                "She walked <strong>into</strong> the room."
+              </p>
+            </div>
+
+            {/* ONTO */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">onto</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="15"
+                  y="60"
+                  width="90"
+                  height="30"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="20"
+                  cy="30"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M20,40 Q20,55 55,55"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  fill="none"
+                  markerEnd="url(#arr2)"
+                />
+                <defs>
+                  <marker
+                    id="arr2"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="60"
+                  y="80"
+                  textAnchor="middle"
+                  fontSize="9"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Movement to a surface (direction + landing on top).
+              </p>
+              <p className="text-xs text-slate italic">
+                "He jumped <strong>onto</strong> the stage."
+              </p>
+            </div>
+
+            {/* TOWARD / TOWARDS */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">
+                toward / towards
+              </h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="75"
+                  y="30"
+                  width="38"
+                  height="40"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="18"
+                  cy="50"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="28"
+                  y1="50"
+                  x2="68"
+                  y2="50"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr3)"
+                />
+                <defs>
+                  <marker
+                    id="arr3"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="94"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Moving in the direction of something (may not reach it).
+              </p>
+              <p className="text-xs text-slate italic">
+                "She walked <strong>toward</strong> the exit."
+              </p>
+            </div>
+
+            {/* AWAY FROM */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">away from</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="30"
+                  width="38"
+                  height="40"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="102"
+                  cy="50"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="50"
+                  y1="50"
+                  x2="88"
+                  y2="50"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr4)"
+                />
+                <defs>
+                  <marker
+                    id="arr4"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="24"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Moving in a direction that increases distance from something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "Move <strong>away from</strong> the fire."
+              </p>
+            </div>
+
+            {/* UP */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">up</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <line
+                  x1="60"
+                  y1="90"
+                  x2="60"
+                  y2="20"
+                  stroke="#94a3b8"
+                  strokeWidth="2"
+                  strokeDasharray="4,3"
+                />
+                <circle
+                  cx="60"
+                  cy="75"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <polygon points="60,12 54,26 66,26" fill="#d97706" />
+                <text
+                  x="60"
+                  y="99"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#94a3b8"
+                >
+                  ground
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                In or toward a higher position.
+              </p>
+              <p className="text-xs text-slate italic">
+                "She looked <strong>up</strong> at the stars."
+              </p>
+            </div>
+
+            {/* DOWN */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">down</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <line
+                  x1="60"
+                  y1="10"
+                  x2="60"
+                  y2="82"
+                  stroke="#94a3b8"
+                  strokeWidth="2"
+                  strokeDasharray="4,3"
+                />
+                <circle
+                  cx="60"
+                  cy="22"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <polygon points="60,88 54,74 66,74" fill="#d97706" />
+                <text
+                  x="60"
+                  y="99"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#94a3b8"
+                >
+                  ground
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                In or toward a lower position.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The ball rolled <strong>down</strong> the hill."
+              </p>
+            </div>
+
+            {/* THROUGH */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">through</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="35"
+                  y="15"
+                  width="50"
+                  height="70"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="47"
+                  y="15"
+                  width="26"
+                  height="70"
+                  rx="0"
+                  fill="white"
+                  stroke="none"
+                />
+                <circle
+                  cx="10"
+                  cy="50"
+                  r="9"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="19"
+                  y1="50"
+                  x2="100"
+                  y2="50"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr5)"
+                />
+                <defs>
+                  <marker
+                    id="arr5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="60"
+                  y="97"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  tunnel
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Moving in one side and out the other of something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The train went <strong>through</strong> the tunnel."
+              </p>
+            </div>
+
+            {/* ACROSS */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">across</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="55"
+                  width="110"
+                  height="35"
+                  rx="4"
+                  fill="#bfdbfe"
+                  stroke="#3b82f6"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="15"
+                  cy="45"
+                  r="9"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="24"
+                  y1="45"
+                  x2="100"
+                  y2="45"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr6)"
+                />
+                <defs>
+                  <marker
+                    id="arr6"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="60"
+                  y="78"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#3b82f6"
+                >
+                  river / road
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                From one side to the other of a surface or area.
+              </p>
+              <p className="text-xs text-slate italic">
+                "She swam <strong>across</strong> the river."
+              </p>
+            </div>
+
+            {/* ALONG */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">along</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="58"
+                  width="110"
+                  height="12"
+                  rx="3"
+                  fill="#bfdbfe"
+                  stroke="#3b82f6"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="15"
+                  cy="46"
+                  r="9"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="24"
+                  y1="46"
+                  x2="100"
+                  y2="46"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  markerEnd="url(#arr7)"
+                />
+                <defs>
+                  <marker
+                    id="arr7"
+                    markerWidth="6"
+                    markerHeight="6"
+                    refX="3"
+                    refY="3"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#d97706" />
+                  </marker>
+                </defs>
+                <text
+                  x="60"
+                  y="83"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#3b82f6"
+                >
+                  path / road
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Moving in the same direction as the length of something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "We walked <strong>along</strong> the river."
+              </p>
+            </div>
+
+            {/* AROUND */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">around</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="40"
+                  y="30"
+                  width="40"
+                  height="40"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="60"
+                  cy="50"
+                  r="30"
+                  fill="none"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                  strokeDasharray="5,3"
+                />
+                <circle
+                  cx="60"
+                  cy="18"
+                  r="6"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <text
+                  x="60"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Encircling or in a circular path about something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The kids ran <strong>around</strong> the fountain."
+              </p>
+            </div>
+
+            {/* OPPOSITE */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">opposite</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="5"
+                  y="30"
+                  width="40"
+                  height="40"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="75"
+                  y="30"
+                  width="40"
+                  height="40"
+                  rx="4"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="47"
+                  y1="50"
+                  x2="73"
+                  y2="50"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                  strokeDasharray="4,3"
+                />
+                <text
+                  x="25"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  A
+                </text>
+                <text
+                  x="95"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#d97706"
+                >
+                  B
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                Facing each other; on the other side.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The bank is <strong>opposite</strong> the post office."
+              </p>
+            </div>
+
+            {/* NEAR / CLOSE TO */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">near / close to</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="55"
+                  y="25"
+                  width="55"
+                  height="50"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="35"
+                  cy="50"
+                  r="14"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="49"
+                  y1="50"
+                  x2="53"
+                  y2="50"
+                  stroke="#94a3b8"
+                  strokeWidth="1.5"
+                />
+                <text
+                  x="82"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+                <text
+                  x="35"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="7"
+                  fill="#d97706"
+                >
+                  ○
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                A short distance from something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The hotel is <strong>near</strong> the airport."
+              </p>
+            </div>
+
+            {/* FAR FROM */}
+            <div className="bg-white rounded-xl border border-mist p-5 flex flex-col gap-3">
+              <h3 className="font-display text-lg text-ink">far from</h3>
+              <svg
+                viewBox="0 0 120 100"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-28"
+              >
+                <rect
+                  x="82"
+                  y="28"
+                  width="33"
+                  height="44"
+                  rx="4"
+                  fill="#e0e7ff"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="10"
+                  cy="50"
+                  r="10"
+                  fill="#fde68a"
+                  stroke="#d97706"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="20"
+                  y1="50"
+                  x2="78"
+                  y2="50"
+                  stroke="#94a3b8"
+                  strokeWidth="1"
+                  strokeDasharray="5,3"
+                />
+                <text
+                  x="99"
+                  y="54"
+                  textAnchor="middle"
+                  fontSize="7"
+                  fill="#6366f1"
+                >
+                  box
+                </text>
+              </svg>
+              <p className="text-sm text-slate">
+                A long distance from something.
+              </p>
+              <p className="text-xs text-slate italic">
+                "The village is <strong>far from</strong> the city."
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Idioms Tab */}
