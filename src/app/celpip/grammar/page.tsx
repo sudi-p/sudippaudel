@@ -776,9 +776,91 @@ export default function CelpipVocabPage() {
 
     function renderCollocations() {
       const content = document.getElementById("collocations-content");
-      content.innerHTML = COLLOCATIONS.map(
-        (group) => `
-    <section>
+
+      // Flatten all collocations into one pool
+      const ALL_COLLOCATIONS = [];
+      COLLOCATIONS.forEach((group) => {
+        group.items.forEach((item) => {
+          ALL_COLLOCATIONS.push({ ...item, category: group.category });
+        });
+      });
+
+      content.innerHTML = `
+<style>
+  /* ── Collocation tab bar ── */
+  .col-tab-row { display: flex; gap: 0; border-bottom: 2px solid #f3f4f6; margin-bottom: 1.75rem; }
+  .col-tab { padding: 10px 22px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+  .col-tab.col-tab-active { color: #111827; border-bottom-color: #d97706; font-weight: 600; }
+  .col-tab:hover:not(.col-tab-active) { color: #374151; }
+  .col-panel { display: none; }
+  .col-panel.col-panel-active { display: block; }
+
+  /* ── Quiz panel ── */
+  .cq-setup { background: #fffbeb; border: 1px solid #fde68a; border-radius: 16px; padding: 2rem; text-align: center; }
+  .cq-setup-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+  .cq-setup-sub { font-size: 14px; color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6; }
+  .cq-count-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cq-count-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .cq-count-btn.selected { border-color: #d97706; background: #fffbeb; color: #92400e; }
+  .cq-start-btn { background: #d97706; color: #fff; border: none; border-radius: 10px; padding: 12px 36px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .cq-start-btn:hover { background: #b45309; }
+
+  .cq-question-wrap { display: none; }
+  .cq-question-wrap.cq-active { display: block; }
+  .cq-progress-bar { height: 6px; background: #e5e7eb; border-radius: 99px; margin-bottom: 1.25rem; overflow: hidden; }
+  .cq-progress-fill { height: 100%; background: #d97706; border-radius: 99px; transition: width 0.3s ease; }
+  .cq-meta { display: flex; justify-content: space-between; font-size: 13px; color: #9ca3af; margin-bottom: 1.25rem; }
+  .cq-score-badge { background: #fffbeb; color: #92400e; border-radius: 20px; padding: 3px 12px; font-weight: 700; font-size: 13px; }
+
+  .cq-sentence-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; }
+  .cq-sentence-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; color: #9ca3af; text-transform: uppercase; margin-bottom: 10px; }
+  .cq-category-tag { font-size: 11px; font-weight: 600; color: #d97706; background: #fffbeb; border: 1px solid #fde68a; border-radius: 20px; padding: 2px 10px; display: inline-block; margin-bottom: 10px; }
+  .cq-sentence-text { font-size: 17px; color: #111827; line-height: 1.7; font-weight: 500; }
+  .cq-blank { display: inline-block; min-width: 160px; border-bottom: 3px solid #d97706; color: #d97706; font-weight: 700; text-align: center; font-size: 17px; padding: 0 6px; }
+
+  .cq-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 1rem; }
+  .cq-opt-btn { padding: 11px 14px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.4; }
+  .cq-opt-btn:hover:not(:disabled) { border-color: #d97706; background: #fffbeb; color: #92400e; }
+  .cq-opt-btn.cq-correct { border-color: #16a34a !important; background: #f0fdf4 !important; color: #166534 !important; }
+  .cq-opt-btn.cq-wrong { border-color: #dc2626 !important; background: #fef2f2 !important; color: #991b1b !important; }
+  .cq-opt-btn:disabled { cursor: default; }
+
+  .cq-feedback { border-radius: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600; margin-bottom: 1rem; display: none; }
+  .cq-feedback.cq-show { display: block; }
+  .cq-feedback.cq-correct-fb { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+  .cq-feedback.cq-wrong-fb { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+  .cq-feedback-tip { font-size: 12px; font-weight: 400; margin-top: 4px; color: #6b7280; }
+
+  .cq-next-btn { background: #111827; color: #fff; border: none; border-radius: 10px; padding: 11px 30px; font-size: 14px; font-weight: 600; cursor: pointer; display: none; transition: background 0.15s; }
+  .cq-next-btn.cq-show { display: inline-block; }
+  .cq-next-btn:hover { background: #1f2937; }
+
+  .cq-results { display: none; background: #fffbeb; border: 1px solid #fde68a; border-radius: 16px; padding: 2.5rem 2rem; text-align: center; }
+  .cq-results.cq-active { display: block; }
+  .cq-results-emoji { font-size: 3rem; margin-bottom: 0.75rem; }
+  .cq-results-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 6px; }
+  .cq-results-score { font-size: 42px; font-weight: 800; color: #d97706; margin-bottom: 6px; }
+  .cq-results-msg { font-size: 15px; color: #6b7280; margin-bottom: 1.5rem; }
+  .cq-restart-btn { background: #d97706; color: #fff; border: none; border-radius: 10px; padding: 12px 32px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .cq-restart-btn:hover { background: #b45309; }
+
+  @media (max-width: 600px) {
+    .cq-options-grid { grid-template-columns: 1fr; }
+    .cq-sentence-text, .cq-blank { font-size: 15px; }
+  }
+</style>
+
+<!-- ── Tab bar ── -->
+<div class="col-tab-row">
+  <button class="col-tab col-tab-active" onclick="colShowTab('col-ref')">📖 Reference</button>
+  <button class="col-tab" onclick="colShowTab('col-quiz')">✍️ Quiz (55 Questions)</button>
+</div>
+
+<!-- ── REFERENCE PANEL ── -->
+<div id="col-ref" class="col-panel col-panel-active">
+  ${COLLOCATIONS.map(
+    (group) => `
+    <section style="margin-bottom:2.5rem">
       <h2 class="font-display text-3xl text-ink mb-1 flex items-center gap-3">
         <span>${group.emoji}</span>${group.category}
       </h2>
@@ -800,7 +882,268 @@ export default function CelpipVocabPage() {
       </div>
     </section>
   `,
-      ).join("");
+  ).join("")}
+</div>
+
+<!-- ── QUIZ PANEL ── -->
+<div id="col-quiz" class="col-panel">
+
+  <!-- Setup screen -->
+  <div class="cq-setup" id="cq-setup">
+    <div class="cq-setup-title">✍️ Collocation Fill-in-the-Blank Quiz</div>
+    <div class="cq-setup-sub">Each question shows a real CELPIP-style sentence with a missing collocation. Pick the correct word combination from 4 options — wrong answers use plausible but incorrect alternatives.</div>
+    <div style="font-size:13px;color:#9ca3af;margin-bottom:1.25rem">How many questions?</div>
+    <div class="cq-count-row">
+      <button class="cq-count-btn selected" data-count="10" onclick="cqSelectCount(10)">10</button>
+      <button class="cq-count-btn" data-count="20" onclick="cqSelectCount(20)">20</button>
+      <button class="cq-count-btn" data-count="35" onclick="cqSelectCount(35)">35</button>
+      <button class="cq-count-btn" data-count="55" onclick="cqSelectCount(55)">All 55</button>
+    </div>
+    <button class="cq-start-btn" onclick="cqStart()">Start Quiz →</button>
+  </div>
+
+  <!-- Question screen -->
+  <div class="cq-question-wrap" id="cq-question-wrap">
+    <div class="cq-progress-bar"><div class="cq-progress-fill" id="cq-progress-fill" style="width:0%"></div></div>
+    <div class="cq-meta">
+      <span id="cq-q-num">Question 1 of 10</span>
+      <span class="cq-score-badge">Score: <span id="cq-score">0</span></span>
+    </div>
+    <div class="cq-sentence-box">
+      <div class="cq-sentence-label">Complete the sentence</div>
+      <div id="cq-category-tag" class="cq-category-tag"></div>
+      <div class="cq-sentence-text" id="cq-sentence"></div>
+    </div>
+    <div class="cq-options-grid" id="cq-options"></div>
+    <div class="cq-feedback" id="cq-feedback">
+      <div id="cq-feedback-main"></div>
+      <div class="cq-feedback-tip" id="cq-feedback-tip"></div>
+    </div>
+    <button class="cq-next-btn" id="cq-next-btn" onclick="cqNext()">Next Question →</button>
+  </div>
+
+  <!-- Results screen -->
+  <div class="cq-results" id="cq-results">
+    <div class="cq-results-emoji" id="cq-results-emoji">🎉</div>
+    <div class="cq-results-title">Quiz Complete!</div>
+    <div class="cq-results-score" id="cq-results-score">0 / 0</div>
+    <div class="cq-results-msg" id="cq-results-msg"></div>
+    <button class="cq-restart-btn" onclick="cqRestart()">Try Again</button>
+  </div>
+</div>
+`;
+
+      // ── Tab switcher ──────────────────────────────────────────────────────
+      window.colShowTab = function (id) {
+        document
+          .querySelectorAll(".col-panel")
+          .forEach((p) => p.classList.remove("col-panel-active"));
+        document
+          .querySelectorAll(".col-tab")
+          .forEach((t) => t.classList.remove("col-tab-active"));
+        document.getElementById(id).classList.add("col-panel-active");
+        const idx = ["col-ref", "col-quiz"].indexOf(id);
+        document
+          .querySelectorAll(".col-tab")
+          [idx].classList.add("col-tab-active");
+      };
+
+      // ── Quiz state ────────────────────────────────────────────────────────
+      const cqState = {
+        selectedCount: 10,
+        questions: [],
+        current: 0,
+        score: 0,
+      };
+
+      window.cqSelectCount = function (n) {
+        cqState.selectedCount = n;
+        document.querySelectorAll(".cq-count-btn").forEach((b) => {
+          b.classList.toggle("selected", parseInt(b.dataset.count) === n);
+        });
+      };
+
+      function cqBuildQuestions(count) {
+        const pool = [...ALL_COLLOCATIONS]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 55);
+        const selected = pool.slice(0, Math.min(count, pool.length));
+
+        return selected.map((item) => {
+          const blank = "___________";
+          const sentenceRaw = item.example || "";
+          const collLower = item.collocation.toLowerCase();
+          const sentenceLower = sentenceRaw.toLowerCase();
+          let sentence;
+
+          // Try exact match first
+          const idx = sentenceLower.indexOf(collLower);
+          if (idx !== -1) {
+            sentence =
+              sentenceRaw.slice(0, idx) +
+              blank +
+              sentenceRaw.slice(idx + item.collocation.length);
+          } else {
+            // Try matching just the first two words of the collocation
+            const firstWords = collLower.split(" ").slice(0, 2).join(" ");
+            const idx2 = sentenceLower.indexOf(firstWords);
+            if (idx2 !== -1) {
+              sentence =
+                sentenceRaw.slice(0, idx2) +
+                blank +
+                sentenceRaw.slice(idx2 + firstWords.length);
+            } else {
+              sentence = sentenceRaw + " [" + blank + "]";
+            }
+          }
+
+          // Pick 3 distractors from the same category first, then fill from pool
+          const sameCategory = pool.filter(
+            (o) =>
+              o.collocation !== item.collocation &&
+              o.category === item.category,
+          );
+          const otherPool = pool.filter(
+            (o) =>
+              o.collocation !== item.collocation &&
+              o.category !== item.category,
+          );
+          const distPool = [
+            ...sameCategory.sort(() => Math.random() - 0.5),
+            ...otherPool.sort(() => Math.random() - 0.5),
+          ];
+          const distractors = distPool.slice(0, 3);
+          const options = [item, ...distractors].sort(
+            () => Math.random() - 0.5,
+          );
+
+          return { item, sentence, options };
+        });
+      }
+
+      window.cqStart = function () {
+        cqState.questions = cqBuildQuestions(cqState.selectedCount);
+        cqState.current = 0;
+        cqState.score = 0;
+
+        document.getElementById("cq-setup").style.display = "none";
+        document.getElementById("cq-results").classList.remove("cq-active");
+        document.getElementById("cq-question-wrap").classList.add("cq-active");
+
+        cqRenderQuestion();
+      };
+
+      function cqRenderQuestion() {
+        const q = cqState.questions[cqState.current];
+        const total = cqState.questions.length;
+
+        document.getElementById("cq-progress-fill").style.width =
+          ((cqState.current + 1) / total) * 100 + "%";
+        document.getElementById("cq-q-num").textContent =
+          `Question ${cqState.current + 1} of ${total}`;
+        document.getElementById("cq-score").textContent = cqState.score;
+        document.getElementById("cq-category-tag").textContent =
+          q.item.category;
+
+        const sentenceHtml = q.sentence.replace(
+          "___________",
+          `<span class="cq-blank">___________</span>`,
+        );
+        document.getElementById("cq-sentence").innerHTML = sentenceHtml;
+
+        document.getElementById("cq-options").innerHTML = q.options
+          .map(
+            (opt) =>
+              `<button class="cq-opt-btn" data-col="${opt.collocation.replace(/"/g, "&quot;")}" onclick="cqAnswer(this)">${opt.collocation}</button>`,
+          )
+          .join("");
+
+        const fb = document.getElementById("cq-feedback");
+        fb.className = "cq-feedback";
+        document.getElementById("cq-feedback-main").textContent = "";
+        document.getElementById("cq-feedback-tip").textContent = "";
+        document.getElementById("cq-next-btn").className = "cq-next-btn";
+      }
+
+      window.cqAnswer = function (btn) {
+        const q = cqState.questions[cqState.current];
+        const chosen = btn.dataset.col;
+        const correct = q.item.collocation;
+        const isRight = chosen === correct;
+
+        if (isRight) cqState.score++;
+
+        document.querySelectorAll(".cq-opt-btn").forEach((b) => {
+          b.disabled = true;
+          if (b.dataset.col === correct) b.classList.add("cq-correct");
+          else if (b === btn && !isRight) b.classList.add("cq-wrong");
+        });
+
+        const fb = document.getElementById("cq-feedback");
+        fb.className =
+          "cq-feedback cq-show " + (isRight ? "cq-correct-fb" : "cq-wrong-fb");
+        document.getElementById("cq-feedback-main").textContent = isRight
+          ? `✓ Correct! "${correct}"`
+          : `✗ The answer is: "${correct}"`;
+        document.getElementById("cq-feedback-tip").textContent =
+          `Example: ${q.item.example}`;
+
+        document.getElementById("cq-score").textContent = cqState.score;
+        document.getElementById("cq-next-btn").className =
+          "cq-next-btn cq-show";
+      };
+
+      window.cqNext = function () {
+        cqState.current++;
+        if (cqState.current < cqState.questions.length) {
+          cqRenderQuestion();
+        } else {
+          cqShowResults();
+        }
+      };
+
+      function cqShowResults() {
+        document
+          .getElementById("cq-question-wrap")
+          .classList.remove("cq-active");
+        const results = document.getElementById("cq-results");
+        results.classList.add("cq-active");
+
+        const pct = Math.round(
+          (cqState.score / cqState.questions.length) * 100,
+        );
+        document.getElementById("cq-results-score").textContent =
+          `${cqState.score} / ${cqState.questions.length}`;
+
+        let emoji = "💪",
+          msg = "";
+        if (pct === 100) {
+          emoji = "🏆";
+          msg = "Perfect! You have mastered CELPIP collocations!";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          msg = "Excellent! Your collocation range is strong — keep it up.";
+        } else if (pct >= 60) {
+          emoji = "📚";
+          msg =
+            "Good effort! Review the reference section for the ones you missed.";
+        } else if (pct >= 40) {
+          emoji = "🔄";
+          msg = "Keep practising — collocations are key to sounding natural.";
+        } else {
+          emoji = "💪";
+          msg = "Don't give up! Study the reference cards and try again.";
+        }
+
+        document.getElementById("cq-results-emoji").textContent = emoji;
+        document.getElementById("cq-results-msg").textContent =
+          `${pct}% — ${msg}`;
+      }
+
+      window.cqRestart = function () {
+        document.getElementById("cq-results").classList.remove("cq-active");
+        document.getElementById("cq-setup").style.display = "";
+      };
     }
 
     function renderSentenceStructure() {
@@ -3115,46 +3458,369 @@ export default function CelpipVocabPage() {
     function renderIdioms() {
       const content = document.getElementById("idioms-content");
 
+      // Flatten all idioms from all groups into one array
+      const ALL_IDIOMS = [];
+      IDIOM_GROUPS.forEach((group) => {
+        group.items.forEach((item) => {
+          ALL_IDIOMS.push({
+            ...item,
+            groupBg: group.bg,
+            groupColor: group.color,
+            groupBorder: group.border,
+          });
+        });
+      });
+
       content.innerHTML = `
-    <style>
-      .idiom-section { margin-bottom: 2.5rem; }
-      .idiom-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
-      .idiom-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
-      .idiom-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 0.75rem; }
-      .idiom-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-      .idiom-phrase { font-size: 14px; font-weight: 700; color: #111827; }
-      .idiom-meaning { font-size: 12.5px; color: #374151; line-height: 1.55; }
-      .idiom-example { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 4px 9px; border: 1px solid #f3f4f6; margin-top: 2px; }
-      @media (max-width: 600px) { .idiom-grid { grid-template-columns: 1fr; } }
-    </style>
+<style>
+  /* ── Idiom tab bar ── */
+  .idiom-tab-row { display: flex; gap: 0; border-bottom: 2px solid #f3f4f6; margin-bottom: 1.75rem; }
+  .idiom-tab { padding: 10px 22px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+  .idiom-tab.idiom-tab-active { color: #111827; border-bottom-color: #2563eb; font-weight: 600; }
+  .idiom-tab:hover:not(.idiom-tab-active) { color: #374151; }
+  .idiom-panel { display: none; }
+  .idiom-panel.idiom-panel-active { display: block; }
 
-    ${IDIOM_GROUPS.map(
-      (group) => `
-      <div class="idiom-section">
-        <div class="idiom-section-header">
-          <span style="font-size:1.3rem">${group.emoji}</span>
-          <span class="idiom-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
-          <span style="font-size:12px;color:#9ca3af">${group.items.length} idioms</span>
-        </div>
-        <div class="idiom-grid">
-          ${group.items
-            .map(
-              (item) => `
-            <div class="idiom-card" style="border-color:${group.border}">
-              <div class="idiom-phrase">${item.idiom}</div>
-              <div class="idiom-meaning">${item.meaning}</div>
-              <div class="idiom-example">"${item.example}"</div>
-            </div>
-          `,
-            )
-            .join("")}
-        </div>
+  /* ── Reference panel ── */
+  .idiom-section { margin-bottom: 2.5rem; }
+  .idiom-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #f3f4f6; }
+  .idiom-section-badge { font-size: 11px; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .idiom-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 0.75rem; }
+  .idiom-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .idiom-phrase { font-size: 14px; font-weight: 700; color: #111827; }
+  .idiom-meaning { font-size: 12.5px; color: #374151; line-height: 1.55; }
+  .idiom-example { font-size: 12px; color: #6b7280; font-style: italic; background: #f9fafb; border-radius: 6px; padding: 4px 9px; border: 1px solid #f3f4f6; margin-top: 2px; }
+
+  /* ── Quiz panel ── */
+  .iq-setup { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 2rem; text-align: center; }
+  .iq-setup-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+  .iq-setup-sub { font-size: 14px; color: #6b7280; margin-bottom: 1.5rem; }
+  .iq-count-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .iq-count-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .iq-count-btn.selected { border-color: #2563eb; background: #eff6ff; color: #1e40af; }
+  .iq-start-btn { background: #2563eb; color: #fff; border: none; border-radius: 10px; padding: 12px 36px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .iq-start-btn:hover { background: #1d4ed8; }
+
+  .iq-question-wrap { display: none; }
+  .iq-question-wrap.iq-active { display: block; }
+  .iq-progress-bar { height: 6px; background: #e5e7eb; border-radius: 99px; margin-bottom: 1.25rem; overflow: hidden; }
+  .iq-progress-fill { height: 100%; background: #2563eb; border-radius: 99px; transition: width 0.3s ease; }
+  .iq-meta { display: flex; justify-content: space-between; font-size: 13px; color: #9ca3af; margin-bottom: 1.25rem; }
+  .iq-score-badge { background: #eff6ff; color: #1e40af; border-radius: 20px; padding: 3px 12px; font-weight: 700; font-size: 13px; }
+
+  .iq-sentence-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; }
+  .iq-sentence-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; color: #9ca3af; text-transform: uppercase; margin-bottom: 10px; }
+  .iq-sentence-text { font-size: 17px; color: #111827; line-height: 1.7; font-weight: 500; }
+  .iq-blank { display: inline-block; min-width: 140px; border-bottom: 3px solid #2563eb; color: #2563eb; font-weight: 700; text-align: center; font-size: 17px; padding: 0 6px; }
+
+  .iq-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 1rem; }
+  .iq-opt-btn { padding: 11px 14px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.4; }
+  .iq-opt-btn:hover:not(:disabled) { border-color: #2563eb; background: #eff6ff; color: #1e40af; }
+  .iq-opt-btn.iq-correct { border-color: #16a34a !important; background: #f0fdf4 !important; color: #166534 !important; }
+  .iq-opt-btn.iq-wrong { border-color: #dc2626 !important; background: #fef2f2 !important; color: #991b1b !important; }
+  .iq-opt-btn:disabled { cursor: default; }
+
+  .iq-feedback { border-radius: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600; margin-bottom: 1rem; display: none; }
+  .iq-feedback.iq-show { display: block; }
+  .iq-feedback.iq-correct-fb { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+  .iq-feedback.iq-wrong-fb { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+  .iq-feedback-meaning { font-size: 12px; font-weight: 400; margin-top: 4px; color: #6b7280; }
+
+  .iq-next-btn { background: #111827; color: #fff; border: none; border-radius: 10px; padding: 11px 30px; font-size: 14px; font-weight: 600; cursor: pointer; display: none; transition: background 0.15s; }
+  .iq-next-btn.iq-show { display: inline-block; }
+  .iq-next-btn:hover { background: #1f2937; }
+
+  .iq-results { display: none; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 16px; padding: 2.5rem 2rem; text-align: center; }
+  .iq-results.iq-active { display: block; }
+  .iq-results-emoji { font-size: 3rem; margin-bottom: 0.75rem; }
+  .iq-results-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 6px; }
+  .iq-results-score { font-size: 42px; font-weight: 800; color: #2563eb; margin-bottom: 6px; }
+  .iq-results-msg { font-size: 15px; color: #6b7280; margin-bottom: 1.5rem; }
+  .iq-restart-btn { background: #2563eb; color: #fff; border: none; border-radius: 10px; padding: 12px 32px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .iq-restart-btn:hover { background: #1d4ed8; }
+
+  @media (max-width: 600px) {
+    .idiom-grid, .iq-options-grid { grid-template-columns: 1fr; }
+    .iq-sentence-text, .iq-blank { font-size: 15px; }
+  }
+</style>
+
+<!-- ── Tab bar ── -->
+<div class="idiom-tab-row">
+  <button class="idiom-tab idiom-tab-active" onclick="idiomShowTab('idiom-ref')">📖 Reference</button>
+  <button class="idiom-tab" onclick="idiomShowTab('idiom-quiz')">🧠 Quiz (55 Questions)</button>
+</div>
+
+<!-- ── REFERENCE PANEL ── -->
+<div id="idiom-ref" class="idiom-panel idiom-panel-active">
+  ${IDIOM_GROUPS.map(
+    (group) => `
+    <div class="idiom-section">
+      <div class="idiom-section-header">
+        <span style="font-size:1.3rem">${group.emoji}</span>
+        <span class="idiom-section-badge" style="background:${group.bg};color:${group.color}">${group.category}</span>
+        <span style="font-size:12px;color:#9ca3af">${group.items.length} idioms</span>
       </div>
-    `,
-    ).join("")}
-  `;
-    }
+      <div class="idiom-grid">
+        ${group.items
+          .map(
+            (item) => `
+          <div class="idiom-card" style="border-color:${group.border}">
+            <div class="idiom-phrase">${item.idiom}</div>
+            <div class="idiom-meaning">${item.meaning}</div>
+            <div class="idiom-example">"${item.example}"</div>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `,
+  ).join("")}
+</div>
 
+<!-- ── QUIZ PANEL ── -->
+<div id="idiom-quiz" class="idiom-panel">
+
+  <!-- Setup screen -->
+  <div class="iq-setup" id="iq-setup">
+    <div class="iq-setup-title">🧠 Idiom Fill-in-the-Blank Quiz</div>
+    <div class="iq-setup-sub">Each question shows a sentence with a missing idiom. Choose the correct one from 4 options — including similar-sounding or confusing alternatives.</div>
+    <div style="font-size:13px;color:#9ca3af;margin-bottom:1.25rem">How many questions?</div>
+    <div class="iq-count-row">
+      <button class="iq-count-btn selected" data-count="10" onclick="iqSelectCount(10)">10</button>
+      <button class="iq-count-btn" data-count="20" onclick="iqSelectCount(20)">20</button>
+      <button class="iq-count-btn" data-count="35" onclick="iqSelectCount(35)">35</button>
+      <button class="iq-count-btn" data-count="55" onclick="iqSelectCount(55)">All 55</button>
+    </div>
+    <button class="iq-start-btn" onclick="iqStart()">Start Quiz →</button>
+  </div>
+
+  <!-- Question screen -->
+  <div class="iq-question-wrap" id="iq-question-wrap">
+    <div class="iq-progress-bar"><div class="iq-progress-fill" id="iq-progress-fill" style="width:0%"></div></div>
+    <div class="iq-meta">
+      <span id="iq-q-num">Question 1 of 10</span>
+      <span class="iq-score-badge">Score: <span id="iq-score">0</span></span>
+    </div>
+    <div class="iq-sentence-box">
+      <div class="iq-sentence-label">Complete the sentence</div>
+      <div class="iq-sentence-text" id="iq-sentence"></div>
+    </div>
+    <div class="iq-options-grid" id="iq-options"></div>
+    <div class="iq-feedback" id="iq-feedback">
+      <div id="iq-feedback-main"></div>
+      <div class="iq-feedback-meaning" id="iq-feedback-meaning"></div>
+    </div>
+    <button class="iq-next-btn" id="iq-next-btn" onclick="iqNext()">Next Question →</button>
+  </div>
+
+  <!-- Results screen -->
+  <div class="iq-results" id="iq-results">
+    <div class="iq-results-emoji" id="iq-results-emoji">🎉</div>
+    <div class="iq-results-title">Quiz Complete!</div>
+    <div class="iq-results-score" id="iq-results-score">0 / 0</div>
+    <div class="iq-results-msg" id="iq-results-msg"></div>
+    <button class="iq-restart-btn" onclick="iqRestart()">Try Again</button>
+  </div>
+</div>
+`;
+
+      // ── Tab switcher ──────────────────────────────────────────────────────
+      window.idiomShowTab = function (id) {
+        document
+          .querySelectorAll(".idiom-panel")
+          .forEach((p) => p.classList.remove("idiom-panel-active"));
+        document
+          .querySelectorAll(".idiom-tab")
+          .forEach((t) => t.classList.remove("idiom-tab-active"));
+        document.getElementById(id).classList.add("idiom-panel-active");
+        const idx = ["idiom-ref", "idiom-quiz"].indexOf(id);
+        document
+          .querySelectorAll(".idiom-tab")
+          [idx].classList.add("idiom-tab-active");
+      };
+
+      // ── Quiz state ────────────────────────────────────────────────────────
+      const iqState = {
+        selectedCount: 10,
+        questions: [],
+        current: 0,
+        score: 0,
+      };
+
+      window.iqSelectCount = function (n) {
+        iqState.selectedCount = n;
+        document.querySelectorAll(".iq-count-btn").forEach((b) => {
+          b.classList.toggle("selected", parseInt(b.dataset.count) === n);
+        });
+      };
+
+      // Build questions from ALL_IDIOMS
+      function iqBuildQuestions(count) {
+        const pool = [...ALL_IDIOMS]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 55);
+        const selected = pool.slice(0, Math.min(count, pool.length));
+
+        return selected.map((item) => {
+          const blank = "___________";
+          const sentenceRaw = item.example || "";
+          const idiomLower = item.idiom.toLowerCase();
+          const sentenceLower = sentenceRaw.toLowerCase();
+          let sentence;
+          const idx = sentenceLower.indexOf(idiomLower);
+          if (idx !== -1) {
+            sentence =
+              sentenceRaw.slice(0, idx) +
+              blank +
+              sentenceRaw.slice(idx + item.idiom.length);
+          } else {
+            const firstWords = idiomLower.split(" ").slice(0, 2).join(" ");
+            const idx2 = sentenceLower.indexOf(firstWords);
+            if (idx2 !== -1) {
+              sentence =
+                sentenceRaw.slice(0, idx2) +
+                blank +
+                sentenceRaw.slice(idx2 + firstWords.length);
+            } else {
+              sentence = sentenceRaw + " [" + blank + "]";
+            }
+          }
+
+          const others = pool.filter((o) => o.idiom !== item.idiom);
+          const distractors = others
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3);
+          const options = [item, ...distractors].sort(
+            () => Math.random() - 0.5,
+          );
+
+          return { item, sentence, options };
+        });
+      }
+
+      window.iqStart = function () {
+        iqState.questions = iqBuildQuestions(iqState.selectedCount);
+        iqState.current = 0;
+        iqState.score = 0;
+
+        document.getElementById("iq-setup").style.display = "none";
+        document.getElementById("iq-results").classList.remove("iq-active");
+        document.getElementById("iq-question-wrap").classList.add("iq-active");
+
+        iqRenderQuestion();
+      };
+
+      function iqRenderQuestion() {
+        const q = iqState.questions[iqState.current];
+        const total = iqState.questions.length;
+
+        document.getElementById("iq-progress-fill").style.width =
+          ((iqState.current + 1) / total) * 100 + "%";
+        document.getElementById("iq-q-num").textContent =
+          `Question ${iqState.current + 1} of ${total}`;
+        document.getElementById("iq-score").textContent = iqState.score;
+
+        const sentenceHtml = q.sentence.replace(
+          "___________",
+          `<span class="iq-blank">___________</span>`,
+        );
+        document.getElementById("iq-sentence").innerHTML = sentenceHtml;
+
+        document.getElementById("iq-options").innerHTML = q.options
+          .map(
+            (opt) =>
+              `<button class="iq-opt-btn" data-idiom="${opt.idiom.replace(/"/g, "&quot;")}" onclick="iqAnswer(this)">${opt.idiom}</button>`,
+          )
+          .join("");
+
+        const fb = document.getElementById("iq-feedback");
+        fb.className = "iq-feedback";
+        document.getElementById("iq-feedback-main").textContent = "";
+        document.getElementById("iq-feedback-meaning").textContent = "";
+        document.getElementById("iq-next-btn").className = "iq-next-btn";
+      }
+
+      window.iqAnswer = function (btn) {
+        const q = iqState.questions[iqState.current];
+        const chosen = btn.dataset.idiom;
+        const correct = q.item.idiom;
+        const isRight = chosen === correct;
+
+        if (isRight) iqState.score++;
+
+        document.querySelectorAll(".iq-opt-btn").forEach((b) => {
+          b.disabled = true;
+          if (b.dataset.idiom === correct) b.classList.add("iq-correct");
+          else if (b === btn && !isRight) b.classList.add("iq-wrong");
+        });
+
+        const fb = document.getElementById("iq-feedback");
+        fb.className =
+          "iq-feedback iq-show " + (isRight ? "iq-correct-fb" : "iq-wrong-fb");
+        document.getElementById("iq-feedback-main").textContent = isRight
+          ? `✓ Correct! "${correct}"`
+          : `✗ The answer is: "${correct}"`;
+        document.getElementById("iq-feedback-meaning").textContent =
+          `Meaning: ${q.item.meaning}`;
+
+        document.getElementById("iq-score").textContent = iqState.score;
+        document.getElementById("iq-next-btn").className =
+          "iq-next-btn iq-show";
+      };
+
+      window.iqNext = function () {
+        iqState.current++;
+        if (iqState.current < iqState.questions.length) {
+          iqRenderQuestion();
+        } else {
+          iqShowResults();
+        }
+      };
+
+      function iqShowResults() {
+        document
+          .getElementById("iq-question-wrap")
+          .classList.remove("iq-active");
+        const results = document.getElementById("iq-results");
+        results.classList.add("iq-active");
+
+        const pct = Math.round(
+          (iqState.score / iqState.questions.length) * 100,
+        );
+        document.getElementById("iq-results-score").textContent =
+          `${iqState.score} / ${iqState.questions.length}`;
+
+        let emoji = "💪",
+          msg = "";
+        if (pct === 100) {
+          emoji = "🏆";
+          msg = "Perfect! You know every idiom. Outstanding!";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          msg = "Excellent! You have a strong grasp of English idioms.";
+        } else if (pct >= 60) {
+          emoji = "📚";
+          msg = "Good effort! Review the ones you missed and try again.";
+        } else if (pct >= 40) {
+          emoji = "🔄";
+          msg = "Keep practising — idioms take time to memorise.";
+        } else {
+          emoji = "💪";
+          msg = "Don't give up! Study the reference section and try again.";
+        }
+
+        document.getElementById("iq-results-emoji").textContent = emoji;
+        document.getElementById("iq-results-msg").textContent =
+          `${pct}% — ${msg}`;
+      }
+
+      window.iqRestart = function () {
+        document.getElementById("iq-results").classList.remove("iq-active");
+        document.getElementById("iq-setup").style.display = "";
+      };
+    }
     function renderPhonetics() {
       const content = document.getElementById("phonetics-content");
 
@@ -4852,42 +5518,414 @@ export default function CelpipVocabPage() {
 
     function renderEmotions() {
       const content = document.getElementById("emotions-content");
-      content.innerHTML = EMOTIONS.map(
-        (group) => `
-            <section>
-              <h2 class="font-display text-3xl text-ink mb-1 flex items-center gap-3">
-                <span>${group.emoji}</span>${group.emotion}
-              </h2>
-              <div class="w-12 h-0.5 bg-gold rounded-full mb-5"></div>
-              <div class="grid gap-4 md:grid-cols-2">
-                ${group.words
-                  .map(
-                    (w) => `
-                  <div class="bg-white rounded-xl border border-mist p-5 card-hover">
-                    <div class="flex items-center justify-between gap-3 mb-2">
-                      <span class="font-semibold text-lg text-ink">${w.word}</span>
-                      <span class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${INTENSITY_STYLES[w.intensity]}">${w.intensity}</span>
-                    </div>
-                    <p class="text-sm text-slate mb-3">${w.meaning}</p>
-                    <ul class="space-y-1.5">
-                      ${w.examples
-                        .map(
-                          (ex) => `
-                        <li class="text-xs text-slate italic flex gap-2">
-                          <span class="text-gold not-italic">›</span><span>"${ex}"</span>
-                        </li>
-                      `,
-                        )
-                        .join("")}
-                    </ul>
-                  </div>
-                `,
-                  )
-                  .join("")}
-              </div>
-            </section>
-          `,
-      ).join("");
+
+      // Flatten all emotion words into one pool
+      const ALL_EMOTION_WORDS = [];
+      EMOTIONS.forEach((group) => {
+        group.words.forEach((w) => {
+          ALL_EMOTION_WORDS.push({
+            ...w,
+            emotion: group.emotion,
+            emoji: group.emoji,
+          });
+        });
+      });
+
+      content.innerHTML = `
+<style>
+  /* ── Emotions tab bar ── */
+  .em-tab-row { display: flex; gap: 0; border-bottom: 2px solid #f3f4f6; margin-bottom: 1.75rem; }
+  .em-tab { padding: 10px 22px; font-size: 14px; font-weight: 500; color: #6b7280; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+  .em-tab.em-tab-active { color: #111827; border-bottom-color: #8b5cf6; font-weight: 600; }
+  .em-tab:hover:not(.em-tab-active) { color: #374151; }
+  .em-panel { display: none; }
+  .em-panel.em-panel-active { display: block; }
+
+  /* ── Quiz panel ── */
+  .eq-setup { background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 16px; padding: 2rem; text-align: center; }
+  .eq-setup-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+  .eq-setup-sub { font-size: 14px; color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6; }
+  .eq-count-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .eq-count-btn { padding: 8px 20px; border-radius: 20px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .eq-count-btn.selected { border-color: #8b5cf6; background: #f5f3ff; color: #5b21b6; }
+  .eq-start-btn { background: #8b5cf6; color: #fff; border: none; border-radius: 10px; padding: 12px 36px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .eq-start-btn:hover { background: #7c3aed; }
+
+  .eq-question-wrap { display: none; }
+  .eq-question-wrap.eq-active { display: block; }
+  .eq-progress-bar { height: 6px; background: #e5e7eb; border-radius: 99px; margin-bottom: 1.25rem; overflow: hidden; }
+  .eq-progress-fill { height: 100%; background: #8b5cf6; border-radius: 99px; transition: width 0.3s ease; }
+  .eq-meta { display: flex; justify-content: space-between; font-size: 13px; color: #9ca3af; margin-bottom: 1.25rem; }
+  .eq-score-badge { background: #f5f3ff; color: #5b21b6; border-radius: 20px; padding: 3px 12px; font-weight: 700; font-size: 13px; }
+
+  .eq-sentence-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; }
+  .eq-sentence-label { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; color: #9ca3af; text-transform: uppercase; margin-bottom: 8px; }
+  .eq-meta-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .eq-emotion-tag { font-size: 11px; font-weight: 600; color: #8b5cf6; background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 20px; padding: 2px 10px; }
+  .eq-intensity-tag { font-size: 11px; font-weight: 600; border-radius: 20px; padding: 2px 10px; }
+  .eq-sentence-text { font-size: 17px; color: #111827; line-height: 1.7; font-weight: 500; }
+  .eq-blank { display: inline-block; min-width: 140px; border-bottom: 3px solid #8b5cf6; color: #8b5cf6; font-weight: 700; text-align: center; font-size: 17px; padding: 0 6px; }
+
+  .eq-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin-bottom: 1rem; }
+  .eq-opt-btn { padding: 11px 14px; border-radius: 10px; border: 2px solid #e5e7eb; background: #fff; color: #374151; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.4; }
+  .eq-opt-btn:hover:not(:disabled) { border-color: #8b5cf6; background: #f5f3ff; color: #5b21b6; }
+  .eq-opt-btn.eq-correct { border-color: #16a34a !important; background: #f0fdf4 !important; color: #166534 !important; }
+  .eq-opt-btn.eq-wrong { border-color: #dc2626 !important; background: #fef2f2 !important; color: #991b1b !important; }
+  .eq-opt-btn:disabled { cursor: default; }
+
+  .eq-feedback { border-radius: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600; margin-bottom: 1rem; display: none; }
+  .eq-feedback.eq-show { display: block; }
+  .eq-feedback.eq-correct-fb { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+  .eq-feedback.eq-wrong-fb { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+  .eq-feedback-tip { font-size: 12px; font-weight: 400; margin-top: 4px; color: #6b7280; }
+
+  .eq-next-btn { background: #111827; color: #fff; border: none; border-radius: 10px; padding: 11px 30px; font-size: 14px; font-weight: 600; cursor: pointer; display: none; transition: background 0.15s; }
+  .eq-next-btn.eq-show { display: inline-block; }
+  .eq-next-btn:hover { background: #1f2937; }
+
+  .eq-results { display: none; background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 16px; padding: 2.5rem 2rem; text-align: center; }
+  .eq-results.eq-active { display: block; }
+  .eq-results-emoji { font-size: 3rem; margin-bottom: 0.75rem; }
+  .eq-results-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 6px; }
+  .eq-results-score { font-size: 42px; font-weight: 800; color: #8b5cf6; margin-bottom: 6px; }
+  .eq-results-msg { font-size: 15px; color: #6b7280; margin-bottom: 1.5rem; }
+  .eq-restart-btn { background: #8b5cf6; color: #fff; border: none; border-radius: 10px; padding: 12px 32px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .eq-restart-btn:hover { background: #7c3aed; }
+
+  @media (max-width: 600px) {
+    .eq-options-grid { grid-template-columns: 1fr; }
+    .eq-sentence-text, .eq-blank { font-size: 15px; }
+  }
+</style>
+
+<!-- ── Tab bar ── -->
+<div class="em-tab-row">
+  <button class="em-tab em-tab-active" onclick="emShowTab('em-ref')">📖 Reference</button>
+  <button class="em-tab" onclick="emShowTab('em-quiz')">💬 Quiz (55 Questions)</button>
+</div>
+
+<!-- ── REFERENCE PANEL ── -->
+<div id="em-ref" class="em-panel em-panel-active">
+  ${EMOTIONS.map(
+    (group) => `
+    <section style="margin-bottom:3rem">
+      <h2 class="font-display text-3xl text-ink mb-1 flex items-center gap-3">
+        <span>${group.emoji}</span>${group.emotion}
+      </h2>
+      <div class="w-12 h-0.5 bg-gold rounded-full mb-5"></div>
+      <div class="grid gap-4 md:grid-cols-2">
+        ${group.words
+          .map(
+            (w) => `
+          <div class="bg-white rounded-xl border border-mist p-5 card-hover">
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <span class="font-semibold text-lg text-ink">${w.word}</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${INTENSITY_STYLES[w.intensity]}">${w.intensity}</span>
+            </div>
+            <p class="text-sm text-slate mb-3">${w.meaning}</p>
+            <ul class="space-y-1.5">
+              ${w.examples
+                .map(
+                  (ex) => `
+                <li class="text-xs text-slate italic flex gap-2">
+                  <span class="text-gold not-italic">›</span><span>"${ex}"</span>
+                </li>
+              `,
+                )
+                .join("")}
+            </ul>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `,
+  ).join("")}
+</div>
+
+<!-- ── QUIZ PANEL ── -->
+<div id="em-quiz" class="em-panel">
+
+  <!-- Setup screen -->
+  <div class="eq-setup" id="eq-setup">
+    <div class="eq-setup-title">💬 Emotion Vocabulary Quiz</div>
+    <div class="eq-setup-sub">Each question shows a CELPIP-style sentence describing a feeling, with the emotion word blanked out. Choose the most precise word from 4 options — wrong answers are from the same emotion family or similar intensity level.</div>
+    <div style="font-size:13px;color:#9ca3af;margin-bottom:1.25rem">How many questions?</div>
+    <div class="eq-count-row">
+      <button class="eq-count-btn selected" data-count="10" onclick="eqSelectCount(10)">10</button>
+      <button class="eq-count-btn" data-count="20" onclick="eqSelectCount(20)">20</button>
+      <button class="eq-count-btn" data-count="35" onclick="eqSelectCount(35)">35</button>
+      <button class="eq-count-btn" data-count="55" onclick="eqSelectCount(55)">All 55</button>
+    </div>
+    <button class="eq-start-btn" onclick="eqStart()">Start Quiz →</button>
+  </div>
+
+  <!-- Question screen -->
+  <div class="eq-question-wrap" id="eq-question-wrap">
+    <div class="eq-progress-bar"><div class="eq-progress-fill" id="eq-progress-fill" style="width:0%"></div></div>
+    <div class="eq-meta">
+      <span id="eq-q-num">Question 1 of 10</span>
+      <span class="eq-score-badge">Score: <span id="eq-score">0</span></span>
+    </div>
+    <div class="eq-sentence-box">
+      <div class="eq-sentence-label">Choose the correct emotion word</div>
+      <div class="eq-meta-row">
+        <span class="eq-emotion-tag" id="eq-emotion-tag"></span>
+        <span class="eq-intensity-tag" id="eq-intensity-tag"></span>
+      </div>
+      <div class="eq-sentence-text" id="eq-sentence"></div>
+    </div>
+    <div class="eq-options-grid" id="eq-options"></div>
+    <div class="eq-feedback" id="eq-feedback">
+      <div id="eq-feedback-main"></div>
+      <div class="eq-feedback-tip" id="eq-feedback-tip"></div>
+    </div>
+    <button class="eq-next-btn" id="eq-next-btn" onclick="eqNext()">Next Question →</button>
+  </div>
+
+  <!-- Results screen -->
+  <div class="eq-results" id="eq-results">
+    <div class="eq-results-emoji" id="eq-results-emoji">🎉</div>
+    <div class="eq-results-title">Quiz Complete!</div>
+    <div class="eq-results-score" id="eq-results-score">0 / 0</div>
+    <div class="eq-results-msg" id="eq-results-msg"></div>
+    <button class="eq-restart-btn" onclick="eqRestart()">Try Again</button>
+  </div>
+</div>
+`;
+
+      // ── Tab switcher ──────────────────────────────────────────────────────
+      window.emShowTab = function (id) {
+        document
+          .querySelectorAll(".em-panel")
+          .forEach((p) => p.classList.remove("em-panel-active"));
+        document
+          .querySelectorAll(".em-tab")
+          .forEach((t) => t.classList.remove("em-tab-active"));
+        document.getElementById(id).classList.add("em-panel-active");
+        const idx = ["em-ref", "em-quiz"].indexOf(id);
+        document
+          .querySelectorAll(".em-tab")
+          [idx].classList.add("em-tab-active");
+      };
+
+      // ── Quiz state ────────────────────────────────────────────────────────
+      const eqState = {
+        selectedCount: 10,
+        questions: [],
+        current: 0,
+        score: 0,
+      };
+
+      window.eqSelectCount = function (n) {
+        eqState.selectedCount = n;
+        document.querySelectorAll(".eq-count-btn").forEach((b) => {
+          b.classList.toggle("selected", parseInt(b.dataset.count) === n);
+        });
+      };
+
+      // Intensity badge styles matching INTENSITY_STYLES
+      const EQ_INTENSITY_STYLES = {
+        mild: { bg: "#f0fdf4", color: "#166534", border: "#86efac" },
+        moderate: { bg: "#fffbeb", color: "#92400e", border: "#fde68a" },
+        strong: { bg: "#fef2f2", color: "#991b1b", border: "#fca5a5" },
+      };
+
+      function eqBuildQuestions(count) {
+        const pool = [...ALL_EMOTION_WORDS]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 55);
+        const selected = pool.slice(0, Math.min(count, pool.length));
+
+        return selected.map((item) => {
+          // Use one of the word's examples as the sentence, blank out the word
+          const exampleRaw =
+            item.examples[Math.floor(Math.random() * item.examples.length)] ||
+            "";
+          const wordLower = item.word.toLowerCase();
+          const exLower = exampleRaw.toLowerCase();
+          const blank = "___________";
+          let sentence;
+
+          const idx = exLower.indexOf(wordLower);
+          if (idx !== -1) {
+            sentence =
+              exampleRaw.slice(0, idx) +
+              blank +
+              exampleRaw.slice(idx + item.word.length);
+          } else {
+            sentence = exampleRaw + " [" + blank + "]";
+          }
+
+          // Distractors: prioritise same emotion group (different intensity), then same intensity, then random
+          const sameEmotion = pool.filter(
+            (o) => o.word !== item.word && o.emotion === item.emotion,
+          );
+          const sameIntensity = pool.filter(
+            (o) =>
+              o.word !== item.word &&
+              o.emotion !== item.emotion &&
+              o.intensity === item.intensity,
+          );
+          const rest = pool.filter(
+            (o) =>
+              o.word !== item.word &&
+              o.emotion !== item.emotion &&
+              o.intensity !== item.intensity,
+          );
+
+          const distPool = [
+            ...sameEmotion.sort(() => Math.random() - 0.5),
+            ...sameIntensity.sort(() => Math.random() - 0.5),
+            ...rest.sort(() => Math.random() - 0.5),
+          ];
+          const distractors = distPool.slice(0, 3);
+          const options = [item, ...distractors].sort(
+            () => Math.random() - 0.5,
+          );
+
+          return { item, sentence, options };
+        });
+      }
+
+      window.eqStart = function () {
+        eqState.questions = eqBuildQuestions(eqState.selectedCount);
+        eqState.current = 0;
+        eqState.score = 0;
+
+        document.getElementById("eq-setup").style.display = "none";
+        document.getElementById("eq-results").classList.remove("eq-active");
+        document.getElementById("eq-question-wrap").classList.add("eq-active");
+
+        eqRenderQuestion();
+      };
+
+      function eqRenderQuestion() {
+        const q = eqState.questions[eqState.current];
+        const total = eqState.questions.length;
+
+        document.getElementById("eq-progress-fill").style.width =
+          ((eqState.current + 1) / total) * 100 + "%";
+        document.getElementById("eq-q-num").textContent =
+          `Question ${eqState.current + 1} of ${total}`;
+        document.getElementById("eq-score").textContent = eqState.score;
+
+        // Emotion + intensity hint tags
+        document.getElementById("eq-emotion-tag").textContent =
+          `${q.item.emoji} ${q.item.emotion}`;
+        const ist =
+          EQ_INTENSITY_STYLES[q.item.intensity] || EQ_INTENSITY_STYLES.mild;
+        const intensityEl = document.getElementById("eq-intensity-tag");
+        intensityEl.textContent = q.item.intensity;
+        intensityEl.style.background = ist.bg;
+        intensityEl.style.color = ist.color;
+        intensityEl.style.border = `1px solid ${ist.border}`;
+
+        // Sentence with styled blank
+        const sentenceHtml = q.sentence.replace(
+          "___________",
+          `<span class="eq-blank">___________</span>`,
+        );
+        document.getElementById("eq-sentence").innerHTML = sentenceHtml;
+
+        // Options
+        document.getElementById("eq-options").innerHTML = q.options
+          .map(
+            (opt) =>
+              `<button class="eq-opt-btn" data-word="${opt.word.replace(/"/g, "&quot;")}" onclick="eqAnswer(this)">
+            <div>${opt.word}</div>
+            
+          </button>`,
+          )
+          .join("");
+
+        // Reset feedback
+        const fb = document.getElementById("eq-feedback");
+        fb.className = "eq-feedback";
+        document.getElementById("eq-feedback-main").textContent = "";
+        document.getElementById("eq-feedback-tip").textContent = "";
+        document.getElementById("eq-next-btn").className = "eq-next-btn";
+      }
+
+      window.eqAnswer = function (btn) {
+        const q = eqState.questions[eqState.current];
+        const chosen = btn.dataset.word;
+        const correct = q.item.word;
+        const isRight = chosen === correct;
+
+        if (isRight) eqState.score++;
+
+        document.querySelectorAll(".eq-opt-btn").forEach((b) => {
+          b.disabled = true;
+          if (b.dataset.word === correct) b.classList.add("eq-correct");
+          else if (b === btn && !isRight) b.classList.add("eq-wrong");
+        });
+
+        const fb = document.getElementById("eq-feedback");
+        fb.className =
+          "eq-feedback eq-show " + (isRight ? "eq-correct-fb" : "eq-wrong-fb");
+        document.getElementById("eq-feedback-main").textContent = isRight
+          ? `✓ Correct! "${correct}"`
+          : `✗ The answer is: "${correct}"`;
+        document.getElementById("eq-feedback-tip").textContent =
+          `Meaning: ${q.item.meaning}`;
+
+        document.getElementById("eq-score").textContent = eqState.score;
+        document.getElementById("eq-next-btn").className =
+          "eq-next-btn eq-show";
+      };
+
+      window.eqNext = function () {
+        eqState.current++;
+        if (eqState.current < eqState.questions.length) {
+          eqRenderQuestion();
+        } else {
+          eqShowResults();
+        }
+      };
+
+      function eqShowResults() {
+        document
+          .getElementById("eq-question-wrap")
+          .classList.remove("eq-active");
+        const results = document.getElementById("eq-results");
+        results.classList.add("eq-active");
+
+        const pct = Math.round(
+          (eqState.score / eqState.questions.length) * 100,
+        );
+        document.getElementById("eq-results-score").textContent =
+          `${eqState.score} / ${eqState.questions.length}`;
+
+        let emoji = "💪",
+          msg = "";
+        if (pct === 100) {
+          emoji = "🏆";
+          msg = "Perfect! Your emotional vocabulary is outstanding.";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          msg = "Excellent! You can express nuanced feelings with precision.";
+        } else if (pct >= 60) {
+          emoji = "📚";
+          msg = "Good effort! Review the mild/moderate/strong distinctions.";
+        } else if (pct >= 40) {
+          emoji = "🔄";
+          msg = "Keep going — emotion nuance takes practice on CELPIP.";
+        } else {
+          emoji = "💪";
+          msg = "Study the reference cards, focusing on intensity levels.";
+        }
+
+        document.getElementById("eq-results-emoji").textContent = emoji;
+        document.getElementById("eq-results-msg").textContent =
+          `${pct}% — ${msg}`;
+      }
+
+      window.eqRestart = function () {
+        document.getElementById("eq-results").classList.remove("eq-active");
+        document.getElementById("eq-setup").style.display = "";
+      };
     }
 
     // ─── Event Listeners ────────────────────────────────────────────────
