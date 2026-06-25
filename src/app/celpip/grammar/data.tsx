@@ -1,5 +1,16 @@
+const shuffleArray = (array: any) => {
+  const shuffled = [...array];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+};
+
 // ─── Emotions Vocabulary ───────────────────────────────────────────
-export const EMOTIONS = [
+export const EMOTIONS = shuffleArray([
   {
     emotion: "Happy",
     emoji: "😊",
@@ -372,7 +383,7 @@ export const EMOTIONS = [
       },
     ],
   },
-];
+]);
 
 export const INTENSITY_STYLES = {
   Mild: "bg-emerald2-light text-emerald2-dark",
@@ -5302,6 +5313,7 @@ export const QUIZ_QS = [
 ];
 
 // ─── Collocations ──────────────────────────────────────────────────
+
 export const COLLOCATIONS = [
   {
     category: "Making Decisions",
@@ -5309,30 +5321,46 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "make a decision",
+        question: "We need to ___________ before the deadline.",
+        answer: "make a decision",
         example: "We need to make a decision before the deadline.",
       },
       {
         collocation: "reach a conclusion",
+        question: "After reviewing the data, the team finally ___________.",
+        answer: "reached a conclusion",
         example: "After reviewing the data, we reached a conclusion.",
       },
       {
         collocation: "weigh the options",
+        question:
+          "She took her time before committing — she wanted to ___________.",
+        answer: "weigh the options",
         example: "She took her time to weigh the options carefully.",
       },
       {
         collocation: "come to an agreement",
+        question:
+          "After hours of negotiation, the two sides finally ___________.",
+        answer: "came to an agreement",
         example: "The two sides finally came to an agreement.",
       },
       {
         collocation: "take a stand",
+        question: "It was time for him to ___________ on the issue.",
+        answer: "take a stand",
         example: "It was time for him to take a stand on the issue.",
       },
       {
         collocation: "change your mind",
+        question: "He ___________ after hearing her argument.",
+        answer: "changed his mind",
         example: "He changed his mind after hearing her argument.",
       },
       {
         collocation: "keep an open mind",
+        question: "Try to ___________ during the discussion.",
+        answer: "keep an open mind",
         example: "Try to keep an open mind during the discussion.",
       },
     ],
@@ -5343,34 +5371,51 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "make progress",
+        question: "We are steadily ___________ on the project.",
+        answer: "making progress",
         example: "We are making steady progress on the project.",
       },
       {
         collocation: "meet a deadline",
+        question: "The team worked overtime to ___________.",
+        answer: "meet the deadline",
         example: "The team worked overtime to meet the deadline.",
       },
       {
         collocation: "take responsibility",
+        question: "He was willing to ___________ for the error.",
+        answer: "take responsibility",
         example: "He was willing to take responsibility for the error.",
       },
       {
         collocation: "put in the effort",
+        question: "You need to ___________ if you want to see results.",
+        answer: "put in the effort",
         example: "You need to put in the effort to see results.",
       },
       {
         collocation: "do your best",
+        question: "All I ask is that you ___________.",
+        answer: "do your best",
         example: "All I ask is that you do your best.",
       },
       {
         collocation: "carry out a task",
+        question: "She ___________ with great precision.",
+        answer: "carried out every task",
         example: "She carried out every task with great precision.",
       },
       {
         collocation: "make an effort",
+        question: "He ___________ to improve his communication skills.",
+        answer: "made a real effort",
         example: "He made a real effort to improve his communication skills.",
       },
       {
         collocation: "achieve a goal",
+        question:
+          "With discipline, anyone can ___________ they set for themselves.",
+        answer: "achieve any goal",
         example: "With discipline, anyone can achieve their goals.",
       },
     ],
@@ -5381,34 +5426,50 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "make a point",
+        question: "She paused mid-sentence to ___________.",
+        answer: "make a point",
         example: "She paused to make an important point.",
       },
       {
         collocation: "raise a concern",
+        question: "Several employees ___________ about the new policy.",
+        answer: "raised concerns",
         example: "Several employees raised concerns about the new policy.",
       },
       {
         collocation: "give an example",
+        question: "Could you ___________ of what you mean?",
+        answer: "give an example",
         example: "Could you give an example of what you mean?",
       },
       {
         collocation: "express an opinion",
+        question: "Everyone was encouraged to ___________ freely.",
+        answer: "express their opinion",
         example: "Everyone was encouraged to express their opinion freely.",
       },
       {
         collocation: "draw a conclusion",
+        question: "It is too early to ___________ from the results.",
+        answer: "draw a conclusion",
         example: "It is too early to draw a conclusion from the results.",
       },
       {
         collocation: "get your point across",
+        question: "He struggled to ___________ in the meeting.",
+        answer: "get his point across",
         example: "He struggled to get his point across in the meeting.",
       },
       {
         collocation: "come to the point",
+        question: "Please ___________ — we don't have much time.",
+        answer: "come to the point",
         example: "Please come to the point — we don't have much time.",
       },
       {
         collocation: "break the news",
+        question: "It was hard to ___________ to the family.",
+        answer: "break the news",
         example: "It was hard to break the news to the family.",
       },
     ],
@@ -5419,31 +5480,45 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "solve a problem",
+        question: "They worked together to ___________ quickly.",
+        answer: "solve the problem",
         example: "They worked together to solve the problem quickly.",
       },
       {
         collocation: "face a challenge",
+        question: "She ___________ during her first year abroad.",
+        answer: "faced many challenges",
         example: "She faced many challenges during her first year abroad.",
       },
       {
         collocation: "deal with a situation",
+        question: "He remained calm and ___________ professionally.",
+        answer: "dealt with the situation",
         example:
           "He remained calm and dealt with the situation professionally.",
       },
       {
         collocation: "overcome an obstacle",
+        question: "The team had to ___________ before finishing the project.",
+        answer: "overcome several obstacles",
         example: "The team had to overcome several unexpected obstacles.",
       },
       {
         collocation: "find a solution",
+        question: "We need to ___________ that works for everyone.",
+        answer: "find a solution",
         example: "We need to find a solution that works for everyone.",
       },
       {
         collocation: "take action",
+        question: "The government decided to ___________ immediately.",
+        answer: "take action",
         example: "The government decided to take action immediately.",
       },
       {
         collocation: "address an issue",
+        question: "The report ___________ in the community.",
+        answer: "addresses several key issues",
         example: "The report addresses several key issues in the community.",
       },
     ],
@@ -5454,30 +5529,45 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "run out of time",
+        question: "We ___________ before finishing the presentation.",
+        answer: "ran out of time",
         example: "We ran out of time before finishing the presentation.",
       },
       {
         collocation: "save time",
+        question: "Taking the highway will ___________ on our commute.",
+        answer: "save us time",
         example: "Taking the highway will save us a lot of time.",
       },
       {
         collocation: "make plans",
+        question: "Let's ___________ to meet up next weekend.",
+        answer: "make plans",
         example: "Let's make plans to meet up next weekend.",
       },
       {
         collocation: "set a goal",
+        question:
+          "She ___________ to read twelve books by the end of the year.",
+        answer: "set a goal",
         example: "She set a goal to read twelve books by the end of the year.",
       },
       {
         collocation: "manage your time",
+        question: "Learning to ___________ is essential in university.",
+        answer: "manage your time",
         example: "Learning to manage your time is essential in university.",
       },
       {
         collocation: "keep track of",
+        question: "It's important to ___________ your spending.",
+        answer: "keep track of",
         example: "It's important to keep track of your spending.",
       },
       {
         collocation: "ahead of schedule",
+        question: "The construction was completed ___________.",
+        answer: "ahead of schedule",
         example: "The construction was completed ahead of schedule.",
       },
     ],
@@ -5488,30 +5578,44 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "have mixed feelings",
+        question: "I ___________ about moving to a new city.",
+        answer: "have mixed feelings",
         example: "I have mixed feelings about moving to a new city.",
       },
       {
         collocation: "lose your temper",
+        question: "He rarely ___________, even under pressure.",
+        answer: "loses his temper",
         example: "He rarely loses his temper, even under pressure.",
       },
       {
         collocation: "come as a surprise",
+        question: "The announcement ___________ to everyone.",
+        answer: "came as a complete surprise",
         example: "The announcement came as a complete surprise.",
       },
       {
         collocation: "feel at home",
+        question: "She immediately ___________ in the new neighbourhood.",
+        answer: "felt at home",
         example: "She immediately felt at home in the new neighbourhood.",
       },
       {
         collocation: "take it personally",
+        question: "Please don't ___________ — it's just constructive feedback.",
+        answer: "take it personally",
         example: "Please don't take the feedback personally.",
       },
       {
         collocation: "lose hope",
+        question: "Even after three setbacks, she refused to ___________.",
+        answer: "lose hope",
         example: "Even after three setbacks, she refused to lose hope.",
       },
       {
         collocation: "burst into tears",
+        question: "He ___________ when he heard the unexpected news.",
+        answer: "burst into tears",
         example: "He burst into tears when he heard the good news.",
       },
     ],
@@ -5522,30 +5626,44 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "make improvements",
+        question: "The city ___________ to public transit.",
+        answer: "made significant improvements",
         example: "The city made significant improvements to public transit.",
       },
       {
         collocation: "bring about change",
+        question: "Education can ___________ in society.",
+        answer: "bring about change",
         example: "Education can bring about meaningful change in society.",
       },
       {
         collocation: "play a role",
+        question: "Diet ___________ in long-term health.",
+        answer: "plays a major role",
         example: "Diet plays a major role in long-term health.",
       },
       {
         collocation: "have an impact",
+        question: "Social media ___________ on how we communicate.",
+        answer: "has had a huge impact",
         example: "Social media has had a huge impact on how we communicate.",
       },
       {
         collocation: "lead to",
+        question: "Poor planning often ___________ unnecessary delays.",
+        answer: "leads to",
         example: "Poor planning often leads to unnecessary delays.",
       },
       {
         collocation: "result in",
+        question: "The new strategy ___________ a 20% increase in sales.",
+        answer: "resulted in",
         example: "The new strategy resulted in a 20% increase in sales.",
       },
       {
         collocation: "give rise to",
+        question: "The shortage ___________ widespread public concern.",
+        answer: "gave rise to",
         example: "The shortage gave rise to widespread public concern.",
       },
     ],
@@ -5556,26 +5674,38 @@ export const COLLOCATIONS = [
     items: [
       {
         collocation: "make friends",
+        question: "It took her a few months to ___________ at the new school.",
+        answer: "make friends",
         example: "It took her a few months to make friends at the new school.",
       },
       {
         collocation: "keep in touch",
+        question: "We promised to ___________ after the conference.",
+        answer: "keep in touch",
         example: "We promised to keep in touch after the conference.",
       },
       {
         collocation: "get along with",
+        question: "She ___________ all of her coworkers.",
+        answer: "gets along with",
         example: "She gets along with all of her coworkers.",
       },
       {
         collocation: "lend a hand",
+        question: "He was always willing to ___________ when needed.",
+        answer: "lend a hand",
         example: "He was always willing to lend a hand when needed.",
       },
       {
         collocation: "lose touch with",
+        question: "After moving abroad, she ___________ many old friends.",
+        answer: "lost touch with",
         example: "After moving abroad, she lost touch with many old friends.",
       },
       {
         collocation: "build trust",
+        question: "It takes time to ___________ in any relationship.",
+        answer: "build trust",
         example: "It takes time to build trust in any relationship.",
       },
     ],

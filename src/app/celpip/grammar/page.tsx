@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import {
   EMOTIONS,
   COLLOCATIONS,
+  COLLOCATIONS_QUIZ,
   INTENSITY_STYLES,
   SOUND_WORDS,
   VERB_TYPES,
@@ -71,14 +72,6 @@ export default function CelpipVocabPage() {
     };
 
     let listFilters = { task: "all" };
-    let quizState = {
-      currentQuestionIndex: 0,
-      score: 0,
-      totalQuestions: 0,
-      quizVocab: [],
-      selectedTask: "all",
-      currentQuestion: null,
-    };
 
     // ─── Word List Rendering ───────────────────────────────────────────
     function renderWordList() {
@@ -166,164 +159,338 @@ export default function CelpipVocabPage() {
     }
     window.phSpeak = phSpeak;
 
-    // ─── Quiz Logic ────────────────────────────────────────────────────
-    function getRandomOptions(correctEntry, count = 4) {
-      const otherOptions = window.VOCAB.filter(
-        (v) => v.word !== correctEntry.word,
-      );
-      const shuffled = otherOptions
-        .sort(() => Math.random() - 0.5)
-        .slice(0, count - 1);
-      return [correctEntry, ...shuffled].sort(() => Math.random() - 0.5);
-    }
+    // ─── Word List Fill-in-the-Blank Quiz ─────────────────────────────
+    function initWordListQuiz() {
+      const root = document.getElementById("wlq-root");
+      if (!root || root.dataset.init) return;
+      root.dataset.init = "1";
 
-    function generateRandomQuestionType() {
-      return Math.random() < 0.5 ? "word-to-meaning" : "meaning-to-word";
-    }
+      root.innerHTML = `
+<style>
+  .wlq-setup { background:#f9fafb; border:1px solid #e5e7eb; border-radius:16px; padding:2rem; text-align:center; }
+  .wlq-setup-title { font-size:22px; font-weight:700; color:#111827; margin-bottom:8px; }
+  .wlq-setup-sub { font-size:14px; color:#6b7280; margin-bottom:1.5rem; line-height:1.6; max-width:480px; margin-left:auto; margin-right:auto; }
+  .wlq-filter-label { font-size:11px; font-weight:700; letter-spacing:.07em; color:#9ca3af; text-transform:uppercase; margin-bottom:8px; }
+  .wlq-task-row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:1.25rem; }
+  .wlq-task-btn { padding:6px 14px; border-radius:20px; border:2px solid #e5e7eb; background:#fff; color:#374151; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; }
+  .wlq-task-btn.selected { border-color:#111827; background:#111827; color:#fff; }
+  .wlq-count-label { font-size:11px; font-weight:700; letter-spacing:.07em; color:#9ca3af; text-transform:uppercase; margin-bottom:8px; }
+  .wlq-count-row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem; }
+  .wlq-count-btn { padding:7px 18px; border-radius:20px; border:2px solid #e5e7eb; background:#fff; color:#374151; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; }
+  .wlq-count-btn.selected { border-color:#111827; background:#111827; color:#fff; }
+  .wlq-start-btn { background:#111827; color:#fff; border:none; border-radius:10px; padding:12px 36px; font-size:15px; font-weight:600; cursor:pointer; }
+  .wlq-start-btn:hover { background:#1f2937; }
 
-    function renderQuestion() {
-      const vocab = quizState.quizVocab[quizState.currentQuestionIndex];
-      const questionType = generateRandomQuestionType();
-      quizState.currentQuestion = { vocab, type: questionType };
+  .wlq-q-wrap { display:none; }
+  .wlq-q-wrap.active { display:block; }
+  .wlq-prog-bar { height:6px; background:#e5e7eb; border-radius:99px; margin-bottom:1.25rem; overflow:hidden; }
+  .wlq-prog-fill { height:100%; background:#111827; border-radius:99px; transition:width .3s ease; }
+  .wlq-meta { display:flex; justify-content:space-between; font-size:13px; color:#9ca3af; margin-bottom:1.25rem; }
+  .wlq-score-badge { background:#f3f4f6; color:#111827; border-radius:20px; padding:3px 12px; font-weight:700; font-size:13px; }
 
-      const questionText = document.getElementById("question-text");
-      const optionsContainer = document.getElementById("options-container");
+  .wlq-sentence-box { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:1.5rem 1.75rem; margin-bottom:1.25rem; }
+  .wlq-sent-label { font-size:11px; font-weight:700; letter-spacing:.07em; color:#9ca3af; text-transform:uppercase; margin-bottom:6px; }
+  .wlq-task-tag { font-size:11px; font-weight:600; color:#374151; background:#f3f4f6; border-radius:20px; padding:2px 10px; display:inline-block; margin-bottom:10px; }
+  .wlq-type-tag { font-size:11px; font-weight:600; color:#6b7280; background:#f9fafb; border:1px solid #e5e7eb; border-radius:20px; padding:2px 10px; display:inline-block; margin-bottom:10px; margin-left:6px; }
+  .wlq-sentence-text { font-size:17px; color:#111827; line-height:1.8; font-weight:500; }
+  .wlq-blank { display:inline-block; min-width:130px; border-bottom:3px solid #111827; color:#111827; font-weight:700; text-align:center; font-size:17px; padding:0 4px; }
+  .wlq-hint { font-size:12px; color:#9ca3af; margin-top:10px; font-style:italic; }
 
-      if (questionType === "word-to-meaning") {
-        questionText.textContent = `What does "${vocab.word}" mean?`;
-        const options = getRandomOptions(vocab);
-        quizState.currentQuestion.correctAnswer = vocab.word;
-        optionsContainer.innerHTML = options
-          .map(
-            (opt) => `
-              <button class="option-btn w-full px-4 py-3 rounded-lg border border-mist bg-white text-slate hover:bg-fog transition-colors text-left" data-answer="${opt.word}">
-                ${opt.meaning}
-              </button>
-            `,
-          )
-          .join("");
-      } else {
-        questionText.textContent = `Which word means "${vocab.meaning}"?`;
-        const options = getRandomOptions(vocab);
-        quizState.currentQuestion.correctAnswer = vocab.word;
-        optionsContainer.innerHTML = options
-          .map(
-            (opt) => `
-              <button class="option-btn w-full px-4 py-3 rounded-lg border border-mist bg-white text-slate hover:bg-fog transition-colors text-left" data-answer="${opt.word}">
-                ${opt.word}
-              </button>
-            `,
-          )
-          .join("");
-      }
+  .wlq-opts { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; margin-bottom:1rem; }
+  .wlq-opt { padding:10px 14px; border-radius:10px; border:2px solid #e5e7eb; background:#fff; color:#374151; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s; text-align:left; line-height:1.5; }
+  .wlq-opt:hover:not(:disabled) { border-color:#111827; background:#f9fafb; }
+  .wlq-opt.wlq-correct { border-color:#16a34a !important; background:#f0fdf4 !important; color:#166534 !important; }
+  .wlq-opt.wlq-wrong { border-color:#dc2626 !important; background:#fef2f2 !important; color:#991b1b !important; }
+  .wlq-opt:disabled { cursor:default; }
 
-      document.getElementById("question-number").textContent =
-        `Question ${quizState.currentQuestionIndex + 1} of ${quizState.totalQuestions}`;
-      document.getElementById("score-display").textContent =
-        `Score: ${quizState.score}`;
+  .wlq-feedback { border-radius:10px; padding:10px 16px; font-size:14px; font-weight:600; margin-bottom:1rem; display:none; }
+  .wlq-feedback.show { display:block; }
+  .wlq-feedback.ok { background:#f0fdf4; color:#166534; border:1px solid #86efac; }
+  .wlq-feedback.bad { background:#fef2f2; color:#991b1b; border:1px solid #fca5a5; }
+  .wlq-feedback-sub { font-size:12px; font-weight:400; margin-top:4px; color:#6b7280; }
 
-      const progressPercent =
-        ((quizState.currentQuestionIndex + 1) / quizState.totalQuestions) * 100;
-      document.getElementById("progress-fill").style.width =
-        progressPercent + "%";
+  .wlq-next-btn { background:#111827; color:#fff; border:none; border-radius:10px; padding:11px 28px; font-size:14px; font-weight:600; cursor:pointer; display:none; }
+  .wlq-next-btn.show { display:inline-block; }
+  .wlq-next-btn:hover { background:#1f2937; }
 
-      document.querySelectorAll(".option-btn").forEach((btn) => {
-        btn.addEventListener("click", handleAnswer);
+  .wlq-results { display:none; background:#f9fafb; border:1px solid #e5e7eb; border-radius:16px; padding:2.5rem 2rem; text-align:center; }
+  .wlq-results.active { display:block; }
+  .wlq-res-emoji { font-size:3rem; margin-bottom:.75rem; }
+  .wlq-res-title { font-size:22px; font-weight:700; color:#111827; margin-bottom:6px; }
+  .wlq-res-score { font-size:42px; font-weight:800; color:#111827; margin-bottom:6px; }
+  .wlq-res-msg { font-size:15px; color:#6b7280; margin-bottom:1.5rem; }
+  .wlq-restart-btn { background:#111827; color:#fff; border:none; border-radius:10px; padding:12px 32px; font-size:14px; font-weight:600; cursor:pointer; }
+  .wlq-restart-btn:hover { background:#1f2937; }
+
+  @media(max-width:600px){
+    .wlq-opts { grid-template-columns:1fr; }
+    .wlq-sentence-text,.wlq-blank { font-size:15px; }
+    .wlq-task-row,.wlq-count-row { justify-content:flex-start; }
+  }
+</style>
+
+<!-- Setup -->
+<div class="wlq-setup" id="wlq-setup">
+  <div class="wlq-setup-title">✏️ Word List Fill-in-the-Blank Quiz</div>
+  <div class="wlq-setup-sub">Each question shows a real CELPIP-style example sentence with the target word blanked out. Four options show meanings — pick the one that fits the context.</div>
+
+
+
+  <div class="wlq-count-label">Number of questions</div>
+  <div class="wlq-count-row" id="wlq-count-row">
+    <button class="wlq-count-btn selected" data-n="10">10</button>
+    <button class="wlq-count-btn" data-n="20">20</button>
+    <button class="wlq-count-btn" data-n="30">30</button>
+    <button class="wlq-count-btn" data-n="0">All</button>
+  </div>
+
+  <button class="wlq-start-btn" id="wlq-start-btn">Start Quiz →</button>
+</div>
+
+<!-- Question -->
+<div class="wlq-q-wrap" id="wlq-q-wrap">
+  <div class="wlq-prog-bar"><div class="wlq-prog-fill" id="wlq-prog-fill" style="width:0%"></div></div>
+  <div class="wlq-meta">
+    <span id="wlq-q-num">Question 1 of 10</span>
+    <span class="wlq-score-badge">Score: <span id="wlq-score">0</span></span>
+  </div>
+  <div class="wlq-sentence-box">
+    <div class="wlq-sent-label">Complete the sentence — choose the meaning of the missing word</div>
+    <div id="wlq-tags"></div>
+    <div class="wlq-sentence-text" id="wlq-sentence"></div>
+    <div class="wlq-hint" id="wlq-hint"></div>
+  </div>
+  <div class="wlq-opts" id="wlq-opts"></div>
+  <div class="wlq-feedback" id="wlq-feedback">
+    <div id="wlq-fb-main"></div>
+    <div class="wlq-feedback-sub" id="wlq-fb-sub"></div>
+  </div>
+  <button class="wlq-next-btn" id="wlq-next-btn">Next →</button>
+</div>
+
+<!-- Results -->
+<div class="wlq-results" id="wlq-results">
+  <div class="wlq-res-emoji" id="wlq-res-emoji">🎉</div>
+  <div class="wlq-res-title">Quiz Complete!</div>
+  <div class="wlq-res-score" id="wlq-res-score">0 / 0</div>
+  <div class="wlq-res-msg" id="wlq-res-msg"></div>
+  <button class="wlq-restart-btn" id="wlq-restart-btn">Try Again</button>
+</div>
+`;
+
+      // ── state ──────────────────────────────────────────────────────────
+      const st = { task: "all", count: 10, questions: [], idx: 0, score: 0 };
+
+      // ── task filter buttons ────────────────────────────────────────────
+
+      const allTasks = [
+        "all",
+        ...new Set(window.VOCAB.map((v) => String(v.task))),
+      ].sort((a, b) => {
+        if (a === "all") return -1;
+        if (b === "all") return 1;
+        return Number(a) - Number(b);
       });
-    }
 
-    function handleAnswer(e) {
-      const selectedAnswer = e.target.dataset.answer;
-      const isCorrect =
-        selectedAnswer === quizState.currentQuestion.correctAnswer;
+      // ── count buttons ──────────────────────────────────────────────────
+      root.querySelectorAll(".wlq-count-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          root
+            .querySelectorAll(".wlq-count-btn")
+            .forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          st.count = parseInt(btn.dataset.n);
+        });
+      });
 
-      if (isCorrect) {
-        quizState.score++;
-        e.target.classList.add("correct");
-      } else {
-        e.target.classList.add("incorrect");
-        document.querySelectorAll(".option-btn").forEach((btn) => {
-          if (btn.dataset.answer === quizState.currentQuestion.correctAnswer) {
-            btn.classList.add("correct");
+      // ── build questions ────────────────────────────────────────────────
+      function buildQuestions() {
+        let pool =
+          st.task === "all"
+            ? [...window.VOCAB]
+            : window.VOCAB.filter((v) => String(v.task) === st.task);
+
+        if (pool.length === 0) return [];
+
+        // shuffle
+        pool = pool.sort(() => Math.random() - 0.5);
+        const selected = st.count === 0 ? pool : pool.slice(0, st.count);
+
+        return selected.map((item) => {
+          // blank the word in the example sentence
+          const raw = item.example || "";
+          const wLow = item.word.toLowerCase();
+          const rLow = raw.toLowerCase();
+          const blank = "___________";
+          let sentence;
+          const i = rLow.indexOf(wLow);
+          if (i !== -1) {
+            sentence =
+              raw.slice(0, i) + blank + raw.slice(i + item.word.length);
+          } else {
+            // try just the first word of a multi-word phrase
+            const firstWord = wLow.split(" ")[0];
+            const i2 = rLow.indexOf(firstWord);
+            if (i2 !== -1) {
+              sentence =
+                raw.slice(0, i2) + blank + raw.slice(i2 + firstWord.length);
+            } else {
+              sentence = raw + " [" + blank + "]";
+            }
           }
+
+          // distractors: same type first (confusingly similar meanings), then random
+          const sameType = pool.filter(
+            (o) => o.word !== item.word && o.type === item.type,
+          );
+          const otherPool = pool.filter(
+            (o) => o.word !== item.word && o.type !== item.type,
+          );
+          const distPool = [
+            ...sameType.sort(() => Math.random() - 0.5),
+            ...otherPool.sort(() => Math.random() - 0.5),
+          ];
+          const distractors = distPool.slice(0, 3);
+          const options = [item, ...distractors].sort(
+            () => Math.random() - 0.5,
+          );
+
+          return { item, sentence, options };
         });
       }
 
-      document
-        .querySelectorAll(".option-btn")
-        .forEach((btn) => (btn.disabled = true));
+      // ── render question ────────────────────────────────────────────────
+      function renderQ() {
+        const q = st.questions[st.idx];
+        const total = st.questions.length;
 
-      const feedback = document.getElementById("feedback");
-      feedback.textContent = isCorrect ? "✓ Correct!" : "✗ Incorrect";
-      feedback.classList.remove("hidden", "bg-mist", "text-slate");
-      feedback.classList.add(
-        isCorrect
-          ? "bg-emerald2-light text-emerald2-dark"
-          : "bg-rose2-light text-rose2-dark",
-      );
+        root.querySelector("#wlq-prog-fill").style.width =
+          ((st.idx + 1) / total) * 100 + "%";
+        root.querySelector("#wlq-q-num").textContent =
+          `Question ${st.idx + 1} of ${total}`;
+        root.querySelector("#wlq-score").textContent = st.score;
 
-      document.getElementById("next-btn").classList.remove("hidden");
-    }
+        // tags
+        const taskLabel =
+          TASK_LABELS[String(q.item.task)] || `Task ${q.item.task}`;
+        root.querySelector("#wlq-tags").innerHTML =
+          `<span class="wlq-task-tag">${taskLabel}</span><span class="wlq-type-tag">${q.item.type || ""}</span>`;
 
-    function goToNextQuestion() {
-      quizState.currentQuestionIndex++;
+        // sentence
+        const sentHtml = q.sentence.replace(
+          "___________",
+          `<span class="wlq-blank">___________</span>`,
+        );
+        root.querySelector("#wlq-sentence").innerHTML = sentHtml;
 
-      if (quizState.currentQuestionIndex < quizState.totalQuestions) {
-        document.getElementById("feedback").classList.add("hidden");
-        document.getElementById("next-btn").classList.add("hidden");
-        renderQuestion();
-      } else {
-        showQuizResults();
-      }
-    }
+        // options — show meanings as choices
+        root.querySelector("#wlq-opts").innerHTML = q.options
+          .map(
+            (opt) =>
+              `<button class="wlq-opt" data-word="${opt.word.replace(/"/g, "&quot;")}">
+              <div style="font-weight:700;margin-bottom:2px">${opt.word}</div>
+              </button>`,
+          )
+          .join("");
 
-    function showQuizResults() {
-      document
-        .getElementById("quiz-question-container")
-        .classList.add("hidden");
-      document.getElementById("quiz-results").classList.remove("hidden");
+        // reset
+        const fb = root.querySelector("#wlq-feedback");
+        fb.className = "wlq-feedback";
+        root.querySelector("#wlq-fb-main").textContent = "";
+        root.querySelector("#wlq-fb-sub").textContent = "";
+        root.querySelector("#wlq-next-btn").className = "wlq-next-btn";
 
-      const percentage = Math.round(
-        (quizState.score / quizState.totalQuestions) * 100,
-      );
-      document.getElementById("final-score").textContent = quizState.score;
-      document.getElementById("total-questions").textContent =
-        quizState.totalQuestions;
-
-      let message = "";
-      if (percentage === 100) message = "Perfect! You're a vocab master! 🎉";
-      else if (percentage >= 80)
-        message = "Great job! Keep practicing to improve! 🌟";
-      else if (percentage >= 60)
-        message = "Good effort! Review the words you missed. 📚";
-      else message = "Keep studying! You'll improve with practice. 💪";
-
-      document.getElementById("result-message").textContent = message;
-    }
-
-    function startQuiz() {
-      const selectedTask = quizState.selectedTask;
-      quizState.quizVocab =
-        selectedTask === "all"
-          ? window.VOCAB
-          : window.VOCAB.filter((v) => String(v.task) === selectedTask);
-
-      if (quizState.quizVocab.length === 0) {
-        alert("No words available for the selected task.");
-        return;
+        root.querySelectorAll(".wlq-opt").forEach((btn) => {
+          btn.addEventListener("click", () => answerQ(btn, q));
+        });
       }
 
-      quizState.currentQuestionIndex = 0;
-      quizState.score = 0;
-      quizState.totalQuestions = quizState.quizVocab.length;
+      // ── answer ─────────────────────────────────────────────────────────
+      function answerQ(btn, q) {
+        const chosen = btn.dataset.word;
+        const correct = q.item.word;
+        const isRight = chosen === correct;
+        if (isRight) st.score++;
 
-      document.getElementById("quiz-setup").classList.add("hidden");
-      document
-        .getElementById("quiz-question-container")
-        .classList.remove("hidden");
-      document.getElementById("quiz-results").classList.add("hidden");
+        root.querySelectorAll(".wlq-opt").forEach((b) => {
+          b.disabled = true;
+          if (b.dataset.word === correct) b.classList.add("wlq-correct");
+          else if (b === btn && !isRight) b.classList.add("wlq-wrong");
+        });
 
-      renderQuestion();
+        const fb = root.querySelector("#wlq-feedback");
+        fb.className = "wlq-feedback show " + (isRight ? "ok" : "bad");
+        root.querySelector("#wlq-fb-main").textContent = isRight
+          ? `✓ Correct! The word is "${correct}".`
+          : `✗ The word is "${correct}".`;
+        root.querySelector("#wlq-fb-sub").textContent =
+          `Meaning: ${q.item.meaning}`;
+
+        root.querySelector("#wlq-score").textContent = st.score;
+        root.querySelector("#wlq-next-btn").className = "wlq-next-btn show";
+      }
+
+      // ── next ───────────────────────────────────────────────────────────
+      root.querySelector("#wlq-next-btn").addEventListener("click", () => {
+        st.idx++;
+        if (st.idx < st.questions.length) {
+          renderQ();
+        } else {
+          showResults();
+        }
+      });
+
+      // ── results ────────────────────────────────────────────────────────
+      function showResults() {
+        root.querySelector("#wlq-q-wrap").classList.remove("active");
+        root.querySelector("#wlq-results").classList.add("active");
+        const pct = Math.round((st.score / st.questions.length) * 100);
+        root.querySelector("#wlq-res-score").textContent =
+          `${st.score} / ${st.questions.length}`;
+        let emoji = "💪",
+          msg = "";
+        if (pct === 100) {
+          emoji = "🏆";
+          msg = "Perfect! You're a vocabulary master!";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          msg = "Excellent! Strong vocab range for CELPIP.";
+        } else if (pct >= 60) {
+          emoji = "📚";
+          msg = "Good effort! Review the words you missed.";
+        } else if (pct >= 40) {
+          emoji = "🔄";
+          msg = "Keep going — context-based practice really helps.";
+        } else {
+          emoji = "💪";
+          msg = "Study the Word List tab and try again.";
+        }
+        root.querySelector("#wlq-res-emoji").textContent = emoji;
+        root.querySelector("#wlq-res-msg").textContent = `${pct}% — ${msg}`;
+      }
+
+      // ── restart ────────────────────────────────────────────────────────
+      root.querySelector("#wlq-restart-btn").addEventListener("click", () => {
+        root.querySelector("#wlq-results").classList.remove("active");
+        root.querySelector("#wlq-setup").style.display = "";
+      });
+
+      // ── start ──────────────────────────────────────────────────────────
+      root.querySelector("#wlq-start-btn").addEventListener("click", () => {
+        st.questions = buildQuestions();
+        if (st.questions.length === 0) {
+          alert(
+            "No words found for the selected task. Try a different filter.",
+          );
+          return;
+        }
+        st.idx = 0;
+        st.score = 0;
+        root.querySelector("#wlq-setup").style.display = "none";
+        root.querySelector("#wlq-results").classList.remove("active");
+        root.querySelector("#wlq-q-wrap").classList.add("active");
+        renderQ();
+      });
     }
 
     function renderNounsPronouns() {
@@ -970,32 +1137,8 @@ export default function CelpipVocabPage() {
         const selected = pool.slice(0, Math.min(count, pool.length));
 
         return selected.map((item) => {
-          const blank = "___________";
-          const sentenceRaw = item.example || "";
-          const collLower = item.collocation.toLowerCase();
-          const sentenceLower = sentenceRaw.toLowerCase();
-          let sentence;
-
-          // Try exact match first
-          const idx = sentenceLower.indexOf(collLower);
-          if (idx !== -1) {
-            sentence =
-              sentenceRaw.slice(0, idx) +
-              blank +
-              sentenceRaw.slice(idx + item.collocation.length);
-          } else {
-            // Try matching just the first two words of the collocation
-            const firstWords = collLower.split(" ").slice(0, 2).join(" ");
-            const idx2 = sentenceLower.indexOf(firstWords);
-            if (idx2 !== -1) {
-              sentence =
-                sentenceRaw.slice(0, idx2) +
-                blank +
-                sentenceRaw.slice(idx2 + firstWords.length);
-            } else {
-              sentence = sentenceRaw + " [" + blank + "]";
-            }
-          }
+          // Use the pre-written question with blank, fall back to example if missing
+          const sentence = item.question || item.example + " [___________]";
 
           // Pick 3 distractors from the same category first, then fill from pool
           const sameCategory = pool.filter(
@@ -1079,14 +1222,21 @@ export default function CelpipVocabPage() {
           else if (b === btn && !isRight) b.classList.add("cq-wrong");
         });
 
+        // Fill the blank with the conjugated answer form
+        const filledSentence = q.sentence.replace(
+          "___________",
+          `<span style="color:#16a34a;font-weight:700;border-bottom:3px solid #16a34a;padding:0 2px">${q.item.answer}</span>`,
+        );
+        document.getElementById("cq-sentence").innerHTML = filledSentence;
+
         const fb = document.getElementById("cq-feedback");
         fb.className =
           "cq-feedback cq-show " + (isRight ? "cq-correct-fb" : "cq-wrong-fb");
         document.getElementById("cq-feedback-main").textContent = isRight
-          ? `✓ Correct! "${correct}"`
-          : `✗ The answer is: "${correct}"`;
+          ? `✓ Correct! The collocation is "${correct}".`
+          : `✗ The collocation is: "${correct}"`;
         document.getElementById("cq-feedback-tip").textContent =
-          `Example: ${q.item.example}`;
+          `The sentence uses: "${q.item.answer}"`;
 
         document.getElementById("cq-score").textContent = cqState.score;
         document.getElementById("cq-next-btn").className =
@@ -5602,6 +5752,7 @@ export default function CelpipVocabPage() {
 <div class="em-tab-row">
   <button class="em-tab em-tab-active" onclick="emShowTab('em-ref')">📖 Reference</button>
   <button class="em-tab" onclick="emShowTab('em-quiz')">💬 Quiz (55 Questions)</button>
+  <button class="em-tab" onclick="emShowTab('em-fill')">✏️ Fill in the Blanks</button>
 </div>
 
 <!-- ── REFERENCE PANEL ── -->
@@ -5693,6 +5844,144 @@ export default function CelpipVocabPage() {
     <button class="eq-restart-btn" onclick="eqRestart()">Try Again</button>
   </div>
 </div>
+
+<!-- ── FILL IN THE BLANKS PANEL ── -->
+<div id="em-fill" class="em-panel">
+  <style>
+    .efb-emotion-block { margin-bottom: 3rem; }
+    .efb-emotion-title {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #111827;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .efb-emotion-emoji { font-size: 2.5rem; margin-right: 0.5rem; vertical-align: middle; }
+    .efb-divider { width: 3rem; height: 4px; background: #8b5cf6; border-radius: 99px; margin-bottom: 1.75rem; }
+    .efb-words-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .efb-word-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 15px;
+      color: #374151;
+      flex-wrap: wrap;
+    }
+    .efb-meaning { flex: 1; min-width: 180px; line-height: 1.6; }
+    .efb-input {
+      display: inline-block;
+      min-width: 120px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+      border: none;
+      border-bottom: 3px solid #8b5cf6;
+      background: transparent;
+      padding: 4px 6px;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.15s;
+    }
+    .efb-input:focus { border-bottom-color: #6d28d9; }
+    .efb-input.efb-correct { border-bottom-color: #16a34a; color: #166534; background: #f0fdf4; border-radius: 6px 6px 0 0; }
+    .efb-input.efb-wrong  { border-bottom-color: #dc2626; color: #991b1b; background: #fef2f2; border-radius: 6px 6px 0 0; }
+    .efb-wrong-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  width: 100%;
+  padding-top: 6px;
+  border-top: 1px dashed #fca5a5;
+}
+.efb-hint-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.efb-hint-emotion {
+  background: #f5f3ff;
+  color: #5b21b6;
+  border: 1px solid #ddd6fe;
+}
+.efb-hint-intensity {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+.efb-hint-meaning {
+  font-size: 12.5px;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.5;
+}
+.efb-hint-na {
+  color: #9ca3af;
+}
+    .efb-check-row { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
+    .efb-check-btn {
+      background: #8b5cf6; color: #fff; border: none; border-radius: 10px;
+      padding: 10px 28px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s;
+    }
+    .efb-check-btn:hover { background: #7c3aed; }
+    .efb-reset-btn {
+      background: #f3f4f6; color: #374151; border: none; border-radius: 10px;
+      padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s;
+    }
+    .efb-reset-btn:hover { background: #e5e7eb; }
+    .efb-result-msg { font-size: 13px; font-weight: 600; margin-top: 0.75rem; color: #6b7280; }
+    @media (max-width: 600px) {
+      .efb-emotion-title { font-size: 2.5rem; }
+      .efb-input { min-width: 80px; font-size: 14px; }
+    }
+  </style>
+
+  ${EMOTIONS.map(
+    (group, gi) => `
+    <div class="efb-emotion-block" id="efb-block-${gi}">
+      <div class="efb-emotion-title">
+        <span class="efb-emotion-emoji">${group.emoji}</span>${group.emotion}
+      </div>
+      <div class="efb-divider"></div>
+      <div class="efb-words-grid">
+        ${group.words
+          .map(
+            (w, wi) => `
+          <div class="efb-word-row">
+            <input
+              class="efb-input"
+              data-answer="${w.word.toLowerCase()}"
+              data-gi="${gi}"
+              data-wi="${wi}"
+              placeholder="?"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <span class="efb-meaning">${w.meaning}</span>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+      <div class="efb-check-row">
+        <button class="efb-check-btn" onclick="efbCheck(${gi})">Check Answers</button>
+        <button class="efb-reset-btn" onclick="efbReset(${gi})">Reset</button>
+      </div>
+      <div class="efb-result-msg" id="efb-msg-${gi}"></div>
+    </div>
+  `,
+  ).join("")}
+</div>
 `;
 
       // ── Tab switcher ──────────────────────────────────────────────────────
@@ -5704,7 +5993,7 @@ export default function CelpipVocabPage() {
           .querySelectorAll(".em-tab")
           .forEach((t) => t.classList.remove("em-tab-active"));
         document.getElementById(id).classList.add("em-panel-active");
-        const idx = ["em-ref", "em-quiz"].indexOf(id);
+        const idx = ["em-ref", "em-quiz", "em-fill"].indexOf(id);
         document
           .querySelectorAll(".em-tab")
           [idx].classList.add("em-tab-active");
@@ -5926,6 +6215,74 @@ export default function CelpipVocabPage() {
         document.getElementById("eq-results").classList.remove("eq-active");
         document.getElementById("eq-setup").style.display = "";
       };
+
+      // ── Fill-in-the-Blanks logic ──────────────────────────────────────────────
+      window.efbCheck = function (gi) {
+        const block = document.getElementById(`efb-block-${gi}`);
+        const inputs = block.querySelectorAll(".efb-input");
+        let correct = 0;
+
+        inputs.forEach((inp) => {
+          const userVal = inp.value.trim().toLowerCase();
+          const answer = inp.dataset.answer;
+          inp.classList.remove("efb-correct", "efb-wrong");
+
+          // Remove any existing hint from a previous check
+          const existingHint = inp
+            .closest(".efb-word-row")
+            .querySelector(".efb-wrong-hint");
+          if (existingHint) existingHint.remove();
+
+          if (userVal === answer) {
+            inp.classList.add("efb-correct");
+            correct++;
+          } else {
+            inp.classList.add("efb-wrong");
+
+            // Look up what the user typed in ALL_EMOTION_WORDS
+            let hintHTML = "";
+            if (userVal) {
+              const match = ALL_EMOTION_WORDS.find(
+                (w) => w.word.toLowerCase() === userVal,
+              );
+              if (match) {
+                hintHTML = `
+            <div class="efb-wrong-hint">
+              <span class="efb-hint-tag efb-hint-emotion">${match.emoji} ${match.emotion}</span>
+              <span class="efb-hint-tag efb-hint-intensity">${match.intensity}</span>
+              <span class="efb-hint-meaning">${match.meaning}</span>
+            </div>`;
+              } else {
+                hintHTML = `
+            <div class="efb-wrong-hint">
+              <span class="efb-hint-meaning efb-hint-na">Meaning not available</span>
+            </div>`;
+              }
+            }
+
+            if (hintHTML) {
+              inp
+                .closest(".efb-word-row")
+                .insertAdjacentHTML("beforeend", hintHTML);
+            }
+          }
+        });
+
+        const msg = document.getElementById(`efb-msg-${gi}`);
+        msg.textContent = `${correct} / ${inputs.length} correct`;
+        msg.style.color = correct === inputs.length ? "#16a34a" : "#dc2626";
+      };
+
+      window.efbReset = function (gi) {
+        const block = document.getElementById(`efb-block-${gi}`);
+        block.querySelectorAll(".efb-input").forEach((inp) => {
+          inp.value = "";
+          inp.classList.remove("efb-correct", "efb-wrong");
+        });
+        block.querySelectorAll(".efb-wrong-hint").forEach((el) => el.remove());
+        const msg = document.getElementById(`efb-msg-${gi}`);
+        msg.textContent = "";
+      };
     }
 
     // ─── Event Listeners ────────────────────────────────────────────────
@@ -5933,6 +6290,8 @@ export default function CelpipVocabPage() {
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const tab = btn.dataset.tab;
+        // init word-list fill-in-blank quiz lazily
+        if (tab === "word-list") setTimeout(initWordListQuiz, 50);
         document.querySelectorAll(".tab-btn").forEach((b) => {
           b.classList.remove("bg-ink", "text-fog");
           b.classList.add("bg-fog", "text-slate");
@@ -6087,19 +6446,91 @@ export default function CelpipVocabPage() {
 
         {/* Word List Tab */}
         <div id="word-list" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-3">
-              Filter by task
-            </p>
-            <div id="task-filters" className="flex flex-wrap gap-2"></div>
+          {/* ── inner tab bar ── */}
+          <div
+            id="wl-tab-bar"
+            style={{
+              display: "flex",
+              gap: 0,
+              borderBottom: "2px solid #f3f4f6",
+              marginBottom: "1.75rem",
+            }}
+          >
+            <button
+              id="wl-tab-list"
+              style={{
+                padding: "10px 22px",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#111827",
+                cursor: "pointer",
+                border: "none",
+                background: "none",
+                borderBottom: "3px solid #111827",
+                marginBottom: -2,
+              }}
+              onClick={() => {
+                document.getElementById("wl-panel-list").style.display =
+                  "block";
+                document.getElementById("wl-panel-quiz").style.display = "none";
+                document.getElementById("wl-tab-list").style.borderBottomColor =
+                  "#111827";
+                document.getElementById("wl-tab-list").style.color = "#111827";
+                document.getElementById("wl-tab-quiz").style.borderBottomColor =
+                  "transparent";
+                document.getElementById("wl-tab-quiz").style.color = "#6b7280";
+              }}
+            >
+              📖 Word List
+            </button>
+            <button
+              id="wl-tab-quiz"
+              style={{
+                padding: "10px 22px",
+                fontSize: 14,
+                fontWeight: 500,
+                color: "#6b7280",
+                cursor: "pointer",
+                border: "none",
+                background: "none",
+                borderBottom: "3px solid transparent",
+                marginBottom: -2,
+              }}
+              onClick={() => {
+                document.getElementById("wl-panel-list").style.display = "none";
+                document.getElementById("wl-panel-quiz").style.display =
+                  "block";
+                document.getElementById("wl-tab-quiz").style.borderBottomColor =
+                  "#111827";
+                document.getElementById("wl-tab-quiz").style.color = "#111827";
+                document.getElementById("wl-tab-list").style.borderBottomColor =
+                  "transparent";
+                document.getElementById("wl-tab-list").style.color = "#6b7280";
+              }}
+            >
+              ✏️ Fill-in-the-Blank Quiz
+            </button>
           </div>
 
-          <div id="vocab-content" className="space-y-8"></div>
+          {/* ── LIST PANEL ── */}
+          <div id="wl-panel-list">
+            <div className="mb-8">
+              <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-3">
+                Filter by task
+              </p>
+              <div id="task-filters" className="flex flex-wrap gap-2"></div>
+            </div>
+            <div id="vocab-content" className="space-y-8"></div>
+            <div id="empty-state" className="hidden text-center py-16">
+              <p className="text-lg text-slate">
+                No words found for the selected filters.
+              </p>
+            </div>
+          </div>
 
-          <div id="empty-state" className="hidden text-center py-16">
-            <p className="text-lg text-slate">
-              No words found for the selected filters.
-            </p>
+          {/* ── QUIZ PANEL ── */}
+          <div id="wl-panel-quiz" style={{ display: "none" }}>
+            <div id="wlq-root"></div>
           </div>
         </div>
 
