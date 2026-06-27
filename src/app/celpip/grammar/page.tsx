@@ -1073,12 +1073,413 @@ export default function CelpipVocabPage() {
             <tr><td>Lower degree</td><td><em>less</em> + adj</td><td><em>the least</em> + adj</td><td>practical → <em>less practical</em> → <em>the least practical</em></td></tr>
             <tr><td>Irregular: good</td><td><em>better</em></td><td><em>best</em></td><td>This plan is <em>better</em>; it's the <em>best</em> option.</td></tr>
             <tr><td>Irregular: bad</td><td><em>worse</em></td><td><em>worst</em></td><td>Traffic was <em>worse</em>; Monday is the <em>worst</em>.</td></tr>
-            <tr><td>Irregular: far</td><td><em>farther / further</em></td><td><em>farthest / furthest</em></td><td>I walked <em>farther</em>; this goes <em>further</em> than expected.</td></tr>
+            <tr><td>Irregular: far</td><td><em>farther(physical) / further(non-physical like discuss this further)</em></td><td><em>farthest / furthest</em></td><td>I walked <em>farther</em>; this goes <em>further</em> than expected.</td></tr>
             <tr><td>Irregular: little</td><td><em>less</em></td><td><em>least</em></td><td>We have <em>less</em> time; this causes the <em>least</em> disruption.</td></tr>
           </tbody>
         </table>
         <div style="margin-top:1rem;padding:1rem 1.25rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:13px;color:#166534;line-height:1.7;">
           <strong>💡 Booster tip:</strong> Strengthen comparatives with <em>much, far, considerably, significantly</em> before <em>more/less/better</em> — e.g. <em>"Option A is considerably more affordable than Option B"</em>. Soften with <em>a little, slightly, somewhat</em> — e.g. <em>"driving is slightly more convenient."</em> Both moves sound native and impress examiners.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 9 — INTENSIFIERS
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Intensifiers — Make Your Adjectives More Powerful</div>
+        <p class="adj-intro">
+          An <strong>intensifier</strong> is a word placed before an adjective (or adverb) to
+          <em>strengthen or weaken</em> its meaning. Native speakers rely on intensifiers constantly
+          to add nuance and emotion. In CELPIP, using varied intensifiers instead of repeating
+          <em>"very"</em> is one of the fastest ways to improve your <strong>Vocabulary</strong>
+          and <strong>Listenability</strong> scores.
+        </p>
+
+        <style>
+          /* ── intensifier-specific styles ── */
+          .int-type-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+          .int-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; }
+          .int-card-head {
+            padding: 10px 16px; font-size: 12px; font-weight: 800;
+            letter-spacing: .05em; text-transform: uppercase;
+            display: flex; align-items: center; gap: 8px;
+          }
+          .int-card-body { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 7px; }
+          .int-word-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+          .int-word {
+            font-size: 13.5px; font-weight: 700; min-width: 120px;
+            color: #1e293b; flex-shrink: 0;
+          }
+          .int-ex { font-size: 13px; color: #475569; font-style: italic; }
+          .int-ex em { font-style: normal; font-weight: 600; color: #4f46e5; }
+
+          /* head colour themes */
+          .int-head-amplifier  { background: #4f46e5; color: #fff; }
+          .int-head-downtoner  { background: #0891b2; color: #fff; }
+          .int-head-maximizer  { background: #7c3aed; color: #fff; }
+          .int-head-approximator{ background: #0f766e; color: #fff; }
+          .int-head-booster    { background: #b45309; color: #fff; }
+          .int-head-diminisher { background: #475569; color: #fff; }
+
+          /* gradability scale */
+          .int-scale-wrap { margin-bottom: 1.5rem; }
+          .int-scale-bar {
+            height: 10px; border-radius: 99px;
+            background: linear-gradient(to right, #bae6fd, #6366f1, #7c3aed, #4f46e5);
+            position: relative; margin: .5rem 0 .25rem;
+          }
+          .int-scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: #64748b; font-weight: 600; }
+          .int-scale-words {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-top: .75rem;
+          }
+          .int-scale-badge {
+            font-size: 12px; font-weight: 600; padding: 3px 12px;
+            border-radius: 20px; border: 1px solid;
+          }
+
+          /* gradable vs non-gradable */
+          .int-grad-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+          .int-grad-box { border-radius: 12px; padding: 1rem 1.25rem; }
+          .int-grad-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .6rem; }
+          .int-grad-row { font-size: 13px; margin-bottom: 5px; color: #374151; line-height: 1.6; }
+          .int-grad-row em { color: #4f46e5; font-style: normal; font-weight: 600; }
+
+          /* natural use tips */
+          .int-tip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: .85rem; margin-bottom: 1.5rem; }
+          .int-tip-box {
+            display: flex; gap: 12px; align-items: flex-start;
+            background: #fefce8; border: 1px solid #fde68a; border-radius: 12px;
+            padding: 1rem 1.25rem;
+          }
+          .int-tip-icon { font-size: 1.4rem; flex-shrink: 0; }
+          .int-tip-body { font-size: 13px; color: #374151; line-height: 1.65; }
+          .int-tip-body strong { color: #92400e; }
+
+          /* collocation table */
+          .int-col-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1.5rem; }
+          .int-col-table th {
+            background: #4f46e5; color: #fff; padding: 9px 14px;
+            text-align: left; font-size: 12px; font-weight: 700;
+          }
+          .int-col-table th:first-child { border-radius: 10px 0 0 0; }
+          .int-col-table th:last-child  { border-radius: 0 10px 0 0; }
+          .int-col-table td { padding: 8px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: top; }
+          .int-col-table tr:last-child td { border-bottom: none; }
+          .int-col-table tr:nth-child(even) td { background: #f8fafc; }
+          .int-col-table em { color: #4f46e5; font-style: normal; font-weight: 600; }
+
+          /* mistake pairs */
+          .int-mistake-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: .85rem; }
+          .int-mistake-box { border: 1px solid #fecaca; border-radius: 12px; overflow: hidden; }
+          .int-mistake-head { background: #fef2f2; padding: 7px 12px; font-size: 12px; font-weight: 700; color: #991b1b; }
+          .int-mistake-body { padding: 10px 12px; background: #fff; display: flex; flex-direction: column; gap: 4px; }
+          .int-m-wrong { font-size: 13px; color: #dc2626; }
+          .int-m-right { font-size: 13px; color: #16a34a; }
+          .int-m-why   { font-size: 11.5px; color: #64748b; font-style: italic; margin-top: 2px; }
+          .int-m-wrong::before { content: "✗ "; font-weight: 700; }
+          .int-m-right::before { content: "✓ "; font-weight: 700; }
+
+          @media (max-width: 600px) {
+            .int-type-grid, .int-grad-grid, .int-tip-grid, .int-mistake-grid { grid-template-columns: 1fr; }
+          }
+        </style>
+
+        <!-- ── INTENSITY SCALE ─────────────────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">The Intensity Scale</div>
+        <div class="int-scale-wrap">
+          <div class="int-scale-bar"></div>
+          <div class="int-scale-labels">
+            <span>⬇ Weakest</span>
+            <span>Neutral / Base adjective</span>
+            <span>Strongest ⬆</span>
+          </div>
+          <div class="int-scale-words">
+            <span class="int-scale-badge" style="background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;">barely</span>
+            <span class="int-scale-badge" style="background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;">slightly</span>
+            <span class="int-scale-badge" style="background:#f0f9ff;border-color:#bae6fd;color:#0369a1;">a little</span>
+            <span class="int-scale-badge" style="background:#f0f9ff;border-color:#bae6fd;color:#0369a1;">somewhat</span>
+            <span class="int-scale-badge" style="background:#f5f3ff;border-color:#ddd6fe;color:#4f46e5;">fairly</span>
+            <span class="int-scale-badge" style="background:#f5f3ff;border-color:#ddd6fe;color:#4f46e5;">rather</span>
+            <span class="int-scale-badge" style="background:#ede9fe;border-color:#c4b5fd;color:#4f46e5;">quite</span>
+            <span class="int-scale-badge" style="background:#ede9fe;border-color:#c4b5fd;color:#4f46e5;">pretty</span>
+            <span class="int-scale-badge" style="background:#e0e7ff;border-color:#a5b4fc;color:#3730a3;">very</span>
+            <span class="int-scale-badge" style="background:#e0e7ff;border-color:#a5b4fc;color:#3730a3;">really</span>
+            <span class="int-scale-badge" style="background:#ddd6fe;border-color:#8b5cf6;color:#3730a3;">highly</span>
+            <span class="int-scale-badge" style="background:#ddd6fe;border-color:#8b5cf6;color:#3730a3;">extremely</span>
+            <span class="int-scale-badge" style="background:#c4b5fd;border-color:#7c3aed;color:#fff;">incredibly</span>
+            <span class="int-scale-badge" style="background:#c4b5fd;border-color:#7c3aed;color:#fff;">remarkably</span>
+            <span class="int-scale-badge" style="background:#7c3aed;border-color:#6d28d9;color:#fff;">absolutely</span>
+            <span class="int-scale-badge" style="background:#4f46e5;border-color:#3730a3;color:#fff;">utterly</span>
+            <span class="int-scale-badge" style="background:#3730a3;border-color:#312e81;color:#fff;">completely</span>
+          </div>
+        </div>
+
+        <!-- ── 6 TYPES OF INTENSIFIERS ─────────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">6 Types of Intensifiers</div>
+        <div class="int-type-grid">
+
+          <div class="int-card">
+            <div class="int-card-head int-head-amplifier">🔊 Amplifiers — increase intensity</div>
+            <div class="int-card-body">
+              <div class="int-word-row"><span class="int-word">very</span><span class="int-ex">The exam was <em>very</em> challenging.</span></div>
+              <div class="int-word-row"><span class="int-word">extremely</span><span class="int-ex">It was <em>extremely</em> cold that morning.</span></div>
+              <div class="int-word-row"><span class="int-word">highly</span><span class="int-ex">She is <em>highly</em> motivated.</span></div>
+              <div class="int-word-row"><span class="int-word">deeply</span><span class="int-ex">I was <em>deeply</em> moved by the story.</span></div>
+              <div class="int-word-row"><span class="int-word">remarkably</span><span class="int-ex">The results were <em>remarkably</em> consistent.</span></div>
+              <div class="int-word-row"><span class="int-word">incredibly</span><span class="int-ex">The view was <em>incredibly</em> breathtaking.</span></div>
+              <div class="int-word-row"><span class="int-word">exceptionally</span><span class="int-ex">She was <em>exceptionally</em> well-prepared.</span></div>
+            </div>
+          </div>
+
+          <div class="int-card">
+            <div class="int-card-head int-head-maximizer">🔝 Maximizers — signal the absolute limit</div>
+            <div class="int-card-body">
+              <div style="font-size:12px;color:#6b7280;padding:0 0 6px;font-style:italic;">Used with extreme (non-gradable) adjectives only. Never with "very."</div>
+              <div class="int-word-row"><span class="int-word">absolutely</span><span class="int-ex">It was <em>absolutely</em> perfect.</span></div>
+              <div class="int-word-row"><span class="int-word">completely</span><span class="int-ex">I was <em>completely</em> exhausted.</span></div>
+              <div class="int-word-row"><span class="int-word">utterly</span><span class="int-ex">The plan was <em>utterly</em> flawed.</span></div>
+              <div class="int-word-row"><span class="int-word">totally</span><span class="int-ex">She was <em>totally</em> unprepared.</span></div>
+              <div class="int-word-row"><span class="int-word">purely</span><span class="int-ex">It was <em>purely</em> coincidental.</span></div>
+              <div class="int-word-row"><span class="int-word">entirely</span><span class="int-ex">That is <em>entirely</em> unacceptable.</span></div>
+            </div>
+          </div>
+
+          <div class="int-card">
+            <div class="int-card-head int-head-downtoner">🔉 Downtoners — reduce intensity</div>
+            <div class="int-card-body">
+              <div class="int-word-row"><span class="int-word">slightly</span><span class="int-ex">The result was <em>slightly</em> disappointing.</span></div>
+              <div class="int-word-row"><span class="int-word">somewhat</span><span class="int-ex">I was <em>somewhat</em> surprised.</span></div>
+              <div class="int-word-row"><span class="int-word">a little</span><span class="int-ex">It was <em>a little</em> overwhelming at first.</span></div>
+              <div class="int-word-row"><span class="int-word">barely</span><span class="int-ex">The room was <em>barely</em> adequate.</span></div>
+              <div class="int-word-row"><span class="int-word">hardly</span><span class="int-ex">It was <em>hardly</em> noticeable.</span></div>
+              <div class="int-word-row"><span class="int-word">mildly</span><span class="int-ex">She seemed <em>mildly</em> concerned.</span></div>
+            </div>
+          </div>
+
+          <div class="int-card">
+            <div class="int-card-head int-head-approximator">〰️ Approximators — express nearness to a degree</div>
+            <div class="int-card-body">
+              <div class="int-word-row"><span class="int-word">almost</span><span class="int-ex">It was <em>almost</em> impossible to focus.</span></div>
+              <div class="int-word-row"><span class="int-word">nearly</span><span class="int-ex">The task was <em>nearly</em> complete.</span></div>
+              <div class="int-word-row"><span class="int-word">practically</span><span class="int-ex">It was <em>practically</em> invisible.</span></div>
+              <div class="int-word-row"><span class="int-word">virtually</span><span class="int-ex">The area was <em>virtually</em> deserted.</span></div>
+              <div class="int-word-row"><span class="int-word">essentially</span><span class="int-ex">The two plans are <em>essentially</em> identical.</span></div>
+            </div>
+          </div>
+
+          <div class="int-card">
+            <div class="int-card-head int-head-booster">⚡ Boosters — formal / academic amplifiers</div>
+            <div class="int-card-body">
+              <div style="font-size:12px;color:#6b7280;padding:0 0 6px;font-style:italic;">Use these in CELPIP Writing Task 2 to sound formal and precise.</div>
+              <div class="int-word-row"><span class="int-word">significantly</span><span class="int-ex">Costs have become <em>significantly</em> higher.</span></div>
+              <div class="int-word-row"><span class="int-word">considerably</span><span class="int-ex">Option A is <em>considerably</em> more efficient.</span></div>
+              <div class="int-word-row"><span class="int-word">substantially</span><span class="int-ex">Risks are <em>substantially</em> reduced.</span></div>
+              <div class="int-word-row"><span class="int-word">notably</span><span class="int-ex">The outcome was <em>notably</em> different.</span></div>
+              <div class="int-word-row"><span class="int-word">overwhelmingly</span><span class="int-ex">The response was <em>overwhelmingly</em> positive.</span></div>
+              <div class="int-word-row"><span class="int-word">undeniably</span><span class="int-ex">This is <em>undeniably</em> the better approach.</span></div>
+            </div>
+          </div>
+
+          <div class="int-card">
+            <div class="int-card-head int-head-diminisher">🌫️ Diminishers — polite / hedged weakeners</div>
+            <div class="int-card-body">
+              <div style="font-size:12px;color:#6b7280;padding:0 0 6px;font-style:italic;">Use in Task 6 (difficult situation) to sound diplomatic, not aggressive.</div>
+              <div class="int-word-row"><span class="int-word">fairly</span><span class="int-ex">The response was <em>fairly</em> reasonable.</span></div>
+              <div class="int-word-row"><span class="int-word">rather</span><span class="int-ex">I found it <em>rather</em> inconvenient.</span></div>
+              <div class="int-word-row"><span class="int-word">quite</span><span class="int-ex">The delay was <em>quite</em> unexpected.</span></div>
+              <div class="int-word-row"><span class="int-word">pretty</span><span class="int-ex">That was <em>pretty</em> difficult to handle.</span></div>
+              <div class="int-word-row"><span class="int-word">moderately</span><span class="int-ex">I was <em>moderately</em> satisfied with the result.</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── GRADABLE vs NON-GRADABLE ───────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">Gradable vs Non-Gradable Adjectives — Which Intensifier Fits?</div>
+        <p class="adj-intro" style="margin-bottom:.85rem;">
+          This is the rule native speakers follow instinctively. Using the wrong intensifier with the
+          wrong adjective type is one of the most noticeable fluency errors on CELPIP.
+        </p>
+        <div class="int-grad-grid">
+          <div class="int-grad-box" style="background:#ede9fe;border:1px solid #c4b5fd;">
+            <div class="int-grad-title" style="color:#4f46e5;">🎚️ Gradable adjectives</div>
+            <div style="font-size:12px;color:#4f46e5;margin-bottom:.6rem;">Use: very, extremely, fairly, quite, rather, slightly, somewhat, incredibly…</div>
+            <div class="int-grad-row"><em>very tired</em> / <em>extremely busy</em></div>
+            <div class="int-grad-row"><em>fairly cold</em> / <em>quite expensive</em></div>
+            <div class="int-grad-row"><em>slightly nervous</em> / <em>rather unusual</em></div>
+            <div class="int-grad-row"><em>incredibly fast</em> / <em>remarkably calm</em></div>
+          </div>
+          <div class="int-grad-box" style="background:#fdf4ff;border:1px solid #e9d5ff;">
+            <div class="int-grad-title" style="color:#7c3aed;">🔝 Non-gradable (extreme) adjectives</div>
+            <div style="font-size:12px;color:#7c3aed;margin-bottom:.6rem;">Use: absolutely, completely, utterly, totally, entirely, purely — NEVER "very"</div>
+            <div class="int-grad-row"><em>absolutely furious</em> ✅ / <em style="color:#dc2626">very furious</em> ❌</div>
+            <div class="int-grad-row"><em>completely exhausted</em> ✅ / <em style="color:#dc2626">very exhausted</em> ❌</div>
+            <div class="int-grad-row"><em>utterly devastated</em> ✅ / <em style="color:#dc2626">very devastated</em> ❌</div>
+            <div class="int-grad-row"><em>totally frozen</em> ✅ / <em style="color:#dc2626">very frozen</em> ❌</div>
+          </div>
+        </div>
+
+        <!-- ── NATURAL COLLOCATIONS ────────────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">Natural Intensifier + Adjective Collocations</div>
+        <p class="adj-intro" style="margin-bottom:.85rem;">
+          Native speakers don't just pick <em>any</em> intensifier — certain intensifiers
+          collocate strongly with specific adjectives. Using these pairs signals true fluency.
+        </p>
+        <table class="int-col-table">
+          <thead>
+            <tr><th>Intensifier</th><th>Collocates naturally with…</th><th>Avoid pairing with…</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>deeply</strong></td>
+              <td><em>concerned, moved, troubled, rooted, committed, disappointed, grateful</em></td>
+              <td>deeply tall, deeply cold <span style="color:#dc2626">(physical adjectives)</span></td>
+            </tr>
+            <tr>
+              <td><strong>highly</strong></td>
+              <td><em>skilled, motivated, recommended, competitive, effective, regarded, trained</em></td>
+              <td>highly hot, highly tired <span style="color:#dc2626">(emotion/sensation adjectives)</span></td>
+            </tr>
+            <tr>
+              <td><strong>bitterly</strong></td>
+              <td><em>cold, disappointed, divided, resentful, ironic, contested</em></td>
+              <td>bitterly happy, bitterly large</td>
+            </tr>
+            <tr>
+              <td><strong>perfectly</strong></td>
+              <td><em>clear, normal, reasonable, capable, valid, understandable, acceptable</em></td>
+              <td>perfectly angry, perfectly difficult</td>
+            </tr>
+            <tr>
+              <td><strong>terribly</strong></td>
+              <td><em>sorry, wrong, important, difficult, upset, worried, embarrassed</em></td>
+              <td>terribly tall, terribly fast</td>
+            </tr>
+            <tr>
+              <td><strong>strongly</strong></td>
+              <td><em>opposed, committed, influenced, built, worded, suggested, held</em></td>
+              <td>strongly tired, strongly cold</td>
+            </tr>
+            <tr>
+              <td><strong>considerably</strong></td>
+              <td><em>more/less + adj, larger, smaller, faster, older, cheaper, better</em></td>
+              <td>considerably furious, considerably afraid</td>
+            </tr>
+            <tr>
+              <td><strong>genuinely</strong></td>
+              <td><em>surprised, concerned, impressed, happy, confused, thankful, interested</em></td>
+              <td>genuinely enormous, genuinely freezing</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ── HOW TO USE NATURALLY ───────────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">How to Use Intensifiers Naturally — 6 Rules</div>
+        <div class="int-tip-grid">
+          <div class="int-tip-box">
+            <span class="int-tip-icon">🔁</span>
+            <div class="int-tip-body">
+              <strong>Never repeat "very" twice in a row.</strong> Rotate through the scale.
+              ❌ "It was very, very good." → ✅ "It was remarkably good" or
+              "It was exceptionally well done."
+            </div>
+          </div>
+          <div class="int-tip-box">
+            <span class="int-tip-icon">🎯</span>
+            <div class="int-tip-body">
+              <strong>Match intensifier strength to context.</strong> In Task 6 (complaints),
+              use downtoners to sound polite: <em>"I was rather disappointed"</em> not
+              <em>"I was absolutely furious"</em> — even if you are.
+            </div>
+          </div>
+          <div class="int-tip-box">
+            <span class="int-tip-icon">📝</span>
+            <div class="int-tip-body">
+              <strong>In Writing Task 2, prefer formal boosters.</strong>
+              Replace <em>"very different"</em> with <em>"considerably different"</em>
+              or <em>"notably distinct."</em> Informal intensifiers like <em>"pretty"</em>
+              or <em>"really"</em> lower your register score in essays.
+            </div>
+          </div>
+          <div class="int-tip-box">
+            <span class="int-tip-icon">🎙️</span>
+            <div class="int-tip-body">
+              <strong>In Speaking, stress the intensifier — not the adjective.</strong>
+              Native speakers say <em>"abSOlutely perfect"</em> and <em>"inCREDibly helpful."</em>
+              This stress pattern signals fluency to the examiner.
+            </div>
+          </div>
+          <div class="int-tip-box">
+            <span class="int-tip-icon">🧊</span>
+            <div class="int-tip-body">
+              <strong>Never use "very" before an extreme adjective.</strong>
+              ❌ "very starving / very freezing / very furious" →
+              ✅ "absolutely starving / utterly freezing / completely furious."
+              This is the single most common intensifier error on CELPIP.
+            </div>
+          </div>
+          <div class="int-tip-box">
+            <span class="int-tip-icon">🤝</span>
+            <div class="int-tip-body">
+              <strong>Learn collocations as chunks.</strong> Don't build intensifier + adjective
+              pairs from scratch — memorise natural chunks:
+              <em>deeply committed, highly skilled, bitterly cold, perfectly reasonable,
+              strongly opposed, terribly sorry.</em>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── COMMON MISTAKES ────────────────────────────────────── -->
+        <div class="adj-section-title" style="font-size:1rem;margin-bottom:.75rem;">Common Intensifier Mistakes</div>
+        <div class="int-mistake-grid">
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ "very" with a non-gradable adjective</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"The soup was very boiling."</div>
+              <div class="int-m-right">"The soup was absolutely boiling."</div>
+              <div class="int-m-why">Boiling is extreme — it has no degrees. Use a maximizer.</div>
+            </div>
+          </div>
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ Formal intensifier in casual speech</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"The pizza was substantially delicious."</div>
+              <div class="int-m-right">"The pizza was incredibly delicious."</div>
+              <div class="int-m-why">"Substantially" is for formal comparisons, not everyday compliments.</div>
+            </div>
+          </div>
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ Casual intensifier in formal writing</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"The policy is pretty controversial."</div>
+              <div class="int-m-right">"The policy is considerably controversial."</div>
+              <div class="int-m-why">"Pretty" is too informal for CELPIP Writing Task 2 essays.</div>
+            </div>
+          </div>
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ Wrong collocation</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"She was deeply tall." / "He was highly angry."</div>
+              <div class="int-m-right">"She was remarkably tall." / "He was deeply angry."</div>
+              <div class="int-m-why">Intensifiers collocate selectively — learn them as fixed pairs.</div>
+            </div>
+          </div>
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ Repeating the same intensifier</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"It was very busy, very loud, and very tiring."</div>
+              <div class="int-m-right">"It was incredibly busy, remarkably loud, and utterly tiring."</div>
+              <div class="int-m-why">Repetition signals a limited vocabulary range — the examiner notices.</div>
+            </div>
+          </div>
+          <div class="int-mistake-box">
+            <div class="int-mistake-head">⚠️ "absolutely" with a gradable adjective</div>
+            <div class="int-mistake-body">
+              <div class="int-m-wrong">"It was absolutely cold outside."</div>
+              <div class="int-m-right">"It was extremely cold" / "absolutely freezing."</div>
+              <div class="int-m-why">"Cold" is gradable — save "absolutely" for the extreme form "freezing."</div>
+            </div>
+          </div>
         </div>
       </div>
 
