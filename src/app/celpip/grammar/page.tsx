@@ -39,6 +39,7 @@ import {
   ADV_NATIVE_PATTERNS,
   ADV_MISTAKES,
   ADV_TYPES,
+  ADV_VS_ADJ,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -754,6 +755,93 @@ export default function CelpipVocabPage() {
               <div class="adj-ex">Anyone <em>interested</em> may apply.</div>
               <div class="adj-ex">The people <em>involved</em> were notified.</div>
             </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- ══════════════════════════════════════════════════════════════
+           SECTION 1b — ADJECTIVE vs ADVERB
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Adjective vs Adverb — What's the Difference?</div>
+        <p class="adj-intro">
+          These two word classes are the most commonly confused in CELPIP. The rule is simple:
+          an <strong>adjective</strong> modifies a <strong>noun or pronoun</strong>;
+          an <strong>adverb</strong> modifies a <strong>verb, adjective, or another adverb</strong>.
+          Mixing them up directly lowers your Grammar and Vocabulary band scores.
+        </p>
+
+        <!-- side-by-side comparison -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+          <div style="background:#ede9fe;border:1px solid #c4b5fd;border-radius:12px;padding:1.1rem 1.25rem;">
+            <div style="font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#4f46e5;margin-bottom:.5rem;">🟣 Adjective</div>
+            <div style="font-size:13px;color:#1e293b;margin-bottom:.5rem;line-height:1.6;">Modifies a <strong>noun or pronoun</strong>.<br>Answers: <em>What kind? Which? How many?</em></div>
+            <div class="adj-ex" style="margin-bottom:5px;">She is a <em>careful</em> driver. <span style="color:#94a3b8;font-size:11px;">(describes the noun "driver")</span></div>
+            <div class="adj-ex" style="margin-bottom:5px;">The report was <em>thorough</em>. <span style="color:#94a3b8;font-size:11px;">(after linking verb "was")</span></div>
+            <div class="adj-ex">He felt <em>confident</em> before the test. <span style="color:#94a3b8;font-size:11px;">(after "felt")</span></div>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.1rem 1.25rem;">
+            <div style="font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#16a34a;margin-bottom:.5rem;">🟢 Adverb</div>
+            <div style="font-size:13px;color:#1e293b;margin-bottom:.5rem;line-height:1.6;">Modifies a <strong>verb, adjective, or adverb</strong>.<br>Answers: <em>How? When? Where? To what extent?</em></div>
+            <div class="adj-ex" style="margin-bottom:5px;">She drives <em>carefully</em>. <span style="color:#94a3b8;font-size:11px;">(modifies the verb "drives")</span></div>
+            <div class="adj-ex" style="margin-bottom:5px;">The report was <em>thoroughly</em> reviewed. <span style="color:#94a3b8;font-size:11px;">(modifies verb "reviewed")</span></div>
+            <div class="adj-ex">He spoke <em>confidently</em> during the test. <span style="color:#94a3b8;font-size:11px;">(modifies "spoke")</span></div>
+          </div>
+        </div>
+
+        <!-- quick test -->
+        <div style="background:#fefce8;border:1px solid #fde68a;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;">
+          <div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:.5rem;">💡 Quick Test — which word does it modify?</div>
+          <div style="font-size:13px;color:#374151;line-height:1.8;">
+            Ask: <em>"Is the word I'm modifying a noun/pronoun?"</em> → use an <strong>adjective</strong>.<br>
+            Ask: <em>"Is the word I'm modifying a verb, adjective, or adverb?"</em> → use an <strong>adverb</strong>.
+          </div>
+        </div>
+
+        <!-- comparison table -->
+        <table class="adj-table">
+          <thead>
+            <tr><th>❌ Common Error</th><th>✅ Correct Form</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"She sings <em>beautiful</em>."</td>
+              <td>"She sings <em>beautifully</em>."</td>
+              <td><em>beautifully</em> modifies the verb <em>sings</em> → needs adverb</td>
+            </tr>
+            <tr>
+              <td>"He is a <em>hardly</em> worker."</td>
+              <td>"He is a <em>hard</em> worker."</td>
+              <td><em>hard</em> modifies the noun <em>worker</em> → needs adjective</td>
+            </tr>
+            <tr>
+              <td>"The food smells <em>wonderfully</em>."</td>
+              <td>"The food smells <em>wonderful</em>."</td>
+              <td><em>smell</em> is a linking verb here → use adjective after it</td>
+            </tr>
+            <tr>
+              <td>"She did <em>good</em> in the exam."</td>
+              <td>"She did <em>well</em> in the exam."</td>
+              <td><em>well</em> is the adverb form of <em>good</em>; modifies verb <em>did</em></td>
+            </tr>
+            <tr>
+              <td>"It was a <em>surprisingly</em> result."</td>
+              <td>"It was a <em>surprising</em> result."</td>
+              <td><em>surprising</em> modifies the noun <em>result</em> → needs adjective</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- linking verb trap -->
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:1rem 1.25rem;margin-top:1rem;">
+          <div style="font-size:13px;font-weight:700;color:#991b1b;margin-bottom:.4rem;">⚠️ The Linking Verb Trap — the #1 CELPIP adjective/adverb mistake</div>
+          <div style="font-size:13px;color:#374151;line-height:1.75;">
+            After linking verbs (<em>be, seem, look, feel, taste, smell, sound, become, appear, remain, stay</em>),
+            always use an <strong>adjective</strong> — not an adverb. The adjective describes the <em>subject</em>, not the verb.<br><br>
+            ❌ <span style="color:#dc2626;font-weight:600;">"The soup tastes <em>wonderfully</em>."</span><br>
+            ✅ <span style="color:#16a34a;font-weight:600;">"The soup tastes <em>wonderful</em>."</span> — <em>wonderful</em> describes the soup, not how it tastes.<br><br>
+            ❌ <span style="color:#dc2626;font-weight:600;">"She looks <em>tiredly</em> after the shift."</span><br>
+            ✅ <span style="color:#16a34a;font-weight:600;">"She looks <em>tired</em> after the shift."</span> — <em>tired</em> describes her appearance.
           </div>
         </div>
       </div>
@@ -5034,6 +5122,77 @@ export default function CelpipVocabPage() {
       </div>
       `;
 
+      // ── Render the new panel ──────────────────────────────────────────────
+      const adjPanel = document.createElement("div");
+      adjPanel.id = "adv-vs-adj";
+      adjPanel.className = "adv-panel";
+      adjPanel.innerHTML = `
+        <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.5rem;">
+          This is one of the most confused grammar pairs in English. Getting it right directly boosts your <strong>Readability</strong> and <strong>Vocabulary</strong> scores on CELPIP.
+        </p>
+        ${ADV_VS_ADJ.map(
+          (section) => `
+          <div class="adv-section">
+            <div class="adv-section-header">
+              <span style="font-size:1.3rem">${section.icon}</span>
+              <span class="adv-badge" style="background:${section.bg};color:${section.color}">${section.category}</span>
+            </div>
+            <div class="adv-intro">${section.explanation}</div>
+            ${
+              section.pairs
+                ? `
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                ${section.pairs
+                  .map(
+                    (p) => `
+                  <div style="background:#fff;border:1px solid #e5e7eb;border-radius:11px;padding:.85rem 1rem;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;">
+                      <div style="background:#fef9c3;border-radius:7px;padding:6px 10px;font-size:13px;color:#374151;">${p.adj}</div>
+                      <div style="background:#dbeafe;border-radius:7px;padding:6px 10px;font-size:13px;color:#374151;">${p.adv}</div>
+                    </div>
+                    <div style="font-size:12px;color:#6b7280;font-style:italic;padding:0 2px;">${p.note}</div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>
+            `
+                : ""
+            }
+            ${
+              section.misconceptions
+                ? `
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                ${section.misconceptions
+                  .map(
+                    (m) => `
+                  <div style="background:#fff;border:1px solid #fca5a5;border-radius:12px;padding:.9rem 1.1rem;">
+                    <div style="font-size:13.5px;font-weight:700;color:#991b1b;margin-bottom:.5rem;">🚫 Myth: ${m.myth}</div>
+                    <div style="font-size:13px;color:#166534;font-weight:600;margin-bottom:.5rem;">✅ Truth: ${m.truth}</div>
+                    <div style="font-size:12.5px;color:#dc2626;margin-bottom:3px;">✗ ${m.wrong}</div>
+                    <div style="font-size:12.5px;color:#16a34a;">✓ ${m.right}</div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+              </div>
+            `
+                : ""
+            }
+          </div>
+        `,
+        ).join("")}
+      `;
+      content.appendChild(adjPanel);
+
+      // Add the tab button
+      document
+        .querySelector(".adv-tab-row")
+        .insertAdjacentHTML(
+          "beforeend",
+          `<button class="adv-tab" onclick="advTab('adv-vs-adj')">🆚 Adverb vs Adjective</button>`,
+        );
+
       window.advTab = function (id) {
         document
           .querySelectorAll(".adv-panel")
@@ -5047,6 +5206,7 @@ export default function CelpipVocabPage() {
           "adv-native",
           "adv-tasks",
           "adv-mistakes",
+          "adv-vs-adj",
         ].indexOf(id);
         document
           .querySelectorAll(".adv-tab")

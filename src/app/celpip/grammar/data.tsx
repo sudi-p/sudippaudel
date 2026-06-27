@@ -6864,6 +6864,194 @@ export const ADV_TYPES = [
   },
 ];
 
+export const ADV_VS_ADJ = [
+  {
+    category: "The Core Difference",
+    icon: "🧠",
+    bg: "#dbeafe",
+    color: "#1e40af",
+    explanation:
+      "An <strong>adjective</strong> describes a <strong>noun</strong> (a person, place, or thing). An <strong>adverb</strong> describes a <strong>verb, adjective, or another adverb</strong> — anything that is NOT a noun.",
+    pairs: [
+      {
+        adj: "She is a <strong>careful</strong> driver.",
+        adv: "She drives <strong>carefully</strong>.",
+        note: "careful → describes 'driver' (noun) | carefully → describes 'drives' (verb)",
+      },
+      {
+        adj: "He gave a <strong>clear</strong> explanation.",
+        adv: "He explained it <strong>clearly</strong>.",
+        note: "clear → describes 'explanation' (noun) | clearly → describes 'explained' (verb)",
+      },
+      {
+        adj: "It was a <strong>significant</strong> impact.",
+        adv: "It <strong>significantly</strong> affected my sleep.",
+        note: "significant → describes 'impact' (noun) | significantly → describes 'affected' (verb)",
+      },
+      {
+        adj: "She is a <strong>fluent</strong> speaker.",
+        adv: "She speaks <strong>fluently</strong>.",
+        note: "fluent → describes 'speaker' (noun) | fluently → describes 'speaks' (verb)",
+      },
+    ],
+  },
+  {
+    category: "Linking Verbs Trap",
+    icon: "⚠️",
+    bg: "#fef3c7",
+    color: "#92400e",
+    explanation:
+      "After <strong>linking verbs</strong> (be, seem, feel, look, appear, smell, taste, sound, become), use an <strong>adjective</strong>, NOT an adverb. These verbs connect the subject back to a description of itself — not an action.",
+    pairs: [
+      {
+        adj: "She looks <strong>confident</strong>. ✓",
+        adv: "She looks <strong>confidently</strong>. ✗",
+        note: "'looks' here = appears/seems, not an action. Use adjective.",
+      },
+      {
+        adj: "The situation seems <strong>serious</strong>. ✓",
+        adv: "The situation seems <strong>seriously</strong>. ✗",
+        note: "'seems' is a linking verb — it needs an adjective to describe the subject.",
+      },
+      {
+        adj: "I feel <strong>terrible</strong> about the delay. ✓",
+        adv: "I feel <strong>terribly</strong> about the delay. ✗",
+        note: "'feel' as a linking verb takes an adjective describing the speaker's state.",
+      },
+      {
+        adj: "The park looks <strong>beautiful</strong> in autumn. ✓",
+        adv: "The park looks <strong>beautifully</strong> in autumn. ✗",
+        note: "Adjective describes the park, not how it performs the action of looking.",
+      },
+    ],
+  },
+  {
+    category: "Irregular Forms — the Most Common Errors",
+    icon: "🔁",
+    bg: "#dcfce7",
+    color: "#166534",
+    explanation:
+      "Some adjective/adverb pairs look alike or have completely different forms. These are responsible for the most penalised errors in CELPIP.",
+    pairs: [
+      {
+        adj: "She is a <strong>good</strong> communicator. (adj)",
+        adv: "She communicates <strong>well</strong>. (adv)",
+        note: "NEVER: 'She communicates good.' This is one of the most common CELPIP errors.",
+      },
+      {
+        adj: "It was a <strong>fast</strong> decision. (adj)",
+        adv: "She decided <strong>fast</strong>. (adv)",
+        note: "'Fast' is both adjective and adverb. 'Fastly' does not exist.",
+      },
+      {
+        adj: "He is a <strong>hard</strong> worker. (adj)",
+        adv: "He works <strong>hard</strong>. (adv)",
+        note: "'Hard' is both forms. 'Hardly' is a completely different word meaning 'almost not'.",
+      },
+      {
+        adj: "That was a <strong>late</strong> submission. (adj)",
+        adv: "She submitted it <strong>late</strong>. (adv)",
+        note: "'Late' is both forms. 'Lately' means 'recently' — a different meaning entirely.",
+      },
+      {
+        adj: "It is a <strong>high</strong> standard. (adj)",
+        adv: "She aims <strong>high</strong>. (adv)",
+        note: "'Highly' means 'very/greatly' (highly recommended), NOT physically high.",
+      },
+    ],
+  },
+  {
+    category: "Adverb Modifying an Adjective",
+    icon: "🎯",
+    bg: "#ede9fe",
+    color: "#5b21b6",
+    explanation:
+      "An adverb can modify an adjective to show degree or intensity. The adverb comes <strong>before</strong> the adjective it modifies. This is a key pattern for sounding natural on CELPIP.",
+    pairs: [
+      {
+        adj: "The park is <strong>important</strong>.",
+        adv: "The park is <strong>particularly important</strong>.",
+        note: "'particularly' (adverb) intensifies 'important' (adjective).",
+      },
+      {
+        adj: "The noise was <strong>loud</strong>.",
+        adv: "The noise was <strong>extremely loud</strong>.",
+        note: "'extremely' (adverb) strengthens 'loud' (adjective) — more precise than 'very loud'.",
+      },
+      {
+        adj: "The decision was <strong>surprising</strong>.",
+        adv: "The decision was <strong>somewhat surprising</strong>.",
+        note: "'somewhat' (adverb) softens 'surprising' — useful for hedging in Task 7.",
+      },
+      {
+        adj: "The process is <strong>straightforward</strong>.",
+        adv: "The process is <strong>relatively straightforward</strong>.",
+        note: "'relatively' (adverb) adds nuance — sounds more sophisticated than 'quite easy'.",
+      },
+    ],
+  },
+  {
+    category: "CELPIP Misconceptions",
+    icon: "🚫",
+    bg: "#fee2e2",
+    color: "#991b1b",
+    explanation:
+      "These are the most common wrong beliefs test-takers have about adverbs vs adjectives, and what the correct rule actually is.",
+    misconceptions: [
+      {
+        myth: '"Any word ending in -ly is an adverb."',
+        truth:
+          "Several common <strong>adjectives</strong> end in -ly: <em>friendly, lovely, lonely, lively, elderly, likely, timely, costly, orderly</em>. These describe nouns, not verbs.",
+        wrong:
+          "She gave a <strong>friendly</strong> greeting. → 'friendly' is an ADJECTIVE here (describes 'greeting').",
+        right:
+          "She greeted us in a <strong>friendly</strong> manner. → still adjective. There is no 'friendlily' in standard English.",
+      },
+      {
+        myth: '"Adverbs always come right after the verb."',
+        truth:
+          "Adverb placement depends on the type. Frequency adverbs go <strong>before</strong> the main verb. Conjunctive adverbs go at the <strong>start of a new sentence</strong>. Manner adverbs typically go <strong>after the object</strong>.",
+        wrong: "I go always to the park. | She explained clearly the issue.",
+        right:
+          "I <strong>always</strong> go to the park. | She explained the issue <strong>clearly</strong>.",
+      },
+      {
+        myth: "\"'Hardly' means the same as 'hard' used as an adverb.\"",
+        truth:
+          "'<strong>Hard</strong>' as an adverb means with effort or force. '<strong>Hardly</strong>' means almost not at all — almost the opposite meaning.",
+        wrong: "I worked hardly all week. (implies you barely worked)",
+        right:
+          "I worked <strong>hard</strong> all week. | I could <strong>hardly</strong> concentrate due to the noise.",
+      },
+      {
+        myth: "\"'Good' and 'well' are interchangeable.\"",
+        truth:
+          "'<strong>Good</strong>' is always an adjective. '<strong>Well</strong>' is the adverb (and also an adjective meaning healthy). Using 'good' as an adverb is one of the most penalised errors in CELPIP readability scoring.",
+        wrong: "She performed good in the interview. | He writes good.",
+        right:
+          "She performed <strong>well</strong>. | He writes <strong>well</strong>. | She is a <strong>good</strong> writer.",
+      },
+      {
+        myth: '"Adjectives can be used after action verbs."',
+        truth:
+          "After action verbs, you must use an <strong>adverb</strong>. Only after <strong>linking verbs</strong> (seem, feel, appear, look, become) do you use an adjective.",
+        wrong: "She spoke polite. | He answered quick.",
+        right:
+          "She spoke <strong>politely</strong>. | He answered <strong>quickly</strong>.",
+      },
+      {
+        myth: "\"'Lately' and 'late' mean the same thing.\"",
+        truth:
+          "'<strong>Late</strong>' as an adverb means not on time or after the expected moment. '<strong>Lately</strong>' means recently — a completely different meaning.",
+        wrong:
+          "I have been arriving lately to work. (sounds like 'recently arriving')",
+        right:
+          "I have been arriving <strong>late</strong> to work. | <strong>Lately</strong>, I have been struggling with the commute.",
+      },
+    ],
+  },
+];
+
 export const ADV_MISTAKES = [
   {
     icon: "❌",
