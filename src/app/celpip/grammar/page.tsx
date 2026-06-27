@@ -35,6 +35,10 @@ import {
   ACTIVE_EXAMPLES,
   PASSIVE_EXAMPLES,
   VOICE_TRAPS,
+  ADV_CELPIP_TASKS,
+  ADV_NATIVE_PATTERNS,
+  ADV_MISTAKES,
+  ADV_TYPES,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -563,6 +567,665 @@ export default function CelpipVocabPage() {
       `;
     }).join("")}
   `;
+    }
+
+    // ── ADJECTIVES ────────────────────────────────────────────────────────────
+    function renderAdjectives() {
+      const content = document.getElementById("adjectives-content");
+      if (!content) return;
+
+      content.innerHTML = `
+      <style>
+        /* ── shared layout ── */
+        .adj-section { margin-bottom: 3.5rem; }
+        .adj-section-title {
+          font-size: 1.25rem; font-weight: 800; color: #1e293b;
+          border-left: 4px solid #6366f1; padding-left: 12px;
+          margin-bottom: 1.25rem;
+        }
+        .adj-intro {
+          font-size: 14px; color: #475569; line-height: 1.75;
+          max-width: 720px; margin-bottom: 1.5rem;
+        }
+
+        /* ── type cards grid ── */
+        .adj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .adj-card {
+          background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+          padding: 1.25rem 1.5rem; transition: box-shadow .15s;
+        }
+        .adj-card:hover { box-shadow: 0 4px 18px rgba(99,102,241,.12); }
+        .adj-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: .6rem; }
+        .adj-card-icon { font-size: 1.6rem; }
+        .adj-card-title { font-size: .95rem; font-weight: 700; color: #1e293b; }
+        .adj-card-tag {
+          display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .04em;
+          text-transform: uppercase; padding: 2px 8px; border-radius: 20px;
+          background: #ede9fe; color: #4f46e5; margin-left: auto;
+        }
+        .adj-card-desc { font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: .75rem; }
+        .adj-examples { display: flex; flex-direction: column; gap: 5px; }
+        .adj-ex {
+          font-size: 13px; color: #1e293b; background: #f8fafc;
+          border-left: 3px solid #a5b4fc; padding: 5px 10px; border-radius: 0 6px 6px 0;
+        }
+        .adj-ex em { color: #4f46e5; font-style: normal; font-weight: 600; }
+
+        /* ── order of adjectives ── */
+        .adj-order-row {
+          display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+          background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+          padding: 1rem 1.25rem; margin-bottom: 1rem;
+        }
+        .adj-order-badge {
+          display: flex; flex-direction: column; align-items: center; gap: 2px;
+          background: #fff; border: 1px solid #c7d2fe; border-radius: 8px;
+          padding: 6px 12px; min-width: 80px;
+        }
+        .adj-order-num { font-size: 10px; font-weight: 700; color: #818cf8; }
+        .adj-order-label { font-size: 12px; font-weight: 600; color: #1e293b; }
+        .adj-order-ex { font-size: 10px; color: #64748b; margin-top: 1px; }
+        .adj-order-arrow { font-size: 1.1rem; color: #c7d2fe; }
+
+        /* ── comparison table ── */
+        .adj-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .adj-table th {
+          background: #4f46e5; color: #fff; padding: 9px 14px;
+          text-align: left; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+        }
+        .adj-table th:first-child { border-radius: 10px 0 0 0; }
+        .adj-table th:last-child  { border-radius: 0 10px 0 0; }
+        .adj-table td { padding: 8px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+        .adj-table tr:last-child td { border-bottom: none; }
+        .adj-table tr:nth-child(even) td { background: #f8fafc; }
+        .adj-table em { color: #4f46e5; font-style: normal; font-weight: 600; }
+
+        /* ── native speaker tips ── */
+        .adj-tip-list { display: flex; flex-direction: column; gap: .85rem; }
+        .adj-tip {
+          display: flex; gap: 12px; align-items: flex-start;
+          background: #fefce8; border: 1px solid #fde68a; border-radius: 12px;
+          padding: 1rem 1.25rem;
+        }
+        .adj-tip-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+        .adj-tip-body { font-size: 13.5px; color: #374151; line-height: 1.65; }
+        .adj-tip-body strong { color: #92400e; }
+
+        /* ── CELPIP task bands ── */
+        .adj-task-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .adj-task-card {
+          border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden;
+        }
+        .adj-task-head {
+          background: #4f46e5; color: #fff; padding: 10px 16px;
+          font-size: 12px; font-weight: 700; letter-spacing: .04em;
+          display: flex; justify-content: space-between; align-items: center;
+        }
+        .adj-task-clb {
+          background: #818cf8; border-radius: 20px;
+          font-size: 10px; padding: 2px 9px; font-weight: 700;
+        }
+        .adj-task-body { padding: 1rem 1.25rem; }
+        .adj-task-scenario { font-size: 12px; color: #64748b; margin-bottom: .6rem; font-style: italic; }
+        .adj-task-weak { font-size: 13px; color: #dc2626; margin-bottom: .4rem; }
+        .adj-task-strong { font-size: 13px; color: #16a34a; }
+        .adj-task-weak::before { content: "✗ "; font-weight: 700; }
+        .adj-task-strong::before { content: "✓ "; font-weight: 700; }
+
+        /* ── mistakes & fixes ── */
+        .adj-mistake-list { display: flex; flex-direction: column; gap: 1rem; }
+        .adj-mistake {
+          border: 1px solid #fecaca; border-radius: 12px; overflow: hidden;
+        }
+        .adj-mistake-head {
+          background: #fef2f2; padding: 8px 14px;
+          font-size: 13px; font-weight: 700; color: #991b1b;
+          display: flex; align-items: center; gap: 8px;
+        }
+        .adj-mistake-body { padding: 10px 14px; background: #fff; }
+        .adj-mistake-wrong { font-size: 13px; color: #dc2626; margin-bottom: 5px; }
+        .adj-mistake-right { font-size: 13px; color: #16a34a; margin-bottom: 5px; }
+        .adj-mistake-why  { font-size: 12px; color: #64748b; font-style: italic; }
+        .adj-mistake-wrong::before { content: "✗ "; font-weight: 700; }
+        .adj-mistake-right::before { content: "✓ "; font-weight: 700; }
+
+        /* ── upgrade bank ── */
+        .adj-upgrade-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; }
+        .adj-upgrade-pair {
+          display: flex; align-items: center; gap: 8px;
+          background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+          padding: 8px 14px; font-size: 13px;
+        }
+        .adj-upgrade-basic { color: #dc2626; font-weight: 600; text-decoration: line-through; }
+        .adj-upgrade-arrow { color: #94a3b8; }
+        .adj-upgrade-better { color: #16a34a; font-weight: 700; }
+
+        @media (max-width: 600px) {
+          .adj-grid, .adj-task-grid, .adj-upgrade-grid { grid-template-columns: 1fr; }
+          .adj-order-row { flex-direction: column; align-items: flex-start; }
+          .adj-order-arrow { transform: rotate(90deg); }
+        }
+      </style>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 1 — WHAT IS AN ADJECTIVE?
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">What is an Adjective?</div>
+        <p class="adj-intro">
+          An adjective <strong>describes or modifies a noun or pronoun</strong> — it tells us more about a person,
+          place, thing, or idea. Adjectives answer questions like <em>What kind? Which one? How many? How much?</em>
+          In CELPIP, adjectives are one of the fastest ways to raise your <strong>Vocabulary</strong> and
+          <strong>Lexical Range</strong> scores because they show the examiner you can be precise and varied.
+        </p>
+        <div class="adj-grid">
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">📍</span>
+              <span class="adj-card-title">Attributive Position</span>
+            </div>
+            <div class="adj-card-desc">Placed <strong>before</strong> the noun it modifies. Most common position in English.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">It was a <em>breathtaking</em> view.</div>
+              <div class="adj-ex">She gave a <em>detailed</em> explanation.</div>
+              <div class="adj-ex">He made a <em>costly</em> mistake.</div>
+            </div>
+          </div>
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🔗</span>
+              <span class="adj-card-title">Predicative Position</span>
+            </div>
+            <div class="adj-card-desc">Comes <strong>after</strong> a linking verb (be, seem, look, feel, become, appear).</div>
+            <div class="adj-examples">
+              <div class="adj-ex">The park is <em>enormous</em>.</div>
+              <div class="adj-ex">She seemed <em>exhausted</em> after the shift.</div>
+              <div class="adj-ex">The result became <em>inevitable</em>.</div>
+            </div>
+          </div>
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🪆</span>
+              <span class="adj-card-title">Post-positive (after noun)</span>
+            </div>
+            <div class="adj-card-desc">Used in fixed phrases and formal writing — sounds polished and native-like.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">Something <em>remarkable</em> happened.</div>
+              <div class="adj-ex">Anyone <em>interested</em> may apply.</div>
+              <div class="adj-ex">The people <em>involved</em> were notified.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 2 — ALL TYPES OF ADJECTIVES
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">All Types of Adjectives</div>
+        <p class="adj-intro">English adjectives fall into distinct categories. Understanding each type lets you choose the right word and combine adjectives naturally — a key marker of fluency assessed in CELPIP.</p>
+        <div class="adj-grid">
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🎨</span>
+              <span class="adj-card-title">Descriptive (Quality)</span>
+              <span class="adj-card-tag">Most common</span>
+            </div>
+            <div class="adj-card-desc">Describe a quality, characteristic, or state of the noun. The largest and most important category for CELPIP.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">a <em>vibrant</em> community / a <em>cramped</em> apartment</div>
+              <div class="adj-ex">a <em>reliable</em> colleague / a <em>tedious</em> commute</div>
+              <div class="adj-ex">a <em>serene</em> lake / a <em>bustling</em> downtown</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🔢</span>
+              <span class="adj-card-title">Quantitative</span>
+            </div>
+            <div class="adj-card-desc">Tell us <em>how much</em> or <em>how many</em>. Use these when discussing data or preferences in Task 7 opinions.</div>
+            <div class="adj-examples">
+              <div class="adj-ex"><em>Several</em> studies confirm this.</div>
+              <div class="adj-ex"><em>Numerous</em> residents complained.</div>
+              <div class="adj-ex">There is <em>sufficient</em> evidence.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">👉</span>
+              <span class="adj-card-title">Demonstrative</span>
+            </div>
+            <div class="adj-card-desc">Point to specific nouns: <strong>this, that, these, those</strong>. Use to anchor your argument in Task 5 & 7.</div>
+            <div class="adj-examples">
+              <div class="adj-ex"><em>This</em> option is far more practical.</div>
+              <div class="adj-ex"><em>Those</em> concerns are valid.</div>
+              <div class="adj-ex"><em>These</em> changes will benefit everyone.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">❓</span>
+              <span class="adj-card-title">Interrogative</span>
+            </div>
+            <div class="adj-card-desc"><strong>Which, what, whose</strong> when used before a noun. Useful in Task 1 (giving advice) to frame choices.</div>
+            <div class="adj-examples">
+              <div class="adj-ex"><em>Which</em> route do you prefer?</div>
+              <div class="adj-ex"><em>What</em> approach would work best?</div>
+              <div class="adj-ex"><em>Whose</em> responsibility is it?</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🏴</span>
+              <span class="adj-card-title">Possessive</span>
+            </div>
+            <div class="adj-card-desc"><strong>My, your, his, her, its, our, their</strong> before a noun. Common in Task 2 personal experience narratives.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">I shared <em>my</em> concerns openly.</div>
+              <div class="adj-ex"><em>Her</em> determination was inspiring.</div>
+              <div class="adj-ex">We doubled <em>our</em> efforts immediately.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">📊</span>
+              <span class="adj-card-title">Comparative</span>
+              <span class="adj-card-tag">Task 5 key</span>
+            </div>
+            <div class="adj-card-desc">Compare two things. Add <strong>-er</strong> (short adjectives) or <strong>more / less</strong> (long adjectives) + <em>than</em>.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">Option A is <em>more cost-effective than</em> Option B.</div>
+              <div class="adj-ex">Public transit is <em>faster than</em> driving downtown.</div>
+              <div class="adj-ex">The second plan is <em>less risky than</em> the first.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🏆</span>
+              <span class="adj-card-title">Superlative</span>
+              <span class="adj-card-tag">Task 5 key</span>
+            </div>
+            <div class="adj-card-desc">Rank one above/below all others. Add <strong>-est</strong> or <strong>the most / least</strong> before the adjective.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">This is <em>the most efficient</em> solution available.</div>
+              <div class="adj-ex">It was <em>the worst</em> commute I had experienced.</div>
+              <div class="adj-ex">She is <em>the least experienced</em> member of the team.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🌍</span>
+              <span class="adj-card-title">Proper</span>
+            </div>
+            <div class="adj-card-desc">Derived from proper nouns — always capitalized. Show cultural awareness in CELPIP Writing.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">a <em>Canadian</em> perspective</div>
+              <div class="adj-ex"><em>Victorian</em> architecture</div>
+              <div class="adj-ex">an <em>Indigenous</em> tradition</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">✅</span>
+              <span class="adj-card-title">Indefinite</span>
+            </div>
+            <div class="adj-card-desc"><strong>Some, any, few, many, each, every, either, neither</strong> — give a non-specific quantity or selection.</div>
+            <div class="adj-examples">
+              <div class="adj-ex"><em>Every</em> candidate must meet this standard.</div>
+              <div class="adj-ex"><em>Few</em> options remain at this stage.</div>
+              <div class="adj-ex"><em>Each</em> point should be supported.</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🔗</span>
+              <span class="adj-card-title">Participial</span>
+            </div>
+            <div class="adj-card-desc">Formed from verbs (-ing or -ed endings). A strong marker of advanced grammar for CELPIP examiners.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">a <em>compelling</em> argument / a <em>convincing</em> case</div>
+              <div class="adj-ex">a <em>well-organized</em> response</div>
+              <div class="adj-ex">an <em>overwhelming</em> majority agreed</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🔄</span>
+              <span class="adj-card-title">Compound</span>
+            </div>
+            <div class="adj-card-desc">Two or more words hyphenated to form one modifier. Instantly sounds native and sophisticated.</div>
+            <div class="adj-examples">
+              <div class="adj-ex">a <em>well-known</em> landmark</div>
+              <div class="adj-ex">a <em>thought-provoking</em> idea</div>
+              <div class="adj-ex">a <em>long-term</em> solution</div>
+            </div>
+          </div>
+
+          <div class="adj-card">
+            <div class="adj-card-header">
+              <span class="adj-card-icon">🎭</span>
+              <span class="adj-card-title">Emotion / Opinion</span>
+              <span class="adj-card-tag">Task 7 key</span>
+            </div>
+            <div class="adj-card-desc">Express feelings or evaluations. Essential in Task 7 (Expressing Opinions) and Task 2 (Personal Experience).</div>
+            <div class="adj-examples">
+              <div class="adj-ex">I found the experience <em>deeply rewarding</em>.</div>
+              <div class="adj-ex">The decision was <em>controversial yet necessary</em>.</div>
+              <div class="adj-ex">It was an <em>unforgettable</em> moment.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 3 — ORDER OF ADJECTIVES
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Order of Adjectives (OSASCOMP)</div>
+        <p class="adj-intro">
+          When stacking multiple adjectives, native speakers follow an instinctive order. Violating this order doesn't
+          make you grammatically wrong, but it sounds unnatural and lowers your <strong>Listenability</strong> score.
+          The mnemonic is <strong>OSASCOMP</strong>.
+        </p>
+        <div class="adj-order-row">
+          <div class="adj-order-badge"><span class="adj-order-num">1</span><span class="adj-order-label">Opinion</span><span class="adj-order-ex">lovely, awful</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">2</span><span class="adj-order-label">Size</span><span class="adj-order-ex">tiny, massive</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">3</span><span class="adj-order-label">Age</span><span class="adj-order-ex">ancient, modern</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">4</span><span class="adj-order-label">Shape</span><span class="adj-order-ex">round, narrow</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">5</span><span class="adj-order-label">Colour</span><span class="adj-order-ex">golden, pale</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">6</span><span class="adj-order-label">Origin</span><span class="adj-order-ex">Canadian, local</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">7</span><span class="adj-order-label">Material</span><span class="adj-order-ex">wooden, glass</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge"><span class="adj-order-num">8</span><span class="adj-order-label">Purpose</span><span class="adj-order-ex">sleeping (bag)</span></div>
+          <span class="adj-order-arrow">→</span>
+          <div class="adj-order-badge" style="border-color:#6366f1;background:#ede9fe"><span class="adj-order-num" style="color:#4f46e5">→</span><span class="adj-order-label" style="color:#4f46e5">NOUN</span></div>
+        </div>
+        <table class="adj-table" style="margin-top:.5rem">
+          <thead><tr><th>❌ Unnatural</th><th>✅ Native order</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>a <em>wooden old small cabin</em></td><td>a <em>lovely small old wooden cabin</em></td><td>Opinion → Size → Age → Material</td></tr>
+            <tr><td>a <em>Canadian reliable modern car</em></td><td>a <em>reliable modern Canadian car</em></td><td>Opinion → Age → Origin</td></tr>
+            <tr><td>a <em>red big beautiful scarf</em></td><td>a <em>beautiful big red scarf</em></td><td>Opinion → Size → Colour</td></tr>
+            <tr><td><em>round gorgeous tiny earrings</em></td><td><em>gorgeous tiny round earrings</em></td><td>Opinion → Size → Shape</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 4 — COMPARATIVE & SUPERLATIVE (FULL RULES)
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Comparative &amp; Superlative — Complete Rules</div>
+        <p class="adj-intro">CELPIP Task 5 (Comparing &amp; Persuading) is scored heavily on how accurately and confidently you compare two options. Master these forms.</p>
+        <table class="adj-table">
+          <thead><tr><th>Adjective type</th><th>Comparative</th><th>Superlative</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>1 syllable</td><td>+ <em>-er</em></td><td>+ <em>-est</em></td><td>fast → <em>faster</em> → <em>fastest</em></td></tr>
+            <tr><td>1 syllable ending CVC</td><td>double final consonant + <em>-er</em></td><td>double + <em>-est</em></td><td>big → <em>bigger</em> → <em>biggest</em></td></tr>
+            <tr><td>2 syllables ending in <em>-y</em></td><td>change y→i + <em>-er</em></td><td>change y→i + <em>-est</em></td><td>busy → <em>busier</em> → <em>busiest</em></td></tr>
+            <tr><td>2+ syllables</td><td><em>more</em> + adj</td><td><em>the most</em> + adj</td><td>efficient → <em>more efficient</em> → <em>the most efficient</em></td></tr>
+            <tr><td>Lower degree</td><td><em>less</em> + adj</td><td><em>the least</em> + adj</td><td>practical → <em>less practical</em> → <em>the least practical</em></td></tr>
+            <tr><td>Irregular: good</td><td><em>better</em></td><td><em>best</em></td><td>This plan is <em>better</em>; it's the <em>best</em> option.</td></tr>
+            <tr><td>Irregular: bad</td><td><em>worse</em></td><td><em>worst</em></td><td>Traffic was <em>worse</em>; Monday is the <em>worst</em>.</td></tr>
+            <tr><td>Irregular: far</td><td><em>farther / further</em></td><td><em>farthest / furthest</em></td><td>I walked <em>farther</em>; this goes <em>further</em> than expected.</td></tr>
+            <tr><td>Irregular: little</td><td><em>less</em></td><td><em>least</em></td><td>We have <em>less</em> time; this causes the <em>least</em> disruption.</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:1rem;padding:1rem 1.25rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;font-size:13px;color:#166534;line-height:1.7;">
+          <strong>💡 Booster tip:</strong> Strengthen comparatives with <em>much, far, considerably, significantly</em> before <em>more/less/better</em> — e.g. <em>"Option A is considerably more affordable than Option B"</em>. Soften with <em>a little, slightly, somewhat</em> — e.g. <em>"driving is slightly more convenient."</em> Both moves sound native and impress examiners.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 5 — HOW NATIVE SPEAKERS USE ADJECTIVES
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">How Native Speakers Use Adjectives</div>
+        <p class="adj-intro">Native speakers don't just choose more complex adjectives — they use them in specific patterns that feel natural. Replicating these patterns will dramatically improve your Listenability and Vocabulary scores.</p>
+        <div class="adj-tip-list">
+          <div class="adj-tip">
+            <span class="adj-tip-icon">🔁</span>
+            <div class="adj-tip-body"><strong>They pair adjectives with strong nouns</strong> instead of using weak adjective + weak noun. Native: <em>"a gruelling commute"</em> not <em>"a very long and tiring trip."</em> The adjective does the heavy lifting.</div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">📐</span>
+            <div class="adj-tip-body"><strong>They rarely stack more than 2–3 adjectives</strong> before a noun. Instead they use a second sentence or clause: <em>"The park is enormous. Its winding pathways are beautifully maintained."</em></div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">🎚️</span>
+            <div class="adj-tip-body"><strong>They use gradable adjectives with intensifiers</strong>: <em>absolutely, remarkably, surprisingly, incredibly</em> + adj. These replace repetitive <em>"very, very"</em>. <br>❌ <em>"very very good"</em> → ✅ <em>"remarkably effective."</em></div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">🧊</span>
+            <div class="adj-tip-body"><strong>They use non-gradable (extreme) adjectives WITHOUT "very"</strong>. You don't say <em>"very enormous"</em> or <em>"very furious."</em> Use <em>absolutely, completely, utterly</em> instead: <em>"absolutely enormous," "utterly exhausted."</em></div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">🤝</span>
+            <div class="adj-tip-body"><strong>They use collocated adjective + noun pairs</strong> naturally. These are fixed combinations: <em>heavy traffic, golden opportunity, vivid memory, tight deadline, pressing issue, valid concern, heated debate.</em> Using these signals true fluency.</div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">🔀</span>
+            <div class="adj-tip-body"><strong>They shift adjectives to predicative for variety</strong>: instead of repeating <em>"the crowded city"</em>, they say <em>"The city was incredibly crowded."</em> Mixing attributive and predicative forms shows syntactic flexibility — a key CELPIP marker.</div>
+          </div>
+          <div class="adj-tip">
+            <span class="adj-tip-icon">💬</span>
+            <div class="adj-tip-body"><strong>They use -ed vs -ing adjectives correctly</strong>: <em>-ing</em> describes the cause; <em>-ed</em> describes how a person feels. <em>"The meeting was exhausting"</em> (it caused fatigue) vs <em>"I was exhausted"</em> (I felt it). Mixing these up is a common CELPIP error.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 6 — CELPIP TASK-BY-TASK ADJECTIVE USE
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Adjectives Across All 8 CELPIP Speaking Tasks</div>
+        <p class="adj-intro">Each CELPIP Speaking task rewards different adjective types. Here is how to deploy them strategically per task.</p>
+        <div class="adj-task-grid">
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 1 — Giving Advice <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Your friend is nervous before a job interview."</div>
+              <div class="adj-task-weak">"It is good to prepare. Be calm."</div>
+              <div class="adj-task-strong">"Thorough preparation will make you feel considerably more <em>confident</em> and <em>well-equipped</em> to handle even the most <em>challenging</em> questions."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 2 — Personal Experience <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Describe a time you overcame a challenge."</div>
+              <div class="adj-task-weak">"It was a hard time. I was sad."</div>
+              <div class="adj-task-strong">"It was an <em>overwhelming</em> period — I felt <em>emotionally drained</em> but <em>determined</em> to push through."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 3 — Describing a Scene <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Describe what you see in the picture."</div>
+              <div class="adj-task-weak">"There is a big park with green trees and some people."</div>
+              <div class="adj-task-strong">"The park appears <em>sprawling</em> and <em>well-maintained</em>, with <em>lush</em> foliage and <em>scattered</em> groups of <em>relaxed</em>-looking people."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 4 — Making Predictions <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "What do you think will happen next?"</div>
+              <div class="adj-task-weak">"I think it will be busy and people will be tired."</div>
+              <div class="adj-task-strong">"The situation is likely to become <em>increasingly hectic</em>, leaving the residents <em>frustrated</em> and <em>desperate</em> for a <em>sustainable</em> solution."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 5 — Comparing &amp; Persuading <span class="adj-task-clb">CLB 8–10</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Bus vs driving — which would you recommend?"</div>
+              <div class="adj-task-weak">"The bus is better. Driving is more expensive."</div>
+              <div class="adj-task-strong">"Taking the bus is <em>considerably more economical</em> and <em>far less stressful</em> than driving, especially during <em>peak</em> hours when traffic is <em>notoriously unpredictable</em>."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 6 — Difficult Situation <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "You received the wrong order — explain to the company."</div>
+              <div class="adj-task-weak">"The item was wrong. I am not happy."</div>
+              <div class="adj-task-strong">"I am <em>deeply disappointed</em> as the item I received was completely <em>different</em> from what was described — the quality was <em>unacceptable</em> and the packaging was <em>damaged</em>."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 7 — Expressing Opinions <span class="adj-task-clb">CLB 8–10</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Should students wear uniforms?"</div>
+              <div class="adj-task-weak">"Yes, it is a good idea because it is fair."</div>
+              <div class="adj-task-strong">"Uniforms are an <em>equitable</em> and <em>practical</em> solution — they eliminate <em>socioeconomic</em> disparities and create a more <em>focused</em>, <em>inclusive</em> learning environment."</div>
+            </div>
+          </div>
+
+          <div class="adj-task-card">
+            <div class="adj-task-head">Task 8 — Unusual Situation <span class="adj-task-clb">CLB 7–9</span></div>
+            <div class="adj-task-body">
+              <div class="adj-task-scenario">e.g. "Describe a strange object you can see."</div>
+              <div class="adj-task-weak">"It is a round thing. It looks old and broken."</div>
+              <div class="adj-task-strong">"It appears to be a <em>circular</em>, <em>rusted</em> object — <em>roughly</em> the size of a dinner plate — with an <em>intricate</em> pattern etched across its <em>uneven</em>, <em>weathered</em> surface."</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:1.25rem;padding:1rem 1.25rem;background:#ede9fe;border:1px solid #c4b5fd;border-radius:12px;font-size:13px;color:#3730a3;line-height:1.7;">
+          <strong>📝 Writing Tasks:</strong>
+          In <strong>Task 1 (Email)</strong>, use formal adjectives like <em>urgent, inconvenient, grateful, appropriate, reasonable</em>.
+          In <strong>Task 2 (Survey/Essay)</strong>, use evaluative adjectives like <em>beneficial, detrimental, sustainable, controversial, prevalent, significant</em>
+          — and always vary them with synonyms to boost your Lexical Range score.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 7 — COMMON MISTAKES & HOW TO FIX THEM
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Common Mistakes &amp; How to Fix Them</div>
+        <p class="adj-intro">These are the most penalised adjective errors on CELPIP. Fixing them is one of the highest-ROI improvements you can make before test day.</p>
+        <div class="adj-mistake-list">
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Using "very" with extreme (non-gradable) adjectives</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"The traffic was very enormous." / "I was very exhausted."</div>
+              <div class="adj-mistake-right">"The traffic was absolutely enormous." / "I was utterly exhausted."</div>
+              <div class="adj-mistake-why">Extreme adjectives already contain the idea of "very" — adding it sounds unnatural and weakens your vocabulary score.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Confusing -ed and -ing participial adjectives</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"The movie was bored." / "I was interesting in the topic."</div>
+              <div class="adj-mistake-right">"The movie was boring." / "I was interested in the topic."</div>
+              <div class="adj-mistake-why">-ING = the thing causes the feeling (boring movie). -ED = the person has the feeling (bored person). This is one of the most common errors examiners see.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Wrong order of stacked adjectives</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"a wooden old large brown chair"</div>
+              <div class="adj-mistake-right">"a large old brown wooden chair"</div>
+              <div class="adj-mistake-why">Follow OSASCOMP: Opinion → Size → Age → Shape → Colour → Origin → Material → Purpose.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Using "more" with short adjectives or "-er" with long ones</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"more fast" / "more cheap" / "importanter" / "usefuller"</div>
+              <div class="adj-mistake-right">"faster" / "cheaper" / "more important" / "more useful"</div>
+              <div class="adj-mistake-why">1-syllable adjectives take -er/-est; 3+ syllable adjectives always take more/most.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Overusing "good," "bad," "nice," "big," "small"</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"It was a good experience. The place was nice and big."</div>
+              <div class="adj-mistake-right">"It was a rewarding experience. The venue was spacious and well-appointed."</div>
+              <div class="adj-mistake-why">Basic adjectives signal CLB 4–5. Precise, varied adjectives signal CLB 8–10 and directly improve your Vocabulary band score.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Making adjectives agree in number (Spanish / French interference)</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"The parks are beautifuls." / "She is tallest than her sister."</div>
+              <div class="adj-mistake-right">"The parks are beautiful." / "She is taller than her sister."</div>
+              <div class="adj-mistake-why">English adjectives never change for plural. Always use "taller than," never "tallest than" for comparisons of two items.</div>
+            </div>
+          </div>
+
+          <div class="adj-mistake">
+            <div class="adj-mistake-head">⚠️ Dropping the article before a superlative</div>
+            <div class="adj-mistake-body">
+              <div class="adj-mistake-wrong">"It was most effective solution." / "She is best candidate."</div>
+              <div class="adj-mistake-right">"It was the most effective solution." / "She is the best candidate."</div>
+              <div class="adj-mistake-why">Superlatives almost always need "the" before them. Missing it is a grammar error that lowers your Task Fulfillment score.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           SECTION 8 — VOCABULARY UPGRADE BANK
+      ══════════════════════════════════════════════════════════════════ -->
+      <div class="adj-section">
+        <div class="adj-section-title">Vocabulary Upgrade Bank — Replace Basic with Precise</div>
+        <p class="adj-intro">Swap these overused adjectives for CELPIP-level alternatives. Aim to use at least 5 upgraded adjectives in every Writing task and 4 in every 90-second Speaking task.</p>
+        <div class="adj-upgrade-grid">
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">good</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">beneficial / effective / commendable</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">bad</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">detrimental / problematic / adverse</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">big</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">substantial / considerable / extensive</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">small</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">minimal / negligible / modest</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">nice</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">pleasant / appealing / delightful</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">important</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">crucial / pivotal / indispensable</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">interesting</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">compelling / thought-provoking / intriguing</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">happy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">thrilled / elated / gratified</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">sad</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">disheartened / dejected / distressed</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">hard / difficult</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">challenging / demanding / arduous</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">easy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">straightforward / effortless / accessible</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">fast</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">rapid / swift / expeditious</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">slow</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">gradual / sluggish / unhurried</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">old</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">aged / antiquated / time-honoured</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">new</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">innovative / cutting-edge / contemporary</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">tired</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">exhausted / drained / fatigued</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">scared</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">apprehensive / anxious / alarmed</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">busy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">hectic / demanding / action-packed</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">clean</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">immaculate / spotless / pristine</span></div>
+          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">different</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">distinct / contrasting / diverse</span></div>
+        </div>
+      </div>
+      `;
     }
 
     function renderVoice() {
@@ -4195,6 +4858,202 @@ export default function CelpipVocabPage() {
       });
     }
 
+    function renderAdverbs() {
+      const content = document.getElementById("adverbs-content");
+
+      // ── Render ─────────────────────────────────────────────────────────────
+      content.innerHTML = `
+      <style>
+        /* Tab row */
+        .adv-tab-row { display:flex; gap:0; border-bottom:2px solid #e5e7eb; margin-bottom:1.75rem; overflow-x:auto; scrollbar-width:none; }
+        .adv-tab-row::-webkit-scrollbar { display:none; }
+        .adv-tab { padding:10px 18px; font-size:13px; font-weight:500; color:#6b7280; cursor:pointer; border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-2px; transition:color 0.15s; white-space:nowrap; }
+        .adv-tab.adv-tab-active { color:#111827; border-bottom-color:#111827; }
+        .adv-tab:hover:not(.adv-tab-active) { color:#374151; }
+        .adv-panel { display:none; }
+        .adv-panel.adv-panel-active { display:block; }
+
+        /* Type sections */
+        .adv-section { margin-bottom:2.5rem; }
+        .adv-section-header { display:flex; align-items:center; gap:10px; margin-bottom:.6rem; padding-bottom:.5rem; border-bottom:2px solid #f3f4f6; }
+        .adv-badge { font-size:11px; font-weight:700; padding:3px 11px; border-radius:20px; letter-spacing:.04em; text-transform:uppercase; }
+        .adv-intro { font-size:13px; color:#374151; line-height:1.65; margin-bottom:.75rem; padding:10px 14px; background:#f9fafb; border-radius:8px; border-left:3px solid #e5e7eb; }
+        .adv-meta { display:flex; flex-direction:column; gap:5px; margin-bottom:.9rem; }
+        .adv-meta-row { font-size:12.5px; color:#374151; line-height:1.55; }
+        .adv-meta-row strong { color:#111827; }
+        .adv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:.65rem; }
+        .adv-card { background:#fff; border-radius:11px; padding:.85rem 1rem; border:1px solid #e5e7eb; }
+        .adv-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:.35rem; }
+        .adv-word { font-size:15px; font-weight:700; color:#111827; }
+        .adv-task-badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:#f3f4f6; color:#6b7280; }
+        .adv-example { font-size:12.5px; color:#4b5563; font-style:italic; line-height:1.55; }
+
+        /* Mistakes */
+        .adv-mistake { background:#fff; border:1px solid #fca5a5; border-radius:12px; padding:.9rem 1.1rem; margin-bottom:.85rem; }
+        .adv-mistake-title { display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700; color:#991b1b; margin-bottom:.6rem; }
+        .adv-mistake-row { font-size:12.5px; line-height:1.6; margin-bottom:.35rem; }
+        .adv-mistake-wrong { color:#dc2626; }
+        .adv-mistake-right { color:#16a34a; }
+        .adv-mistake-tip { font-size:12px; color:#374151; background:#fafafa; border-radius:6px; padding:5px 9px; border:1px solid #f3f4f6; margin-top:.4rem; }
+        .adv-score-tag { display:inline-block; font-size:10px; font-weight:700; background:#dcfce7; color:#166534; border-radius:10px; padding:2px 8px; margin-top:.4rem; }
+
+        /* CELPIP task samples */
+        .adv-task-block { border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; margin-bottom:2rem; background:#fff; }
+        .adv-task-hdr { display:flex; align-items:center; gap:10px; padding:.9rem 1.2rem; background:#f9fafb; border-bottom:1px solid #e5e7eb; }
+        .adv-task-pill { font-size:11.5px; font-weight:700; padding:4px 12px; border-radius:20px; }
+        .adv-scenario { padding:.75rem 1.2rem; background:#fffbeb; border-bottom:1px solid #fde68a; }
+        .adv-scenario-lbl { font-size:10.5px; font-weight:700; color:#92400e; text-transform:uppercase; letter-spacing:.06em; margin-bottom:3px; }
+        .adv-scenario-txt { font-size:13px; color:#374151; line-height:1.6; }
+        .adv-sample-box { padding:1rem 1.2rem; border-bottom:1px solid #e5e7eb; }
+        .adv-sample-lbl { font-size:10.5px; font-weight:700; color:#374151; text-transform:uppercase; letter-spacing:.06em; margin-bottom:7px; }
+        .adv-sample-txt { font-size:13.5px; color:#111827; line-height:2.1; white-space:pre-line; }
+        .adv-sample-txt em { color:#2563eb; font-style:normal; font-weight:700; background:#eff6ff; border-radius:3px; padding:0 3px; }
+        .adv-highlights { padding:.9rem 1.2rem; }
+        .adv-hl-lbl { font-size:10.5px; font-weight:700; color:#374151; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+        .adv-hl-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:.6rem; }
+        .adv-hl-tag { font-size:12px; font-weight:600; color:#2563eb; background:#eff6ff; border-radius:6px; padding:2px 9px; border:1px solid #bfdbfe; }
+        .adv-task-tip { font-size:12.5px; color:#374151; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:7px 11px; line-height:1.6; }
+        .adv-task-tip strong { color:#166534; }
+
+        /* Native patterns */
+        .adv-pattern-card { background:#fff; border:1px solid #e5e7eb; border-radius:11px; padding:.85rem 1rem; margin-bottom:.65rem; }
+        .adv-pattern-name { font-size:12px; font-weight:700; color:#111827; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.35rem; }
+        .adv-pattern-ex { font-size:13.5px; color:#1e40af; font-style:italic; margin-bottom:.3rem; }
+        .adv-pattern-note { font-size:12px; color:#6b7280; line-height:1.55; }
+
+        @media(max-width:600px){ .adv-grid{ grid-template-columns:1fr; } }
+      </style>
+
+      <!-- Tab bar -->
+      <div class="adv-tab-row">
+        <button class="adv-tab adv-tab-active" onclick="advTab('adv-types')">📖 Types & Rules</button>
+        <button class="adv-tab" onclick="advTab('adv-native')">🗣️ Native Patterns</button>
+        <button class="adv-tab" onclick="advTab('adv-tasks')">🎯 CELPIP Task Samples</button>
+        <button class="adv-tab" onclick="advTab('adv-mistakes')">⚠️ Mistakes & Fixes</button>
+      </div>
+
+      <!-- ══ PANEL 1: Types ══ -->
+      <div id="adv-types" class="adv-panel adv-panel-active">
+        ${ADV_TYPES.map(
+          (g) => `
+          <div class="adv-section">
+            <div class="adv-section-header">
+              <span style="font-size:1.3rem">${g.emoji}</span>
+              <span class="adv-badge" style="background:${g.bg};color:${g.color}">${g.type}</span>
+              <span class="adv-badge" style="background:#f3f4f6;color:#374151;font-size:10px">${g.badge}</span>
+            </div>
+            <div class="adv-intro">${g.intro}</div>
+            <div class="adv-meta">
+              <div class="adv-meta-row"><strong>Formation:</strong> ${g.formation}</div>
+              <div class="adv-meta-row"><strong>💡 Native speaker tip:</strong> ${g.nativeTip}</div>
+              <div class="adv-meta-row"><strong>📝 Used in:</strong> ${g.celpipUse}</div>
+            </div>
+            <div class="adv-grid">
+              ${g.items
+                .map(
+                  (item) => `
+                <div class="adv-card" style="border-color:${g.border}">
+                  <div class="adv-card-top">
+                    <span class="adv-word">${item.word}</span>
+                    <span class="adv-task-badge">${item.task}</span>
+                  </div>
+                  <div class="adv-example">${item.example}</div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+
+      <!-- ══ PANEL 2: Native Patterns ══ -->
+      <div id="adv-native" class="adv-panel">
+        <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+          These are the <strong>patterns native English speakers naturally use</strong> with adverbs. Practise slotting your own content into each structure to sound fluent and natural on CELPIP.
+        </p>
+        ${ADV_NATIVE_PATTERNS.map(
+          (p) => `
+          <div class="adv-pattern-card">
+            <div class="adv-pattern-name">${p.pattern}</div>
+            <div class="adv-pattern-ex">"${p.example}"</div>
+            <div class="adv-pattern-note">${p.note}</div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+
+      <!-- ══ PANEL 3: CELPIP Task Samples ══ -->
+      <div id="adv-tasks" class="adv-panel">
+        <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+          Each sample shows a real CELPIP scenario. Adverbs are <span style="color:#2563eb;font-weight:700;background:#eff6ff;border-radius:3px;padding:0 3px;">highlighted in blue</span>. A tip below each explains the strategy.
+        </p>
+        ${ADV_CELPIP_TASKS.map(
+          (t) => `
+          <div class="adv-task-block">
+            <div class="adv-task-hdr">
+              <span class="adv-task-pill" style="background:${t.badgeBg};color:${t.badgeColor}">${t.badge}</span>
+              <span style="font-size:13px;font-weight:600;color:#111827">${t.taskName}</span>
+              <span style="font-size:11px;color:#9ca3af;margin-left:auto">${t.taskNum}</span>
+            </div>
+            <div class="adv-scenario">
+              <div class="adv-scenario-lbl">📋 Scenario</div>
+              <div class="adv-scenario-txt">${t.scenario}</div>
+            </div>
+            <div class="adv-sample-box">
+              <div class="adv-sample-lbl">✍️ Sample Response — adverbs highlighted</div>
+              <div class="adv-sample-txt">${t.sample}</div>
+            </div>
+            <div class="adv-highlights">
+              <div class="adv-hl-lbl">🔵 Adverbs used</div>
+              <div class="adv-hl-tags">${t.adverbsUsed.map((a) => `<span class="adv-hl-tag">${a}</span>`).join("")}</div>
+              <div class="adv-task-tip"><strong>💡 Strategy:</strong> ${t.tip}</div>
+            </div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+
+      <!-- ══ PANEL 4: Mistakes & Fixes ══ -->
+      <div id="adv-mistakes" class="adv-panel">
+        <p style="font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:1.25rem;">
+          These are the most common adverb errors CELPIP test-takers make, and exactly how to fix them to improve your score.
+        </p>
+        ${ADV_MISTAKES.map(
+          (m) => `
+          <div class="adv-mistake">
+            <div class="adv-mistake-title">${m.icon} ${m.title}</div>
+            <div class="adv-mistake-row adv-mistake-wrong">✗ "${m.wrong}"</div>
+            <div class="adv-mistake-row adv-mistake-right">✓ "${m.right}"</div>
+            <div class="adv-mistake-tip">${m.tip}</div>
+            <div><span class="adv-score-tag">📈 ${m.score}</span></div>
+          </div>
+        `,
+        ).join("")}
+      </div>
+      `;
+
+      window.advTab = function (id) {
+        document
+          .querySelectorAll(".adv-panel")
+          .forEach((p) => p.classList.remove("adv-panel-active"));
+        document
+          .querySelectorAll(".adv-tab")
+          .forEach((t) => t.classList.remove("adv-tab-active"));
+        document.getElementById(id).classList.add("adv-panel-active");
+        const idx = [
+          "adv-types",
+          "adv-native",
+          "adv-tasks",
+          "adv-mistakes",
+        ].indexOf(id);
+        document
+          .querySelectorAll(".adv-tab")
+          [idx].classList.add("adv-tab-active");
+      };
+    }
+
     function renderVerbs() {
       const content = document.getElementById("verbs-content");
 
@@ -6313,6 +7172,8 @@ export default function CelpipVocabPage() {
     renderNounsPronouns();
     renderCollocations();
     renderVerbs();
+    renderAdjectives();
+    renderAdverbs();
     renderVoice();
     renderPhonetics();
     renderPrepositions();
@@ -6399,6 +7260,24 @@ export default function CelpipVocabPage() {
               </button>
               <button
                 className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="verbs"
+              >
+                Verbs
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="adjectives"
+              >
+                Adjectives
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
+                data-tab="adverbs"
+              >
+                Adverbs
+              </button>
+              <button
+                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
                 data-tab="articles"
               >
                 Articles
@@ -6416,12 +7295,6 @@ export default function CelpipVocabPage() {
                 Prepositions
               </button>
 
-              <button
-                className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
-                data-tab="verbs"
-              >
-                Verbs
-              </button>
               <button
                 className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
                 data-tab="positional-relations"
@@ -6442,6 +7315,206 @@ export default function CelpipVocabPage() {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Active & Passive Voice Tab */}
+        <div id="voice" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master{" "}
+              <span className="font-semibold text-emerald2-dark">active</span>{" "}
+              and{" "}
+              <span className="font-semibold text-amber2-dark">passive</span>{" "}
+              voice — when to use each, how to convert between them, and
+              CELPIP-specific examples for writing and speaking tasks.
+            </p>
+          </div>
+          <div id="voice-content"></div>
+        </div>
+
+        {/* Phonetics Tab */}
+        <div id="phonetics" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                pronunciation
+              </span>{" "}
+              — learn how vowels, consonants, and stress patterns work so you
+              can speak clearly and understand native speakers in every CELPIP
+              task.
+            </p>
+          </div>
+          <div id="phonetics-content"></div>
+        </div>
+
+        {/* Adverbs Tab */}
+        <div id="adverbs" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">adverbs</span>{" "}
+              — the words that modify verbs, adjectives, and other adverbs.
+              Learn every type, how native speakers use them, and how to boost
+              your CELPIP Writing and Speaking score.
+            </p>
+          </div>
+          <div id="adverbs-content"></div>
+        </div>
+
+        {/* Articles Tab */}
+        <div id="articles" className="tab-content hidden"></div>
+
+        {/* Idioms Tab */}
+        <div id="idioms" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master common English{" "}
+              <span className="font-semibold text-sapphire-dark">idioms</span> —
+              fixed expressions whose meanings cannot be guessed from the
+              individual words. Understanding idioms will help you sound natural
+              and interpret authentic English in the CELPIP listening and
+              reading sections.
+            </p>
+          </div>
+          <div id="idioms-content"></div>
+        </div>
+
+        {/* Nouns & Pronouns Tab */}
+        <div id="nouns-pronouns" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Understand English{" "}
+              <span className="font-semibold text-sapphire-dark">nouns</span>{" "}
+              and{" "}
+              <span className="font-semibold text-sapphire-dark">pronouns</span>{" "}
+              — the words that name people, places, things, and ideas, and the
+              words that replace them. Master their types, forms, and common
+              traps.
+            </p>
+          </div>
+          <div id="nouns-pronouns-content"></div>
+        </div>
+
+        {/* Conjunctions Tab */}
+        <div id="conjunctions" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                conjunctions
+              </span>{" "}
+              — the linking words that connect ideas, clauses, and sentences.
+              Learn coordinating, subordinating, and correlative types with
+              examples and common traps.
+            </p>
+          </div>
+          <div id="conjunctions-content"></div>
+        </div>
+
+        {/* Emotions Tab */}
+        <div id="emotions" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Build a precise emotional vocabulary. Each emotion is shown from
+              <span className="font-semibold text-emerald2-dark">mild</span> to
+              <span className="font-semibold text-rose2-dark">strong</span>{" "}
+              intensity, so you can choose the exact word for how you feel.
+            </p>
+          </div>
+
+          <div id="emotions-content" className="space-y-12"></div>
+        </div>
+
+        {/* Sentence Structure Tab */}
+        <div id="sentence-structure" className="tab-content">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Understand how English sentences are built — from individual{" "}
+              <span className="font-semibold text-sapphire-dark">
+                word roles
+              </span>{" "}
+              to complete{" "}
+              <span className="font-semibold text-emerald2-dark">
+                sentence types
+              </span>
+              . Master these structures to write and speak with precision on
+              CELPIP.
+            </p>
+          </div>
+          <div id="sentence-structure-content"></div>
+        </div>
+
+        {/* Collocations Tab */}
+        <div id="collocations" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Natural-sounding word combinations used by fluent English
+              speakers. Mastering collocations helps you sound more{" "}
+              <span className="font-semibold text-sapphire-dark">natural</span>{" "}
+              and less{" "}
+              <span className="font-semibold text-rose2-dark">translated</span>{" "}
+              in your CELPIP responses.
+            </p>
+          </div>
+          <div id="collocations-content" className="space-y-12"></div>
+        </div>
+
+        {/* Articles Tab */}
+        <div id="articles" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master <span className="font-semibold text-sapphire-dark">a</span>
+              , <span className="font-semibold text-emerald2-dark">an</span>,
+              and <span className="font-semibold text-amber2-dark">the</span> —
+              every rule, every trap, with interactive practice and a quiz.
+            </p>
+          </div>
+          <div id="articles-content" className="space-y-12"></div>
+        </div>
+
+        {/* Prepositions Tab */}
+        <div id="prepositions" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                prepositions
+              </span>{" "}
+              — the small words that show relationships of place, time,
+              direction, and more. Learn the rules, common combinations, and
+              traps to avoid.
+            </p>
+          </div>
+          <div id="prepositions-content"></div>
+        </div>
+
+        {/* Verbs Tab */}
+        <div id="verbs" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Everything about English verbs — types, all 12 tenses, forms,
+              modals, phrasal verbs, irregular verbs, and interactive practice.
+            </p>
+          </div>
+          <div id="verbs-content"></div>
+        </div>
+
+        {/* Adjectives Tab */}
+        <div id="adjectives" className="tab-content hidden">
+          <div className="mb-8">
+            <p className="text-slate max-w-2xl leading-relaxed">
+              Master English{" "}
+              <span className="font-semibold text-sapphire-dark">
+                adjectives
+              </span>{" "}
+              — the words that describe, qualify, and bring nouns to life. Learn
+              every type, how native speakers use them, and how to boost your
+              CELPIP Speaking and Writing scores with precise, vivid
+              description.
+            </p>
+          </div>
+          <div id="adjectives-content"></div>
         </div>
 
         {/* Word List Tab */}
@@ -6533,51 +7606,6 @@ export default function CelpipVocabPage() {
             <div id="wlq-root"></div>
           </div>
         </div>
-
-        {/* Active & Passive Voice Tab */}
-        <div id="voice" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master{" "}
-              <span className="font-semibold text-emerald2-dark">active</span>{" "}
-              and{" "}
-              <span className="font-semibold text-amber2-dark">passive</span>{" "}
-              voice — when to use each, how to convert between them, and
-              CELPIP-specific examples for writing and speaking tasks.
-            </p>
-          </div>
-          <div id="voice-content"></div>
-        </div>
-
-        {/* Phonetics Tab */}
-        <div id="phonetics" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master English{" "}
-              <span className="font-semibold text-sapphire-dark">
-                pronunciation
-              </span>{" "}
-              — learn how vowels, consonants, and stress patterns work so you
-              can speak clearly and understand native speakers in every CELPIP
-              task.
-            </p>
-          </div>
-          <div id="phonetics-content"></div>
-        </div>
-
-        {/* ─── POSITIONAL RELATIONS TAB ─────────────────────────────────────── */}
-        {/* 1. Add this tab button after the Collocations button in the Vocabulary group */}
-        {/*
-<button
-  className="tab-btn px-4 py-2 text-sm font-medium rounded-lg bg-fog text-slate hover:bg-mist hover:text-ink transition-all"
-  data-tab="positional-relations"
->
-  Positional Relations
-</button>
-*/}
-
-        {/* 2. Add this entire block before the Articles Tab div */}
-
         <div id="positional-relations" className="tab-content hidden">
           <div className="mb-8">
             <p className="text-slate max-w-2xl leading-relaxed">
@@ -10902,141 +11930,6 @@ export default function CelpipVocabPage() {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Idioms Tab */}
-        <div id="idioms" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master common English{" "}
-              <span className="font-semibold text-sapphire-dark">idioms</span> —
-              fixed expressions whose meanings cannot be guessed from the
-              individual words. Understanding idioms will help you sound natural
-              and interpret authentic English in the CELPIP listening and
-              reading sections.
-            </p>
-          </div>
-          <div id="idioms-content"></div>
-        </div>
-
-        {/* Nouns & Pronouns Tab */}
-        <div id="nouns-pronouns" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Understand English{" "}
-              <span className="font-semibold text-sapphire-dark">nouns</span>{" "}
-              and{" "}
-              <span className="font-semibold text-sapphire-dark">pronouns</span>{" "}
-              — the words that name people, places, things, and ideas, and the
-              words that replace them. Master their types, forms, and common
-              traps.
-            </p>
-          </div>
-          <div id="nouns-pronouns-content"></div>
-        </div>
-
-        {/* Conjunctions Tab */}
-        <div id="conjunctions" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master English{" "}
-              <span className="font-semibold text-sapphire-dark">
-                conjunctions
-              </span>{" "}
-              — the linking words that connect ideas, clauses, and sentences.
-              Learn coordinating, subordinating, and correlative types with
-              examples and common traps.
-            </p>
-          </div>
-          <div id="conjunctions-content"></div>
-        </div>
-
-        {/* Emotions Tab */}
-        <div id="emotions" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Build a precise emotional vocabulary. Each emotion is shown from
-              <span className="font-semibold text-emerald2-dark">mild</span> to
-              <span className="font-semibold text-rose2-dark">strong</span>{" "}
-              intensity, so you can choose the exact word for how you feel.
-            </p>
-          </div>
-
-          <div id="emotions-content" className="space-y-12"></div>
-        </div>
-
-        {/* Sentence Structure Tab */}
-        <div id="sentence-structure" className="tab-content">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Understand how English sentences are built — from individual{" "}
-              <span className="font-semibold text-sapphire-dark">
-                word roles
-              </span>{" "}
-              to complete{" "}
-              <span className="font-semibold text-emerald2-dark">
-                sentence types
-              </span>
-              . Master these structures to write and speak with precision on
-              CELPIP.
-            </p>
-          </div>
-          <div id="sentence-structure-content"></div>
-        </div>
-
-        {/* Collocations Tab */}
-        <div id="collocations" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Natural-sounding word combinations used by fluent English
-              speakers. Mastering collocations helps you sound more{" "}
-              <span className="font-semibold text-sapphire-dark">natural</span>{" "}
-              and less{" "}
-              <span className="font-semibold text-rose2-dark">translated</span>{" "}
-              in your CELPIP responses.
-            </p>
-          </div>
-          <div id="collocations-content" className="space-y-12"></div>
-        </div>
-
-        {/* Articles Tab */}
-        <div id="articles" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master <span className="font-semibold text-sapphire-dark">a</span>
-              , <span className="font-semibold text-emerald2-dark">an</span>,
-              and <span className="font-semibold text-amber2-dark">the</span> —
-              every rule, every trap, with interactive practice and a quiz.
-            </p>
-          </div>
-          <div id="articles-content" className="space-y-12"></div>
-        </div>
-
-        {/* Prepositions Tab */}
-        <div id="prepositions" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Master English{" "}
-              <span className="font-semibold text-sapphire-dark">
-                prepositions
-              </span>{" "}
-              — the small words that show relationships of place, time,
-              direction, and more. Learn the rules, common combinations, and
-              traps to avoid.
-            </p>
-          </div>
-          <div id="prepositions-content"></div>
-        </div>
-
-        {/* Verbs Tab */}
-        <div id="verbs" className="tab-content hidden">
-          <div className="mb-8">
-            <p className="text-slate max-w-2xl leading-relaxed">
-              Everything about English verbs — types, all 12 tenses, forms,
-              modals, phrasal verbs, irregular verbs, and interactive practice.
-            </p>
-          </div>
-          <div id="verbs-content"></div>
         </div>
       </main>
 
