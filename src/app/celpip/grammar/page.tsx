@@ -6678,7 +6678,23 @@ export default function CelpipVocabPage() {
         initVbQuiz();
       };
     }
+    // ─── Event Listeners ────────────────────────────────────────────────
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.dataset.tab;
 
+        document.querySelectorAll(".tab-btn").forEach((b) => {
+          b.classList.remove("bg-ink", "text-fog");
+          b.classList.add("bg-fog", "text-slate");
+        });
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.add("hidden"));
+        btn.classList.remove("bg-fog", "text-slate");
+        btn.classList.add("bg-ink", "text-fog");
+        document.getElementById(tab).classList.remove("hidden");
+      });
+    });
     // Initialize
     renderSentenceStructure();
     renderArticles();
@@ -6835,9 +6851,6 @@ export default function CelpipVocabPage() {
           </div>
           <div id="adverbs-content"></div>
         </div>
-
-        {/* Articles Tab */}
-        <div id="articles" className="tab-content hidden"></div>
 
         {/* Idioms Tab */}
         <div id="idioms" className="tab-content hidden">
