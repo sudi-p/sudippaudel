@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/celpip", label: "Notes" },
+  { href: "/celpip", label: "Reading/Writing" },
   { href: "/celpip/grammar", label: "Grammar" },
-  // { href: "/celpip/speaking-task-1", label: "Speaking" },
-  // { href: "/celpip/writing-task-1", label: "Writing" },
+  { href: "/celpip/communication", label: "Communication" },
+  { href: "/celpip/vocab", label: "Vocab" },
   { href: "/", label: "← Portfolio" },
 ];
 
