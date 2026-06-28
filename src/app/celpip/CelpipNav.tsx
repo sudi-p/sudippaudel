@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/celpip", label: "Reading/Writing" },
+  { href: "/celpip", label: "Speaking/Writing" },
   { href: "/celpip/grammar", label: "Grammar" },
   { href: "/celpip/communication", label: "Communication" },
   { href: "/celpip/vocab", label: "Vocab" },
