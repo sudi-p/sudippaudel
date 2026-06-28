@@ -7126,6 +7126,35 @@ export const ADV_MISTAKES = [
   },
 ];
 
+export const UPGRADE_BANK = shuffleArray([
+  { basic: "good", upgrades: ["beneficial", "effective", "commendable"] },
+  { basic: "bad", upgrades: ["detrimental", "problematic", "adverse"] },
+  { basic: "big", upgrades: ["substantial", "considerable", "extensive"] },
+  { basic: "small", upgrades: ["minimal", "negligible", "modest"] },
+  { basic: "nice", upgrades: ["pleasant", "appealing", "delightful"] },
+  { basic: "important", upgrades: ["crucial", "pivotal", "indispensable"] },
+  {
+    basic: "interesting",
+    upgrades: ["compelling", "thought-provoking", "intriguing"],
+  },
+  { basic: "happy", upgrades: ["thrilled", "elated", "gratified"] },
+  { basic: "sad", upgrades: ["disheartened", "dejected", "distressed"] },
+  {
+    basic: "hard / difficult",
+    upgrades: ["challenging", "demanding", "arduous"],
+  },
+  { basic: "easy", upgrades: ["straightforward", "effortless", "accessible"] },
+  { basic: "fast", upgrades: ["rapid", "swift", "expeditious"] },
+  { basic: "slow", upgrades: ["gradual", "sluggish", "unhurried"] },
+  { basic: "old", upgrades: ["aged", "antiquated", "time-honoured"] },
+  { basic: "new", upgrades: ["innovative", "cutting-edge", "contemporary"] },
+  { basic: "tired", upgrades: ["exhausted", "drained", "fatigued"] },
+  { basic: "scared", upgrades: ["apprehensive", "anxious", "alarmed"] },
+  { basic: "busy", upgrades: ["hectic", "demanding", "action-packed"] },
+  { basic: "clean", upgrades: ["immaculate", "spotless", "pristine"] },
+  { basic: "different", upgrades: ["distinct", "contrasting", "diverse"] },
+]);
+
 export const ADV_CELPIP_TASKS = [
   {
     taskNum: "Speaking Task 3",

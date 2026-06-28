@@ -40,6 +40,7 @@ import {
   ADV_MISTAKES,
   ADV_TYPES,
   ADV_VS_ADJ,
+  UPGRADE_BANK,
 } from "./data";
 
 export default function CelpipVocabPage() {
@@ -577,6 +578,114 @@ export default function CelpipVocabPage() {
 
       content.innerHTML = `
       <style>
+      .adj-tab-bar {
+    display: flex; gap: 8px; margin-bottom: 1.75rem;
+    border-bottom: 2px solid #e2e8f0; padding-bottom: 0;
+  }
+  .adj-tab-btn {
+    padding: 8px 22px; font-size: 13.5px; font-weight: 700;
+    border: none; background: none; cursor: pointer; color: #64748b;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    border-radius: 6px 6px 0 0; transition: color .15s, border-color .15s;
+  }
+  .adj-tab-btn:hover { color: #4f46e5; }
+  .adj-tab-btn.adj-tab-active { color: #4f46e5; border-bottom-color: #4f46e5; }
+  .adj-tab-panel { display: none; }
+  .adj-tab-panel.adj-tab-panel-active { display: block; }
+
+  /* ── flip card quiz ── */
+  .fq-header {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 12px; margin-bottom: 1.5rem;
+  }
+  .fq-meta { font-size: 13px; color: #64748b; font-weight: 600; }
+  .fq-btn {
+    padding: 9px 22px; border: none; border-radius: 10px; font-size: 13px;
+    font-weight: 700; cursor: pointer; transition: background .15s, transform .1s;
+  }
+  .fq-btn:active { transform: scale(.97); }
+  .fq-btn-primary   { background: #4f46e5; color: #fff; }
+  .fq-btn-primary:hover { background: #3730a3; }
+  .fq-btn-secondary { background: #f1f5f9; color: #334155; }
+  .fq-btn-secondary:hover { background: #e2e8f0; }
+
+  /* progress bar */
+  .fq-progress-wrap { display:flex; flex-direction:column; gap:4px; flex:1; min-width:180px; }
+  .fq-progress-label { font-size:12px; font-weight:600; color:#64748b; }
+  .fq-progress-bg { height:7px; background:#e2e8f0; border-radius:99px; overflow:hidden; }
+  .fq-progress-fill { height:100%; background:#4f46e5; border-radius:99px; transition:width .35s; }
+
+  /* score badges */
+  .fq-score-row { display:flex; gap:12px; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .fq-badge { display:flex; align-items:center; gap:6px; padding:5px 14px; border-radius:20px; font-size:13px; font-weight:700; }
+  .fq-badge-seen  { background:#ede9fe; color:#4f46e5; }
+  .fq-badge-known { background:#f0fdf4; color:#16a34a; }
+  .fq-badge-again { background:#fef2f2; color:#dc2626; }
+
+  /* scene / card */
+  .fq-scene {
+    width:100%; max-width:480px; height:230px;
+    perspective:1000px; margin:0 auto 1.25rem; cursor:pointer;
+    user-select:none;
+  }
+  .fq-card-inner {
+    width:100%; height:100%; position:relative;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);
+    border-radius:20px;
+  }
+  .fq-card-inner.fq-flipped { transform:rotateY(180deg); }
+  .fq-face {
+    position:absolute; inset:0; backface-visibility:hidden;
+    -webkit-backface-visibility:hidden; border-radius:20px;
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:2rem; text-align:center;
+    box-shadow:0 8px 32px rgba(99,102,241,.13);
+  }
+  .fq-front {
+    background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);
+    color:#fff;
+  }
+  .fq-back { background:#fff; border:2px solid #e2e8f0; transform:rotateY(180deg); }
+
+  .fq-front-hint { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; opacity:.6; margin-bottom:.5rem; }
+  .fq-front-word { font-size:2.8rem; font-weight:900; letter-spacing:-.02em; line-height:1; }
+  .fq-front-tap  { font-size:11px; opacity:.5; margin-top:.85rem; }
+
+  .fq-back-label { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#94a3b8; margin-bottom:.85rem; }
+  .fq-chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .fq-chip {
+    background:#ede9fe; color:#4f46e5; font-size:14px; font-weight:700;
+    padding:5px 18px; border-radius:20px; border:1.5px solid #c4b5fd;
+  }
+
+  /* result buttons */
+  .fq-result-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:1.75rem; }
+  .fq-btn-known { background:#f0fdf4; color:#16a34a; border:1.5px solid #bbf7d0; }
+  .fq-btn-known:hover { background:#dcfce7; }
+  .fq-btn-again { background:#fef2f2; color:#dc2626; border:1.5px solid #fecaca; }
+  .fq-btn-again:hover { background:#fee2e2; }
+
+  /* completion screen */
+  .fq-complete {
+    text-align:center; padding:3rem 1rem;
+    background:#fff; border:1px solid #e2e8f0; border-radius:20px;
+  }
+  .fq-complete-icon  { font-size:3.5rem; margin-bottom:.75rem; }
+  .fq-complete-title { font-size:1.5rem; font-weight:900; color:#1e293b; margin-bottom:.5rem; }
+  .fq-complete-sub   { font-size:14px; color:#64748b; margin-bottom:1.5rem; }
+  .fq-stat-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:1.75rem; }
+  .fq-stat {
+    background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;
+    padding:12px 24px; text-align:center;
+  }
+  .fq-stat-num   { font-size:1.8rem; font-weight:900; color:#4f46e5; }
+  .fq-stat-label { font-size:11px; color:#64748b; font-weight:600; margin-top:2px; }
+
+  @media(max-width:600px){
+    .fq-scene { height:200px; }
+    .fq-front-word { font-size:2rem; }
+  }
         /* ── shared layout ── */
         .adj-section { margin-bottom: 3.5rem; }
         .adj-section-title {
@@ -707,6 +816,16 @@ export default function CelpipVocabPage() {
           .adj-order-arrow { transform: rotate(90deg); }
         }
       </style>
+
+      <!-- ── TAB BAR ── -->
+<div class="adj-tab-bar">
+  <button class="adj-tab-btn adj-tab-active" onclick="adjShowTab('adj-ref')">📖 Reference</button>
+  <button class="adj-tab-btn" onclick="adjShowTab('adj-quiz')">🃏 Flip Card Quiz</button>
+  <button class="adj-tab-btn" onclick="adjShowTab('adj-fill')">✏️ Fill in the Blanks</button>
+</div>
+
+<!-- ── PANEL 1: reference (wrap ALL your existing sections in this div) ── -->
+<div id="adj-ref" class="adj-tab-panel adj-tab-panel-active">
 
       <!-- ══════════════════════════════════════════════════════════════
            SECTION 1 — WHAT IS AN ADJECTIVE?
@@ -1692,30 +1811,646 @@ export default function CelpipVocabPage() {
         <div class="adj-section-title">Vocabulary Upgrade Bank — Replace Basic with Precise</div>
         <p class="adj-intro">Swap these overused adjectives for CELPIP-level alternatives. Aim to use at least 5 upgraded adjectives in every Writing task and 4 in every 90-second Speaking task.</p>
         <div class="adj-upgrade-grid">
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">good</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">beneficial / effective / commendable</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">bad</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">detrimental / problematic / adverse</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">big</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">substantial / considerable / extensive</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">small</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">minimal / negligible / modest</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">nice</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">pleasant / appealing / delightful</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">important</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">crucial / pivotal / indispensable</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">interesting</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">compelling / thought-provoking / intriguing</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">happy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">thrilled / elated / gratified</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">sad</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">disheartened / dejected / distressed</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">hard / difficult</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">challenging / demanding / arduous</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">easy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">straightforward / effortless / accessible</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">fast</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">rapid / swift / expeditious</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">slow</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">gradual / sluggish / unhurried</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">old</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">aged / antiquated / time-honoured</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">new</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">innovative / cutting-edge / contemporary</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">tired</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">exhausted / drained / fatigued</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">scared</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">apprehensive / anxious / alarmed</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">busy</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">hectic / demanding / action-packed</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">clean</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">immaculate / spotless / pristine</span></div>
-          <div class="adj-upgrade-pair"><span class="adj-upgrade-basic">different</span><span class="adj-upgrade-arrow">→</span><span class="adj-upgrade-better">distinct / contrasting / diverse</span></div>
-        </div>
+  ${UPGRADE_BANK.map(
+    (w) => `
+    <div class="adj-upgrade-pair">
+      <span class="adj-upgrade-basic">${w.basic}</span>
+      <span class="adj-upgrade-arrow">→</span>
+      <span class="adj-upgrade-better">${w.upgrades.join(" / ")}</span>
+    </div>
+  `,
+  ).join("")}
+</div>
       </div>
+      </div><!-- /adj-ref -->
+
+<!-- ── PANEL 2: flip card quiz ── -->
+<div id="adj-quiz" class="adj-tab-panel">
+
+  <div class="fq-header">
+    <div class="fq-progress-wrap">
+      <div class="fq-progress-label" id="fq-prog-label">Card 1 of ${UPGRADE_BANK.length}</div>
+      <div class="fq-progress-bg">
+        <div class="fq-progress-fill" id="fq-prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+    <button class="fq-btn fq-btn-secondary" onclick="fqRestart()">↺ Restart</button>
+  </div>
+
+  <div class="fq-score-row">
+    <div class="fq-badge fq-badge-seen">👁 Seen: <span id="fq-seen">0</span></div>
+    <div class="fq-badge fq-badge-known">✓ Got it: <span id="fq-known">0</span></div>
+    <div class="fq-badge fq-badge-again">↺ Again: <span id="fq-again">0</span></div>
+  </div>
+
+  <!-- card scene -->
+  <div class="fq-scene" id="fq-scene" onclick="fqFlip()">
+    <div class="fq-card-inner" id="fq-inner">
+      <div class="fq-face fq-front">
+        <div class="fq-front-hint">Basic word — upgrade it</div>
+        <div class="fq-front-word" id="fq-front-word"></div>
+        <div class="fq-front-tap">tap to reveal upgrades</div>
+      </div>
+      <div class="fq-face fq-back">
+        <div class="fq-back-label">✨ Upgraded alternatives</div>
+        <div class="fq-chips" id="fq-back-chips"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- result buttons (hidden until flipped) -->
+  <div class="fq-result-row" id="fq-result-row" style="display:none">
+    <button class="fq-btn fq-btn-again" onclick="fqAnswer(false)">↺ Study again</button>
+    <button class="fq-btn fq-btn-known" onclick="fqAnswer(true)">✓ Got it!</button>
+  </div>
+
+  <!-- completion screen (hidden until done) -->
+  <div class="fq-complete" id="fq-complete" style="display:none">
+    <div class="fq-complete-icon">🎉</div>
+    <div class="fq-complete-title">Round complete!</div>
+    <div class="fq-complete-sub" id="fq-complete-sub"></div>
+    <div class="fq-stat-row">
+      <div class="fq-stat"><div class="fq-stat-num" id="fq-stat-known">0</div><div class="fq-stat-label">Got it</div></div>
+      <div class="fq-stat"><div class="fq-stat-num" id="fq-stat-again">0</div><div class="fq-stat-label">Study again</div></div>
+      <div class="fq-stat"><div class="fq-stat-num" id="fq-stat-pct">0%</div><div class="fq-stat-label">Score</div></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <button class="fq-btn fq-btn-primary" onclick="fqRestartWrong()" id="fq-retry-btn">↺ Retry missed</button>
+      <button class="fq-btn fq-btn-secondary" onclick="fqRestart()">↺ Full restart</button>
+    </div>
+  </div>
+
+</div><!-- /adj-quiz -->
+<!-- ── PANEL 3: fill in the blanks ── -->
+<div id="adj-fill" class="adj-tab-panel">
+
+  <style>
+    .afb-card {
+      background: #fff; border: 2px solid #e2e8f0; border-radius: 20px;
+      padding: 2.25rem 2rem; max-width: 560px; margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 32px rgba(99,102,241,.10);
+      transition: border-color .2s;
+    }
+    .afb-card.afb-correct { border-color: #16a34a; background: #f0fdf4; }
+    .afb-card.afb-wrong   { border-color: #dc2626; background: #fef2f2; }
+    .afb-card.afb-revealed { border-color: #8b5cf6; background: #faf5ff; }
+
+    /* counter & progress */
+    .afb-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 560px; margin: 0 auto 1rem; flex-wrap: wrap; gap: 8px;
+    }
+    .afb-counter { font-size: 13px; font-weight: 700; color: #64748b; }
+    .afb-progress-bg { flex: 1; min-width: 120px; height: 7px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+    .afb-progress-fill { height: 100%; background: #4f46e5; border-radius: 99px; transition: width .35s; }
+
+    /* prompt */
+    .afb-prompt {
+      font-size: 13px; color: #94a3b8; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .07em; margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    /* basic word display */
+    .afb-basic-word {
+      text-align: center; margin-bottom: 1.75rem;
+    }
+    .afb-basic-chip {
+      display: inline-block;
+      font-size: 2rem; font-weight: 900; letter-spacing: -.02em;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff; padding: .35em .75em;
+      border-radius: 14px; line-height: 1.2;
+    }
+
+    /* inputs area */
+    .afb-inputs-label {
+      font-size: 11px; font-weight: 700; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: .07em;
+      text-align: center; margin-bottom: .75rem;
+    }
+    .afb-inputs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 1.5rem; }
+    .afb-input-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .afb-input-num { font-size: 10px; font-weight: 700; color: #a5b4fc; }
+    .afb-input {
+      font-size: 14px; font-weight: 600; color: #1e293b;
+      border: 2px solid #e2e8f0; border-radius: 10px;
+      padding: 8px 14px; outline: none; text-align: center;
+      min-width: 130px; transition: border-color .15s, background .15s;
+      background: #f8fafc;
+    }
+    .afb-input:focus { border-color: #818cf8; background: #fff; }
+    .afb-input.afb-input-correct { border-color: #16a34a; background: #f0fdf4; color: #166534; }
+    .afb-input.afb-input-wrong   { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+    .afb-input.afb-input-revealed { border-color: #8b5cf6; background: #faf5ff; color: #6d28d9; font-style: italic; }
+    .afb-input:disabled { cursor: default; }
+
+    /* feedback message */
+    .afb-feedback {
+      text-align: center; font-size: 14px; font-weight: 700;
+      min-height: 22px; margin-bottom: 1.25rem; transition: opacity .2s;
+    }
+    .afb-feedback.afb-fb-correct  { color: #16a34a; }
+    .afb-feedback.afb-fb-wrong    { color: #dc2626; }
+    .afb-feedback.afb-fb-partial  { color: #d97706; }
+    .afb-feedback.afb-fb-revealed { color: #7c3aed; }
+
+    /* action buttons */
+    .afb-actions {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .afb-btn {
+      padding: 9px 20px; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: background .15s, transform .1s;
+    }
+    .afb-btn:active { transform: scale(.96); }
+    .afb-btn-check   { background: #4f46e5; color: #fff; }
+    .afb-btn-check:hover   { background: #3730a3; }
+    .afb-btn-reveal  { background: #f5f3ff; color: #6d28d9; border: 1.5px solid #ddd6fe; }
+    .afb-btn-reveal:hover  { background: #ede9fe; }
+    .afb-btn-reset   { background: #f1f5f9; color: #475569; border: 1.5px solid #e2e8f0; }
+    .afb-btn-reset:hover   { background: #e2e8f0; }
+
+    /* nav buttons */
+    .afb-nav {
+      display: flex; gap: 10px; justify-content: center; margin-top: .25rem;
+    }
+    .afb-btn-nav {
+      padding: 9px 28px; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer; background: #fff;
+      color: #334155; transition: background .15s, border-color .15s;
+    }
+    .afb-btn-nav:hover:not(:disabled) { background: #f1f5f9; border-color: #a5b4fc; }
+    .afb-btn-nav:disabled { opacity: .35; cursor: default; }
+
+    /* score summary strip */
+    .afb-score-strip {
+      display: flex; gap: 10px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .afb-score-badge {
+      font-size: 13px; font-weight: 700; padding: 5px 16px;
+      border-radius: 20px;
+    }
+    .afb-score-correct { background: #f0fdf4; color: #16a34a; }
+    .afb-score-wrong   { background: #fef2f2; color: #dc2626; }
+    .afb-score-skipped { background: #f5f3ff; color: #7c3aed; }
+
+    @media (max-width: 600px) {
+      .afb-card { padding: 1.5rem 1rem; }
+      .afb-basic-chip { font-size: 1.5rem; }
+      .afb-input { min-width: 100px; font-size: 13px; }
+    }
+  </style>
+
+  <!-- meta bar -->
+  <div class="afb-meta">
+    <span class="afb-counter" id="afb-counter">1 / 20</span>
+    <div class="afb-progress-bg">
+      <div class="afb-progress-fill" id="afb-progress" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- score strip -->
+  <div class="afb-score-strip">
+    <span class="afb-score-badge afb-score-correct">✓ Correct: <span id="afb-sc-correct">0</span></span>
+    <span class="afb-score-badge afb-score-wrong">✗ Wrong: <span id="afb-sc-wrong">0</span></span>
+    <span class="afb-score-badge afb-score-skipped">👁 Revealed: <span id="afb-sc-revealed">0</span></span>
+  </div>
+
+  <!-- main card -->
+  <div class="afb-card" id="afb-card">
+    <div class="afb-prompt">Upgrade this basic word</div>
+
+    <div class="afb-basic-word">
+      <span class="afb-basic-chip" id="afb-basic-word"></span>
+    </div>
+
+    <div class="afb-inputs-label" id="afb-inputs-label"></div>
+    <div class="afb-inputs" id="afb-inputs"></div>
+
+    <div class="afb-feedback" id="afb-feedback"></div>
+
+    <div class="afb-actions">
+      <button class="afb-btn afb-btn-check"  onclick="afbCheck()">✓ Check Answer</button>
+      <button class="afb-btn afb-btn-reveal" onclick="afbReveal()">👁 Reveal Answer</button>
+      <button class="afb-btn afb-btn-reset"  onclick="afbReset()">↺ Reset</button>
+    </div>
+
+    <div class="afb-nav">
+      <button class="afb-btn-nav" id="afb-prev" onclick="afbNav(-1)">← Prev</button>
+      <button class="afb-btn-nav" id="afb-next" onclick="afbNav(1)">Next →</button>
+    </div>
+  </div>
+
+</div><!-- /adj-fill -->
       `;
     }
+    // ── Adjective flip-card quiz ──────────────────────────────────────
+    window.adjShowTab = function (id) {
+      document
+        .querySelectorAll(".adj-tab-panel")
+        .forEach((p) => p.classList.remove("adj-tab-panel-active"));
+      document
+        .querySelectorAll(".adj-tab-btn")
+        .forEach((b) => b.classList.remove("adj-tab-active"));
+      document.getElementById(id).classList.add("adj-tab-panel-active");
+      document.querySelectorAll(".adj-tab-btn").forEach((b) => {
+        if (b.getAttribute("onclick") === `adjShowTab('${id}')`)
+          b.classList.add("adj-tab-active");
+      });
+      // boot fill-in-the-blanks on first open
+      if (id === "adj-fill" && typeof window._afbInit === "function") {
+        window._afbInit();
+        window._afbInit = null; // run once only
+      }
+    };
+
+    (function () {
+      let deck = [],
+        idx = 0,
+        known = 0,
+        again = 0,
+        flipped = false;
+
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function render() {
+        const scene = document.getElementById("fq-scene");
+        const complete = document.getElementById("fq-complete");
+        const resultRow = document.getElementById("fq-result-row");
+        if (!scene) return;
+
+        if (idx >= deck.length) {
+          scene.style.display = "none";
+          resultRow.style.display = "none";
+          complete.style.display = "block";
+          const pct = Math.round((known / deck.length) * 100);
+          document.getElementById("fq-stat-known").textContent = known;
+          document.getElementById("fq-stat-again").textContent = again;
+          document.getElementById("fq-stat-pct").textContent = pct + "%";
+          document.getElementById("fq-complete-sub").textContent =
+            pct === 100
+              ? "Perfect — you know them all! 🏆"
+              : pct >= 70
+                ? "Great work! Review the missed ones."
+                : "Keep practising — you'll get there!";
+          const retryBtn = document.getElementById("fq-retry-btn");
+          retryBtn.style.display = again > 0 ? "" : "none";
+          return;
+        }
+
+        const card = deck[idx];
+        flipped = false;
+
+        document.getElementById("fq-inner").classList.remove("fq-flipped");
+        document.getElementById("fq-front-word").textContent = card.basic;
+        document.getElementById("fq-back-chips").innerHTML = card.upgrades
+          .map((u) => `<span class="fq-chip">${u}</span>`)
+          .join("");
+
+        resultRow.style.display = "none";
+        scene.style.display = "";
+        complete.style.display = "none";
+
+        // progress
+        const total = deck.length;
+        const pct = Math.round((idx / total) * 100);
+        document.getElementById("fq-prog-label").textContent =
+          `Card ${idx + 1} of ${total}`;
+        document.getElementById("fq-prog-fill").style.width = pct + "%";
+        document.getElementById("fq-seen").textContent = idx;
+        document.getElementById("fq-known").textContent = known;
+        document.getElementById("fq-again").textContent = again;
+      }
+
+      window.fqFlip = function () {
+        if (flipped) return;
+        flipped = true;
+        document.getElementById("fq-inner").classList.add("fq-flipped");
+        document.getElementById("fq-result-row").style.display = "flex";
+      };
+
+      window.fqAnswer = function (gotIt) {
+        if (gotIt) {
+          known++;
+        } else {
+          again++;
+          deck.push(deck[idx]);
+        } // push to end for review
+        idx++;
+        render();
+      };
+
+      window.fqRestart = function () {
+        deck = shuffle(UPGRADE_BANK);
+        idx = 0;
+        known = 0;
+        again = 0;
+        render();
+      };
+
+      window.fqRestartWrong = function () {
+        // collect the "again" entries that were pushed to the end
+        const wrongCards = deck.slice(UPGRADE_BANK.length);
+        deck = shuffle(wrongCards.length ? wrongCards : UPGRADE_BANK);
+        idx = 0;
+        known = 0;
+        again = 0;
+        render();
+      };
+
+      // auto-start when quiz tab is first opened
+      const quizBtn = document.querySelector(
+        ".adj-tab-btn[onclick=\"adjShowTab('adj-quiz')\"]",
+      );
+      if (quizBtn) {
+        quizBtn.addEventListener("click", function onFirst() {
+          if (deck.length === 0) window.fqRestart();
+          quizBtn.removeEventListener("click", onFirst);
+        });
+      }
+    })();
+
+    // ── Fill in the Blanks quiz ───────────────────────────────────────
+    window._afbInit = function () {
+      let idx = 0;
+      const states = new Array(UPGRADE_BANK.length).fill(null);
+      let scCorrect = 0,
+        scWrong = 0,
+        scRevealed = 0;
+
+      function getInputs() {
+        return Array.from(document.querySelectorAll(".afb-input"));
+      }
+
+      function updateMeta() {
+        const el = {
+          counter: document.getElementById("afb-counter"),
+          progress: document.getElementById("afb-progress"),
+          correct: document.getElementById("afb-sc-correct"),
+          wrong: document.getElementById("afb-sc-wrong"),
+          revealed: document.getElementById("afb-sc-revealed"),
+        };
+        if (!el.counter) return;
+        el.counter.textContent = `${idx + 1} / ${UPGRADE_BANK.length}`;
+        el.progress.style.width = `${Math.round(((idx + 1) / UPGRADE_BANK.length) * 100)}%`;
+        el.correct.textContent = scCorrect;
+        el.wrong.textContent = scWrong;
+        el.revealed.textContent = scRevealed;
+      }
+
+      function applyCorrectUI(upgrades) {
+        const card = document.getElementById("afb-card");
+        const fb = document.getElementById("afb-feedback");
+        if (!card) return;
+        card.className = "afb-card afb-correct";
+        fb.className = "afb-feedback afb-fb-correct";
+        fb.textContent = "✓ All correct! Well done.";
+        upgrades.forEach((u, wi) => {
+          const inp = document.getElementById(`afb-inp-${wi}`);
+          if (!inp) return;
+          inp.value = u;
+          inp.classList.remove("afb-input-wrong");
+          inp.classList.add("afb-input-correct");
+          inp.disabled = true;
+        });
+      }
+
+      function applyRevealedUI(upgrades) {
+        const card = document.getElementById("afb-card");
+        const fb = document.getElementById("afb-feedback");
+        if (!card) return;
+        card.className = "afb-card afb-revealed";
+        fb.className = "afb-feedback afb-fb-revealed";
+        fb.textContent = "👁 Answer revealed.";
+        upgrades.forEach((u, wi) => {
+          const inp = document.getElementById(`afb-inp-${wi}`);
+          if (!inp) return;
+          inp.value = u;
+          inp.classList.add("afb-input-revealed");
+          inp.disabled = true;
+        });
+      }
+
+      function setCard(i) {
+        idx = i;
+        const item = UPGRADE_BANK[idx];
+        const state = states[idx];
+
+        // ── basic word ──
+        const wordEl = document.getElementById("afb-basic-word");
+        if (wordEl) wordEl.textContent = item.basic;
+
+        // ── inputs label ──
+        const labelEl = document.getElementById("afb-inputs-label");
+        if (labelEl)
+          labelEl.textContent = `Enter ${item.upgrades.length} upgraded alternative${item.upgrades.length > 1 ? "s" : ""}`;
+
+        // ── build inputs ──
+        const container = document.getElementById("afb-inputs");
+        if (container) {
+          container.innerHTML = item.upgrades
+            .map(
+              (_, wi) => `
+        <div class="afb-input-wrap">
+          <span class="afb-input-num">${wi + 1}</span>
+          <input
+            class="afb-input"
+            id="afb-inp-${wi}"
+            type="text"
+            placeholder="word ${wi + 1}"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+      `,
+            )
+            .join("");
+
+          // attach Enter key listener after building
+          container.querySelectorAll(".afb-input").forEach((inp) => {
+            inp.addEventListener("keydown", (e) => {
+              if (e.key === "Enter") window.afbCheck();
+            });
+          });
+        }
+
+        // ── reset card appearance ──
+        const card = document.getElementById("afb-card");
+        const fb = document.getElementById("afb-feedback");
+        if (card) card.className = "afb-card";
+        if (fb) {
+          fb.className = "afb-feedback";
+          fb.textContent = "";
+        }
+
+        // ── restore previous state ──
+        if (state === "correct") {
+          applyCorrectUI(item.upgrades);
+        } else if (state === "revealed") {
+          applyRevealedUI(item.upgrades);
+        } else if (state && state.values) {
+          // partial / wrong — restore typed values and colouring
+          const upgradesLower = item.upgrades.map((u) => u.toLowerCase());
+          const usedIdx = new Set();
+          state.values.forEach((v, wi) => {
+            const inp = document.getElementById(`afb-inp-${wi}`);
+            if (!inp) return;
+            inp.value = v;
+            const normV = v.trim().toLowerCase();
+            const mIdx = upgradesLower.findIndex(
+              (u, i) => u === normV && !usedIdx.has(i),
+            );
+            if (normV && mIdx !== -1) {
+              usedIdx.add(mIdx);
+              inp.classList.add("afb-input-correct");
+            } else if (normV) {
+              inp.classList.add("afb-input-wrong");
+            }
+          });
+          const allRight = state.values.every((v) =>
+            item.upgrades
+              .map((u) => u.toLowerCase())
+              .includes(v.trim().toLowerCase()),
+          );
+          if (fb) {
+            if (allRight) {
+              fb.className = "afb-feedback afb-fb-correct";
+              fb.textContent = "✓ All correct! Well done.";
+              if (card) card.classList.add("afb-correct");
+            } else {
+              const correctCount = state.values.filter((v) =>
+                item.upgrades
+                  .map((u) => u.toLowerCase())
+                  .includes(v.trim().toLowerCase()),
+              ).length;
+              fb.className = "afb-feedback afb-fb-partial";
+              fb.textContent = `${correctCount} of ${item.upgrades.length} correct — keep trying!`;
+              if (card) card.classList.add("afb-wrong");
+            }
+          }
+        }
+
+        // ── nav buttons ──
+        const prevBtn = document.getElementById("afb-prev");
+        const nextBtn = document.getElementById("afb-next");
+        if (prevBtn) prevBtn.disabled = idx === 0;
+        if (nextBtn) nextBtn.disabled = idx === UPGRADE_BANK.length - 1;
+
+        updateMeta();
+
+        // focus first empty input
+        if (!state) {
+          const first = document.getElementById("afb-inp-0");
+          if (first) setTimeout(() => first.focus(), 60);
+        }
+      }
+
+      /* ── public action handlers ── */
+      window.afbCheck = function () {
+        const item = UPGRADE_BANK[idx];
+        const inputs = getInputs();
+        const values = inputs.map((i) => i.value.trim());
+
+        if (values.every((v) => v === "")) {
+          const fb = document.getElementById("afb-feedback");
+          if (fb) {
+            fb.className = "afb-feedback afb-fb-wrong";
+            fb.textContent = "Please enter at least one answer.";
+          }
+          return;
+        }
+
+        const upgradesLower = item.upgrades.map((u) => u.toLowerCase());
+        const usedIdx = new Set();
+        let allCorrect = true;
+
+        inputs.forEach((inp, wi) => {
+          const v = values[wi].toLowerCase();
+          const mIdx = upgradesLower.findIndex(
+            (u, i) => u === v && !usedIdx.has(i),
+          );
+          inp.classList.remove(
+            "afb-input-correct",
+            "afb-input-wrong",
+            "afb-input-revealed",
+          );
+          if (v !== "" && mIdx !== -1) {
+            usedIdx.add(mIdx);
+            inp.classList.add("afb-input-correct");
+          } else {
+            if (v !== "") inp.classList.add("afb-input-wrong");
+            allCorrect = false;
+          }
+        });
+
+        // only count score on first attempt
+        if (!states[idx]) {
+          if (allCorrect) scCorrect++;
+          else scWrong++;
+        }
+
+        if (allCorrect) {
+          states[idx] = "correct";
+          applyCorrectUI(item.upgrades);
+        } else {
+          states[idx] = { values };
+          const correctCount = values.filter((v) =>
+            upgradesLower.includes(v.trim().toLowerCase()),
+          ).length;
+          const card = document.getElementById("afb-card");
+          const fb = document.getElementById("afb-feedback");
+          if (card) {
+            card.className = "afb-card afb-wrong";
+          }
+          if (fb) {
+            fb.className = "afb-feedback afb-fb-partial";
+            fb.textContent =
+              correctCount > 0
+                ? `${correctCount} of ${item.upgrades.length} correct — keep trying!`
+                : "✗ None correct — try again or reveal the answer.";
+          }
+        }
+        updateMeta();
+      };
+
+      window.afbReveal = function () {
+        const item = UPGRADE_BANK[idx];
+        if (states[idx] === "correct") return;
+        if (!states[idx]) scRevealed++;
+        states[idx] = "revealed";
+        applyRevealedUI(item.upgrades);
+        updateMeta();
+      };
+
+      window.afbReset = function () {
+        const prev = states[idx];
+        if (prev === "correct") scCorrect--;
+        else if (prev === "revealed") scRevealed--;
+        else if (prev && prev.values) scWrong--;
+        states[idx] = null;
+        setCard(idx);
+      };
+
+      window.afbNav = function (dir) {
+        const next = idx + dir;
+        if (next < 0 || next >= UPGRADE_BANK.length) return;
+        setCard(next);
+      };
+
+      // boot immediately — DOM is already ready since renderAdjectives() just ran
+      setCard(0);
+    };
 
     function renderVoice() {
       const content = document.getElementById("voice-content");
