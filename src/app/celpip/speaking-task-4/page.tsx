@@ -1343,6 +1343,179 @@ export default function CelpipSpeakingTask4Page() {
             </div>
           </div>
 
+          {/* ── CATEGORY 6: COSY / INTIMATE ── */}
+          <div className="bg-white rounded-2xl border border-mist overflow-hidden">
+            <div className="px-6 py-5 border-b border-mist flex items-center gap-3">
+              <span className="w-8 h-8 rounded-full bg-gold text-white text-sm font-bold flex items-center justify-center shrink-0">
+                6
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-ink">
+                  Cosy / Intimate
+                </p>
+                <p className="text-xs text-slate">
+                  e.g. café interior, living room, home kitchen, library reading
+                  nook, small bookshop, quiet office
+                </p>
+              </div>
+            </div>
+            <div className="px-6 py-5 space-y-5">
+              <div>
+                <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">
+                  Key vocabulary
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    {
+                      word: "cosy",
+                      meaning:
+                        "giving a feeling of comfort, warmth, and relaxation",
+                      example:
+                        "The café has a cosy atmosphere that makes customers want to stay longer.",
+                    },
+                    {
+                      word: "intimate",
+                      meaning: "having a warm, friendly, private quality",
+                      example:
+                        "The intimate setting of the living room encourages open conversation.",
+                    },
+                    {
+                      word: "ambient",
+                      meaning:
+                        "relating to the surrounding atmosphere or environment",
+                      example:
+                        "The ambient lighting in the café creates a calm, welcoming mood.",
+                    },
+                    {
+                      word: "murmur",
+                      meaning:
+                        "a soft, low, continuous sound of voices or activity",
+                      example:
+                        "The quiet murmur of conversation will fade as closing time approaches.",
+                    },
+                    {
+                      word: "browse",
+                      meaning:
+                        "to look through something in a relaxed, unhurried way",
+                      example:
+                        "Customers will continue to browse the shelves long after the rush hour.",
+                    },
+                    {
+                      word: "engrossed",
+                      meaning: "deeply absorbed in something",
+                      example:
+                        "The readers are engrossed in their books and unlikely to leave soon.",
+                    },
+                    {
+                      word: "trickle in",
+                      meaning: "to arrive slowly and in small numbers",
+                      example:
+                        "More regulars will trickle in once the afternoon lull passes.",
+                    },
+                    {
+                      word: "settle in",
+                      meaning: "to make oneself comfortable in a place",
+                      example:
+                        "The couple have settled in for the evening with their drinks and books.",
+                    },
+                  ].map((v) => (
+                    <div key={v.word} className="bg-fog rounded-xl p-4">
+                      <p className="text-sm font-semibold text-ink mb-1">
+                        {v.word}
+                      </p>
+                      <p className="text-xs text-slate mb-1">
+                        <strong>Meaning:</strong> {v.meaning}
+                      </p>
+                      <p className="text-xs text-slate italic">
+                        <strong>Example:</strong> "{v.example}"
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-sapphire-light rounded-xl p-4">
+                  <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-2">
+                    ✦ Opening (first paragraph)
+                  </p>
+                  <p className="text-xs text-sapphire-dark leading-relaxed">
+                    Establish the warmth and quietness of the space. Name the
+                    small, specific details that create the cosy feeling —
+                    lighting, sounds, what individuals are doing. Keep the tone
+                    gentle and unhurried.
+                  </p>
+                  <p className="text-xs text-sapphire-dark italic mt-2">
+                    "Right now, the café is cosy and unhurried — warm ambient
+                    lighting falls across small wooden tables where customers
+                    are quietly reading or working on laptops, and the soft
+                    murmur of conversation fills the room."
+                  </p>
+                </div>
+                <div className="bg-amber2-light rounded-xl p-4">
+                  <p className="text-xs font-semibold text-amber2-dark uppercase tracking-wider mb-2">
+                    ✦ Closing (last paragraph)
+                  </p>
+                  <p className="text-xs text-amber2-dark leading-relaxed">
+                    Predict a gentle shift — more customers trickling in, or the
+                    space gradually emptying as closing time nears. Avoid
+                    dramatic language; the tone should stay soft and natural
+                    throughout.
+                  </p>
+                  <p className="text-xs text-amber2-dark italic mt-2">
+                    "Overall, the intimate atmosphere will be maintained as long
+                    as the space stays quiet — but once the after-work crowd
+                    begins to trickle in, the cosy calm will slowly give way to
+                    a livelier, more social energy."
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-fog rounded-xl p-5 space-y-3">
+                <p className="text-xs font-semibold text-gold uppercase tracking-widest">
+                  ★ Perfect 60-second response — Cosy Café Interior
+                </p>
+                <div className="text-sm text-ink italic leading-relaxed space-y-2">
+                  <p>
+                    <span className="not-italic font-semibold text-sapphire">
+                      Recap:
+                    </span>{" "}
+                    "Right now, the café is cosy and unhurried — warm ambient
+                    lighting falls across small wooden tables where customers
+                    are quietly reading or working on laptops, and the soft
+                    murmur of conversation fills the room."
+                  </p>
+                  <p>
+                    <span className="not-italic font-semibold text-emerald2">
+                      Predictions:
+                    </span>{" "}
+                    "I predict that as the afternoon progresses, more customers
+                    will trickle in after finishing work, so the café will
+                    gradually shift from quiet and intimate to noticeably
+                    busier. The baristas will probably step up the pace behind
+                    the counter to keep up with new orders. Some of the current
+                    customers who have been engrossed in their work for hours
+                    will likely pack up and leave to make room. Meanwhile, small
+                    groups of friends might settle in for the evening, turning
+                    the space from a solo work environment into a more social
+                    one."
+                  </p>
+                  <p>
+                    <span className="not-italic font-semibold text-amber2">
+                      Reasoning:
+                    </span>{" "}
+                    "Overall, the cosy, intimate atmosphere will gradually give
+                    way to something livelier as the evening crowd arrives —
+                    because cafés like this one naturally serve different
+                    purposes at different times of day, shifting from a quiet
+                    workspace in the afternoon to a relaxed social venue by
+                    evening."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Quick-reference cheat sheet */}
           <div className="bg-ink rounded-2xl p-6 text-fog">
             <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">
@@ -1374,6 +1547,11 @@ export default function CelpipSpeakingTask4Page() {
                   cat: "Professional / Workplace",
                   cues: "desks, meeting room, uniforms, laptops, whiteboards",
                   color: "text-violet2",
+                },
+                {
+                  cat: "Cosy / Intimate",
+                  cues: "café, living room, library, warm lighting, books, small groups",
+                  color: "text-gold",
                 },
               ].map((r) => (
                 <div key={r.cat} className="bg-white/5 rounded-xl p-3">
