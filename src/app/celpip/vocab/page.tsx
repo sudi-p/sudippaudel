@@ -1794,6 +1794,7 @@ export default function VocabularyPage() {
     renderEmotions();
     renderCollocations();
     renderIdioms();
+    setTimeout(initWordListQuiz, 50);
   }, []);
 
   return (
@@ -1843,7 +1844,7 @@ export default function VocabularyPage() {
         </div>
 
         {/* Word List Tab */}
-        <div id="word-list" className="tab-content hidden">
+        <div id="word-list" className="tab-content">
           {/* ── inner tab bar ── */}
           <div
             id="wl-tab-bar"
