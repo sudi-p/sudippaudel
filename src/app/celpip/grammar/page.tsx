@@ -15,6 +15,7 @@ import PositionalRelationsTab from "./PositionalRelationsTab";
 import SentenceStructureTab from "./SentenceStructureTab";
 import PrepositionsTab from "./PrepositionsTab";
 import AdjectivesTab from "./AdjectivesTab";
+import IntensifiersTab from "./IntensifiersTab";
 
 const INTRO = "text-slate max-w-2xl leading-relaxed";
 
@@ -69,6 +70,21 @@ const TABS = [
         the words that describe, qualify, and bring nouns to life. Learn every
         type, how native speakers use them, and how to boost your CELPIP
         Speaking and Writing scores with precise, vivid description.
+      </p>
+    ),
+  },
+  {
+    id: "intensifiers",
+    label: "Intensifiers",
+    Component: IntensifiersTab,
+    intro: (
+      <p className={INTRO}>
+        Master English{" "}
+        <span className="font-semibold text-sapphire-dark">intensifiers</span> —
+        the words that strengthen or weaken adjectives and adverbs. Learn the
+        intensity scale, gradable vs non-gradable rules, and natural
+        collocations to replace a repetitive <em>&quot;very&quot;</em> and boost
+        your CELPIP Vocabulary score.
       </p>
     ),
   },
@@ -197,7 +213,9 @@ export default function CelpipVocabPage() {
 
       {/* ─── MAIN CONTENT ─── */}
       <div className="flex">
-        <AdsenseAd />
+        <aside className="hidden lg:block w-40 shrink-0 px-2">
+          <AdsenseAd />
+        </aside>
 
         <main className="max-w-6xl mx-auto px-6 pb-24">
           <div className="mb-8">
@@ -230,7 +248,9 @@ export default function CelpipVocabPage() {
             </div>
           ))}
         </main>
-        <AdsenseAd />
+        <aside className="hidden lg:block w-40 shrink-0 px-2">
+          <AdsenseAd />
+        </aside>
       </div>
 
       {/* ─── FOOTER ─── */}

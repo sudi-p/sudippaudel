@@ -1,14 +1,3 @@
-const shuffleArray = (array: any) => {
-  const shuffled = [...array];
-
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-
-  return shuffled;
-};
-
 export const PARTS_OF_SPEECH = [
   {
     tag: "Subject",
@@ -5979,7 +5968,7 @@ export const ADV_MISTAKES = [
   },
 ];
 
-export const UPGRADE_BANK = shuffleArray([
+export const UPGRADE_BANK = ([
   { basic: "good", upgrades: ["beneficial", "effective", "commendable"] },
   { basic: "bad", upgrades: ["detrimental", "problematic", "adverse"] },
   { basic: "big", upgrades: ["substantial", "considerable", "extensive"] },
@@ -6007,6 +5996,7 @@ export const UPGRADE_BANK = shuffleArray([
   { basic: "clean", upgrades: ["immaculate", "spotless", "pristine"] },
   { basic: "different", upgrades: ["distinct", "contrasting", "diverse"] },
 ]);
+
 
 export const ADV_CELPIP_TASKS = [
   {
