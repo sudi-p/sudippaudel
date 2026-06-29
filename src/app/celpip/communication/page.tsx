@@ -870,7 +870,7 @@ export default function InterPersonalPage() {
 ${CATEGORIES.map(
   (cat) => `
   <div class="ipc-section" id="ipc-${cat.id}">
-    <div class="ipc-section-header" style="background:${cat.bg}; border-bottom: 1px solid ${cat.border};"
+    <div class="ipc-section-header" style="background:${cat.bg}1a; border-bottom: 1px solid ${cat.border}80;"
          onclick="ipcToggle('${cat.id}')">
       <span class="ipc-emoji">${cat.emoji}</span>
       <span class="ipc-title" style="color:${cat.color}">${cat.title}</span>
