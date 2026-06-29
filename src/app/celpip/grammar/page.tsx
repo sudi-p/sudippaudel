@@ -401,7 +401,8 @@ export default function CelpipVocabPage() {
   <button class="adj-tab-btn adj-tab-active" onclick="adjShowTab('adj-ref')">📖 Reference</button>
   <button class="adj-tab-btn" onclick="adjShowTab('adj-quiz')">🃏 Flip Card Quiz</button>
   <button class="adj-tab-btn" onclick="adjShowTab('adj-fill')">✏️ Fill in the Blanks</button>
-</div>
+      <button class="adj-tab-btn" onclick="adjShowTab('adj-int')">🎚️ Intensifiers Quiz</button>
+  </div>
 
 <!-- ── PANEL 1: reference (wrap ALL your existing sections in this div) ── -->
 <div id="adj-ref" class="adj-tab-panel adj-tab-panel-active">
@@ -1625,7 +1626,394 @@ export default function CelpipVocabPage() {
   </div>
 
 </div><!-- /adj-fill -->
-      `;
+<!-- ── PANEL 4: intensifier fill-in-the-blanks ── -->
+<div id="adj-int" class="adj-tab-panel">
+
+  <style>
+    /* ── intensifier quiz specific ── */
+    .aint-header {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 12px; margin-bottom: 1rem;
+    }
+    .aint-title { font-size: 1rem; font-weight: 800; color: #1e293b; }
+    .aint-desc { font-size: 13px; color: #64748b; line-height: 1.6; max-width: 640px; margin-bottom: 1.5rem; }
+
+    /* score strip */
+    .aint-score-strip {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .aint-score-badge {
+      font-size: 13px; font-weight: 700; padding: 5px 16px;
+      border-radius: 20px; display: flex; align-items: center; gap: 5px;
+    }
+    .aint-sc-correct { background: #f0fdf4; color: #16a34a; }
+    .aint-sc-wrong   { background: #fef2f2; color: #dc2626; }
+    .aint-sc-total   { background: #ede9fe; color: #4f46e5; }
+
+    /* action buttons row */
+    .aint-actions {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem;
+    }
+    .aint-btn {
+      padding: 9px 20px; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: background .15s, transform .1s;
+    }
+    .aint-btn:active { transform: scale(.96); }
+    .aint-btn-reveal-all { background: #7c3aed; color: #fff; }
+    .aint-btn-reveal-all:hover { background: #6d28d9; }
+    .aint-btn-reset-all  { background: #f1f5f9; color: #475569; border: 1.5px solid #e2e8f0; }
+    .aint-btn-reset-all:hover  { background: #e2e8f0; }
+
+    /* ── range selector buttons ── */
+    .aint-range-selector {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.75rem;
+    }
+    .aint-range-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 10px 18px; border-radius: 12px; border: 2px solid transparent;
+      cursor: pointer; font-size: 12px; font-weight: 700; transition: all .18s;
+      background: #f8fafc; color: #475569; min-width: 110px;
+    }
+    .aint-range-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+    .aint-range-btn .aint-range-icon { font-size: 1.3rem; }
+    .aint-range-btn .aint-range-label { font-size: 12px; font-weight: 800; }
+    .aint-range-btn .aint-range-sub { font-size: 10px; font-weight: 500; opacity: .75; }
+
+    .aint-range-btn[data-range="downtoners"]   { border-color: #bae6fd; }
+    .aint-range-btn[data-range="downtoners"]:hover,
+    .aint-range-btn[data-range="downtoners"].aint-range-active  { background: #e0f2fe; color: #0369a1; border-color: #0369a1; }
+
+    .aint-range-btn[data-range="midrange"]   { border-color: #c4b5fd; }
+    .aint-range-btn[data-range="midrange"]:hover,
+    .aint-range-btn[data-range="midrange"].aint-range-active  { background: #ede9fe; color: #4f46e5; border-color: #4f46e5; }
+
+    .aint-range-btn[data-range="amplifiers"]   { border-color: #a5b4fc; }
+    .aint-range-btn[data-range="amplifiers"]:hover,
+    .aint-range-btn[data-range="amplifiers"].aint-range-active  { background: #e0e7ff; color: #3730a3; border-color: #3730a3; }
+
+    .aint-range-btn[data-range="maximizers"]   { border-color: #ddd6fe; }
+    .aint-range-btn[data-range="maximizers"]:hover,
+    .aint-range-btn[data-range="maximizers"].aint-range-active  { background: #ddd6fe; color: #4c1d95; border-color: #4c1d95; }
+
+    /* the scale bar */
+    .aint-scale-wrap { margin-bottom: 2rem; position: relative; }
+    .aint-scale-bar {
+      height: 10px; border-radius: 99px;
+      background: linear-gradient(to right, #bae6fd, #6366f1, #7c3aed, #4f46e5);
+      margin: .5rem 0 .5rem; position: relative;
+    }
+    /* pointer triangle on scale */
+    .aint-scale-pointer {
+      position: absolute; top: -6px;
+      width: 0; height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 10px solid #1e293b;
+      transform: translateX(-50%);
+      transition: left .35s cubic-bezier(.4,0,.2,1);
+    }
+    .aint-scale-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: #64748b; font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    /* active range highlight label */
+    .aint-scale-active-label {
+      text-align: center; font-size: 12px; font-weight: 700;
+      min-height: 18px; margin-top: 4px; transition: color .2s;
+    }
+
+    /* group sections */
+    .aint-group { margin-bottom: 2rem; }
+    .aint-group-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 10px 10px 0 0;
+      font-size: 12px; font-weight: 800; letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .aint-group-body {
+      border: 2px solid #e2e8f0; border-top: none;
+      border-radius: 0 0 12px 12px;
+      padding: 1.25rem;
+    }
+    .aint-items { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* each intensifier item */
+    .aint-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      min-width: 120px;
+    }
+    .aint-item-num {
+      font-size: 10px; font-weight: 700; color: #a5b4fc;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .aint-input {
+      font-size: 13.5px; font-weight: 700; text-align: center;
+      padding: 7px 14px; border-radius: 20px;
+      border: 2px solid #e2e8f0; outline: none;
+      width: 120px; background: #f8fafc; color: #1e293b;
+      transition: border-color .15s, background .15s;
+    }
+    .aint-input:focus { border-color: #818cf8; background: #fff; }
+    .aint-input.aint-correct { border-color: #16a34a; background: #f0fdf4; color: #166534; }
+    .aint-input.aint-wrong   { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+    .aint-input.aint-revealed {
+      border-color: #8b5cf6; background: #faf5ff; color: #6d28d9;
+      font-style: italic;
+    }
+    .aint-input:disabled { cursor: default; }
+
+    /* reveal-individual button below each input */
+    .aint-reveal-btn {
+      font-size: 10px; font-weight: 700; color: #94a3b8;
+      background: none; border: none; cursor: pointer; padding: 0;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .aint-reveal-btn:hover { color: #7c3aed; }
+    .aint-reveal-btn:disabled { opacity: .3; cursor: default; }
+
+    /* check-all button and feedback */
+    .aint-check-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      margin-top: 1.25rem;
+    }
+    .aint-btn-check { background: #4f46e5; color: #fff; }
+    .aint-btn-check:hover { background: #3730a3; }
+    .aint-feedback {
+      font-size: 13px; font-weight: 700; min-height: 18px;
+    }
+    .aint-fb-ok  { color: #16a34a; }
+    .aint-fb-err { color: #dc2626; }
+    .aint-fb-partial { color: #d97706; }
+
+    /* placeholder hint */
+    .aint-select-hint {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; padding: 2.5rem 1rem; border: 2px dashed #e2e8f0; border-radius: 14px;
+      color: #94a3b8; font-size: 14px; font-weight: 600; text-align: center;
+      background: #f8fafc; margin-bottom: 1rem;
+    }
+    .aint-select-hint-icon { font-size: 2rem; }
+
+    @media (max-width: 600px) {
+      .aint-items { gap: 8px; }
+      .aint-input { width: 100px; font-size: 12px; }
+      .aint-range-selector { gap: 8px; }
+      .aint-range-btn { min-width: 80px; padding: 8px 10px; }
+    }
+  </style>
+
+  <div class="aint-header">
+    <div class="aint-title">🎚️ Intensifiers — Fill in the Blanks</div>
+  </div>
+  <p class="aint-desc">
+    Select a range below to reveal its questions. The pointer on the scale shows where that range sits.
+    Type each intensifier into its position, then hit <strong>Check</strong> to score yourself.
+  </p>
+
+  <!-- score + action strip -->
+  <div class="aint-score-strip">
+    <span class="aint-score-badge aint-sc-correct">✓ Correct: <span id="aint-sc-correct">0</span></span>
+    <span class="aint-score-badge aint-sc-wrong">✗ Wrong: <span id="aint-sc-wrong">0</span></span>
+    <span class="aint-score-badge aint-sc-total">Total: <span id="aint-sc-total">17</span></span>
+  </div>
+  <div class="aint-actions">
+    <button class="aint-btn aint-btn-reveal-all" onclick="aintRevealAll()">👁 Reveal All</button>
+    <button class="aint-btn aint-btn-reset-all"  onclick="aintResetAll()">↺ Reset</button>
+  </div>
+
+  <!-- ── range selector buttons ── -->
+  <div class="aint-range-selector">
+    <button class="aint-range-btn" data-range="downtoners" onclick="aintSelectRange('downtoners', this)">
+      <span class="aint-range-icon">🔉</span>
+      <span class="aint-range-label">Downtoners</span>
+      <span class="aint-range-sub">weakest end</span>
+    </button>
+    <button class="aint-range-btn" data-range="midrange" onclick="aintSelectRange('midrange', this)">
+      <span class="aint-range-icon">🎚️</span>
+      <span class="aint-range-label">Mid-range</span>
+      <span class="aint-range-sub">moderately strong</span>
+    </button>
+    <button class="aint-range-btn" data-range="amplifiers" onclick="aintSelectRange('amplifiers', this)">
+      <span class="aint-range-icon">🔊</span>
+      <span class="aint-range-label">Amplifiers</span>
+      <span class="aint-range-sub">strong</span>
+    </button>
+    <button class="aint-range-btn" data-range="maximizers" onclick="aintSelectRange('maximizers', this)">
+      <span class="aint-range-icon">🔝</span>
+      <span class="aint-range-label">Maximizers</span>
+      <span class="aint-range-sub">strongest / absolute</span>
+    </button>
+  </div>
+
+  <!-- gradient scale bar with pointer -->
+  <div class="aint-scale-wrap">
+    <div class="aint-scale-bar">
+      <div class="aint-scale-pointer" id="aint-scale-pointer" style="left: 12.5%; display: none;"></div>
+    </div>
+    <div class="aint-scale-labels">
+      <span>⬇ Weakest</span>
+      <span>Neutral / Base adjective</span>
+      <span>Strongest ⬆</span>
+    </div>
+    <div class="aint-scale-active-label" id="aint-scale-active-label"></div>
+  </div>
+
+  <!-- placeholder hint (shown when no range selected) -->
+  <div class="aint-select-hint" id="aint-select-hint">
+    <span class="aint-select-hint-icon">☝️</span>
+    <span>Select any one of the four ranges above to reveal its questions</span>
+  </div>
+
+  <!-- GROUP 1: Downtoners -->
+  <div class="aint-group" id="aint-group-downtoners" style="display:none;">
+    <div class="aint-group-head" style="background:#e0f2fe;color:#0369a1;">
+      🔉 Downtoners — weakest end of the scale
+    </div>
+    <div class="aint-group-body">
+      <div class="aint-items">
+        <div class="aint-item">
+          <span class="aint-item-num">1 — weakest</span>
+          <input class="aint-input" id="aint-0" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="barely" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(0)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">2</span>
+          <input class="aint-input" id="aint-1" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="slightly" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(1)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">3</span>
+          <input class="aint-input" id="aint-2" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="a little" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(2)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">4</span>
+          <input class="aint-input" id="aint-3" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="somewhat" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(3)">👁 reveal</button>
+        </div>
+      </div>
+      <div class="aint-check-row">
+        <button class="aint-btn aint-btn-check" onclick="aintCheckGroup([0,1,2,3], this)">✓ Check</button>
+        <span class="aint-feedback" id="aint-fb-0"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 2: Mid-range -->
+  <div class="aint-group" id="aint-group-midrange" style="display:none;">
+    <div class="aint-group-head" style="background:#ede9fe;color:#4f46e5;">
+      🎚️ Mid-range — moderately strong
+    </div>
+    <div class="aint-group-body">
+      <div class="aint-items">
+        <div class="aint-item">
+          <span class="aint-item-num">5</span>
+          <input class="aint-input" id="aint-4" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="fairly" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(4)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">6</span>
+          <input class="aint-input" id="aint-5" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="rather" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(5)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">7</span>
+          <input class="aint-input" id="aint-6" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="quite" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(6)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">8</span>
+          <input class="aint-input" id="aint-7" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="pretty" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(7)">👁 reveal</button>
+        </div>
+      </div>
+      <div class="aint-check-row">
+        <button class="aint-btn aint-btn-check" onclick="aintCheckGroup([4,5,6,7], this)">✓ Check</button>
+        <span class="aint-feedback" id="aint-fb-1"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 3: Amplifiers -->
+  <div class="aint-group" id="aint-group-amplifiers" style="display:none;">
+    <div class="aint-group-head" style="background:#e0e7ff;color:#3730a3;">
+      🔊 Amplifiers — strong
+    </div>
+    <div class="aint-group-body">
+      <div class="aint-items">
+        <div class="aint-item">
+          <span class="aint-item-num">9</span>
+          <input class="aint-input" id="aint-8" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="very" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(8)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">10</span>
+          <input class="aint-input" id="aint-9" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="really" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(9)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">11</span>
+          <input class="aint-input" id="aint-10" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="highly" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(10)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">12</span>
+          <input class="aint-input" id="aint-11" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="extremely" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(11)">👁 reveal</button>
+        </div>
+      </div>
+      <div class="aint-check-row">
+        <button class="aint-btn aint-btn-check" onclick="aintCheckGroup([8,9,10,11], this)">✓ Check</button>
+        <span class="aint-feedback" id="aint-fb-2"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 4: Maximizers -->
+  <div class="aint-group" id="aint-group-maximizers" style="display:none;">
+    <div class="aint-group-head" style="background:#ddd6fe;color:#4c1d95;">
+      🔝 Maximizers — strongest / absolute
+    </div>
+    <div class="aint-group-body">
+      <div class="aint-items">
+        <div class="aint-item">
+          <span class="aint-item-num">13</span>
+          <input class="aint-input" id="aint-12" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="incredibly" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(12)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">14</span>
+          <input class="aint-input" id="aint-13" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="remarkably" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(13)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">15</span>
+          <input class="aint-input" id="aint-14" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="absolutely" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(14)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">16</span>
+          <input class="aint-input" id="aint-15" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="utterly" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(15)">👁 reveal</button>
+        </div>
+        <div class="aint-item">
+          <span class="aint-item-num">17 — strongest</span>
+          <input class="aint-input" id="aint-16" type="text" placeholder="?" autocomplete="off" spellcheck="false" data-answer="completely" />
+          <button class="aint-reveal-btn" onclick="aintRevealOne(16)">👁 reveal</button>
+        </div>
+      </div>
+      <div class="aint-check-row">
+        <button class="aint-btn aint-btn-check" onclick="aintCheckGroup([12,13,14,15,16], this)">✓ Check</button>
+        <span class="aint-feedback" id="aint-fb-3"></span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /adj-int -->
+
+`;
     }
     // ── Adjective flip-card quiz ──────────────────────────────────────
     window.adjShowTab = function (id) {
@@ -1644,6 +2032,11 @@ export default function CelpipVocabPage() {
       if (id === "adj-fill" && typeof window._afbInit === "function") {
         window._afbInit();
         window._afbInit = null; // run once only
+      }
+      // boot intensifier quiz on first open
+      if (id === "adj-int" && typeof window._aintInit === "function") {
+        window._aintInit();
+        window._aintInit = null;
       }
     };
 
@@ -2029,6 +2422,216 @@ export default function CelpipVocabPage() {
 
       // boot immediately — DOM is already ready since renderAdjectives() just ran
       setCard(0);
+    };
+
+    // ── Intensifier Fill-in-the-Blanks quiz ──────────────────────────
+    window._aintInit = function () {
+      const TOTAL = 17;
+      let scCorrect = 0,
+        scWrong = 0;
+      const revealed = new Set(); // indices that have been revealed
+
+      function getInput(i) {
+        return document.getElementById("aint-" + i);
+      }
+
+      function updateScore() {
+        const c = document.getElementById("aint-sc-correct");
+        const w = document.getElementById("aint-sc-wrong");
+        if (c) c.textContent = scCorrect;
+        if (w) w.textContent = scWrong;
+      }
+
+      function markInput(inp, state) {
+        // state: 'correct' | 'wrong' | 'revealed'
+        inp.classList.remove("aint-correct", "aint-wrong", "aint-revealed");
+        if (state) inp.classList.add("aint-" + state);
+        inp.disabled = state === "correct" || state === "revealed";
+        const revBtn = inp.parentElement.querySelector(".aint-reveal-btn");
+        if (revBtn)
+          revBtn.disabled = state === "correct" || state === "revealed";
+      }
+
+      window.aintRevealOne = function (i) {
+        const inp = getInput(i);
+        if (!inp || inp.disabled) return;
+        // if it was blank / un-scored, don't penalise — just reveal
+        if (!inp.classList.contains("aint-correct")) {
+          if (!revealed.has(i)) {
+            revealed.add(i);
+            // if user had typed something wrong, it already counted as wrong
+          }
+          inp.value = inp.dataset.answer;
+          markInput(inp, "revealed");
+          updateScore();
+        }
+      };
+
+      window.aintCheckGroup = function (indices, btn) {
+        const fbId = btn.parentElement.querySelector(".aint-feedback");
+        let groupCorrect = 0;
+        indices.forEach(function (i) {
+          const inp = getInput(i);
+          if (!inp || inp.disabled) {
+            if (inp && inp.classList.contains("aint-correct")) groupCorrect++;
+            return;
+          }
+          const typed = inp.value.trim().toLowerCase();
+          const answer = inp.dataset.answer.toLowerCase();
+          if (typed === answer) {
+            if (!inp.classList.contains("aint-correct")) {
+              scCorrect++;
+            }
+            markInput(inp, "correct");
+            groupCorrect++;
+          } else if (typed !== "") {
+            if (!inp.classList.contains("aint-wrong")) {
+              scWrong++;
+            }
+            markInput(inp, "wrong");
+          } else {
+            // empty — show as wrong border only if already attempted
+            inp.classList.add("aint-wrong");
+          }
+        });
+        updateScore();
+        // group feedback
+        const total = indices.length;
+        if (fbId) {
+          if (groupCorrect === total) {
+            fbId.className = "aint-feedback aint-fb-ok";
+            fbId.textContent = "✓ All " + total + " correct!";
+          } else if (groupCorrect > 0) {
+            fbId.className = "aint-feedback aint-fb-partial";
+            fbId.textContent =
+              groupCorrect + " / " + total + " correct — keep trying!";
+          } else {
+            fbId.className = "aint-feedback aint-fb-err";
+            fbId.textContent = "✗ None correct yet.";
+          }
+        }
+      };
+
+      window.aintSelectRange = function (range, btn) {
+        // toggle off if already active
+        const wasActive = btn.classList.contains("aint-range-active");
+
+        // deactivate all range buttons
+        document
+          .querySelectorAll(".aint-range-btn")
+          .forEach((b) => b.classList.remove("aint-range-active"));
+
+        // hide all groups and hint
+        const allGroups = [
+          "downtoners",
+          "midrange",
+          "amplifiers",
+          "maximizers",
+        ];
+        allGroups.forEach((r) => {
+          const el = document.getElementById("aint-group-" + r);
+          if (el) el.style.display = "none";
+        });
+
+        const pointer = document.getElementById("aint-scale-pointer");
+        const label = document.getElementById("aint-scale-active-label");
+        const hint = document.getElementById("aint-select-hint");
+
+        if (wasActive) {
+          // clicking the same button again → deselect
+          pointer.style.display = "none";
+          label.textContent = "";
+          label.style.color = "";
+          if (hint) hint.style.display = "";
+          return;
+        }
+
+        // activate selected
+        btn.classList.add("aint-range-active");
+        if (hint) hint.style.display = "none";
+
+        const config = {
+          downtoners: {
+            left: "12%",
+            color: "#0369a1",
+            text: "🔉 Downtoners — weakest end",
+          },
+          midrange: {
+            left: "37%",
+            color: "#4f46e5",
+            text: "🎚️ Mid-range — moderately strong",
+          },
+          amplifiers: {
+            left: "63%",
+            color: "#3730a3",
+            text: "🔊 Amplifiers — strong",
+          },
+          maximizers: {
+            left: "88%",
+            color: "#4c1d95",
+            text: "🔝 Maximizers — strongest / absolute",
+          },
+        };
+
+        const cfg = config[range];
+        const group = document.getElementById("aint-group-" + range);
+        if (group) group.style.display = "";
+
+        pointer.style.display = "";
+        pointer.style.left = cfg.left;
+        pointer.style.borderTopColor = cfg.color;
+        label.textContent = cfg.text;
+        label.style.color = cfg.color;
+      };
+
+      window.aintRevealAll = function () {
+        for (let i = 0; i < TOTAL; i++) {
+          const inp = getInput(i);
+          if (!inp || inp.disabled) continue;
+          inp.value = inp.dataset.answer;
+          markInput(inp, "revealed");
+          revealed.add(i);
+        }
+        updateScore();
+        // update all group feedbacks
+        [
+          { fb: "aint-fb-0", count: 4 },
+          { fb: "aint-fb-1", count: 4 },
+          { fb: "aint-fb-2", count: 4 },
+          { fb: "aint-fb-3", count: 5 },
+        ].forEach(function (g) {
+          const el = document.getElementById(g.fb);
+          if (el) {
+            el.className = "aint-feedback aint-fb-partial";
+            el.textContent = "👁 Answers revealed.";
+          }
+        });
+      };
+
+      window.aintResetAll = function () {
+        scCorrect = 0;
+        scWrong = 0;
+        revealed.clear();
+        for (let i = 0; i < TOTAL; i++) {
+          const inp = getInput(i);
+          if (!inp) continue;
+          inp.value = "";
+          inp.className = "aint-input";
+          inp.disabled = false;
+          const revBtn = inp.parentElement.querySelector(".aint-reveal-btn");
+          if (revBtn) revBtn.disabled = false;
+        }
+        ["aint-fb-0", "aint-fb-1", "aint-fb-2", "aint-fb-3"].forEach(
+          function (id) {
+            const el = document.getElementById(id);
+            if (el) {
+              el.className = "aint-feedback";
+              el.textContent = "";
+            }
+          },
+        );
+        updateScore();
+      };
     };
 
     function renderVoice() {
