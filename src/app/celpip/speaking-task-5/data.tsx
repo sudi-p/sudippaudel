@@ -125,11 +125,11 @@ export const SAMPLE_ANSWERS = [
         "A sleek fitness smartwatch with a round screen showing a step-count and heart-rate display, silicone sport band, price tag reading $100, clean studio product photography, white background, photorealistic.",
     },
     opening:
-      "Hi John! I saw you were leaning toward the tablet for his birthday. I totally get why — the big screen is nice — but I really think the smartwatch is the better pick.",
+      "Hi John, I saw you were leaning toward the tablet. I understand why — the big screen is nice — but I actually think the smartwatch is the better choice for us.",
     compare:
-      "First, on price, the smartwatch is only a hundred dollars, which is much cheaper than the tablet at three hundred — so we'd have plenty left for the party. Also, it has fitness and heart-rate tracking, which is far more useful for him since he loves running, whereas the tablet is mostly for watching movies. On top of that, it's water-resistant, so it'll last much longer than a fragile tablet screen.",
+      "First, regarding price, the smartwatch is only a hundred dollars, which is much cheaper than the tablet at three hundred — so we'd have plenty left for the party. Also, it has fitness and heart-rate tracking, which is more useful because he loves running. Finally, it's water-resistant, so it'll last far longer than a fragile tablet screen.",
     conclusion:
-      "So for those reasons, I really think we should go with the smartwatch — it's cheaper and more practical. Let me know if you agree and we can order it today!",
+      "So for these reasons, I really think we should go with the smartwatch — it's cheaper and more practical. Let me know if you agree, and we can order it today!",
   },
   {
     accent: "text-sapphire",
@@ -149,11 +149,11 @@ export const SAMPLE_ANSWERS = [
         "A bright lakeside park pavilion with picnic tables under a wooden shelter, green trees and a calm lake behind it, families gathering, a small sign reading $150 total rental, sunny day, photorealistic, wide shot.",
     },
     opening:
-      "Hey Sara, I know you had your eye on the downtown restaurant for Mom's celebration. It does look lovely, but honestly I think the lakeside park pavilion would be the better choice for us.",
+      "Hi Sara, I saw you were leaning toward the downtown restaurant. I understand why — it does look lovely — but I actually think the lakeside park pavilion is the better choice for us.",
     compare:
-      "First, the cost: the pavilion is just a hundred and fifty dollars for the whole group, whereas the restaurant is sixty dollars per person — for fifteen people that's nine hundred dollars, so the park is far cheaper. Also, the pavilion gives the kids space to run around by the lake, which is much more relaxing than a quiet restaurant. And we can bring Mom's favourite homemade food instead of being limited to a set menu.",
+      "First, regarding price, the pavilion is just a hundred and fifty dollars for the whole group, which is much cheaper than the restaurant at sixty dollars per person — for fifteen people that's nine hundred dollars. Also, it gives the kids space to run around by the lake, which is more useful because they get restless indoors. Finally, we can bring Mom's favourite homemade food instead of a fixed set menu.",
     conclusion:
-      "So for those reasons, I really think the park pavilion is the smarter, more fun option. Let me know if you're on board and I'll book it!",
+      "So for these reasons, I really think we should go with the park pavilion — it's cheaper and more fun. Let me know if you agree, and I'll book it!",
   },
   {
     accent: "text-emerald2",
@@ -171,11 +171,11 @@ export const SAMPLE_ANSWERS = [
         "A compact electric height-adjustable standing desk raised to standing position with a laptop on top, in a modern office, a price tag reading $250, clean lighting, photorealistic, product shot.",
     },
     opening:
-      "Hi Priya, I noticed you preferred the big L-shaped desk for the office. I see the appeal of all that space, but I actually think the compact standing desk is the better choice for us.",
+      "Hi Priya, I saw you were leaning toward the big L-shaped desk. I understand why — all that space is tempting — but I actually think the compact standing desk is the better choice for us.",
     compare:
-      "First, on price, the standing desk is two hundred and fifty dollars, which is two hundred dollars cheaper than the L-shaped one — so we could buy two for the team. Second, it's adjustable, so it's much healthier for our backs since we sit all day, whereas the L-shaped desk keeps you seated. And because it's compact, it fits our small office far better and leaves room to move around.",
+      "First, regarding price, the standing desk is two hundred and fifty dollars, which is much cheaper than the L-shaped one at four hundred and fifty — so we could buy two for the team. Also, it's height-adjustable, which is more useful because we sit all day and it's healthier for our backs. Finally, it's compact, so it fits our small office and leaves room to move around.",
     conclusion:
-      "So for those reasons, I really think we should go with the standing desk — it's cheaper, healthier, and space-friendly. Let me know if you agree!",
+      "So for these reasons, I really think we should go with the standing desk — it's cheaper and healthier. Let me know if you agree!",
   },
   {
     accent: "text-amber2",
@@ -194,11 +194,11 @@ export const SAMPLE_ANSWERS = [
         "A cozy wooden mountain cabin surrounded by pine forest and snowy peaks, smoke rising from the chimney, a small sign reading $1200 per week, crisp daylight, photorealistic, wide shot.",
     },
     opening:
-      "Hey love, I know you were dreaming about the beach resort. It does look amazing, but I really think the mountain cabin would be the better trip for us this year.",
+      "Hi love, I saw you were leaning toward the beach resort. I understand why — it does look amazing — but I actually think the mountain cabin is the better choice for us.",
     compare:
-      "First, on cost, the cabin is twelve hundred dollars compared to two thousand for the resort — that's eight hundred dollars saved, which we could put toward next year's holiday. Second, the cabin is far more peaceful and private, which is more relaxing than a crowded resort pool. And the kids would love hiking and seeing the snow, which is something completely new for them.",
+      "First, regarding price, the cabin is twelve hundred dollars, which is much cheaper than the resort at two thousand — that's eight hundred dollars we could save for next year's holiday. Also, it's far more peaceful and private, which is more useful because we really need to unwind. Finally, the kids would love hiking and seeing the snow, which is something completely new for them.",
     conclusion:
-      "So for those reasons, I really think the cabin is the smarter, cosier choice. Let me know if you're happy with it and I'll book the dates!",
+      "So for these reasons, I really think we should go with the cabin — it's cheaper and cosier. Let me know if you agree, and I'll book the dates!",
   },
   {
     accent: "text-rose2",
@@ -217,11 +217,11 @@ export const SAMPLE_ANSWERS = [
         "A sleek modern blue hybrid sedan parked in a dealership, a small green hybrid badge, a price tag reading $28,000, clean showroom lighting, photorealistic, three-quarter front view.",
     },
     opening:
-      "Hi honey, I know you were leaning toward the big SUV. I understand — it's roomy — but I genuinely think the hybrid sedan is the better choice for our family.",
+      "Hi honey, I saw you were leaning toward the big SUV. I understand why — it's roomy — but I actually think the hybrid sedan is the better choice for us.",
     compare:
-      "First, on price, the hybrid is twenty-eight thousand dollars, which is seven thousand cheaper than the thirty-five-thousand-dollar SUV. Second, it's far more fuel-efficient, so we'd save a lot on gas every month — much more practical for our daily commute. And it's easier to park in the city than a large SUV, which matters since we drive downtown a lot.",
+      "First, regarding price, the hybrid is twenty-eight thousand dollars, which is much cheaper than the SUV at thirty-five thousand — that's seven thousand dollars saved. Also, it's far more fuel-efficient, which is more useful because we'd save a lot on gas every month. Finally, it's easier to park in the city, which matters since we drive downtown a lot.",
     conclusion:
-      "So for those reasons, I really think the hybrid sedan is the smarter buy — cheaper to own and easier to drive. Let me know if you agree and we can test-drive it this weekend!",
+      "So for these reasons, I really think we should go with the hybrid sedan — it's cheaper to own and easier to drive. Let me know if you agree, and we can test-drive it this weekend!",
   },
 ];
 
