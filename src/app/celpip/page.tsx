@@ -26,6 +26,43 @@ export default function CelpipNotesPage() {
 
       {/* ─── MAIN CONTENT ─── */}
       <main className="max-w-6xl mx-auto px-6 pb-24">
+        {/* Cheatsheet Section */}
+        <section className="mb-16">
+          <a
+            href="/celpip/cheatsheet"
+            className="block bg-ink rounded-2xl p-6 md:p-8 card-hover group"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-2">
+                  The Final 2 Hours
+                </p>
+                <h2 className="font-display text-3xl text-fog mb-2 group-hover:text-gold transition-colors">
+                  Exam-Day Cheatsheet
+                </h2>
+                <p className="text-sm text-mist leading-relaxed max-w-2xl">
+                  One condensed template for every speaking and writing task —
+                  memorize the frames, swap in the topic. The single page to skim
+                  right before your test.
+                </p>
+              </div>
+              <svg
+                className="w-6 h-6 text-gold opacity-60 group-hover:opacity-100 transition-opacity shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </a>
+        </section>
+
         {/* Speaking Tasks Section */}
         <section className="mb-16">
           <div className="mb-8">
@@ -486,7 +523,7 @@ export default function CelpipNotesPage() {
           </div>
 
           <a
-            href="#"
+            href="/celpip/listening"
             className="bg-white rounded-2xl border border-mist p-6 card-hover group block"
           >
             <div className="flex items-start justify-between mb-4">
@@ -537,7 +574,7 @@ export default function CelpipNotesPage() {
           </div>
 
           <a
-            href="#"
+            href="/celpip/reading"
             className="bg-white rounded-2xl border border-mist p-6 card-hover group block"
           >
             <div className="flex items-start justify-between mb-4">

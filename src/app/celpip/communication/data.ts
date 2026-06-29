@@ -557,7 +557,7 @@ export const CATEGORIES = [
           color: "#1e40af",
           bg: "#dbeafe",
           border: "#93c5fd",
-          celpipTasks: ["Speaking Task 3", "Writing Task 1 (Email)"],
+          celpipTasks: ["Writing Task 1 (Email)"],
           intro:
             "In announcements and information-giving contexts, clarity and structure are key. Native speakers use signposting phrases to guide the listener.",
           vocab: [

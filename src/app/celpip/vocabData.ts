@@ -10,8 +10,8 @@ export const VOCAB = [
   { word: "Ultimately", meaning: "In the end; finally", example: "Ultimately, the decision was mine to make.", type: "General", task: "0" },
   { word: "Perspective", meaning: "A particular way of viewing things", example: "From my perspective, this is the best approach.", type: "General", task: "0" },
   { word: "Significant", meaning: "Important or noticeable", example: "That experience had a significant impact on my life.", type: "General", task: "0" },
-  { word: "Evident", meaning: "Clearly seen or understood", example: "It was evident that the project would succeed.", type: "General", task: "0" },
-  { word: "Remarkable", meaning: "Worthy of attention; striking", example: "Her progress was remarkable in just a few months.", type: "General", task: "0" },
+  { word: "Evident", meaning: "Clearly seen or understood", example: "Looking back, it was evident that moving abroad had changed me for the better.", type: "General", task: "0" },
+  { word: "Remarkable", meaning: "Worthy of attention; striking", example: "What stood out most to me was the remarkable kindness of the people I met there.", type: "General", task: "0" },
 
   // ── Task 1: Giving Advice ──
   { word: "That must be difficult/stressful/challenging", meaning: "Shows understanding and empathy for the person's situation", example: "That must be stressful for you, balancing so many responsibilities at once.", type: "Empathy & Understanding", task: "1" },
@@ -112,8 +112,8 @@ export const VOCAB = [
   { word: "Analogous", meaning: "Comparable in certain respects; similar in meaningful ways", example: "Learning languages is analogous to learning music — both require practice and repetition.", type: "Comparison Language", task: "5" },
   { word: "Diverge", meaning: "To differ or move in different directions; to have opposing views", example: "Our opinions on education diverge significantly, but both have merit.", type: "Comparison Language", task: "5" },
   { word: "Compelling", meaning: "Convincing and persuasive; forces agreement through strong evidence", example: "The documentary presents a compelling argument that changed my perspective.", type: "Persuasion Language", task: "5" },
-  { word: "Contend", meaning: "To argue or claim firmly and confidently", example: "Experts contend that remote work boosts productivity and work-life balance.", type: "Reasoning Language", task: "5" },
-  { word: "Substantiate", meaning: "To support with evidence or proof; to back up claims with data", example: "The researcher substantiated her claims with comprehensive data and real-world examples.", type: "Reasoning Language", task: "5" },
+  { word: "Contend", meaning: "To argue or claim firmly and confidently", example: "I would contend that public transit is the more responsible choice for a growing city.", type: "Reasoning Language", task: "5" },
+  { word: "Substantiate", meaning: "To support with evidence or proof; to back up claims with data", example: "I can substantiate my choice with clear benefits: lower costs, greater reliability, and long-term savings.", type: "Reasoning Language", task: "5" },
 
   // ── Task 6: Difficult Situation ──
   { word: "To acknowledge", meaning: "Recognize the problem. Shows responsibility and awareness", example: "I would acknowledge the mistake immediately.", type: "Problem Recognition", task: "6" },
@@ -125,7 +125,7 @@ export const VOCAB = [
   { word: "To mitigate the issue", meaning: "Reduce the damage or impact of a problem. Shows damage control", example: "I would mitigate the issue by taking immediate corrective action.", type: "Action & Problem-solving", task: "6" },
   { word: "To propose a solution", meaning: "Offer a way to fix it. Shows problem-solving capability", example: "I would propose a solution to prevent future occurrences.", type: "Action & Problem-solving", task: "6" },
   { word: "Composed", meaning: "Calm and in control. Shows emotional maturity under pressure", example: "I would remain composed and handle the situation professionally.", type: "Emotion & Composure", task: "6" },
-  { word: "Resilience", meaning: "Ability to recover and keep going after setbacks", example: "Her resilience after setbacks was truly inspiring.", type: "Emotion & Composure", task: "6" },
+  { word: "Resilience", meaning: "Ability to recover and keep going after setbacks", example: "I drew on my resilience to stay calm and work through the problem one step at a time.", type: "Emotion & Composure", task: "6" },
   { word: "To learn from experience", meaning: "Gain wisdom from setbacks. Shows growth mindset", example: "I would learn from the experience to prevent it happening again.", type: "Reflection & Learning", task: "6" },
   { word: "To prevent future occurrences", meaning: "Stop it from happening again. Shows foresight and responsibility", example: "I would implement steps to prevent future occurrences.", type: "Reflection & Learning", task: "6" },
 
@@ -141,41 +141,21 @@ export const VOCAB = [
   { word: "In conclusion", meaning: "Signals closing and final summary of opinion", example: "In conclusion, my opinion is well-founded.", type: "Closing", task: "7" },
   { word: "To summarize", meaning: "Wraps up main points and restates position", example: "To summarize, these three factors support my view.", type: "Closing", task: "7" },
 
-  // ── Task 8: Unusual Situation ──
-  { word: "Unexpected", meaning: "Describes something surprising or not anticipated", example: "An unexpected change in plans required quick thinking.", type: "Unexpected Situations", task: "8" },
-  { word: "Unforeseen", meaning: "Not expected or anticipated beforehand", example: "An unforeseen obstacle came up during the project.", type: "Unexpected Situations", task: "8" },
-  { word: "To take initiative", meaning: "Act independently to solve something proactively", example: "I took initiative and found an alternative solution.", type: "Action & Response", task: "8" },
-  { word: "To adapt", meaning: "Adjust to new circumstances or changes", example: "I had to adapt quickly to the change.", type: "Action & Response", task: "8" },
-  { word: "Resourceful", meaning: "Able to find solutions with available means", example: "Being resourceful, I found a quick workaround.", type: "Action & Response", task: "8" },
-  { word: "Composed", meaning: "Calm and controlled under pressure", example: "I stayed composed and focused on solutions.", type: "Emotion & Mindset", task: "8" },
-  { word: "To manage", meaning: "Handle a situation effectively despite stress", example: "I managed the stress by staying organized.", type: "Emotion & Mindset", task: "8" },
-  { word: "To recover", meaning: "Bounce back from difficulty or setback", example: "I recovered from the setback by regrouping.", type: "Emotion & Mindset", task: "8" },
-  { word: "To resolve", meaning: "Find a solution to a problem", example: "I resolved the issue by communicating clearly.", type: "Resolution & Outcome", task: "8" },
-  { word: "To handle", meaning: "Deal with something difficult professionally", example: "I handled the unexpected change professionally.", type: "Resolution & Outcome", task: "8" },
-
-  // ── Task 9: Email Writing ──
-  { word: "Sincerely", meaning: "In a genuine and honest way; formal closing", example: "Thank you for your help. Sincerely, John.", type: "Email Structure & Tone", task: "9" },
-  { word: "Appreciate", meaning: "To recognize the value or quality of something", example: "I appreciate your quick response to my inquiry.", type: "Politeness & Courtesy", task: "9" },
-  { word: "Apologies", meaning: "Expression of regret or saying sorry", example: "My apologies for the confusion in my previous message.", type: "Politeness & Courtesy", task: "9" },
-  { word: "Clarify", meaning: "To make something clear or easier to understand", example: "Could you clarify what you meant by that statement?", type: "Email Communication", task: "9" },
-  { word: "Formally", meaning: "In an official or ceremonial way", example: "I am writing to formally request your assistance.", type: "Email Structure & Tone", task: "9" },
-  { word: "Request", meaning: "To ask for something politely or formally", example: "I request your feedback on this proposal.", type: "Email Communication", task: "9" },
-  { word: "Prompt", meaning: "Done without delay; quick and efficient", example: "Thank you for your prompt attention to this matter.", type: "Politeness & Courtesy", task: "9" },
-  { word: "Regarding", meaning: "Concerning; with respect to", example: "Regarding your inquiry, I can provide more details.", type: "Email Communication", task: "9" },
-  { word: "Convey", meaning: "To communicate or make known", example: "I wanted to convey my sincere gratitude.", type: "Email Communication", task: "9" },
-  { word: "Accommodate", meaning: "To provide lodging or adjust to suit someone's needs", example: "We can accommodate your request for a later deadline.", type: "Email Communication", task: "9" },
-
-  // ── Task 10: Survey Response ──
-  { word: "Concur", meaning: "To agree with someone or something", example: "I concur with your assessment of the situation.", type: "Agreement & Disagreement", task: "10" },
-  { word: "Disagree", meaning: "To have a different opinion; not agree", example: "I respectfully disagree with that conclusion.", type: "Agreement & Disagreement", task: "10" },
-  { word: "Justified", meaning: "Having good or sufficient reason; warranted", example: "Your concerns are completely justified.", type: "Reasoning & Logic", task: "10" },
-  { word: "Applicable", meaning: "Relevant or suitable for a particular purpose", example: "These findings are applicable to our industry.", type: "Relevance & Importance", task: "10" },
-  { word: "Constructive", meaning: "Helpful and leading to improvement", example: "The feedback was constructive and valuable.", type: "Feedback & Evaluation", task: "10" },
-  { word: "Comprehensive", meaning: "Complete and thorough; covering everything", example: "The survey provided a comprehensive view of customer satisfaction.", type: "Feedback & Evaluation", task: "10" },
-  { word: "Efficacy", meaning: "The ability to produce a desired result", example: "The study measured the efficacy of the new treatment.", type: "Evaluation & Results", task: "10" },
-  { word: "Viable", meaning: "Capable of working successfully; feasible", example: "The proposed solution is viable and cost-effective.", type: "Evaluation & Results", task: "10" },
-  { word: "Quantify", meaning: "To express in numbers or measurable terms", example: "It's difficult to quantify the impact of this change.", type: "Reasoning & Logic", task: "10" },
-  { word: "Notable", meaning: "Worthy of attention; striking or remarkable", example: "There were several notable trends in the survey results.", type: "Feedback & Evaluation", task: "10" },
+  // ── Task 8: Describing an Unusual Situation (describe an odd picture to someone who can't see it) ──
+  { word: "At first glance", meaning: "Opens your overview before you get into the details", example: "At first glance, it looks like an ordinary chair, but it has wheels where the legs should be.", type: "Overview & First Impression", task: "8" },
+  { word: "It appears to be", meaning: "Hedging phrase for describing something you can't fully identify", example: "It appears to be some kind of machine, though I've never seen anything quite like it.", type: "Overview & First Impression", task: "8" },
+  { word: "Peculiar", meaning: "Strange or unusual in a noticeable way", example: "The most peculiar thing in the picture is a clock with no numbers on its face.", type: "Overview & First Impression", task: "8" },
+  { word: "Bizarre", meaning: "Very strange; odd to the point of surprising", example: "It's a bizarre contraption that seems to combine a bicycle with a kitchen table.", type: "Overview & First Impression", task: "8" },
+  { word: "Cylindrical", meaning: "Shaped like a cylinder or tube", example: "The main part is cylindrical, roughly like a large soup can standing upright.", type: "Shape & Size", task: "8" },
+  { word: "Irregular", meaning: "Not even or symmetrical in shape", example: "The top has an irregular shape, with one side much taller than the other.", type: "Shape & Size", task: "8" },
+  { word: "Roughly the size of", meaning: "Compares the object's size to something familiar", example: "It's roughly the size of a microwave, so it would just fit on a kitchen counter.", type: "Shape & Size", task: "8" },
+  { word: "Resembles", meaning: "Looks like something else; useful for comparisons", example: "The handle resembles a question mark, curving back on itself at the top.", type: "Shape & Size", task: "8" },
+  { word: "Transparent", meaning: "Clear; you can see through it", example: "The container is transparent, so you can see the wires coiled up inside it.", type: "Colour & Material", task: "8" },
+  { word: "Metallic", meaning: "Made of metal or shiny like metal", example: "It has a metallic surface that reflects the light, probably steel or aluminum.", type: "Colour & Material", task: "8" },
+  { word: "Worn", meaning: "Faded or damaged from age and use", example: "The wooden base looks worn, with chipped paint along the edges.", type: "Colour & Material", task: "8" },
+  { word: "Seems to be used for", meaning: "Guesses the purpose of an unfamiliar object", example: "It seems to be used for cleaning, since there's a brush attached to one end.", type: "Function & Purpose", task: "8" },
+  { word: "Contraption", meaning: "An odd or overly complicated device", example: "The whole contraption is covered in buttons and levers, but it's not clear what they do.", type: "Function & Purpose", task: "8" },
+  { word: "What's odd about it is", meaning: "Frames the strange detail that makes the picture unusual", example: "What's odd about it is that a bird's nest is sitting right on top of the device.", type: "Function & Purpose", task: "8" },
 
   // ── Writing Task 1: Email Writing ──
   { word: "I am writing to", meaning: "Classic opening for stating your purpose clearly", example: "I am writing to request an extension on the deadline.", type: "Email Opening", task: "W1" },

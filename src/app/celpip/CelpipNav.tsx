@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
-  { href: "/celpip", label: "Speaking/Writing" },
-  { href: "/celpip/grammar", label: "Grammar" },
-  { href: "/celpip/communication", label: "Communication" },
-  { href: "/celpip/vocab", label: "Vocab" },
+  { href: "/celpip", label: "Celpip Notes" },
+  { href: "/grammar", label: "Grammar" },
+  { href: "/communication", label: "Communication" },
+  { href: "/vocab", label: "Vocab" },
   { href: "/", label: "← Portfolio" },
 ];
 
@@ -34,7 +34,7 @@ export default function CelpipNav() {
                   href={l.href}
                   className={
                     active
-                      ? "text-ink"
+                      ? "text-ink bg-gray-300 p-2 rounded font-extrabold"
                       : "text-slate hover:text-ink transition-colors"
                   }
                 >
