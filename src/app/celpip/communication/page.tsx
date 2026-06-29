@@ -1,169 +1,175 @@
-// @ts-nocheck
-/* eslint-disable */
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import { CATEGORIES } from "./data";
 
-export default function InterPersonalPage() {
-  useEffect(() => {
-    // ─── Interpersonal Communication ────────────────────────────────────
-    function renderInterPersonal() {
-      const content = document.getElementById("interpersonal-content");
-      if (!content) return;
+type TabKey = "vocab" | "intensity" | "mistakes";
 
-      content.innerHTML = `
-<style>
-  .ipc-section { margin-bottom: 3rem; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; }
-  .ipc-section-header { display: flex; align-items: center; gap: 12px; padding: 1rem 1.25rem; cursor: pointer; user-select: none; }
-  .ipc-section-header:hover { filter: brightness(0.96); }
-  .ipc-emoji { font-size: 1.6rem; }
-  .ipc-title { font-size: 1rem; font-weight: 800; }
-  .ipc-tasks { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
-  .ipc-task-badge { font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 20px; background: rgba(0,0,0,.08); }
-  .ipc-chevron { font-size: 1rem; margin-left: 6px; transition: transform .2s; }
-  .ipc-chevron.open { transform: rotate(180deg); }
-  .ipc-body { display: none; padding: 1.25rem; background: #fff; }
-  .ipc-body.open { display: block; }
+const TABS: { key: TabKey; label: string }[] = [
+  { key: "vocab", label: "📚 Vocabulary" },
+  { key: "intensity", label: "📈 Intensity Levels" },
+  { key: "mistakes", label: "⚠️ Mistakes & Fixes" },
+];
 
-  .ipc-intro { font-size: 13.5px; color: #374151; line-height: 1.7; margin-bottom: 1.5rem; padding: 10px 14px; background: #f9fafb; border-left: 3px solid #e5e7eb; border-radius: 0 8px 8px 0; }
+type Category = (typeof CATEGORIES)[number];
 
-  /* sub-tabs */
-  .ipc-tab-row { display: flex; gap: 0; border-bottom: 2px solid #f3f4f6; margin-bottom: 1.25rem; overflow-x: auto; }
-  .ipc-tab { padding: 9px 16px; font-size: 12.5px; font-weight: 600; color: #6b7280; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
-  .ipc-tab.ipc-tab-active { color: #111827; border-bottom-color: #111827; }
-  .ipc-panel { display: none; }
-  .ipc-panel.ipc-panel-active { display: block; }
+function CategorySection({ cat }: { cat: Category }) {
+  const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabKey>("vocab");
 
-  /* vocab grid */
-  .ipc-vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: .75rem; margin-bottom: .5rem; }
-  .ipc-vocab-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: .9rem 1rem; }
-  .ipc-vocab-word { font-size: 14px; font-weight: 700; color: #111827; margin-bottom: .3rem; }
-  .ipc-vocab-ex { font-size: 12.5px; color: #374151; font-style: italic; margin-bottom: .45rem; line-height: 1.55; }
-  .ipc-vocab-note { font-size: 11.5px; color: #6b7280; line-height: 1.5; background: #f9fafb; border-radius: 6px; padding: 3px 8px; }
+  return (
+    <div className="mb-12 overflow-hidden rounded-2xl border border-gray-200">
+      {/* header */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full select-none items-center gap-3 px-5 py-4 text-left transition hover:brightness-95"
+        style={{
+          background: `${cat.bg}1a`,
+          borderBottom: `1px solid ${cat.border}80`,
+        }}
+        aria-expanded={open}
+      >
+        <span className="text-2xl">{cat.emoji}</span>
+        <span className="text-base font-extrabold" style={{ color: cat.color }}>
+          {cat.title}
+        </span>
+        <div className="ml-auto hidden flex-wrap gap-1.5 sm:flex">
+          {cat.celpipTasks.map((t) => (
+            <span
+              key={t}
+              className="rounded-full bg-black/10 px-2.5 py-0.5 text-[10px] font-bold"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <span
+          className="ml-1.5 text-base transition-transform duration-200"
+          style={{ transform: open ? "rotate(180deg)" : undefined }}
+        >
+          ▼
+        </span>
+      </button>
 
-  /* intensity */
-  .ipc-intensity-list { display: flex; flex-direction: column; gap: .65rem; }
-  .ipc-intensity-row { display: flex; align-items: flex-start; gap: 10px; padding: .8rem 1rem; border-radius: 10px; border: 1px solid #e5e7eb; }
-  .ipc-intensity-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-  .ipc-intensity-ex { font-size: 13px; color: #374151; font-style: italic; line-height: 1.6; }
+      {/* body */}
+      {open && (
+        <div className="bg-white p-5">
+          <div className="mb-6 rounded-r-lg border-l-[3px] border-gray-200 bg-gray-50 px-3.5 py-2.5 text-[13.5px] leading-relaxed text-gray-700">
+            {cat.intro}
+          </div>
 
-  /* mistakes */
-  .ipc-mistake { border: 1px solid #fca5a5; border-radius: 12px; overflow: hidden; margin-bottom: .85rem; }
-  .ipc-mistake-head { background: #fef2f2; padding: 8px 14px; font-size: 13px; font-weight: 700; color: #991b1b; }
-  .ipc-mistake-body { padding: 10px 14px; background: #fff; display: flex; flex-direction: column; gap: 5px; }
-  .ipc-wrong { font-size: 13px; color: #dc2626; }
-  .ipc-right  { font-size: 13px; color: #16a34a; }
-  .ipc-why   { font-size: 12px; color: #6b7280; font-style: italic; line-height: 1.55; margin-top: 2px; }
-  .ipc-wrong::before { content: "✗ "; font-weight: 700; }
-  .ipc-right::before { content: "✓ "; font-weight: 700; }
+          {/* sub-tabs */}
+          <div className="mb-5 flex overflow-x-auto border-b-2 border-gray-100">
+            {TABS.map((tab) => {
+              const active = activeTab === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`-mb-0.5 whitespace-nowrap border-b-2 px-4 py-2.5 text-[12.5px] font-semibold transition ${
+                    active
+                      ? "border-gray-900 text-gray-900"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
 
-  @media(max-width:600px) { .ipc-vocab-grid { grid-template-columns: 1fr; } .ipc-tasks { display: none; } }
-</style>
-
-${CATEGORIES.map(
-  (cat) => `
-  <div class="ipc-section" id="ipc-${cat.id}">
-    <div class="ipc-section-header" style="background:${cat.bg}1a; border-bottom: 1px solid ${cat.border}80;"
-         onclick="ipcToggle('${cat.id}')">
-      <span class="ipc-emoji">${cat.emoji}</span>
-      <span class="ipc-title" style="color:${cat.color}">${cat.title}</span>
-      <div class="ipc-tasks">
-        ${cat.celpipTasks.map((t) => `<span class="ipc-task-badge">${t}</span>`).join("")}
-      </div>
-      <span class="ipc-chevron" id="ipc-chev-${cat.id}">▼</span>
+          {activeTab === "vocab" && <VocabPanel cat={cat} />}
+          {activeTab === "intensity" && <IntensityPanel cat={cat} />}
+          {activeTab === "mistakes" && <MistakesPanel cat={cat} />}
+        </div>
+      )}
     </div>
-    <div class="ipc-body" id="ipc-body-${cat.id}">
-      <div class="ipc-intro">${cat.intro}</div>
-      <div class="ipc-tab-row">
-        <button class="ipc-tab ipc-tab-active" onclick="ipcTab('${cat.id}','vocab',this)">📚 Vocabulary</button>
-        <button class="ipc-tab" onclick="ipcTab('${cat.id}','intensity',this)">📈 Intensity Levels</button>
-        <button class="ipc-tab" onclick="ipcTab('${cat.id}','mistakes',this)">⚠️ Mistakes & Fixes</button>
-      </div>
+  );
+}
 
-      <!-- vocab panel -->
-      <div id="ipc-panel-vocab-${cat.id}" class="ipc-panel ipc-panel-active">
-        <div class="ipc-vocab-grid">
-          ${cat.vocab
-            .map(
-              (v) => `
-            <div class="ipc-vocab-card" style="border-left:4px solid ${cat.color}">
-              <div class="ipc-vocab-word">${v.word}</div>
-              <div class="ipc-vocab-ex">"${v.example}"</div>
-              <div class="ipc-vocab-note">💡 ${v.note}</div>
-            </div>
-          `,
-            )
-            .join("")}
+function VocabPanel({ cat }: { cat: Category }) {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+      {cat.vocab.map((v) => (
+        <div
+          key={v.word}
+          className="rounded-xl border border-gray-200 bg-white px-4 py-3.5"
+          style={{ borderLeft: `4px solid ${cat.color}` }}
+        >
+          <div className="mb-1 text-sm font-bold text-gray-900">{v.word}</div>
+          <div className="mb-2 text-[12.5px] italic leading-relaxed text-gray-700">
+            &ldquo;{v.example}&rdquo;
+          </div>
+          <div className="rounded-md bg-gray-50 px-2 py-1 text-[11.5px] leading-normal text-gray-500">
+            💡 {v.note}
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+  );
+}
 
-      <!-- intensity panel -->
-      <div id="ipc-panel-intensity-${cat.id}" class="ipc-panel">
-        <div class="ipc-intensity-list">
-          ${cat.intensityLevels
-            .map(
-              (lv) => `
-            <div class="ipc-intensity-row" style="background:${lv.bg}; border-color:${cat.border}">
-              <span class="ipc-intensity-badge" style="background:${lv.bg};color:${lv.color};border:1px solid ${lv.color}40">${lv.level}</span>
-              <div class="ipc-intensity-ex">"${lv.example}"</div>
-            </div>
-          `,
-            )
-            .join("")}
+function IntensityPanel({ cat }: { cat: Category }) {
+  return (
+    <div className="flex flex-col gap-2.5">
+      {cat.intensityLevels.map((lv) => (
+        <div
+          key={lv.level}
+          className="flex items-start gap-2.5 rounded-[10px] border px-4 py-3"
+          style={{ background: lv.bg, borderColor: cat.border }}
+        >
+          <span
+            className="shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold"
+            style={{
+              background: lv.bg,
+              color: lv.color,
+              border: `1px solid ${lv.color}40`,
+            }}
+          >
+            {lv.level}
+          </span>
+          <div className="text-[13px] italic leading-relaxed text-gray-700">
+            &ldquo;{lv.example}&rdquo;
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+  );
+}
 
-      <!-- mistakes panel -->
-      <div id="ipc-panel-mistakes-${cat.id}" class="ipc-panel">
-        ${cat.mistakes
-          .map(
-            (m) => `
-          <div class="ipc-mistake">
-            <div class="ipc-mistake-head">⚠️ ${m.title}</div>
-            <div class="ipc-mistake-body">
-              <div class="ipc-wrong">${m.wrong}</div>
-              <div class="ipc-right">${m.right}</div>
-              <div class="ipc-why">${m.why}</div>
+function MistakesPanel({ cat }: { cat: Category }) {
+  return (
+    <div className="flex flex-col gap-3.5">
+      {cat.mistakes.map((m) => (
+        <div
+          key={m.title}
+          className="overflow-hidden rounded-xl border border-red-300"
+        >
+          <div className="bg-red-50 px-3.5 py-2 text-[13px] font-bold text-red-800">
+            ⚠️ {m.title}
+          </div>
+          <div className="flex flex-col gap-1.5 bg-white px-3.5 py-2.5">
+            <div className="text-[13px] text-red-600">
+              <span className="font-bold">✗ </span>
+              {m.wrong}
+            </div>
+            <div className="text-[13px] text-green-600">
+              <span className="font-bold">✓ </span>
+              {m.right}
+            </div>
+            <div className="mt-0.5 text-xs italic leading-normal text-gray-500">
+              {m.why}
             </div>
           </div>
-        `,
-          )
-          .join("")}
-      </div>
+        </div>
+      ))}
     </div>
-  </div>
-`,
-).join("")}
-      `;
+  );
+}
 
-      window.ipcToggle = function (id) {
-        const body = document.getElementById("ipc-body-" + id);
-        const chev = document.getElementById("ipc-chev-" + id);
-        const open = body.classList.toggle("open");
-        chev.classList.toggle("open", open);
-      };
-
-      window.ipcTab = function (catId, panel, btn) {
-        ["vocab", "intensity", "mistakes"].forEach((p) => {
-          const el = document.getElementById("ipc-panel-" + p + "-" + catId);
-          if (el) el.classList.remove("ipc-panel-active");
-        });
-        const target = document.getElementById(
-          "ipc-panel-" + panel + "-" + catId,
-        );
-        if (target) target.classList.add("ipc-panel-active");
-        const body = document.getElementById("ipc-body-" + catId);
-        if (body)
-          body
-            .querySelectorAll(".ipc-tab")
-            .forEach((t) => t.classList.remove("ipc-tab-active"));
-        btn.classList.add("ipc-tab-active");
-      };
-    }
-    renderInterPersonal();
-  }, []);
-
+export default function InterPersonalPage() {
   return (
     <>
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-8">
@@ -176,7 +182,9 @@ ${CATEGORIES.map(
       </header>
 
       <main className="max-w-6xl mx-auto px-6 pb-24">
-        <div id="interpersonal-content"></div>
+        {CATEGORIES.map((cat) => (
+          <CategorySection key={cat.id} cat={cat} />
+        ))}
       </main>
     </>
   );

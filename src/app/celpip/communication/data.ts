@@ -6,7 +6,11 @@ export const CATEGORIES = [
           color: "#1d4ed8",
           bg: "#dbeafe",
           border: "#93c5fd",
-          celpipTasks: ["Speaking Task 3", "Speaking Task 5", "Writing Task 2"],
+          celpipTasks: [
+            "Speaking Task 1",
+            "Speaking Task 6",
+            "Writing Task 1 (Email)",
+          ],
           intro:
             "Used when you want to propose an idea or course of action without being pushy. Native speakers soften suggestions to show respect.",
           vocab: [
@@ -102,7 +106,7 @@ export const CATEGORIES = [
           color: "#6d28d9",
           bg: "#ede9fe",
           border: "#c4b5fd",
-          celpipTasks: ["Speaking Task 1", "Writing Task 1 (Email)"],
+          celpipTasks: ["Writing Task 1 (Email)", "Speaking Task 6"],
           intro:
             "Requests range from casual to highly formal depending on the situation. CELPIP emails often require you to make polite, professional requests.",
           vocab: [
@@ -187,7 +191,11 @@ export const CATEGORIES = [
           color: "#b45309",
           bg: "#fef3c7",
           border: "#fde68a",
-          celpipTasks: ["Speaking Task 2", "Speaking Task 4", "Writing Task 1"],
+          celpipTasks: [
+            "Speaking Task 6",
+            "Speaking Task 2",
+            "Writing Task 1 (Email)",
+          ],
           intro:
             "When describing a problem, complaint, or challenging scenario, native speakers use specific language to set context, show impact, and maintain a respectful tone.",
           vocab: [
@@ -283,7 +291,7 @@ export const CATEGORIES = [
           color: "#0f766e",
           bg: "#ccfbf1",
           border: "#5eead4",
-          celpipTasks: ["Speaking Task 5", "Speaking Task 6", "Writing Task 2"],
+          celpipTasks: ["Speaking Task 7", "Speaking Task 5", "Writing Task 2"],
           intro:
             "CELPIP tasks frequently ask you to take a stance. Native speakers signal their opinion clearly and then support it with reasons — they don't waffle.",
           vocab: [
@@ -372,7 +380,7 @@ export const CATEGORIES = [
           color: "#065f46",
           bg: "#d1fae5",
           border: "#6ee7b7",
-          celpipTasks: ["Speaking Task 5", "Speaking Task 6"],
+          celpipTasks: ["Speaking Task 7", "Speaking Task 5", "Writing Task 2"],
           intro:
             "In CELPIP speaking tasks involving discussion or debate, you need to agree, partially agree, or disagree diplomatically. Native speakers rarely say 'You are wrong.'",
           vocab: [
@@ -464,7 +472,7 @@ export const CATEGORIES = [
           color: "#be185d",
           bg: "#fce7f3",
           border: "#f9a8d4",
-          celpipTasks: ["Writing Task 1 (Email)", "Speaking Task 1"],
+          celpipTasks: ["Writing Task 1 (Email)", "Speaking Task 6"],
           intro:
             "Apologies in professional English follow a pattern: acknowledge → take responsibility → show impact → offer a solution. Simply saying 'sorry' is not enough in formal contexts.",
           vocab: [
@@ -549,7 +557,7 @@ export const CATEGORIES = [
           color: "#1e40af",
           bg: "#dbeafe",
           border: "#93c5fd",
-          celpipTasks: ["Speaking Task 3", "Writing Task 1"],
+          celpipTasks: ["Speaking Task 3", "Writing Task 1 (Email)"],
           intro:
             "In announcements and information-giving contexts, clarity and structure are key. Native speakers use signposting phrases to guide the listener.",
           vocab: [
@@ -628,7 +636,7 @@ export const CATEGORIES = [
           color: "#7c3aed",
           bg: "#ede9fe",
           border: "#c4b5fd",
-          celpipTasks: ["Writing Task 2", "Speaking Task 5"],
+          celpipTasks: ["Speaking Task 5", "Speaking Task 7", "Writing Task 2"],
           intro:
             "Persuasion uses evidence, examples, and emotional appeal. Native speakers structure arguments: claim → reason → example → benefit.",
           vocab: [
@@ -723,7 +731,7 @@ export const CATEGORIES = [
           color: "#dc2626",
           bg: "#fee2e2",
           border: "#fca5a5",
-          celpipTasks: ["Writing Task 1 (Email)", "Speaking Task 2"],
+          celpipTasks: ["Writing Task 1 (Email)", "Speaking Task 6"],
           intro:
             "Formal complaints follow a strict pattern: state the problem → give evidence/timeline → describe the impact → request action. Avoid emotional language.",
           vocab: [
