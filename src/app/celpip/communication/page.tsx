@@ -6,9 +6,9 @@ import { CATEGORIES } from "./data";
 type TabKey = "vocab" | "intensity" | "mistakes";
 
 const TABS: { key: TabKey; label: string }[] = [
-  { key: "vocab", label: "📚 Vocabulary" },
-  { key: "intensity", label: "📈 Intensity Levels" },
-  { key: "mistakes", label: "⚠️ Mistakes & Fixes" },
+  { key: "vocab", label: "Vocabulary" },
+  { key: "intensity", label: "Intensity" },
+  { key: "mistakes", label: "Mistakes & Fixes" },
 ];
 
 type Category = (typeof CATEGORIES)[number];
@@ -18,35 +18,49 @@ function CategorySection({ cat }: { cat: Category }) {
   const [activeTab, setActiveTab] = useState<TabKey>("vocab");
 
   return (
-    <div className="mb-12 overflow-hidden rounded-2xl border border-gray-200">
+    <div
+      className={`mb-5 overflow-hidden rounded-2xl border bg-white transition-shadow ${
+        open ? "shadow-[0_8px_30px_rgba(15,15,15,0.06)]" : "card-hover"
+      }`}
+      style={{ borderColor: open ? cat.border : "#e4e2da" }}
+    >
       {/* header */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full select-none items-center gap-3 px-5 py-4 text-left transition hover:brightness-95"
-        style={{
-          background: `${cat.bg}1a`,
-          borderBottom: `1px solid ${cat.border}80`,
-        }}
+        className="flex w-full select-none items-center gap-4 px-5 py-4 text-left transition"
+        style={{ background: open ? `${cat.bg}33` : "transparent" }}
         aria-expanded={open}
       >
-        <span className="text-2xl">{cat.emoji}</span>
-        <span className="text-base font-extrabold" style={{ color: cat.color }}>
+        <span
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-2xl"
+          style={{ background: `${cat.bg}80` }}
+        >
+          {cat.emoji}
+        </span>
+        <span
+          className="text-base font-extrabold leading-tight md:text-lg"
+          style={{ color: cat.color }}
+        >
           {cat.title}
         </span>
-        <div className="ml-auto hidden flex-wrap gap-1.5 sm:flex">
+        <div className="ml-auto hidden flex-wrap justify-end gap-1.5 sm:flex">
           {cat.celpipTasks.map((t) => (
             <span
               key={t}
-              className="rounded-full bg-black/10 px-2.5 py-0.5 text-[10px] font-bold"
+              className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+              style={{ background: `${cat.bg}80`, color: cat.color }}
             >
               {t}
             </span>
           ))}
         </div>
         <span
-          className="ml-1.5 text-base transition-transform duration-200"
-          style={{ transform: open ? "rotate(180deg)" : undefined }}
+          className="ml-1 grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs text-slate transition-transform duration-300"
+          style={{
+            background: "#f1efe8",
+            transform: open ? "rotate(180deg)" : undefined,
+          }}
         >
           ▼
         </span>
@@ -54,13 +68,16 @@ function CategorySection({ cat }: { cat: Category }) {
 
       {/* body */}
       {open && (
-        <div className="bg-white p-5">
-          <div className="mb-6 rounded-r-lg border-l-[3px] border-gray-200 bg-gray-50 px-3.5 py-2.5 text-[13.5px] leading-relaxed text-gray-700">
+        <div className="animate-fade-in border-t border-mist px-5 pb-6 pt-5">
+          <div
+            className="mb-6 rounded-xl px-4 py-3 text-sm leading-relaxed text-steel"
+            style={{ background: `${cat.bg}40`, borderLeft: `3px solid ${cat.color}` }}
+          >
             {cat.intro}
           </div>
 
           {/* sub-tabs */}
-          <div className="mb-5 flex overflow-x-auto border-b-2 border-gray-100">
+          <div className="mb-5 flex flex-wrap gap-2">
             {TABS.map((tab) => {
               const active = activeTab === tab.key;
               return (
@@ -68,10 +85,10 @@ function CategorySection({ cat }: { cat: Category }) {
                   key={tab.key}
                   type="button"
                   onClick={() => setActiveTab(tab.key)}
-                  className={`-mb-0.5 whitespace-nowrap border-b-2 px-4 py-2.5 text-[12.5px] font-semibold transition ${
+                  className={`rounded-full border px-4 py-1.5 text-[12.5px] font-semibold transition ${
                     active
-                      ? "border-gray-900 text-gray-900"
-                      : "border-transparent text-gray-500 hover:text-gray-700"
+                      ? "border-ink bg-ink text-fog"
+                      : "border-mist text-slate hover:border-slate/40 hover:text-ink"
                   }`}
                 >
                   {tab.label}
@@ -95,14 +112,14 @@ function VocabPanel({ cat }: { cat: Category }) {
       {cat.vocab.map((v) => (
         <div
           key={v.word}
-          className="rounded-xl border border-gray-200 bg-white px-4 py-3.5"
+          className="card-hover rounded-xl border border-mist bg-fog/40 px-4 py-3.5"
           style={{ borderLeft: `4px solid ${cat.color}` }}
         >
-          <div className="mb-1 text-sm font-bold text-gray-900">{v.word}</div>
-          <div className="mb-2 text-[12.5px] italic leading-relaxed text-gray-700">
+          <div className="mb-1.5 text-sm font-bold text-ink">{v.word}</div>
+          <div className="mb-2.5 text-[12.5px] italic leading-relaxed text-steel">
             &ldquo;{v.example}&rdquo;
           </div>
-          <div className="rounded-md bg-gray-50 px-2 py-1 text-[11.5px] leading-normal text-gray-500">
+          <div className="rounded-lg bg-mist/70 px-2.5 py-1.5 text-[11.5px] leading-normal text-slate">
             💡 {v.note}
           </div>
         </div>
@@ -117,20 +134,19 @@ function IntensityPanel({ cat }: { cat: Category }) {
       {cat.intensityLevels.map((lv) => (
         <div
           key={lv.level}
-          className="flex items-start gap-2.5 rounded-[10px] border px-4 py-3"
-          style={{ background: lv.bg, borderColor: cat.border }}
+          className="flex items-center gap-3 rounded-xl border px-4 py-3"
+          style={{ background: lv.bg, borderColor: `${lv.color}33` }}
         >
           <span
-            className="shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold"
+            className="shrink-0 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide"
             style={{
-              background: lv.bg,
+              background: `${lv.color}1a`,
               color: lv.color,
-              border: `1px solid ${lv.color}40`,
             }}
           >
             {lv.level}
           </span>
-          <div className="text-[13px] italic leading-relaxed text-gray-700">
+          <div className="text-[13px] italic leading-relaxed text-steel">
             &ldquo;{lv.example}&rdquo;
           </div>
         </div>
@@ -141,25 +157,25 @@ function IntensityPanel({ cat }: { cat: Category }) {
 
 function MistakesPanel({ cat }: { cat: Category }) {
   return (
-    <div className="flex flex-col gap-3.5">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
       {cat.mistakes.map((m) => (
         <div
           key={m.title}
-          className="overflow-hidden rounded-xl border border-red-300"
+          className="overflow-hidden rounded-xl border border-mist bg-white"
         >
-          <div className="bg-red-50 px-3.5 py-2 text-[13px] font-bold text-red-800">
-            ⚠️ {m.title}
+          <div className="border-b border-mist bg-fog/60 px-4 py-2.5 text-[13px] font-bold text-ink">
+            {m.title}
           </div>
-          <div className="flex flex-col gap-1.5 bg-white px-3.5 py-2.5">
-            <div className="text-[13px] text-red-600">
-              <span className="font-bold">✗ </span>
-              {m.wrong}
+          <div className="flex flex-col gap-2 px-4 py-3.5">
+            <div className="flex gap-2 rounded-lg bg-rose2-light/50 px-3 py-2 text-[13px] leading-relaxed text-rose2-dark">
+              <span className="font-bold">✗</span>
+              <span>{m.wrong}</span>
             </div>
-            <div className="text-[13px] text-green-600">
-              <span className="font-bold">✓ </span>
-              {m.right}
+            <div className="flex gap-2 rounded-lg bg-emerald2-light/50 px-3 py-2 text-[13px] leading-relaxed text-emerald2-dark">
+              <span className="font-bold">✓</span>
+              <span>{m.right}</span>
             </div>
-            <div className="mt-0.5 text-xs italic leading-normal text-gray-500">
+            <div className="px-1 text-xs italic leading-relaxed text-slate">
               {m.why}
             </div>
           </div>
@@ -210,6 +226,7 @@ function QuizPanel() {
   });
   const correctCount = correctFlags.filter(Boolean).length;
   const total = card.answers.length;
+  const progress = total ? (correctCount / total) * 100 : 0;
 
   const setValue = (i: number, v: string) => {
     setInputs((prev) => {
@@ -224,58 +241,73 @@ function QuizPanel() {
 
   return (
     <div>
-      <p className="mb-5 text-[13.5px] leading-relaxed text-gray-600">
+      <p className="mb-6 max-w-2xl text-sm leading-relaxed text-slate">
         Read each scenario and type the expressions you would use. The order
         doesn&rsquo;t matter — any correct phrase in any box counts. Stuck? Use{" "}
-        <span className="font-semibold">Reveal all</span> to check yourself.
+        <span className="font-semibold text-ink">Reveal all</span> to check
+        yourself.
       </p>
 
       {/* card */}
       <div
-        className="overflow-hidden rounded-2xl border bg-white"
+        className="overflow-hidden rounded-2xl border bg-white shadow-[0_8px_30px_rgba(15,15,15,0.06)]"
         style={{ borderColor: card.border }}
       >
         {/* card header */}
         <div
-          className="flex items-center gap-3 px-5 py-4"
-          style={{ background: `${card.bg}66`, borderBottom: `1px solid ${card.border}` }}
+          className="flex items-center gap-4 px-6 py-5"
+          style={{ background: `${card.bg}55` }}
         >
-          <span className="text-2xl">{card.emoji}</span>
+          <span
+            className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-2xl"
+            style={{ background: `${card.bg}cc` }}
+          >
+            {card.emoji}
+          </span>
           <div>
             <div
-              className="text-[11px] font-bold uppercase tracking-wide"
+              className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: card.color }}
             >
               Scenario {index + 1} of {QUIZ_CARDS.length}
             </div>
-            <div className="text-base font-extrabold text-gray-900">
+            <div className="text-base font-extrabold leading-tight text-ink md:text-lg">
               {card.question}
             </div>
           </div>
           <div className="ml-auto shrink-0 text-right">
             <div
-              className="text-lg font-extrabold"
+              className="text-2xl font-extrabold leading-none"
               style={{ color: card.color }}
             >
               {correctCount}/{total}
             </div>
-            <div className="text-[10px] font-semibold uppercase text-gray-400">
+            <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-slate">
               correct
             </div>
           </div>
         </div>
 
+        {/* progress bar */}
+        <div className="h-1.5 w-full bg-mist">
+          <div
+            className="h-full transition-[width] duration-500 ease-out"
+            style={{ width: `${progress}%`, background: card.color }}
+          />
+        </div>
+
         {/* card body */}
-        <div className="p-5">
+        <div className="p-6">
           {isRevealed ? (
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {card.answers.map((a) => (
                 <div
                   key={a}
-                  className="rounded-xl border px-4 py-3 text-sm font-semibold text-gray-900"
+                  className="flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold text-ink"
                   style={{ borderColor: card.border, background: `${card.bg}40` }}
                 >
-                  ✓ {a}
+                  <span style={{ color: card.color }}>✓</span>
+                  {a}
                 </div>
               ))}
             </div>
@@ -292,13 +324,17 @@ function QuizPanel() {
                       placeholder={`Expression ${i + 1}`}
                       className={`w-full rounded-xl border px-4 py-3 pr-10 text-sm outline-none transition focus:ring-2 ${
                         ok
-                          ? "border-green-400 bg-green-50 text-green-800"
-                          : "border-gray-200 bg-white text-gray-900 focus:border-gray-400"
+                          ? "border-emerald2 bg-emerald2-light/60 text-emerald2-dark"
+                          : "border-mist bg-fog/40 text-ink placeholder:text-slate/60 focus:border-slate/40"
                       }`}
-                      style={ok ? undefined : { ["--tw-ring-color" as string]: `${card.color}33` }}
+                      style={
+                        ok
+                          ? undefined
+                          : { ["--tw-ring-color" as string]: `${card.color}33` }
+                      }
                     />
                     {ok && (
-                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-green-600">
+                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-emerald2">
                         ✓
                       </span>
                     )}
@@ -310,18 +346,18 @@ function QuizPanel() {
         </div>
 
         {/* card footer / controls */}
-        <div className="flex flex-wrap items-center gap-2 border-t border-gray-100 bg-gray-50 px-5 py-3.5">
+        <div className="flex flex-wrap items-center gap-2 border-t border-mist bg-fog/50 px-6 py-4">
           <button
             type="button"
             onClick={() => go(-1)}
-            className="rounded-full border border-gray-300 bg-white px-4 py-2 text-[13px] font-semibold text-gray-700 transition hover:bg-gray-100"
+            className="rounded-full border border-mist bg-white px-4 py-2 text-[13px] font-semibold text-steel transition hover:border-slate/40 hover:text-ink"
           >
             ← Prev
           </button>
           <button
             type="button"
             onClick={() => go(1)}
-            className="rounded-full border border-gray-300 bg-white px-4 py-2 text-[13px] font-semibold text-gray-700 transition hover:bg-gray-100"
+            className="rounded-full border border-mist bg-white px-4 py-2 text-[13px] font-semibold text-steel transition hover:border-slate/40 hover:text-ink"
           >
             Next →
           </button>
@@ -333,7 +369,7 @@ function QuizPanel() {
                 onClick={() =>
                   setRevealed((prev) => ({ ...prev, [index]: false }))
                 }
-                className="rounded-full border border-gray-300 bg-white px-4 py-2 text-[13px] font-semibold text-gray-700 transition hover:bg-gray-100"
+                className="rounded-full border border-mist bg-white px-4 py-2 text-[13px] font-semibold text-steel transition hover:border-slate/40 hover:text-ink"
               >
                 🙈 Hide answers
               </button>
@@ -361,8 +397,8 @@ function QuizPanel() {
 type MainTab = "learn" | "quiz";
 
 const MAIN_TABS: { key: MainTab; label: string }[] = [
-  { key: "learn", label: "📖 Information" },
-  { key: "quiz", label: "📝 Quiz" },
+  { key: "learn", label: "Information" },
+  { key: "quiz", label: "Quiz" },
 ];
 
 export default function InterPersonalPage() {
@@ -370,18 +406,21 @@ export default function InterPersonalPage() {
 
   return (
     <>
-      <header className="max-w-6xl mx-auto px-6 pt-16 pb-8">
-        <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-3">
-          Talking to People
+      <header className="mx-auto max-w-6xl px-6 pb-8 pt-16">
+        <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">
+          Communication Toolkit
+        </div>
+        <h1 className="mb-3 font-display text-5xl leading-tight text-ink md:text-6xl">
+          <span className="hero-line">Talking to People</span>
         </h1>
-        <p className="text-lg text-slate max-w-xl leading-relaxed">
+        <p className="max-w-xl text-lg leading-relaxed text-slate">
           Master interpersonal communication for every CELPIP task.
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 pb-24">
+      <main className="mx-auto max-w-6xl px-6 pb-24">
         {/* top-level tabs */}
-        <div className="mb-8 flex w-fit gap-1.5 rounded-full border border-gray-200 bg-gray-50 p-1.5">
+        <div className="mb-8 inline-flex gap-1 rounded-full border border-mist bg-white p-1">
           {MAIN_TABS.map((tab) => {
             const active = mainTab === tab.key;
             return (
@@ -389,10 +428,10 @@ export default function InterPersonalPage() {
                 key={tab.key}
                 type="button"
                 onClick={() => setMainTab(tab.key)}
-                className={`rounded-full px-5 py-2 text-[13px] font-bold transition ${
+                className={`rounded-full px-6 py-2 text-[13px] font-bold transition ${
                   active
-                    ? "bg-gray-900 text-white"
-                    : "text-gray-500 hover:text-gray-800"
+                    ? "bg-ink text-fog"
+                    : "text-slate hover:text-ink"
                 }`}
               >
                 {tab.label}
