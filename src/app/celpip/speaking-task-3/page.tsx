@@ -640,20 +640,6 @@ export default function CelpipSpeakingTask3Page() {
           id="pane-tips"
           className={`pane ${activeTab === "tips" ? "active" : ""} space-y-4`}
         >
-          <div className="flex flex-wrap gap-2 mb-4">
-            {TIP_FILTERS.map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => setTipFilter(filter.id)}
-                className={`filter-btn ${
-                  tipFilter === filter.id ? "filter-active" : "filter-inactive"
-                } px-4 py-1.5 rounded-full border text-xs font-medium`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
-
           <div className="space-y-3">
             {filteredTips.map((tip) => (
               <div
