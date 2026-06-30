@@ -177,11 +177,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Busy Market",
     recap:
-      "Right now, the market is absolutely bustling — vendors are calling out to passing shoppers, and every stall is packed with customers hunting for bargains.",
+      "Right now, the market is bustling with shoppers — the vendors are calling out to customers, and every stall is packed with people hunting for bargains.",
     predictions:
-      "Looking ahead, I predict the crowd will surge even larger in the next twenty minutes because it is the peak evening shopping hour. The vendors will probably start lowering their prices to move the last of their stock before closing time. Meanwhile, some early shoppers who have already filled their bags will begin to disperse toward the exit. The busiest stalls — fruit and street food — will likely sell out first, which might cause some frustration among latecomers.",
+      "Looking ahead, I predict that the crowd will surge even larger in the next twenty minutes because it is the peak evening shopping hour. The vendors will probably start lowering their prices to clear the last of their stock before closing time. Meanwhile, some early shoppers who have already filled their bags might begin to disperse toward the exit. Eventually, the crowd will thin out as the busiest stalls sell out and people head home for dinner.",
     reasoning:
-      "Overall, the scene will look quite different in an hour. The hectic energy will fade as the vendors pack up and the throng of shoppers moves on, because busy markets always wind down once daylight disappears and people head home for dinner.",
+      "Overall, the scene will look quite different in an hour, because busy markets always wind down once daylight disappears and the shoppers leave.",
   },
   {
     n: "2",
@@ -247,11 +247,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Peaceful Beach Sunset",
     recap:
-      "The beach is serene right now — the sun is low on the horizon and a few families are quietly enjoying the golden light reflecting off the calm water.",
+      "Right now, the beach is serene and peaceful — the sun is low on the horizon, and a few families are quietly soaking up the last sunlight on the calm water.",
     predictions:
-      "I predict that as the sun sets lower, the temperature will drop noticeably and most visitors will start gathering their belongings. The children who are still swimming will probably come out of the water soon because it will become too dark to swim safely. Some couples might linger a little longer to watch the stars appear, while families with younger children will retreat home first. Eventually, the beach will feel almost completely deserted and perfectly hushed.",
+      "Looking ahead, I predict that the temperature will drop noticeably as the sun sets lower because the warmth fades quickly after dusk. The visitors will probably start gathering their belongings to head back home. Meanwhile, a few couples might linger a little longer to watch the stars appear. Eventually, the beach will fall completely quiet as the last visitors leave.",
     reasoning:
-      "In conclusion, the serene mood will deepen into total stillness as nightfall arrives — the crowd will dwindle and the placid water will reflect only moonlight, because peaceful places like this naturally empty once daylight fades.",
+      "Overall, the serene mood will deepen into total stillness as nightfall arrives, because peaceful places like this naturally empty once daylight fades.",
   },
   {
     n: "3",
@@ -317,11 +317,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Tense Office Argument",
     recap:
-      "Right now, the atmosphere in the office is extremely tense — two colleagues are in a heated confrontation and their body language suggests the argument is getting worse, not better.",
+      "Right now, the atmosphere in the office is extremely tense — two colleagues have got into a heated argument, and their body language suggests the tension is still building.",
     predictions:
-      "I predict that in the next few minutes, the tension will escalate further before it improves. Other team members will likely feel uncomfortable and try to distance themselves from the confrontation. A senior manager or HR representative will probably intervene to mediate, asking both parties to take a break and discuss the issue privately. Once separated, the two colleagues will likely calm down and begin to see the other's perspective more clearly.",
+      "Looking ahead, I predict that the confrontation will escalate a little further before it improves because neither side wants to back down first. A senior colleague will probably step in to calm things down and ask both parties to take a break to cool off. Meanwhile, the rest of the team might feel uncomfortable and try to distance themselves from the argument. Eventually, once they talk it out in private, the two colleagues will reach a compromise and patch things up.",
     reasoning:
-      "Overall, I believe the situation will be resolved within the hour — most workplace conflicts defuse once a neutral party steps in, because people are generally more reasonable when they are no longer in a confrontational, public setting.",
+      "Overall, I believe the situation will be resolved within the hour, because most workplace conflicts defuse once a neutral party steps in and people are no longer arguing in public.",
   },
   {
     n: "4",
@@ -389,11 +389,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Street Festival",
     recap:
-      "At this moment, the street festival is in full swing — the atmosphere is vibrant, performers are dancing in traditional costumes, and the crowd is completely exuberant.",
+      "Right now, the street festival is in full swing — the performers are dancing to the music, and the crowd is cheering them on with real excitement.",
     predictions:
-      "I predict that as the evening progresses, the festival will become even more crowded because people arriving after work will join the merriment. The festive lights will be switched on once it gets darker, which will make the atmosphere feel even more electric. Food vendors will likely start running low on popular items, and some stalls will probably sell out entirely. Later in the night, families with young children will begin to leave, but the revelry among younger adults will likely continue.",
+      "Looking ahead, I predict that the crowd will swell even larger as the evening goes on because people will join the celebration after work. Once the lights come on, the atmosphere will probably feel even more electric and lively. Meanwhile, the food vendors might start running low on popular items as visitors grab a bite from the stalls. Eventually, the celebration will peak with an evening performance before the festivities wind down.",
     reasoning:
-      "In conclusion, the celebration will culminate in a spectacular evening performance before gradually tapering off, because festivals naturally build toward a night-time peak and then wind down as the crowd disperses and energy fades.",
+      "Overall, the celebration will build toward a night-time climax and then gradually taper off, because festivals always follow this natural arc as the crowd disperses and energy fades.",
   },
   {
     n: "5",
@@ -463,11 +463,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Office Meeting",
     recap:
-      "Right now, the team is in an important meeting — everyone appears focused and engaged, and the atmosphere suggests a significant deadline or decision is being discussed.",
+      "Right now, the team is in an important meeting — everyone looks focused as they go over the agenda, and the atmosphere suggests a tight deadline is approaching.",
     predictions:
-      "I predict that in the next fifteen minutes, the manager will wrap up the discussion and begin assigning specific action items to team members. Some colleagues will probably step out to make calls or send urgent emails based on what was decided. The more junior staff will likely return to their desks to resume their individual tasks, while senior members might stay behind to continue the conversation. Productivity in the office will likely increase right after the meeting, because people tend to feel motivated once they have clear direction.",
+      "Looking ahead, I predict that the manager will wrap up the meeting soon and begin assigning tasks to the team because clear direction is needed before the deadline. A few colleagues will probably step out to make calls based on what was decided. Meanwhile, the more junior staff might return to their desks to get back to work. Eventually, the whole team will knuckle down on the project once the key decisions have been made.",
     reasoning:
-      "Overall, the meeting will adjourn within the hour and the team will shift from collaborative planning back to individual work — because proficient teams know how to move quickly from discussion to action once the key decisions have been made.",
+      "Overall, the meeting will adjourn within the hour and the team will shift from collaborative planning back to individual work, because proficient teams move quickly from discussion to action.",
   },
   {
     n: "6",
@@ -538,11 +538,11 @@ export const SCENARIO_TYPES = [
     },
     responseLabel: "Cosy Café Interior",
     recap:
-      "Right now, the café is cosy and unhurried — warm ambient lighting falls across small wooden tables where customers are quietly reading or working on laptops, and the soft murmur of conversation fills the room.",
+      "Right now, the café is cosy and unhurried — customers are sipping their coffee and working on their laptops, and a soft murmur of conversation fills the warmly lit room.",
     predictions:
-      "I predict that as the afternoon progresses, more customers will trickle in after finishing work, so the café will gradually shift from quiet and intimate to noticeably busier. The baristas will probably step up the pace behind the counter to keep up with new orders. Some of the current customers who have been engrossed in their work for hours will likely pack up and leave to make room. Meanwhile, small groups of friends might settle in for the evening, turning the space from a solo work environment into a more social one.",
+      "Looking ahead, I predict that more customers will trickle in after work because the afternoon lull is ending, so the café will gradually grow busier. The baristas will probably pick up the pace behind the counter to keep up with the new orders. Meanwhile, some of the current customers who have worked for hours might pack up and leave to make room. Eventually, small groups of friends will settle in for the evening and turn the quiet space into a more social one.",
     reasoning:
-      "Overall, the cosy, intimate atmosphere will gradually give way to something livelier as the evening crowd arrives — because cafés like this one naturally serve different purposes at different times of day, shifting from a quiet workspace in the afternoon to a relaxed social venue by evening.",
+      "Overall, the cosy, intimate atmosphere will give way to something livelier as the evening crowd arrives, because cafés like this naturally shift from a quiet workspace by day to a relaxed social venue by night.",
   },
 ];
 

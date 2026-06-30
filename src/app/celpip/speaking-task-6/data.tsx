@@ -4,6 +4,7 @@
 export const TABS = [
   { id: "overview", label: "Overview" },
   { id: "structure", label: "My Template" },
+  { id: "scenarios", label: "Scenario Types" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
 ];
@@ -227,6 +228,216 @@ export const SAMPLE_ANSWERS = [
       "I know how much we've both been looking forward to this, and I completely understand if you're disappointed — I am too. The thing is, an urgent issue has come up at work that I just can't get out of, so I'm afraid I won't be able to make our trip this weekend.",
     solution:
       "So I think the best approach would be to reschedule for the following weekend if that works for you, and I'd be happy to sort out changing the bookings and cover any rebooking fees. I really hope you understand — let's lock in a new date soon!",
+  },
+];
+
+// Real-exam categories of difficult situation. Every Task 6 prompt is a
+// variation of one of these. Each sample answer reuses the SAME template
+// skeleton from "My Template" (the highlighted TEMPLATE_PHRASES) so learners
+// see one reliable structure works for every category.
+export const SCENARIO_TYPES = [
+  {
+    n: "1",
+    badge: "bg-rose2",
+    accent: "text-rose2",
+    title: "Declining a Request",
+    examples:
+      "e.g. a friend asks to borrow money or your car, a relative wants to move in, someone asks you to cover their shift",
+    phrases: [
+      {
+        phrase: "I really wish I could help with this",
+        use: "Buy goodwill before you say no.",
+      },
+      {
+        phrase: "I'm just not in a position to…",
+        use: "A soft, blameless way to refuse.",
+      },
+      {
+        phrase: "It's not that I don't want to, it's that…",
+        use: "Separate the person from the refusal.",
+      },
+      {
+        phrase: "What I can do instead is…",
+        use: "Pivot from a flat no to an offer.",
+      },
+    ],
+    approachHint:
+      "Lead with warmth, give one honest reason, and never leave them empty-handed — always pivot to what you CAN do.",
+    responseLabel: "Friend wants to borrow your car",
+    greeting:
+      "Hi Dani, hope you're doing well! There's something a little tricky I wanted to talk to you about — your road trip next weekend.",
+    empathize:
+      "I know how much you've been looking forward to it, and I completely understand why you'd want a reliable car for the drive. The thing is, I actually need my car that same weekend to take my mom to her medical appointments, so I'm afraid I can't lend it to you this time.",
+    solution:
+      "So I think the best approach would be to help you book a rental from the place near campus that does student discounts, and I'd be happy to split the cost with you as an early birthday gift. I really hope you understand — I want your trip to go perfectly!",
+  },
+  {
+    n: "2",
+    badge: "bg-sapphire",
+    accent: "text-sapphire",
+    title: "Cancelling or Breaking Bad News",
+    examples:
+      "e.g. cancelling a trip or party, missing a wedding, telling someone an event has been called off",
+    phrases: [
+      {
+        phrase: "I've got some news you're not going to love",
+        use: "Pre-warn them gently before the blow.",
+      },
+      {
+        phrase: "I held off telling you, hoping things would change",
+        use: "Show it wasn't careless.",
+      },
+      {
+        phrase: "This is completely out of my hands",
+        use: "Make clear it isn't a free choice.",
+      },
+      {
+        phrase: "Let's find another way to make it happen",
+        use: "Keep the door open for next time.",
+      },
+    ],
+    approachHint:
+      "Pre-warn gently, take the blame off yourself where it's genuine, and immediately propose a way to reschedule or make up for it.",
+    responseLabel: "Cancelling a weekend trip",
+    greeting:
+      "Hi Priya, hope you're doing well! There's something a little disappointing I wanted to talk to you about — our trip this weekend.",
+    empathize:
+      "I know we've both been counting down to this for weeks, and I completely understand if you're upset, because honestly I am too. The thing is, an urgent project at work has just been moved up and I have to be in the office on Saturday, so I'm afraid I won't be able to come away with you this weekend.",
+    solution:
+      "So I think the best approach would be to push the trip to the long weekend next month, and I'd be happy to handle all the rebooking and cover any change fees myself. I really hope you understand — let's lock in a new date as soon as I'm free!",
+  },
+  {
+    n: "3",
+    badge: "bg-amber2",
+    accent: "text-amber2",
+    title: "Addressing a Problem Behaviour",
+    examples:
+      "e.g. a noisy roommate, a coworker who leaves early, a neighbour's barking dog, a friend who's always late",
+    phrases: [
+      {
+        phrase: "I've been meaning to bring this up gently",
+        use: "Signal care, not an attack.",
+      },
+      {
+        phrase: "I'm sure you haven't even noticed, but…",
+        use: "Give them an easy way out.",
+      },
+      {
+        phrase: "It's starting to affect me a bit, so…",
+        use: "Make it about impact, not blame.",
+      },
+      {
+        phrase: "Could we find a system that works for both of us?",
+        use: "Invite a shared fix instead of a demand.",
+      },
+    ],
+    approachHint:
+      "Never accuse. Assume they didn't realise, describe the impact on you (not their character), and propose a shared fix.",
+    responseLabel: "Roommate's late-night noise",
+    greeting:
+      "Hi Alex, hope you're doing well! There's something a little awkward I wanted to talk to you about — the noise late at night.",
+    empathize:
+      "I know how much you love having friends over, and I completely understand — it's your home too, and I'd never want to spoil that. The thing is, I've got back-to-back exams this week, and the late-night noise has been making it really hard for me to sleep and concentrate.",
+    solution:
+      "So I think the best approach would be to keep things a bit quieter after about eleven on weeknights, and I'd be happy to give you the whole place to yourself this weekend to make up for it. I really hope you understand — I promise it's just for exam week!",
+  },
+  {
+    n: "4",
+    badge: "bg-emerald2",
+    accent: "text-emerald2",
+    title: "Apologizing for a Mistake",
+    examples:
+      "e.g. you broke a borrowed item, missed a deadline, forgot an important date, lost something of theirs",
+    phrases: [
+      {
+        phrase: "I owe you an honest apology",
+        use: "Take ownership in the first breath.",
+      },
+      {
+        phrase: "There's no excuse, but here's what happened",
+        use: "Accountability before any explanation.",
+      },
+      {
+        phrase: "I take full responsibility for this",
+        use: "Don't shift the blame elsewhere.",
+      },
+      {
+        phrase: "Please let me make this right",
+        use: "Move straight toward repair.",
+      },
+    ],
+    approachHint:
+      "Own it fully and fast, skip the excuses, and lead with a concrete way to make it right — repair, replace, or compensate.",
+    responseLabel: "Cracked a borrowed camera lens",
+    greeting:
+      "Hi Maya, hope you're doing well! There's something a little difficult I wanted to talk to you about — the camera you so kindly lent me.",
+    empathize:
+      "I know how much that camera means to you, and I completely understand if you're frustrated when you hear this. The thing is, while I was hiking on the trip it slipped from my hands and the lens cracked — there's really no excuse, and I take full responsibility for it.",
+    solution:
+      "So I think the best approach would be to take it straight to the official repair shop this week, or replace the lens entirely if you'd prefer, and I'd be happy to cover every cent. I really hope you understand — I'm so sorry, and thank you for being so gracious about it.",
+  },
+  {
+    n: "5",
+    badge: "bg-violet2",
+    accent: "text-violet2",
+    title: "Choosing Between Two Commitments",
+    examples:
+      "e.g. two friends' events on the same night, your manager and a colleague both need you, a family event clashes with work",
+    phrases: [
+      {
+        phrase: "I've been torn about this all week",
+        use: "Show the choice was genuinely hard.",
+      },
+      {
+        phrase: "It came down to a real clash of timing",
+        use: "Frame it as logistics, not preference.",
+      },
+      {
+        phrase: "It's nothing to do with how much I value you",
+        use: "Protect the relationship.",
+      },
+      {
+        phrase: "Let me make it up to you properly",
+        use: "Offer the other person a make-good.",
+      },
+    ],
+    approachHint:
+      "Make clear the clash is about timing, not how much you care, then commit clearly to one and offer the other person a genuine make-up plan.",
+    responseLabel: "Two friends' events, same night",
+    greeting:
+      "Hi Sam, hope you're doing well! There's something a little sensitive I wanted to talk to you about — your dinner this Saturday.",
+    empathize:
+      "I know you've put so much thought into the evening, and I completely understand if this is disappointing to hear. The thing is, my sister's farewell party turned out to be the very same night, and since she's moving abroad the next morning, I feel I really have to be there for her.",
+    solution:
+      "So I think the best approach would be for me to take you out, just the two of us, the following week — my treat — and I'd be happy to help you set up on Saturday beforehand so your dinner still goes brilliantly. I really hope you understand — you mean a lot to me, and I'll make it up to you!",
+  },
+];
+
+export const SCENARIO_CHEATSHEET = [
+  {
+    cat: "Declining a Request",
+    cues: "someone asks for money, your car, your time, or a favour you can't give",
+    color: "text-rose2",
+  },
+  {
+    cat: "Cancelling / Bad News",
+    cues: "you have to back out, call something off, or share news they won't like",
+    color: "text-sapphire",
+  },
+  {
+    cat: "Problem Behaviour",
+    cues: "someone's habit — noise, lateness, mess — is affecting you",
+    color: "text-amber2",
+  },
+  {
+    cat: "Apologizing",
+    cues: "you broke, lost, forgot, or damaged something — it's your fault",
+    color: "text-emerald2",
+  },
+  {
+    cat: "Competing Commitments",
+    cues: "two people or duties clash and you can only choose one",
+    color: "text-violet2",
   },
 ];
 

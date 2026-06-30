@@ -77,19 +77,19 @@ function ScenarioResponse({ accent, label, recap, predictions, reasoning }) {
       <div className="text-sm text-ink italic leading-relaxed space-y-2">
         <p>
           <span className="not-italic font-semibold text-sapphire">Recap:</span>{" "}
-          "{recap}"
+          "{renderTemplate(recap, TEMPLATE_PHRASES)}"
         </p>
         <p>
           <span className="not-italic font-semibold text-emerald2">
             Predictions:
           </span>{" "}
-          "{predictions}"
+          "{renderTemplate(predictions, TEMPLATE_PHRASES)}"
         </p>
         <p>
           <span className="not-italic font-semibold text-amber2">
             Reasoning:
           </span>{" "}
-          "{reasoning}"
+          "{renderTemplate(reasoning, TEMPLATE_PHRASES)}"
         </p>
       </div>
     </div>

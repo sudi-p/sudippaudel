@@ -10,6 +10,8 @@ import {
   SCORE_CRITERIA,
   BLUEPRINT,
   SCORE_BANDS,
+  SCENARIO_TYPES,
+  SCENARIO_CHEATSHEET,
   SAMPLE_ANSWERS,
   TEMPLATE_PHRASES,
   TIPS,
@@ -54,6 +56,38 @@ function Accordion({
         className={`accordion-body border-t border-mist px-6 py-5 ${bodyClassName} ${open ? "open" : ""}`}
       >
         {children}
+      </div>
+    </div>
+  );
+}
+
+function ScenarioResponse({ accent, label, greeting, empathize, solution }) {
+  return (
+    <div className="bg-fog rounded-xl p-5 space-y-3">
+      <p
+        className={`text-xs font-semibold ${accent} uppercase tracking-widest`}
+      >
+        ★ Perfect 60-second response — {label}
+      </p>
+      <div className="text-sm text-ink italic leading-relaxed space-y-2">
+        <p>
+          <span className="not-italic font-semibold text-sapphire">
+            Greeting:
+          </span>{" "}
+          "{renderTemplate(greeting, TEMPLATE_PHRASES)}"
+        </p>
+        <p>
+          <span className="not-italic font-semibold text-emerald2">
+            Empathize &amp; deliver:
+          </span>{" "}
+          "{renderTemplate(empathize, TEMPLATE_PHRASES)}"
+        </p>
+        <p>
+          <span className="not-italic font-semibold text-amber2">
+            Solution &amp; close:
+          </span>{" "}
+          "{renderTemplate(solution, TEMPLATE_PHRASES)}"
+        </p>
       </div>
     </div>
   );
@@ -781,6 +815,107 @@ export default function CelpipSpeakingTask6Page() {
               </div>
             </div>
           </Accordion>
+        </div>
+
+        {/* ══════════════════════════════════════════
+               PANE: SCENARIO TYPES
+          ══════════════════════════════════════════ */}
+        <div
+          id="pane-scenarios"
+          className={`pane ${activeTab === "scenarios" ? "active" : ""} space-y-6`}
+        >
+          {/* Intro */}
+          <div className="bg-white rounded-2xl border border-mist p-6">
+            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
+              Why scenario type matters
+            </p>
+            <p className="text-sm leading-relaxed text-ink">
+              Every Task 6 prompt is a variation of one of five{" "}
+              <strong>difficult-situation categories</strong>. Recognising the
+              category in your 60-second prep lets you instantly reach for the
+              right tone and phrases. Crucially,{" "}
+              <strong>the same template works for all of them</strong> — Greeting
+              → Empathize &amp; Deliver → Solution &amp; Close. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words below are the reusable skeleton from{" "}
+              <strong>My Template</strong>; only the details change.
+            </p>
+          </div>
+
+          {SCENARIO_TYPES.map((s) => (
+            <div
+              key={s.n}
+              className="bg-white rounded-2xl border border-mist overflow-hidden"
+            >
+              <div className="px-6 py-5 border-b border-mist flex items-center gap-3">
+                <span
+                  className={`w-8 h-8 rounded-full ${s.badge} text-white text-sm font-bold flex items-center justify-center shrink-0`}
+                >
+                  {s.n}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-ink">{s.title}</p>
+                  <p className="text-xs text-slate">{s.examples}</p>
+                </div>
+              </div>
+              <div className="px-6 py-5 space-y-5">
+                {/* Phrases */}
+                <div>
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-3">
+                    Phrases for this category
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {s.phrases.map((p) => (
+                      <div key={p.phrase} className="bg-fog rounded-xl p-4">
+                        <p className="text-sm font-semibold text-ink mb-1 italic">
+                          "{p.phrase}"
+                        </p>
+                        <p className="text-xs text-slate">
+                          <strong>When:</strong> {p.use}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* How to handle it */}
+                <div className="bg-sapphire-light rounded-xl p-4">
+                  <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-2">
+                    ✦ How to handle it
+                  </p>
+                  <p className="text-xs text-sapphire-dark leading-relaxed">
+                    {s.approachHint}
+                  </p>
+                </div>
+
+                {/* Perfect response */}
+                <ScenarioResponse
+                  accent={s.accent}
+                  label={s.responseLabel}
+                  greeting={s.greeting}
+                  empathize={s.empathize}
+                  solution={s.solution}
+                />
+              </div>
+            </div>
+          ))}
+
+          {/* Quick-reference cheat sheet */}
+          <div className="bg-ink rounded-2xl p-6 text-fog">
+            <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+              Quick-reference: read the prompt → pick your category
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              {SCENARIO_CHEATSHEET.map((r) => (
+                <div key={r.cat} className="bg-white/5 rounded-xl p-3">
+                  <p className={`font-semibold mb-1 ${r.color}`}>{r.cat}</p>
+                  <p className="text-fog/70">{r.cues}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* ══════════════════════════════════════════
