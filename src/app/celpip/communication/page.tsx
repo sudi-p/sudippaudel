@@ -3,119 +3,98 @@
 import { useState } from "react";
 import { CATEGORIES } from "./data";
 
-type TabKey = "vocab" | "intensity" | "mistakes";
+type Category = (typeof CATEGORIES)[number];
 
-const TABS: { key: TabKey; label: string }[] = [
+const SECTIONS: { key: "vocab" | "intensity" | "mistakes"; label: string }[] = [
   { key: "vocab", label: "Vocabulary" },
   { key: "intensity", label: "Intensity" },
   { key: "mistakes", label: "Mistakes & Fixes" },
 ];
 
-type Category = (typeof CATEGORIES)[number];
-
-function CategorySection({ cat }: { cat: Category }) {
-  const [open, setOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<TabKey>("vocab");
+function CategorySection({ cat, n }: { cat: Category; n: number }) {
+  const [activeTab, setActiveTab] =
+    useState<(typeof SECTIONS)[number]["key"]>("vocab");
 
   return (
-    <div
-      className={`mb-5 overflow-hidden rounded-2xl border bg-white transition-shadow ${
-        open ? "shadow-[0_8px_30px_rgba(15,15,15,0.06)]" : "card-hover"
-      }`}
-      style={{ borderColor: open ? cat.border : "#e4e2da" }}
-    >
+    <div className="mb-6 overflow-hidden rounded-2xl border border-mist bg-white">
       {/* header */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full select-none items-center gap-4 px-5 py-4 text-left transition"
-        style={{ background: open ? `${cat.bg}33` : "transparent" }}
-        aria-expanded={open}
-      >
-        <span
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-2xl"
-          style={{ background: `${cat.bg}80` }}
-        >
-          {cat.emoji}
+      <div className="flex items-center gap-3 border-b border-mist px-5 py-3">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink text-[13px] font-bold text-fog">
+          {n}
         </span>
-        <span
-          className="text-base font-extrabold leading-tight md:text-lg"
-          style={{ color: cat.color }}
-        >
+        <span className="text-base font-extrabold leading-tight text-ink md:text-lg">
           {cat.title}
         </span>
         <div className="ml-auto hidden flex-wrap justify-end gap-1.5 sm:flex">
           {cat.celpipTasks.map((t) => (
             <span
               key={t}
-              className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
-              style={{ background: `${cat.bg}80`, color: cat.color }}
+              className="rounded-full bg-fog px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate"
             >
               {t}
             </span>
           ))}
         </div>
-        <span
-          className="ml-1 grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs text-slate transition-transform duration-300"
-          style={{
-            background: "#f1efe8",
-            transform: open ? "rotate(180deg)" : undefined,
-          }}
-        >
-          ▼
-        </span>
-      </button>
+      </div>
 
-      {/* body */}
-      {open && (
-        <div className="animate-fade-in border-t border-mist px-5 pb-6 pt-5">
-          <div
-            className="mb-6 rounded-xl px-4 py-3 text-sm leading-relaxed text-steel"
-            style={{ background: `${cat.bg}40`, borderLeft: `3px solid ${cat.color}` }}
-          >
-            {cat.intro}
-          </div>
-
-          {/* sub-tabs */}
-          <div className="mb-5 flex flex-wrap gap-2">
-            {TABS.map((tab) => {
-              const active = activeTab === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  type="button"
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`rounded-full border px-4 py-1.5 text-[12.5px] font-semibold transition ${
-                    active
-                      ? "border-ink bg-ink text-fog"
-                      : "border-mist text-slate hover:border-slate/40 hover:text-ink"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {activeTab === "vocab" && <VocabPanel cat={cat} />}
-          {activeTab === "intensity" && <IntensityPanel cat={cat} />}
-          {activeTab === "mistakes" && <MistakesPanel cat={cat} />}
+      {/* body — tabbed sections */}
+      <div className="space-y-5 px-6 py-5">
+        <div className="rounded-xl bg-fog px-4 py-3 text-sm leading-relaxed text-steel">
+          {cat.intro}
         </div>
-      )}
+
+        {/* sub-tabs */}
+        <div className="flex flex-wrap gap-2">
+          {SECTIONS.map((tab) => {
+            const active = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActiveTab(tab.key)}
+                className={`rounded-full border px-4 py-1.5 text-[12.5px] font-semibold transition ${
+                  active
+                    ? "border-ink bg-ink text-fog"
+                    : "border-mist text-slate hover:border-slate/40 hover:text-ink"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {activeTab === "vocab" && <VocabPanel cat={cat} />}
+        {activeTab === "intensity" && <IntensityPanel cat={cat} />}
+        {activeTab === "mistakes" && <MistakesPanel cat={cat} />}
+      </div>
     </div>
   );
 }
 
 function VocabPanel({ cat }: { cat: Category }) {
+  const levelColor = (level: string) =>
+    cat.intensityLevels.find((lv) => lv.level === level)?.color ?? "#64748b";
+
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
       {cat.vocab.map((v) => (
         <div
           key={v.word}
-          className="card-hover rounded-xl border border-mist bg-fog/40 px-4 py-3.5"
-          style={{ borderLeft: `4px solid ${cat.color}` }}
+          className="card-hover rounded-xl border border-mist bg-fog px-4 py-3.5"
         >
-          <div className="mb-1.5 text-sm font-bold text-ink">{v.word}</div>
+          <div className="mb-1.5 flex items-start justify-between gap-2">
+            <span className="text-sm font-bold text-ink">{v.word}</span>
+            <span
+              className="mt-0.5 shrink-0 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+              style={{
+                background: `${levelColor(v.intensity)}1a`,
+                color: levelColor(v.intensity),
+              }}
+            >
+              {v.intensity}
+            </span>
+          </div>
           <div className="mb-2.5 text-[12.5px] italic leading-relaxed text-steel">
             &ldquo;{v.example}&rdquo;
           </div>
@@ -134,8 +113,7 @@ function IntensityPanel({ cat }: { cat: Category }) {
       {cat.intensityLevels.map((lv) => (
         <div
           key={lv.level}
-          className="flex items-center gap-3 rounded-xl border px-4 py-3"
-          style={{ background: lv.bg, borderColor: `${lv.color}33` }}
+          className="flex items-center gap-3 rounded-xl border border-mist bg-fog px-4 py-3"
         >
           <span
             className="shrink-0 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide"
@@ -441,7 +419,9 @@ export default function InterPersonalPage() {
         </div>
 
         {mainTab === "learn" &&
-          CATEGORIES.map((cat) => <CategorySection key={cat.id} cat={cat} />)}
+          CATEGORIES.map((cat, i) => (
+            <CategorySection key={cat.id} cat={cat} n={i + 1} />
+          ))}
 
         {mainTab === "quiz" && <QuizPanel />}
       </main>

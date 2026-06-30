@@ -14,43 +14,46 @@ export const CATEGORIES = [
           intro:
             "Used when you want to propose an idea or course of action without being pushy. Native speakers soften suggestions to show respect.",
           vocab: [
-            {
-              word: "Perhaps",
-              example: "Perhaps we could meet on Friday instead.",
-              note: "Softest suggestion — very polite, almost tentative.",
-            },
+            
             {
               word: "Maybe",
+              intensity: "Gentle",
               example: "Maybe you should try calling them first.",
               note: "Casual and common in everyday speech.",
             },
             {
               word: "You might want to",
+              intensity: "Gentle",
               example: "You might want to arrive early to get a good seat.",
               note: "Indirect; gives the listener full choice.",
             },
             {
               word: "Have you considered",
+              intensity: "Moderate",
               example: "Have you considered taking the train?",
               note: "Question form; invites the person to think, not just comply.",
             },
             {
               word: "It might be worth",
+              intensity: "Moderate",
               example: "It might be worth checking the weather before you go.",
               note: "Frames the suggestion as a value judgment.",
             },
             {
               word: "Why don't you",
+              intensity: "Moderate",
               example: "Why don't you talk to your manager about it?",
               note: "Informal and friendly — common between colleagues.",
             },
             {
               word: "I'd suggest",
+              intensity: "Moderate",
               example: "I'd suggest reviewing the report one more time.",
               note: "Slightly more assertive; own the idea without imposing.",
             },
             {
               word: "I strongly recommend",
+              intensity: "Strong",
               example: "I strongly recommend getting travel insurance.",
               note: "Confident and decisive — used when you're an expert or certain.",
             },
@@ -112,39 +115,41 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "Can you",
+              intensity: "Casual",
               example: "Can you send me the file by tomorrow?",
               note: "Informal — fine between friends and coworkers.",
             },
             {
               word: "Could you",
+              intensity: "Polite",
               example: "Could you please forward this to the team?",
               note: "More polite than 'can'; adds a layer of formality.",
             },
             {
               word: "Would you mind",
+              intensity: "Polite",
               example: "Would you mind lowering the music?",
               note: "Very polite; implies you're aware you're inconveniencing them.",
             },
             {
               word: "I was wondering if you could",
+              intensity: "Formal",
               example: "I was wondering if you could look into this issue.",
               note: "Formal and indirect — ideal for professional emails.",
             },
             {
               word: "I'd appreciate it if",
+              intensity: "Formal",
               example: "I'd appreciate it if you could reply by end of day.",
               note: "Expresses gratitude in advance; very professional.",
             },
             {
               word: "I'd like to request",
+              intensity: "Formal",
               example: "I'd like to request a change to my schedule.",
               note: "Clear and formal — good for written requests to managers.",
             },
-            {
-              word: "Is it possible to",
-              example: "Is it possible to get an extension on the deadline?",
-              note: "Leaves the door open; doesn't pressure the recipient.",
-            },
+            
           ],
           intensityLevels: [
             {
@@ -201,44 +206,52 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "Unfortunately",
+              intensity: "Mild concern",
               example: "Unfortunately, the delivery never arrived.",
               note: "Signals that bad news is coming; softens the impact.",
             },
             {
               word: "The issue is that",
+              intensity: "Clear problem",
               example:
                 "The issue is that the noise level is affecting my work.",
               note: "Clearly frames the core problem.",
             },
             {
               word: "I'm concerned about",
+              intensity: "Mild concern",
               example: "I'm concerned about the safety of the equipment.",
               note: "Professional; expresses worry without accusation.",
             },
             {
               word: "As a result",
+              intensity: "Clear problem",
               example: "As a result, we missed the deadline.",
               note: "Shows cause-and-effect — critical for CELPIP task coherence.",
             },
             {
               word: "This has led to",
+              intensity: "Clear problem",
               example: "This has led to significant delays in our project.",
               note: "Stronger consequence marker; formal and precise.",
             },
             {
               word: "To make matters worse",
+              intensity: "Serious complaint",
               example:
                 "To make matters worse, the replacement also arrived damaged.",
               note: "Adds a second problem layer — useful in complaint writing.",
             },
             {
               word: "I would like to bring to your attention",
+              intensity: "Serious complaint",
               example:
                 "I would like to bring to your attention a recurring problem.",
               note: "Very formal opener for written complaints.",
             },
             {
               word: "Despite",
+              intensity: "Clear problem",
               example:
                 "Despite several reminders, the issue remains unresolved.",
               note: "Shows contrast; signals persistence.",
@@ -297,38 +310,45 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "In my opinion",
+              intensity: "Clear",
               example: "In my opinion, remote work is more productive.",
               note: "Clear, simple opener — good for speaking tasks.",
             },
             {
               word: "I believe",
+              intensity: "Clear",
               example: "I believe this policy will benefit the community.",
               note: "Slightly more confident than 'I think'.",
             },
             {
               word: "From my perspective",
+              intensity: "Clear",
               example:
                 "From my perspective, the advantages outweigh the drawbacks.",
               note: "Academic tone — good for Writing Task 2.",
             },
             {
               word: "I strongly feel that",
+              intensity: "Assertive",
               example:
                 "I strongly feel that children should spend more time outdoors.",
               note: "Adds emotional weight; shows conviction.",
             },
             {
               word: "It seems to me that",
+              intensity: "Tentative",
               example: "It seems to me that the current system is inefficient.",
               note: "Measured and thoughtful — avoids sounding arrogant.",
             },
             {
               word: "The way I see it",
+              intensity: "Clear",
               example: "The way I see it, both options have their merits.",
               note: "Conversational — works well in speaking tasks.",
             },
             {
               word: "I am convinced that",
+              intensity: "Assertive",
               example: "I am convinced that this approach is the right one.",
               note: "Strong, assertive — use when fully committed to a view.",
             },
@@ -386,41 +406,48 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "I completely agree",
+              intensity: "Full agreement",
               example: "I completely agree with your point about flexibility.",
               note: "Full agreement — strong and direct.",
             },
             {
               word: "That's a fair point",
+              intensity: "Partial agreement",
               example:
                 "That's a fair point, though I think there are other factors too.",
               note: "Acknowledges before pivoting — great for partial agreement.",
             },
             {
               word: "I see what you mean, but",
+              intensity: "Polite disagreement",
               example:
                 "I see what you mean, but I think we also need to consider cost.",
               note: "Classic diplomatic disagreement opener.",
             },
             {
               word: "I'd have to respectfully disagree",
+              intensity: "Polite disagreement",
               example:
                 "I'd have to respectfully disagree on that — here's why.",
               note: "Formal and professional; good for workplace scenarios.",
             },
             {
               word: "While I understand your view",
+              intensity: "Polite disagreement",
               example:
                 "While I understand your view, the data suggests otherwise.",
               note: "Empathetic before countering; shows maturity.",
             },
             {
               word: "You make a valid point, however",
+              intensity: "Partial agreement",
               example:
                 "You make a valid point; however, there are drawbacks worth noting.",
               note: "Validates then contrasts — structured and fluent.",
             },
             {
               word: "I'm not entirely convinced",
+              intensity: "Polite disagreement",
               example: "I'm not entirely convinced that this plan will work.",
               note: "Soft disagreement — avoids direct confrontation.",
             },
@@ -478,33 +505,39 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "I apologize for",
+              intensity: "Professional",
               example: "I apologize for the delay in responding.",
               note: "Formal; preferred in professional and written contexts over 'I'm sorry'.",
             },
             {
               word: "I'm truly sorry for",
+              intensity: "Professional",
               example: "I'm truly sorry for any inconvenience this has caused.",
               note: "Adds sincerity; acknowledges the impact on others.",
             },
             {
               word: "Please accept my sincere apologies",
+              intensity: "Formal / serious",
               example: "Please accept my sincere apologies for the oversight.",
               note: "Highly formal — ideal for emails to customers or managers.",
             },
             {
               word: "I take full responsibility",
+              intensity: "Formal / serious",
               example:
                 "I take full responsibility for the error and will ensure it doesn't happen again.",
               note: "Shows accountability without making excuses.",
             },
             {
               word: "I should have",
+              intensity: "Light",
               example:
                 "I should have informed you sooner — that was my mistake.",
               note: "Reflects on what was done wrong; avoids blame-shifting.",
             },
             {
               word: "To make it right",
+              intensity: "Professional",
               example:
                 "To make it right, I've arranged for a replacement to be sent.",
               note: "Moves beyond apology to action — valued in CELPIP writing.",
@@ -563,35 +596,41 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "I'd like to inform you that",
+              intensity: "Professional",
               example:
                 "I'd like to inform you that the event has been rescheduled.",
               note: "Formal announcement opener — very common in professional emails.",
             },
             {
               word: "Please be aware that",
+              intensity: "Professional",
               example:
                 "Please be aware that the office will be closed on Monday.",
               note: "Signals important information the reader must know.",
             },
             {
               word: "I'm writing to let you know",
+              intensity: "Casual",
               example:
                 "I'm writing to let you know about a change to your account.",
               note: "Friendly and professional — good all-purpose email opener.",
             },
             {
               word: "This is to confirm",
+              intensity: "Formal",
               example:
                 "This is to confirm your appointment on June 15th at 2 p.m.",
               note: "Used for confirmations; very specific and transactional.",
             },
             {
               word: "As you may already know",
+              intensity: "Casual",
               example: "As you may already know, we are expanding our team.",
               note: "Assumes some shared knowledge; softens the announcement.",
             },
             {
               word: "I am pleased to announce",
+              intensity: "Formal",
               example:
                 "I am pleased to announce that we have reached our fundraising goal.",
               note: "Positive announcement — used for good news.",
@@ -642,42 +681,49 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "Consider the fact that",
+              intensity: "Gentle nudge",
               example:
                 "Consider the fact that remote workers report 30% higher productivity.",
               note: "Invites the reader to reflect; leads into evidence.",
             },
             {
               word: "Research has shown",
+              intensity: "Clear argument",
               example:
                 "Research has shown that exercise improves mental health significantly.",
               note: "Academic and credible — boosts formal writing scores.",
             },
             {
               word: "Not only… but also",
+              intensity: "Clear argument",
               example:
                 "Not only is it cost-effective, but it also reduces our carbon footprint.",
               note: "Structures two benefits in one sentence — very fluent.",
             },
             {
               word: "This would result in",
+              intensity: "Clear argument",
               example:
                 "This would result in a 20% reduction in overhead costs.",
               note: "Shows clear, specific consequence — persuasive and precise.",
             },
             {
               word: "Imagine how",
+              intensity: "Gentle nudge",
               example:
                 "Imagine how much smoother operations would be with this system in place.",
               note: "Emotional appeal — makes the benefit vivid and real.",
             },
             {
               word: "It goes without saying",
+              intensity: "Strong push",
               example:
                 "It goes without saying that safety should be our top priority.",
               note: "Signals something obvious — rhetorical emphasis.",
             },
             {
               word: "The evidence clearly indicates",
+              intensity: "Strong push",
               example:
                 "The evidence clearly indicates that early intervention yields better outcomes.",
               note: "Strong, authoritative language for written persuasion.",
@@ -737,35 +783,41 @@ export const CATEGORIES = [
           vocab: [
             {
               word: "I am writing to express my dissatisfaction",
+              intensity: "Firm",
               example:
                 "I am writing to express my dissatisfaction with the service I received.",
               note: "Standard formal complaint opener.",
             },
             {
               word: "Contrary to what was promised",
+              intensity: "Firm",
               example:
                 "Contrary to what was promised, the item arrived two weeks late.",
               note: "Points out a broken commitment clearly.",
             },
             {
               word: "This is not acceptable",
+              intensity: "Serious",
               example:
                 "This level of service is not acceptable, given the premium I paid.",
               note: "Firm but professional; avoids personal attacks.",
             },
             {
               word: "On [date], I",
+              intensity: "Mild",
               example:
                 "On March 10th, I contacted your customer service team regarding this issue.",
               note: "Specificity with dates strengthens a complaint.",
             },
             {
               word: "I expect",
+              intensity: "Serious",
               example: "I expect a full refund within 5 business days.",
               note: "States a clear resolution — outcome-focused.",
             },
             {
               word: "I trust this matter will be resolved promptly",
+              intensity: "Firm",
               example: "I trust this matter will be resolved promptly.",
               note: "Closing phrase — implies expectation without being aggressive.",
             },
