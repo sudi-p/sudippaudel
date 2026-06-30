@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   BLUEPRINT,
   SCORE_BANDS,
   SAMPLE_ANSWERS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -536,9 +538,12 @@ export default function CelpipSpeakingTask6Page() {
             <p className="text-sm text-slate">
               Each scenario gives you <strong>two options</strong> — pick one
               (usually the harder, more responsible choice) and speak directly to
-              the person. Task 6 is text-only on the real test, but an{" "}
-              <strong>image prompt</strong> is included so you can picture the
-              situation while you practise.
+              the person. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLE_ANSWERS.map((sample) => (
@@ -574,19 +579,19 @@ export default function CelpipSpeakingTask6Page() {
                       <span className="not-italic font-semibold text-sapphire">
                         Greeting:
                       </span>{" "}
-                      "{sample.greeting}"
+                      "{renderTemplate(sample.greeting, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-emerald2">
                         Empathize &amp; deliver:
                       </span>{" "}
-                      "{sample.empathize}"
+                      "{renderTemplate(sample.empathize, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-amber2">
                         Solution &amp; close:
                       </span>{" "}
-                      "{sample.solution}"
+                      "{renderTemplate(sample.solution, TEMPLATE_PHRASES)}"
                     </p>
                   </div>
                 </div>

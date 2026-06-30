@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   FOUR_PART,
   SCORE_BANDS,
   SCENARIOS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -66,13 +68,13 @@ const Segs = ({ parts, hClass = "text-violet2" }) =>
   });
 
 // A multi-line answer paragraph (handles "\n" → <br/> for sign-offs)
-const AnswerPara = ({ text }) => {
+const AnswerPara = ({ text, phrases }) => {
   const lines = text.split("\n");
   return (
     <p>
       {lines.map((line, i) => (
         <span key={i}>
-          {line}
+          {phrases ? renderTemplate(line, phrases) : line}
           {i < lines.length - 1 && <br />}
         </span>
       ))}
@@ -1342,6 +1344,12 @@ export default function CelpipWritingTask1Page() {
               three points drive the plan), the <strong>Template</strong> skeleton
               built from the sections above, and the finished{" "}
               <strong>Answer</strong> — written in real paragraphs, not one block.
+              In the Answer, the{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SCENARIOS.map((s) => (
@@ -1398,7 +1406,7 @@ export default function CelpipWritingTask1Page() {
                   </span>
                   <div className="bg-violet2-light rounded-lg p-3 text-sm text-ink italic leading-relaxed space-y-2">
                     {s.answer.map((para, i) => (
-                      <AnswerPara key={i} text={para} />
+                      <AnswerPara key={i} text={para} phrases={TEMPLATE_PHRASES} />
                     ))}
                   </div>
                 </div>

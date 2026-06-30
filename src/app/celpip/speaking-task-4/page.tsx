@@ -4,6 +4,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -16,6 +17,7 @@ import {
   CLOSING_TEMPLATES,
   PREDICTION_TOOLKIT,
   SAMPLE_ANSWERS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -661,7 +663,12 @@ export default function CelpipSpeakingTask4Page() {
               Task 4 builds on a Task 3 image, so an{" "}
               <strong>image prompt</strong> is included so you can generate the
               scene, describe the current state, and then predict what happens
-              next.
+              next. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLE_ANSWERS.map((sample) => (
@@ -691,19 +698,19 @@ export default function CelpipSpeakingTask4Page() {
                       <span className="not-italic font-semibold text-sapphire">
                         Recap:
                       </span>{" "}
-                      "{sample.recap}"
+                      "{renderTemplate(sample.recap, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-emerald2">
                         Predictions:
                       </span>{" "}
-                      "{sample.predictions}"
+                      "{renderTemplate(sample.predictions, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-amber2">
                         Reasoning:
                       </span>{" "}
-                      "{sample.reasoning}"
+                      "{renderTemplate(sample.reasoning, TEMPLATE_PHRASES)}"
                     </p>
                   </div>
                 </div>

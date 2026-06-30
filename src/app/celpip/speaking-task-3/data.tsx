@@ -663,6 +663,19 @@ export const SPATIAL_TOOLKIT = [
   },
 ];
 
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "This image shows a",
+  "taken during",
+  "The atmosphere looks",
+  "In the foreground,",
+  "In the middle,",
+  "In the background,",
+  "Overall,",
+  "It looks like",
+  "I would",
+];
+
 export const SAMPLES = [
   {
     scenario: "Scenario 1 · Bustling outdoor market",
@@ -682,7 +695,7 @@ export const SAMPLES = [
     imagePrompt:
       '"A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting."',
     setting:
-      '"This image shows a quiet, serene beach at sunset, taken in the evening. The atmosphere looks warm and peaceful, and the sky is glowing in shades of orange and pink."',
+      '"This image shows a quiet, serene beach at sunset, taken during the evening. The atmosphere looks warm and peaceful, and the sky is glowing in shades of orange and pink."',
     details:
       '"In the foreground, there is golden sand where a few people are walking slowly along the shore. In the middle, the water is a calm blue colour, and it reflects the warm light of the setting sun, while some palm trees sway gently to the left. In the background, I can see small beach huts and a few scattered clouds in the sky, and everything looks soft and still."',
     impression:

@@ -112,6 +112,14 @@ export const SCORE_BANDS = [
   },
 ];
 
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "you won't believe what I'm looking at",
+  "What makes it really unusual is",
+  "I think",
+  "Let me know what you think",
+];
+
 export const SAMPLE_ANSWERS = [
   {
     accent: "text-gold",

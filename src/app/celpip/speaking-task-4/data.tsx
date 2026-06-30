@@ -4,9 +4,9 @@
 export const TABS = [
   { id: "overview", label: "Overview" },
   { id: "structure", label: "My Template" },
+  { id: "scenarios", label: "Scenario Types" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
-  { id: "scenarios", label: "Scenario Types" },
 ];
 
 export const SCORE_CRITERIA = [
@@ -125,47 +125,44 @@ export const SCENARIO_TYPES = [
       "e.g. busy market, crowded street, rush-hour transit, airport terminal, shopping mall",
     vocab: [
       {
-        word: "bustling",
-        meaning: "full of energetic activity",
-        example:
-          "The market is bustling with shoppers hunting for bargains.",
+        word: "bustling with shoppers",
+        meaning: "full of energetic crowds of buyers",
+        example: "The market is bustling with shoppers hunting for the best deals.",
       },
       {
-        word: "congested",
-        meaning: "overcrowded, difficult to move through",
-        example:
-          "The street is congested with vehicles and pedestrians.",
+        word: "weave through the crowd",
+        meaning: "move carefully between lots of people",
+        example: "Customers are weaving through the crowd to reach the busiest stalls.",
       },
       {
-        word: "hectic",
-        meaning: "very busy and slightly chaotic",
-        example:
-          "The airport terminal looks hectic during the holiday rush.",
+        word: "haggle over prices",
+        meaning: "argue back and forth to get a lower price",
+        example: "A few shoppers are haggling over prices at the fruit stall.",
       },
       {
-        word: "throng",
-        meaning: "a densely packed crowd",
-        example: "A throng of shoppers is moving through the main aisle.",
+        word: "call out to customers",
+        meaning: "shout to attract buyers' attention",
+        example: "The vendors keep calling out to customers to advertise their goods.",
       },
       {
-        word: "vendor",
-        meaning: "a seller of goods, often at a stall",
-        example: "The vendors are calling out to attract more customers.",
+        word: "snap up the bargains",
+        meaning: "quickly buy cheap items before they're gone",
+        example: "Late shoppers will snap up the bargains before the stalls close.",
       },
       {
-        word: "disperse",
-        meaning: "to spread out or move away in different directions",
-        example: "The crowd will likely disperse once the market closes.",
+        word: "the crowd thins out",
+        meaning: "fewer and fewer people remain",
+        example: "By evening, the crowd will thin out as people head home.",
       },
       {
-        word: "surge",
-        meaning: "a sudden strong increase (of people or activity)",
-        example: "A surge of commuters will pour through the gates at 5 p.m.",
+        word: "pack up the stalls",
+        meaning: "put away the goods at closing time",
+        example: "The sellers will start to pack up the stalls once the rush is over.",
       },
       {
-        word: "wind down",
-        meaning: "to gradually reduce in activity",
-        example: "By evening, the market will start to wind down.",
+        word: "head home for dinner",
+        meaning: "leave to return home for the evening meal",
+        example: "Most shoppers will head home for dinner once the market winds down.",
       },
     ],
     opening: {
@@ -195,48 +192,47 @@ export const SCENARIO_TYPES = [
       "e.g. beach at sunset, quiet park, lakeside, countryside, library reading room",
     vocab: [
       {
-        word: "serene",
-        meaning: "calm and untroubled",
+        word: "soak up the last sunlight",
+        meaning: "enjoy the remaining warmth and light",
         example:
-          "The beach has a serene quality as the sun dips below the horizon.",
+          "A few families are soaking up the last sunlight before dusk.",
       },
       {
-        word: "tranquil",
-        meaning: "free from disturbance; peaceful",
+        word: "stroll along the shore",
+        meaning: "walk slowly and relaxedly by the water",
+        example: "Some couples are strolling along the shore as the sun goes down.",
+      },
+      {
+        word: "watch the sunset",
+        meaning: "sit and observe the sun going down",
         example:
-          "The tranquil park will become noisier once school lets out.",
+          "People are settling on the sand to watch the sunset together.",
       },
       {
-        word: "linger",
-        meaning: "to stay somewhere longer than expected",
+        word: "unwind after a long day",
+        meaning: "relax and let go of the day's stress",
+        example: "Visitors clearly come here to unwind after a long day.",
+      },
+      {
+        word: "gather their belongings",
+        meaning: "collect their things to get ready to leave",
+        example: "As it cools down, people will start gathering their belongings.",
+      },
+      {
+        word: "head back home",
+        meaning: "leave to return home",
+        example: "Families with young children will head back home once it gets dark.",
+      },
+      {
+        word: "linger a little longer",
+        meaning: "stay somewhere a bit more than expected",
+        example: "A few couples might linger a little longer to watch the stars appear.",
+      },
+      {
+        word: "fall completely quiet",
+        meaning: "become silent and still",
         example:
-          "Some visitors will linger on the shore to watch the stars appear.",
-      },
-      {
-        word: "dwindle",
-        meaning: "to gradually become smaller in number",
-        example: "The crowd will dwindle as evening temperatures drop.",
-      },
-      {
-        word: "unwind",
-        meaning: "to relax after stress",
-        example: "People are clearly here to unwind after a long day.",
-      },
-      {
-        word: "placid",
-        meaning: "not easily upset; calm (of water or atmosphere)",
-        example: "The placid lake will reflect the last light of dusk.",
-      },
-      {
-        word: "retreat",
-        meaning: "to go back or withdraw to a quieter place",
-        example: "Families will retreat to their homes once it gets dark.",
-      },
-      {
-        word: "hushed",
-        meaning: "very quiet; almost silent",
-        example:
-          "The atmosphere will become hushed once the final visitors leave.",
+          "The beach will fall completely quiet once the final visitors leave.",
       },
     ],
     opening: {
@@ -266,51 +262,47 @@ export const SCENARIO_TYPES = [
       "e.g. argument in office, protest or demonstration, road-rage scene, heated team meeting, overcrowded waiting room",
     vocab: [
       {
-        word: "livid",
-        meaning: "furiously angry",
-        example:
-          "The manager looks livid as she reviews the incorrect report.",
+        word: "get into a heated argument",
+        meaning: "start an intense, angry dispute",
+        example: "Two colleagues have got into a heated argument over the report.",
       },
       {
-        word: "escalate",
-        meaning: "to increase in intensity or seriousness",
-        example:
-          "The argument will likely escalate if no one intervenes soon.",
+        word: "raise their voices",
+        meaning: "speak more loudly out of anger",
+        example: "The two are raising their voices as the disagreement grows.",
       },
       {
-        word: "tension",
-        meaning: "a feeling of anxiety or hostility between people",
+        word: "the tension is building",
+        meaning: "hostility between people is increasing",
         example:
-          "The tension in the room is palpable — nobody is making eye contact.",
+          "You can tell the tension is building — nobody is making eye contact.",
       },
       {
-        word: "intervene",
-        meaning: "to step in to prevent a conflict from worsening",
-        example: "A supervisor will probably intervene to calm the situation.",
+        word: "step in to calm things down",
+        meaning: "intervene to reduce the conflict",
+        example: "A senior colleague will probably step in to calm things down.",
       },
       {
-        word: "mediate",
-        meaning: "to help two sides reach an agreement",
-        example:
-          "HR will be called in to mediate between the two employees.",
+        word: "take a break to cool off",
+        meaning: "pause so people can lower their anger",
+        example: "They will likely take a break to cool off before talking again.",
       },
       {
-        word: "defuse",
-        meaning: "to reduce the danger or tension in a situation",
-        example:
-          "A calm bystander might step forward to defuse the argument.",
+        word: "talk it out in private",
+        meaning: "discuss the problem away from others",
+        example: "HR will ask the two to talk it out in private.",
       },
       {
-        word: "confrontational",
-        meaning: "tending to deal with problems aggressively",
+        word: "reach a compromise",
+        meaning: "settle the dispute by each side giving in a little",
         example:
-          "The confrontational tone will likely push others to take sides.",
+          "Both parties will need to reach a compromise to settle this.",
       },
       {
-        word: "resolve",
-        meaning: "to find a solution to a problem or conflict",
+        word: "patch things up",
+        meaning: "repair the relationship after a quarrel",
         example:
-          "Both parties will need to compromise to resolve this dispute.",
+          "Once they calm down, the colleagues will probably patch things up.",
       },
     ],
     opening: {
@@ -340,50 +332,49 @@ export const SCENARIO_TYPES = [
       "e.g. street festival, birthday party, sports victory, concert, graduation ceremony",
     vocab: [
       {
-        word: "exuberant",
-        meaning: "full of energy, excitement, and cheerfulness",
-        example: "The crowd is exuberant as the band takes the stage.",
+        word: "in full swing",
+        meaning: "at its liveliest, busiest point",
+        example: "The street festival is in full swing as the band takes the stage.",
       },
       {
-        word: "revelry",
-        meaning: "lively and noisy celebrations",
+        word: "dance to the music",
+        meaning: "move energetically in time with the music",
         example:
-          "The revelry on the street will likely continue well into the night.",
+          "Crowds are dancing to the music in the middle of the street.",
       },
       {
-        word: "culminate",
-        meaning: "to reach the highest or most exciting point",
+        word: "cheer on the performers",
+        meaning: "shout encouragement at the performers",
         example:
-          "The parade will culminate in a spectacular fireworks display.",
+          "Spectators are cheering on the performers as they pass by.",
       },
       {
-        word: "vibrant",
-        meaning: "full of energy and enthusiasm",
+        word: "grab a bite from the stalls",
+        meaning: "quickly buy some food to eat",
         example:
-          "The festival has a vibrant atmosphere with music and colour everywhere.",
+          "Many visitors will grab a bite from the food stalls between shows.",
       },
       {
-        word: "merriment",
-        meaning: "cheerful and lively enjoyment",
-        example: "The merriment in the hall will grow as more guests arrive.",
+        word: "the lights come on",
+        meaning: "the decorative lighting is switched on",
+        example: "Once the lights come on, the atmosphere will feel even more festive.",
       },
       {
-        word: "taper off",
-        meaning: "to gradually decrease in energy or number",
+        word: "the crowd swells",
+        meaning: "the number of people grows quickly",
+        example: "The crowd will swell as more people arrive after work.",
+      },
+      {
+        word: "the celebration peaks",
+        meaning: "the event reaches its most exciting point",
         example:
-          "The celebrations will taper off once families with children head home.",
+          "The celebration will peak with a spectacular fireworks display.",
       },
       {
-        word: "spectators",
-        meaning: "people who watch an event without participating",
+        word: "the festivities wind down",
+        meaning: "the celebrations gradually slow and end",
         example:
-          "Spectators lining the route will cheer as the floats pass by.",
-      },
-      {
-        word: "atmosphere",
-        meaning: "the overall mood or feeling of a place",
-        example:
-          "The atmosphere will become electric once the headliner performs.",
+          "Later on, the festivities will wind down as families head home.",
       },
     ],
     opening: {
@@ -413,51 +404,51 @@ export const SCENARIO_TYPES = [
       "e.g. office meeting, job interview, construction site, hospital, classroom, cozy café (work setting)",
     vocab: [
       {
-        word: "productivity",
-        meaning: "the efficiency with which work is done",
+        word: "go over the agenda",
+        meaning: "review the list of topics for the meeting",
         example:
-          "Productivity in the office will drop once the lunch hour approaches.",
+          "The team is going over the agenda for the new project.",
       },
       {
-        word: "deadline",
-        meaning: "a time by which work must be completed",
+        word: "brainstorm ideas",
+        meaning: "generate lots of ideas together",
         example:
-          "The team looks stressed, suggesting a deadline is approaching.",
+          "The colleagues are brainstorming ideas on the whiteboard.",
       },
       {
-        word: "collaborate",
-        meaning: "to work jointly with others on a shared task",
+        word: "meet a tight deadline",
+        meaning: "finish work by a time that is hard to make",
         example:
-          "The two departments will likely collaborate to finish the project.",
+          "Everyone looks focused because they need to meet a tight deadline.",
       },
       {
-        word: "wrap up",
-        meaning: "to bring something to a close or conclusion",
+        word: "wrap up the meeting",
+        meaning: "bring the meeting to a close",
         example:
-          "The manager will wrap up the meeting with a summary of action points.",
+          "The manager will wrap up the meeting with a few action points.",
       },
       {
-        word: "adjourn",
-        meaning: "to formally suspend or end a meeting",
+        word: "assign tasks to the team",
+        meaning: "give specific jobs to each member",
         example:
-          "The board will adjourn once all agenda items have been covered.",
+          "The manager will assign tasks to the team before they leave.",
       },
       {
-        word: "resume",
-        meaning: "to begin again after a pause",
-        example: "Workers will resume their tasks once the break is over.",
+        word: "get back to work",
+        meaning: "return to one's own tasks after a pause",
+        example: "The staff will get back to work once the meeting ends.",
       },
       {
-        word: "delegate",
-        meaning: "to assign tasks to someone else",
+        word: "step out to make calls",
+        meaning: "leave the room to phone people",
         example:
-          "The supervisor will delegate the remaining work to junior staff.",
+          "A few colleagues will step out to make calls about the decisions.",
       },
       {
-        word: "proficient",
-        meaning: "competent and skilled in a particular area",
+        word: "knuckle down on the project",
+        meaning: "start working hard and seriously on the task",
         example:
-          "The proficient staff will handle the increased workload without difficulty.",
+          "After the meeting, the team will knuckle down on the project.",
       },
     ],
     opening: {
@@ -487,52 +478,52 @@ export const SCENARIO_TYPES = [
       "e.g. café interior, living room, home kitchen, library reading nook, small bookshop, quiet office",
     vocab: [
       {
-        word: "cosy",
-        meaning: "giving a feeling of comfort, warmth, and relaxation",
+        word: "sip their coffee",
+        meaning: "drink coffee slowly and calmly",
         example:
-          "The café has a cosy atmosphere that makes customers want to stay longer.",
+          "Customers are sipping their coffee while reading quietly.",
       },
       {
-        word: "intimate",
-        meaning: "having a warm, friendly, private quality",
+        word: "work on their laptops",
+        meaning: "do tasks on their computers",
         example:
-          "The intimate setting of the living room encourages open conversation.",
+          "A few people are working on their laptops in the corner.",
       },
       {
-        word: "ambient",
-        meaning: "relating to the surrounding atmosphere or environment",
+        word: "get lost in a book",
+        meaning: "become completely absorbed in reading",
         example:
-          "The ambient lighting in the café creates a calm, welcoming mood.",
+          "One customer is getting lost in a book by the window.",
       },
       {
-        word: "murmur",
-        meaning: "a soft, low, continuous sound of voices or activity",
+        word: "chat over a drink",
+        meaning: "talk casually while having a beverage",
         example:
-          "The quiet murmur of conversation will fade as closing time approaches.",
+          "Two friends are chatting over a drink at a small table.",
       },
       {
-        word: "browse",
-        meaning: "to look through something in a relaxed, unhurried way",
+        word: "settle in for the evening",
+        meaning: "make oneself comfortable to stay a while",
         example:
-          "Customers will continue to browse the shelves long after the rush hour.",
+          "A couple have settled in for the evening with their books and drinks.",
       },
       {
-        word: "engrossed",
-        meaning: "deeply absorbed in something",
+        word: "trickle in after work",
+        meaning: "arrive slowly, a few at a time, once work ends",
         example:
-          "The readers are engrossed in their books and unlikely to leave soon.",
+          "More customers will trickle in after work as the afternoon lull passes.",
       },
       {
-        word: "trickle in",
-        meaning: "to arrive slowly and in small numbers",
+        word: "pick up the pace",
+        meaning: "start working faster to keep up",
         example:
-          "More regulars will trickle in once the afternoon lull passes.",
+          "The baristas will pick up the pace as new orders come in.",
       },
       {
-        word: "settle in",
-        meaning: "to make oneself comfortable in a place",
+        word: "pack up and leave",
+        meaning: "gather one's things and go",
         example:
-          "The couple have settled in for the evening with their drinks and books.",
+          "Some of the current customers will pack up and leave to make room.",
       },
     ],
     opening: {
@@ -676,6 +667,16 @@ export const PREDICTION_TOOLKIT = [
       "Depending on / It depends whether",
     ],
   },
+];
+
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "Right now,",
+  "Looking ahead, I predict that",
+  "will probably",
+  "Eventually,",
+  "Overall,",
+  "because",
 ];
 
 export const SAMPLE_ANSWERS = [

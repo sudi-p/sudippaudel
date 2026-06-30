@@ -102,6 +102,18 @@ export const SCORE_BANDS = [
   },
 ];
 
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "hope you're doing well!",
+  "There's something a little",
+  "I wanted to talk to you about",
+  "and I completely understand",
+  "The thing is,",
+  "So I think the best approach would be",
+  "I'd be happy to",
+  "I really hope you understand",
+];
+
 export const SAMPLE_ANSWERS = [
   {
     accent: "text-gold",

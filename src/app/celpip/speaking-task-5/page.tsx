@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   BLUEPRINT,
   SCORE_BANDS,
   SAMPLE_ANSWERS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -530,7 +532,12 @@ export default function CelpipSpeakingTask5Page() {
               scenario below, an{" "}
               <strong>image prompt is included for both options</strong> so you
               can generate the pair, choose one, and practise persuading the
-              person.
+              person. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLE_ANSWERS.map((sample) => (
@@ -571,19 +578,19 @@ export default function CelpipSpeakingTask5Page() {
                       <span className="not-italic font-semibold text-sapphire">
                         Opening:
                       </span>{" "}
-                      "{sample.opening}"
+                      "{renderTemplate(sample.opening, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-emerald2">
                         Compare:
                       </span>{" "}
-                      "{sample.compare}"
+                      "{renderTemplate(sample.compare, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-amber2">
                         Conclusion:
                       </span>{" "}
-                      "{sample.conclusion}"
+                      "{renderTemplate(sample.conclusion, TEMPLATE_PHRASES)}"
                     </p>
                   </div>
                 </div>

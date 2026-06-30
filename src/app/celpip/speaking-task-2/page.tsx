@@ -4,6 +4,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -14,6 +15,7 @@ import {
   COMPLETE_EXAMPLES,
   TIPS,
   TIP_FILTERS,
+  TEMPLATE_PHRASES,
 } from "./data";
 
 const Chevron = ({ open }) => (
@@ -548,17 +550,28 @@ export default function CelpipSpeakingTask2Page() {
               </div>
             }
           >
+            <p className="text-sm text-slate">
+              Each example follows the same arc: opening → body → closing. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              story.
+            </p>
             {COMPLETE_EXAMPLES.map((ex) => (
               <div key={ex.title} className={`border-l-3 ${ex.border} pl-4`}>
                 <p className="text-sm font-semibold text-ink mb-3">{ex.title}</p>
                 <p className="text-sm text-slate italic mb-2">
-                  <strong>Opening:</strong> "{ex.opening}"
+                  <strong>Opening:</strong> "
+                  {renderTemplate(ex.opening, TEMPLATE_PHRASES)}"
                 </p>
                 <p className="text-sm text-slate italic mb-2">
-                  <strong>Body:</strong> "{ex.body}"
+                  <strong>Body:</strong> "
+                  {renderTemplate(ex.body, TEMPLATE_PHRASES)}"
                 </p>
                 <p className="text-sm text-slate italic">
-                  <strong>Closing:</strong> "{ex.closing}"
+                  <strong>Closing:</strong> "
+                  {renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
                 </p>
               </div>
             ))}

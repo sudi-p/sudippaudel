@@ -110,6 +110,19 @@ export const SCORE_BANDS = [
   },
 ];
 
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "In conclusion, I firmly believe",
+  "I firmly believe",
+  "The evidence clearly shows",
+  "First,",
+  "Second,",
+  "Third,",
+  "For example,",
+  "For instance,",
+  "because",
+];
+
 export const COMPLETE_EXAMPLES = [
   {
     border: "border-sapphire",

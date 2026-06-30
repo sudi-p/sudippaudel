@@ -116,6 +116,17 @@ export const SCORE_BANDS = [
 
 // Each essay: template rows (badge + text), idea generator (2 reasons,
 // each with who/what/detail), and a model essay (array of paragraphs).
+// Fixed template signposts highlighted inside each model essay.
+export const TEMPLATE_PHRASES = [
+  "In my view,",
+  "First,",
+  "Additionally,",
+  "Admittedly,",
+  "However,",
+  "In conclusion,",
+  "Ultimately,",
+];
+
 export const ESSAYS = [
   {
     title: "Essay 1 — Remote vs. Office Work",

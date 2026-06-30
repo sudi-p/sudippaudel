@@ -108,6 +108,21 @@ export const SCORE_BANDS = [
   },
 ];
 
+// Fixed template signposts highlighted inside each sample answer.
+export const TEMPLATE_PHRASES = [
+  "I saw you were leaning toward",
+  "I understand why",
+  "but I actually think",
+  "is the better choice for us",
+  "First, regarding price,",
+  "which is much cheaper than",
+  "Also, it",
+  "which is more useful because",
+  "Finally,",
+  "So for these reasons, I really think we should go with",
+  "Let me know if you agree",
+];
+
 export const SAMPLE_ANSWERS = [
   {
     accent: "text-gold",

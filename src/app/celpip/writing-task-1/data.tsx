@@ -121,6 +121,16 @@ export const SCORE_BANDS = [
 
 // Each scenario's template/answer line is an array of segments:
 //   string | { h: "highlighted text" } | { br: true }
+// Fixed template signposts highlighted inside each sample email answer.
+export const TEMPLATE_PHRASES = [
+  "Dear",
+  "I am writing to",
+  "Thank you for",
+  "I look forward to",
+  "Sincerely,",
+  "Best regards,",
+];
+
 // Each thoughtProcess item is { label, body } where body is an array of:
 //   string | { em: "italic text" }
 export const SCENARIOS = [

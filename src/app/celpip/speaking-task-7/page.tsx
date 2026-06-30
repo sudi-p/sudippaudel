@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   BLUEPRINT,
   SCORE_BANDS,
   COMPLETE_EXAMPLES,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -480,17 +482,29 @@ export default function CelpipSpeakingTask7Page() {
               </div>
             }
           >
+            <p className="text-sm text-slate">
+              Each example follows the same frame: position → supporting reasons
+              → conclusion. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              argument.
+            </p>
             {COMPLETE_EXAMPLES.map((ex) => (
               <div key={ex.title} className={`border-l-3 ${ex.border} pl-4`}>
                 <p className="text-sm font-semibold text-ink mb-3">{ex.title}</p>
                 <p className="text-sm text-slate italic mb-2">
-                  <strong>Statement:</strong> "{ex.statement}"
+                  <strong>Statement:</strong> "
+                  {renderTemplate(ex.statement, TEMPLATE_PHRASES)}"
                 </p>
                 <p className="text-sm text-slate italic mb-2">
-                  <strong>Support:</strong> "{ex.support}"
+                  <strong>Support:</strong> "
+                  {renderTemplate(ex.support, TEMPLATE_PHRASES)}"
                 </p>
                 <p className="text-sm text-slate italic">
-                  <strong>Closing:</strong> "{ex.closing}"
+                  <strong>Closing:</strong> "
+                  {renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
                 </p>
               </div>
             ))}

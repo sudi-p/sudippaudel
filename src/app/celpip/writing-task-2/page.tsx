@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   FOUR_PART,
   SCORE_BANDS,
   ESSAYS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -792,6 +794,15 @@ export default function CelpipWritingTask2Page() {
               </div>
             }
           >
+            <p className="text-sm text-violet2-dark mb-4">
+              Every model essay follows the same frame: thesis → first reason →
+              second reason with concession → conclusion. In each Model essay, the{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              argument.
+            </p>
             {ESSAYS.map((essay, idx) => (
               <div
                 key={essay.title}
@@ -863,7 +874,7 @@ export default function CelpipWritingTask2Page() {
                   </p>
                   <div className="space-y-2 text-sm text-ink italic leading-relaxed">
                     {essay.essay.map((para, i) => (
-                      <p key={i}>{para}</p>
+                      <p key={i}>{renderTemplate(para, TEMPLATE_PHRASES)}</p>
                     ))}
                   </div>
                 </div>

@@ -4,12 +4,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
   BLUEPRINT,
   SCORE_BANDS,
   SAMPLE_ANSWERS,
+  TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
 } from "./data";
@@ -524,7 +526,12 @@ export default function CelpipSpeakingTask8Page() {
               Task 8 always shows an <strong>unusual image</strong>. For each
               scenario below, an <strong>image prompt</strong> is included so you
               can generate the picture, then practise describing it to someone who
-              can't see it and ask the closing question.
+              can't see it and ask the closing question. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLE_ANSWERS.map((sample) => (
@@ -557,19 +564,19 @@ export default function CelpipSpeakingTask8Page() {
                       <span className="not-italic font-semibold text-sapphire">
                         Setup:
                       </span>{" "}
-                      "{sample.setup}"
+                      "{renderTemplate(sample.setup, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-emerald2">
                         Description:
                       </span>{" "}
-                      "{sample.description}"
+                      "{renderTemplate(sample.description, TEMPLATE_PHRASES)}"
                     </p>
                     <p>
                       <span className="not-italic font-semibold text-amber2">
                         Question:
                       </span>{" "}
-                      "{sample.question}"
+                      "{renderTemplate(sample.question, TEMPLATE_PHRASES)}"
                     </p>
                   </div>
                 </div>

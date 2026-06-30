@@ -4,6 +4,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -13,6 +14,7 @@ import {
   TEMPLATE_PARTS,
   SPATIAL_TOOLKIT,
   SAMPLES,
+  TEMPLATE_PHRASES,
   TIP_FILTERS,
   TIPS,
   KEY_INSIGHT,
@@ -76,22 +78,28 @@ const VocabCard = ({ word }) => (
 
 // Setting → Details → Impression — the three labelled beats reused by every
 // scenario's "Perfect Response Example" and by every sample answer.
-const Triad = ({ setting, details, impression }) => (
-  <div className="text-sm text-ink italic leading-relaxed space-y-2">
-    <p>
-      <span className="not-italic font-semibold text-sapphire">Setting:</span>{" "}
-      {setting}
-    </p>
-    <p>
-      <span className="not-italic font-semibold text-emerald2">Details:</span>{" "}
-      {details}
-    </p>
-    <p>
-      <span className="not-italic font-semibold text-amber2">Impression:</span>{" "}
-      {impression}
-    </p>
-  </div>
-);
+const Triad = ({ setting, details, impression, highlight = false }) => {
+  const show = (text) =>
+    highlight ? renderTemplate(text, TEMPLATE_PHRASES) : text;
+  return (
+    <div className="text-sm text-ink italic leading-relaxed space-y-2">
+      <p>
+        <span className="not-italic font-semibold text-sapphire">Setting:</span>{" "}
+        {show(setting)}
+      </p>
+      <p>
+        <span className="not-italic font-semibold text-emerald2">Details:</span>{" "}
+        {show(details)}
+      </p>
+      <p>
+        <span className="not-italic font-semibold text-amber2">
+          Impression:
+        </span>{" "}
+        {show(impression)}
+      </p>
+    </div>
+  );
+};
 
 export default function CelpipSpeakingTask3Page() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -540,7 +548,12 @@ export default function CelpipSpeakingTask3Page() {
               Each sample combines the three parts above into a complete answer.
               Since Task 3 always shows a photograph, an{" "}
               <strong>image prompt</strong> is included so you can generate the
-              scene and practise describing it aloud.
+              scene and practise describing it aloud. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLES.map((sample) => (
@@ -569,6 +582,7 @@ export default function CelpipSpeakingTask3Page() {
                     setting={sample.setting}
                     details={sample.details}
                     impression={sample.impression}
+                    highlight
                   />
                 </div>
               </div>
