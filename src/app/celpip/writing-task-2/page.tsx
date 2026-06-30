@@ -761,9 +761,10 @@ export default function CelpipWritingTask2Page() {
               </li>
               <li className="flex gap-2">
                 <span className="text-gold shrink-0">✦</span>
-                <strong>Final thought:</strong> End with impact. "In a world where
-                privacy is increasingly threatened, legal action is not just
-                necessary—it is urgent."
+                <strong>Final thought:</strong> End with impact, signposted with
+                "Ultimately,". "Ultimately, in a world where privacy is
+                increasingly threatened, legal action is not just necessary—it is
+                urgent."
               </li>
             </ul>
             <div className="bg-fog rounded-xl p-4">
@@ -774,9 +775,9 @@ export default function CelpipWritingTask2Page() {
                 "In conclusion, strict government regulation of social media
                 platforms is essential for protecting user privacy, preventing data
                 breaches, and ensuring corporate accountability. The evidence
-                clearly shows that self-regulation has failed. As technology
-                continues to advance, legal frameworks must evolve to protect
-                citizens' fundamental right to privacy."
+                clearly shows that self-regulation has failed. Ultimately, as
+                technology continues to advance, legal frameworks must evolve to
+                protect citizens' fundamental right to privacy."
               </p>
             </div>
           </Accordion>

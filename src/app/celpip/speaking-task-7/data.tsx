@@ -78,8 +78,7 @@ export const SCORE_BANDS = [
         "Mostly fluent with minimal pauses. Delivery is generally confident.",
       Coherence:
         "Opinion is clear with 2 supporting reasons. Mostly logical progression.",
-      Vocabulary:
-        "Good range of opinion words. Some repetition is acceptable.",
+      Vocabulary: "Good range of opinion words. Some repetition is acceptable.",
       Grammar:
         "Mostly accurate; some errors in complex structures don't impede understanding.",
     },
@@ -104,15 +103,15 @@ export const SCORE_BANDS = [
       Coherence:
         "Opinion may be unclear or not well-supported. Disjointed explanation.",
       Vocabulary: "Very limited; mostly basic words only.",
-      Grammar:
-        "Frequent errors in basic structures; meaning often obscured.",
+      Grammar: "Frequent errors in basic structures; meaning often obscured.",
     },
   },
 ];
 
 // Fixed template signposts highlighted inside each sample answer.
 export const TEMPLATE_PHRASES = [
-  "In conclusion, I firmly believe",
+  "In conclusion, It is clear that",
+  "In my opinion",
   "I firmly believe",
   "The evidence clearly shows",
   "First,",
@@ -132,7 +131,7 @@ export const COMPLETE_EXAMPLES = [
     support:
       "First, travel teaches practical problem-solving skills. For example, navigating an unfamiliar city, managing a budget, and handling unexpected situations forces you to think creatively and independently. Second, cultural immersion builds empathy and global perspective, which makes you a better employee and colleague. For instance, someone who has lived in different countries understands diverse viewpoints and can work effectively with international teams. Third, travel boosts confidence in ways education alone cannot. When you overcome challenges in a foreign country, you return home knowing you can handle difficult situations confidently.",
     closing:
-      "In conclusion, I firmly believe travel before a career is invaluable. The evidence clearly shows that travel builds practical skills, emotional maturity, and confidence — all essential for long-term success.",
+      "In conclusion, it is clear that travel before a career is invaluable. The evidence clearly shows that travel builds practical skills, emotional maturity, and confidence — all essential for long-term success.",
   },
   {
     border: "border-emerald2",
@@ -142,7 +141,7 @@ export const COMPLETE_EXAMPLES = [
     support:
       "First, remote workers face fewer interruptions. In offices, you're constantly interrupted by colleagues, meetings, and office noise — this fragments your focus. When working from home, you control your environment and can dedicate uninterrupted time to focused work. Research actually shows remote workers complete tasks 30% faster. Second, flexibility improves work-life balance, which increases motivation. For example, you can attend your child's school event without asking for time off, reducing stress and burnout. Third, commuting time is eliminated, giving workers two extra hours daily. People can use this time for exercise, family, or better work preparation — all of which improve productivity.",
     closing:
-      "In conclusion, I firmly believe remote work is more productive. The evidence clearly shows fewer distractions, better flexibility, and time savings — all leading to superior performance.",
+      "In conclusion, it is clear that remote work is more productive. The evidence clearly shows fewer distractions, better flexibility, and time savings — all leading to superior performance.",
   },
   {
     border: "border-amber2",
@@ -152,7 +151,7 @@ export const COMPLETE_EXAMPLES = [
     support:
       "First, technology prepares students for reality. Every modern job requires digital skills — coding, data analysis, digital communication. Schools that limit technology leave students unprepared. For example, companies now expect basic proficiency in cloud tools, spreadsheets, and online collaboration platforms. Second, technology makes learning more engaging and interactive. Educational apps allow students to learn at their own pace, receive instant feedback, and visualize complex concepts. A student struggling with mathematics benefits from interactive simulations more than from a textbook. Third, technology promotes digital citizenship and critical thinking. Students learn to evaluate online information, recognize misinformation, and use technology responsibly — skills essential in today's world.",
     closing:
-      "In conclusion, I firmly believe technology in schools is essential. The evidence clearly shows it prepares students for modern careers and enhances learning outcomes.",
+      "In conclusion, it is clear that technology in schools is essential. The evidence clearly shows it prepares students for modern careers and enhances learning outcomes.",
   },
   {
     border: "border-rose2",
@@ -162,7 +161,7 @@ export const COMPLETE_EXAMPLES = [
     support:
       "First, social media damages mental health, particularly in young people. Studies show constant comparison with others' curated lives increases anxiety and depression. For example, teenagers spending three hours daily on social media report significantly higher rates of depression. Second, misinformation spreads rapidly on social platforms without fact-checking. During elections or health crises, false information reaches millions before corrections arrive. This has real consequences — vaccine hesitancy and election misinformation have caused measurable harm. Third, social media is designed to be addictive, reducing face-to-face interaction. While it promises connection, people are actually more isolated and lonely despite having thousands of 'friends' online.",
     closing:
-      "In conclusion, I firmly believe social media's harms outweigh its benefits. The evidence clearly shows negative impacts on mental health, truth, and genuine human connection.",
+      "In conclusion, it is clear that social media's harms outweigh its benefits. The evidence clearly shows negative impacts on mental health, truth, and genuine human connection.",
   },
   {
     border: "border-violet2",
@@ -172,7 +171,7 @@ export const COMPLETE_EXAMPLES = [
     support:
       "First, family relationships provide the deepest life satisfaction. Studies on happiness consistently show that strong relationships matter more than income above a certain threshold. A high-powered job with no time for family creates wealth but not happiness — you're too busy to enjoy it. Second, children need parental presence to develop healthily. Kids with involved parents show better emotional regulation, academic performance, and self-esteem. No amount of money compensates for an absent parent. Third, career success is temporary and fragile. Companies downsize, industries change, and retirement comes eventually. But family bonds remain throughout life. Your children will remember time with you long after your job title is forgotten.",
     closing:
-      "In conclusion, I firmly believe family time should take priority. The evidence clearly shows that relationships and well-being matter more to long-term happiness than career advancement alone.",
+      "In conclusion, it is clear that family time should take priority. The evidence clearly shows that relationships and well-being matter more to long-term happiness than career advancement alone.",
   },
 ];
 
