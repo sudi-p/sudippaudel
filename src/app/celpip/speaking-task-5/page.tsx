@@ -315,7 +315,7 @@ export default function CelpipSpeakingTask5Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
                 "Hi [name], I saw you were leaning toward [their option]. I
@@ -335,9 +335,9 @@ export default function CelpipSpeakingTask5Page() {
                 Example
               </p>
               <p className="text-sm text-sapphire-dark italic leading-relaxed">
-                "Hi John, I saw you suggested the tablet for his birthday. I get
-                why — it has a big screen — but I really think the smartwatch is
-                the better choice."
+                "Hi John, I saw you were leaning toward the tablet. I understand
+                why — the big screen is nice — but I actually think the
+                smartwatch is the better choice for us."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -401,7 +401,7 @@ export default function CelpipSpeakingTask5Page() {
             </div>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
                 "First, regarding price, [your option] costs [X], which is much
@@ -421,11 +421,12 @@ export default function CelpipSpeakingTask5Page() {
                 Example
               </p>
               <p className="text-sm text-emerald2-dark italic leading-relaxed">
-                "First, the smartwatch only costs a hundred dollars — that's much
-                cheaper than the tablet at three hundred, so we'd save money for
-                the party. Also, it has fitness tracking, which is more useful
-                since he loves running. Finally, it's water-resistant, so it'll
-                last far longer than the tablet."
+                "First, regarding price, the smartwatch is only a hundred dollars,
+                which is much cheaper than the tablet at three hundred — so we'd
+                have plenty left for the party. Also, it has fitness and
+                heart-rate tracking, which is more useful because he loves
+                running. Finally, it's water-resistant, so it'll last far longer
+                than a fragile tablet screen."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -467,7 +468,7 @@ export default function CelpipSpeakingTask5Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
                 "So for these reasons, I really think we should go with [your
@@ -486,8 +487,8 @@ export default function CelpipSpeakingTask5Page() {
                 Example
               </p>
               <p className="text-sm text-gold-dark italic leading-relaxed">
-                "So for those reasons, I really think the smartwatch is the
-                smarter pick — it's cheaper and more practical. Let me know if you
+                "So for these reasons, I really think we should go with the
+                smartwatch — it's cheaper and more practical. Let me know if you
                 agree, and we can order it today!"
               </p>
             </div>

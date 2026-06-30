@@ -352,12 +352,11 @@ export default function CelpipSpeakingTask6Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "Hi [name], hope you're doing well. Listen, I have something a bit
-                delicate to talk to you about regarding [situation] — do you have
-                a minute?"
+                "Hi [name], hope you're doing well! There's something a little
+                delicate I wanted to talk to you about — [the situation]."
               </p>
             </div>
             <div
@@ -372,10 +371,9 @@ export default function CelpipSpeakingTask6Page() {
                 Example
               </p>
               <p className="text-sm text-sapphire-dark italic leading-relaxed">
-                "Hi Sam, hope you're doing well. Listen, I wanted to talk to you
-                about your plan to stay at my place for the summer — there's
-                something a bit delicate I need to share, so do you have a
-                moment?"
+                "Hi Sam, hope you're doing well! There's something a little
+                delicate I wanted to talk to you about — your plan to stay with
+                me this summer."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -439,12 +437,11 @@ export default function CelpipSpeakingTask6Page() {
             </div>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "I know you were counting on [their hope], and I completely
-                understand [why it matters to them]. However, I'm afraid that
-                [your decision / the reality]."
+                "I know [their hope/feeling], and I completely understand [why it
+                matters to them]. The thing is, [your decision / the reality]."
               </p>
             </div>
             <div
@@ -459,11 +456,11 @@ export default function CelpipSpeakingTask6Page() {
                 Example
               </p>
               <p className="text-sm text-emerald2-dark italic leading-relaxed">
-                "I know you were really excited to stay with me for two months,
-                and I completely understand it would help you save money while you
-                job-hunt. However, I'm afraid my lease doesn't allow guests to
-                stay longer than three days, and my roommate and I could risk
-                eviction."
+                "I know you were really excited about it, and I completely
+                understand it would help you save money while you look for a job.
+                The thing is, my lease doesn't allow guests to stay longer than
+                three days, and my roommate and I could actually risk eviction if
+                we broke that rule."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -506,12 +503,12 @@ export default function CelpipSpeakingTask6Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "I think the best way forward would be to [solution]. I'd be happy
-                to [your offer]. I really hope you can see where I'm coming from,
-                and [warm sign-off]."
+                "So I think the best approach would be to [solution], and I'd be
+                happy to [your offer]. I really hope you understand — [warm
+                sign-off]."
               </p>
             </div>
             <div
@@ -526,10 +523,10 @@ export default function CelpipSpeakingTask6Page() {
                 Example
               </p>
               <p className="text-sm text-gold-dark italic leading-relaxed">
-                "I think the best approach would be to find you an affordable place
-                nearby, and I'd be happy to help cover your first week. That way
-                you'll have somewhere comfortable without putting our lease at
-                risk. I really hope you understand — I can't wait to see you
+                "So I think the best approach would be to find you an affordable
+                hostel or sublet nearby, and I'd be happy to help cover your
+                first week so you'd have a comfortable place without putting us
+                at risk. I really hope you understand — I can't wait to see you
                 soon!"
               </p>
             </div>

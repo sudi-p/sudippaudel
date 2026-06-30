@@ -305,11 +305,11 @@ export default function CelpipSpeakingTask7Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "I believe [your opinion]. In my view, [reason]. This is because
-                [why it matters]."
+                "I firmly believe [your opinion] because [a brief preview of your
+                reasons]."
               </p>
             </div>
             <div
@@ -324,9 +324,9 @@ export default function CelpipSpeakingTask7Page() {
                 Example
               </p>
               <p className="text-sm text-sapphire-dark italic leading-relaxed">
-                "I believe young people should travel before starting their
-                careers. In my view, travel builds character and confidence. This
-                is because exposure to different cultures teaches resilience."
+                "I firmly believe young people should travel before starting their
+                careers because it builds essential life skills and personal
+                confidence."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -369,11 +369,11 @@ export default function CelpipSpeakingTask7Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
                 "First, [reason 1]. For example, [specific example]. Second,
-                [reason 2], which demonstrates [why it's important]."
+                [reason 2]. For instance, [specific example]. Third, [reason 3]."
               </p>
             </div>
             <div
@@ -388,10 +388,12 @@ export default function CelpipSpeakingTask7Page() {
                 Example
               </p>
               <p className="text-sm text-emerald2-dark italic leading-relaxed">
-                "First, travel teaches problem-solving skills. For example,
-                navigating a foreign city on a budget forces you to be
-                resourceful. Second, cultural immersion builds empathy, which is
-                invaluable in any career."
+                "First, travel teaches practical problem-solving skills. For
+                example, navigating an unfamiliar city and managing a budget
+                forces you to think independently. Second, cultural immersion
+                builds empathy and global perspective. For instance, someone who
+                has lived abroad can work effectively with international teams.
+                Third, travel boosts confidence in ways education alone cannot."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -431,7 +433,7 @@ export default function CelpipSpeakingTask7Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
                 "In conclusion, I firmly believe [restate opinion]. The evidence
@@ -450,9 +452,10 @@ export default function CelpipSpeakingTask7Page() {
                 Example
               </p>
               <p className="text-sm text-gold-dark italic leading-relaxed">
-                "In conclusion, I firmly believe young people benefit greatly from
-                traveling. The evidence clearly shows that travel builds both
-                practical skills and personal confidence."
+                "In conclusion, I firmly believe travel before a career is
+                invaluable. The evidence clearly shows that travel builds
+                practical skills, emotional maturity, and confidence — all
+                essential for long-term success."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">

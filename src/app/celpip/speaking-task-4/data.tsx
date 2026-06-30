@@ -580,36 +580,18 @@ export const SCENARIO_CHEATSHEET = [
 ];
 
 export const OPENING_EXAMPLES = [
-  "Currently, the market is bustling with activity, vendors are selling, and customers are browsing.",
-  "The beach is beautiful right now — the sun is low on the horizon, and families are enjoying the water.",
-  "The park is busy with children playing, parents watching, and several groups picnicking on the grass.",
-  "The café is cozy and calm, with people reading or working on laptops while staff are preparing drinks.",
+  "Right now, [the present state — what the people and objects are doing].",
 ];
 
 export const PREDICTION_EXAMPLES = [
   {
-    title: "Scenario 1: Busy Market Scene",
-    text: "Currently, the market is bustling with customers and vendors. Looking ahead, I predict that in the next 30 minutes, the crowd will become even larger because it's the evening shopping rush. The vendors will probably lower some prices to encourage final purchases before closing. Meanwhile, some visitors might start heading home with their shopping bags. By the end of the evening, the market will likely become quieter as vendors begin to close their stalls.",
-  },
-  {
-    title: "Scenario 2: Beach at Sunset",
-    text: "The beach is peaceful now with families enjoying the sunset. I believe that as the sun sets lower, the temperature will drop significantly, and people will probably start gathering their belongings. The swimmers are going to come out of the water soon because it will get too dark to swim safely. Some families might light small fires or turn on lights for picnicking. Eventually, the beach will become much quieter as most visitors leave for the evening.",
-  },
-  {
-    title: "Scenario 3: Park with Children Playing",
-    text: "The park is busy with children playing and parents supervising. In the next hour, I expect the activity level will change because it will get closer to dinner time. The younger children might get tired and start asking their parents to go home. Meanwhile, teenagers might continue playing sports as long as there's light. Eventually, as evening approaches, the park will become much less crowded, and parents will be taking their children home.",
-  },
-  {
-    title: "Scenario 4: Cozy Café Interior",
-    text: "The café is quiet right now with customers enjoying beverages and work. I anticipate that later in the evening, the atmosphere will change. More people might arrive after finishing work, so the café could become busier than it is now. The staff will probably be preparing for the evening rush and getting more coffee ready. Some of the current visitors are going to leave to make room for new customers. Eventually, the café's activity level will shift from relaxed to more bustling.",
+    title: "My template (used in every sample below)",
+    text: "Looking ahead, I predict that [prediction] because [reason]. [Subject] will probably [prediction]. Meanwhile, [subject] might [prediction]. Eventually, [the final prediction].",
   },
 ];
 
 export const CLOSING_TEMPLATES = [
-  "Overall, the scene will look quite different in an hour because it's getting dark and people naturally go home earlier in the evening.",
-  "The pace of change depends on the weather, but based on typical patterns, the location will become quieter as time passes.",
-  "In conclusion, I predict the activity will shift from busy and active to calm and empty as evening turns to night.",
-  "That's why I believe the most significant change will be the departure of visitors as they choose to spend time at home instead.",
+  "Overall, [how the scene will change in an hour], because [a real-world reason — time of day, weather, or human nature].",
 ];
 
 export const PREDICTION_TOOLKIT = [

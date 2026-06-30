@@ -319,13 +319,11 @@ export default function CelpipSpeakingTask8Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "Hi [name], I'm calling because I'm looking at [the unusual thing]
-                right now, and it's the strangest thing I've ever seen. Let me
-                describe it — it's basically [one-line overview of what it is and
-                its size/shape]."
+                "Hi [name], I'm at [place] and you won't believe what I'm looking
+                at — [a one-line overview of what it is and its size/shape]."
               </p>
             </div>
             <div
@@ -340,10 +338,9 @@ export default function CelpipSpeakingTask8Page() {
                 Example
               </p>
               <p className="text-sm text-sapphire-dark italic leading-relaxed">
-                "Hi Mom, I'm calling from the furniture store because I've found
-                the most unusual bed and I can't take a photo. It's a single bed,
-                but the whole frame and mattress are curved into the shape of a
-                person lying on their side."
+                "Hi Mom, I'm at the furniture store and you won't believe what I'm
+                looking at — a single bed curved into the shape of a person lying
+                on their side."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -388,13 +385,12 @@ export default function CelpipSpeakingTask8Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "On the left/in the centre, there's [main feature]. Next to it /
-                behind it, you can see [detail]. What makes it really unusual is
-                [the odd part]. It's [colour/material/texture], and it looks like
-                [comparison]."
+                "[Describe the main features — colour, material, shape, and
+                spatial layout]. What makes it really unusual is [the odd part].
+                I think [your guess at its purpose]."
               </p>
             </div>
             <div
@@ -409,12 +405,12 @@ export default function CelpipSpeakingTask8Page() {
                 Example
               </p>
               <p className="text-sm text-emerald2-dark italic leading-relaxed">
-                "The frame is made of pale wood with a soft grey mattress on top.
-                Instead of being flat, it dips and curves so your body slots into
-                it perfectly — there's even a hollow for your head and a raised
-                section for your knees. What makes it really unusual is that you
-                can only sleep on your left side; there's no way to lie on your
-                back."
+                "The frame is made of pale wood with a soft grey mattress on top,
+                and instead of being flat, it dips and curves so your body slots
+                right into it, with a hollow for your head and a raised part for
+                your knees. What makes it really unusual is that you can only
+                sleep on your left side; there's no way to lie on your back. I
+                think it's designed to be as comfortable as a cocoon."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
@@ -462,11 +458,11 @@ export default function CelpipSpeakingTask8Page() {
             </p>
             <div className="bg-fog rounded-xl p-4">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Template
+                My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic leading-relaxed">
-                "So, what do you think — [the question from the prompt]? Let me
-                know soon because [reason / time pressure]. Talk to you in a bit!"
+                "So, [the question from the prompt]? Let me know what you think —
+                [a quick reason or time pressure]!"
               </p>
             </div>
             <div
@@ -481,10 +477,9 @@ export default function CelpipSpeakingTask8Page() {
                 Example
               </p>
               <p className="text-sm text-gold-dark italic leading-relaxed">
-                "So, do you think I should actually buy it? It's a bit pricey, and
-                I know it's strange, but it looks incredibly comfortable. Let me
-                know quickly because the store closes in 20 minutes. Thanks, talk
-                soon!"
+                "So, do you think I should buy it? It's a little pricey and
+                definitely odd, but I love it. Let me know what you think — the
+                store closes in 20 minutes!"
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">

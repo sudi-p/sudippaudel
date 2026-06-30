@@ -417,15 +417,13 @@ export default function CelpipSpeakingTask2Page() {
               </ul>
               <div className="bg-fog rounded-xl p-4">
                 <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                  Example openings
+                  My template (the recurring story arc)
                 </p>
                 <p className="text-sm text-ink italic leading-relaxed">
-                  "A few years back, I did something I'd been putting off for
-                  years — I went on a solo road trip up the coast."
-                </p>
-                <p className="text-sm text-ink italic leading-relaxed mt-2">
-                  "There's one weekend from university I still think about — the
-                  time I almost dropped out, but decided to stay."
+                  "<span className="font-semibold not-italic text-violet2">[A few years ago / Last year]</span>,
+                  I decided to [event]. I'd never [done this] before,{" "}
+                  <span className="font-semibold not-italic text-violet2">and honestly, I was</span>{" "}
+                  [emotion]."
                 </p>
               </div>
           </Accordion>
@@ -477,13 +475,16 @@ export default function CelpipSpeakingTask2Page() {
               </ul>
               <div className="bg-fog rounded-xl p-4">
                 <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                  Sensory detail examples
+                  My template (the recurring story arc)
                 </p>
-                <div className="space-y-1 text-sm text-ink italic">
-                  <p>"The air smelled like pine and rain."</p>
-                  <p>"The crowd noise was physically overwhelming."</p>
-                  <p>"My hands were shaking as I reached the summit."</p>
-                </div>
+                <p className="text-sm text-ink italic leading-relaxed">
+                  "[Set the scene]. <span className="font-semibold not-italic text-violet2">I remember</span>{" "}
+                  [one strong sensory detail].{" "}
+                  <span className="font-semibold not-italic text-violet2">But then</span>{" "}
+                  [the turning point], and{" "}
+                  <span className="font-semibold not-italic text-violet2">that was the moment everything shifted</span>,
+                  because [realization]."
+                </p>
               </div>
           </Accordion>
 
@@ -524,18 +525,13 @@ export default function CelpipSpeakingTask2Page() {
               </ul>
               <div className="bg-fog rounded-xl p-4">
                 <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                  Example closings
+                  My template (the recurring story arc)
                 </p>
-                <div className="space-y-1 text-sm text-ink italic">
-                  <p>
-                    "Looking back, that trip showed me I'm more capable than I
-                    thought."
-                  </p>
-                  <p>
-                    "It wasn't easy, but I came out more confident — and I'd do
-                    it again."
-                  </p>
-                </div>
+                <p className="text-sm text-ink italic leading-relaxed">
+                  "That <span className="font-semibold not-italic text-violet2">[trip/day/night]
+                  taught me</span> [lesson],{" "}
+                  <span className="font-semibold not-italic text-violet2">and I wouldn't trade that experience for anything</span>."
+                </p>
               </div>
           </Accordion>
 

@@ -479,7 +479,7 @@ export default function CelpipSpeakingTask4Page() {
             </ul>
             <div className="bg-fog rounded-xl p-4 space-y-3">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider">
-                Opening examples (linking from Task 3)
+                My template (used in every sample below)
               </p>
               <div className="space-y-2 text-sm text-ink">
                 {OPENING_EXAMPLES.map((ex, i) => (
@@ -599,7 +599,7 @@ export default function CelpipSpeakingTask4Page() {
             </ul>
             <div className="bg-fog rounded-xl p-4 space-y-3">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Closing templates
+                My template (used in every sample below)
               </p>
               <div className="space-y-2 text-sm text-ink italic">
                 {CLOSING_TEMPLATES.map((t, i) => (

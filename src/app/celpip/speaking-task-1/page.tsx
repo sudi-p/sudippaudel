@@ -310,23 +310,18 @@ export default function CelpipSpeakingTask1Page() {
             </p>
             <div className="bg-fog rounded-xl p-4 space-y-2">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider">
-                Opening templates
+                My template (used in every sample below)
               </p>
-              <ul className="space-y-1.5 text-sm text-ink">
-                <li className="italic">
-                  "I understand that [problem]. That must be [emotion/impact].
-                  If I were you, I would..."
-                </li>
-                <li className="italic">
-                  "I know you're going through a difficult time with [issue]. I
-                  can see why [reason matters]. Here's what I'd suggest..."
-                </li>
-                <li className="italic">
-                  "That sounds really challenging, and I can understand your
-                  concern. In my experience, [related insight] helps. So I'd
-                  suggest..."
-                </li>
-              </ul>
+              <p className="text-sm text-ink italic">
+                "Hi [Name], <span className="font-semibold not-italic text-violet2">I understand</span>{" "}
+                [the problem], <span className="font-semibold not-italic text-violet2">and that must</span>{" "}
+                [be/feel + emotion].{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  I went through something similar a few years ago, so I'd like
+                  to share a few suggestions.
+                </span>
+                "
+              </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
               <li className="flex gap-2">
@@ -367,28 +362,26 @@ export default function CelpipSpeakingTask1Page() {
               pieces of advice. For each: State it → Explain why → Show the
               benefit/consequence.
             </p>
-            <div className="bg-sapphire-light rounded-lg p-3 mb-3">
-              <p className="text-xs font-semibold text-sapphire-dark mb-2">
-                Grammar for variety (mix these):
+            <div className="bg-fog rounded-xl p-4 space-y-2">
+              <p className="text-xs font-semibold text-slate uppercase tracking-wider">
+                My template (used in every sample below)
               </p>
-              <ul className="space-y-1 text-xs text-sapphire-dark">
-                <li>
-                  • "If I were you, I would..." (Conditional — most empathetic)
-                </li>
-                <li>
-                  • "You should / could / ought to..." (Modal for strong
-                  suggestions)
-                </li>
-                <li>• "Another thing you might do is..." (Possibility)</li>
-                <li>• "I'd strongly recommend..." (Personal opinion)</li>
-                <li>
-                  • "Try [action] because [reason]..." (Direct practical advice)
-                </li>
-              </ul>
+              <p className="text-sm text-ink italic">
+                <span className="font-semibold not-italic text-violet2">First, if I were you, I would</span>{" "}
+                [advice], because [reason].
+              </p>
+              <p className="text-sm text-ink italic">
+                <span className="font-semibold not-italic text-violet2">Second, you might want to</span>{" "}
+                [advice], so [reason].
+              </p>
+              <p className="text-sm text-ink italic">
+                <span className="font-semibold not-italic text-violet2">Third, I'd recommend</span>{" "}
+                [advice], which will [benefit].
+              </p>
             </div>
             <p className="text-xs text-slate italic">
               See the <strong>Sample Responses</strong> section below for five
-              full worked examples using this structure.
+              full worked examples using this exact template.
             </p>
           </Accordion>
 
@@ -414,23 +407,13 @@ export default function CelpipSpeakingTask1Page() {
             </p>
             <div className="bg-fog rounded-xl p-4 space-y-2">
               <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
-                Conclusion templates
+                My template (used in every sample below)
               </p>
-              <ul className="space-y-1.5 text-sm text-ink italic">
-                <li>
-                  "To summarize, I think [main advice] are your best options.
-                  You'll definitely feel [positive result]. I'm confident you
-                  can do this."
-                </li>
-                <li>
-                  "Those are my suggestions. I know it seems like a lot, but you
-                  have the ability to handle this. You've got this!"
-                </li>
-                <li>
-                  "I really believe that if you try these approaches, you'll see
-                  improvements. You're capable of handling this change."
-                </li>
-              </ul>
+              <p className="text-sm text-ink italic">
+                "<span className="font-semibold not-italic text-violet2">These steps will</span>{" "}
+                [benefit/result],{" "}
+                <span className="font-semibold not-italic text-violet2">and I'm confident you can do this</span>."
+              </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
               <li className="flex gap-2">

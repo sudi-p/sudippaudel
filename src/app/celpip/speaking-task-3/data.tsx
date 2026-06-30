@@ -559,12 +559,9 @@ export const TEMPLATE_PARTS = [
       ["What's the overall mood?", '"It looks busy and lively" or "very peaceful and serene."'],
       ["One striking detail.", 'A splash of color, weather, or atmosphere. "The sky is clear and bright."'],
     ],
-    panelLabel: "Opening templates",
+    panelLabel: "My template (used in every sample below)",
     panelItems: [
-      '"This is a vibrant outdoor market scene, taken during the day. The atmosphere looks bustling and lively."',
-      '"The image shows a quiet, serene beach at sunset. The colors are very warm and peaceful."',
-      '"I can see a busy city street with tall buildings. It looks like the middle of the afternoon, and there\'s a lot of activity."',
-      '"This photograph captures a cozy café interior. The lighting is warm, and it appears to be a relaxing space."',
+      '"This image shows a [scene], taken during [the day / the evening]. The atmosphere looks [mood], and [one striking detail stands out]."',
     ],
   },
   {
@@ -581,23 +578,9 @@ export const TEMPLATE_PARTS = [
       'Be specific: Not just "a person" but "a young man wearing a blue shirt is sitting"',
       'Connect details with transitions: "Meanwhile," "Additionally," "Next to that," "Beside the..."',
     ],
-    scenarioBlocks: [
-      {
-        label: "Scenario 1: Market or Bazaar",
-        text: '"In the foreground, there are colorful fruit and vegetable stalls overflowing with fresh produce. Vendors are wearing traditional clothing and are actively arranging items. In the middle section, customers are browsing and selecting goods, with some carrying bags. I can see vibrant blues, reds, yellows, and greens. In the background, more stalls are visible, and there are tall buildings. The overall atmosphere is energetic and crowded."',
-      },
-      {
-        label: "Scenario 2: Beach Scene",
-        text: '"The foreground shows golden sand where several children are building sandcastles, and their parents are watching nearby. The water in the middle is a beautiful blue color, and a few swimmers are enjoying the ocean. To the left, colorful beach umbrellas are providing shade for sunbathing adults. In the background, I can see palm trees and some beach bars or huts. The sky is mostly clear with a few white clouds."',
-      },
-      {
-        label: "Scenario 3: Park or Playground",
-        text: '"In the foreground, children are playing on various playground equipment — some are climbing, others are sliding. A few parents are sitting on benches nearby, supervising. To the left, teenagers are playing frisbee on an open grass area. In the background, there are tall green trees providing shade. Adults and children are walking along paths throughout the park. Colorful clothing contrasts against the green grass and trees."',
-      },
-      {
-        label: "Scenario 4: Café or Restaurant Interior",
-        text: '"The foreground shows several small tables with customers sitting and enjoying beverages or food. I can see chairs in different colors and styles. To the left and right, more seating areas are visible with people reading books or working on laptops. The walls are decorated with paintings and warm lighting fixtures. Behind the counter, staff members are preparing drinks. The overall atmosphere is calm and inviting, with natural light coming through large windows."',
-      },
+    panelLabel: "My template (used in every sample below)",
+    panelItems: [
+      '"In the foreground, [the nearest objects and people, and what they are doing]. In the middle, [what is happening, plus the main colours]. In the background, [what is further back]."',
     ],
   },
   {
@@ -614,12 +597,9 @@ export const TEMPLATE_PARTS = [
       ["Connect to larger idea:", '"I would enjoy visiting a place like this" or "It reminds me of similar scenes I\'ve experienced."'],
       ["Be specific, not generic:", 'Instead of "It\'s nice," say "I appreciate the bright colors and the sense of community."'],
     ],
-    panelLabel: "Closing templates",
+    panelLabel: "My template (used in every sample below)",
     panelItems: [
-      '"Overall, the scene captures the energy and vibrancy of a bustling marketplace. It looks like a place full of life and cultural richness."',
-      '"This is a very peaceful, serene moment. The combination of the sunset colors and the relaxed atmosphere would make it an ideal place to unwind."',
-      '"The park appears to be a welcoming community space where people of all ages gather. It seems like the kind of place where many families would enjoy spending their free time."',
-      '"The café looks like a cozy retreat where people can relax and socialize. I think it would be a pleasant place to spend an afternoon."',
+      '"Overall, [what the scene captures]. It looks like [your interpretation], and I would [personal reaction]."',
     ],
   },
 ];

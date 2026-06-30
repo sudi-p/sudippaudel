@@ -560,7 +560,7 @@ export default function CelpipWritingTask2Page() {
               </li>
               <li className="flex gap-2">
                 <span className="text-gold shrink-0">✦</span>
-                <strong>State your thesis:</strong> "I believe that social media
+                <strong>State your thesis:</strong> "In my view, social media
                 platforms should be held legally accountable for user data
                 privacy."
               </li>
@@ -572,7 +572,7 @@ export default function CelpipWritingTask2Page() {
               <p className="text-sm text-ink">
                 "In today's digital world, social media companies collect vast
                 amounts of personal data. This raises serious concerns about
-                privacy and data security. I believe that governments must
+                privacy and data security. In my view, governments must
                 implement stricter regulations to protect users' personal
                 information."
               </p>
