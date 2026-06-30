@@ -122,11 +122,11 @@ export const SAMPLE_ANSWERS = [
     ],
     speakingTo: "speaking to your cousin, Sam",
     greeting:
-      "Hi Sam, hope you're doing well! Listen, I wanted to talk to you about your plan to stay with me this summer — there's something a bit delicate I need to share.",
+      "Hi Sam, hope you're doing well! There's something a little delicate I wanted to talk to you about — your plan to stay with me this summer.",
     empathize:
-      "I know you were really excited about it, and I completely understand it would help you save money while you look for a job. However, I'm afraid my lease doesn't allow guests to stay longer than three days, and my roommate and I could actually risk eviction if we broke that rule.",
+      "I know you were really excited about it, and I completely understand it would help you save money while you look for a job. The thing is, my lease doesn't allow guests to stay longer than three days, and my roommate and I could actually risk eviction if we broke that rule.",
     solution:
-      "So I think the best approach would be to find you an affordable hostel or sublet nearby, and I'd be more than happy to help cover your first week. That way you'd have a comfortable place without putting us at risk. I really hope you understand — I can't wait to see you soon!",
+      "So I think the best approach would be to find you an affordable hostel or sublet nearby, and I'd be happy to help cover your first week so you'd have a comfortable place without putting us at risk. I really hope you understand — I can't wait to see you soon!",
   },
   {
     accent: "text-sapphire",
@@ -143,11 +143,11 @@ export const SAMPLE_ANSWERS = [
     ],
     speakingTo: "speaking to your roommate, Alex",
     greeting:
-      "Hey Alex, do you have a quick minute? There's something small I wanted to gently bring up, and I hope it's okay to chat about it.",
+      "Hi Alex, hope you're doing well! There's something a little delicate I wanted to talk to you about — the music late at night.",
     empathize:
-      "First off, I love that you're into your music, and I'd never want to stop you enjoying it. The thing is, I've got really important exams this week, and the music late at night has been making it hard for me to sleep and focus.",
+      "I know how much you love your music, and I completely understand. The thing is, I've got really important exams this week, and the late-night music has been making it hard for me to sleep and focus.",
     solution:
-      "I was wondering if we could maybe agree to keep things a bit quieter after, say, ten on weeknights — or you could use headphones during exam season? I'd really appreciate it, and of course I'll do the same for you when you've got deadlines. Thanks so much for understanding!",
+      "So I think the best approach would be to keep things a bit quieter after ten on weeknights, or you could use headphones during exam season, and I'd be happy to do the same for you when you've got deadlines. I really hope you understand — thanks so much!",
   },
   {
     accent: "text-emerald2",
@@ -160,11 +160,11 @@ export const SAMPLE_ANSWERS = [
     ],
     speakingTo: "speaking to your coworker, Jordan",
     greeting:
-      "Hi Jordan, could I grab you for a moment? There's something I've been meaning to raise with you, and I'd rather talk to you about it directly than let it build up.",
+      "Hi Jordan, hope you're doing well! There's something a little delicate I wanted to talk to you about — covering your tasks when you leave early.",
     empathize:
-      "I completely understand you've had a lot going on lately, and I've been glad to help out when I can. The thing is, covering your tasks on top of my own has started to get a bit overwhelming, and I'm worried it might affect the quality of both our work.",
+      "I know you've had a lot going on lately, and I completely understand. The thing is, covering your tasks on top of my own has started to get a bit overwhelming, and I'm worried it might affect the quality of both our work.",
     solution:
-      "I was thinking maybe we could split the workload more evenly, or you could let me know in advance on the days you need to leave early so we can plan around it together. I'd really like for us to find something that works for both of us. Thanks so much for hearing me out!",
+      "So I think the best approach would be to split the workload more evenly, or you could let me know in advance on the days you need to leave early so we can plan around it together. I really hope you understand — thanks so much for hearing me out!",
   },
   {
     accent: "text-amber2",
@@ -185,11 +185,11 @@ export const SAMPLE_ANSWERS = [
     ],
     speakingTo: "speaking to your friend, Maya",
     greeting:
-      "Hi Maya, hope you're well. Listen, I have something a little awkward to tell you about the camera you kindly lent me, and I wanted to be upfront about it.",
+      "Hi Maya, hope you're doing well! There's something a little awkward I wanted to talk to you about — the camera you kindly lent me.",
     empathize:
-      "I know how much that camera means to you, and I'm genuinely sorry — while I was on the trip, it slipped and the lens got cracked. I feel terrible about it, and I take full responsibility.",
+      "I know how much that camera means to you, and I completely understand. The thing is, while I was on the trip it slipped and the lens got cracked — I feel terrible about it, and I take full responsibility.",
     solution:
-      "I'd really like to make it right, so I'd be happy to pay for a professional repair, or replace the lens entirely if that's easier for you. Just let me know what you'd prefer. Again, I'm so sorry, and thank you for being understanding.",
+      "So I think the best approach would be for me to pay for a professional repair, or replace the lens entirely if that's easier for you. I really hope you understand — I'm so sorry, and thank you for being so understanding!",
   },
   {
     accent: "text-rose2",
@@ -210,11 +210,11 @@ export const SAMPLE_ANSWERS = [
     ],
     speakingTo: "speaking to your friend, Chris",
     greeting:
-      "Hey Chris, do you have a sec? I really hate to bring this up, because I know how much we've both been looking forward to this weekend.",
+      "Hi Chris, hope you're doing well! There's something a little delicate I wanted to talk to you about — our trip this weekend.",
     empathize:
-      "I completely understand if you're disappointed — I am too. Unfortunately, an urgent issue has come up at work that I just can't get out of, so I'm afraid I won't be able to make our trip this weekend.",
+      "I know how much we've both been looking forward to this, and I completely understand if you're disappointed — I am too. The thing is, an urgent issue has come up at work that I just can't get out of, so I'm afraid I won't be able to make our trip this weekend.",
     solution:
-      "I'd love to reschedule for the following weekend if that works for you, and I'm happy to sort out changing the bookings and cover any rebooking fees. I really appreciate your patience — let's lock in a new date soon. Thanks so much for understanding!",
+      "So I think the best approach would be to reschedule for the following weekend if that works for you, and I'd be happy to sort out changing the bookings and cover any rebooking fees. I really hope you understand — let's lock in a new date soon!",
   },
 ];
 

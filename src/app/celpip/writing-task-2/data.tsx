@@ -169,7 +169,7 @@ export const ESSAYS = [
       },
     ],
     essay: [
-      "Students today often wonder whether a university degree or practical training offers the better route to success. I firmly believe that practical training programmes are more valuable in today's competitive job market.",
+      "Students today often wonder whether a university degree or practical training offers the better route to success. In my view, practical training is the more valuable choice in today's competitive job market.",
       "First, practical training equips students with immediately applicable skills that employers actively demand. Because graduates can begin contributing on their very first day, they earn income and build professional experience far sooner than university graduates. This head start often translates into faster promotions and stronger long-term earnings.",
       "Additionally, practical training costs significantly less than university tuition, sparing students from years of heavy debt. Admittedly, a university education provides broad theoretical knowledge and a wider range of career possibilities. However, this breadth frequently comes at an enormous cost in time and money, with no guarantee of employment, whereas specialised training leads directly to a job.",
       "In conclusion, practical training offers superior value through immediate employability, affordability, and a clear path into the workforce. For most students seeking financial security and rapid advancement, it is undoubtedly the smarter choice. Ultimately, real-world readiness matters more to employers than a diploma alone.",
@@ -198,7 +198,7 @@ export const ESSAYS = [
       },
     ],
     essay: [
-      "Many organisations must decide whether their employees should wear uniforms or dress freely. I strongly support introducing company uniforms in the workplace.",
+      "Many organisations must decide whether their employees should wear uniforms or dress freely. In my view, introducing company uniforms is the better choice for the workplace.",
       "First, uniforms project professionalism and create a cohesive company image. When clients arrive, they instantly recognise staff and perceive the organisation as organised and trustworthy. Customers naturally place greater trust in a team that looks coordinated and competent. This polished appearance strengthens client confidence and can directly improve a company's reputation and sales.",
       "Additionally, uniforms foster equality and team spirit by removing fashion-based comparisons among colleagues. Employees are then judged on performance rather than clothing, which builds a more inclusive and focused environment. Admittedly, some workers value the chance to express their personality through fashion. However, the benefits of unity and daily convenience clearly outweigh individual wardrobe preferences, since uniforms also save staff time and money every morning.",
       "In conclusion, company uniforms represent a practical investment in professionalism, equality, and employee convenience. Organisations that adopt them stand to gain a stronger image and a more united, productive team. Ultimately, the small loss of individual choice is a worthwhile trade for these lasting advantages.",
@@ -227,7 +227,7 @@ export const ESSAYS = [
       },
     ],
     essay: [
-      "When a neighbourhood receives funding for a new facility, it must choose carefully. I believe a community garden is a better investment than a public swimming pool for our diverse area.",
+      "When a neighbourhood receives funding for a new facility, it must choose carefully. In my view, a community garden is a better investment than a public swimming pool for our diverse area.",
       "First, a garden serves every resident year-round, regardless of age or ability. Unlike a pool, it benefits the elderly, young children, and non-swimmers equally, providing fresh produce alongside gentle outdoor activity. This inclusivity ensures that public money improves the lives of the entire community rather than a select few.",
       "Additionally, a community garden strengthens neighbourhood bonds by bringing diverse residents together around shared cultivation. These connections build the kind of social cohesion that a pool rarely creates. Admittedly, a swimming pool offers excellent exercise and recreation for swimmers. However, pools demand costly year-round maintenance and operate only seasonally, whereas a garden runs continuously and even improves local food security.",
       "In conclusion, a community garden better serves our neighbourhood's varied needs, promotes sustainability, and builds lasting connections. For genuine, long-term community value, it is clearly the wiser choice. By choosing the garden, we invest in health, belonging, and a greener future for all.",

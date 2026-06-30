@@ -226,56 +226,69 @@ export const ADVICE_TOOLKIT = [
   },
 ];
 
+// Fixed template fragments highlighted inside each sample (the reusable
+// skeleton; everything else is scenario-specific fill-in).
+export const TEMPLATE_PHRASES = [
+  "I understand",
+  "and that must",
+  "I went through something similar a few years ago, so I'd like to share a few suggestions.",
+  "First, if I were you, I would",
+  "Second, you might want to",
+  "Third, I'd recommend",
+  "These steps will",
+  "I'm confident you can do this",
+];
+
 export const SAMPLES = [
   {
     scenario:
       "Scenario 1: Career Change (Friend Nervous About Starting Over)",
     lines: [
-      "\"I understand you're worried about changing careers, and that's totally natural. Here's my advice:\"",
+      "\"Hi Sarah, I understand you're worried about changing careers, and that must feel overwhelming. I went through something similar a few years ago, so I'd like to share a few suggestions.\"",
       "First, if I were you, I would update your resume to highlight transferable skills, because employers value what you've already learned.",
-      "Second, you should start networking in your new field — attend industry events or join online communities — so you can learn about opportunities before you apply.",
-      "Third, I'd suggest taking an online course to build specific skills for your new career, which will boost your confidence and make you more competitive.",
-      'These steps will show employers you\'re serious about the change and well-prepared."',
+      "Second, you might want to start networking in your new field by attending industry events or joining online communities, so you can hear about opportunities before you apply.",
+      "Third, I'd recommend taking an online course to build specific skills for the new career, which will boost your confidence and make you more competitive.",
+      'These steps will show employers you\'re serious and well-prepared, and I\'m confident you can do this."',
     ],
   },
   {
     scenario: "Scenario 2: Time Management at Work",
     lines: [
-      "\"I know work feels overwhelming right now, and I can see why it's stressful. If I were you, here's what I'd do:\"",
-      "First, you should create a priority list each morning so you know which tasks matter most — this prevents wasting energy on less important things.",
-      "Second, I'd recommend blocking time for focused work without interruptions, maybe turning off email for an hour — you'll finish tasks faster because you won't be constantly distracted.",
-      "Third, try talking to your manager about which tasks you can delegate or postpone; they might not realize you're overloaded.",
-      'These changes will help you feel much more in control of your day."',
+      "\"Hi Mark, I understand work feels overwhelming right now, and that must be really stressful. I went through something similar a few years ago, so I'd like to share a few suggestions.\"",
+      "First, if I were you, I would create a priority list each morning, because it shows you which tasks matter most and stops you wasting energy on smaller things.",
+      "Second, you might want to block time for focused work without interruptions, maybe turning off email for an hour, so you finish tasks faster without being constantly distracted.",
+      "Third, I'd recommend talking to your manager about which tasks you can delegate or postpone, which will lighten your load since they might not realize you're overloaded.",
+      'These steps will help you feel much more in control of your day, and I\'m confident you can do this."',
     ],
   },
   {
     scenario: "Scenario 3: Building Friendships (Feeling Lonely)",
     lines: [
-      "\"I understand feeling lonely, especially when you're trying to build a social circle. Here's my advice:\"",
-      "First, if I were you, I'd join one activity or club that interests you — sports, book club, volunteer group — because you'll meet people with shared interests and friendship flows naturally.",
-      "Second, you should attend regularly and make an effort to talk to the same people, not just show up once — consistency helps bonds develop.",
-      "Third, I'd suggest hosting a small gathering or suggesting coffee with someone you met; most people appreciate when someone takes the initiative.",
-      'These steps give you real opportunities to connect with people."',
+      "\"Hi Emma, I understand you're feeling lonely while trying to build a social circle, and that must be hard. I went through something similar a few years ago, so I'd like to share a few suggestions.\"",
+      "First, if I were you, I would join one activity or club that interests you, like a sports team, book club, or volunteer group, because you'll meet people with shared interests.",
+      "Second, you might want to attend regularly and talk to the same people instead of just showing up once, so the bonds have time to develop naturally.",
+      "Third, I'd recommend hosting a small gathering or inviting someone for coffee, which will help because most people appreciate when someone takes the initiative.",
+      'These steps will give you real opportunities to connect, and I\'m confident you can do this."',
     ],
   },
   {
     scenario: "Scenario 4: Starting a New Hobby",
     lines: [
-      "\"I'm excited about you starting a new hobby! Here's my advice:\"",
-      "First, you should research beginner resources — YouTube tutorials, books, community classes — because you'll avoid expensive mistakes and learn the basics safely.",
-      "Second, if I were you, I'd start with one affordable beginner kit or tool rather than buying everything at once — it lets you try it without a big investment.",
-      "Third, you ought to find others doing the same hobby, maybe online communities or local groups, because learning with others keeps you motivated and they can answer your questions.",
-      'This approach will help you build confidence without feeling overwhelmed or wasting money."',
+      "\"Hi Jake, I understand you're nervous about starting a new hobby, and that must feel a little daunting. I went through something similar a few years ago, so I'd like to share a few suggestions.\"",
+      "First, if I were you, I would research beginner resources like YouTube tutorials, books, and community classes, because they help you avoid expensive mistakes and learn the basics safely.",
+      "Second, you might want to start with one affordable beginner kit rather than buying everything at once, so you can try it without a big investment.",
+      "Third, I'd recommend finding others doing the same hobby in online communities or local groups, which will keep you motivated since they can answer your questions.",
+      'These steps will help you build confidence without feeling overwhelmed, and I\'m confident you can do this."',
     ],
   },
   {
     scenario: "Scenario 5: Improving English Skills",
     lines: [
-      "\"I know improving English takes effort, and I'm glad you're committed to it. Here's what I'd suggest:\"",
-      "First, if I were you, I'd set a specific daily practice routine — even 30 minutes is better than random studying — because consistency is what builds real progress.",
-      "Second, you should mix listening, speaking, reading, and writing instead of just one skill, because all parts of language connect.",
-      "Third, I'd recommend finding a conversation partner online or locally who speaks English regularly, which helps you practice naturally and builds confidence faster than studying alone.",
-      'These strategies will help you reach your goals."',
+      "\"Hi Maria, I understand improving your English feels like a big effort, and that must be frustrating at times. I went through something similar a few years ago, so I'd like to share a few suggestions.\"",
+      "First, if I were you, I would set a specific daily practice routine of even just 30 minutes, because consistency is what builds real progress.",
+      "Second, you might want to mix listening, speaking, reading, and writing instead of focusing on one skill, so all parts of the language reinforce each other.",
+      "Third, I'd recommend finding a conversation partner online or locally, which will build your confidence faster because you practise naturally rather than studying alone.",
+      'These steps will help you reach your goals, and I\'m confident you can do this."',
     ],
   },
 ];

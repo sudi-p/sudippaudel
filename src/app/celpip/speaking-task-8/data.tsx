@@ -121,11 +121,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "An unusual single bed in a modern furniture store, the pale wooden frame and soft grey mattress contoured into the shape of a person lying on their side, with a hollow for the head and a raised section for the knees, only allowing left-side sleeping, bright showroom lighting, photorealistic, product display shot.",
     setup:
-      "Hi Mom, I'm calling from the furniture store because I've found the strangest bed and I can't take a photo. It's a single bed, but the whole thing is curved into the shape of a person lying on their side.",
+      "Hi Mom, I'm at the furniture store and you won't believe what I'm looking at — a single bed curved into the shape of a person lying on their side.",
     description:
-      "The frame is made of pale wood with a soft grey mattress on top. Instead of being flat, it dips and curves so your body slots right into it — there's even a hollow for your head and a raised part for your knees. What makes it really unusual is that you can only sleep on your left side; there's no way to lie on your back. It actually looks incredibly comfortable, almost like a cocoon.",
+      "The frame is made of pale wood with a soft grey mattress on top, and instead of being flat, it dips and curves so your body slots right into it, with a hollow for your head and a raised part for your knees. What makes it really unusual is that you can only sleep on your left side; there's no way to lie on your back. I think it's designed to be as comfortable as a cocoon.",
     question:
-      "So, do you think I should buy it? It's a little pricey and definitely odd, but I love it. Let me know quickly because the store closes in 20 minutes. Thanks, talk soon!",
+      "So, do you think I should buy it? It's a little pricey and definitely odd, but I love it. Let me know what you think — the store closes in 20 minutes!",
   },
   {
     accent: "text-sapphire",
@@ -135,11 +135,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "Two athletes inside a boxing ring wearing boxing gloves and shorts, but seated at a small table in the centre playing a game of chess while wearing noise-cancelling headphones, a referee standing beside them, a crowd watching in an indoor arena, bright spotlights, photorealistic, wide shot.",
     setup:
-      "Hey George, you won't believe what I'm watching at the sports centre. There are two people in a boxing ring, but instead of fighting, they're playing chess!",
+      "Hi George, I'm at the sports centre and you won't believe what I'm looking at — two people in a boxing ring playing a game of chess.",
     description:
-      "Both players are wearing boxing gloves and shorts, and they're sitting at a small table right in the centre of the ring. They've got big headphones on, probably to block out the crowd. One of them is leaning forward, carefully moving a chess piece, while the other is waiting with his gloves resting on the table. There's a referee standing beside them and a whole audience watching. Apparently it's a real sport where you switch between boxing rounds and chess rounds.",
+      "Both players are wearing boxing gloves and shorts, and they're sitting at a small table right in the centre of the ring, with big headphones on to block out the crowd. One of them is leaning forward, carefully moving a chess piece, while the other waits with his gloves resting on the table, and a referee stands beside them in front of a whole audience. What makes it really unusual is that it's a real sport where you switch between boxing rounds and chess rounds.",
     question:
-      "It looks fascinating — would you be interested in trying it with me sometime? I think it would be a fun challenge. Let me know what you think!",
+      "It looks fascinating — would you be interested in trying it with me sometime? Let me know what you think!",
   },
   {
     accent: "text-emerald2",
@@ -149,11 +149,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A completely upside-down house built as a tourist attraction, the roof on the ground and the foundation pointing at the sky, an upside-down car parked on the inverted driveway, bright blue sky, people taking photos in front of it, daytime, photorealistic, wide street view.",
     setup:
-      "Hi Priya, I'm walking through town and I'm standing in front of the most bizarre building — it's a whole house built completely upside down!",
+      "Hi Priya, I'm walking through town and you won't believe what I'm looking at — a whole house built completely upside down.",
     description:
-      "The roof is sitting flat on the ground, and the foundation is pointing straight up at the sky. Even the windows and the front door are upside down. On the driveway, there's a car parked upside down too, as if it crashed from above. It's painted in bright colours, and there's a crowd of people in front taking photos. Apparently you can go inside, where the furniture is also mounted on the ceiling.",
+      "The roof is sitting flat on the ground, the foundation is pointing straight up at the sky, and even the windows and front door are upside down. On the driveway, there's a car parked upside down too, as if it crashed from above, and it's painted in bright colours with a crowd of people taking photos. What makes it really unusual is that you can go inside, where the furniture is also mounted on the ceiling. I think it's a tourist attraction.",
     question:
-      "It's such a fun attraction — do you want to come and visit it with me this weekend? I think it'd make for some hilarious photos. Let me know!",
+      "It's such a fun attraction — do you want to come and visit it with me this weekend? Let me know what you think!",
   },
   {
     accent: "text-amber2",
@@ -163,11 +163,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A giant inflatable yellow rubber duck, several storeys tall, floating in a city harbour next to the waterfront, dwarfing the boats around it, crowds of people gathered on the pier taking photos, blue sky with light clouds, daytime, photorealistic, wide-angle shot.",
     setup:
-      "Hi Dad, I'm down at the harbour and there's a giant rubber duck floating in the water — and I mean enormous, several storeys tall!",
+      "Hi Dad, I'm at the harbour and you won't believe what I'm looking at — a giant rubber duck floating in the water, several storeys tall.",
     description:
-      "It's a bright yellow inflatable duck, the kind you'd see in a bathtub, except it completely dwarfs the boats around it. It's bobbing gently in the middle of the harbour, right next to the pier. There's a huge crowd gathered along the waterfront, and almost everyone is taking photos. It looks cheerful and a little surreal against the city skyline behind it. I think it might be some kind of public art installation.",
+      "It's a bright yellow inflatable duck, the kind you'd see in a bathtub, except it completely dwarfs the boats around it, and it's bobbing gently in the middle of the harbour right next to the pier. There's a huge crowd gathered along the waterfront, and almost everyone is taking photos. What makes it really unusual is how cheerful and surreal it looks against the city skyline behind it. I think it might be some kind of public art installation.",
     question:
-      "Have you heard anything about it on the news? I'm curious how long it'll be here. Call me back when you can!",
+      "Have you heard anything about it on the news? I'm curious how long it'll be here — let me know what you think!",
   },
   {
     accent: "text-rose2",
@@ -177,11 +177,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "An unusual vending machine in a shopping mall that dispenses live potted plants instead of snacks, glass front showing rows of small green succulents and flowers in pots, glowing interior lights, a digital touchscreen on the front, modern mall corridor in the background, photorealistic, eye-level shot.",
     setup:
-      "Hey Sam, I'm at the mall and I've just found the weirdest vending machine — it doesn't sell snacks, it sells live plants!",
+      "Hi Sam, I'm at the mall and you won't believe what I'm looking at — a vending machine that sells live plants instead of snacks.",
     description:
-      "It's about the size of a normal drinks machine, with a big glass front. Inside, there are rows and rows of little potted plants — mostly succulents and small flowers — all lit up with soft glowing lights. On the front there's a digital touchscreen where you pick the plant you want, pay, and it drops down gently like a chocolate bar would. It looks really modern and the plants seem perfectly healthy. I've honestly never seen anything like it.",
+      "It's about the size of a normal drinks machine, with a big glass front, and inside there are rows and rows of little potted plants — mostly succulents and small flowers — all lit up with soft glowing lights. On the front there's a digital touchscreen where you pick the plant you want, pay, and it drops down gently like a chocolate bar would. What makes it really unusual is that the plants seem perfectly healthy inside a machine. I think it's a clever modern twist on vending.",
     question:
-      "Do you think I should try it and grab one for my desk? Let me know — I'm tempted to buy a little cactus right now!",
+      "Do you think I should try it and grab one for my desk? Let me know what you think — I'm tempted to buy a little cactus right now!",
   },
 ];
 

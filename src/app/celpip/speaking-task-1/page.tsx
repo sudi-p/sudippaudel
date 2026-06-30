@@ -4,6 +4,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
+import { renderTemplate } from "../templateHighlight";
 import {
   TABS,
   TIPS,
@@ -13,6 +14,7 @@ import {
   SCORE_BANDS,
   ADVICE_TOOLKIT,
   SAMPLES,
+  TEMPLATE_PHRASES,
 } from "./data";
 
 const Chevron = ({ open }) => (
@@ -502,7 +504,12 @@ export default function CelpipSpeakingTask1Page() {
                 acknowledge → three pieces of advice with reasons → encouraging
                 conclusion.
               </strong>{" "}
-              Notice how each idea is its own beat, not one long sentence.
+              Notice how each idea is its own beat, not one long sentence. The{" "}
+              <mark className="tmpl-hl rounded bg-gold/20 px-0.5 font-semibold text-ink">
+                highlighted
+              </mark>{" "}
+              words are the reusable template — keep them and swap in your own
+              details.
             </p>
 
             {SAMPLES.map((sample) => (
@@ -518,7 +525,7 @@ export default function CelpipSpeakingTask1Page() {
                     key={i}
                     className="text-sm text-ink italic leading-relaxed"
                   >
-                    {line}
+                    {renderTemplate(line, TEMPLATE_PHRASES)}
                   </p>
                 ))}
               </div>

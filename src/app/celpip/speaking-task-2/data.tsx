@@ -419,6 +419,10 @@ export const CATEGORY_SUMMARY = [
   { num: "6", label: "Celebration / Event", color: "text-gold" },
 ];
 
+// Reusable template signals highlighted inside each sample. Task 2 is a
+// narrative, so the consistent fixed frame is the closing reflection.
+export const TEMPLATE_PHRASES = ["taught me"];
+
 export const COMPLETE_EXAMPLES = [
   {
     border: "border-sapphire",
@@ -427,25 +431,25 @@ export const COMPLETE_EXAMPLES = [
       "A few years ago, I decided to take a solo backpacking trip through Southeast Asia for three months. I'd never traveled alone before, and honestly, I was terrified.",
     body: "The first week was in Thailand. I remember walking through Bangkok's night market at dusk — the smell of grilled seafood was everywhere, and the crowd noise was physically overwhelming. My hands were shaking as I tried to navigate the streets with just a map. But then this street vendor noticed I was lost and helped me find my hostel. After that moment, something shifted. I realized people were genuinely kind, and I could handle being uncomfortable.",
     closing:
-      "That trip taught me I'm braver than I thought. I came home knowing I could handle anything, and I've since traveled to ten more countries. I wouldn't trade that experience for anything.",
+      "That trip taught me I'm braver than I thought. I came home knowing I could handle almost anything, and I've since traveled to ten more countries — I wouldn't trade that experience for anything.",
   },
   {
     border: "border-emerald2",
     title: "Example 2: Learning a Skill",
     opening:
       "Last year, I decided to learn guitar even though I had no musical background whatsoever. My brother had left his old guitar at my place, and one day I just picked it up.",
-    body: "The first month was frustrating. My fingers would hurt after just ten minutes of practice, and the strings buzzed when I played chords. I wanted to give up. But then one afternoon, I sat down and played 'Wonderwall' all the way through for the first time. I remember my heart racing and my hands trembling with excitement. That moment changed everything because it showed me that persistence actually works.",
+    body: "The first month was frustrating. My fingers would hurt after just ten minutes of practice, and the strings buzzed when I played chords. I wanted to give up. But then one afternoon, I sat down and played 'Wonderwall' all the way through for the first time. I remember my heart racing and my hands trembling with excitement. That was the moment everything shifted, because it showed me that persistence actually works.",
     closing:
-      "Now I play three times a week, and I'm learning more complex songs. It's taught me that you don't need talent to start — you just need patience. If I could go back, I'd tell my younger self to stick with it.",
+      "That afternoon taught me you don't need talent to start — you just need patience. Now I play three times a week and I'm learning more complex songs, and I wouldn't trade that feeling for anything.",
   },
   {
     border: "border-amber2",
     title: "Example 3: A Memorable Celebration",
     opening:
-      "One night that still stands out is my grandmother's 80th birthday party. The whole extended family came from different cities — we hadn't all been together in five years.",
+      "A couple of years ago, we threw my grandmother's 80th birthday party. The whole extended family came from different cities — we hadn't all been together in five years.",
     body: "We had dinner at her favorite restaurant by the riverside. The moment I'll never forget is when the waiter brought out the cake — it was shaped like a lotus flower, her favorite flower. My grandmother's eyes actually teared up. The room went silent for a moment, and then everyone started clapping and singing. I could smell jasmine flowers on the table and taste the sweetness of the cake when we cut it together. But what hit me most was seeing her surrounded by people who loved her, laughing and telling old stories.",
     closing:
-      "That night made me realize how precious those moments are. I'm so grateful I was there, and now I make sure to visit her every month.",
+      "That night taught me how precious those moments are. I'm so grateful I was there, and now I make sure to visit her every month.",
   },
   {
     border: "border-rose2",
@@ -454,7 +458,7 @@ export const COMPLETE_EXAMPLES = [
       "During my second year of university, I had a scholarship to study engineering. But halfway through the semester, I realized I hated it. So I made a big decision — I switched to studying environmental science instead.",
     body: "The day I told my parents, I was so anxious. I could feel my stomach twisting as I made the call. But to my surprise, my father said, 'If you're not happy, change it. Life is too short to spend it doing something you don't believe in.' That moment lifted this huge weight off my shoulders. I'd been so worried about disappointing him that I hadn't even considered what I actually wanted. The switch was tough — I had to retake some classes — but suddenly, going to class didn't feel like a burden anymore.",
     closing:
-      "That decision was scary at the time, but it was exactly right. Now I work for an environmental NGO, and I couldn't imagine a different path. It taught me to listen to my gut.",
+      "That decision taught me to listen to my gut. It was scary at the time, but it was exactly right — now I work for an environmental NGO, and I couldn't imagine a different path.",
   },
 ];
 

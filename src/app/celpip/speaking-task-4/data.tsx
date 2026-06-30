@@ -685,11 +685,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot.",
     recap:
-      "Currently, the market is bustling with activity — the vendors are arranging their produce, and the customers are browsing the colourful stalls.",
+      "Right now, the market is bustling with activity — the vendors are arranging their produce, and the customers are browsing the colourful stalls.",
     predictions:
-      "Looking ahead, I predict that in the next 30 minutes the crowd will become even larger because it's the evening shopping rush. The vendors will probably lower some prices to encourage final purchases before closing. Meanwhile, some visitors might start heading home with their full shopping bags. By the end of the evening, the market will likely become much quieter as the vendors begin to pack up their stalls.",
+      "Looking ahead, I predict that in the next 30 minutes the crowd will become even larger because it's the evening shopping rush. The vendors will probably lower some prices to encourage final purchases before closing. Meanwhile, some visitors might start heading home with their full shopping bags. Eventually, the market will become much quieter as the vendors begin to pack up their stalls.",
     reasoning:
-      "Overall, the scene will look quite different in an hour, mainly because markets naturally wind down once it gets dark and people return home for dinner.",
+      "Overall, the scene will look quite different in an hour, because markets naturally wind down once it gets dark and people return home for dinner.",
   },
   {
     accent: "text-sapphire",
@@ -697,11 +697,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting.",
     recap:
-      "The beach is beautiful and peaceful right now — the sun is low on the horizon, and a few families are still enjoying the shore.",
+      "Right now, the beach is beautiful and peaceful — the sun is low on the horizon, and a few families are still enjoying the shore.",
     predictions:
-      "I believe that as the sun sets lower, the temperature will drop noticeably, and people will probably start gathering their belongings. The swimmers are going to come out of the water soon because it will get too dark to swim safely. Some families might turn on lights or build small fires to keep enjoying the evening. Eventually, the beach will become much quieter as most visitors leave for home.",
+      "Looking ahead, I predict that as the sun sets lower the temperature will drop noticeably, and people will probably start gathering their belongings. The swimmers are going to come out of the water soon because it will get too dark to swim safely. Some families might turn on lights or build small fires to keep enjoying the evening. Eventually, the beach will become much quieter as most visitors leave for home.",
     reasoning:
-      "In conclusion, I predict the atmosphere will shift from relaxed and active to calm and almost empty, simply because nightfall makes the beach colder and harder to enjoy.",
+      "Overall, the atmosphere will shift from relaxed and active to calm and almost empty, because nightfall makes the beach colder and harder to enjoy.",
   },
   {
     accent: "text-emerald2",
@@ -709,11 +709,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones.",
     recap:
-      "The café is cozy and calm right now, with customers reading or working on laptops while the staff are preparing drinks.",
+      "Right now, the café is cozy and calm, with customers reading or working on laptops while the staff are preparing drinks.",
     predictions:
-      "I anticipate that later in the evening, the atmosphere will change. More people might arrive after finishing work, so the café could become busier than it is now. The staff will probably be getting more coffee ready in preparation for the rush. Some of the current customers are going to leave to make room for new ones. Eventually, the quiet, relaxed mood will shift into something more lively and social.",
+      "Looking ahead, I predict that later in the evening the atmosphere will change. More people might arrive after finishing work, so the café could become busier than it is now. The staff will probably be getting more coffee ready in preparation for the rush. Some of the current customers are going to leave to make room for new ones. Eventually, the quiet, relaxed mood will shift into something more lively and social.",
     reasoning:
-      "That's why I believe the café's energy will rise as the day goes on, because cafés tend to fill up once the workday ends and people look for a place to unwind.",
+      "Overall, the café's energy will rise as the day goes on, because cafés tend to fill up once the workday ends and people look for a place to unwind.",
   },
   {
     accent: "text-amber2",
@@ -723,9 +723,9 @@ export const SAMPLE_ANSWERS = [
     recap:
       "Right now, the mountain landscape looks calm and clear — the sky is bright, and a few hikers are making their way along the trail in the foreground.",
     predictions:
-      "Looking ahead, I expect the weather in the mountains will change quickly, as it often does at high altitude. Clouds will likely roll in over the peaks, and the temperature is going to drop in the late afternoon. The hikers will probably start descending soon to reach safety before dark. Meanwhile, the light will fade, and the snow-capped peaks might be hidden behind mist.",
+      "Looking ahead, I predict that the weather in the mountains will change quickly, as it often does at high altitude. Clouds will likely roll in over the peaks, and the temperature is going to drop in the late afternoon. The hikers will probably start descending soon to reach safety before dark. Eventually, the light will fade, and the snow-capped peaks might be hidden behind mist.",
     reasoning:
-      "Overall, the scene will likely become colder and less visible within a few hours, because mountain weather is unpredictable and daylight disappears fast in the valleys.",
+      "Overall, the scene will become colder and less visible within a few hours, because mountain weather is unpredictable and daylight disappears fast in the valleys.",
   },
   {
     accent: "text-rose2",
@@ -733,11 +733,11 @@ export const SAMPLE_ANSWERS = [
     imagePrompt:
       "A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view.",
     recap:
-      "At the moment, the street festival is full of energy — large crowds are celebrating, performers are dancing, and the food stalls are doing brisk business.",
+      "Right now, the street festival is full of energy — large crowds are celebrating, performers are dancing, and the food stalls are doing brisk business.",
     predictions:
-      "I predict that as the day turns into evening, the festival will become even more crowded because more people will arrive after work. The festive lights will be switched on, and the atmosphere is going to feel more dramatic and exciting. The performers will probably move on to bigger shows, while the food stalls might start selling out of popular items. Later in the night, however, families with young children will likely begin heading home.",
+      "Looking ahead, I predict that as the day turns into evening the festival will become even more crowded because more people will arrive after work. The festive lights will be switched on, and the atmosphere is going to feel more dramatic and exciting. The performers will probably move on to bigger shows, while the food stalls might start selling out of popular items. Eventually, families with young children will begin heading home.",
     reasoning:
-      "In conclusion, the celebration will likely peak in the evening and then gradually wind down, because festivals naturally build toward a night-time climax before the crowds disperse.",
+      "Overall, the celebration will peak in the evening and then gradually wind down, because festivals naturally build toward a night-time climax before the crowds disperse.",
   },
 ];
 

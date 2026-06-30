@@ -670,9 +670,9 @@ export const SAMPLES = [
     imagePrompt:
       '"A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot."',
     setting:
-      '"This is a vibrant outdoor market scene, taken during the day. The atmosphere looks bustling and lively, and the colours immediately stand out."',
+      '"This image shows a vibrant outdoor market scene, taken during the day. The atmosphere looks bustling and lively, and the colours immediately stand out."',
     details:
-      '"In the foreground, there are colourful fruit and vegetable stalls overflowing with fresh produce. The vendors are wearing traditional clothing and are actively arranging their items. In the middle section, customers are browsing and selecting goods, and some are carrying shopping bags. I can see vibrant blues, reds, yellows, and greens everywhere. In the background, more stalls are visible, and there are tall buildings rising above the crowd."',
+      '"In the foreground, there are colourful fruit and vegetable stalls overflowing with fresh produce, and the vendors are wearing traditional clothing as they arrange their items. In the middle, customers are browsing and selecting goods, and some are carrying shopping bags, with vibrant blues, reds, yellows, and greens everywhere. In the background, more stalls are visible, and there are tall buildings rising above the crowd."',
     impression:
       '"Overall, the scene captures the energy and vibrancy of a bustling marketplace. It looks like a place full of life and cultural richness, and I would really enjoy visiting somewhere like this."',
   },
@@ -682,11 +682,11 @@ export const SAMPLES = [
     imagePrompt:
       '"A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting."',
     setting:
-      '"The image shows a quiet, serene beach at sunset. The colours are very warm and peaceful, with the sky glowing in shades of orange and pink."',
+      '"This image shows a quiet, serene beach at sunset, taken in the evening. The atmosphere looks warm and peaceful, and the sky is glowing in shades of orange and pink."',
     details:
-      '"The foreground shows golden sand where a few people are walking slowly along the shore. The water in the middle is a calm blue colour, and it reflects the warm light of the setting sun. To the left, there are some palm trees swaying gently, and in the background I can see small beach huts and a few scattered clouds in the sky. Everything looks soft and still."',
+      '"In the foreground, there is golden sand where a few people are walking slowly along the shore. In the middle, the water is a calm blue colour, and it reflects the warm light of the setting sun, while some palm trees sway gently to the left. In the background, I can see small beach huts and a few scattered clouds in the sky, and everything looks soft and still."',
     impression:
-      '"This is a very peaceful, serene moment. The combination of the sunset colours and the relaxed atmosphere would make it an ideal place to unwind after a long day."',
+      '"Overall, this is a very peaceful, serene moment. The combination of the sunset colours and the relaxed atmosphere would make it an ideal place to unwind after a long day, and I would love to spend an evening here."',
   },
   {
     scenario: "Scenario 3 · Cozy café interior",
@@ -694,11 +694,11 @@ export const SAMPLES = [
     imagePrompt:
       '"A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones."',
     setting:
-      '"This photograph captures a cozy café interior. The lighting is warm, and it appears to be a relaxing, welcoming space."',
+      '"This image shows a cozy café interior, taken during the day. The atmosphere looks warm and welcoming, and the lighting is soft."',
     details:
-      '"The foreground shows several small tables where customers are sitting and enjoying beverages or food. I can see chairs in different colours and styles. To the left and right, more seating areas are visible, with some people reading books and others working on laptops. The walls are decorated with paintings and warm lighting fixtures. Behind the counter, staff members are preparing drinks, and natural light is coming through the large windows."',
+      '"In the foreground, there are several small tables where customers are sitting and enjoying beverages or food, with chairs in different colours and styles. In the middle, more seating areas are visible to the left and right, with some people reading books and others working on laptops, and the walls are decorated with paintings and warm lighting fixtures. In the background, staff members are preparing drinks behind the counter, and natural light is coming through the large windows."',
     impression:
-      '"Overall, the café looks like a cozy retreat where people can relax and socialise. I think it would be a pleasant place to spend an afternoon with a good book."',
+      '"Overall, the café looks like a cozy retreat where people can relax and socialise. It looks like a pleasant place to spend an afternoon, and I would love to settle in here with a good book."',
   },
   {
     scenario: "Scenario 4 · Mountain landscape",
@@ -706,11 +706,11 @@ export const SAMPLES = [
     imagePrompt:
       '"A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot."',
     setting:
-      '"This image shows a breathtaking mountain landscape, taken during the day. The scene feels vast, fresh, and very peaceful."',
+      '"This image shows a breathtaking mountain landscape, taken during the day. The atmosphere looks vast, fresh, and very peaceful."',
     details:
-      '"In the foreground, there are tall green pine trees and some large rocks scattered across the ground. In the middle, a wide valley stretches out, and I can see a winding river running through it. In the background, there are tall, snow-capped peaks rising into a clear blue sky with a few white clouds. The colours range from deep greens to soft greys and bright whites, which gives the scene a real sense of scale."',
+      '"In the foreground, there are tall green pine trees and some large rocks scattered across the ground. In the middle, a wide valley stretches out, and I can see a winding river running through it. In the background, there are tall, snow-capped peaks rising into a clear blue sky with a few white clouds, and the colours range from deep greens to soft greys and bright whites, which gives the scene a real sense of scale."',
     impression:
-      '"Overall, the landscape looks calm and majestic. It reminds me of peaceful hiking trips, and it would be a wonderful place to escape from the noise of the city."',
+      '"Overall, the landscape looks calm and majestic. It reminds me of peaceful hiking trips, and I would love to escape here from the noise of the city."',
   },
   {
     scenario: "Scenario 5 · Street festival",
@@ -718,11 +718,11 @@ export const SAMPLES = [
     imagePrompt:
       '"A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view."',
     setting:
-      '"This image shows a lively street festival or cultural celebration. The atmosphere looks joyful and energetic, and the whole street is full of colour."',
+      '"This image shows a lively street festival or cultural celebration, taken during the day. The atmosphere looks joyful and energetic, and the whole street is full of colour."',
     details:
-      '"In the foreground, large crowds of people are celebrating, and many of them are smiling and taking photos. To the left and right, colourful decorations and banners are hanging across the street. In the middle, performers in traditional costumes are dancing, while food stalls line both sides of the road. In the background, I can see festive lights and even more people gathered together. The bright colours really stand out against the busy scene."',
+      '"In the foreground, large crowds of people are celebrating, and many of them are smiling and taking photos, with colourful decorations and banners hanging across the street. In the middle, performers in traditional costumes are dancing, while food stalls line both sides of the road. In the background, I can see festive lights and even more people gathered together, and the bright colours really stand out against the busy scene."',
     impression:
-      '"Overall, the scene captures the excitement and community spirit of a cultural festival. It looks like the kind of event where people of all ages come together to celebrate, and I would love to experience it in person."',
+      '"Overall, the scene captures the excitement and community spirit of a cultural festival. It looks like the kind of event where people of all ages come together, and I would love to experience it in person."',
   },
 ];
 

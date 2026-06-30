@@ -125,27 +125,27 @@ export const COMPLETE_EXAMPLES = [
     border: "border-emerald2",
     title: "Example 2: Remote Work vs. Office Work",
     statement:
-      "I strongly believe remote work is more productive than working in an office because it reduces distractions and increases flexibility.",
+      "I firmly believe remote work is more productive than working in an office because it reduces distractions and increases flexibility.",
     support:
       "First, remote workers face fewer interruptions. In offices, you're constantly interrupted by colleagues, meetings, and office noise — this fragments your focus. When working from home, you control your environment and can dedicate uninterrupted time to focused work. Research actually shows remote workers complete tasks 30% faster. Second, flexibility improves work-life balance, which increases motivation. For example, you can attend your child's school event without asking for time off, reducing stress and burnout. Third, commuting time is eliminated, giving workers two extra hours daily. People can use this time for exercise, family, or better work preparation — all of which improve productivity.",
     closing:
-      "In conclusion, remote work is demonstrably more productive. The evidence clearly shows fewer distractions, better flexibility, and time savings — all leading to superior performance.",
+      "In conclusion, I firmly believe remote work is more productive. The evidence clearly shows fewer distractions, better flexibility, and time savings — all leading to superior performance.",
   },
   {
     border: "border-amber2",
     title: "Example 3: Technology in Schools",
     statement:
-      "I believe technology should be encouraged in schools because it prepares students for the modern workforce and enhances learning.",
+      "I firmly believe technology should be encouraged in schools because it prepares students for the modern workforce and enhances learning.",
     support:
       "First, technology prepares students for reality. Every modern job requires digital skills — coding, data analysis, digital communication. Schools that limit technology leave students unprepared. For example, companies now expect basic proficiency in cloud tools, spreadsheets, and online collaboration platforms. Second, technology makes learning more engaging and interactive. Educational apps allow students to learn at their own pace, receive instant feedback, and visualize complex concepts. A student struggling with mathematics benefits from interactive simulations more than from a textbook. Third, technology promotes digital citizenship and critical thinking. Students learn to evaluate online information, recognize misinformation, and use technology responsibly — skills essential in today's world.",
     closing:
-      "In conclusion, technology in schools is not just beneficial — it's essential. The evidence clearly shows it prepares students for modern careers and enhances learning outcomes.",
+      "In conclusion, I firmly believe technology in schools is essential. The evidence clearly shows it prepares students for modern careers and enhances learning outcomes.",
   },
   {
     border: "border-rose2",
     title: "Example 4: Social Media's Impact on Society",
     statement:
-      "I believe social media has more negative effects than positive ones because it harms mental health and spreads misinformation.",
+      "I firmly believe social media has more negative effects than positive ones because it harms mental health and spreads misinformation.",
     support:
       "First, social media damages mental health, particularly in young people. Studies show constant comparison with others' curated lives increases anxiety and depression. For example, teenagers spending three hours daily on social media report significantly higher rates of depression. Second, misinformation spreads rapidly on social platforms without fact-checking. During elections or health crises, false information reaches millions before corrections arrive. This has real consequences — vaccine hesitancy and election misinformation have caused measurable harm. Third, social media is designed to be addictive, reducing face-to-face interaction. While it promises connection, people are actually more isolated and lonely despite having thousands of 'friends' online.",
     closing:
@@ -155,7 +155,7 @@ export const COMPLETE_EXAMPLES = [
     border: "border-violet2",
     title: "Example 5: Career vs. Family Time Priority",
     statement:
-      "I believe people should prioritize family time over career success because meaningful relationships and well-being are more valuable than material success.",
+      "I firmly believe people should prioritize family time over career success because meaningful relationships and well-being are more valuable than material success.",
     support:
       "First, family relationships provide the deepest life satisfaction. Studies on happiness consistently show that strong relationships matter more than income above a certain threshold. A high-powered job with no time for family creates wealth but not happiness — you're too busy to enjoy it. Second, children need parental presence to develop healthily. Kids with involved parents show better emotional regulation, academic performance, and self-esteem. No amount of money compensates for an absent parent. Third, career success is temporary and fragile. Companies downsize, industries change, and retirement comes eventually. But family bonds remain throughout life. Your children will remember time with you long after your job title is forgotten.",
     closing:
