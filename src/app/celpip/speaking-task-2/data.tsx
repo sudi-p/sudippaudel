@@ -421,7 +421,15 @@ export const CATEGORY_SUMMARY = [
 
 // Reusable template signals highlighted inside each sample. Task 2 is a
 // narrative, so the consistent fixed frame is the closing reflection.
-export const TEMPLATE_PHRASES = ["taught me"];
+export const TEMPLATE_PHRASES = [
+  "I remember",
+  "I'll never forget",
+  "Not only was it",
+  "but it also",
+  "made me feel",
+  "made me realize",
+  "Overall, it was truly",
+];
 
 export const COMPLETE_EXAMPLES = [
   {
@@ -429,36 +437,36 @@ export const COMPLETE_EXAMPLES = [
     title: "Example 1: Overcoming Fear",
     opening:
       "A few years ago, I decided to take a solo backpacking trip through Southeast Asia for three months. I'd never traveled alone before, and honestly, I was terrified.",
-    body: "The first week was in Thailand. I remember walking through Bangkok's night market at dusk — the smell of grilled seafood was everywhere, and the crowd noise was physically overwhelming. My hands were shaking as I tried to navigate the streets with just a map. But then this street vendor noticed I was lost and helped me find my hostel. After that moment, something shifted. I realized people were genuinely kind, and I could handle being uncomfortable.",
+    body: "The first week was in Thailand. I remember walking through Bangkok's night market at dusk — the smell of grilled seafood was everywhere, and the crowd noise was physically overwhelming. My hands were shaking as I tried to navigate the streets with just a map. But then this street vendor noticed I was lost and helped me find my hostel. Not only was it unexpected, but it also completely changed how I felt about being alone in a foreign place.",
     closing:
-      "That trip taught me I'm braver than I thought. I came home knowing I could handle almost anything, and I've since traveled to ten more countries — I wouldn't trade that experience for anything.",
+      "That trip made me feel braver than I'd ever felt before, and it made me realize people are kinder than I expected. Overall, it was truly life-changing — I've since traveled to ten more countries, and I wouldn't trade that experience for anything.",
   },
   {
     border: "border-emerald2",
     title: "Example 2: Learning a Skill",
     opening:
       "Last year, I decided to learn guitar even though I had no musical background whatsoever. My brother had left his old guitar at my place, and one day I just picked it up.",
-    body: "The first month was frustrating. My fingers would hurt after just ten minutes of practice, and the strings buzzed when I played chords. I wanted to give up. But then one afternoon, I sat down and played 'Wonderwall' all the way through for the first time. I remember my heart racing and my hands trembling with excitement. That was the moment everything shifted, because it showed me that persistence actually works.",
+    body: "The first month was frustrating. My fingers would hurt after just ten minutes of practice, and the strings buzzed when I played chords. Not only was it painfully slow progress, but it also felt embarrassing every time I messed up in front of my roommate. I nearly gave up. But then one afternoon, I sat down and played 'Wonderwall' all the way through for the first time — I remember my heart racing and my hands trembling with excitement.",
     closing:
-      "That afternoon taught me you don't need talent to start — you just need patience. Now I play three times a week and I'm learning more complex songs, and I wouldn't trade that feeling for anything.",
+      "That afternoon made me feel like I'd finally accomplished something real, and it made me realize you don't need talent to start — just patience. Overall, it was truly rewarding, and now I play three times a week and I'm learning more complex songs.",
   },
   {
     border: "border-amber2",
     title: "Example 3: A Memorable Celebration",
     opening:
       "A couple of years ago, we threw my grandmother's 80th birthday party. The whole extended family came from different cities — we hadn't all been together in five years.",
-    body: "We had dinner at her favorite restaurant by the riverside. The moment I'll never forget is when the waiter brought out the cake — it was shaped like a lotus flower, her favorite flower. My grandmother's eyes actually teared up. The room went silent for a moment, and then everyone started clapping and singing. I could smell jasmine flowers on the table and taste the sweetness of the cake when we cut it together. But what hit me most was seeing her surrounded by people who loved her, laughing and telling old stories.",
+    body: "We had dinner at her favorite restaurant by the riverside. The moment I'll never forget is when the waiter brought out the cake — it was shaped like a lotus flower, her favorite flower. Not only was it emotional, but it also brought the whole room to a stop before everyone started clapping and singing. I could smell jasmine flowers on the table and taste the sweetness of the cake when we cut it together.",
     closing:
-      "That night taught me how precious those moments are. I'm so grateful I was there, and now I make sure to visit her every month.",
+      "That night made me feel closer to my family than I had in years, and it made me realize how precious those moments are. Overall, it was truly unforgettable — I'm so grateful I was there, and now I make sure to visit her every month.",
   },
   {
     border: "border-rose2",
     title: "Example 4: An Unexpected Decision",
     opening:
       "During my second year of university, I had a scholarship to study engineering. But halfway through the semester, I realized I hated it. So I made a big decision — I switched to studying environmental science instead.",
-    body: "The day I told my parents, I was so anxious. I could feel my stomach twisting as I made the call. But to my surprise, my father said, 'If you're not happy, change it. Life is too short to spend it doing something you don't believe in.' That moment lifted this huge weight off my shoulders. I'd been so worried about disappointing him that I hadn't even considered what I actually wanted. The switch was tough — I had to retake some classes — but suddenly, going to class didn't feel like a burden anymore.",
+    body: "I remember how anxious I was as I made the call — my stomach was twisting the whole time. But to my surprise, my father said, 'If you're not happy, change it. Life is too short to spend it doing something you don't believe in.' Not only was it a relief to hear, but it also made me stop worrying about what everyone else thought. The switch was tough — I had to retake some classes — but suddenly, going to class didn't feel like a burden anymore.",
     closing:
-      "That decision taught me to listen to my gut. It was scary at the time, but it was exactly right — now I work for an environmental NGO, and I couldn't imagine a different path.",
+      "That decision made me feel like I'd finally taken control of my own life, and it made me realize I need to listen to my gut. Overall, it was truly the best decision I've made — now I work for an environmental NGO, and I couldn't imagine a different path.",
   },
 ];
 

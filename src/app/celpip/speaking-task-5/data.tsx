@@ -76,8 +76,7 @@ export const SCORE_BANDS = [
         "Good comparative language with 2 clear points; uses some specific details.",
       Persuasion:
         "Chooses an option and persuades, though the soft rejection or the request for agreement may be thin.",
-      Coherence:
-        "Logical and mostly easy to follow; transitions may be basic.",
+      Coherence: "Logical and mostly easy to follow; transitions may be basic.",
       Grammar:
         "Mostly accurate; minor comparative errors don't impede meaning.",
     },
@@ -92,7 +91,8 @@ export const SCORE_BANDS = [
         "The choice may be unclear, or it doesn't sound like persuading a real person.",
       Coherence:
         "Some structure, but the flow jumps around or one point dominates.",
-      Grammar: 'Comparative errors ("more cheaper"); meaning sometimes unclear.',
+      Grammar:
+        'Comparative errors ("more cheaper"); meaning sometimes unclear.',
     },
   },
   {
