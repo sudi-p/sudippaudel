@@ -348,11 +348,27 @@ function PracticePanel() {
           </div>
           {chosen != null && (
             <>
-              <Html
-                as="div"
-                className="text-[13px] text-gray-500 leading-relaxed px-3.5 py-2.5 bg-gray-50 rounded-lg mb-3"
-                html={q.explain}
-              />
+              {/* breakdown of every option — why the right one is right, and why each of the others is wrong */}
+              <div className="flex flex-col gap-2 mb-3">
+                {q.options.map((opt) => {
+                  const isCorrectOpt = opt.toLowerCase() === q.answer.toLowerCase();
+                  const isChosenOpt = opt === chosen;
+                  const cls = isCorrectOpt
+                    ? "bg-green-50 border-green-200"
+                    : isChosenOpt
+                      ? "bg-red-50 border-red-200"
+                      : "bg-gray-50 border-gray-200";
+                  const iconCls = isCorrectOpt ? "text-green-700" : "text-red-500";
+                  return (
+                    <div key={opt} className={`px-3.5 py-2.5 rounded-lg border text-[13px] leading-relaxed ${cls}`}>
+                      <span className={`font-semibold mr-1.5 ${iconCls}`}>
+                        {isCorrectOpt ? "✓" : "✗"} {opt}:
+                      </span>
+                      <Html as="span" className="text-gray-600" html={q.reasons[opt]} />
+                    </div>
+                  );
+                })}
+              </div>
               <button className={NAV_BTN} onClick={next}>
                 {i + 1 === order.length ? "See results →" : "Next question →"}
               </button>

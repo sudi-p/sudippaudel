@@ -8,11 +8,11 @@ import {
   STRESS_RULES,
   CONNECTED_SPEECH,
 } from "./data";
-import SectionHeader from "./components/SectionHeader";
-import Intro from "./components/Intro";
-import SpeakButton from "./components/SpeakButton";
-import WordChip from "./components/WordChip";
-import SoundCard from "./components/SoundCard";
+import SectionHeader from "../components/SectionHeader";
+import Intro from "../components/Intro";
+import SpeakButton from "../components/SpeakButton";
+import WordChip from "../components/WordChip";
+import SoundCard from "../components/SoundCard";
 
 const TRAP_CLS =
   "text-[11.5px] text-amber-800 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1 leading-relaxed";

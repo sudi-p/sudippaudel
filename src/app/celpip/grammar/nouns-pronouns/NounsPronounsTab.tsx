@@ -3,7 +3,7 @@
 "use client";
 
 import { GROUPS } from "./data";
-import GroupSection from "./components/GroupSection";
+import GroupSection from "../components/GroupSection";
 
 export default function NounsPronounsSection() {
   return (
