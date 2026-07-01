@@ -3,7 +3,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { VOCAB } from "../vocabData";
+import { VOCAB } from "../celpip/vocabData";
 import SubTabs from "./components/SubTabs";
 import FillBlankQuiz from "./components/FillBlankQuiz";
 import { shuffle, blankOut } from "./components/quizUtils";

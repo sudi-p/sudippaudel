@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AdsenseAd from "@/components/AdComponent";
+import StudyChrome from "../celpip/StudyChrome";
 import GrammarTabBar from "./GrammarTabBar";
 import VoicePreloader from "./VoicePreloader";
 
@@ -15,7 +16,7 @@ export default function GrammarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <StudyChrome>
       <VoicePreloader />
 
       {/* ─── HERO ─── */}
@@ -64,6 +65,6 @@ export default function GrammarLayout({
           for test success.
         </p>
       </footer>
-    </>
+    </StudyChrome>
   );
 }
