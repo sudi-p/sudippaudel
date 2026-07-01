@@ -3,7 +3,7 @@
 "use client";
 
 import { useState } from "react";
-import { SOUND_WORDS, SENTENCES, TRAPS, QUIZ } from "./data";
+import { SOUND_WORDS, TRAPS, ARTICLE_PRACTICE } from "./data";
 
 const Html = ({ html, className, as: Tag = "span" }) => (
   <Tag className={className} dangerouslySetInnerHTML={{ __html: html }} />
@@ -11,11 +11,18 @@ const Html = ({ html, className, as: Tag = "span" }) => (
 
 const SUB_TABS = [
   { id: "art-rules", label: "Rules" },
-  { id: "art-sound", label: "Sound rule" },
-  { id: "art-practice", label: "Fill-in" },
+  { id: "art-practice", label: "Practice" },
   { id: "art-traps", label: "Common traps" },
-  { id: "art-quiz", label: "Quiz" },
 ];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 const NAV_BTN =
   "px-3.5 py-1.5 border border-gray-300 rounded-lg bg-white text-[13px] cursor-pointer text-gray-700 disabled:opacity-35 disabled:cursor-default";
@@ -34,7 +41,7 @@ const BADGE = {
 const RULES = [
   { badge: "a", label: "a", title: "First mention — any one of its kind", body: `Use <strong>a</strong> when you introduce something for the first time, or when it doesn't matter <em>which</em> one — just any single one.`, pills: ["I saw <em>a</em> dog.", "She has <em>a</em> job offer.", "Can I borrow <em>a</em> pen?"] },
   { badge: "an", label: "an", title: `Same as "a" — but before a vowel sound`, body: `Use <strong>an</strong> when the very next sound is a vowel. It's about the <em>sound</em>, not the spelling.`, pills: ["<em>an</em> apple", "<em>an</em> hour (silent h)", `<em>an</em> MBA (says "em")`, `<em>a</em> university (says "you")`, "<em>a</em> European"] },
-  { badge: "the", label: "the", title: "Already known — the specific one", body: `Use <strong>the</strong> when both speaker and listener know exactly which one is meant — because it was mentioned before, there's only one, or context makes it obvious.`, pills: ["I saw a dog. <em>The</em> dog barked.", "<em>The</em> sun rises in the east.", "Close <em>the</em> door.", "<em>The</em> president spoke today."] },
+  { badge: "the", label: "the", title: "Already known — the specific one", body: `Use <strong>the</strong> when both speaker and listener know exactly which one is meant — because it was mentioned before, there's only one, context makes it obvious, or you both share the same real-world knowledge of it (your regular store, doctor, gym) even if it's the first time you've said the word out loud. Being physically inside a place does NOT make it "the" on its own — what matters is whether your listener can identify it, not where your body is standing.`, pills: ["I saw a dog. <em>The</em> dog barked.", "<em>The</em> sun rises in the east.", "Close <em>the</em> door.", "<em>The</em> president spoke today.", "Hi Mom, I'm at <em>the</em> furniture store. (our usual one — she knows which)", "Hi Mom, I'm at <em>a</em> furniture store downtown. (a new one — she has no idea which)"] },
   { badge: "the", label: "the", title: "Superlatives & unique roles", body: `Use <strong>the</strong> with superlatives (best, worst, tallest) and with ordinals (first, second, last). Also with one-of-a-kind things in context.`, pills: ["<em>The</em> best option", "<em>The</em> first time", "<em>The</em> last train", "<em>The</em> only solution"] },
   { badge: "the", label: "the", title: `Geographic names that use "the"`, body: `Rivers, oceans, seas, mountain ranges, deserts, and country names with "united/republic/states/islands" take <strong>the</strong>.`, pills: ["<em>The</em> Amazon", "<em>The</em> Pacific Ocean", "<em>The</em> Alps", "<em>The</em> Sahara", "<em>The</em> United States", "<em>The</em> Philippines"] },
 ];
@@ -83,12 +90,61 @@ function RuleCard({ badge, label, title, body, pills }) {
   );
 }
 
+function SoundRuleCard() {
+  const [sel, setSel] = useState(0);
+  const w = SOUND_WORDS[sel];
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl px-5 py-4 mb-3">
+      <div className="text-sm font-semibold text-gray-900 mb-1.5 flex items-center gap-2">
+        <span className={`inline-block text-[11px] font-semibold px-2 py-[2px] rounded-md ${BADGE.an}`}>
+          a / an
+        </span>
+        The sound rule
+      </div>
+      <Html
+        as="p"
+        className={`text-[13px] text-gray-500 mb-3 leading-relaxed ${EM} [&_strong]:font-bold`}
+        html={`It's about the <em>sound</em> of the next word, not its first letter. Click each word to see the rule.`}
+      />
+      <div className="bg-gray-50 rounded-xl p-5 mb-4 min-h-[80px]">
+        <div className="text-[22px] text-gray-900 mb-2 font-semibold">
+          <span className="text-blue-600">{w.art}</span> {w.word}
+        </div>
+        <Html as="div" className="text-[13px] text-gray-500 leading-relaxed" html={w.why} />
+      </div>
+      <div className="flex gap-2 flex-wrap mb-4">
+        {SOUND_WORDS.map((sw, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setSel(i)}
+            className={`text-[13px] px-3.5 py-1.5 rounded-lg border cursor-pointer transition-all ${
+              sel === i
+                ? "bg-white border-gray-300 text-gray-900 font-medium"
+                : "bg-gray-50 border-gray-200 text-gray-500"
+            }`}
+          >
+            <strong>{sw.art}</strong> {sw.word}
+          </button>
+        ))}
+      </div>
+      <div className="px-3.5 py-2.5 bg-gray-50 rounded-lg text-[13px] text-gray-500 leading-relaxed">
+        <strong className="text-gray-700">Tip:</strong> When unsure, say the
+        phrase aloud. If the next word begins with a vowel sound, your mouth
+        naturally prefers "an".
+      </div>
+    </div>
+  );
+}
+
 function RulesPanel() {
   return (
     <>
       {RULES.map((r, i) => (
         <RuleCard key={i} {...r} />
       ))}
+
+      <SoundRuleCard />
 
       {/* Zero-article grid card */}
       <div className="bg-white border border-gray-200 rounded-xl px-5 py-4 mb-3">
@@ -137,134 +193,6 @@ function RulesPanel() {
   );
 }
 
-/* ═══════════════════════════ SOUND PANEL ═══════════════════════════ */
-
-function SoundPanel() {
-  const [sel, setSel] = useState(0);
-  const w = SOUND_WORDS[sel];
-  return (
-    <>
-      <Html
-        as="p"
-        className={`text-sm text-gray-500 mb-4 leading-relaxed ${EM} [&_strong]:font-bold`}
-        html={`The <strong>a / an</strong> rule is about the <em>sound</em> of the next word, not its first letter. Click each word to see the rule.`}
-      />
-      <div className="bg-gray-50 rounded-xl p-5 mb-4 min-h-[80px]">
-        <div className="text-[22px] text-gray-900 mb-2 font-semibold">
-          <span className="text-blue-600">{w.art}</span> {w.word}
-        </div>
-        <Html as="div" className="text-[13px] text-gray-500 leading-relaxed" html={w.why} />
-      </div>
-      <div className="flex gap-2 flex-wrap mb-4">
-        {SOUND_WORDS.map((sw, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setSel(i)}
-            className={`text-[13px] px-3.5 py-1.5 rounded-lg border cursor-pointer transition-all ${
-              sel === i
-                ? "bg-white border-gray-300 text-gray-900 font-medium"
-                : "bg-gray-50 border-gray-200 text-gray-500"
-            }`}
-          >
-            <strong>{sw.art}</strong> {sw.word}
-          </button>
-        ))}
-      </div>
-      <div className="px-3.5 py-2.5 bg-gray-50 rounded-lg text-[13px] text-gray-500 leading-relaxed">
-        <strong className="text-gray-700">Tip:</strong> When unsure, say the
-        phrase aloud. If the next word begins with a vowel sound, your mouth
-        naturally prefers "an".
-      </div>
-    </>
-  );
-}
-
-/* ═══════════════════════════ FILL-IN PANEL ═══════════════════════════ */
-
-function FillPanel() {
-  const [i, setI] = useState(0);
-  const [chosen, setChosen] = useState(null);
-  const s = SENTENCES[i];
-  const move = (d) => {
-    setI((x) => Math.max(0, Math.min(SENTENCES.length - 1, x + d)));
-    setChosen(null);
-  };
-  const isRight =
-    chosen != null && chosen.toLowerCase() === s.answer.toLowerCase();
-
-  return (
-    <>
-      <div className="flex items-center justify-between mb-4">
-        <button className={NAV_BTN} onClick={() => move(-1)} disabled={i === 0}>
-          ← prev
-        </button>
-        <span className="text-[13px] text-gray-500">
-          {i + 1} of {SENTENCES.length}
-        </span>
-        <button
-          className={NAV_BTN}
-          onClick={() => move(1)}
-          disabled={i === SENTENCES.length - 1}
-        >
-          next →
-        </button>
-      </div>
-      <div className="bg-gray-50 rounded-xl p-5 mb-3">
-        <div className="text-[18px] text-gray-900 [line-height:2] mb-3">
-          {s.before ? s.before + " " : ""}
-          <span
-            className="inline-block min-w-[52px] border-b-2 border-gray-400 text-center px-1 text-[18px]"
-            style={isRight ? { color: "#16a34a" } : { color: "#6b7280" }}
-          >
-            {isRight ? s.answer : "___"}
-          </span>{" "}
-          {s.after}
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          {s.options.map((opt) => {
-            let cls = "bg-white border-gray-300 text-gray-700";
-            if (chosen != null) {
-              const correct = opt.toLowerCase() === s.answer.toLowerCase();
-              if (correct) cls = "bg-green-100 border-green-600 text-green-800";
-              else if (opt === chosen) cls = "bg-red-100 border-red-600 text-red-800";
-            }
-            return (
-              <button
-                key={opt}
-                type="button"
-                disabled={chosen != null}
-                onClick={() => setChosen(opt)}
-                className={`px-4 py-1.5 border rounded-lg text-sm font-medium ${cls} ${
-                  chosen == null ? "cursor-pointer hover:bg-gray-50" : "cursor-default"
-                }`}
-              >
-                {opt}
-              </button>
-            );
-          })}
-        </div>
-        {chosen != null && (
-          <div
-            className={`text-[13px] mt-2.5 font-medium ${
-              isRight ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {isRight ? "✓ Correct!" : "✗ Not quite."}
-          </div>
-        )}
-      </div>
-      {chosen != null && (
-        <Html
-          as="div"
-          className="text-[13px] text-gray-500 leading-relaxed px-3.5 py-2.5 bg-gray-50 rounded-lg mt-2"
-          html={s.explain}
-        />
-      )}
-    </>
-  );
-}
-
 /* ═══════════════════════════ TRAPS PANEL ═══════════════════════════ */
 
 function TrapsPanel() {
@@ -294,95 +222,143 @@ function TrapsPanel() {
   );
 }
 
-/* ═══════════════════════════ QUIZ PANEL ═══════════════════════════ */
+/* ═══════════════════════════ PRACTICE PANEL ═══════════════════════════ */
+/* Combined fill-in + quiz: 120 questions pulled from all 8 Speaking tasks
+   and both Writing tasks, shuffled on each run, with a live right/wrong
+   scoreboard that updates the instant you answer each question. */
 
-function QuizPanel() {
+function PracticePanel() {
+  const [order, setOrder] = useState(() => shuffle(ARTICLE_PRACTICE.map((_, idx) => idx)));
   const [i, setI] = useState(0);
-  const [score, setScore] = useState(0);
   const [chosen, setChosen] = useState(null);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
 
-  const answer = (idx) => {
-    if (chosen !== null) return;
-    const q = QUIZ[i];
-    setChosen(idx);
-    if (idx === q.ans) setScore((s) => s + 1);
-    setTimeout(() => {
-      setI((x) => x + 1);
-      setChosen(null);
-    }, 1800);
+  const done = i >= order.length;
+  const q = done ? null : ARTICLE_PRACTICE[order[i]];
+  const isRight = chosen != null && q && chosen.toLowerCase() === q.answer.toLowerCase();
+  const answered = correctCount + wrongCount;
+  const pct = order.length ? (answered / order.length) * 100 : 0;
+
+  const answer = (opt) => {
+    if (chosen != null) return;
+    setChosen(opt);
+    if (opt.toLowerCase() === q.answer.toLowerCase()) {
+      setCorrectCount((c) => c + 1);
+    } else {
+      setWrongCount((c) => c + 1);
+    }
   };
-  const restart = () => {
-    setI(0);
-    setScore(0);
+
+  const next = () => {
+    setI((x) => x + 1);
     setChosen(null);
   };
 
-  const done = i >= QUIZ.length;
-  const pct = done ? 100 : (i / QUIZ.length) * 100;
+  const restart = () => {
+    setOrder(shuffle(ARTICLE_PRACTICE.map((_, idx) => idx)));
+    setI(0);
+    setChosen(null);
+    setCorrectCount(0);
+    setWrongCount(0);
+  };
 
   return (
     <>
+      {/* live scoreboard — updates the instant each question is answered */}
+      <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+        <div className="flex items-center gap-3 text-[13px] font-medium">
+          <span className="text-green-600">✓ Correct: {correctCount}</span>
+          <span className="text-red-600">✗ Incorrect: {wrongCount}</span>
+        </div>
+        <span className="text-[13px] text-gray-500">
+          {Math.min(i + 1, order.length)} of {order.length}
+        </span>
+      </div>
       <div className="h-[3px] bg-gray-200 rounded-sm mb-5">
         <div className="h-[3px] bg-blue-600 rounded-sm transition-all" style={{ width: `${pct}%` }} />
       </div>
+
       {done ? (
         <div className="text-center px-4 py-10">
           <div className="text-5xl font-bold text-gray-900">
-            {score}/{QUIZ.length}
+            {correctCount}/{order.length}
           </div>
           <div className="text-[15px] text-gray-500 mt-1.5">
-            {score === QUIZ.length
+            {correctCount === order.length
               ? "Perfect! 🎉"
-              : score >= 9
+              : correctCount >= order.length * 0.8
                 ? "Great work!"
-                : score >= 6
+                : correctCount >= order.length * 0.5
                   ? "Good effort — keep practising!"
                   : "Keep studying — you'll get there!"}
           </div>
           <button className={`${NAV_BTN} mt-4`} onClick={restart}>
-            Try again
+            Shuffle & try again
           </button>
         </div>
       ) : (
-        (() => {
-          const q = QUIZ[i];
-          return (
+        <>
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-blue-600 mb-2">
+            {q.task}
+          </div>
+          <div className="bg-gray-50 rounded-xl p-5 mb-3">
+            <div className="text-[18px] text-gray-900 [line-height:2] mb-3">
+              {q.before ? q.before + " " : ""}
+              <span
+                className="inline-block min-w-[52px] border-b-2 border-gray-400 text-center px-1 text-[18px]"
+                style={isRight ? { color: "#16a34a" } : { color: "#6b7280" }}
+              >
+                {chosen != null ? q.answer : "___"}
+              </span>{" "}
+              {q.after}
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {q.options.map((opt) => {
+                let cls = "bg-white border-gray-300 text-gray-700";
+                if (chosen != null) {
+                  const correct = opt.toLowerCase() === q.answer.toLowerCase();
+                  if (correct) cls = "bg-green-100 border-green-600 text-green-800";
+                  else if (opt === chosen) cls = "bg-red-100 border-red-600 text-red-800";
+                }
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    disabled={chosen != null}
+                    onClick={() => answer(opt)}
+                    className={`px-4 py-1.5 border rounded-lg text-sm font-medium ${cls} ${
+                      chosen == null ? "cursor-pointer hover:bg-gray-50" : "cursor-default"
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+            {chosen != null && (
+              <div
+                className={`text-[13px] mt-2.5 font-medium ${
+                  isRight ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {isRight ? "✓ Correct!" : "✗ Not quite."}
+              </div>
+            )}
+          </div>
+          {chosen != null && (
             <>
-              <div className="text-base font-semibold text-gray-900 mb-3.5">
-                {i + 1}. {q.q}
-              </div>
-              <div className="flex flex-col gap-2">
-                {q.opts.map((o, idx) => {
-                  let cls = "bg-white border-gray-300 text-gray-700";
-                  if (chosen !== null) {
-                    if (idx === q.ans) cls = "bg-green-100 border-green-600 text-green-800";
-                    else if (idx === chosen) cls = "bg-red-100 border-red-600 text-red-800";
-                  }
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      disabled={chosen !== null}
-                      onClick={() => answer(idx)}
-                      className={`px-3.5 py-2.5 border rounded-lg text-sm text-left ${cls} ${
-                        chosen === null ? "cursor-pointer hover:bg-gray-50" : "cursor-default"
-                      }`}
-                    >
-                      {o}
-                    </button>
-                  );
-                })}
-              </div>
-              {chosen !== null && (
-                <Html
-                  as="div"
-                  className="text-[13px] text-gray-500 mt-2.5 px-3 py-2.5 bg-gray-50 rounded-lg leading-relaxed"
-                  html={q.exp}
-                />
-              )}
+              <Html
+                as="div"
+                className="text-[13px] text-gray-500 leading-relaxed px-3.5 py-2.5 bg-gray-50 rounded-lg mb-3"
+                html={q.explain}
+              />
+              <button className={NAV_BTN} onClick={next}>
+                {i + 1 === order.length ? "See results →" : "Next question →"}
+              </button>
             </>
-          );
-        })()
+          )}
+        </>
       )}
     </>
   );
@@ -392,10 +368,8 @@ function QuizPanel() {
 
 const PANELS = {
   "art-rules": RulesPanel,
-  "art-sound": SoundPanel,
-  "art-practice": FillPanel,
+  "art-practice": PracticePanel,
   "art-traps": TrapsPanel,
-  "art-quiz": QuizPanel,
 };
 
 function PositionHeader() {

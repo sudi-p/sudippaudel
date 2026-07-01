@@ -4617,123 +4617,6 @@ export const SOUND_WORDS = [
   },
 ];
 
-export const SENTENCES = [
-  {
-    before: "I saw",
-    after: "dog in the park.",
-    answer: "a",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      '"dog" — first mention, singular countable, consonant sound /d/ → <strong>a</strong>.',
-  },
-  {
-    before: "The dog barked, so I called",
-    after: "officer.",
-    answer: "an",
-    options: ["a", "an", "the", "∅"],
-    explain: '"officer" starts with /ɒ/ — vowel sound → <strong>an</strong>.',
-  },
-  {
-    before: "",
-    after: "sun rises in the east.",
-    answer: "The",
-    options: ["A", "An", "The", "∅"],
-    explain:
-      "There is only one sun — unique in context → <strong>the</strong>.",
-  },
-  {
-    before: "She is",
-    after: "honest person.",
-    answer: "an",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      '"honest" has a silent h — first sound is a vowel → <strong>an</strong>.',
-  },
-  {
-    before: "I drink",
-    after: "coffee every morning.",
-    answer: "∅",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      '"coffee" is uncountable in a general habit statement — no article needed.',
-  },
-  {
-    before: "He is",
-    after: "best player on the team.",
-    answer: "the",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      'Superlatives always take <strong>the</strong> — there is only one "best".',
-  },
-  {
-    before: "Turn off",
-    after: "lights before you leave.",
-    answer: "the",
-    options: ["a", "an", "the", "∅"],
-    explain: "Shared context — both know which lights → <strong>the</strong>.",
-  },
-  {
-    before: "",
-    after: "cats are independent animals.",
-    answer: "∅",
-    options: ["A", "An", "The", "∅"],
-    explain: "Plural generalization about all cats → no article.",
-  },
-  {
-    before: "She lives in",
-    after: "United States.",
-    answer: "the",
-    options: ["a", "an", "the", "∅"],
-    explain: '"United" country names take <strong>the</strong>.',
-  },
-  {
-    before: "I have",
-    after: "meeting at 3 pm.",
-    answer: "a",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      "First mention, singular countable, consonant sound → <strong>a</strong>.",
-  },
-  {
-    before: "She wants to become",
-    after: "engineer.",
-    answer: "an",
-    options: ["a", "an", "the", "∅"],
-    explain: '"engineer" starts with /ɛ/ — vowel sound → <strong>an</strong>.',
-  },
-  {
-    before: "",
-    after: "music she played was beautiful.",
-    answer: "The",
-    options: ["A", "An", "The", "∅"],
-    explain:
-      "Specific music — the one she played. Context makes it known → <strong>the</strong>.",
-  },
-  {
-    before: "Can I have",
-    after: "glass of water?",
-    answer: "a",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      "First mention, countable, consonant sound /ɡ/ → <strong>a</strong>.",
-  },
-  {
-    before: "It was",
-    after: "most difficult exam I have ever taken.",
-    answer: "the",
-    options: ["a", "an", "the", "∅"],
-    explain: 'Superlative "most difficult" → <strong>the</strong>.',
-  },
-  {
-    before: "He went to",
-    after: "hospital to visit his friend.",
-    answer: "the",
-    options: ["a", "an", "the", "∅"],
-    explain:
-      "Visiting (not a patient) — treating the hospital as a physical place → <strong>the</strong>.",
-  },
-];
-
 export const TRAPS = [
   {
     wrong: "✗ She is the doctor.",
@@ -4787,79 +4670,153 @@ export const TRAPS = [
   },
 ];
 
-export const QUIZ = [
-  {
-    q: "I need ___ advice from you.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 3,
-    exp: '"Advice" is uncountable — no article for a general request.',
-  },
-  {
-    q: "She's ___ best student in the class.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 2,
-    exp: "Superlative → always use <strong>the</strong>.",
-  },
-  {
-    q: "My brother is ___ honest man.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 1,
-    exp: '"honest" has a silent h — vowel sound → <strong>an</strong>.',
-  },
-  {
-    q: "I play ___ tennis on weekends.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 3,
-    exp: "Sports take no article.",
-  },
-  {
-    q: "Close ___ window — it's cold!",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 2,
-    exp: "Shared context — only one window, both know which → <strong>the</strong>.",
-  },
-  {
-    q: "___ Amazon is the largest river in the world.",
-    opts: ["A", "An", "The", "∅ (none)"],
-    ans: 2,
-    exp: "Rivers take <strong>the</strong>.",
-  },
-  {
-    q: "She graduated from ___ university last year.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 0,
-    exp: '"university" starts with /juː/ — consonant sound → <strong>a</strong>.',
-  },
-  {
-    q: "___ children need love and stability.",
-    opts: ["A", "An", "The", "∅ (none)"],
-    ans: 3,
-    exp: "General plural statement about all children → no article.",
-  },
-  {
-    q: "It was ___ most shocking news I had ever heard.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 2,
-    exp: 'Superlative "most shocking" → <strong>the</strong>.',
-  },
-  {
-    q: "He is ___ engineer at a tech company.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 1,
-    exp: '"engineer" starts with /ɛ/ — vowel sound → <strong>an</strong>.',
-  },
-  {
-    q: "We visited ___ Eiffel Tower last summer.",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 2,
-    exp: "Unique landmarks take <strong>the</strong>.",
-  },
-  {
-    q: "Can I have ___ water, please?",
-    opts: ["a", "an", "the", "∅ (none)"],
-    ans: 3,
-    exp: '"Water" is uncountable in a general request → no article.',
-  },
+// ─────────────────────────────────────────────────────────────────────────────
+// ARTICLE_PRACTICE — combined fill-in / quiz bank for the Articles Practice tab.
+// 12 questions × all 10 CELPIP tasks (Speaking 1–8, Writing 1–2) = 120 total,
+// so the pool always clears the 100-question minimum and can be shuffled.
+// ─────────────────────────────────────────────────────────────────────────────
+const OPTS = ["a", "an", "the", "∅"];
+
+export const ARTICLE_PRACTICE = [
+  // ── Speaking Task 1 — Giving Advice ──────────────────────────────────────
+  { task: "Speaking Task 1 — Giving Advice", before: "You should see", after: "doctor about that pain.", options: OPTS, answer: "a", explain: '"doctor" — first mention, consonant sound /d/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "I think you need", after: "break from work.", options: OPTS, answer: "a", explain: '"break" starts with consonant /b/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "Maybe you could ask", after: "expert for advice.", options: OPTS, answer: "an", explain: '"expert" starts with /ɛ/ — vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "Why don't you talk to", after: "counsellor at school?", options: OPTS, answer: "a", explain: '"counsellor" starts with consonant /k/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "You might want to take", after: "day off this week.", options: OPTS, answer: "a", explain: '"day" — first mention, consonant /d/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "I would recommend", after: "honest conversation with your manager.", options: OPTS, answer: "an", explain: '"honest" has a silent h — vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "Have you thought about getting", after: "second opinion?", options: OPTS, answer: "a", explain: '"second" starts with consonant /s/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "You should give yourself", after: "time to think it over.", options: OPTS, answer: "∅", explain: '"time" is uncountable here — a general amount, not one specific thing.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "I believe", after: "best solution is to talk to her directly.", options: OPTS, answer: "the", explain: 'Superlative "best" → always <strong>the</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "It might help to write down", after: "advice I'm giving you.", options: OPTS, answer: "the", explain: 'Already specific — "the advice I\'m giving you" is identified by the relative clause.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "You could look for", after: "new apartment closer to work.", options: OPTS, answer: "a", explain: '"new" starts with consonant /n/ → <strong>a</strong>.' },
+  { task: "Speaking Task 1 — Giving Advice", before: "I suggest you avoid", after: "stress as much as possible.", options: OPTS, answer: "∅", explain: '"stress" is uncountable in this general statement — no article.' },
+
+  // ── Speaking Task 2 — Personal Experience ────────────────────────────────
+  { task: "Speaking Task 2 — Personal Experience", before: "Last year, I went on", after: "unforgettable trip to Banff.", options: OPTS, answer: "an", explain: '"unforgettable" starts with /ʌ/ — vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "I still remember", after: "day I graduated from college.", options: OPTS, answer: "the", explain: "A specific day, already identified by the relative clause → <strong>the</strong>." },
+  { task: "Speaking Task 2 — Personal Experience", before: "We stayed at", after: "small hotel near the lake.", options: OPTS, answer: "a", explain: '"small" starts with consonant /s/ → <strong>a</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "It was", after: "hour before the bus finally arrived.", options: OPTS, answer: "an", explain: '"hour" has a silent h — vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "I met", after: "old friend I hadn't seen in years.", options: OPTS, answer: "an", explain: '"old" starts with vowel /oʊ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "That afternoon, we had", after: "picnic in the park.", options: OPTS, answer: "a", explain: '"picnic" — first mention, consonant /p/ → <strong>a</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "I'll never forget", after: "look on her face when she saw the surprise.", options: OPTS, answer: "the", explain: "Specific, known look — identified by the context → <strong>the</strong>." },
+  { task: "Speaking Task 2 — Personal Experience", before: "During the trip, we visited", after: "Rocky Mountains.", options: OPTS, answer: "the", explain: "Mountain ranges take <strong>the</strong>." },
+  { task: "Speaking Task 2 — Personal Experience", before: "I felt", after: "happiness I had never experienced before.", options: OPTS, answer: "the", explain: "Abstract noun made specific by the relative clause → <strong>the</strong>." },
+  { task: "Speaking Task 2 — Personal Experience", before: "We travelled by", after: "train through the mountains.", options: OPTS, answer: "∅", explain: 'No article after "by" for a mode of transport.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "It was", after: "most memorable summer of my life.", options: OPTS, answer: "the", explain: 'Superlative "most memorable" → <strong>the</strong>.' },
+  { task: "Speaking Task 2 — Personal Experience", before: "I spent", after: "entire afternoon exploring the old town.", options: OPTS, answer: "the", explain: '"the entire afternoon" — a specific, whole period → <strong>the</strong>.' },
+
+  // ── Speaking Task 3 — Describing a Scene ─────────────────────────────────
+  { task: "Speaking Task 3 — Describing a Scene", before: "There is", after: "man sitting on a bench in the foreground.", options: OPTS, answer: "a", explain: '"man" — first mention, consonant /m/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "In the background, I can see", after: "old building.", options: OPTS, answer: "an", explain: '"old" starts with vowel /oʊ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "In the picture,", after: "woman is walking her dog near the fountain.", options: OPTS, answer: "a", explain: '"woman" starts with consonant /w/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "On the left side of the picture, there is", after: "large tree.", options: OPTS, answer: "a", explain: '"large" starts with consonant /l/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "Overhead,", after: "sky looks cloudy and grey.", options: OPTS, answer: "the", explain: "There is only one sky — unique in context → <strong>the</strong>." },
+  { task: "Speaking Task 3 — Describing a Scene", before: "Next to the bench, I notice", after: "umbrella lying on the ground.", options: OPTS, answer: "an", explain: '"umbrella" starts with vowel /ʌ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "There seems to be", after: "small café at the corner of the street.", options: OPTS, answer: "a", explain: '"small" starts with consonant /s/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "In the middle of the scene, there is", after: "fountain surrounded by benches.", options: OPTS, answer: "a", explain: '"fountain" — first mention, consonant /f/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "Nearby,", after: "children are playing near the entrance.", options: OPTS, answer: "the", explain: "The specific children visible in this picture → <strong>the</strong>." },
+  { task: "Speaking Task 3 — Describing a Scene", before: "I can also see", after: "elderly woman feeding the pigeons.", options: OPTS, answer: "an", explain: '"elderly" starts with vowel /ɛ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "To the right, there is", after: "row of shops.", options: OPTS, answer: "a", explain: '"row" starts with consonant /r/ → <strong>a</strong>.' },
+  { task: "Speaking Task 3 — Describing a Scene", before: "Overall,", after: "atmosphere in the picture seems calm and relaxed.", options: OPTS, answer: "the", explain: "Unique to this specific picture → <strong>the</strong>." },
+
+  // ── Speaking Task 4 — Making Predictions ─────────────────────────────────
+  { task: "Speaking Task 4 — Making Predictions", before: "I think the man is going to catch", after: "earlier train.", options: OPTS, answer: "an", explain: '"earlier" starts with a vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "She will probably ask for", after: "refund.", options: OPTS, answer: "a", explain: '"refund" — first mention, consonant /r/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "I predict he will find", after: "new job within a month.", options: OPTS, answer: "a", explain: '"new" starts with consonant /n/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "They will likely miss", after: "bus if they don't hurry.", options: OPTS, answer: "the", explain: "The specific bus already shown in the scene → <strong>the</strong>." },
+  { task: "Speaking Task 4 — Making Predictions", before: "I imagine she is going to have", after: "wonderful time at the party.", options: OPTS, answer: "a", explain: '"wonderful" starts with consonant /w/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "He will probably need", after: "umbrella later today.", options: OPTS, answer: "an", explain: '"umbrella" starts with vowel /ʌ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "I think this will become", after: "important issue in the future.", options: OPTS, answer: "an", explain: '"important" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "By next year, they will have opened", after: "new branch downtown.", options: OPTS, answer: "a", explain: '"new" starts with consonant /n/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "I bet", after: "weather will improve by tomorrow.", options: OPTS, answer: "the", explain: 'Unique, known referent — "the weather" right now → <strong>the</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "She's likely to get", after: "promotion soon.", options: OPTS, answer: "a", explain: '"promotion" — first mention, consonant /p/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "I think this will be", after: "turning point in his life.", options: OPTS, answer: "a", explain: '"turning" starts with consonant /t/ → <strong>a</strong>.' },
+  { task: "Speaking Task 4 — Making Predictions", before: "They will probably reach", after: "airport just in time.", options: OPTS, answer: "the", explain: "The specific, already-known airport → <strong>the</strong>." },
+
+  // ── Speaking Task 5 — Comparing and Persuading ───────────────────────────
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I believe the downtown apartment is", after: "better choice than the suburban house.", options: OPTS, answer: "a", explain: '"better" starts with consonant /b/ → <strong>a</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "In my opinion, this is", after: "most convenient option available.", options: OPTS, answer: "the", explain: 'Superlative "most convenient" → <strong>the</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I would choose", after: "online course because it offers more flexibility.", options: OPTS, answer: "the", explain: "The specific option under comparison → <strong>the</strong>." },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "This restaurant offers", after: "wider variety of dishes than the other one.", options: OPTS, answer: "a", explain: '"wider" starts with consonant /w/ → <strong>a</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I think public transit is", after: "eco-friendly option overall.", options: OPTS, answer: "an", explain: '"eco-friendly" starts with vowel /iː/ → <strong>an</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "You should pick this laptop because it has", after: "faster processor.", options: OPTS, answer: "a", explain: '"faster" starts with consonant /f/ → <strong>a</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I strongly recommend", after: "first option for several reasons.", options: OPTS, answer: "the", explain: "Ordinals (first, second, last) take <strong>the</strong>." },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "This plan gives us", after: "advantage the other one doesn't.", options: OPTS, answer: "an", explain: '"advantage" starts with vowel /æ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I would rather stay at", after: "hotel near the city centre.", options: OPTS, answer: "a", explain: '"hotel" — first mention, consonant /h/ → <strong>a</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "This job offers", after: "higher salary than my current one.", options: OPTS, answer: "a", explain: '"higher" starts with a pronounced consonant /h/ → <strong>a</strong>.' },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "I think", after: "second choice is more practical.", options: OPTS, answer: "the", explain: "Ordinals take <strong>the</strong>." },
+  { task: "Speaking Task 5 — Comparing and Persuading", before: "This option is clearly", after: "better fit for our team.", options: OPTS, answer: "a", explain: '"better" starts with consonant /b/ → <strong>a</strong>.' },
+
+  // ── Speaking Task 6 — Dealing with a Difficult Situation ─────────────────
+  { task: "Speaking Task 6 — Difficult Situation", before: "I'm sorry, but I have to cancel", after: "appointment we scheduled.", options: OPTS, answer: "the", explain: "Already mentioned/known appointment → <strong>the</strong>." },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I'm afraid I can't lend you", after: "money right now.", options: OPTS, answer: "∅", explain: '"money" is uncountable in this general statement — no article.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I understand this is", after: "difficult situation for you.", options: OPTS, answer: "a", explain: '"difficult" starts with consonant /d/ → <strong>a</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I'm going to need", after: "extra day to finish the report.", options: OPTS, answer: "an", explain: '"extra" starts with vowel /ɛ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "Unfortunately, I won't be able to attend", after: "meeting tomorrow.", options: OPTS, answer: "the", explain: "The specific, already-arranged meeting → <strong>the</strong>." },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I hope you understand it wasn't", after: "easy decision to make.", options: OPTS, answer: "an", explain: '"easy" starts with vowel /iː/ → <strong>an</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I owe you", after: "honest explanation for the delay.", options: OPTS, answer: "an", explain: '"honest" has a silent h — vowel sound → <strong>an</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I know this isn't", after: "ideal outcome, but it's the best I can offer.", options: OPTS, answer: "an", explain: '"ideal" starts with vowel /aɪ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I'd like to propose", after: "compromise that works for both of us.", options: OPTS, answer: "a", explain: '"compromise" — first mention, consonant /k/ → <strong>a</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I realize this puts you in", after: "awkward position.", options: OPTS, answer: "an", explain: '"awkward" starts with vowel /ɔː/ → <strong>an</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "Let's find", after: "solution that satisfies everyone.", options: OPTS, answer: "a", explain: '"solution" — first mention, consonant /s/ → <strong>a</strong>.' },
+  { task: "Speaking Task 6 — Difficult Situation", before: "I apologize for", after: "inconvenience this has caused.", options: OPTS, answer: "the", explain: "Specific, known inconvenience — identified by the context → <strong>the</strong>." },
+
+  // ── Speaking Task 7 — Expressing Opinions ────────────────────────────────
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I believe social media has", after: "negative effect on teenagers.", options: OPTS, answer: "a", explain: '"negative" starts with consonant /n/ → <strong>a</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I think", after: "government should invest more in public transit.", options: OPTS, answer: "the", explain: "A specific, known institution → <strong>the</strong>." },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I think working from home is", after: "best option for many employees.", options: OPTS, answer: "the", explain: 'Superlative "best" → <strong>the</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I strongly believe", after: "education is the key to success.", options: OPTS, answer: "∅", explain: "Abstract noun stating a general truth → no article." },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "From my perspective, this policy creates", after: "unfair advantage for large companies.", options: OPTS, answer: "an", explain: '"unfair" starts with vowel /ʌ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I would argue that", after: "internet has changed the way we communicate.", options: OPTS, answer: "the", explain: 'Unique, known referent — "the internet" → <strong>the</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "In my view, this is", after: "unnecessary restriction on personal freedom.", options: OPTS, answer: "an", explain: '"unnecessary" starts with vowel /ʌ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I disagree because", after: "younger generation faces different challenges.", options: OPTS, answer: "the", explain: "A specific, known group being discussed → <strong>the</strong>." },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I feel that", after: "honesty is always the best policy.", options: OPTS, answer: "∅", explain: "Abstract noun stating a general truth → no article." },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "To me, this represents", after: "important shift in public opinion.", options: OPTS, answer: "an", explain: '"important" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "I believe technology has become", after: "essential part of modern life.", options: OPTS, answer: "an", explain: '"essential" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 7 — Expressing Opinions", before: "Overall, I think this is", after: "reasonable approach to the problem.", options: OPTS, answer: "a", explain: '"reasonable" starts with consonant /r/ → <strong>a</strong>.' },
+
+  // ── Speaking Task 8 — Describing an Unusual Situation ────────────────────
+  { task: "Speaking Task 8 — Unusual Situation", before: "It's", after: "small object with a strange shape.", options: OPTS, answer: "a", explain: '"small" starts with consonant /s/ → <strong>a</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "The item has", after: "unusual texture, almost like rubber.", options: OPTS, answer: "an", explain: '"unusual" starts with vowel /ʌ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It looks like", after: "oversized paperclip.", options: OPTS, answer: "an", explain: '"oversized" starts with vowel /oʊ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "There's", after: "odd smell coming from it.", options: OPTS, answer: "an", explain: '"odd" starts with vowel /ɒ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It seems to be made of", after: "metal and plastic.", options: OPTS, answer: "∅", explain: "Uncountable materials named generally — no article." },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It has", after: "handle on one side and a button on the other.", options: OPTS, answer: "a", explain: '"handle" — first mention, consonant /h/ → <strong>a</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "I think it's used to hold", after: "documents together.", options: OPTS, answer: "∅", explain: "Plural generalization — documents in general, no article." },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It's shaped like", after: "egg but much larger.", options: OPTS, answer: "an", explain: '"egg" starts with vowel /ɛ/ → <strong>an</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "The surface has", after: "unique pattern I've never seen before.", options: OPTS, answer: "a", explain: '"unique" sounds like "yoo-neek" — /j/ is a consonant sound → <strong>a</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It could be", after: "tool for opening cans.", options: OPTS, answer: "a", explain: '"tool" — first mention, consonant /t/ → <strong>a</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "There is", after: "hole in the middle of it.", options: OPTS, answer: "a", explain: '"hole" — first mention, consonant /h/ → <strong>a</strong>.' },
+  { task: "Speaking Task 8 — Unusual Situation", before: "It looks like", after: "ancient artifact from a museum.", options: OPTS, answer: "an", explain: '"ancient" starts with vowel /eɪ/ → <strong>an</strong>.' },
+
+  // ── Writing Task 1 — Writing an Email ────────────────────────────────────
+  { task: "Writing Task 1 — Email", before: "I am writing to inform you about", after: "change in our meeting schedule.", options: OPTS, answer: "a", explain: '"change" — first mention, consonant /tʃ/ → <strong>a</strong>.' },
+  { task: "Writing Task 1 — Email", before: "I would like to request", after: "refund for the defective item.", options: OPTS, answer: "a", explain: '"refund" — first mention, consonant /r/ → <strong>a</strong>.' },
+  { task: "Writing Task 1 — Email", before: "Please let me know if you have", after: "questions.", options: OPTS, answer: "∅", explain: "Plural generalization — any questions at all, no article." },
+  { task: "Writing Task 1 — Email", before: "I am writing to express", after: "concern about the recent delay.", options: OPTS, answer: "a", explain: '"concern" — first mention, consonant /k/ → <strong>a</strong>.' },
+  { task: "Writing Task 1 — Email", before: "I would appreciate", after: "quick response at your earliest convenience.", options: OPTS, answer: "a", explain: '"quick" starts with consonant /k/ → <strong>a</strong>.' },
+  { task: "Writing Task 1 — Email", before: "I am attaching", after: "copy of the invoice for your reference.", options: OPTS, answer: "a", explain: '"copy" — first mention, consonant /k/ → <strong>a</strong>.' },
+  { task: "Writing Task 1 — Email", before: "I wanted to bring to your attention", after: "issue with my recent order.", options: OPTS, answer: "an", explain: '"issue" starts with vowel /ɪ/ → <strong>an</strong>.' },
+  { task: "Writing Task 1 — Email", before: "Thank you for", after: "opportunity to work on this project.", options: OPTS, answer: "the", explain: "Specific, already-known opportunity → <strong>the</strong>." },
+  { task: "Writing Task 1 — Email", before: "I look forward to hearing from you at", after: "earliest opportunity.", options: OPTS, answer: "the", explain: 'Fixed phrase with a superlative — "at the earliest opportunity" → <strong>the</strong>.' },
+  { task: "Writing Task 1 — Email", before: "I am writing on behalf of", after: "residents in our building.", options: OPTS, answer: "the", explain: "A specific, known group of residents → <strong>the</strong>." },
+  { task: "Writing Task 1 — Email", before: "Please find attached", after: "document you requested.", options: OPTS, answer: "the", explain: "Specific document — identified by the relative clause → <strong>the</strong>." },
+  { task: "Writing Task 1 — Email", before: "I would like to schedule", after: "appointment for next week.", options: OPTS, answer: "an", explain: '"appointment" starts with vowel /ə/ → <strong>an</strong>.' },
+
+  // ── Writing Task 2 — Survey / Opinion ────────────────────────────────────
+  { task: "Writing Task 2 — Survey", before: "I prefer", after: "online option because it saves time.", options: OPTS, answer: "the", explain: "The specific one of the two survey options → <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "In my opinion,", after: "second choice is more practical for families.", options: OPTS, answer: "the", explain: "Ordinals take <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "I would choose to attend", after: "in-person event rather than a virtual one.", options: OPTS, answer: "the", explain: "The specific option under comparison → <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "I believe this is", after: "better solution for most people.", options: OPTS, answer: "a", explain: '"better" starts with consonant /b/ → <strong>a</strong>.' },
+  { task: "Writing Task 2 — Survey", before: "I think", after: "first option offers more benefits overall.", options: OPTS, answer: "the", explain: "Ordinals take <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "For me, convenience is", after: "most important factor.", options: OPTS, answer: "the", explain: 'Superlative "most important" → <strong>the</strong>.' },
+  { task: "Writing Task 2 — Survey", before: "I would rather take", after: "shorter route even if it costs more.", options: OPTS, answer: "the", explain: "The specific route under comparison → <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "Overall, I support", after: "idea of remote work.", options: OPTS, answer: "the", explain: "A specific, known idea already introduced → <strong>the</strong>." },
+  { task: "Writing Task 2 — Survey", before: "I feel that", after: "flexibility is essential in today's workplace.", options: OPTS, answer: "∅", explain: "Abstract noun stating a general truth — no article." },
+  { task: "Writing Task 2 — Survey", before: "My preference is for", after: "option that offers long-term value.", options: OPTS, answer: "an", explain: '"option" — first mention, vowel /ɒ/ → <strong>an</strong>.' },
+  { task: "Writing Task 2 — Survey", before: "I chose this survey response because it reflects", after: "honest opinion.", options: OPTS, answer: "an", explain: '"honest" has a silent h — vowel sound → <strong>an</strong>.' },
+  { task: "Writing Task 2 — Survey", before: "I believe", after: "majority of people would agree with this approach.", options: OPTS, answer: "the", explain: 'Fixed phrase — "the majority of" → <strong>the</strong>.' },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. ADD to data.js
