@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -41,7 +42,7 @@ function Accordion({
   wrapStyle,
   bodyClassName = "space-y-4",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName} style={wrapStyle}>
       <button
@@ -117,6 +118,7 @@ export default function CelpipSpeakingTask6Page() {
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -267,61 +269,14 @@ export default function CelpipSpeakingTask6Page() {
             </div>
           </div>
 
-          {/* Scoring — folded in from the old Scoring tab */}
-          <div className="bg-white rounded-2xl border border-mist p-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-              How you are scored
-            </p>
-            <p className="text-sm text-slate">
-              How examiners score Task 6 on a 12-point scale. A polite tone and a
-              clear, well-handled decision matter most.
-            </p>
-
-            <div className="space-y-3 mt-4">
-              {SCORE_BANDS.map((band) => (
-                <div
-                  key={band.title}
-                  className="bg-white rounded-2xl border border-mist p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold text-ink">
-                      {band.title}
-                    </p>
-                    <span className={`font-display text-xl ${band.dot}`}>●</span>
-                  </div>
-                  <div className="space-y-2 text-sm text-slate">
-                    {Object.entries(band.lines).map(([label, text]) => (
-                      <p key={label}>
-                        <strong>{label}:</strong> {text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-                Key insight
-              </p>
-              <p className="text-sm text-ink">
-                This task rewards{" "}
-                <strong>tact, not problem-solving genius</strong>. You're talking
-                to a real person and delivering news they won't love — so
-                validate their feelings, soften everything with "would / could /
-                might," choose one option clearly, and offer a fair compromise.
-                Being polite and indirect scores higher than being efficient.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             A 3-part framework for the role-play — choose one option, then deliver
@@ -546,6 +501,12 @@ export default function CelpipSpeakingTask6Page() {
             </ul>
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Sample Answers */}
           <Accordion
             bodyClassName="space-y-5"
@@ -630,6 +591,12 @@ export default function CelpipSpeakingTask6Page() {
             ))}
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-template-2"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
+        >
           {/* Polite Conflict Language Toolkit */}
           <Accordion
             bodyClassName="space-y-6"

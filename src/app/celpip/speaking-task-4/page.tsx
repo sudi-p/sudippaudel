@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -46,7 +47,7 @@ function Accordion({
   bodyBorder = "border-mist",
   bodyClassName = "space-y-4",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName}>
       <button
@@ -120,6 +121,7 @@ export default function CelpipSpeakingTask4Page() {
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -262,53 +264,6 @@ export default function CelpipSpeakingTask4Page() {
             </div>
           </div>
 
-          {/* Scoring — folded in from the old Scoring tab */}
-          <div className="bg-white rounded-2xl border border-mist p-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-              How you are scored
-            </p>
-            <p className="text-sm text-slate">
-              How examiners score Task 4 on a 12-point scale. The bands below
-              show typical language for each score tier.
-            </p>
-
-            <div className="space-y-3 mt-4">
-              {SCORE_BANDS.map((band) => (
-                <div
-                  key={band.title}
-                  className="bg-white rounded-2xl border border-mist p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold text-ink">
-                      {band.title}
-                    </p>
-                    <span className={`font-display text-xl ${band.dot}`}>●</span>
-                  </div>
-                  <div className="space-y-2 text-sm text-slate">
-                    {Object.entries(band.lines).map(([label, text]) => (
-                      <p key={label}>
-                        <strong>{label}:</strong> {text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-                Key insight
-              </p>
-              <p className="text-sm text-ink">
-                A 9–10 speaker makes logical predictions with natural
-                conditional language. They support predictions with reasons and
-                speak confidently. They are <strong>not</strong> perfect; they
-                may use simple structures alongside complex ones, and that's
-                fine. What matters: do the predictions and reasoning feel
-                intentional and credible?
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
@@ -429,8 +384,8 @@ export default function CelpipSpeakingTask4Page() {
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             <strong>Key insight:</strong> Task 4 builds on Task 3. You describe
@@ -639,6 +594,12 @@ export default function CelpipSpeakingTask4Page() {
             </div>
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Sample Answers */}
           <Accordion
             bodyClassName="space-y-5"

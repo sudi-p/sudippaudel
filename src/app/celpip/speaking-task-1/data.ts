@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 export const TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "structure", label: "My Template" },
+  { id: "overview", label: "Overview and Template" },
+  { id: "structure", label: "Sample" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
 ];
@@ -233,7 +233,10 @@ export const TEMPLATE_PHRASES = [
   "and that must",
   "I went through something similar a few years ago, so I'd like to share a few suggestions.",
   "First, if I were you, I would",
+  ", because",
   "Second, you might want to",
+  ", so",
+  ", which",
   "Third, I'd recommend",
   "These steps will",
   "I'm confident you can do this",

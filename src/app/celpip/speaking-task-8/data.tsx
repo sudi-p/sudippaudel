@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 export const TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "structure", label: "My Template" },
+  { id: "overview", label: "Overview and Template" },
+  { id: "structure", label: "Sample" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
 ];

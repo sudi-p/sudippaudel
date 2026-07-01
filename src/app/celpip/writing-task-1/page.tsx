@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -41,7 +42,7 @@ function Accordion({
   bodyBorderClass = "border-t border-mist",
   bodyClassName = "space-y-4",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName} style={wrapStyle}>
       <button type="button" onClick={() => setOpen((o) => !o)} className={triggerClassName}>
@@ -107,6 +108,7 @@ export default function CelpipWritingTask1Page() {
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -242,55 +244,14 @@ export default function CelpipWritingTask1Page() {
             </div>
           </div>
 
-          {/* ─── Scoring bands ─── */}
-          <div>
-            <p className="text-sm text-slate mb-3">
-              How examiners score Task 1 on a 12-point scale. The bands below show
-              typical email characteristics at each level.
-            </p>
-
-            <div className="space-y-3">
-              {SCORE_BANDS.map((band) => (
-                <div
-                  key={band.title}
-                  className="bg-white rounded-2xl border border-mist p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold text-ink">{band.title}</p>
-                    <span className={`font-display text-xl ${band.dot}`}>●</span>
-                  </div>
-                  <div className="space-y-2 text-sm text-slate">
-                    {Object.entries(band.lines).map(([label, text]) => (
-                      <p key={label}>
-                        <strong>{label}:</strong> {text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-                Key insight
-              </p>
-              <p className="text-sm text-ink">
-                A 10–12 email is well-organized, professional in tone, and nearly
-                error-free. It hits the word count and addresses all requirements
-                within 27 minutes. It is <strong>not</strong> perfect, and that's
-                fine — what matters is that it demonstrates professional
-                communication with clear purpose and good control of language.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
              PANE: STRUCTURE / TEMPLATE
         ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             <strong>Key to high scores:</strong> Clear structure + Professional
@@ -1324,6 +1285,12 @@ export default function CelpipWritingTask1Page() {
             </div>
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Bonus: Complete Email Scenarios */}
           <Accordion
             wrapClassName="bg-violet2-light rounded-2xl border border-violet2 overflow-hidden"

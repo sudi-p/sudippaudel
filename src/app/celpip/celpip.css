@@ -124,3 +124,12 @@
   color: #6e1e28 !important;
   border-color: #a83240 !important;
 }
+
+/* Hide scrollbar on the per-task nav pill rows */
+.celpip-page .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.celpip-page .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

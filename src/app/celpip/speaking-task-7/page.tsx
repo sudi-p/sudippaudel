@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -39,7 +40,7 @@ function Accordion({
   wrapStyle,
   bodyClassName = "space-y-4",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName} style={wrapStyle}>
       <button
@@ -83,6 +84,7 @@ export default function CelpipSpeakingTask7Page() {
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -223,60 +225,14 @@ export default function CelpipSpeakingTask7Page() {
             </div>
           </div>
 
-          {/* Scoring — folded in from the old Scoring tab */}
-          <div className="bg-white rounded-2xl border border-mist p-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-              How you are scored
-            </p>
-            <p className="text-sm text-slate">
-              How examiners score Task 7 on a 12-point scale. Clarity of opinion
-              and quality of support matter most.
-            </p>
-
-            <div className="space-y-3 mt-4">
-              {SCORE_BANDS.map((band) => (
-                <div
-                  key={band.title}
-                  className="bg-white rounded-2xl border border-mist p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold text-ink">
-                      {band.title}
-                    </p>
-                    <span className={`font-display text-xl ${band.dot}`}>●</span>
-                  </div>
-                  <div className="space-y-2 text-sm text-slate">
-                    {Object.entries(band.lines).map(([label, text]) => (
-                      <p key={label}>
-                        <strong>{label}:</strong> {text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-                Key insight
-              </p>
-              <p className="text-sm text-ink">
-                A high score requires a{" "}
-                <strong>clear opinion with 2–3 well-supported reasons</strong>.
-                The opinion itself doesn't matter — your ability to defend it
-                does. Examiners reward candidates who speak with conviction and
-                back up their views with concrete examples.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             A 3-part framework for expressing opinions clearly — speak with
@@ -474,6 +430,12 @@ export default function CelpipSpeakingTask7Page() {
             </ul>
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Complete Opinion Examples */}
           <Accordion
             bodyClassName="space-y-6"
@@ -513,6 +475,12 @@ export default function CelpipSpeakingTask7Page() {
             ))}
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-template-2"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
+        >
           {/* Opinion Expression Language Toolkit */}
           <Accordion
             bodyClassName="space-y-6"

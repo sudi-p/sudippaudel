@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   TIPS,
@@ -40,7 +41,7 @@ function Accordion({
   triggerHover = "hover:bg-fog/50",
   bodyBorder = "border-mist",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName}>
       <button
@@ -80,12 +81,11 @@ export default function CelpipSpeakingTask1Page() {
       : task1Words.filter((v) => v.type === vocabFilter);
 
   const filteredTips =
-    tipFilter === "all"
-      ? TIPS
-      : TIPS.filter((t) => t.category === tipFilter);
+    tipFilter === "all" ? TIPS : TIPS.filter((t) => t.category === tipFilter);
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -225,62 +225,14 @@ export default function CelpipSpeakingTask1Page() {
             </div>
           </div>
 
-          {/* ─── Scoring (moved into Overview) ─── */}
-          <div className="pt-2">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-1">
-              How examiners score Task 1
-            </p>
-            <p className="text-sm text-slate mb-4">
-              Empathy, clarity, and practical advice are most important.
-            </p>
-
-            <div className="space-y-3">
-              {SCORE_BANDS.map((band) => (
-                <div
-                  key={band.title}
-                  className="bg-white rounded-2xl border border-mist p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-sm font-semibold text-ink">
-                      {band.title}
-                    </p>
-                    <span className={`font-display text-xl ${band.dot}`}>●</span>
-                  </div>
-                  <div className="space-y-2 text-sm text-slate">
-                    {Object.entries(band.lines).map(([label, text]) => (
-                      <p key={label}>
-                        <strong>{label}:</strong> {text}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-fog rounded-2xl p-6 mt-6">
-              <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-                Key insight
-              </p>
-              <p className="text-sm text-ink">
-                A high-scoring advice response shows{" "}
-                <strong>
-                  genuine empathy, clear structure, and practical suggestions
-                  with reasoning
-                </strong>
-                . You don't need to be perfect — you need to sound helpful and
-                thoughtful. Examiners want to hear someone who understands the
-                problem and cares about helping.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             <strong>Key to high scores:</strong> Empathy + Specific Advice +
@@ -313,8 +265,14 @@ export default function CelpipSpeakingTask1Page() {
                 My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic">
-                "Hi [Name], <span className="font-semibold not-italic text-violet2">I understand</span>{" "}
-                [the problem], <span className="font-semibold not-italic text-violet2">and that must</span>{" "}
+                "Hi [Name],{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  I understand
+                </span>{" "}
+                [the problem],{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  and that must
+                </span>{" "}
                 [be/feel + emotion].{" "}
                 <span className="font-semibold not-italic text-violet2">
                   I went through something similar a few years ago, so I'd like
@@ -367,15 +325,21 @@ export default function CelpipSpeakingTask1Page() {
                 My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">First, if I were you, I would</span>{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  First, if I were you, I would
+                </span>{" "}
                 [advice], because [reason].
               </p>
               <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">Second, you might want to</span>{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  Second, you might want to
+                </span>{" "}
                 [advice], so [reason].
               </p>
               <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">Third, I'd recommend</span>{" "}
+                <span className="font-semibold not-italic text-violet2">
+                  Third, I'd recommend
+                </span>{" "}
                 [advice], which will [benefit].
               </p>
             </div>
@@ -410,16 +374,22 @@ export default function CelpipSpeakingTask1Page() {
                 My template (used in every sample below)
               </p>
               <p className="text-sm text-ink italic">
-                "<span className="font-semibold not-italic text-violet2">These steps will</span>{" "}
+                "
+                <span className="font-semibold not-italic text-violet2">
+                  These steps will
+                </span>{" "}
                 [benefit/result],{" "}
-                <span className="font-semibold not-italic text-violet2">and I'm confident you can do this</span>."
+                <span className="font-semibold not-italic text-violet2">
+                  and I'm confident you can do this
+                </span>
+                ."
               </p>
             </div>
             <ul className="space-y-1.5 text-sm text-ink">
               <li className="flex gap-2">
                 <span className="text-gold shrink-0">✦</span>
-                <strong>Briefly recap</strong> 1–2 main pieces of advice (not all
-                three)
+                <strong>Briefly recap</strong> 1–2 main pieces of advice (not
+                all three)
               </li>
               <li className="flex gap-2">
                 <span className="text-gold shrink-0">✦</span>
@@ -434,35 +404,12 @@ export default function CelpipSpeakingTask1Page() {
             </ul>
           </Accordion>
 
-          {/* Bonus: Advice Language Toolkit */}
-          <Accordion
-            wrapClassName="bg-violet2-light rounded-2xl border border-violet2 overflow-hidden"
-            triggerHover="hover:bg-violet2/5"
-            bodyBorder="border-violet2/30"
-            header={
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-semibold text-ink">
-                  Advice Language & Transition Toolkit
-                </span>
-              </div>
-            }
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-ink">
-              {ADVICE_TOOLKIT.map((col) => (
-                <div key={col.title}>
-                  <p className="font-semibold text-violet2-dark mb-2">
-                    {col.title}
-                  </p>
-                  <ul className="space-y-1 text-xs">
-                    {col.items.map((item) => (
-                      <li key={item}>• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </Accordion>
+        </div>
 
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Sample Responses */}
           <Accordion
             header={
@@ -513,6 +460,41 @@ export default function CelpipSpeakingTask1Page() {
                 ))}
               </div>
             ))}
+          </Accordion>
+
+        </div>
+
+        <div
+          id="pane-template-2"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
+        >
+          {/* Bonus: Advice Language Toolkit */}
+          <Accordion
+            wrapClassName="bg-violet2-light rounded-2xl border border-violet2 overflow-hidden"
+            triggerHover="hover:bg-violet2/5"
+            bodyBorder="border-violet2/30"
+            header={
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-semibold text-ink">
+                  Advice Language & Transition Toolkit
+                </span>
+              </div>
+            }
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-ink">
+              {ADVICE_TOOLKIT.map((col) => (
+                <div key={col.title}>
+                  <p className="font-semibold text-violet2-dark mb-2">
+                    {col.title}
+                  </p>
+                  <ul className="space-y-1 text-xs">
+                    {col.items.map((item) => (
+                      <li key={item}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </Accordion>
         </div>
 

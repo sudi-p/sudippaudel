@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 export const TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "structure", label: "My Template" },
+  { id: "overview", label: "Overview and Template" },
+  { id: "structure", label: "Sample" },
   { id: "scenarios", label: "Scenario Types" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
@@ -105,11 +105,11 @@ export const SCORE_BANDS = [
     lines: {
       Vocabulary:
         "Very limited range. Little to no spatial language. Heavy repetition or inaccuracy.",
-      Coherence: "Description is disjointed or very brief. No clear logical flow.",
+      Coherence:
+        "Description is disjointed or very brief. No clear logical flow.",
       Fluency:
         "Frequent hesitations, filler words, or long silences. Choppy delivery.",
-      Accuracy:
-        "Frequent grammatical errors. Meaning is sometimes unclear.",
+      Accuracy: "Frequent grammatical errors. Meaning is sometimes unclear.",
     },
   },
 ];
@@ -237,7 +237,8 @@ export const SCENARIOS = [
       {
         word: "Hustle and bustle",
         meaning: "the noisy, busy activity of a crowded place",
-        example: "The image perfectly captures the hustle and bustle of city life.",
+        example:
+          "The image perfectly captures the hustle and bustle of city life.",
       },
     ],
     opening: {
@@ -277,7 +278,8 @@ export const SCENARIOS = [
       {
         word: "Confrontational",
         meaning: "involving or causing conflict",
-        example: "The body language between the two figures looks confrontational.",
+        example:
+          "The body language between the two figures looks confrontational.",
       },
       {
         word: "Charged atmosphere",
@@ -287,7 +289,8 @@ export const SCENARIOS = [
       {
         word: "Agitated",
         meaning: "troubled or nervous; moving in a disturbed manner",
-        example: "The crowd appears agitated, with several people gesturing loudly.",
+        example:
+          "The crowd appears agitated, with several people gesturing loudly.",
       },
       {
         word: "Ominous",
@@ -352,7 +355,8 @@ export const SCENARIOS = [
       {
         word: "Festive",
         meaning: "relating to a festival or celebration; joyful",
-        example: "The whole area has a festive feel, with lights and decorations.",
+        example:
+          "The whole area has a festive feel, with lights and decorations.",
       },
       {
         word: "Revelry",
@@ -377,7 +381,8 @@ export const SCENARIOS = [
       {
         word: "Colourful",
         meaning: "having many bright, vivid colours; lively and interesting",
-        example: "Colourful banners and streamers are hanging across the street.",
+        example:
+          "Colourful banners and streamers are hanging across the street.",
       },
     ],
     opening: {
@@ -427,11 +432,13 @@ export const SCENARIOS = [
       {
         word: "Muted tones",
         meaning: "soft, gentle colours that are not too bright",
-        example: "Muted tones of beige and brown give the space a calming feel.",
+        example:
+          "Muted tones of beige and brown give the space a calming feel.",
       },
       {
         word: "Ambient",
-        meaning: "relating to the surrounding environment; soft background quality",
+        meaning:
+          "relating to the surrounding environment; soft background quality",
         example: "The ambient lighting creates a relaxed, comfortable mood.",
       },
       {
@@ -517,7 +524,8 @@ export const SCENARIOS = [
       {
         word: "Ethereal",
         meaning: "extremely delicate and light; heavenly",
-        example: "The mist around the peaks gives the scene an ethereal quality.",
+        example:
+          "The mist around the peaks gives the scene an ethereal quality.",
       },
     ],
     opening: {
@@ -555,9 +563,18 @@ export const TEMPLATE_PARTS = [
     intro:
       "Establish the overall scene quickly — location, time, mood, and general impression. This orients the listener.",
     bullets: [
-      ["Where and when?", '"This is an outdoor market during the day" or "a cozy café interior in the evening."'],
-      ["What's the overall mood?", '"It looks busy and lively" or "very peaceful and serene."'],
-      ["One striking detail.", 'A splash of color, weather, or atmosphere. "The sky is clear and bright."'],
+      [
+        "Where and when?",
+        '"This is an outdoor market during the day" or "a cozy café interior in the evening."',
+      ],
+      [
+        "What's the overall mood?",
+        '"It looks busy and lively" or "very peaceful and serene."',
+      ],
+      [
+        "One striking detail.",
+        'A splash of color, weather, or atmosphere. "The sky is clear and bright."',
+      ],
     ],
     panelLabel: "My template (used in every sample below)",
     panelItems: [
@@ -592,10 +609,22 @@ export const TEMPLATE_PARTS = [
     intro:
       "Wrap up with your personal take or interpretation. What does this scene make you think or feel? Show opinion and confidence.",
     bullets: [
-      ["React emotionally:", '"It looks peaceful and calming" or "The scene seems vibrant and energetic."'],
-      ["Make an observation:", '"Overall, it captures a typical day in this community" or "This reflects the local culture well."'],
-      ["Connect to larger idea:", '"I would enjoy visiting a place like this" or "It reminds me of similar scenes I\'ve experienced."'],
-      ["Be specific, not generic:", 'Instead of "It\'s nice," say "I appreciate the bright colors and the sense of community."'],
+      [
+        "React emotionally:",
+        '"It looks peaceful and calming" or "The scene seems vibrant and energetic."',
+      ],
+      [
+        "Make an observation:",
+        '"Overall, it captures a typical day in this community" or "This reflects the local culture well."',
+      ],
+      [
+        "Connect to larger idea:",
+        '"I would enjoy visiting a place like this" or "It reminds me of similar scenes I\'ve experienced."',
+      ],
+      [
+        "Be specific, not generic:",
+        'Instead of "It\'s nice," say "I appreciate the bright colors and the sense of community."',
+      ],
     ],
     panelLabel: "My template (used in every sample below)",
     panelItems: [
@@ -654,6 +683,7 @@ export const TEMPLATE_PHRASES = [
   "Overall,",
   "It looks like",
   "I would",
+  ", and",
 ];
 
 export const SAMPLES = [

@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 export const TABS = [
-  { id: "overview", label: "Overview" },
+  { id: "overview", label: "Overview and Template" },
+  { id: "structure", label: "Sample" },
   { id: "qtypes", label: "Question Types" },
-  { id: "structure", label: "My Template" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
 ];
@@ -395,8 +395,7 @@ export const QUESTION_TYPES = [
       },
       {
         word: "mark the occasion",
-        meaning:
-          "to do something special to celebrate or remember an event",
+        meaning: "to do something special to celebrate or remember an event",
         example: "We went out for dinner to mark the occasion properly.",
       },
       {

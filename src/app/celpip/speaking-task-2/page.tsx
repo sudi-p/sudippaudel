@@ -5,6 +5,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
+import TaskNav from "../TaskNav";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -42,7 +43,7 @@ function Accordion({
   triggerHover = "hover:bg-fog/50",
   bodyClassName = "space-y-4",
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div className={wrapClassName} style={wrapStyle}>
       <button
@@ -88,6 +89,7 @@ export default function CelpipSpeakingTask2Page() {
 
   return (
     <>
+      <TaskNav />
       {/* ─── HERO ─── */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
         <div className="animate-fade-up">
@@ -227,44 +229,6 @@ export default function CelpipSpeakingTask2Page() {
             </div>
           </div>
 
-          {/* Scoring bands */}
-          <p className="text-sm text-slate pt-2">
-            How examiners score Task 2 on a 12-point scale. The bands below show
-            typical language for each score tier.
-          </p>
-
-          <div className="space-y-3">
-            {SCORE_BANDS.map((band) => (
-              <div
-                key={band.title}
-                className="bg-white rounded-2xl border border-mist p-6"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-semibold text-ink">{band.title}</p>
-                  <span className={`font-display text-xl ${band.dot}`}>●</span>
-                </div>
-                <div className="space-y-2 text-sm text-slate">
-                  {Object.entries(band.lines).map(([label, text]) => (
-                    <p key={label}>
-                      <strong>{label}:</strong> {text}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-fog rounded-2xl p-6 mt-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
-              Key insight
-            </p>
-            <p className="text-sm text-ink">
-              A 9–10 speaker tells a coherent story with natural pacing and good
-              vocabulary. They are <strong>not</strong> perfect; they may use
-              simple sentences alongside complex ones, and that's fine. What
-              matters: do the story and grammar feel intentional, or accidental?
-            </p>
-          </div>
         </div>
 
         {/* ══════════════════════════════════════════
@@ -371,8 +335,8 @@ export default function CelpipSpeakingTask2Page() {
                PANE: STRUCTURE / TEMPLATE
           ══════════════════════════════════════════ */}
         <div
-          id="pane-structure"
-          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+          id="pane-template"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
         >
           <p className="text-sm text-slate">
             A 3-part structure to internalize — not a word-for-word script.
@@ -535,6 +499,12 @@ export default function CelpipSpeakingTask2Page() {
               </div>
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-samples"
+          className={`pane ${activeTab === "structure" ? "active" : ""} space-y-4`}
+        >
           {/* Complete Scenario Examples */}
           <Accordion
             bodyClassName="space-y-6"
@@ -573,6 +543,12 @@ export default function CelpipSpeakingTask2Page() {
             ))}
           </Accordion>
 
+        </div>
+
+        <div
+          id="pane-template-2"
+          className={`pane ${activeTab === "overview" ? "active" : ""} space-y-4 mt-5`}
+        >
           {/* Storytelling & Personal Experience Language Toolkit */}
           <Accordion
             bodyClassName="space-y-6"
