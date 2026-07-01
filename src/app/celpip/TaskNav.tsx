@@ -49,33 +49,29 @@ export default function TaskNav() {
 
   return (
     <div className="sticky top-16 z-40 border-b border-mist bg-fog/90 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-6">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <span className="shrink-0 text-xs font-semibold text-gold uppercase tracking-widest">
-            Speaking
-          </span>
-          {SPEAKING.map((t) => {
-            const href = `/celpip/speaking-task-${t.n}`;
-            return (
-              <Pill key={t.n} href={href} active={pathname === href}>
-                {t.n}. {t.label}
-              </Pill>
-            );
-          })}
-        </div>
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <span className="shrink-0 text-xs font-semibold text-gold uppercase tracking-widest">
-            Writing
-          </span>
-          {WRITING.map((t) => {
-            const href = `/celpip/writing-task-${t.n}`;
-            return (
-              <Pill key={t.n} href={href} active={pathname === href}>
-                {t.n}. {t.label}
-              </Pill>
-            );
-          })}
-        </div>
+      <div className="max-w-screen-2xl mx-auto px-6 py-3 flex flex-wrap items-center justify-center gap-2">
+        <span className="shrink-0 text-xs font-semibold text-gold uppercase tracking-widest">
+          Speaking
+        </span>
+        {SPEAKING.map((t) => {
+          const href = `/celpip/speaking-task-${t.n}`;
+          return (
+            <Pill key={t.n} href={href} active={pathname === href}>
+              {t.n}. {t.label}
+            </Pill>
+          );
+        })}
+        <span className="shrink-0 ml-2 text-xs font-semibold text-gold uppercase tracking-widest">
+          Writing
+        </span>
+        {WRITING.map((t) => {
+          const href = `/celpip/writing-task-${t.n}`;
+          return (
+            <Pill key={t.n} href={href} active={pathname === href}>
+              {t.n}. {t.label}
+            </Pill>
+          );
+        })}
       </div>
     </div>
   );
