@@ -6,6 +6,12 @@ import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
 import TaskNav from "../TaskNav";
+import { Accordion } from "../components/Accordion";
+import { TabBar } from "../components/TabBar";
+import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
+import { TipsPane } from "../components/TipsPane";
+import { VocabPane } from "../components/VocabPane";
+import { Hero } from "../components/Hero";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -16,47 +22,6 @@ import {
   TIPS,
   TIP_FILTERS,
 } from "./data";
-
-const Chevron = ({ open }) => (
-  <svg
-    className={`chevron w-4 h-4 text-slate ${open ? "rotated" : ""}`}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M19 9l-7 7-7-7"
-    />
-  </svg>
-);
-
-function Accordion({
-  header,
-  children,
-  wrapClassName = "bg-white rounded-2xl border border-mist overflow-hidden",
-  wrapStyle,
-  triggerClassName = "accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left hover:bg-fog/50 transition-colors",
-  bodyBorderClass = "border-t border-mist",
-  bodyClassName = "space-y-4",
-}) {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className={wrapClassName} style={wrapStyle}>
-      <button type="button" onClick={() => setOpen((o) => !o)} className={triggerClassName}>
-        {header}
-        <Chevron open={open} />
-      </button>
-      <div
-        className={`accordion-body ${bodyBorderClass} px-6 py-5 ${bodyClassName} ${open ? "open" : ""}`}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
 
 export default function CelpipWritingTask2Page() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -84,72 +49,23 @@ export default function CelpipWritingTask2Page() {
     <>
       <TaskNav />
       {/* ─── HERO ─── */}
-      <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
-        <div className="animate-fade-up">
-          <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">
-            Writing · Task 2 of 2
-          </p>
-          <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-5">
-            Write a persuasive <span className="hero-line italic">essay</span>
-          </h1>
-          <p className="text-lg text-slate max-w-xl leading-relaxed">
-            Everything you need to score 9+ on Task 2 — structure, vocab, scoring
-            rubric, practice prompts, and writing tips.
-          </p>
-        </div>
-
-        {/* Quick stats */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 animate-fade-up"
-          style={{ animationDelay: ".1s" }}
-        >
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Word count
-            </div>
-            <div className="font-display text-3xl text-ink">180–199</div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Time allowed
-            </div>
-            <div className="font-display text-3xl text-ink">26 minutes</div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Score scale
-            </div>
-            <div className="font-display text-3xl text-ink">1–12</div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Target band
-            </div>
-            <div className="font-display text-3xl text-ink">10–12</div>
-          </div>
-        </div>
-      </header>
+      <Hero
+        eyebrow={<>Writing · Task 2 of 2</>}
+        title={<>Write a persuasive <span className="hero-line italic">essay</span></>}
+        description={<>Everything you need to score 9+ on Task 2 — structure, vocab, scoring
+            rubric, practice prompts, and writing tips.</>}
+        stats={[
+          { label: "Word count", value: <>180–199</> },
+          { label: "Time allowed", value: <>26 minutes</> },
+          { label: "Score scale", value: <>1–12</> },
+          { label: "Target band", value: <>10–12</> },
+        ]}
+      />
 
       {/* ─── MAIN CONTENT ─── */}
       <main className="max-w-6xl mx-auto px-6 pb-24">
         {/* TAB BAR */}
-        <div
-          className="flex flex-wrap gap-2 mb-8 animate-fade-up"
-          style={{ animationDelay: ".15s" }}
-          id="tab-bar"
-        >
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`tab-btn ${
-                activeTab === tab.id ? "tab-active" : "tab-inactive"
-              } px-5 py-2 rounded-full border text-sm font-medium transition-all`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+<TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
         {/* ══════════════════════════════════════════
              PANE: OVERVIEW
@@ -174,48 +90,9 @@ export default function CelpipWritingTask2Page() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-mist p-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">
-              What examiners score you on
-            </p>
-            <div className="space-y-3">
-              {SCORE_CRITERIA.map((c) => (
-                <div key={c.label} className="flex items-start gap-3">
-                  <span
-                    className={`text-xs font-semibold px-3 py-1 rounded-md ${c.badge} shrink-0 mt-0.5`}
-                  >
-                    {c.label}
-                  </span>
-                  <p className="text-sm leading-relaxed text-ink">{c.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+<ScoreCriteria items={SCORE_CRITERIA} />
 
-          <div className="bg-ink rounded-2xl p-6 text-fog">
-            <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">
-              The 4-paragraph structure
-            </p>
-            <div className="space-y-3">
-              {FOUR_PART.map((step) => (
-                <div key={step.n} className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full ${step.circle} border flex items-center justify-center shrink-0`}
-                  >
-                    <span className={`font-display ${step.accent} text-sm`}>
-                      {step.n}
-                    </span>
-                  </div>
-                  <div>
-                    <p className={`text-xs font-semibold ${step.accent}`}>
-                      {step.title}
-                    </p>
-                    <p className="text-xs text-fog/80">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+<Blueprint title="The 4-paragraph structure" steps={FOUR_PART} />
 
           {/* Pre-Built Arguments Framework: Practical vs. Human */}
           <div className="bg-white rounded-2xl border border-mist p-6">
@@ -950,61 +827,12 @@ export default function CelpipWritingTask2Page() {
         {/* ══════════════════════════════════════════
              PANE: VOCAB BANK
         ══════════════════════════════════════════ */}
-        <div
-          id="pane-vocab"
-          className={`pane ${activeTab === "vocab" ? "active" : ""} space-y-4`}
-        >
-          <div className="flex flex-wrap gap-2">
-            {vocabTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setVocabFilter(type)}
-                className={`vocab-filter-btn ${
-                  vocabFilter === type ? "filter-active" : "filter-inactive"
-                } px-4 py-1.5 rounded-full border text-xs font-medium`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-4">
-            {filteredVocab.map((word) => (
-              <div
-                key={word.word}
-                className="bg-white rounded-xl border border-mist p-4"
-              >
-                <p className="text-sm font-semibold text-ink mb-1">{word.word}</p>
-                <p className="text-xs text-slate mb-2">{word.meaning}</p>
-                <p className="text-xs text-emerald2 italic">"{word.example}"</p>
-              </div>
-            ))}
-          </div>
-        </div>
+<VocabPane words={filteredVocab} types={vocabTypes} filter={vocabFilter} onFilter={setVocabFilter} active={activeTab} variant="compact" />
 
         {/* ══════════════════════════════════════════
              PANE: PRO TIPS
         ══════════════════════════════════════════ */}
-        <div
-          id="pane-tips"
-          className={`pane ${activeTab === "tips" ? "active" : ""} space-y-4`}
-        >
-          <div className="space-y-3">
-            {filteredTips.map((tip) => (
-              <div
-                key={tip.title}
-                className="tip-card bg-white rounded-xl border border-mist p-4"
-              >
-                <p
-                  className={`text-xs font-semibold ${tip.color} uppercase tracking-widest mb-2`}
-                >
-                  {tip.label}
-                </p>
-                <p className="text-sm font-semibold text-ink mb-2">{tip.title}</p>
-                <p className="text-xs text-slate">{tip.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+<TipsPane tips={filteredTips} active={activeTab} />
       </main>
 
       <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">

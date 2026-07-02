@@ -6,6 +6,12 @@ import { useEffect, useMemo, useState } from "react";
 import { VOCAB } from "../vocabData";
 import { renderTemplate } from "../templateHighlight";
 import TaskNav from "../TaskNav";
+import { Accordion } from "../components/Accordion";
+import { TabBar } from "../components/TabBar";
+import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
+import { TipsPane } from "../components/TipsPane";
+import { VocabPane } from "../components/VocabPane";
+import { Hero } from "../components/Hero";
 import {
   TABS,
   TIPS,
@@ -17,49 +23,6 @@ import {
   SAMPLES,
   TEMPLATE_PHRASES,
 } from "./data";
-
-const Chevron = ({ open }) => (
-  <svg
-    className={`chevron w-4 h-4 text-slate ${open ? "rotated" : ""}`}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M19 9l-7 7-7-7"
-    />
-  </svg>
-);
-
-function Accordion({
-  header,
-  children,
-  wrapClassName = "bg-white rounded-2xl border border-mist overflow-hidden",
-  triggerHover = "hover:bg-fog/50",
-  bodyBorder = "border-mist",
-}) {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className={wrapClassName}>
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className={`accordion-trigger w-full flex items-center justify-between px-6 py-4 text-left ${triggerHover} transition-colors`}
-      >
-        {header}
-        <Chevron open={open} />
-      </button>
-      <div
-        className={`accordion-body border-t ${bodyBorder} px-6 py-5 space-y-4 ${open ? "open" : ""}`}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
 
 export default function CelpipSpeakingTask1Page() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -87,76 +50,23 @@ export default function CelpipSpeakingTask1Page() {
     <>
       <TaskNav />
       {/* ─── HERO ─── */}
-      <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
-        <div className="animate-fade-up">
-          <p className="text-xs tracking-widest text-gold font-semibold uppercase mb-4">
-            Speaking · Task 1 of 8
-          </p>
-          <h1 className="font-display text-5xl md:text-6xl leading-tight text-ink mb-5">
-            Give <span className="hero-line italic">advice</span>
-          </h1>
-          <p className="text-lg text-slate max-w-xl leading-relaxed">
-            Respond to a situation by providing thoughtful advice. Show empathy,
-            clear reasoning, and practical suggestions.
-          </p>
-        </div>
-
-        {/* Quick stats */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 animate-fade-up"
-          style={{ animationDelay: ".1s" }}
-        >
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Speaking time
-            </div>
-            <div className="font-display text-3xl text-ink">
-              90<span className="text-lg">s</span>
-            </div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Prep time
-            </div>
-            <div className="font-display text-3xl text-ink">
-              30<span className="text-lg">s</span>
-            </div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Score scale
-            </div>
-            <div className="font-display text-3xl text-ink">1–12</div>
-          </div>
-          <div className="bg-white rounded-2xl border border-mist p-4 text-center card-hover">
-            <div className="text-xs text-slate uppercase tracking-wider mb-1">
-              Target band
-            </div>
-            <div className="font-display text-3xl text-ink">8–10</div>
-          </div>
-        </div>
-      </header>
+      <Hero
+        eyebrow={<>Speaking · Task 1 of 8</>}
+        title={<>Give <span className="hero-line italic">advice</span></>}
+        description={<>Respond to a situation by providing thoughtful advice. Show empathy,
+            clear reasoning, and practical suggestions.</>}
+        stats={[
+          { label: "Speaking time", value: <>90<span className="text-lg">s</span></> },
+          { label: "Prep time", value: <>30<span className="text-lg">s</span></> },
+          { label: "Score scale", value: <>1–12</> },
+          { label: "Target band", value: <>8–10</> },
+        ]}
+      />
 
       {/* ─── MAIN CONTENT ─── */}
       <main className="max-w-6xl mx-auto px-6 pb-24">
         {/* TAB BAR */}
-        <div
-          className="flex flex-wrap gap-2 mb-8 animate-fade-up"
-          style={{ animationDelay: ".15s" }}
-          id="tab-bar"
-        >
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`tab-btn ${
-                activeTab === tab.id ? "tab-active" : "tab-inactive"
-              } px-5 py-2 rounded-full border text-sm font-medium transition-all`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+<TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
         {/* ══════════════════════════════════════════
                PANE: OVERVIEW
@@ -182,48 +92,9 @@ export default function CelpipSpeakingTask1Page() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-mist p-6">
-            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-4">
-              What examiners score you on
-            </p>
-            <div className="space-y-3">
-              {SCORE_CRITERIA.map((c) => (
-                <div key={c.label} className="flex items-start gap-3">
-                  <span
-                    className={`text-xs font-semibold px-3 py-1 rounded-md ${c.badge} shrink-0 mt-0.5`}
-                  >
-                    {c.label}
-                  </span>
-                  <p className="text-sm leading-relaxed text-ink">{c.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+<ScoreCriteria items={SCORE_CRITERIA} />
 
-          <div className="bg-ink rounded-2xl p-6 text-fog">
-            <p className="text-xs font-semibold text-gold uppercase tracking-widest mb-4">
-              The 90-second blueprint
-            </p>
-            <div className="space-y-3">
-              {BLUEPRINT.map((step) => (
-                <div key={step.n} className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full ${step.circle} border flex items-center justify-center shrink-0`}
-                  >
-                    <span className={`font-display ${step.accent} text-sm`}>
-                      {step.n}
-                    </span>
-                  </div>
-                  <div>
-                    <p className={`text-xs font-semibold ${step.accent}`}>
-                      {step.title}
-                    </p>
-                    <p className="text-xs text-fog/80">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+<Blueprint title="The 90-second blueprint" steps={BLUEPRINT} />
 
         </div>
 
@@ -501,72 +372,12 @@ export default function CelpipSpeakingTask1Page() {
         {/* ══════════════════════════════════════════
                PANE: VOCAB BANK
           ══════════════════════════════════════════ */}
-        <div
-          id="pane-vocab"
-          className={`pane ${activeTab === "vocab" ? "active" : ""} space-y-4`}
-        >
-          <div className="flex flex-wrap gap-2">
-            {vocabTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setVocabFilter(type)}
-                className={`vocab-filter-btn ${
-                  vocabFilter === type ? "filter-active" : "filter-inactive"
-                } px-4 py-1.5 rounded-full border text-xs font-medium`}
-              >
-                {type === "all" ? "All Words" : type}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-4">
-            {filteredVocab.map((word) => (
-              <div
-                key={word.word}
-                className="bg-white rounded-xl border border-mist p-4"
-              >
-                <p className="text-sm font-semibold text-ink mb-1">
-                  {word.word}
-                </p>
-                <p className="text-xs text-slate mb-2">
-                  <strong>Meaning:</strong> {word.meaning}
-                </p>
-                <p className="text-xs text-slate italic">
-                  <strong>Example:</strong> "{word.example}"
-                </p>
-                <span className="inline-block mt-3 text-xs font-medium text-sapphire bg-sapphire-light px-2 py-1 rounded">
-                  {word.type}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+<VocabPane words={filteredVocab} types={vocabTypes} filter={vocabFilter} onFilter={setVocabFilter} active={activeTab} variant="labeled" />
 
         {/* ══════════════════════════════════════════
                PANE: PRO TIPS
           ══════════════════════════════════════════ */}
-        <div
-          id="pane-tips"
-          className={`pane ${activeTab === "tips" ? "active" : ""} space-y-4`}
-        >
-          <div className="space-y-3">
-            {filteredTips.map((tip) => (
-              <div
-                key={tip.title}
-                className="tip-card bg-white rounded-xl border border-mist p-4"
-              >
-                <p
-                  className={`text-xs font-semibold ${tip.color} uppercase tracking-widest mb-2`}
-                >
-                  {tip.category.charAt(0).toUpperCase() + tip.category.slice(1)}
-                </p>
-                <p className="text-sm font-semibold text-ink mb-2">
-                  {tip.title}
-                </p>
-                <p className="text-xs text-slate">{tip.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+<TipsPane tips={filteredTips} active={activeTab} />
       </main>
 
       <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">
