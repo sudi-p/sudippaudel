@@ -128,46 +128,32 @@ export const SCENARIOS = [
     vocabHeading: "text-sapphire",
     openingBox: "bg-sapphire-light",
     openingLabel: "text-sapphire-dark",
-    vocab: [
-      {
-        word: "Serene",
-        meaning: "calm and peaceful, with no disturbance",
-        example: "The lake looks completely serene in the early morning light.",
-      },
+    atmosphere: [
       {
         word: "Tranquil",
         meaning: "free from anxiety or stress; very quiet",
-        example: "The countryside scene has a tranquil, unhurried atmosphere.",
-      },
-      {
-        word: "Idyllic",
-        meaning: "extremely happy, peaceful, or picturesque",
-        example: "It is an idyllic rural landscape with rolling green hills.",
-      },
-      {
-        word: "Placid",
-        meaning: "not easily upset; calm on the surface",
-        example: "The placid water reflects the mountains perfectly.",
-      },
-      {
-        word: "Lush",
-        meaning: "rich, abundant green vegetation",
-        example: "Lush grass and dense trees cover the hillside.",
       },
       {
         word: "Pristine",
         meaning: "in its original, unspoiled condition",
-        example: "The beach looks pristine, with no litter in sight.",
       },
       {
         word: "Golden hour",
         meaning: "the soft, warm light just after sunrise or before sunset",
-        example: "Everything is bathed in a golden-hour glow.",
+      },
+    ],
+    mood: [
+      {
+        word: "Serene",
+        meaning: "calm and peaceful, with no disturbance",
       },
       {
-        word: "Undisturbed",
-        meaning: "not interfered with; completely still",
-        example: "The surface of the pond appears completely undisturbed.",
+        word: "Idyllic",
+        meaning: "extremely happy, peaceful, or picturesque",
+      },
+      {
+        word: "Placid",
+        meaning: "not easily upset; calm on the surface",
       },
     ],
     opening: {
@@ -198,47 +184,32 @@ export const SCENARIOS = [
     vocabHeading: "text-gold",
     openingBox: "bg-gold/10",
     openingLabel: "text-amber2-dark",
-    vocab: [
+    atmosphere: [
       {
         word: "Bustling",
         meaning: "full of energetic, noisy activity",
-        example: "The street is bustling with shoppers and street vendors.",
-      },
-      {
-        word: "Vibrant",
-        meaning: "full of energy and enthusiasm",
-        example: "The market has a vibrant, colourful atmosphere.",
-      },
-      {
-        word: "Teeming with",
-        meaning: "be full of people or activity",
-        example: "The sidewalk is teeming with pedestrians and cyclists.",
       },
       {
         word: "Congested",
         meaning: "overcrowded, especially with traffic",
-        example: "The road in the background looks congested with vehicles.",
-      },
-      {
-        word: "Animated",
-        meaning: "full of life, excitement, and activity",
-        example: "The crowd looks animated and engaged.",
-      },
-      {
-        word: "Frenetic",
-        meaning: "fast and energetic in a slightly chaotic way",
-        example: "The frenetic pace of the street is immediately noticeable.",
-      },
-      {
-        word: "Towering",
-        meaning: "extremely tall, dominating the skyline",
-        example: "Towering skyscrapers rise above the busy street below.",
       },
       {
         word: "Hustle and bustle",
         meaning: "the noisy, busy activity of a crowded place",
-        example:
-          "The image perfectly captures the hustle and bustle of city life.",
+      },
+    ],
+    mood: [
+      {
+        word: "Vibrant",
+        meaning: "full of energy and enthusiasm",
+      },
+      {
+        word: "Animated",
+        meaning: "full of life, excitement, and activity",
+      },
+      {
+        word: "Frenetic",
+        meaning: "fast and energetic in a slightly chaotic way",
       },
     ],
     opening: {
@@ -269,48 +240,32 @@ export const SCENARIOS = [
     vocabHeading: "text-rose2",
     openingBox: "bg-rose2-light",
     openingLabel: "text-rose2-dark",
-    vocab: [
-      {
-        word: "Intense",
-        meaning: "having or showing strong feelings or great activity",
-        example: "The athletes' expressions are intense, showing total focus.",
-      },
-      {
-        word: "Confrontational",
-        meaning: "involving or causing conflict",
-        example:
-          "The body language between the two figures looks confrontational.",
-      },
+    atmosphere: [
       {
         word: "Charged atmosphere",
         meaning: "an environment full of tension or strong emotion",
-        example: "There is a charged atmosphere on the stadium floor.",
-      },
-      {
-        word: "Agitated",
-        meaning: "troubled or nervous; moving in a disturbed manner",
-        example:
-          "The crowd appears agitated, with several people gesturing loudly.",
       },
       {
         word: "Ominous",
         meaning: "giving the impression something bad is about to happen",
-        example: "The dark clouds in the background look ominous.",
-      },
-      {
-        word: "Gripping",
-        meaning: "so exciting or dramatic that it holds your attention",
-        example: "It looks like a gripping moment in the competition.",
-      },
-      {
-        word: "Furious",
-        meaning: "extremely angry; moving with great force",
-        example: "The waves in the background are furious and powerful.",
       },
       {
         word: "High-stakes",
         meaning: "involving serious risks or important outcomes",
-        example: "This appears to be a high-stakes, decisive moment.",
+      },
+    ],
+    mood: [
+      {
+        word: "Intense",
+        meaning: "having or showing strong feelings or great activity",
+      },
+      {
+        word: "Agitated",
+        meaning: "troubled or nervous; moving in a disturbed manner",
+      },
+      {
+        word: "Gripping",
+        meaning: "so exciting or dramatic that it holds your attention",
       },
     ],
     opening: {
@@ -341,48 +296,32 @@ export const SCENARIOS = [
     vocabHeading: "text-emerald2",
     openingBox: "bg-emerald2-light",
     openingLabel: "text-emerald2-dark",
-    vocab: [
-      {
-        word: "Exuberant",
-        meaning: "filled with lively energy and excitement",
-        example: "The crowd looks exuberant, cheering and dancing together.",
-      },
-      {
-        word: "Jubilant",
-        meaning: "feeling or expressing great happiness",
-        example: "The participants are jubilant, throwing confetti in the air.",
-      },
+    atmosphere: [
       {
         word: "Festive",
         meaning: "relating to a festival or celebration; joyful",
-        example:
-          "The whole area has a festive feel, with lights and decorations.",
       },
       {
         word: "Revelry",
         meaning: "lively and noisy celebrations",
-        example: "The streets are full of revelry and laughter.",
-      },
-      {
-        word: "Spirited",
-        meaning: "full of energy, enthusiasm, and determination",
-        example: "The dancers are giving a spirited, energetic performance.",
-      },
-      {
-        word: "Communal",
-        meaning: "shared by or belonging to a community",
-        example: "It is a wonderful communal celebration.",
-      },
-      {
-        word: "Radiant",
-        meaning: "sending out light; clearly very happy",
-        example: "The faces in the crowd are radiant with happiness.",
       },
       {
         word: "Colourful",
         meaning: "having many bright, vivid colours; lively and interesting",
-        example:
-          "Colourful banners and streamers are hanging across the street.",
+      },
+    ],
+    mood: [
+      {
+        word: "Exuberant",
+        meaning: "filled with lively energy and excitement",
+      },
+      {
+        word: "Jubilant",
+        meaning: "feeling or expressing great happiness",
+      },
+      {
+        word: "Radiant",
+        meaning: "sending out light; clearly very happy",
       },
     ],
     opening: {
@@ -413,48 +352,33 @@ export const SCENARIOS = [
     vocabHeading: "text-violet2",
     openingBox: "bg-violet2-light",
     openingLabel: "text-violet2-dark",
-    vocab: [
-      {
-        word: "Intimate",
-        meaning: "having a warm, cosy quality; suggesting close friendship",
-        example: "The small café has an intimate, welcoming atmosphere.",
-      },
-      {
-        word: "Inviting",
-        meaning: "making you want to enter or take part; attractive",
-        example: "The warm lighting makes the room look very inviting.",
-      },
-      {
-        word: "Snug",
-        meaning: "comfortable, warm, and sheltered",
-        example: "The reading corner looks snug and perfectly arranged.",
-      },
-      {
-        word: "Muted tones",
-        meaning: "soft, gentle colours that are not too bright",
-        example:
-          "Muted tones of beige and brown give the space a calming feel.",
-      },
+    atmosphere: [
       {
         word: "Ambient",
         meaning:
           "relating to the surrounding environment; soft background quality",
-        example: "The ambient lighting creates a relaxed, comfortable mood.",
+      },
+      {
+        word: "Muted tones",
+        meaning: "soft, gentle colours that are not too bright",
       },
       {
         word: "Homely",
         meaning: "simple but comfortable; creating a sense of home",
-        example: "The kitchen has a warm, homely quality.",
+      },
+    ],
+    mood: [
+      {
+        word: "Intimate",
+        meaning: "having a warm, cosy quality; suggesting close friendship",
       },
       {
-        word: "Engrossed",
-        meaning: "having all one's attention absorbed in something",
-        example: "Several customers are engrossed in their books or laptops.",
+        word: "Inviting",
+        meaning: "making you want to enter or take part; attractive",
       },
       {
-        word: "Tastefully cluttered",
-        meaning: "full of items but in a charming, personal way",
-        example: "The shelves are tastefully cluttered with books and plants.",
+        word: "Snug",
+        meaning: "comfortable, warm, and sheltered",
       },
     ],
     opening: {
@@ -485,47 +409,32 @@ export const SCENARIOS = [
     vocabHeading: "text-ink",
     openingBox: "bg-fog border border-mist",
     openingLabel: "text-slate",
-    vocab: [
-      {
-        word: "Majestic",
-        meaning: "impressively beautiful, elaborate, or dignified",
-        example: "The snow-capped peaks look majestic against the clear sky.",
-      },
-      {
-        word: "Breathtaking",
-        meaning: "astonishing or awe-inspiring in quality or beauty",
-        example: "The view from the cliff is absolutely breathtaking.",
-      },
-      {
-        word: "Imposing",
-        meaning: "grand and impressive; commanding respect",
-        example: "The cathedral's imposing façade dominates the city square.",
-      },
+    atmosphere: [
       {
         word: "Vast",
         meaning: "of very great extent or quantity; immense",
-        example: "The vast open landscape stretches as far as the eye can see.",
-      },
-      {
-        word: "Rugged",
-        meaning: "having a strongly built, rough appearance",
-        example: "The rugged mountain terrain looks wild and untamed.",
-      },
-      {
-        word: "Cascading",
-        meaning: "falling or flowing fast down a steep slope",
-        example: "A cascading waterfall rushes down the rocky cliff face.",
       },
       {
         word: "Panoramic",
         meaning: "with a wide view that covers a large area",
-        example: "The image appears to be taken from a panoramic viewpoint.",
       },
       {
         word: "Ethereal",
         meaning: "extremely delicate and light; heavenly",
-        example:
-          "The mist around the peaks gives the scene an ethereal quality.",
+      },
+    ],
+    mood: [
+      {
+        word: "Majestic",
+        meaning: "impressively beautiful, elaborate, or dignified",
+      },
+      {
+        word: "Breathtaking",
+        meaning: "astonishing or awe-inspiring in quality or beauty",
+      },
+      {
+        word: "Imposing",
+        meaning: "grand and impressive; commanding respect",
       },
     ],
     opening: {

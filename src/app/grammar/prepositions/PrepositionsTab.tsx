@@ -10,201 +10,893 @@ const Html = ({ html, className, as: Tag = "span" }) => (
 
 /* ───────────────────────── inline data ───────────────────────── */
 
-      const CELPIP_PREP_TASKS = [
+      const PREP_COLLOCATIONS = [
         {
-          type: "writing",
-          task: "Writing Task 1 — Email",
-          badge: "✉️ Writing Task 1",
-          badgeBg: "#dbeafe",
-          badgeColor: "#1e40af",
-          scenario:
-            "Your neighbour has been making loud noise late at night. Write an email to your building manager to report the problem and request action.",
-          sampleResponse: `Dear Mr. Thompson,\n\nI am writing to bring a noise concern <strong>to</strong> your attention. I live <strong>in</strong> unit 4B, <strong>on</strong> the third floor, and <strong>for</strong> the past two weeks my neighbour <strong>in</strong> unit 4C has been playing loud music late <strong>at</strong> night, often continuing well past midnight.\n\nThe noise begins <strong>around</strong> 10 p.m. and can be heard clearly <strong>through</strong> the walls. I have spoken <strong>to</strong> the neighbour directly, but the situation has not improved. I am concerned <strong>about</strong> the impact this is having <strong>on</strong> my sleep and my ability to work <strong>in</strong> the mornings.\n\nI would appreciate it if you could look <strong>into</strong> this matter and remind all residents <strong>of</strong> the quiet-hours policy. I look forward <strong>to</strong> hearing from you.\n\nSincerely,\nAlex Kim`,
-          highlights: [
+          prep: "on",
+          emoji: "🎯",
+          bg: "#dbeafe",
+          color: "#1e40af",
+          border: "#bfdbfe",
+          intro:
+            "Verbs of attention, dependence, and expenditure that pair with 'on' — extremely common in CELPIP opinion and advice tasks.",
+          items: [
             {
-              prep: "to",
-              use: "direction / indirect object — bring something to someone's attention",
+              phrase: "focus on",
+              meaning: "concentrate your attention or effort on something",
+              examples: [
+                "In my essay, I will <strong>focus on</strong> the benefits of public transit.",
+                "Students should <strong>focus on</strong> improving their weak areas.",
+                "The company decided to <strong>focus on</strong> customer service.",
+                "Let's <strong>focus on</strong> finding a practical solution.",
+                "This year I want to <strong>focus on</strong> my health and fitness.",
+                "During the meeting, we will <strong>focus on</strong> next quarter's goals.",
+                "Try to <strong>focus on</strong> the positives rather than the problems.",
+                "The government should <strong>focus on</strong> creating more jobs.",
+                "I need to <strong>focus on</strong> one task at a time.",
+                "The report <strong>focuses on</strong> the causes of traffic congestion.",
+              ],
             },
             {
-              prep: "in",
-              use: "location — living in a unit, hearing through a wall",
-            },
-            { prep: "on", use: "floor level — on the third floor" },
-            { prep: "for", use: "duration — for the past two weeks" },
-            { prep: "at", use: "specific time — at night" },
-            { prep: "around", use: "approximate time — around 10 p.m." },
-            {
-              prep: "through",
-              use: "movement / medium — heard through the walls",
-            },
-            {
-              prep: "about",
-              use: "topic of concern — concerned about the impact",
-            },
-            { prep: "into", use: "investigation — look into a matter" },
-            { prep: "of", use: "possession — policy of the building" },
-          ],
-        },
-        {
-          type: "writing",
-          task: "Writing Task 2 — Survey Response",
-          badge: "📝 Writing Task 2",
-          badgeBg: "#dcfce7",
-          badgeColor: "#166534",
-          scenario:
-            "Your city is asking residents whether a large park should be converted into a shopping mall. Write your opinion in response to a community survey.",
-          sampleResponse: `I am strongly opposed <strong>to</strong> converting the park <strong>into</strong> a commercial mall. Green spaces play a vital role <strong>in</strong> the mental and physical health <strong>of</strong> city residents, particularly those who live <strong>in</strong> high-density apartment buildings <strong>with</strong> no access <strong>to</strong> private yards.\n\nThe park is used <strong>by</strong> hundreds of families every weekend. Children rely <strong>on</strong> it <strong>for</strong> outdoor play, and seniors gather there <strong>for</strong> morning walks and socializing. Removing this space would place a disproportionate burden <strong>on</strong> those residents who depend <strong>on</strong> it most.\n\nInstead <strong>of</strong> replacing the park, the city should invest <strong>in</strong> improving its facilities. <strong>In</strong> conclusion, I urge decision-makers to reconsider <strong>in</strong> favour <strong>of</strong> the community's long-term wellbeing.`,
-          highlights: [
-            {
-              prep: "to",
-              use: "opposition — opposed to something; access to yards",
+              phrase: "depend on",
+              meaning: "be determined by; need for support",
+              examples: [
+                "The success of the project <strong>depends on</strong> teamwork.",
+                "Many families <strong>depend on</strong> public transportation.",
+                "Whether we go out <strong>depends on</strong> the weather.",
+                "You can <strong>depend on</strong> me to finish the report.",
+                "The amount you pay <strong>depends on</strong> how much you use.",
+                "Small children <strong>depend on</strong> their parents for everything.",
+                "Our plans <strong>depend on</strong> whether the budget is approved.",
+                "Farmers <strong>depend on</strong> good weather for a strong harvest.",
+                "It <strong>depends on</strong> how much time we have.",
+                "The whole community <strong>depends on</strong> local volunteers.",
+              ],
             },
             {
-              prep: "into",
-              use: "transformation — converting something into something else",
+              phrase: "rely on",
+              meaning: "trust or count on someone or something",
+              examples: [
+                "Small businesses <strong>rely on</strong> loyal customers.",
+                "Elderly residents <strong>rely on</strong> community services.",
+                "We <strong>rely on</strong> technology to stay connected.",
+                "I <strong>rely on</strong> my colleagues for feedback.",
+                "Commuters <strong>rely on</strong> the subway to get to work.",
+                "You should never <strong>rely on</strong> a single source of income.",
+                "The team <strong>relies on</strong> clear communication.",
+                "Many students <strong>rely on</strong> scholarships to pay tuition.",
+                "He <strong>relies on</strong> his savings during slow months.",
+                "I <strong>rely on</strong> my calendar to stay organized.",
+              ],
             },
             {
-              prep: "in",
-              use: "location / domain — in the city, in conclusion, in high-density areas",
+              phrase: "spend (money/time) on",
+              meaning: "use money or time for a particular purpose",
+              examples: [
+                "I <strong>spend</strong> too much money <strong>on</strong> groceries.",
+                "She <strong>spends</strong> her weekends <strong>on</strong> volunteer work.",
+                "The city <strong>spent</strong> millions <strong>on</strong> new parks.",
+                "Don't <strong>spend</strong> too much time <strong>on</strong> one question.",
+                "We <strong>spend</strong> a lot <strong>on</strong> transportation each month.",
+                "Try not to <strong>spend</strong> hours <strong>on</strong> social media.",
+                "They <strong>spent</strong> their savings <strong>on</strong> a new home.",
+                "I like to <strong>spend</strong> my free time <strong>on</strong> outdoor activities.",
+                "The company <strong>spends</strong> heavily <strong>on</strong> staff training.",
+                "He <strong>spends</strong> most of his budget <strong>on</strong> rent.",
+              ],
             },
             {
-              prep: "of",
-              use: "belonging — health of residents, role of spaces",
+              phrase: "concentrate on",
+              meaning: "direct all of your attention to something",
+              examples: [
+                "It's hard to <strong>concentrate on</strong> studying with background noise.",
+                "During the exam, <strong>concentrate on</strong> the task at hand.",
+                "He needs to <strong>concentrate on</strong> his career right now.",
+                "Let's <strong>concentrate on</strong> what really matters.",
+                "I can't <strong>concentrate on</strong> work when I'm tired.",
+                "Athletes must <strong>concentrate on</strong> their technique.",
+                "Please <strong>concentrate on</strong> the road while driving.",
+                "She <strong>concentrated on</strong> finishing the project on time.",
+                "<strong>Concentrate on</strong> your breathing to stay calm.",
+                "We should <strong>concentrate on</strong> solving the main problem first.",
+              ],
             },
             {
-              prep: "with",
-              use: "accompaniment / characteristic — buildings with no yard",
+              phrase: "insist on",
+              meaning: "demand something firmly",
+              examples: [
+                "My manager <strong>insists on</strong> punctuality.",
+                "She <strong>insisted on</strong> paying for dinner.",
+                "The customer <strong>insisted on</strong> a full refund.",
+                "I <strong>insist on</strong> doing things properly.",
+                "He <strong>insists on</strong> checking every detail himself.",
+                "The teacher <strong>insists on</strong> neat handwriting.",
+                "They <strong>insisted on</strong> seeing the manager.",
+                "My parents <strong>insist on</strong> a family dinner every Sunday.",
+                "The client <strong>insisted on</strong> meeting in person.",
+                "She <strong>insists on</strong> high standards from her team.",
+              ],
             },
             {
-              prep: "by",
-              use: "agent (passive) — used by hundreds of families",
-            },
-            { prep: "on", use: "reliance — rely on, burden on" },
-            {
-              prep: "for",
-              use: "purpose — for outdoor play, for morning walks",
-            },
-            {
-              prep: "instead of",
-              use: "contrast/alternative — instead of replacing",
-            },
-          ],
-        },
-        {
-          type: "speaking",
-          task: "Speaking Task 3 — Describing a Scene",
-          badge: "🗣️ Speaking Task 3",
-          badgeBg: "#fef3c7",
-          badgeColor: "#92400e",
-          scenario:
-            "You are shown an image of a busy farmer's market in a town square. Describe what you see in detail.",
-          sampleResponse: `<em>In</em> this picture, I can see a lively farmer's market taking place <em>in</em> the centre of a town square. There are several colourful stalls arranged <em>in</em> rows, and vendors are standing <em>behind</em> their tables, selling fresh produce. <em>On</em> the left side of the image, a woman is looking <em>at</em> a basket of tomatoes and speaking <em>with</em> the vendor. <em>In</em> the background, there are tall buildings <em>on</em> both sides of the street. A group of children is running <em>between</em> the stalls, and a man <em>in</em> a red jacket is walking <em>toward</em> the entrance <em>with</em> a reusable shopping bag <em>in</em> his hand. The overall atmosphere appears cheerful, and the market looks well-attended <em>by</em> people <em>of</em> all ages.`,
-          highlights: [
-            {
-              prep: "in",
-              use: "location — in the picture, in the centre, in the background, in his hand",
+              phrase: "comment on",
+              meaning: "give an opinion or remark about something",
+              examples: [
+                "The teacher <strong>commented on</strong> my progress.",
+                "I'd rather not <strong>comment on</strong> the rumours.",
+                "Reviewers <strong>commented on</strong> the poor service.",
+                "Could you <strong>comment on</strong> the proposal?",
+                "Several people <strong>commented on</strong> how clean the park was.",
+                "The manager declined to <strong>comment on</strong> the decision.",
+                "Guests <strong>commented on</strong> the excellent food.",
+                "She <strong>commented on</strong> the improvement in his work.",
+                "Critics <strong>commented on</strong> the film's stunning visuals.",
+                "Feel free to <strong>comment on</strong> the draft.",
+              ],
             },
             {
-              prep: "on",
-              use: "side / surface — on the left side, on both sides",
-            },
-            { prep: "behind", use: "position — standing behind the tables" },
-            { prep: "at", use: "direction of gaze — looking at something" },
-            {
-              prep: "with",
-              use: "accompaniment — speaking with the vendor, with a bag",
-            },
-            { prep: "between", use: "spatial — running between the stalls" },
-            {
-              prep: "toward",
-              use: "direction of movement — walking toward the entrance",
-            },
-            { prep: "by", use: "agent (passive) — attended by people" },
-            { prep: "of", use: "specification — people of all ages" },
-          ],
-        },
-        {
-          type: "speaking",
-          task: "Speaking Task 5 — Giving Advice",
-          badge: "💬 Speaking Task 5",
-          badgeBg: "#ede9fe",
-          badgeColor: "#5b21b6",
-          scenario:
-            "Your friend is thinking about moving to a new city for work. They are nervous about the change. Give them advice.",
-          sampleResponse: `I totally understand your concern <em>about</em> moving. It's completely normal to feel nervous <em>about</em> such a big change. First, I'd suggest doing some research <em>on</em> the city before you go. Look <em>into</em> the cost <em>of</em> living, the neighbourhoods close <em>to</em> your workplace, and what the public transit system is like.\n\nOnce you're there, try to get <em>out</em> and explore. Join a club or a group based <em>on</em> your interests — this is one <em>of</em> the best ways to meet people. Don't rely <em>on</em> technology alone to stay connected <em>with</em> friends back home. <em>In</em> the beginning it can feel overwhelming, but <em>within</em> a few months you'll start to feel <em>at</em> home. I went <em>through</em> the same experience, and it turned <em>into</em> one <em>of</em> the best decisions <em>of</em> my life.`,
-          highlights: [
-            {
-              prep: "about",
-              use: "subject of concern or emotion — concern about moving, nervous about change",
-            },
-            {
-              prep: "on",
-              use: "topic — research on the city, based on interests",
-            },
-            {
-              prep: "into",
-              use: "investigation — look into the cost; transformation — turned into",
-            },
-            {
-              prep: "of",
-              use: "belonging / specification — cost of living, one of the best",
-            },
-            {
-              prep: "to",
-              use: "proximity / direction — close to your workplace, connected to friends",
-            },
-            { prep: "out", use: "phrasal verb — get out and explore" },
-            { prep: "on", use: "dependence — rely on technology" },
-            { prep: "with", use: "connection — stay connected with friends" },
-            { prep: "in", use: "time phrase — in the beginning" },
-            { prep: "within", use: "time frame — within a few months" },
-            { prep: "at", use: "state — feel at home" },
-            {
-              prep: "through",
-              use: "experience — went through the same experience",
+              phrase: "base (something) on",
+              meaning: "use something as a foundation",
+              examples: [
+                "The decision was <strong>based on</strong> customer feedback.",
+                "The movie is <strong>based on</strong> a true story.",
+                "I'll <strong>base</strong> my argument <strong>on</strong> recent data.",
+                "Their conclusion was <strong>based on</strong> solid research.",
+                "Promotions are <strong>based on</strong> performance.",
+                "The design is <strong>based on</strong> customer needs.",
+                "His theory is <strong>based on</strong> years of observation.",
+                "The price is <strong>based on</strong> the size of the order.",
+                "We <strong>base</strong> our decisions <strong>on</strong> reliable evidence.",
+                "The rating is <strong>based on</strong> real user reviews.",
+              ],
             },
           ],
         },
         {
-          type: "speaking",
-          task: "Speaking Task 7 — Expressing an Opinion",
-          badge: "🎤 Speaking Task 7",
-          badgeBg: "#fce7f3",
-          badgeColor: "#be185d",
-          scenario:
-            "Some people believe that children should not be allowed to use smartphones until they are teenagers. Do you agree or disagree?",
-          sampleResponse: `I agree <em>with</em> the idea that children should be limited <em>in</em> their smartphone use, but I don't think a total ban <em>until</em> the teenage years is realistic. The key issue is not access <em>to</em> the device itself, but rather what children are exposed <em>to</em> <em>on</em> those devices. Parents need to be <em>in</em> control <em>of</em> screen time <em>from</em> an early age. Instead <em>of</em> banning smartphones outright, families should focus <em>on</em> building healthy habits <em>around</em> technology. <em>For</em> example, no phones <em>during</em> meals or <em>before</em> bedtime. Children who are taught to use technology responsibly <em>from</em> a young age are better prepared <em>for</em> the digital world they will grow up <em>in</em>.`,
-          highlights: [
-            { prep: "with", use: "agreement — agree with an idea" },
+          prep: "in",
+          emoji: "📥",
+          bg: "#dcfce7",
+          color: "#166534",
+          border: "#86efac",
+          intro:
+            "Verbs of involvement, investment, and outcome that take 'in' — useful when discussing goals, work, and society.",
+          items: [
             {
-              prep: "in",
-              use: "scope/control — limited in their use, in control",
-            },
-            { prep: "until", use: "time limit — until the teenage years" },
-            {
-              prep: "to",
-              use: "direction / access — access to the device, exposed to content",
-            },
-            {
-              prep: "on",
-              use: "medium — on those devices; topic — focus on habits",
-            },
-            { prep: "of", use: "possession — control of screen time" },
-            {
-              prep: "from",
-              use: "starting point — from an early age, from a young age",
-            },
-            { prep: "instead of", use: "alternative — instead of banning" },
-            {
-              prep: "around",
-              use: "habits around something — habits around technology",
+              phrase: "invest in",
+              meaning: "put money or effort into something for future benefit",
+              examples: [
+                "Many people <strong>invest in</strong> stocks for retirement.",
+                "The government should <strong>invest in</strong> education.",
+                "It's wise to <strong>invest in</strong> your own skills.",
+                "The company <strong>invested in</strong> new technology.",
+                "We should <strong>invest in</strong> renewable energy.",
+                "She <strong>invested in</strong> a small business downtown.",
+                "<strong>Investing in</strong> good tools saves money later.",
+                "The city plans to <strong>invest in</strong> public transit.",
+                "He <strong>invested in</strong> property when prices were low.",
+                "It's important to <strong>invest in</strong> employee training.",
+              ],
             },
             {
-              prep: "for",
-              use: "example marker and purpose — for example, prepared for the world",
+              phrase: "participate in",
+              meaning: "take part in an activity or event",
+              examples: [
+                "All employees are encouraged to <strong>participate in</strong> the survey.",
+                "She <strong>participates in</strong> community events.",
+                "I'd love to <strong>participate in</strong> the volunteer program.",
+                "Students <strong>participate in</strong> group discussions.",
+                "Thousands <strong>participated in</strong> the charity run.",
+                "He rarely <strong>participates in</strong> class activities.",
+                "Everyone is welcome to <strong>participate in</strong> the workshop.",
+                "Local residents <strong>participated in</strong> the clean-up drive.",
+                "I <strong>participate in</strong> a book club every month.",
+                "Many companies <strong>participate in</strong> the job fair.",
+              ],
             },
-            { prep: "during", use: "time — during meals" },
-            { prep: "before", use: "time order — before bedtime" },
+            {
+              phrase: "succeed in",
+              meaning: "achieve a goal you were working toward",
+              examples: [
+                "She <strong>succeeded in</strong> passing the exam.",
+                "To <strong>succeed in</strong> business, you need patience.",
+                "They finally <strong>succeeded in</strong> reducing costs.",
+                "He <strong>succeeded in</strong> convincing the board.",
+                "We <strong>succeeded in</strong> meeting the deadline.",
+                "Few people <strong>succeed in</strong> changing careers so late.",
+                "She <strong>succeeded in</strong> building a loyal customer base.",
+                "They <strong>succeeded in</strong> raising enough funds.",
+                "I hope to <strong>succeed in</strong> my new role.",
+                "The team <strong>succeeded in</strong> launching the product on time.",
+              ],
+            },
+            {
+              phrase: "specialize in",
+              meaning: "focus on a particular area of work or study",
+              examples: [
+                "The clinic <strong>specializes in</strong> children's health.",
+                "She <strong>specializes in</strong> corporate law.",
+                "Our team <strong>specializes in</strong> customer support.",
+                "I want to <strong>specialize in</strong> data analysis.",
+                "This shop <strong>specializes in</strong> handmade furniture.",
+                "He <strong>specializes in</strong> repairing vintage cars.",
+                "The agency <strong>specializes in</strong> digital marketing.",
+                "Our restaurant <strong>specializes in</strong> local cuisine.",
+                "She <strong>specializes in</strong> teaching young learners.",
+                "The company <strong>specializes in</strong> eco-friendly products.",
+              ],
+            },
+            {
+              phrase: "result in",
+              meaning: "cause a particular outcome",
+              examples: [
+                "Poor planning can <strong>result in</strong> delays.",
+                "The new policy <strong>resulted in</strong> higher sales.",
+                "Skipping meals may <strong>result in</strong> fatigue.",
+                "The negotiations <strong>resulted in</strong> an agreement.",
+                "Heavy rain <strong>resulted in</strong> flooding downtown.",
+                "The mistake <strong>resulted in</strong> a large loss.",
+                "Better training <strong>resulted in</strong> fewer errors.",
+                "The merger <strong>resulted in</strong> many job cuts.",
+                "Careless driving can <strong>result in</strong> accidents.",
+                "The campaign <strong>resulted in</strong> greater awareness.",
+              ],
+            },
+            {
+              phrase: "believe in",
+              meaning: "have confidence in the value of something",
+              examples: [
+                "I <strong>believe in</strong> treating everyone fairly.",
+                "She <strong>believes in</strong> hard work.",
+                "We <strong>believe in</strong> supporting local businesses.",
+                "You have to <strong>believe in</strong> yourself.",
+                "He <strong>believes in</strong> giving people a second chance.",
+                "I firmly <strong>believe in</strong> the power of education.",
+                "They <strong>believe in</strong> protecting the environment.",
+                "Our company <strong>believes in</strong> honest service.",
+                "She <strong>believes in</strong> living a simple life.",
+                "I <strong>believe in</strong> setting clear goals.",
+              ],
+            },
+            {
+              phrase: "engage in",
+              meaning: "take part in an activity",
+              examples: [
+                "Children should <strong>engage in</strong> outdoor play.",
+                "The two sides <strong>engaged in</strong> a long discussion.",
+                "He likes to <strong>engage in</strong> meaningful conversations.",
+                "Employees <strong>engage in</strong> ongoing training.",
+                "Students are encouraged to <strong>engage in</strong> debate.",
+                "She <strong>engages in</strong> regular exercise.",
+                "The company <strong>engages in</strong> charitable work.",
+                "We should <strong>engage in</strong> more physical activity.",
+                "They <strong>engaged in</strong> a heated argument.",
+                "Volunteers <strong>engage in</strong> community projects.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "to",
+          emoji: "➡️",
+          bg: "#fef3c7",
+          color: "#92400e",
+          border: "#fde68a",
+          intro:
+            "Verbs and adjectives of direction, reaction, and commitment that take 'to' — vital for emails and opinion responses.",
+          items: [
+            {
+              phrase: "allocate (resources) to",
+              meaning: "assign money, time, or resources for a purpose",
+              examples: [
+                "The city <strong>allocated</strong> a large budget <strong>to</strong> development activities.",
+                "We should <strong>allocate</strong> more funds <strong>to</strong> healthcare.",
+                "The manager <strong>allocated</strong> extra time <strong>to</strong> training.",
+                "Resources were <strong>allocated to</strong> the most urgent projects.",
+                "The school <strong>allocated</strong> new computers <strong>to</strong> each classroom.",
+                "A portion of the profit is <strong>allocated to</strong> research.",
+                "They <strong>allocated</strong> a room <strong>to</strong> the new team.",
+                "More staff were <strong>allocated to</strong> customer support.",
+                "The council <strong>allocated</strong> money <strong>to</strong> road repairs.",
+                "We need to <strong>allocate</strong> time <strong>to</strong> careful planning.",
+              ],
+            },
+            {
+              phrase: "contribute to",
+              meaning: "help cause or add to something",
+              examples: [
+                "Regular exercise <strong>contributes to</strong> good health.",
+                "Everyone <strong>contributed to</strong> the fundraiser.",
+                "Pollution <strong>contributes to</strong> climate change.",
+                "Her ideas <strong>contributed to</strong> the project's success.",
+                "Poor diet <strong>contributes to</strong> many illnesses.",
+                "Volunteers <strong>contribute to</strong> the local community.",
+                "Stress can <strong>contribute to</strong> poor sleep.",
+                "Each team member <strong>contributed to</strong> the win.",
+                "Reading <strong>contributes to</strong> a wider vocabulary.",
+                "Heavy traffic <strong>contributes to</strong> air pollution.",
+              ],
+            },
+            {
+              phrase: "lead to",
+              meaning: "result in or cause something",
+              examples: [
+                "Hard work often <strong>leads to</strong> success.",
+                "Poor communication can <strong>lead to</strong> misunderstandings.",
+                "The investment <strong>led to</strong> significant growth.",
+                "Stress may <strong>lead to</strong> health problems.",
+                "Small savings can <strong>lead to</strong> big rewards.",
+                "Bad habits can <strong>lead to</strong> serious issues.",
+                "The discovery <strong>led to</strong> new treatments.",
+                "Skipping practice <strong>leads to</strong> poor results.",
+                "Kindness can <strong>lead to</strong> lasting friendships.",
+                "The decision <strong>led to</strong> major changes.",
+              ],
+            },
+            {
+              phrase: "adapt to",
+              meaning: "adjust to a new situation",
+              examples: [
+                "It took time to <strong>adapt to</strong> the new city.",
+                "Companies must <strong>adapt to</strong> changing markets.",
+                "Children quickly <strong>adapt to</strong> new schools.",
+                "We need to <strong>adapt to</strong> remote work.",
+                "Immigrants often have to <strong>adapt to</strong> a new culture.",
+                "Businesses must <strong>adapt to</strong> new technology.",
+                "It's not easy to <strong>adapt to</strong> a different climate.",
+                "She <strong>adapted to</strong> her new role quickly.",
+                "We must <strong>adapt to</strong> changing customer expectations.",
+                "Plants <strong>adapt to</strong> their environment.",
+              ],
+            },
+            {
+              phrase: "object to",
+              meaning: "disagree with or oppose something",
+              examples: [
+                "Many residents <strong>objected to</strong> the new highway.",
+                "I <strong>object to</strong> the proposed changes.",
+                "She <strong>objected to</strong> working overtime without pay.",
+                "Some parents <strong>objected to</strong> the new policy.",
+                "Neighbours <strong>objected to</strong> the late-night noise.",
+                "He <strong>objected to</strong> the unfair treatment.",
+                "Several members <strong>objected to</strong> the plan.",
+                "I strongly <strong>object to</strong> that suggestion.",
+                "Workers <strong>objected to</strong> the longer hours.",
+                "They <strong>objected to</strong> the increase in fees.",
+              ],
+            },
+            {
+              phrase: "respond to",
+              meaning: "reply or react to something",
+              examples: [
+                "Please <strong>respond to</strong> the email by Friday.",
+                "The company was slow to <strong>respond to</strong> complaints.",
+                "How did they <strong>respond to</strong> the news?",
+                "We must <strong>respond to</strong> customer needs.",
+                "The staff <strong>responded to</strong> the emergency quickly.",
+                "She didn't <strong>respond to</strong> my message.",
+                "The city <strong>responded to</strong> residents' concerns.",
+                "He <strong>responded to</strong> the criticism calmly.",
+                "Please <strong>respond to</strong> the invitation soon.",
+                "The team <strong>responded to</strong> the challenge well.",
+              ],
+            },
+            {
+              phrase: "commit to",
+              meaning: "dedicate yourself fully to something",
+              examples: [
+                "I'm ready to <strong>commit to</strong> this project.",
+                "The company <strong>committed to</strong> reducing waste.",
+                "She <strong>committed to</strong> learning English.",
+                "We should <strong>commit to</strong> regular exercise.",
+                "He <strong>committed to</strong> finishing the course.",
+                "The government <strong>committed to</strong> lowering emissions.",
+                "I can't <strong>commit to</strong> a long-term plan yet.",
+                "They <strong>committed to</strong> improving customer service.",
+                "She <strong>committed to</strong> volunteering every weekend.",
+                "We are <strong>committed to</strong> fair treatment for everyone.",
+              ],
+            },
+            {
+              phrase: "look forward to",
+              meaning: "anticipate something with pleasure",
+              examples: [
+                "I <strong>look forward to</strong> hearing from you.",
+                "We <strong>look forward to</strong> working with you.",
+                "She <strong>looks forward to</strong> the weekend.",
+                "They <strong>look forward to</strong> the annual conference.",
+                "I <strong>look forward to</strong> meeting you in person.",
+                "He <strong>looks forward to</strong> his morning coffee.",
+                "We <strong>look forward to</strong> your reply.",
+                "The children <strong>look forward to</strong> summer vacation.",
+                "I <strong>look forward to</strong> seeing the final results.",
+                "She <strong>looks forward to</strong> starting her new job.",
+              ],
+            },
+            {
+              phrase: "be similar to",
+              meaning: "resemble or be like something",
+              examples: [
+                "This job is <strong>similar to</strong> my previous one.",
+                "Her writing style is <strong>similar to</strong> mine.",
+                "The new model is <strong>similar to</strong> the old one.",
+                "Their culture is <strong>similar to</strong> ours in many ways.",
+                "This recipe is <strong>similar to</strong> my grandmother's.",
+                "The two cities are <strong>similar to</strong> each other.",
+                "His opinion is <strong>similar to</strong> mine.",
+                "The new phone is <strong>similar to</strong> last year's model.",
+                "Her voice is <strong>similar to</strong> her sister's.",
+                "The climate here is <strong>similar to</strong> my hometown's.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "for",
+          emoji: "🎁",
+          bg: "#ede9fe",
+          color: "#5b21b6",
+          border: "#c4b5fd",
+          intro:
+            "Verbs and adjectives of purpose, cause, and responsibility that pair with 'for'.",
+          items: [
+            {
+              phrase: "apply for",
+              meaning: "make a formal request for something",
+              examples: [
+                "I plan to <strong>apply for</strong> the manager position.",
+                "She <strong>applied for</strong> a scholarship.",
+                "You can <strong>apply for</strong> a refund online.",
+                "Many people <strong>applied for</strong> the job.",
+                "He <strong>applied for</strong> a student loan.",
+                "We <strong>applied for</strong> a permit to build.",
+                "I'm going to <strong>apply for</strong> a new passport.",
+                "She <strong>applied for</strong> several positions at once.",
+                "You should <strong>apply for</strong> the grant early.",
+                "Thousands <strong>applied for</strong> the internship.",
+              ],
+            },
+            {
+              phrase: "prepare for",
+              meaning: "get ready for something",
+              examples: [
+                "I'm <strong>preparing for</strong> the CELPIP exam.",
+                "We need to <strong>prepare for</strong> the meeting.",
+                "Students should <strong>prepare for</strong> interviews.",
+                "The city is <strong>preparing for</strong> winter.",
+                "They <strong>prepared for</strong> the storm in advance.",
+                "She carefully <strong>prepared for</strong> her presentation.",
+                "We should <strong>prepare for</strong> possible delays.",
+                "He is <strong>preparing for</strong> a career change.",
+                "The team <strong>prepared for</strong> the big game.",
+                "Always <strong>prepare for</strong> unexpected questions.",
+              ],
+            },
+            {
+              phrase: "account for",
+              meaning: "explain something or make up a portion of it",
+              examples: [
+                "You must <strong>account for</strong> every expense.",
+                "Online sales <strong>account for</strong> half of our revenue.",
+                "How do you <strong>account for</strong> the delay?",
+                "These factors <strong>account for</strong> the price increase.",
+                "Salaries <strong>account for</strong> most of the budget.",
+                "Tourism <strong>accounts for</strong> a large share of income.",
+                "Can you <strong>account for</strong> the missing funds?",
+                "Weather <strong>accounts for</strong> many of the delays.",
+                "This region <strong>accounts for</strong> most of our sales.",
+                "The manager had to <strong>account for</strong> the shortage.",
+              ],
+            },
+            {
+              phrase: "apologize for",
+              meaning: "say you are sorry for something",
+              examples: [
+                "I <strong>apologize for</strong> the inconvenience.",
+                "She <strong>apologized for</strong> being late.",
+                "The company <strong>apologized for</strong> the error.",
+                "He <strong>apologized for</strong> the misunderstanding.",
+                "I must <strong>apologize for</strong> the delay in replying.",
+                "They <strong>apologized for</strong> the poor service.",
+                "She <strong>apologized for</strong> missing the meeting.",
+                "We <strong>apologize for</strong> any confusion.",
+                "He <strong>apologized for</strong> his rude remark.",
+                "The airline <strong>apologized for</strong> the cancellation.",
+              ],
+            },
+            {
+              phrase: "search for",
+              meaning: "look carefully for something",
+              examples: [
+                "I've been <strong>searching for</strong> a new apartment.",
+                "They <strong>searched for</strong> the missing documents.",
+                "She is <strong>searching for</strong> a better opportunity.",
+                "We <strong>searched for</strong> the cheapest option.",
+                "He <strong>searched for</strong> his keys everywhere.",
+                "Volunteers <strong>searched for</strong> the lost dog.",
+                "I'm <strong>searching for</strong> a reliable babysitter.",
+                "They <strong>searched for</strong> answers online.",
+                "She spent hours <strong>searching for</strong> the perfect gift.",
+                "We are <strong>searching for</strong> qualified candidates.",
+              ],
+            },
+            {
+              phrase: "be responsible for",
+              meaning: "be in charge of, or be the cause of, something",
+              examples: [
+                "She is <strong>responsible for</strong> the marketing team.",
+                "Who is <strong>responsible for</strong> this project?",
+                "Drivers are <strong>responsible for</strong> their passengers' safety.",
+                "I'm <strong>responsible for</strong> training new staff.",
+                "He is <strong>responsible for</strong> the daily schedule.",
+                "Parents are <strong>responsible for</strong> their children.",
+                "The manager is <strong>responsible for</strong> the budget.",
+                "Each employee is <strong>responsible for</strong> their own work.",
+                "She is <strong>responsible for</strong> handling complaints.",
+                "Everyone is <strong>responsible for</strong> keeping the office clean.",
+              ],
+            },
+            {
+              phrase: "compensate for",
+              meaning: "make up for something lost or lacking",
+              examples: [
+                "Extra pay can <strong>compensate for</strong> long hours.",
+                "Nothing can <strong>compensate for</strong> lost time.",
+                "The company <strong>compensated</strong> customers <strong>for</strong> the delay.",
+                "Good service <strong>compensates for</strong> higher prices.",
+                "Hard work can <strong>compensate for</strong> a lack of experience.",
+                "The bonus <strong>compensated for</strong> the extra effort.",
+                "Nothing <strong>compensates for</strong> a good night's sleep.",
+                "The discount <strong>compensated for</strong> the earlier mistake.",
+                "She works hard to <strong>compensate for</strong> lost time.",
+                "Better features <strong>compensate for</strong> the higher cost.",
+              ],
+            },
+            {
+              phrase: "blame (someone) for",
+              meaning: "hold someone responsible for something bad",
+              examples: [
+                "Don't <strong>blame</strong> others <strong>for</strong> your mistakes.",
+                "They <strong>blamed</strong> the manager <strong>for</strong> the loss.",
+                "She was <strong>blamed for</strong> the delay.",
+                "You can't <strong>blame</strong> him <strong>for</strong> trying.",
+                "He <strong>blamed</strong> the weather <strong>for</strong> the poor turnout.",
+                "Don't <strong>blame</strong> yourself <strong>for</strong> what happened.",
+                "The media <strong>blamed</strong> the company <strong>for</strong> the scandal.",
+                "They <strong>blamed</strong> each other <strong>for</strong> the failure.",
+                "I don't <strong>blame</strong> you <strong>for</strong> being upset.",
+                "She was unfairly <strong>blamed for</strong> the error.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "of",
+          emoji: "🧩",
+          bg: "#fce7f3",
+          color: "#be185d",
+          border: "#fbcfe8",
+          intro:
+            "Verbs and adjectives of composition, awareness, and judgement that take 'of'.",
+          items: [
+            {
+              phrase: "consist of",
+              meaning: "be made up of",
+              examples: [
+                "The team <strong>consists of</strong> five members.",
+                "The course <strong>consists of</strong> ten lessons.",
+                "A healthy diet <strong>consists of</strong> fruits and vegetables.",
+                "The report <strong>consists of</strong> three sections.",
+                "The committee <strong>consists of</strong> local volunteers.",
+                "The exam <strong>consists of</strong> two parts.",
+                "Their diet <strong>consists</strong> mainly <strong>of</strong> rice and vegetables.",
+                "The package <strong>consists of</strong> several items.",
+                "The panel <strong>consists of</strong> industry experts.",
+                "The building <strong>consists of</strong> twelve floors.",
+              ],
+            },
+            {
+              phrase: "approve of",
+              meaning: "have a favourable opinion of something",
+              examples: [
+                "My parents <strong>approve of</strong> my decision.",
+                "Not everyone <strong>approves of</strong> the new rules.",
+                "The committee <strong>approved of</strong> the plan.",
+                "I don't <strong>approve of</strong> wasting food.",
+                "She doesn't <strong>approve of</strong> his behaviour.",
+                "Most residents <strong>approve of</strong> the changes.",
+                "My boss <strong>approved of</strong> the new schedule.",
+                "They didn't <strong>approve of</strong> the idea at first.",
+                "I <strong>approve of</strong> the way she handled it.",
+                "Few people <strong>approve of</strong> higher taxes.",
+              ],
+            },
+            {
+              phrase: "remind (someone) of",
+              meaning: "cause someone to remember something",
+              examples: [
+                "This song <strong>reminds</strong> me <strong>of</strong> my childhood.",
+                "Please <strong>remind</strong> me <strong>of</strong> the deadline.",
+                "She <strong>reminds</strong> me <strong>of</strong> my sister.",
+                "The photo <strong>reminded</strong> him <strong>of</strong> home.",
+                "This place <strong>reminds</strong> me <strong>of</strong> my hometown.",
+                "Can you <strong>remind</strong> me <strong>of</strong> the address?",
+                "His voice <strong>reminds</strong> me <strong>of</strong> my father.",
+                "The smell <strong>reminds</strong> me <strong>of</strong> my grandmother's kitchen.",
+                "Let me <strong>remind</strong> you <strong>of</strong> the rules.",
+                "That story <strong>reminds</strong> me <strong>of</strong> an old movie.",
+              ],
+            },
+            {
+              phrase: "take advantage of",
+              meaning: "make good use of an opportunity",
+              examples: [
+                "You should <strong>take advantage of</strong> the free training.",
+                "We <strong>took advantage of</strong> the sunny weather.",
+                "Don't let others <strong>take advantage of</strong> you.",
+                "Travellers <strong>take advantage of</strong> off-season discounts.",
+                "She <strong>took advantage of</strong> the job opportunity.",
+                "<strong>Take advantage of</strong> the free trial while it lasts.",
+                "We <strong>took advantage of</strong> the long weekend to travel.",
+                "Students should <strong>take advantage of</strong> the library.",
+                "He <strong>took advantage of</strong> the low interest rates.",
+                "<strong>Take advantage of</strong> every chance to learn.",
+              ],
+            },
+            {
+              phrase: "be aware of",
+              meaning: "know about or notice something",
+              examples: [
+                "Are you <strong>aware of</strong> the new policy?",
+                "Drivers should be <strong>aware of</strong> pedestrians.",
+                "I wasn't <strong>aware of</strong> the deadline.",
+                "We must be <strong>aware of</strong> the risks.",
+                "Please be <strong>aware of</strong> your surroundings.",
+                "She is <strong>aware of</strong> the challenges ahead.",
+                "Customers should be <strong>aware of</strong> the return policy.",
+                "Be <strong>aware of</strong> hidden fees when signing up.",
+                "He was not <strong>aware of</strong> the recent changes.",
+                "Everyone should be <strong>aware of</strong> the fire exits.",
+              ],
+            },
+            {
+              phrase: "be capable of",
+              meaning: "have the ability to do something",
+              examples: [
+                "She is <strong>capable of</strong> handling pressure.",
+                "The machine is <strong>capable of</strong> printing in colour.",
+                "I believe you are <strong>capable of</strong> great things.",
+                "He is <strong>capable of</strong> leading the team.",
+                "This car is <strong>capable of</strong> high speeds.",
+                "She is more than <strong>capable of</strong> doing the job.",
+                "The system is <strong>capable of</strong> storing huge amounts of data.",
+                "They are <strong>capable of</strong> much better work.",
+                "I know you're <strong>capable of</strong> passing the test.",
+                "The new software is <strong>capable of</strong> many tasks.",
+              ],
+            },
+            {
+              phrase: "accuse (someone) of",
+              meaning: "say that someone has done something wrong",
+              examples: [
+                "They <strong>accused</strong> him <strong>of</strong> cheating.",
+                "She was <strong>accused of</strong> stealing.",
+                "Don't <strong>accuse</strong> people <strong>of</strong> lying without proof.",
+                "The article <strong>accused</strong> the company <strong>of</strong> fraud.",
+                "He was <strong>accused of</strong> breaking the rules.",
+                "They <strong>accused</strong> the driver <strong>of</strong> speeding.",
+                "She <strong>accused</strong> him <strong>of</strong> being dishonest.",
+                "The report <strong>accused</strong> officials <strong>of</strong> corruption.",
+                "Don't <strong>accuse</strong> me <strong>of</strong> something I didn't do.",
+                "He was wrongly <strong>accused of</strong> the crime.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "with",
+          emoji: "🤝",
+          bg: "#cffafe",
+          color: "#155e75",
+          border: "#a5f3fc",
+          intro:
+            "Verbs and adjectives of handling, agreement, and familiarity that pair with 'with'.",
+          items: [
+            {
+              phrase: "deal with",
+              meaning: "handle or manage a situation",
+              examples: [
+                "Managers must <strong>deal with</strong> difficult situations.",
+                "How do you <strong>deal with</strong> stress?",
+                "We need to <strong>deal with</strong> this problem quickly.",
+                "Customer service <strong>deals with</strong> complaints daily.",
+                "She knows how to <strong>deal with</strong> angry customers.",
+                "It's hard to <strong>deal with</strong> so much pressure.",
+                "The government must <strong>deal with</strong> rising costs.",
+                "I'll <strong>deal with</strong> this issue tomorrow.",
+                "He <strong>deals with</strong> clients from all over the world.",
+                "We must <strong>deal with</strong> the situation calmly.",
+              ],
+            },
+            {
+              phrase: "cope with",
+              meaning: "manage a difficult situation successfully",
+              examples: [
+                "It's hard to <strong>cope with</strong> so much pressure.",
+                "She learned to <strong>cope with</strong> the loss.",
+                "New employees must <strong>cope with</strong> a heavy workload.",
+                "How do you <strong>cope with</strong> change?",
+                "He struggled to <strong>cope with</strong> the stress.",
+                "Some people <strong>cope with</strong> problems by talking about them.",
+                "It's difficult to <strong>cope with</strong> a busy schedule.",
+                "She <strong>copes with</strong> pressure by staying organized.",
+                "The city struggled to <strong>cope with</strong> the flood.",
+                "Many students find it hard to <strong>cope with</strong> exams.",
+              ],
+            },
+            {
+              phrase: "agree with",
+              meaning: "share the same opinion as someone",
+              examples: [
+                "I <strong>agree with</strong> your point of view.",
+                "Not everyone <strong>agrees with</strong> the decision.",
+                "Do you <strong>agree with</strong> the new rules?",
+                "She <strong>agreed with</strong> my suggestion.",
+                "Most experts <strong>agree with</strong> this approach.",
+                "I don't <strong>agree with</strong> that statement.",
+                "He <strong>agreed with</strong> the proposal completely.",
+                "Few people <strong>agreed with</strong> the plan.",
+                "I couldn't <strong>agree with</strong> you more.",
+                "The team <strong>agreed with</strong> the manager's idea.",
+              ],
+            },
+            {
+              phrase: "comply with",
+              meaning: "obey or follow rules and regulations",
+              examples: [
+                "All staff must <strong>comply with</strong> safety regulations.",
+                "The company <strong>complied with</strong> the new law.",
+                "Please <strong>comply with</strong> the guidelines.",
+                "Failure to <strong>comply with</strong> the rules has consequences.",
+                "Drivers must <strong>comply with</strong> speed limits.",
+                "The factory <strong>complied with</strong> environmental standards.",
+                "Everyone is expected to <strong>comply with</strong> the dress code.",
+                "They refused to <strong>comply with</strong> the request.",
+                "We must <strong>comply with</strong> local laws.",
+                "Businesses have to <strong>comply with</strong> health rules.",
+              ],
+            },
+            {
+              phrase: "be satisfied with",
+              meaning: "be pleased with something",
+              examples: [
+                "I'm very <strong>satisfied with</strong> the service.",
+                "Customers were <strong>satisfied with</strong> the product.",
+                "She wasn't <strong>satisfied with</strong> the results.",
+                "Are you <strong>satisfied with</strong> your progress?",
+                "The manager was <strong>satisfied with</strong> our work.",
+                "He is never <strong>satisfied with</strong> second place.",
+                "We are <strong>satisfied with</strong> the outcome.",
+                "Most guests were <strong>satisfied with</strong> their stay.",
+                "I'm not fully <strong>satisfied with</strong> the design.",
+                "They seemed <strong>satisfied with</strong> the explanation.",
+              ],
+            },
+            {
+              phrase: "be familiar with",
+              meaning: "know something well",
+              examples: [
+                "I'm <strong>familiar with</strong> this software.",
+                "Are you <strong>familiar with</strong> the area?",
+                "She is <strong>familiar with</strong> the procedure.",
+                "New staff should become <strong>familiar with</strong> the rules.",
+                "He is <strong>familiar with</strong> the local customs.",
+                "I'm not <strong>familiar with</strong> that brand.",
+                "Are you <strong>familiar with</strong> how it works?",
+                "She is <strong>familiar with</strong> several languages.",
+                "Most drivers are <strong>familiar with</strong> these roads.",
+                "You should be <strong>familiar with</strong> the safety rules.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "about",
+          emoji: "💭",
+          bg: "#ffedd5",
+          color: "#9a3412",
+          border: "#fed7aa",
+          intro:
+            "Verbs and adjectives expressing feelings and concerns that take 'about'.",
+          items: [
+            {
+              phrase: "worry about",
+              meaning: "feel anxious about something",
+              examples: [
+                "Don't <strong>worry about</strong> the small details.",
+                "Parents often <strong>worry about</strong> their children.",
+                "I <strong>worry about</strong> meeting the deadline.",
+                "There's no need to <strong>worry about</strong> the cost.",
+                "She <strong>worries about</strong> her exams too much.",
+                "Try not to <strong>worry about</strong> things you can't control.",
+                "He <strong>worries about</strong> the future.",
+                "We <strong>worry about</strong> the rising cost of living.",
+                "Don't <strong>worry about</strong> being perfect.",
+                "Many people <strong>worry about</strong> job security.",
+              ],
+            },
+            {
+              phrase: "complain about",
+              meaning: "express dissatisfaction with something",
+              examples: [
+                "Residents <strong>complained about</strong> the noise.",
+                "He always <strong>complains about</strong> the weather.",
+                "Customers <strong>complained about</strong> the long wait.",
+                "She <strong>complained about</strong> the poor service.",
+                "Employees <strong>complained about</strong> the new schedule.",
+                "Passengers <strong>complained about</strong> the delay.",
+                "They <strong>complained about</strong> the high prices.",
+                "He <strong>complained about</strong> the cold food.",
+                "Neighbours <strong>complained about</strong> the construction.",
+                "Guests <strong>complained about</strong> the slow internet.",
+              ],
+            },
+          ],
+        },
+        {
+          prep: "from",
+          emoji: "📤",
+          bg: "#fee2e2",
+          color: "#991b1b",
+          border: "#fca5a5",
+          intro:
+            "Verbs of gaining, experiencing, and recovering that pair with 'from'.",
+          items: [
+            {
+              phrase: "benefit from",
+              meaning: "gain an advantage from something",
+              examples: [
+                "Students <strong>benefit from</strong> small class sizes.",
+                "The community <strong>benefited from</strong> the new library.",
+                "You'll <strong>benefit from</strong> regular practice.",
+                "Businesses <strong>benefit from</strong> good reviews.",
+                "Everyone <strong>benefits from</strong> a healthy lifestyle.",
+                "Workers <strong>benefit from</strong> flexible hours.",
+                "The city <strong>benefited from</strong> increased tourism.",
+                "Children <strong>benefit from</strong> reading every day.",
+                "We all <strong>benefit from</strong> clean public spaces.",
+                "Companies <strong>benefit from</strong> happy employees.",
+              ],
+            },
+            {
+              phrase: "suffer from",
+              meaning: "experience something bad, especially an illness",
+              examples: [
+                "Many people <strong>suffer from</strong> stress at work.",
+                "She <strong>suffers from</strong> seasonal allergies.",
+                "The region <strong>suffers from</strong> water shortages.",
+                "He <strong>suffered from</strong> a lack of sleep.",
+                "The city <strong>suffers from</strong> heavy traffic.",
+                "Many workers <strong>suffer from</strong> burnout.",
+                "He <strong>suffers from</strong> frequent headaches.",
+                "The area <strong>suffers from</strong> poor internet service.",
+                "Some students <strong>suffer from</strong> exam anxiety.",
+                "The economy <strong>suffers from</strong> high inflation.",
+              ],
+            },
+            {
+              phrase: "recover from",
+              meaning: "return to normal after a difficulty or illness",
+              examples: [
+                "It took weeks to <strong>recover from</strong> the flu.",
+                "The economy is <strong>recovering from</strong> the recession.",
+                "She quickly <strong>recovered from</strong> the surgery.",
+                "It's hard to <strong>recover from</strong> such a setback.",
+                "He is slowly <strong>recovering from</strong> his injury.",
+                "The business <strong>recovered from</strong> a difficult year.",
+                "It took time to <strong>recover from</strong> the loss.",
+                "The team <strong>recovered from</strong> a poor start.",
+                "She <strong>recovered from</strong> her illness within days.",
+                "The region is <strong>recovering from</strong> the storm.",
+              ],
+            },
           ],
         },
       ];
@@ -645,273 +1337,277 @@ const Html = ({ html, className, as: Tag = "span" }) => (
       ];
 
       const PREP_QUIZ_QUESTIONS = [
-        // Time
+        // Collocations — verbs + prepositions
         {
-          q: "The meeting is __ 9 a.m.",
+          q: "To boost the economy, the government should invest __ education.",
+          options: ["in", "on", "to", "for"],
+          ans: 0,
+          exp: "<strong>Invest in</strong> means to put money or effort into something for future benefit.",
+        },
+        {
+          q: "In my essay, I will focus __ the benefits of remote work.",
+          options: ["at", "on", "in", "to"],
+          ans: 1,
+          exp: "<strong>Focus on</strong> means to direct your attention or effort to something.",
+        },
+        {
+          q: "The city allocated a large budget __ development activities.",
+          options: ["for", "to", "on", "in"],
+          ans: 1,
+          exp: "<strong>Allocate ... to</strong> means to assign money or resources for a purpose.",
+        },
+        {
+          q: "The success of any team depends __ good communication.",
+          options: ["of", "on", "in", "at"],
+          ans: 1,
+          exp: "<strong>Depend on</strong> is the correct collocation — never 'depend of'.",
+        },
+        {
+          q: "Many seniors rely __ community services for daily support.",
+          options: ["in", "on", "at", "to"],
+          ans: 1,
+          exp: "<strong>Rely on</strong> means to trust or need something for support.",
+        },
+        {
+          q: "I spend most of my weekend money __ groceries and transport.",
+          options: ["for", "in", "on", "to"],
+          ans: 2,
+          exp: "<strong>Spend money on</strong> is the fixed collocation.",
+        },
+        {
+          q: "It's difficult to concentrate __ studying in a noisy room.",
+          options: ["at", "in", "on", "to"],
+          ans: 2,
+          exp: "<strong>Concentrate on</strong> means to give all your attention to something.",
+        },
+        {
+          q: "The manager insisted __ finishing the report before the weekend.",
           options: ["in", "on", "at", "for"],
-          ans: 2,
-          exp: "Use <strong>at</strong> for exact clock times.",
-        },
-        {
-          q: "She has worked here __ 2019.",
-          options: ["for", "since", "during", "in"],
           ans: 1,
-          exp: "<strong>Since</strong> marks the starting point of an ongoing action (used with perfect tenses).",
+          exp: "<strong>Insist on</strong> means to demand something firmly.",
         },
         {
-          q: "I lived in Toronto __ three years.",
-          options: ["since", "during", "for", "until"],
-          ans: 2,
-          exp: "<strong>For</strong> shows duration — how long something lasted.",
-        },
-        {
-          q: "Please submit the report __ Friday.",
-          options: ["until", "by", "on", "at"],
-          ans: 1,
-          exp: "<strong>By</strong> means no later than a deadline.",
-        },
-        {
-          q: "The library is open __ 8 p.m.",
-          options: ["by", "at", "until", "since"],
-          ans: 2,
-          exp: "<strong>Until</strong> means up to and including that time.",
-        },
-        {
-          q: "She was born __ January.",
-          options: ["on", "at", "in", "by"],
-          ans: 2,
-          exp: "<strong>In</strong> is used with months, years, and seasons.",
-        },
-        {
-          q: "No talking is allowed __ the exam.",
-          options: ["for", "during", "while", "at"],
-          ans: 1,
-          exp: "<strong>During</strong> is used with a noun to describe something happening within that period.",
-        },
-        {
-          q: "The parcel will arrive __ two days.",
-          options: ["in", "within", "for", "by"],
-          ans: 1,
-          exp: "<strong>Within</strong> means before the end of that time frame.",
-        },
-        {
-          q: "He called me __ midnight.",
-          options: ["in", "on", "at", "by"],
-          ans: 2,
-          exp: "<strong>At</strong> is used with specific times including midnight and noon.",
-        },
-        {
-          q: "Please call me __ you arrive.",
-          options: ["since", "after", "during", "for"],
-          ans: 1,
-          exp: "<strong>After</strong> indicates something happens later in sequence.",
-        },
-        // Place
-        {
-          q: "She lives __ a small apartment.",
-          options: ["at", "on", "in", "by"],
-          ans: 2,
-          exp: "<strong>In</strong> is used for enclosed spaces and areas.",
-        },
-        {
-          q: "The keys are __ the table.",
-          options: ["in", "at", "on", "above"],
-          ans: 2,
-          exp: "<strong>On</strong> is used for surfaces.",
-        },
-        {
-          q: "He works __ the hospital.",
-          options: ["in", "at", "on", "into"],
-          ans: 1,
-          exp: "<strong>At</strong> is used for specific locations and institutions.",
-        },
-        {
-          q: "The café is __ the corner of King and Bay.",
-          options: ["on", "at", "in", "by"],
-          ans: 1,
-          exp: "<strong>At</strong> is used for a specific point or corner.",
-        },
-        {
-          q: "She lives __ the third floor.",
-          options: ["in", "at", "on", "by"],
-          ans: 2,
-          exp: "<strong>On</strong> is used with floor levels.",
-        },
-        {
-          q: "The park is __ the school and the library.",
-          options: ["among", "between", "beside", "across"],
-          ans: 1,
-          exp: "<strong>Between</strong> is used when referring to two defined points.",
-        },
-        {
-          q: "He stood __ the door, waiting.",
-          options: ["in front of", "above", "among", "through"],
+          q: "The final decision was based __ customer feedback.",
+          options: ["on", "in", "of", "at"],
           ans: 0,
-          exp: "<strong>In front of</strong> means facing or before the entrance side.",
+          exp: "<strong>Base something on</strong> means to use it as a foundation.",
         },
         {
-          q: "There is a pharmacy __ to the clinic.",
-          options: ["next", "close", "beside", "near"],
-          ans: 0,
-          exp: "<strong>Next to</strong> means immediately adjacent.",
-        },
-        {
-          q: "The sign is __ the entrance.",
-          options: ["over", "above", "on", "across"],
+          q: "Volunteering allows me to participate __ community events.",
+          options: ["on", "in", "at", "to"],
           ans: 1,
-          exp: "<strong>Above</strong> means at a higher level, without necessarily touching.",
+          exp: "<strong>Participate in</strong> means to take part in an activity.",
         },
         {
-          q: "She sat __ her parents.",
-          options: ["among", "between", "beside", "in front of"],
-          ans: 1,
-          exp: "<strong>Between</strong> is used when one thing is in the middle of two specific others.",
-        },
-        // Direction
-        {
-          q: "She walked __ the room without knocking.",
-          options: ["to", "in", "into", "toward"],
+          q: "With enough practice, I'm confident I will succeed __ passing the exam.",
+          options: ["on", "at", "in", "for"],
           ans: 2,
-          exp: "<strong>Into</strong> shows movement entering an enclosed space.",
+          exp: "<strong>Succeed in</strong> is used before a noun or gerund.",
         },
         {
-          q: "We drove __ the tunnel.",
-          options: ["across", "past", "through", "along"],
+          q: "Our clinic specializes __ children's healthcare.",
+          options: ["on", "at", "in", "to"],
           ans: 2,
-          exp: "<strong>Through</strong> means moving from one side of something to the other.",
+          exp: "<strong>Specialize in</strong> means to focus on a particular area.",
         },
         {
-          q: "He ran __ the finish line.",
-          options: ["past", "through", "across", "along"],
-          ans: 0,
-          exp: "<strong>Past</strong> means moving beyond a point.",
-        },
-        {
-          q: "They jogged __ the river trail.",
-          options: ["across", "past", "through", "along"],
-          ans: 3,
-          exp: "<strong>Along</strong> means moving beside or following a path.",
-        },
-        {
-          q: "She walked __ the street to reach the store.",
-          options: ["along", "across", "through", "past"],
+          q: "Poor planning often results __ costly delays.",
+          options: ["to", "in", "on", "at"],
           ans: 1,
-          exp: "<strong>Across</strong> means from one side to the other.",
+          exp: "<strong>Result in</strong> means to cause a particular outcome.",
         },
         {
-          q: "He was walking __ the exit when I called him.",
-          options: ["to", "into", "toward", "through"],
+          q: "I strongly believe __ treating everyone with respect.",
+          options: ["on", "at", "in", "to"],
           ans: 2,
-          exp: "<strong>Toward</strong> means in the direction of, without necessarily arriving.",
+          exp: "<strong>Believe in</strong> means to have confidence in the value of something.",
         },
         {
-          q: "The family moved __ the city last year.",
-          options: ["out", "out of", "from", "away"],
+          q: "Regular exercise contributes __ better mental health.",
+          options: ["for", "to", "in", "on"],
           ans: 1,
-          exp: "<strong>Out of</strong> means exiting from inside a place.",
+          exp: "<strong>Contribute to</strong> means to help cause or add to something.",
         },
         {
-          q: "She commutes __ work by subway every day.",
-          options: ["at", "to", "into", "toward"],
+          q: "Too much screen time can lead __ poor sleep.",
+          options: ["in", "to", "for", "on"],
           ans: 1,
-          exp: "<strong>To</strong> shows movement toward a destination.",
+          exp: "<strong>Lead to</strong> means to result in or cause something.",
         },
-        // Formal phrases
         {
-          q: "__ the noise, there was also a bad smell.",
-          options: ["Instead of", "Due to", "In addition to", "As a result of"],
+          q: "Newcomers often need time to adapt __ a different culture.",
+          options: ["with", "to", "in", "for"],
+          ans: 1,
+          exp: "<strong>Adapt to</strong> means to adjust to a new situation.",
+        },
+        {
+          q: "Many residents objected __ the proposed highway.",
+          options: ["against", "to", "on", "for"],
+          ans: 1,
+          exp: "<strong>Object to</strong> means to disagree with or oppose something.",
+        },
+        {
+          q: "Please respond __ my email by the end of the day.",
+          options: ["on", "for", "to", "at"],
           ans: 2,
-          exp: "<strong>In addition to</strong> adds an extra point without using 'also'.",
+          exp: "<strong>Respond to</strong> means to reply or react to something.",
         },
         {
-          q: "The delay was __ heavy snowfall.",
-          options: ["because", "due to", "in terms of", "owing"],
+          q: "I look forward __ hearing from you soon.",
+          options: ["for", "to", "at", "on"],
           ans: 1,
-          exp: "<strong>Due to</strong> gives a formal reason; it must be followed by a noun/noun phrase.",
+          exp: "<strong>Look forward to</strong> — 'to' is a preposition here, so it's followed by a gerund.",
         },
         {
-          q: "I am writing __ your complaint.",
-          options: ["with regard to", "in terms of", "instead of", "due to"],
+          q: "Our company is committed __ reducing its carbon footprint.",
+          options: ["to", "on", "for", "in"],
           ans: 0,
-          exp: "<strong>With regard to</strong> is a formal phrase used to introduce the subject of a letter or email.",
+          exp: "<strong>Commit to</strong> means to dedicate yourself fully to something.",
         },
         {
-          q: "She attended the meeting __ the director.",
-          options: ["instead of", "on behalf of", "in favour of", "due to"],
+          q: "My new job is quite similar __ my previous one.",
+          options: ["with", "to", "as", "like"],
           ans: 1,
-          exp: "<strong>On behalf of</strong> means representing or acting for someone else.",
+          exp: "<strong>Similar to</strong> is the correct collocation — not 'similar with'.",
         },
         {
-          q: "Residents voted __ the new park.",
-          options: [
-            "in favour of",
-            "instead of",
-            "in addition to",
-            "as a result of",
-          ],
-          ans: 0,
-          exp: "<strong>In favour of</strong> means in support of something.",
+          q: "I'm planning to apply __ the marketing manager position.",
+          options: ["to", "for", "on", "at"],
+          ans: 1,
+          exp: "<strong>Apply for</strong> is used when requesting a job, grant, or refund.",
         },
         {
-          q: "__ replacing the park, the city should improve it.",
-          options: ["Due to", "In terms of", "Instead of", "In addition to"],
+          q: "Students should prepare __ interviews well in advance.",
+          options: ["to", "for", "on", "at"],
+          ans: 1,
+          exp: "<strong>Prepare for</strong> means to get ready for something.",
+        },
+        {
+          q: "As the team lead, she is responsible __ training new staff.",
+          options: ["of", "for", "to", "on"],
+          ans: 1,
+          exp: "<strong>Responsible for</strong> means being in charge of, or the cause of, something.",
+        },
+        {
+          q: "Online sales now account __ half of our revenue.",
+          options: ["of", "for", "to", "on"],
+          ans: 1,
+          exp: "<strong>Account for</strong> can mean to make up a portion of something.",
+        },
+        {
+          q: "I would like to apologize __ the inconvenience caused.",
+          options: ["of", "for", "to", "about"],
+          ans: 1,
+          exp: "<strong>Apologize for</strong> the thing you did wrong (apologize to a person).",
+        },
+        {
+          q: "Extra vacation days can compensate __ the long working hours.",
+          options: ["of", "for", "to", "with"],
+          ans: 1,
+          exp: "<strong>Compensate for</strong> means to make up for something.",
+        },
+        {
+          q: "It's unfair to blame others __ your own mistakes.",
+          options: ["of", "on", "for", "about"],
           ans: 2,
-          exp: "<strong>Instead of</strong> presents an alternative action.",
+          exp: "<strong>Blame someone for</strong> means to hold them responsible for something bad.",
         },
         {
-          q: "The project was cancelled __ budget constraints.",
-          options: ["due to", "in terms of", "with regard to", "instead of"],
+          q: "Good managers know how to deal __ difficult situations.",
+          options: ["with", "to", "on", "for"],
           ans: 0,
-          exp: "<strong>Due to</strong> / <strong>owing to</strong> introduce the formal cause.",
+          exp: "<strong>Deal with</strong> means to handle or manage something.",
         },
-        // Common traps
         {
-          q: "She is very interested __ learning English.",
+          q: "New employees must learn to cope __ a heavy workload.",
+          options: ["to", "with", "on", "for"],
+          ans: 1,
+          exp: "<strong>Cope with</strong> means to manage a difficult situation.",
+        },
+        {
+          q: "I completely agree __ your point of view.",
+          options: ["to", "on", "with", "about"],
+          ans: 2,
+          exp: "<strong>Agree with</strong> a person or opinion is the standard collocation.",
+        },
+        {
+          q: "All staff must comply __ the safety regulations.",
+          options: ["to", "with", "on", "for"],
+          ans: 1,
+          exp: "<strong>Comply with</strong> means to obey or follow rules.",
+        },
+        {
+          q: "Overall, I am very satisfied __ the level of service.",
+          options: ["with", "of", "for", "about"],
+          ans: 0,
+          exp: "<strong>Satisfied with</strong> means pleased with something.",
+        },
+        {
+          q: "Are you familiar __ this software?",
+          options: ["to", "with", "of", "about"],
+          ans: 1,
+          exp: "<strong>Familiar with</strong> means to know something well.",
+        },
+        {
+          q: "Small class sizes mean students benefit __ more personal attention.",
+          options: ["of", "from", "for", "with"],
+          ans: 1,
+          exp: "<strong>Benefit from</strong> means to gain an advantage from something.",
+        },
+        {
+          q: "A surprising number of employees suffer __ work-related stress.",
+          options: ["of", "from", "with", "for"],
+          ans: 1,
+          exp: "<strong>Suffer from</strong> is used for illnesses and ongoing problems.",
+        },
+        {
+          q: "It can take weeks to recover __ a serious illness.",
+          options: ["of", "from", "off", "with"],
+          ans: 1,
+          exp: "<strong>Recover from</strong> means to return to normal after difficulty.",
+        },
+        {
+          q: "Drivers should always be aware __ pedestrians.",
+          options: ["about", "of", "for", "on"],
+          ans: 1,
+          exp: "<strong>Aware of</strong> means to know about or notice something.",
+        },
+        {
+          q: "I'm sure she is capable __ handling the pressure.",
+          options: ["of", "to", "for", "in"],
+          ans: 0,
+          exp: "<strong>Capable of</strong> means having the ability to do something.",
+        },
+        {
+          q: "The committee consists __ five members from different departments.",
+          options: ["in", "of", "from", "with"],
+          ans: 1,
+          exp: "<strong>Consist of</strong> means to be made up of.",
+        },
+        {
+          q: "There's no need to worry __ the small details.",
+          options: ["for", "about", "on", "of"],
+          ans: 1,
+          exp: "<strong>Worry about</strong> means to feel anxious about something.",
+        },
+        {
+          q: "Several residents complained __ the constant noise.",
+          options: ["about", "for", "on", "of"],
+          ans: 0,
+          exp: "<strong>Complain about</strong> means to express dissatisfaction.",
+        },
+        // Adjective + preposition and CELPIP formal phrases
+        {
+          q: "I have always been interested __ learning new languages.",
           options: ["on", "in", "about", "for"],
           ans: 1,
           exp: "Always use <strong>interested in</strong> — 'interested on' is incorrect.",
         },
         {
-          q: "The result depends __ how much you study.",
-          options: ["of", "from", "on", "at"],
+          q: "I am deeply concerned __ the impact on our community.",
+          options: ["for", "of", "about", "with"],
           ans: 2,
-          exp: "<strong>Depend on</strong> is the correct collocation.",
-        },
-        {
-          q: "I arrived __ the airport at 6 a.m.",
-          options: ["to", "in", "at", "on"],
-          ans: 2,
-          exp: "Use <strong>arrive at</strong> for specific places (airport, station, school).",
-        },
-        {
-          q: "She arrived __ Canada in November.",
-          options: ["at", "to", "in", "on"],
-          ans: 2,
-          exp: "Use <strong>arrive in</strong> for cities and countries.",
-        },
-        {
-          q: "Let's discuss __ the proposal tomorrow.",
-          options: ["about", "on", "— (no preposition)", "for"],
-          ans: 2,
-          exp: "<strong>Discuss</strong> is transitive — no preposition needed: 'discuss the proposal'.",
-        },
-        {
-          q: "He is married __ a doctor.",
-          options: ["with", "to", "and", "by"],
-          ans: 1,
-          exp: "Always use <strong>married to</strong>, not 'married with'.",
-        },
-        {
-          q: "I love listening __ music on my commute.",
-          options: ["— (no prep)", "at", "to", "for"],
-          ans: 2,
-          exp: "<strong>Listen to</strong> always requires 'to'.",
-        },
-        {
-          q: "We usually play hockey __ the weekend.",
-          options: ["in", "at", "during", "on"],
-          ans: 3,
-          exp: "Use <strong>on</strong> for days and weekends.",
+          exp: "<strong>Concerned about</strong> is the standard way to express worry.",
         },
         {
           q: "She is very good __ public speaking.",
@@ -920,71 +1616,329 @@ const Html = ({ html, className, as: Tag = "span" }) => (
           exp: "Use <strong>good at</strong> to describe a skill or ability.",
         },
         {
-          q: "I am not satisfied __ the results.",
-          options: ["from", "by", "with", "about"],
-          ans: 2,
-          exp: "<strong>Satisfied with</strong> is the correct collocation.",
-        },
-        // CELPIP context
-        {
-          q: "I am writing to bring this issue __ your attention.",
-          options: ["in", "to", "at", "for"],
-          ans: 1,
-          exp: "The fixed phrase is <strong>bring something to someone's attention</strong>.",
-        },
-        {
-          q: "The noise can be heard __ the walls.",
-          options: ["across", "along", "through", "past"],
-          ans: 2,
-          exp: "<strong>Through</strong> describes sound passing from one side of a barrier to the other.",
-        },
-        {
-          q: "I am concerned __ the impact on my sleep.",
-          options: ["for", "of", "about", "with"],
-          ans: 2,
-          exp: "<strong>Concerned about</strong> is the standard collocation for expressing worry.",
-        },
-        {
-          q: "The park is used __ hundreds of families every weekend.",
-          options: ["from", "with", "to", "by"],
-          ans: 3,
-          exp: "<strong>By</strong> introduces the agent in passive constructions.",
-        },
-        {
-          q: "Children rely __ the park for outdoor play.",
-          options: ["at", "in", "on", "upon"],
-          ans: 2,
-          exp: "<strong>Rely on</strong> is the correct collocation.",
-        },
-        {
-          q: "__ conclusion, I urge the city to reconsider.",
-          options: ["At", "In", "On", "By"],
-          ans: 1,
-          exp: "<strong>In conclusion</strong> is the standard linking phrase to end a formal response.",
-        },
-        {
-          q: "I look forward __ hearing from you.",
-          options: ["to", "for", "at", "about"],
+          q: "I am writing __ regard to your recent complaint.",
+          options: ["with", "in", "on", "for"],
           ans: 0,
-          exp: "<strong>Look forward to</strong> — 'to' is a preposition here, so it's followed by a gerund.",
+          exp: "<strong>With regard to</strong> is a formal phrase used to introduce a topic in an email.",
         },
         {
-          q: "__ the beginning, the new city felt overwhelming.",
+          q: "__ conclusion, I strongly urge the council to reconsider.",
           options: ["At", "On", "In", "By"],
           ans: 2,
-          exp: "<strong>In the beginning</strong> is the correct fixed phrase.",
+          exp: "<strong>In conclusion</strong> is the standard phrase to end a formal response.",
         },
         {
-          q: "I went __ the same experience when I first moved.",
-          options: ["across", "over", "through", "past"],
-          ans: 2,
-          exp: "<strong>Go through</strong> means to experience something difficult.",
-        },
-        {
-          q: "Within a few months, you will feel __ home.",
-          options: ["in", "at", "like", "on"],
+          q: "The event was cancelled __ the heavy snowfall.",
+          options: ["because", "due to", "owing", "thanks"],
           ans: 1,
-          exp: "<strong>Feel at home</strong> is the fixed expression meaning to feel comfortable.",
+          exp: "<strong>Due to</strong> gives a formal reason and is followed by a noun phrase.",
+        },
+        {
+          q: "I am writing __ behalf of our entire team.",
+          options: ["in", "on", "for", "with"],
+          ans: 1,
+          exp: "<strong>On behalf of</strong> means representing or acting for others.",
+        },
+        // More collocations and formal phrases
+        {
+          q: "He is committed __ improving his English skills.",
+          options: ["with", "to", "for", "in"],
+          ans: 1,
+          exp: "<strong>Commit to</strong> means to dedicate yourself to something.",
+        },
+        {
+          q: "She has a real passion __ helping others.",
+          options: ["in", "for", "at", "of"],
+          ans: 1,
+          exp: "Use <strong>passion for</strong> to show strong enthusiasm about something.",
+        },
+        {
+          q: "The council voted __ the new community centre.",
+          options: ["in favour of", "instead of", "in addition to", "as a result of"],
+          ans: 0,
+          exp: "<strong>In favour of</strong> means in support of something.",
+        },
+        {
+          q: "__ your recent email, I have attached the required form.",
+          options: ["With regard to", "In terms of", "Instead of", "Due to"],
+          ans: 0,
+          exp: "<strong>With regard to</strong> is a formal way to introduce the topic of a message.",
+        },
+        {
+          q: "She attended the ceremony __ the entire team.",
+          options: ["in behalf of", "on behalf of", "for behalf of", "by behalf of"],
+          ans: 1,
+          exp: "<strong>On behalf of</strong> means representing or acting for others.",
+        },
+        {
+          q: "__ cost, the second proposal is far more efficient.",
+          options: ["In terms of", "Due to", "Instead of", "In favour of"],
+          ans: 0,
+          exp: "<strong>In terms of</strong> specifies the particular area you are discussing.",
+        },
+        {
+          q: "__ driving to work, he now takes the train.",
+          options: ["Instead of", "Due to", "In terms of", "In addition to"],
+          ans: 0,
+          exp: "<strong>Instead of</strong> presents an alternative action.",
+        },
+        {
+          q: "The long delay occurred __ a technical fault.",
+          options: ["as a result of", "in favour of", "in terms of", "on behalf of"],
+          ans: 0,
+          exp: "<strong>As a result of</strong> introduces a cause formally.",
+        },
+        {
+          q: "I am very interested __ learning a new language.",
+          options: ["on", "in", "about", "for"],
+          ans: 1,
+          exp: "Always use <strong>interested in</strong> — 'interested on' is incorrect.",
+        },
+        {
+          q: "She is really good __ solving difficult problems.",
+          options: ["in", "at", "on", "for"],
+          ans: 1,
+          exp: "Use <strong>good at</strong> to describe a skill or ability.",
+        },
+        {
+          q: "The children were excited __ the school trip.",
+          options: ["for", "about", "with", "of"],
+          ans: 1,
+          exp: "<strong>Excited about</strong> is the standard collocation.",
+        },
+        {
+          q: "He is married __ a teacher from Vancouver.",
+          options: ["with", "to", "and", "by"],
+          ans: 1,
+          exp: "Always use <strong>married to</strong>, not 'married with'.",
+        },
+        {
+          q: "We are very proud __ our team's achievements.",
+          options: ["with", "of", "for", "about"],
+          ans: 1,
+          exp: "<strong>Proud of</strong> is the correct collocation.",
+        },
+        {
+          q: "This year's plan was based __ careful research.",
+          options: ["in", "on", "of", "at"],
+          ans: 1,
+          exp: "<strong>Base something on</strong> means to use it as a foundation.",
+        },
+        {
+          q: "Many residents are concerned __ rising crime.",
+          options: ["for", "of", "about", "with"],
+          ans: 2,
+          exp: "<strong>Concerned about</strong> is the standard way to express worry.",
+        },
+        {
+          q: "The flight was postponed __ the heavy fog.",
+          options: ["owing to", "because", "thanks", "as"],
+          ans: 0,
+          exp: "<strong>Owing to</strong> gives a formal reason and is followed by a noun phrase.",
+        },
+        {
+          q: "I look forward __ working with your team.",
+          options: ["for", "to", "at", "on"],
+          ans: 1,
+          exp: "<strong>Look forward to</strong> — 'to' is a preposition here, so it takes a gerund.",
+        },
+        {
+          q: "She apologized __ arriving so late.",
+          options: ["of", "for", "to", "about"],
+          ans: 1,
+          exp: "<strong>Apologize for</strong> the action (apologize to a person).",
+        },
+        {
+          q: "All employees must comply __ the new guidelines.",
+          options: ["to", "with", "on", "for"],
+          ans: 1,
+          exp: "<strong>Comply with</strong> means to obey or follow rules.",
+        },
+        {
+          q: "He is responsible __ managing the entire budget.",
+          options: ["of", "for", "to", "on"],
+          ans: 1,
+          exp: "<strong>Responsible for</strong> means being in charge of something.",
+        },
+        {
+          q: "The company invested heavily __ new technology.",
+          options: ["on", "in", "to", "for"],
+          ans: 1,
+          exp: "<strong>Invest in</strong> means to put money or effort into something.",
+        },
+        {
+          q: "Please respond __ this message as soon as possible.",
+          options: ["on", "for", "to", "at"],
+          ans: 2,
+          exp: "<strong>Respond to</strong> means to reply or react to something.",
+        },
+        {
+          q: "He suffers __ frequent back pain.",
+          options: ["of", "from", "with", "for"],
+          ans: 1,
+          exp: "<strong>Suffer from</strong> is used for illnesses and ongoing problems.",
+        },
+        {
+          q: "The town benefited greatly __ the new hospital.",
+          options: ["of", "from", "for", "with"],
+          ans: 1,
+          exp: "<strong>Benefit from</strong> means to gain an advantage from something.",
+        },
+        {
+          q: "It took months to recover __ the injury.",
+          options: ["of", "from", "off", "with"],
+          ans: 1,
+          exp: "<strong>Recover from</strong> means to return to normal after difficulty.",
+        },
+        {
+          q: "A large budget was allocated __ public education.",
+          options: ["for", "to", "on", "in"],
+          ans: 1,
+          exp: "<strong>Allocate ... to</strong> means to assign resources for a purpose.",
+        },
+        {
+          q: "A poor diet can lead __ serious health problems.",
+          options: ["in", "to", "for", "on"],
+          ans: 1,
+          exp: "<strong>Lead to</strong> means to cause or result in something.",
+        },
+        {
+          q: "Several residents objected __ the proposed changes.",
+          options: ["against", "to", "on", "for"],
+          ans: 1,
+          exp: "<strong>Object to</strong> means to disagree with or oppose something.",
+        },
+        {
+          q: "I completely agree __ your suggestion.",
+          options: ["to", "on", "with", "about"],
+          ans: 2,
+          exp: "<strong>Agree with</strong> a person or opinion is the standard collocation.",
+        },
+        {
+          q: "Are you aware __ the risks involved?",
+          options: ["about", "of", "for", "on"],
+          ans: 1,
+          exp: "<strong>Aware of</strong> means to know about or notice something.",
+        },
+        {
+          q: "The committee consists __ ten members.",
+          options: ["in", "of", "from", "with"],
+          ans: 1,
+          exp: "<strong>Consist of</strong> means to be made up of.",
+        },
+        {
+          q: "He was accused __ ignoring the safety rules.",
+          options: ["for", "of", "with", "about"],
+          ans: 1,
+          exp: "<strong>Accuse someone of</strong> means to say they did something wrong.",
+        },
+        {
+          q: "My new laptop is very similar __ yours.",
+          options: ["with", "to", "as", "like"],
+          ans: 1,
+          exp: "<strong>Similar to</strong> is the correct collocation — not 'similar with'.",
+        },
+        {
+          q: "The city must adapt __ a growing population.",
+          options: ["with", "to", "in", "for"],
+          ans: 1,
+          exp: "<strong>Adapt to</strong> means to adjust to a new situation.",
+        },
+        {
+          q: "I would like to apply __ the scholarship.",
+          options: ["to", "for", "on", "at"],
+          ans: 1,
+          exp: "<strong>Apply for</strong> is used when requesting a job, grant, or refund.",
+        },
+        {
+          q: "Regular exercise contributes __ a healthy lifestyle.",
+          options: ["for", "to", "in", "on"],
+          ans: 1,
+          exp: "<strong>Contribute to</strong> means to help cause or add to something.",
+        },
+        {
+          q: "Don't blame yourself __ the mistake.",
+          options: ["of", "on", "for", "about"],
+          ans: 2,
+          exp: "<strong>Blame someone for</strong> means to hold them responsible for something.",
+        },
+        {
+          q: "Smart students take advantage __ every opportunity.",
+          options: ["on", "of", "for", "with"],
+          ans: 1,
+          exp: "<strong>Take advantage of</strong> means to make good use of something.",
+        },
+        {
+          q: "We rely __ renewable energy sources.",
+          options: ["in", "on", "at", "to"],
+          ans: 1,
+          exp: "<strong>Rely on</strong> means to trust or need something for support.",
+        },
+        {
+          q: "The manager insisted __ a detailed written report.",
+          options: ["in", "on", "at", "for"],
+          ans: 1,
+          exp: "<strong>Insist on</strong> means to demand something firmly.",
+        },
+        {
+          q: "Customers complained __ the rising prices.",
+          options: ["about", "for", "on", "of"],
+          ans: 0,
+          exp: "<strong>Complain about</strong> means to express dissatisfaction.",
+        },
+        {
+          q: "Students should prepare __ the final exam early.",
+          options: ["to", "for", "on", "at"],
+          ans: 1,
+          exp: "<strong>Prepare for</strong> means to get ready for something.",
+        },
+        {
+          q: "The professor commented __ my essay.",
+          options: ["at", "on", "in", "to"],
+          ans: 1,
+          exp: "<strong>Comment on</strong> means to give an opinion about something.",
+        },
+        {
+          q: "How do you cope __ such a heavy workload?",
+          options: ["to", "with", "on", "for"],
+          ans: 1,
+          exp: "<strong>Cope with</strong> means to manage a difficult situation.",
+        },
+        {
+          q: "He is fully capable __ handling the project alone.",
+          options: ["of", "to", "for", "in"],
+          ans: 0,
+          exp: "<strong>Capable of</strong> means having the ability to do something.",
+        },
+        {
+          q: "We are very satisfied __ the final result.",
+          options: ["with", "of", "for", "about"],
+          ans: 0,
+          exp: "<strong>Satisfied with</strong> means pleased with something.",
+        },
+        {
+          q: "The government should invest __ public health.",
+          options: ["on", "in", "to", "for"],
+          ans: 1,
+          exp: "<strong>Invest in</strong> means to put money or effort into something.",
+        },
+        {
+          q: "Please deal __ this complaint immediately.",
+          options: ["to", "with", "on", "for"],
+          ans: 1,
+          exp: "<strong>Deal with</strong> means to handle or manage something.",
+        },
+        {
+          q: "Their farm specializes __ organic vegetables.",
+          options: ["on", "at", "in", "to"],
+          ans: 2,
+          exp: "<strong>Specialize in</strong> means to focus on a particular area.",
+        },
+        {
+          q: "She participates __ several community clubs.",
+          options: ["on", "in", "at", "to"],
+          ans: 1,
+          exp: "<strong>Participate in</strong> means to take part in an activity.",
         },
       ];
 
@@ -1077,103 +2031,96 @@ function ReferencePanel() {
   );
 }
 
-/* ═══════════════════════════ TASKS PANEL ═══════════════════════════ */
+/* ═══════════════════════════ COLLOCATIONS PANEL ═══════════════════════════ */
 
-const TASK_FILTERS = [
-  { type: "all", label: "All Tasks" },
-  { type: "writing", label: "✉️ Writing Tasks" },
-  { type: "speaking", label: "🗣️ Speaking Tasks" },
-];
+const COLLOC_EM =
+  "[&_strong]:text-blue-600 [&_strong]:font-bold [&_strong]:bg-blue-50 [&_strong]:rounded-[3px] [&_strong]:px-[3px]";
 
-const RESP_EM =
-  "[&_strong]:text-blue-600 [&_strong]:not-italic [&_strong]:font-bold [&_strong]:bg-blue-50 [&_strong]:rounded-[3px] [&_strong]:px-[3px] [&_em]:text-blue-600 [&_em]:not-italic [&_em]:font-bold [&_em]:bg-blue-50 [&_em]:rounded-[3px] [&_em]:px-[3px]";
+const shuffle = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
 
-function TasksPanel() {
-  const [filter, setFilter] = useState("all");
-  const tasks = CELPIP_PREP_TASKS.filter(
-    (t) => filter === "all" || t.type === filter,
+function CollocationsPanel() {
+  // Shuffle groups and their items, and pick a random 4 of each collocation's
+  // 10 examples — computed once per mount, so the order and the shown examples
+  // differ every time the tab is opened or the page is refreshed.
+  const [groups] = useState(() =>
+    shuffle(PREP_COLLOCATIONS).map((g) => ({
+      ...g,
+      items: shuffle(g.items).map((it) => ({
+        ...it,
+        examples: shuffle(it.examples).slice(0, 4),
+      })),
+    })),
+  );
+
+  const totalCount = PREP_COLLOCATIONS.reduce(
+    (n, g) => n + g.items.length,
+    0,
   );
 
   return (
     <>
-      <p className="text-[13px] text-gray-500 leading-relaxed mb-5">
-        Each sample below shows a realistic CELPIP scenario. Prepositions in the
-        response are{" "}
+      <p className="text-[13px] text-gray-500 leading-relaxed mb-6">
+        {totalCount} high-value preposition collocations for CELPIP Speaking and
+        Writing, grouped by their preposition. Each one has 10 example
+        sentences, and a different random set of 4 is shown each time you open
+        this tab — with the collocation{" "}
         <span className="text-blue-600 font-bold bg-blue-50 rounded-[3px] px-[3px]">
           highlighted in blue
         </span>
-        . A breakdown below each sample explains why each preposition was chosen.
+        . Refresh the page to practise with fresh examples.
       </p>
 
-      <div className="flex gap-2 mb-6 flex-wrap">
-        {TASK_FILTERS.map((f) => (
-          <button
-            key={f.type}
-            type="button"
-            onClick={() => setFilter(f.type)}
-            className={`px-4 py-1.5 rounded-full border text-[12.5px] font-medium cursor-pointer transition-all ${
-              filter === f.type
-                ? "bg-gray-900 border-gray-900 text-white"
-                : "bg-white border-gray-300 text-gray-500"
-            }`}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
-      {tasks.map((task, i) => (
-        <div
-          key={i}
-          className="mb-10 rounded-2xl border border-gray-200 overflow-hidden bg-white"
-        >
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-gray-200 bg-gray-50">
+      {groups.map((group) => (
+        <div key={group.prep} className="mb-10">
+          <div className="flex items-center gap-2.5 mb-4 pb-2 border-b-2 border-gray-100">
+            <span className="text-[1.3rem]">{group.emoji}</span>
             <span
-              className="text-[11.5px] font-bold px-3 py-1 rounded-full tracking-wide"
-              style={{ background: task.badgeBg, color: task.badgeColor }}
+              className="text-[11px] font-bold px-2.5 py-[3px] rounded-full tracking-wide uppercase"
+              style={{ background: group.bg, color: group.color }}
             >
-              {task.badge}
+              + {group.prep}
             </span>
-            <span className="text-[11px] text-gray-400 uppercase tracking-wider font-semibold ml-auto">
-              {task.type.toUpperCase()}
+            <span className="text-xs text-gray-400">
+              {group.items.length} collocations
             </span>
           </div>
-          <div className="px-5 py-[0.85rem] bg-amber-50 border-b border-amber-200">
-            <div className="text-[10.5px] font-bold text-amber-800 uppercase tracking-wider mb-1">
-              📋 Scenario
+          {group.intro && (
+            <div className="text-[13px] text-gray-500 leading-relaxed mb-4 px-3.5 py-2.5 bg-gray-50 rounded-lg border-l-[3px] border-gray-200">
+              {group.intro}
             </div>
-            <div className="text-[13px] text-gray-700 leading-relaxed">
-              {task.scenario}
-            </div>
-          </div>
-          <div className="px-5 py-4 border-b border-gray-200">
-            <div className="text-[10.5px] font-bold text-gray-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <span className="text-[13px]">✍️</span> Sample Response —
-              prepositions highlighted
-            </div>
-            <Html
-              as="div"
-              className={`text-[13.5px] text-gray-900 [line-height:2] whitespace-pre-line ${RESP_EM}`}
-              html={task.sampleResponse}
-            />
-          </div>
-          <div className="px-5 py-4">
-            <div className="text-[10.5px] font-bold text-gray-700 uppercase tracking-wider mb-2.5">
-              🔍 Preposition Breakdown
-            </div>
-            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(220px,1fr))] gap-1.5 max-[600px]:grid-cols-1">
-              {task.highlights.map((h, j) => (
-                <div
-                  key={j}
-                  className="flex gap-2 items-start bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-100"
-                >
-                  <div className="text-[13px] font-bold text-blue-600 min-w-[52px] shrink-0">
-                    {h.prep}
-                  </div>
-                  <div className="text-xs text-gray-500 leading-snug">{h.use}</div>
+          )}
+          <div className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] max-[600px]:grid-cols-1">
+            {group.items.map((item, i) => (
+              <div
+                key={i}
+                className="bg-white border rounded-xl px-4 py-[0.9rem]"
+                style={{ borderColor: group.border }}
+              >
+                <div className="text-[15px] font-bold text-gray-900 mb-[0.3rem]">
+                  {item.phrase}
                 </div>
-              ))}
-            </div>
+                <div className="text-[12.5px] text-gray-500 leading-relaxed mb-2.5">
+                  {item.meaning}
+                </div>
+                <div className="flex flex-col gap-[3px]">
+                  {item.examples.map((e, j) => (
+                    <Html
+                      key={j}
+                      as="div"
+                      className={`text-xs text-gray-600 bg-gray-50 rounded-md px-2 py-[4px] border border-gray-100 leading-relaxed ${COLLOC_EM}`}
+                      html={e}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       ))}
@@ -1184,7 +2131,10 @@ function TasksPanel() {
 /* ═══════════════════════════ QUIZ PANEL ═══════════════════════════ */
 
 function QuizPanel() {
-  const total = PREP_QUIZ_QUESTIONS.length;
+  // Shuffle the questions once per mount, and again on restart, so they
+  // appear in a different order each time.
+  const [questions, setQuestions] = useState(() => shuffle(PREP_QUIZ_QUESTIONS));
+  const total = questions.length;
   const [idx, setIdx] = useState(0);
   const [score, setScore] = useState(0);
   const [chosen, setChosen] = useState(null);
@@ -1192,13 +2142,14 @@ function QuizPanel() {
   const answer = (i) => {
     if (chosen !== null) return;
     setChosen(i);
-    if (i === PREP_QUIZ_QUESTIONS[idx].ans) setScore((s) => s + 1);
+    if (i === questions[idx].ans) setScore((s) => s + 1);
   };
   const next = () => {
     setIdx((x) => x + 1);
     setChosen(null);
   };
   const restart = () => {
+    setQuestions(shuffle(PREP_QUIZ_QUESTIONS));
     setIdx(0);
     setScore(0);
     setChosen(null);
@@ -1220,7 +2171,7 @@ function QuizPanel() {
       color = "#92400e";
     } else {
       msg =
-        "Keep practicing! Go through the Reference and Task Sample tabs, then try again. 💪";
+        "Keep practicing! Go through the Reference and Collocations tabs, then try again. 💪";
       color = "#991b1b";
     }
     return (
@@ -1251,15 +2202,16 @@ function QuizPanel() {
     );
   }
 
-  const q = PREP_QUIZ_QUESTIONS[idx];
+  const q = questions[idx];
   const correct = chosen !== null && chosen === q.ans;
   const answeredCount = idx + (chosen !== null ? 1 : 0);
 
   return (
     <>
       <p className="text-[13px] text-gray-500 leading-relaxed mb-5">
-        55 questions covering time, place, direction, formal phrases, and common
-        CELPIP traps. Your running score updates after every answer.
+        100 questions on the preposition collocations most useful for CELPIP
+        Speaking and Writing tasks, shown in a random order each time. Your
+        running score updates after every answer.
       </p>
       <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl px-5 py-3 mb-5">
         <span className="text-[15px] font-bold text-gray-900">
@@ -1342,7 +2294,7 @@ function QuizPanel() {
 
 const SUB_TABS = [
   { id: "prep-reference", label: "📚 Preposition Reference" },
-  { id: "prep-tasks", label: "🎯 CELPIP Task Samples" },
+  { id: "prep-collocations", label: "🔗 50 Collocations" },
   { id: "prep-quiz", label: "✏️ Quiz" },
 ];
 
@@ -1367,7 +2319,7 @@ export default function PrepositionsTab() {
         ))}
       </div>
       {active === "prep-reference" && <ReferencePanel />}
-      {active === "prep-tasks" && <TasksPanel />}
+      {active === "prep-collocations" && <CollocationsPanel />}
       {active === "prep-quiz" && <QuizPanel />}
     </>
   );

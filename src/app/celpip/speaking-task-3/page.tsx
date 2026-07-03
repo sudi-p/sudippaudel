@@ -34,9 +34,11 @@ const VocabCard = ({ word }) => (
     <p className="text-xs text-slate mt-0.5">
       <strong>Meaning:</strong> {word.meaning}
     </p>
-    <p className="text-xs text-slate italic mt-0.5">
-      <strong>Example:</strong> "{word.example}"
-    </p>
+    {word.example && (
+      <p className="text-xs text-slate italic mt-0.5">
+        <strong>Example:</strong> "{word.example}"
+      </p>
+    )}
   </div>
 );
 
@@ -186,15 +188,41 @@ export default function CelpipSpeakingTask3Page() {
                 </div>
               }
             >
-              <p
-                className={`text-xs font-semibold ${sc.vocabHeading} uppercase tracking-wider mb-1`}
-              >
-                Key Vocabulary
-              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {sc.vocab.map((word) => (
-                  <VocabCard key={word.word} word={word} />
-                ))}
+                <div className="bg-fog rounded-xl p-4">
+                  <p
+                    className={`text-xs font-semibold ${sc.vocabHeading} uppercase tracking-wider mb-2`}
+                  >
+                    Atmosphere
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {sc.atmosphere.map((word) => (
+                      <span
+                        key={word.word}
+                        className="bg-white border border-mist rounded-full px-3 py-1 text-xs font-semibold text-ink"
+                      >
+                        {word.word}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-fog rounded-xl p-4">
+                  <p
+                    className={`text-xs font-semibold ${sc.vocabHeading} uppercase tracking-wider mb-2`}
+                  >
+                    Mood
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {sc.mood.map((word) => (
+                      <span
+                        key={word.word}
+                        className="bg-white border border-mist rounded-full px-3 py-1 text-xs font-semibold text-ink"
+                      >
+                        {word.word}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
@@ -232,6 +260,22 @@ export default function CelpipSpeakingTask3Page() {
                   details={sc.example.details}
                   impression={sc.example.impression}
                 />
+              </div>
+
+              <div>
+                <p
+                  className={`text-xs font-semibold ${sc.vocabHeading} uppercase tracking-wider mb-1`}
+                >
+                  Key Vocabulary
+                </p>
+                <p className="text-xs text-slate mb-2">
+                  Meanings of the atmosphere and mood words above.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[...sc.atmosphere, ...sc.mood].map((word) => (
+                    <VocabCard key={word.word} word={word} />
+                  ))}
+                </div>
               </div>
             </Accordion>
           ))}

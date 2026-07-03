@@ -13,12 +13,9 @@ export default function Page() {
       <div className="mb-8">
         <p className="text-slate max-w-2xl leading-relaxed">
           Master English{" "}
-          <span className="font-semibold text-sapphire-dark">
-            prepositions
-          </span>{" "}
-          — the small words that show relationships of place, time,
-          direction, and more. Learn the rules, common combinations, and
-          traps to avoid.
+          <span className="font-semibold text-sapphire-dark">prepositions</span>{" "}
+          — the small words that show relationships of place, time, direction,
+          and more. Learn the rules, common combinations, and traps to avoid.
         </p>
       </div>
       <PrepositionsTab />
