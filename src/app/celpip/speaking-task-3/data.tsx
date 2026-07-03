@@ -157,11 +157,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image shows a breathtakingly serene [beach / park / countryside], captured during [time of day]. The atmosphere is calm and tranquil, and the colours are soft and soothing."',
+      questions: [
+        ["Where and when?", "A serene lake surrounded by tall pine trees, captured at sunrise."],
+        ["What's the overall mood?", "Quiet, still, and misty — deeply peaceful."],
+        ["One striking detail?", "A soft, golden light is filtering through the trees."],
+      ],
+      combined:
+        '"This image shows a serene lake at sunrise, surrounded by tall pine trees. The atmosphere is quiet and misty, with a soft, golden light filtering through the trees."',
       tip: "name the location type + mood adjective + lighting in one sentence.",
     },
     closing: {
-      text: '"Overall, the scene captures a rare moment of stillness and natural beauty. It looks like the kind of place where you could truly unwind and escape from the pressures of daily life."',
+      questions: [
+        ["React emotionally:", "It feels incredibly peaceful and idyllic."],
+        ["Make an observation:", "The scene captures a rare moment of complete stillness in nature."],
+        ["Connect to a larger idea:", "It looks like a remote retreat far from city noise — the perfect place to unwind and recharge."],
+      ],
+      combined:
+        '"Overall, this is an incredibly peaceful and idyllic scene. It looks like a remote retreat far from city noise, and I think it would be the perfect place to sit quietly, enjoy nature, and recharge."',
       tip: 'use "stillness," "escape," or "unwind" to match the mood.',
     },
     example: {
@@ -213,11 +225,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image shows a vibrant, bustling [city street / market / transit hub], taken during the day. The scene is full of energy and movement, and there is a clear sense of activity everywhere."',
+      questions: [
+        ["Where and when?", "A vibrant city intersection, taken at midday."],
+        ["What's the overall mood?", "Full of energy and movement — fast-paced and dynamic."],
+        ["One striking detail?", "Crowds are crossing in every direction while traffic builds up on the road."],
+      ],
+      combined:
+        '"This image shows a vibrant, bustling city intersection, taken at midday. The scene is full of energy and movement, and the overall atmosphere feels fast-paced and dynamic."',
       tip: 'use "movement" and "energy" — they signal the busy category immediately.',
     },
     closing: {
-      text: '"Overall, the scene perfectly captures the hustle and bustle of urban life. It looks like a dynamic, fast-paced environment where people are always on the move, and I find the energy quite exciting."',
+      questions: [
+        ["React emotionally:", "The frenetic energy feels exciting and alive."],
+        ["Make an observation:", "It perfectly captures the hustle and bustle of a busy city centre."],
+        ["Connect to a larger idea:", "It's a vivid snapshot of everyday urban life, where people are always on the move."],
+      ],
+      combined:
+        '"Overall, this is a vivid snapshot of urban life. The scene perfectly captures the hustle and bustle of a busy city centre, and despite the frenetic energy, there is something exciting and alive about it."',
       tip: '"hustle and bustle" and "dynamic" are high-score phrases for this category.',
     },
     example: {
@@ -269,11 +293,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image captures a tense and intense [moment / scene], and the overall atmosphere feels charged with emotion. It is immediately clear that something significant is happening."',
+      questions: [
+        ["Where and when?", "An intense moment during a football match in a large, packed stadium."],
+        ["What's the overall mood?", "Charged, tense, and highly competitive."],
+        ["One striking detail?", "Two players are battling fiercely for the ball, their expressions focused and determined."],
+      ],
+      combined:
+        '"This image captures an intense moment in a football match taking place in a large, packed stadium. The overall atmosphere looks charged and highly competitive."',
       tip: '"charged atmosphere" or "significant moment" signals you have read the emotional tone.',
     },
     closing: {
-      text: '"Overall, this is clearly a high-stakes, gripping moment. The image conveys a great deal of tension and raw emotion, and I think it would leave a lasting impression on anyone who sees it."',
+      questions: [
+        ["React emotionally:", "You can almost feel the pressure and adrenaline through the image."],
+        ["Make an observation:", "It's a gripping, high-stakes moment that conveys the raw intensity of competitive sport."],
+        ["Connect to a larger idea:", "It perfectly captures why football captivates so many people around the world."],
+      ],
+      combined:
+        '"Overall, this is a gripping, high-stakes moment that conveys the raw intensity of competitive sport. You can almost feel the pressure and adrenaline through the image, and it perfectly captures why football captivates so many people around the world."',
       tip: '"raw emotion" and "lasting impression" show sophisticated engagement with the scene.',
     },
     example: {
@@ -325,11 +361,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image shows a joyful, festive [celebration / street parade / festival], and the overall atmosphere is colourful, energetic, and full of happiness. People are clearly enjoying a special occasion."',
+      questions: [
+        ["Where and when?", "A lively street carnival taking place during the day."],
+        ["What's the overall mood?", "Exuberant and festive — full of joy and excitement."],
+        ["One striking detail?", "Colour, music, and movement are everywhere, with confetti falling over the dancers."],
+      ],
+      combined:
+        '"This image shows a vibrant, joyful street carnival taking place during the day. The atmosphere is exuberant and festive, with colour, music, and movement everywhere."',
       tip: '"special occasion" or "communal celebration" instantly frames the festive mood.',
     },
     closing: {
-      text: '"Overall, the scene radiates joy and community spirit. It is the kind of occasion that brings people together, and the happiness visible on every face makes this image genuinely uplifting to look at."',
+      questions: [
+        ["React emotionally:", "The image radiates pure joy and happiness."],
+        ["Make an observation:", "It perfectly captures the spirit of a cultural carnival."],
+        ["Connect to a larger idea:", "It's the kind of event that unites communities — I would love to experience it first-hand."],
+      ],
+      combined:
+        '"Overall, this image radiates pure joy and communal celebration. It perfectly captures the spirit of a cultural carnival — the kind of event that unites communities and fills people with pride and happiness. I would love to experience it first-hand."',
       tip: '"community spirit" and "uplifting" are high-band words for festive scenes.',
     },
     example: {
@@ -382,11 +430,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image shows a cosy, intimate [café / living room / library] interior. The lighting is warm and ambient, and the overall atmosphere feels inviting and comfortable — a space designed to help people relax."',
+      questions: [
+        ["Where and when?", "A cosy bookshop café interior, taken indoors."],
+        ["What's the overall mood?", "Warm, inviting, and intimate."],
+        ["One striking detail?", "The lighting is warm and amber-toned throughout the space."],
+      ],
+      combined:
+        '"This image shows a beautifully cosy bookshop café, taken indoors. The lighting is warm and amber-toned, giving the entire space an inviting and intimate feel."',
       tip: '"warm and ambient lighting" is the perfect detail-starter for indoor cosy scenes.',
     },
     closing: {
-      text: '"Overall, the space looks like the kind of place where people come to slow down, recharge, and enjoy quiet moments. I would find it very easy to spend a long, relaxing afternoon here."',
+      questions: [
+        ["React emotionally:", "It feels like a charming, comforting retreat from the outside world."],
+        ["Make an observation:", "The books, warm lighting, and smell of coffee make it perfect for slowing down."],
+        ["Connect to a larger idea:", "It's exactly the kind of place I would love to spend a quiet, rainy afternoon."],
+      ],
+      combined:
+        '"Overall, this space looks like a charming retreat from the outside world. The combination of books, warm lighting, and the smell of coffee would make it the perfect place to slow down and enjoy a quiet afternoon — exactly the kind of place I would love to spend a rainy day."',
       tip: '"slow down" and "quiet moments" contrast well with Bustling — they signal scene-awareness.',
     },
     example: {
@@ -438,11 +498,23 @@ export const SCENARIOS = [
       },
     ],
     opening: {
-      text: '"This image shows a breathtaking, dramatic [mountain / canyon / waterfall / skyline] scene. The scale is immediately impressive, and the overall atmosphere conveys a powerful sense of natural grandeur."',
+      questions: [
+        ["Where and when?", "A vast canyon landscape, captured at sunset."],
+        ["What's the overall mood?", "Dramatic and grand, with a powerful sense of natural beauty."],
+        ["One striking detail?", "Layered red rock walls glow beneath a sky of orange, violet, and gold."],
+      ],
+      combined:
+        '"This image captures a breathtaking canyon landscape at sunset. The scene is vast and dramatic, immediately conveying a powerful sense of natural grandeur and raw beauty."',
       tip: 'use "scale" — it signals that you recognise the grandeur before diving into details.',
     },
     closing: {
-      text: '"Overall, the scene is awe-inspiring in its scale and beauty. Standing in front of a view like this would make you feel very small, yet incredibly fortunate to witness such natural magnificence."',
+      questions: [
+        ["React emotionally:", "It's a truly awe-inspiring scene that leaves you speechless."],
+        ["Make an observation:", "It makes you acutely aware of the immense age and power of nature."],
+        ["Connect to a larger idea:", "The sheer scale, combined with the ethereal sunset light, makes you feel small yet fortunate to witness it."],
+      ],
+      combined:
+        '"Overall, this is a truly awe-inspiring scene that makes you acutely aware of the immense age and power of nature. The sheer scale of the canyon, combined with the ethereal sunset light, creates an image that I think would leave anyone speechless."',
       tip: '"awe-inspiring" and "natural magnificence" are high-band phrases that work perfectly here.',
     },
     example: {

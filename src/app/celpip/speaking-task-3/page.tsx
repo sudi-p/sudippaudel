@@ -225,25 +225,60 @@ export default function CelpipSpeakingTask3Page() {
                 </div>
               </div>
 
+              <p className="text-xs text-slate italic -mb-1">
+                Worked from this image: {sc.example.imageDesc}
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                 <div className={`${sc.openingBox} rounded-xl p-4`}>
                   <p
-                    className={`text-xs font-semibold ${sc.openingLabel} uppercase tracking-wider mb-2`}
+                    className={`text-xs font-semibold ${sc.openingLabel} uppercase tracking-wider mb-3`}
                   >
                     ✦ Opening (Setting — 10 s)
                   </p>
-                  <p className="text-sm text-ink italic leading-relaxed">
-                    {sc.opening.text}
-                  </p>
+                  <ul className="space-y-2 text-sm text-ink mb-3">
+                    {sc.opening.questions.map(([q, a]) => (
+                      <li key={q} className="flex gap-2">
+                        <span className={`${sc.openingLabel} shrink-0`}>✦</span>
+                        <span>
+                          <strong>{q}</strong>{" "}
+                          <span className="italic">{a}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="bg-white/60 rounded-lg p-3">
+                    <p className="text-[11px] font-semibold text-slate uppercase tracking-wider mb-1">
+                      Combined into one line
+                    </p>
+                    <p className="text-sm text-ink italic leading-relaxed">
+                      {sc.opening.combined}
+                    </p>
+                  </div>
                   <p className="text-xs text-slate mt-2">Tip: {sc.opening.tip}</p>
                 </div>
                 <div className="bg-amber2-light rounded-xl p-4">
-                  <p className="text-xs font-semibold text-amber2-dark uppercase tracking-wider mb-2">
+                  <p className="text-xs font-semibold text-amber2-dark uppercase tracking-wider mb-3">
                     ✦ Closing (Impression — 15 s)
                   </p>
-                  <p className="text-sm text-ink italic leading-relaxed">
-                    {sc.closing.text}
-                  </p>
+                  <ul className="space-y-2 text-sm text-ink mb-3">
+                    {sc.closing.questions.map(([q, a]) => (
+                      <li key={q} className="flex gap-2">
+                        <span className="text-amber2-dark shrink-0">✦</span>
+                        <span>
+                          <strong>{q}</strong>{" "}
+                          <span className="italic">{a}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="bg-white/60 rounded-lg p-3">
+                    <p className="text-[11px] font-semibold text-slate uppercase tracking-wider mb-1">
+                      Combined into one line
+                    </p>
+                    <p className="text-sm text-ink italic leading-relaxed">
+                      {sc.closing.combined}
+                    </p>
+                  </div>
                   <p className="text-xs text-slate mt-2">Tip: {sc.closing.tip}</p>
                 </div>
               </div>
