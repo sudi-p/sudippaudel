@@ -16,6 +16,7 @@ import {
   TABS,
   SCORE_CRITERIA,
   BLUEPRINT,
+  BODY_METHOD,
   SCORE_BANDS,
   SCENARIOS,
   TEMPLATE_PARTS,
@@ -139,6 +140,33 @@ export default function CelpipSpeakingTask3Page() {
 <ScoreCriteria items={SCORE_CRITERIA} />
 
 <Blueprint title="The 60-second blueprint" steps={BLUEPRINT} />
+
+          {/* The detail trap — the #1 reason test-takers never reach the conclusion */}
+          <div className="bg-white rounded-2xl border border-mist p-6">
+            <p className="text-xs font-semibold text-rose2-dark uppercase tracking-widest mb-3">
+              ⚠ The #1 trap — too much detail, no conclusion
+            </p>
+            <p className="text-base leading-relaxed text-ink">
+              {BODY_METHOD.problem}
+            </p>
+            <div className="bg-fog rounded-xl p-4 mt-4">
+              <p className="text-xs font-semibold text-emerald2-dark uppercase tracking-wider mb-3">
+                {BODY_METHOD.fixLabel}
+              </p>
+              <ol className="space-y-3">
+                {BODY_METHOD.steps.map((step, i) => (
+                  <li key={step.title} className="flex gap-3">
+                    <span className="w-6 h-6 rounded-full bg-emerald2 text-white text-xs font-semibold flex items-center justify-center shrink-0">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm text-ink">
+                      <strong>{step.title}.</strong> {step.desc}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
 
         </div>
 
@@ -283,18 +311,107 @@ export default function CelpipSpeakingTask3Page() {
                 </div>
               </div>
 
-              <div className="bg-fog rounded-xl p-5 space-y-3">
+              <div className="bg-fog rounded-xl p-5 space-y-4">
                 <p className="text-xs font-semibold text-gold uppercase tracking-widest">
                   ★ Perfect Response Example
                 </p>
-                <p className="text-xs text-slate italic">
-                  Image: {sc.example.imageDesc}
-                </p>
-                <Triad
-                  setting={sc.example.setting}
-                  details={sc.example.details}
-                  impression={sc.example.impression}
-                />
+
+                {/* The scene + what it reflects */}
+                <div>
+                  <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-1">
+                    The image
+                  </p>
+                  <p className="text-sm text-ink italic">
+                    {sc.example.imageDesc}
+                  </p>
+                  <p className="text-sm text-ink mt-2 leading-relaxed">
+                    <strong>What it reflects:</strong>{" "}
+                    {sc.example.sceneReflects}
+                  </p>
+                </div>
+
+                {/* Prep — what to describe vs. ignore on purpose */}
+                <div className="bg-white rounded-lg border border-mist p-4">
+                  <p className="text-xs font-semibold text-emerald2-dark uppercase tracking-wider mb-1">
+                    Preparing the body (in your 30-second prep)
+                  </p>
+                  <p className="text-[11px] text-slate mb-3">
+                    Decide what earns a mention and what to skip — you can't
+                    cover it all in 60 seconds.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-[11px] font-semibold text-emerald2-dark uppercase tracking-wider mb-1.5">
+                        ✓ What I'll describe
+                      </p>
+                      <ul className="space-y-1 text-xs text-ink">
+                        {sc.example.seeing.map((s) => (
+                          <li key={s} className="flex gap-1.5">
+                            <span className="text-emerald2 shrink-0">+</span>
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-rose2-dark uppercase tracking-wider mb-1.5">
+                        ✕ What I'll ignore (on purpose)
+                      </p>
+                      <ul className="space-y-1 text-xs text-slate">
+                        {sc.example.ignoring.map((s) => (
+                          <li key={s} className="flex gap-1.5">
+                            <span className="text-rose2 shrink-0">−</span>
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Body build — every sentence explained by the framework */}
+                <div className="bg-white rounded-lg border border-mist p-4">
+                  <p className="text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-1">
+                    Building the body — every line explained
+                  </p>
+                  <p className="text-[11px] text-slate mb-3">
+                    Each sentence maps to a zone in the "pan, don't zoom"
+                    framework — never zooming into one spot.
+                  </p>
+                  <div className="space-y-3">
+                    {sc.example.bodyBreakdown.map((row, i) => (
+                      <div
+                        key={i}
+                        className="border-l-2 border-sapphire/40 pl-3"
+                      >
+                        <span className="inline-block text-[10px] font-semibold text-sapphire-dark bg-sapphire-light rounded px-1.5 py-0.5 mb-1 uppercase tracking-wider">
+                          {row.zone}
+                        </span>
+                        <p className="text-sm text-ink italic leading-relaxed">
+                          {row.sentence}
+                        </p>
+                        <p className="text-xs text-slate mt-1 leading-relaxed">
+                          <strong className="text-sapphire-dark not-italic">
+                            Why:
+                          </strong>{" "}
+                          {row.why}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* The full answer, combined */}
+                <div>
+                  <p className="text-xs font-semibold text-gold uppercase tracking-wider mb-2">
+                    ▶ The full 60-second answer
+                  </p>
+                  <Triad
+                    setting={sc.example.setting}
+                    details={sc.example.details}
+                    impression={sc.example.impression}
+                  />
+                </div>
               </div>
 
               <div>

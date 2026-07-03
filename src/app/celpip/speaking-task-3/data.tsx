@@ -56,6 +56,36 @@ export const BLUEPRINT = [
   },
 ];
 
+// ─── THE DETAIL TRAP ───
+// The #1 reason test-takers run out of time on Task 3: the image holds more
+// detail than 60 seconds can cover, so they "zoom in" on one area, over-describe
+// it, and never reach the conclusion. This "Pan, don't zoom" method keeps the
+// response balanced. It is shown in the Overview and reused as a body reminder
+// inside every scenario's Perfect Response Example.
+export const BODY_METHOD = {
+  problem:
+    "A Task 3 picture always has more detail than 60 seconds can hold. The most common mistake is to zoom in on one corner, describe it exhaustively, and run out of time before reaching the conclusion — which costs marks in both Coherence and Task Fulfillment.",
+  fixLabel: 'The fix — "Pan, don\'t zoom"',
+  steps: [
+    {
+      title: "Split the image into 3 zones",
+      desc: "Foreground, middle, and background. Give each zone roughly 10–12 seconds so no single area swallows all your time.",
+    },
+    {
+      title: "2–3 things per zone, then move on",
+      desc: "Name the main people or objects and one action or colour — then deliberately pan to the next zone. Never describe a single object in depth.",
+    },
+    {
+      title: "Leave minor details out on purpose",
+      desc: "You are not expected to mention everything. Breadth sounds organised; a deep-dive sounds stuck. Pick only what stands out most.",
+    },
+    {
+      title: "At ~45 seconds, stop and conclude",
+      desc: "The moment you reach the 45-second mark, move to your impression — even if part of the image is left undescribed. Always land the ending.",
+    },
+  ],
+};
+
 export const SCORE_BANDS = [
   {
     title: "Score 10–12 (Advanced)",
@@ -179,6 +209,47 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "A misty lake at sunrise, pine trees on the banks, a wooden rowboat moored at a dock.",
+      sceneReflects:
+        "It reflects a still, untouched moment in nature — early morning before anyone is around. The point of the scene is calm, isolation, and the soft transition from night to day.",
+      seeing: [
+        "A wooden dock and a moored rowboat",
+        "The still, mirror-like lake surface",
+        "Pine trees along the banks",
+        "Thick morning mist",
+        "Muted blue, green, and grey tones",
+      ],
+      ignoring: [
+        "The wood grain and rope on the dock",
+        "Counting or naming individual trees",
+        "Any birds or reeds at the edges",
+        "The exact shape of the rowboat",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground",
+          sentence:
+            "In the foreground, a weathered wooden dock stretches out over the still water, and a small rowboat is moored alongside it.",
+          why: "Zone 1 — I name the two nearest, most dominant objects (dock + boat) and stop. I don't describe the wood grain or rope, which would eat my time.",
+        },
+        {
+          zone: "Middle",
+          sentence:
+            "The surface of the lake is completely undisturbed, reflecting the mist and the pine trees on its banks.",
+          why: "Zone 2 — one clear observation about the water plus its reflection, which links foreground to background without lingering.",
+        },
+        {
+          zone: "Background",
+          sentence:
+            "Moving toward the background, the trees become denser and gradually disappear into a thick morning mist.",
+          why: "Zone 3 — a single 'moving toward the background' transition and the furthest element (the mist). I resist counting trees.",
+        },
+        {
+          zone: "Colour wrap",
+          sentence:
+            "The colours are muted — soft blues, greens, and greys — giving the entire scene a dreamy, almost painterly quality.",
+          why: "One colour sentence covering the whole image reinforces the mood and signals I'm ready to conclude at ~45s.",
+        },
+      ],
       setting:
         '"This image shows a serene lake at sunrise, surrounded by tall pine trees. The atmosphere is quiet and misty, with a soft, golden light filtering through the trees."',
       details:
@@ -247,6 +318,47 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "A busy downtown intersection at midday — pedestrians crossing, cyclists, taxis, storefronts, tall office buildings.",
+      sceneReflects:
+        "It reflects the relentless energy of a modern city at its busiest hour — commerce, traffic, and people all colliding at one intersection. The point of the scene is pace and density.",
+      seeing: [
+        "Crowds of pedestrians crossing",
+        "A cyclist weaving through the crowd",
+        "Yellow taxis and delivery trucks",
+        "Storefronts and café awnings",
+        "Tall glass office buildings",
+      ],
+      ignoring: [
+        "Individual faces, outfits, or bags",
+        "The names of specific shops",
+        "Reading signs or billboards",
+        "The make or model of the taxis",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground",
+          sentence:
+            "In the foreground, a large group of pedestrians is crossing the street in multiple directions, many of them carrying bags or looking at their phones. A cyclist is weaving carefully through the crowd.",
+          why: "Zone 1 — the dominant action (the crowd) plus one supporting detail (the cyclist). Present continuous keeps it lively, and I describe the crowd as a group, not person by person.",
+        },
+        {
+          zone: "Middle (left)",
+          sentence:
+            "To the left, yellow taxis and delivery trucks are lined up, creating congestion on the road.",
+          why: "Zone 2 — one spatial anchor ('to the left') and the traffic, the other half of a busy intersection. Two things, then move on.",
+        },
+        {
+          zone: "Sides",
+          sentence:
+            "On either side of the street, colourful storefronts and café awnings are visible.",
+          why: "A quick sweep of the edges for context — named collectively, not shop by shop.",
+        },
+        {
+          zone: "Background",
+          sentence:
+            "In the background, towering glass office buildings rise above the scene, reflecting the midday light.",
+          why: "Zone 3 — the furthest, tallest element closes the spatial scan and cues the conclusion.",
+        },
+      ],
       setting:
         '"This image shows a vibrant, bustling city intersection, taken at midday. The scene is full of energy and movement, and the overall atmosphere feels fast-paced and dynamic."',
       details:
@@ -315,6 +427,46 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "Two soccer players competing fiercely for the ball in a packed stadium.",
+      sceneReflects:
+        "It reflects a decisive, high-pressure instant in competitive sport — raw physical effort watched by a huge crowd. The point of the scene is tension, rivalry, and adrenaline.",
+      seeing: [
+        "Two players contesting the ball",
+        "Their fierce expressions and body language",
+        "Contrasting team kits",
+        "A packed stadium of spectators",
+        "Floodlights and dramatic lighting",
+      ],
+      ignoring: [
+        "The score or which teams are playing",
+        "Individual fans in the crowd",
+        "Advertising boards around the pitch",
+        "The exact colours of each kit",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground (the subject)",
+          sentence:
+            "In the foreground, two players are competing aggressively for the ball. One is lunging forward with great determination, while the other is bracing to hold his position — both their expressions are fierce and focused.",
+          why: "Zone 1 is the emotional core, so it earns the most detail: the action plus their expressions, because that is what conveys the tense mood.",
+        },
+        {
+          zone: "Foreground detail",
+          sentence: "They are wearing contrasting team kits.",
+          why: "One extra identifying detail, then I stop — I don't name teams or colours I can't be sure of.",
+        },
+        {
+          zone: "Background",
+          sentence:
+            "In the background, the stadium is filled with thousands of spectators, many of whom appear to be on their feet. The stands are a blur of colour, suggesting the crowd is in full voice.",
+          why: "Zone 2 — the crowd is described as a mass ('a blur of colour'), not person by person. Breadth over depth.",
+        },
+        {
+          zone: "Lighting wrap",
+          sentence:
+            "The floodlights overhead create sharp, dramatic lighting across the pitch.",
+          why: "A single atmosphere sentence reinforces the drama and signals the wrap-up at ~45s.",
+        },
+      ],
       setting:
         '"This image captures an intense moment in a football match taking place in a large, packed stadium. The overall atmosphere looks charged and highly competitive."',
       details:
@@ -383,6 +535,47 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "A street carnival — dancers in elaborate costumes, confetti, cheering crowd, food stalls.",
+      sceneReflects:
+        "It reflects a communal celebration in full swing — culture, music, and colour spilling into the street. The point of the scene is shared joy and spectacle.",
+      seeing: [
+        "Costumed dancers performing",
+        "Confetti falling over the street",
+        "A jubilant crowd cheering and filming",
+        "Food stalls and vendors",
+        "More performers and floats approaching",
+      ],
+      ignoring: [
+        "The detail of each individual costume",
+        "Specific people in the crowd",
+        "What the food stalls are selling",
+        "Which festival or culture it is",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground",
+          sentence:
+            "In the foreground, dancers are wearing elaborate, brightly-coloured costumes adorned with feathers and sequins, and they are performing with great energy and flair. Confetti is falling all around them.",
+          why: "Zone 1 — the performers are the focus, so costume + action + confetti in two sentences, then I move on rather than describing one costume fully.",
+        },
+        {
+          zone: "Middle",
+          sentence:
+            "The crowd lining the street is jubilant — many people are cheering, clapping, and taking photos. To the right, a row of food stalls is visible, with vendors serving food and drinks to spectators.",
+          why: "Zone 2 — the crowd as a group plus one spatial anchor ('to the right') for the stalls. Two elements, no individuals.",
+        },
+        {
+          zone: "Background",
+          sentence:
+            "In the background, more performers and floats are approaching, adding to the spectacle.",
+          why: "Zone 3 — the furthest element hints the event continues, closing the scan.",
+        },
+        {
+          zone: "Colour wrap",
+          sentence:
+            "The colours are vivid and joyful — deep reds, electric blues, and bright golds dominate the scene.",
+          why: "One colour sentence ties the mood together and cues the conclusion.",
+        },
+      ],
       setting:
         '"This image shows a vibrant, joyful street carnival taking place during the day. The atmosphere is exuberant and festive, with colour, music, and movement everywhere."',
       details:
@@ -452,6 +645,41 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "A small bookshop café — wooden shelves of books, warm pendant lights, customers reading, barista at the counter.",
+      sceneReflects:
+        "It reflects a quiet, personal refuge — a place designed for slowing down. The point of the scene is warmth, comfort, and gentle focus.",
+      seeing: [
+        "Wooden tables with lamps and coffee",
+        "Customers reading and working",
+        "Floor-to-ceiling bookshelves",
+        "Warm amber pendant lighting",
+        "A barista at the counter",
+      ],
+      ignoring: [
+        "The titles of the books",
+        "What each customer is reading or typing",
+        "The café's brand or menu items",
+        "The precise style of the furniture",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground",
+          sentence:
+            "In the foreground, a couple of wooden tables are arranged with small lamps and cups of coffee on them. Customers are sitting quietly — one person is engrossed in a thick novel, while another is working on a laptop.",
+          why: "Zone 1 — the nearest tables plus what two people are doing, which is enough to show the calm mood without describing every customer.",
+        },
+        {
+          zone: "Sides / middle",
+          sentence:
+            "The walls on both sides are lined with floor-to-ceiling wooden bookshelves, tastefully cluttered with books of all sizes. Hanging pendant lights cast a soft, amber glow across the room.",
+          why: "Zone 2 — the defining feature (books) and the lighting. I describe the shelves as a whole, not the titles.",
+        },
+        {
+          zone: "Background",
+          sentence:
+            "In the background, a barista is preparing drinks behind a compact counter, and a chalkboard menu is visible on the wall above.",
+          why: "Zone 3 — the furthest point (the counter) completes the depth and signals the wrap-up at ~45s.",
+        },
+      ],
       setting:
         '"This image shows a beautifully cosy bookshop café, taken indoors. The lighting is warm and amber-toned, giving the entire space an inviting and intimate feel."',
       details:
@@ -520,6 +748,47 @@ export const SCENARIOS = [
     example: {
       imageDesc:
         "A dramatic canyon at sunset — layered red rock walls, a winding river below, vast sky with deep orange and purple clouds.",
+      sceneReflects:
+        "It reflects the overwhelming scale and age of the natural world — something far bigger than any person. The point of the scene is grandeur, stillness, and perspective.",
+      seeing: [
+        "Layered red and orange canyon walls",
+        "Textured, dramatic rock formations",
+        "A winding river far below",
+        "A spectacular sunset sky",
+        "Bands of orange, violet, and gold",
+      ],
+      ignoring: [
+        "Individual rocks or ridges",
+        "Technical geology terms",
+        "Any small vegetation on the walls",
+        "The precise time of day",
+      ],
+      bodyBreakdown: [
+        {
+          zone: "Foreground",
+          sentence:
+            "In the foreground, the rugged canyon walls are layered in deep shades of red, orange, and burnt sienna — the result of millions of years of erosion. The rock formations are textured and dramatic, with sharp ridges and smooth curves carved by the elements.",
+          why: "Zone 1 — the nearest, biggest feature (the walls) with colour and texture. I describe them as a whole rather than fixating on one rock.",
+        },
+        {
+          zone: "Middle",
+          sentence:
+            "Far below in the valley, a narrow river is winding its way through the canyon floor, looking almost like a ribbon of silver from this height.",
+          why: "Zone 2 — one vivid element (the river) with a simile that conveys the scale, then I move up.",
+        },
+        {
+          zone: "Background (sky)",
+          sentence:
+            "Above, the sky is spectacular — sweeping bands of deep orange, violet, and gold are spread across the horizon as the sun disappears.",
+          why: "Zone 3 — the sky is the furthest layer; naming the sunset colours reinforces the dramatic mood.",
+        },
+        {
+          zone: "Synthesis wrap",
+          sentence:
+            "The colours in the sky and on the rocks complement each other beautifully.",
+          why: "A one-line synthesis linking the zones together, cueing the conclusion at ~45s.",
+        },
+      ],
       setting:
         '"This image captures a breathtaking canyon landscape at sunset. The scene is vast and dramatic, immediately conveying a powerful sense of natural grandeur and raw beauty."',
       details:
