@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -407,25 +408,31 @@ export default function CelpipSpeakingTask5Page() {
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     Sample answer
                   </p>
-                  <div className="text-sm text-ink italic leading-relaxed space-y-2">
-                    <p>
-                      <span className="not-italic font-semibold text-sapphire">
-                        Opening:
-                      </span>{" "}
+                  <div className="space-y-2">
+                    <TimedLine
+                      spend="~10s"
+                      clock="0:00–0:10"
+                      label="Opening"
+                      labelClass="text-sapphire"
+                    >
                       "{renderTemplate(sample.opening, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-emerald2">
-                        Compare:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~40s"
+                      clock="0:10–0:50"
+                      label="Compare"
+                      labelClass="text-emerald2"
+                    >
                       "{renderTemplate(sample.compare, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-amber2">
-                        Conclusion:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~10s"
+                      clock="0:50–1:00"
+                      label="Conclusion"
+                      labelClass="text-amber2"
+                    >
                       "{renderTemplate(sample.conclusion, TEMPLATE_PHRASES)}"
-                    </p>
+                    </TimedLine>
                   </div>
                 </div>
               </div>

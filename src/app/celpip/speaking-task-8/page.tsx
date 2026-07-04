@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -386,25 +387,31 @@ export default function CelpipSpeakingTask8Page() {
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     Sample answer
                   </p>
-                  <div className="text-sm text-ink italic leading-relaxed space-y-2">
-                    <p>
-                      <span className="not-italic font-semibold text-sapphire">
-                        Setup:
-                      </span>{" "}
+                  <div className="space-y-2">
+                    <TimedLine
+                      spend="~15s"
+                      clock="0:00–0:15"
+                      label="Setup"
+                      labelClass="text-sapphire"
+                    >
                       "{renderTemplate(sample.setup, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-emerald2">
-                        Description:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~35s"
+                      clock="0:15–0:50"
+                      label="Description"
+                      labelClass="text-emerald2"
+                    >
                       "{renderTemplate(sample.description, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-amber2">
-                        Question:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~10s"
+                      clock="0:50–1:00"
+                      label="Question"
+                      labelClass="text-amber2"
+                    >
                       "{renderTemplate(sample.question, TEMPLATE_PHRASES)}"
-                    </p>
+                    </TimedLine>
                   </div>
                 </div>
               </div>

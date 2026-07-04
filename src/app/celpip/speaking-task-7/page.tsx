@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -55,7 +56,7 @@ export default function CelpipSpeakingTask7Page() {
         description={<>State your views clearly and support them with relevant examples and
             thoughtful reasoning.</>}
         stats={[
-          { label: "Speaking time", value: <>60<span className="text-lg">s</span></> },
+          { label: "Speaking time", value: <>90<span className="text-lg">s</span></> },
           { label: "Prep time", value: <>30<span className="text-lg">s</span></> },
           { label: "Score scale", value: <>1–12</> },
           { label: "Target band", value: <>8–10</> },
@@ -94,7 +95,7 @@ export default function CelpipSpeakingTask7Page() {
 
 <ScoreCriteria items={SCORE_CRITERIA} />
 
-<Blueprint title="The 60-second blueprint" steps={BLUEPRINT} />
+<Blueprint title="The 90-second blueprint" steps={BLUEPRINT} />
 
         </div>
 
@@ -121,7 +122,7 @@ export default function CelpipSpeakingTask7Page() {
                   <span className="text-sm font-semibold text-ink">
                     Statement
                   </span>
-                  <span className="text-xs text-slate ml-2">~10 seconds</span>
+                  <span className="text-xs text-slate ml-2">~15 seconds</span>
                 </div>
               </div>
             }
@@ -184,7 +185,7 @@ export default function CelpipSpeakingTask7Page() {
                     Supporting Reasons
                   </span>
                   <span className="text-xs text-slate ml-2">
-                    ~40 seconds · 2–3 reasons
+                    ~60 seconds · 2–3 reasons
                   </span>
                 </div>
               </div>
@@ -249,7 +250,7 @@ export default function CelpipSpeakingTask7Page() {
                 </span>
                 <div>
                   <span className="text-sm font-semibold text-ink">Closing</span>
-                  <span className="text-xs text-slate ml-2">~10 seconds</span>
+                  <span className="text-xs text-slate ml-2">~15 seconds</span>
                 </div>
               </div>
             }
@@ -325,23 +326,23 @@ export default function CelpipSpeakingTask7Page() {
                 highlighted
               </mark>{" "}
               words are the reusable template — keep them and swap in your own
-              argument.
+              argument. The <strong>time beside each part</strong> is roughly how
+              long to spend on it so all three land inside the 90 seconds.
             </p>
             {COMPLETE_EXAMPLES.map((ex) => (
               <div key={ex.title} className={`border-l-3 ${ex.border} pl-4`}>
                 <p className="text-sm font-semibold text-ink mb-3">{ex.title}</p>
-                <p className="text-sm text-slate italic mb-2">
-                  <strong>Statement:</strong> "
-                  {renderTemplate(ex.statement, TEMPLATE_PHRASES)}"
-                </p>
-                <p className="text-sm text-slate italic mb-2">
-                  <strong>Support:</strong> "
-                  {renderTemplate(ex.support, TEMPLATE_PHRASES)}"
-                </p>
-                <p className="text-sm text-slate italic">
-                  <strong>Closing:</strong> "
-                  {renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
-                </p>
+                <div className="space-y-2">
+                  <TimedLine spend="~15s" clock="0:00–0:15" label="Statement">
+                    "{renderTemplate(ex.statement, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                  <TimedLine spend="~60s" clock="0:15–1:15" label="Support">
+                    "{renderTemplate(ex.support, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                  <TimedLine spend="~15s" clock="1:15–1:30" label="Closing">
+                    "{renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                </div>
               </div>
             ))}
           </Accordion>

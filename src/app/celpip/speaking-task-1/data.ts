@@ -226,6 +226,17 @@ export const ADVICE_TOOLKIT = [
   },
 ];
 
+// Per-line pacing for the 90-second response. Every sample below shares the
+// same 5-line shape, so one array covers them all:
+//   empathy (15s) + three advice beats (20s each) + conclusion (15s) = 90s.
+export const SAMPLE_LINE_TIMES = [
+  { spend: "~15s", clock: "0:00–0:15" },
+  { spend: "~20s", clock: "0:15–0:35" },
+  { spend: "~20s", clock: "0:35–0:55" },
+  { spend: "~20s", clock: "0:55–1:15" },
+  { spend: "~15s", clock: "1:15–1:30" },
+];
+
 // Fixed template fragments highlighted inside each sample (the reusable
 // skeleton; everything else is scenario-specific fill-in).
 export const TEMPLATE_PHRASES = [

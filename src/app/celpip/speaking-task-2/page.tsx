@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -59,8 +60,8 @@ export default function CelpipSpeakingTask2Page() {
         description={<>Everything you need to score 9+ on Task 2 — structure, vocab,
             scoring rubric, practice scenarios, and delivery tips.</>}
         stats={[
-          { label: "Speaking time", value: <>90<span className="text-lg">s</span></> },
-          { label: "Prep time", value: <>90<span className="text-lg">s</span></> },
+          { label: "Speaking time", value: <>60<span className="text-lg">s</span></> },
+          { label: "Prep time", value: <>30<span className="text-lg">s</span></> },
           { label: "Score scale", value: <>1–12</> },
           { label: "Target band", value: <>8–10</> },
         ]}
@@ -84,8 +85,8 @@ export default function CelpipSpeakingTask2Page() {
             </p>
             <p className="text-base leading-relaxed text-ink">
               You will be asked to describe a personal experience or memorable
-              event. You have <strong>90 seconds to prepare</strong> and{" "}
-              <strong>90 seconds to speak</strong>. There is no writing — only
+              event. You have <strong>30 seconds to prepare</strong> and{" "}
+              <strong>60 seconds to speak</strong>. There is no writing — only
               speaking about something from your own life.
             </p>
             <p className="text-base leading-relaxed text-ink mt-3">
@@ -97,7 +98,7 @@ export default function CelpipSpeakingTask2Page() {
 
 <ScoreCriteria items={SCORE_CRITERIA} />
 
-<Blueprint title="The 90-second blueprint" steps={BLUEPRINT} />
+<Blueprint title="The 60-second blueprint" steps={BLUEPRINT} />
 
         </div>
 
@@ -171,6 +172,9 @@ export default function CelpipSpeakingTask2Page() {
                 <div className="bg-ink rounded-xl p-5 text-fog space-y-3">
                   <p className="text-xs font-semibold text-gold uppercase tracking-widest">
                     Score 10 Model Response
+                    <span className="text-fog/50 normal-case tracking-normal ml-2">
+                      · ~60s total (10s open · 40s body · 10s close)
+                    </span>
                   </p>
                   <p className="text-sm leading-relaxed italic">"{qt.model}"</p>
                 </div>
@@ -223,7 +227,7 @@ export default function CelpipSpeakingTask2Page() {
                   <span className="text-sm font-semibold text-ink">
                     Opening
                   </span>
-                  <span className="text-xs text-slate ml-2">~20 seconds</span>
+                  <span className="text-xs text-slate ml-2">~10 seconds</span>
                 </div>
               </div>
             }
@@ -272,7 +276,7 @@ export default function CelpipSpeakingTask2Page() {
                 <div>
                   <span className="text-sm font-semibold text-ink">Body</span>
                   <span className="text-xs text-slate ml-2">
-                    ~50 seconds · the heart of your story
+                    ~40 seconds · the heart of your story
                   </span>
                 </div>
               </div>
@@ -334,7 +338,7 @@ export default function CelpipSpeakingTask2Page() {
                   <span className="text-sm font-semibold text-ink">
                     Closing
                   </span>
-                  <span className="text-xs text-slate ml-2">~20 seconds</span>
+                  <span className="text-xs text-slate ml-2">~10 seconds</span>
                 </div>
               </div>
             }
@@ -392,23 +396,23 @@ export default function CelpipSpeakingTask2Page() {
                 highlighted
               </mark>{" "}
               words are the reusable template — keep them and swap in your own
-              story.
+              story. The <strong>time beside each part</strong> is roughly how
+              long to spend on it so all three land inside the 60 seconds.
             </p>
             {COMPLETE_EXAMPLES.map((ex) => (
               <div key={ex.title} className={`border-l-3 ${ex.border} pl-4`}>
                 <p className="text-sm font-semibold text-ink mb-3">{ex.title}</p>
-                <p className="text-sm text-slate italic mb-2">
-                  <strong>Opening:</strong> "
-                  {renderTemplate(ex.opening, TEMPLATE_PHRASES)}"
-                </p>
-                <p className="text-sm text-slate italic mb-2">
-                  <strong>Body:</strong> "
-                  {renderTemplate(ex.body, TEMPLATE_PHRASES)}"
-                </p>
-                <p className="text-sm text-slate italic">
-                  <strong>Closing:</strong> "
-                  {renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
-                </p>
+                <div className="space-y-2">
+                  <TimedLine spend="~10s" clock="0:00–0:10" label="Opening">
+                    "{renderTemplate(ex.opening, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                  <TimedLine spend="~40s" clock="0:10–0:50" label="Body">
+                    "{renderTemplate(ex.body, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                  <TimedLine spend="~10s" clock="0:50–1:00" label="Closing">
+                    "{renderTemplate(ex.closing, TEMPLATE_PHRASES)}"
+                  </TimedLine>
+                </div>
               </div>
             ))}
           </Accordion>

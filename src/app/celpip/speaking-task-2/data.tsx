@@ -37,21 +37,21 @@ export const BLUEPRINT = [
     n: "1",
     circle: "bg-gold/20 border-gold/40",
     accent: "text-gold",
-    title: "Opening (20s)",
+    title: "Opening (10s)",
     desc: "Name the event, when it happened, why it mattered",
   },
   {
     n: "2",
     circle: "bg-fog/20 border-fog/40",
     accent: "text-fog",
-    title: "Body (50s)",
+    title: "Body (40s)",
     desc: "Describe one key moment with sensory details; show emotion shift",
   },
   {
     n: "3",
     circle: "bg-gold/20 border-gold/40",
     accent: "text-gold",
-    title: "Closing (20s)",
+    title: "Closing (10s)",
     desc: "Reflect on what you learned or how it changed you",
   },
 ];
@@ -522,7 +522,7 @@ export const TIPS = [
     category: "mistakes",
     color: "text-emerald2",
     title: "Don't finish early and go silent.",
-    body: "If you run out of ideas, add one more detail to a key moment or expand your reflection. 90 seconds should feel natural, not rushed or cut short.",
+    body: "If you run out of ideas, add one more detail to a key moment or expand your reflection. 60 seconds should feel natural, not rushed or cut short.",
   },
 ];
 

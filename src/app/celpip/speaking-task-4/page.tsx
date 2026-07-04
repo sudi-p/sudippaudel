@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -38,23 +39,31 @@ function ScenarioResponse({ accent, label, recap, predictions, reasoning }) {
       >
         ★ Perfect 60-second response — {label}
       </p>
-      <div className="text-sm text-ink italic leading-relaxed space-y-2">
-        <p>
-          <span className="not-italic font-semibold text-sapphire">Recap:</span>{" "}
+      <div className="space-y-2">
+        <TimedLine
+          spend="~10s"
+          clock="0:00–0:10"
+          label="Recap"
+          labelClass="text-sapphire"
+        >
           "{renderTemplate(recap, TEMPLATE_PHRASES)}"
-        </p>
-        <p>
-          <span className="not-italic font-semibold text-emerald2">
-            Predictions:
-          </span>{" "}
+        </TimedLine>
+        <TimedLine
+          spend="~35s"
+          clock="0:10–0:45"
+          label="Predictions"
+          labelClass="text-emerald2"
+        >
           "{renderTemplate(predictions, TEMPLATE_PHRASES)}"
-        </p>
-        <p>
-          <span className="not-italic font-semibold text-amber2">
-            Reasoning:
-          </span>{" "}
+        </TimedLine>
+        <TimedLine
+          spend="~15s"
+          clock="0:45–1:00"
+          label="Reasoning"
+          labelClass="text-amber2"
+        >
           "{renderTemplate(reasoning, TEMPLATE_PHRASES)}"
-        </p>
+        </TimedLine>
       </div>
     </div>
   );
@@ -525,25 +534,31 @@ export default function CelpipSpeakingTask4Page() {
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     Sample answer
                   </p>
-                  <div className="text-sm text-ink italic leading-relaxed space-y-2">
-                    <p>
-                      <span className="not-italic font-semibold text-sapphire">
-                        Recap:
-                      </span>{" "}
+                  <div className="space-y-2">
+                    <TimedLine
+                      spend="~10s"
+                      clock="0:00–0:10"
+                      label="Recap"
+                      labelClass="text-sapphire"
+                    >
                       "{renderTemplate(sample.recap, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-emerald2">
-                        Predictions:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~35s"
+                      clock="0:10–0:45"
+                      label="Predictions"
+                      labelClass="text-emerald2"
+                    >
                       "{renderTemplate(sample.predictions, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-amber2">
-                        Reasoning:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~15s"
+                      clock="0:45–1:00"
+                      label="Reasoning"
+                      labelClass="text-amber2"
+                    >
                       "{renderTemplate(sample.reasoning, TEMPLATE_PHRASES)}"
-                    </p>
+                    </TimedLine>
                   </div>
                 </div>
               </div>

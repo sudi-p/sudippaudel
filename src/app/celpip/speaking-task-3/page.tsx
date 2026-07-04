@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -49,21 +50,31 @@ const Triad = ({ setting, details, impression, highlight = false }) => {
   const show = (text) =>
     highlight ? renderTemplate(text, TEMPLATE_PHRASES) : text;
   return (
-    <div className="text-sm text-ink italic leading-relaxed space-y-2">
-      <p>
-        <span className="not-italic font-semibold text-sapphire">Setting:</span>{" "}
+    <div className="space-y-2">
+      <TimedLine
+        spend="~10s"
+        clock="0:00–0:10"
+        label="Setting"
+        labelClass="text-sapphire"
+      >
         {show(setting)}
-      </p>
-      <p>
-        <span className="not-italic font-semibold text-emerald2">Details:</span>{" "}
+      </TimedLine>
+      <TimedLine
+        spend="~35s"
+        clock="0:10–0:45"
+        label="Details"
+        labelClass="text-emerald2"
+      >
         {show(details)}
-      </p>
-      <p>
-        <span className="not-italic font-semibold text-amber2">
-          Impression:
-        </span>{" "}
+      </TimedLine>
+      <TimedLine
+        spend="~15s"
+        clock="0:45–1:00"
+        label="Impression"
+        labelClass="text-amber2"
+      >
         {show(impression)}
-      </p>
+      </TimedLine>
     </div>
   );
 };

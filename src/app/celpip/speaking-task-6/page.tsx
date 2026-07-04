@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -34,25 +35,31 @@ function ScenarioResponse({ accent, label, greeting, empathize, solution }) {
       >
         ★ Perfect 60-second response — {label}
       </p>
-      <div className="text-sm text-ink italic leading-relaxed space-y-2">
-        <p>
-          <span className="not-italic font-semibold text-sapphire">
-            Greeting:
-          </span>{" "}
+      <div className="space-y-2">
+        <TimedLine
+          spend="~15s"
+          clock="0:00–0:15"
+          label="Greeting"
+          labelClass="text-sapphire"
+        >
           "{renderTemplate(greeting, TEMPLATE_PHRASES)}"
-        </p>
-        <p>
-          <span className="not-italic font-semibold text-emerald2">
-            Empathize &amp; deliver:
-          </span>{" "}
+        </TimedLine>
+        <TimedLine
+          spend="~25s"
+          clock="0:15–0:40"
+          label="Empathize & deliver"
+          labelClass="text-emerald2"
+        >
           "{renderTemplate(empathize, TEMPLATE_PHRASES)}"
-        </p>
-        <p>
-          <span className="not-italic font-semibold text-amber2">
-            Solution &amp; close:
-          </span>{" "}
+        </TimedLine>
+        <TimedLine
+          spend="~20s"
+          clock="0:40–1:00"
+          label="Solution & close"
+          labelClass="text-amber2"
+        >
           "{renderTemplate(solution, TEMPLATE_PHRASES)}"
-        </p>
+        </TimedLine>
       </div>
     </div>
   );
@@ -438,25 +445,31 @@ export default function CelpipSpeakingTask6Page() {
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     Sample answer ({sample.speakingTo})
                   </p>
-                  <div className="text-sm text-ink italic leading-relaxed space-y-2">
-                    <p>
-                      <span className="not-italic font-semibold text-sapphire">
-                        Greeting:
-                      </span>{" "}
+                  <div className="space-y-2">
+                    <TimedLine
+                      spend="~15s"
+                      clock="0:00–0:15"
+                      label="Greeting"
+                      labelClass="text-sapphire"
+                    >
                       "{renderTemplate(sample.greeting, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-emerald2">
-                        Empathize &amp; deliver:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~25s"
+                      clock="0:15–0:40"
+                      label="Empathize & deliver"
+                      labelClass="text-emerald2"
+                    >
                       "{renderTemplate(sample.empathize, TEMPLATE_PHRASES)}"
-                    </p>
-                    <p>
-                      <span className="not-italic font-semibold text-amber2">
-                        Solution &amp; close:
-                      </span>{" "}
+                    </TimedLine>
+                    <TimedLine
+                      spend="~20s"
+                      clock="0:40–1:00"
+                      label="Solution & close"
+                      labelClass="text-amber2"
+                    >
                       "{renderTemplate(sample.solution, TEMPLATE_PHRASES)}"
-                    </p>
+                    </TimedLine>
                   </div>
                 </div>
               </div>

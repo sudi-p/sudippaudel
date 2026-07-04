@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { TimedLine } from "../components/TimedLine";
 import {
   TABS,
   TIPS,
@@ -21,6 +22,7 @@ import {
   SCORE_BANDS,
   ADVICE_TOOLKIT,
   SAMPLES,
+  SAMPLE_LINE_TIMES,
   TEMPLATE_PHRASES,
 } from "./data";
 
@@ -195,23 +197,38 @@ export default function CelpipSpeakingTask1Page() {
               <p className="text-xs font-semibold text-slate uppercase tracking-wider">
                 My template (used in every sample below)
               </p>
-              <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">
-                  First, if I were you, I would
-                </span>{" "}
-                [advice], because [reason].
+              <p className="text-sm text-ink italic flex gap-3">
+                <span className="shrink-0 w-10 text-right not-italic text-[11px] font-semibold text-slate tabular-nums pt-0.5">
+                  ~20s
+                </span>
+                <span>
+                  <span className="font-semibold not-italic text-violet2">
+                    First, if I were you, I would
+                  </span>{" "}
+                  [advice], because [reason].
+                </span>
               </p>
-              <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">
-                  Second, you might want to
-                </span>{" "}
-                [advice], so [reason].
+              <p className="text-sm text-ink italic flex gap-3">
+                <span className="shrink-0 w-10 text-right not-italic text-[11px] font-semibold text-slate tabular-nums pt-0.5">
+                  ~20s
+                </span>
+                <span>
+                  <span className="font-semibold not-italic text-violet2">
+                    Second, you might want to
+                  </span>{" "}
+                  [advice], so [reason].
+                </span>
               </p>
-              <p className="text-sm text-ink italic">
-                <span className="font-semibold not-italic text-violet2">
-                  Third, I'd recommend
-                </span>{" "}
-                [advice], which will [benefit].
+              <p className="text-sm text-ink italic flex gap-3">
+                <span className="shrink-0 w-10 text-right not-italic text-[11px] font-semibold text-slate tabular-nums pt-0.5">
+                  ~20s
+                </span>
+                <span>
+                  <span className="font-semibold not-italic text-violet2">
+                    Third, I'd recommend
+                  </span>{" "}
+                  [advice], which will [benefit].
+                </span>
               </p>
             </div>
             <p className="text-xs text-slate italic">
@@ -310,7 +327,9 @@ export default function CelpipSpeakingTask1Page() {
                 highlighted
               </mark>{" "}
               words are the reusable template — keep them and swap in your own
-              details.
+              details. The <strong>time on the left</strong> of each line is
+              roughly how long to spend on it (and the running clock), so all
+              five beats land inside the 90 seconds.
             </p>
 
             {SAMPLES.map((sample) => (
@@ -322,12 +341,13 @@ export default function CelpipSpeakingTask1Page() {
                   {sample.scenario}
                 </p>
                 {sample.lines.map((line, i) => (
-                  <p
+                  <TimedLine
                     key={i}
-                    className="text-sm text-ink italic leading-relaxed"
+                    spend={SAMPLE_LINE_TIMES[i]?.spend}
+                    clock={SAMPLE_LINE_TIMES[i]?.clock}
                   >
                     {renderTemplate(line, TEMPLATE_PHRASES)}
-                  </p>
+                  </TimedLine>
                 ))}
               </div>
             ))}
