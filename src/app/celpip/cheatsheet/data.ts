@@ -30,7 +30,7 @@ export const SPEAKING = [
       {
         label: "Advise ×2–3",
         meta: "~60s",
-        frame: "\"First, if I were you, I would [advice], because [reason]. Second, you might want to [advice], so [result]. Third, I'd recommend [advice], which will [benefit].\"",
+        frame: "\"To begin with, if I were you, I would [advice], because [reason]. Moreover, you might want to [advice], so [result]. Third, I'd recommend [advice], which will [benefit].\"",
       },
       {
         label: "Conclude",
@@ -85,7 +85,7 @@ export const SPEAKING = [
       {
         label: "Impression",
         meta: "~15s",
-        frame: "\"Overall, [description of the scene]. It looks like [description], and I would [reaction].\"",
+        frame: "\"All in all, [description of the scene]. It looks like [description], and I would [reaction].\"",
       },
     ],
   },
@@ -125,7 +125,7 @@ export const SPEAKING = [
       {
         label: "Open + soft reject",
         meta: "~10s",
-        frame: "\"Hi [name], I saw you were leaning toward [their option]. I understand why — [acknowledge its appeal] — but I actually think [your option] is the better choice for us.\"",
+        frame: "\"Hi [name], I saw you were leaning toward [their option]. I can see why — [acknowledge its appeal] — nevertheless I actually think [your option] is the better choice for us.\"",
       },
       {
         label: "Compare ×2–3",

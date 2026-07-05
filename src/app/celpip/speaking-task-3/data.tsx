@@ -5,6 +5,7 @@ export const TABS = [
   { id: "overview", label: "Overview and Template" },
   { id: "structure", label: "Sample" },
   { id: "scenarios", label: "Scenario Types" },
+  { id: "challenge", label: "Mood Challenge" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
 ];
@@ -188,9 +189,18 @@ export const SCENARIOS = [
     ],
     opening: {
       questions: [
-        ["Where and when?", "A serene lake surrounded by tall pine trees, captured at sunrise."],
-        ["What's the overall mood?", "Quiet, still, and misty — deeply peaceful."],
-        ["One striking detail?", "A soft, golden light is filtering through the trees."],
+        [
+          "Where and when?",
+          "A serene lake surrounded by tall pine trees, captured at sunrise.",
+        ],
+        [
+          "What's the overall mood?",
+          "Quiet, still, and misty — deeply peaceful.",
+        ],
+        [
+          "One striking detail?",
+          "A soft, golden light is filtering through the trees.",
+        ],
       ],
       combined:
         '"This image shows a serene lake at sunrise, surrounded by tall pine trees. The atmosphere is quiet and misty, with a soft, golden light filtering through the trees."',
@@ -199,11 +209,17 @@ export const SCENARIOS = [
     closing: {
       questions: [
         ["React emotionally:", "It feels incredibly peaceful and idyllic."],
-        ["Make an observation:", "The scene captures a rare moment of complete stillness in nature."],
-        ["Connect to a larger idea:", "It looks like a remote retreat far from city noise — the perfect place to unwind and recharge."],
+        [
+          "Make an observation:",
+          "The scene captures a rare moment of complete stillness in nature.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "It looks like a remote retreat far from city noise — the perfect place to unwind and recharge.",
+        ],
       ],
       combined:
-        '"Overall, this is an incredibly peaceful and idyllic scene. It looks like a remote retreat far from city noise, and I think it would be the perfect place to sit quietly, enjoy nature, and recharge."',
+        '"All in all, this is an incredibly peaceful and idyllic scene. It looks like a remote retreat far from city noise, and I think it would be the perfect place to sit quietly, enjoy nature, and recharge."',
       tip: 'use "stillness," "escape," or "unwind" to match the mood.',
     },
     example: {
@@ -255,7 +271,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, a weathered wooden dock stretches out over the still water, and a small rowboat is moored alongside it. The surface of the lake is completely undisturbed, reflecting the mist and the pine trees on its banks. Moving toward the background, the trees become denser and gradually disappear into a thick morning mist. The colours are muted — soft blues, greens, and greys — giving the entire scene a dreamy, almost painterly quality."',
       impression:
-        '"Overall, this is an incredibly peaceful and idyllic scene. It looks like a remote retreat far from city noise, and I think it would be the perfect place to sit quietly, enjoy nature, and recharge."',
+        '"All in all, this is an incredibly peaceful and idyllic scene. It looks like a remote retreat far from city noise, and I think it would be the perfect place to sit quietly, enjoy nature, and recharge."',
     },
   },
   {
@@ -298,8 +314,14 @@ export const SCENARIOS = [
     opening: {
       questions: [
         ["Where and when?", "A vibrant city intersection, taken at midday."],
-        ["What's the overall mood?", "Full of energy and movement — fast-paced and dynamic."],
-        ["One striking detail?", "Crowds are crossing in every direction while traffic builds up on the road."],
+        [
+          "What's the overall mood?",
+          "Full of energy and movement — fast-paced and dynamic.",
+        ],
+        [
+          "One striking detail?",
+          "Crowds are crossing in every direction while traffic builds up on the road.",
+        ],
       ],
       combined:
         '"This image shows a vibrant, bustling city intersection, taken at midday. The scene is full of energy and movement, and the overall atmosphere feels fast-paced and dynamic."',
@@ -308,11 +330,17 @@ export const SCENARIOS = [
     closing: {
       questions: [
         ["React emotionally:", "The frenetic energy feels exciting and alive."],
-        ["Make an observation:", "It perfectly captures the hustle and bustle of a busy city centre."],
-        ["Connect to a larger idea:", "It's a vivid snapshot of everyday urban life, where people are always on the move."],
+        [
+          "Make an observation:",
+          "It perfectly captures the hustle and bustle of a busy city centre.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "It's a vivid snapshot of everyday urban life, where people are always on the move.",
+        ],
       ],
       combined:
-        '"Overall, this is a vivid snapshot of urban life. The scene perfectly captures the hustle and bustle of a busy city centre, and despite the frenetic energy, there is something exciting and alive about it."',
+        '"All in all, this is a vivid snapshot of urban life. The scene perfectly captures the hustle and bustle of a busy city centre, and despite the frenetic energy, there is something exciting and alive about it."',
       tip: '"hustle and bustle" and "dynamic" are high-score phrases for this category.',
     },
     example: {
@@ -364,7 +392,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, a large group of pedestrians is crossing the street in multiple directions, many of them carrying bags or looking at their phones. A cyclist is weaving carefully through the crowd. To the left, yellow taxis and delivery trucks are lined up, creating congestion on the road. On either side of the street, colourful storefronts and café awnings are visible. In the background, towering glass office buildings rise above the scene, reflecting the midday light."',
       impression:
-        '"Overall, this is a vivid snapshot of urban life. The scene perfectly captures the hustle and bustle of a busy city centre, and despite the frenetic energy, there is something exciting and alive about it."',
+        '"All in all, this is a vivid snapshot of urban life. The scene perfectly captures the hustle and bustle of a busy city centre, and despite the frenetic energy, there is something exciting and alive about it."',
     },
   },
   {
@@ -406,9 +434,15 @@ export const SCENARIOS = [
     ],
     opening: {
       questions: [
-        ["Where and when?", "An intense moment during a football match in a large, packed stadium."],
+        [
+          "Where and when?",
+          "An intense moment during a football match in a large, packed stadium.",
+        ],
         ["What's the overall mood?", "Charged, tense, and highly competitive."],
-        ["One striking detail?", "Two players are battling fiercely for the ball, their expressions focused and determined."],
+        [
+          "One striking detail?",
+          "Two players are battling fiercely for the ball, their expressions focused and determined.",
+        ],
       ],
       combined:
         '"This image captures an intense moment in a football match taking place in a large, packed stadium. The overall atmosphere looks charged and highly competitive."',
@@ -416,12 +450,21 @@ export const SCENARIOS = [
     },
     closing: {
       questions: [
-        ["React emotionally:", "You can almost feel the pressure and adrenaline through the image."],
-        ["Make an observation:", "It's a gripping, high-stakes moment that conveys the raw intensity of competitive sport."],
-        ["Connect to a larger idea:", "It perfectly captures why football captivates so many people around the world."],
+        [
+          "React emotionally:",
+          "You can almost feel the pressure and adrenaline through the image.",
+        ],
+        [
+          "Make an observation:",
+          "It's a gripping, high-stakes moment that conveys the raw intensity of competitive sport.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "It perfectly captures why football captivates so many people around the world.",
+        ],
       ],
       combined:
-        '"Overall, this is a gripping, high-stakes moment that conveys the raw intensity of competitive sport. You can almost feel the pressure and adrenaline through the image, and it perfectly captures why football captivates so many people around the world."',
+        '"All in all, this is a gripping, high-stakes moment that conveys the raw intensity of competitive sport. You can almost feel the pressure and adrenaline through the image, and it perfectly captures why football captivates so many people around the world."',
       tip: '"raw emotion" and "lasting impression" show sophisticated engagement with the scene.',
     },
     example: {
@@ -472,7 +515,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, two players are competing aggressively for the ball. One is lunging forward with great determination, while the other is bracing to hold his position — both their expressions are fierce and focused. They are wearing contrasting team kits. In the background, the stadium is filled with thousands of spectators, many of whom appear to be on their feet. The stands are a blur of colour, suggesting the crowd is in full voice. The floodlights overhead create sharp, dramatic lighting across the pitch."',
       impression:
-        '"Overall, this is a gripping, high-stakes moment that conveys the raw intensity of competitive sport. You can almost feel the pressure and adrenaline through the image, and it perfectly captures why football captivates so many people around the world."',
+        '"All in all, this is a gripping, high-stakes moment that conveys the raw intensity of competitive sport. You can almost feel the pressure and adrenaline through the image, and it perfectly captures why football captivates so many people around the world."',
     },
   },
   {
@@ -514,9 +557,18 @@ export const SCENARIOS = [
     ],
     opening: {
       questions: [
-        ["Where and when?", "A lively street carnival taking place during the day."],
-        ["What's the overall mood?", "Exuberant and festive — full of joy and excitement."],
-        ["One striking detail?", "Colour, music, and movement are everywhere, with confetti falling over the dancers."],
+        [
+          "Where and when?",
+          "A lively street carnival taking place during the day.",
+        ],
+        [
+          "What's the overall mood?",
+          "Exuberant and festive — full of joy and excitement.",
+        ],
+        [
+          "One striking detail?",
+          "Colour, music, and movement are everywhere, with confetti falling over the dancers.",
+        ],
       ],
       combined:
         '"This image shows a vibrant, joyful street carnival taking place during the day. The atmosphere is exuberant and festive, with colour, music, and movement everywhere."',
@@ -525,11 +577,17 @@ export const SCENARIOS = [
     closing: {
       questions: [
         ["React emotionally:", "The image radiates pure joy and happiness."],
-        ["Make an observation:", "It perfectly captures the spirit of a cultural carnival."],
-        ["Connect to a larger idea:", "It's the kind of event that unites communities — I would love to experience it first-hand."],
+        [
+          "Make an observation:",
+          "It perfectly captures the spirit of a cultural carnival.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "It's the kind of event that unites communities — I would love to experience it first-hand.",
+        ],
       ],
       combined:
-        '"Overall, this image radiates pure joy and communal celebration. It perfectly captures the spirit of a cultural carnival — the kind of event that unites communities and fills people with pride and happiness. I would love to experience it first-hand."',
+        '"All in all, this image radiates pure joy and communal celebration. It perfectly captures the spirit of a cultural carnival — the kind of event that unites communities and fills people with pride and happiness. I would love to experience it first-hand."',
       tip: '"community spirit" and "uplifting" are high-band words for festive scenes.',
     },
     example: {
@@ -581,7 +639,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, dancers are wearing elaborate, brightly-coloured costumes adorned with feathers and sequins, and they are performing with great energy and flair. Confetti is falling all around them. The crowd lining the street is jubilant — many people are cheering, clapping, and taking photos. To the right, a row of food stalls is visible, with vendors serving food and drinks to spectators. In the background, more performers and floats are approaching, adding to the spectacle. The colours are vivid and joyful — deep reds, electric blues, and bright golds dominate the scene."',
       impression:
-        '"Overall, this image radiates pure joy and communal celebration. It perfectly captures the spirit of a cultural carnival — the kind of event that unites communities and fills people with pride and happiness. I would love to experience it first-hand."',
+        '"All in all, this image radiates pure joy and communal celebration. It perfectly captures the spirit of a cultural carnival — the kind of event that unites communities and fills people with pride and happiness. I would love to experience it first-hand."',
     },
   },
   {
@@ -626,7 +684,10 @@ export const SCENARIOS = [
       questions: [
         ["Where and when?", "A cosy bookshop café interior, taken indoors."],
         ["What's the overall mood?", "Warm, inviting, and intimate."],
-        ["One striking detail?", "The lighting is warm and amber-toned throughout the space."],
+        [
+          "One striking detail?",
+          "The lighting is warm and amber-toned throughout the space.",
+        ],
       ],
       combined:
         '"This image shows a beautifully cosy bookshop café, taken indoors. The lighting is warm and amber-toned, giving the entire space an inviting and intimate feel."',
@@ -634,12 +695,21 @@ export const SCENARIOS = [
     },
     closing: {
       questions: [
-        ["React emotionally:", "It feels like a charming, comforting retreat from the outside world."],
-        ["Make an observation:", "The books, warm lighting, and smell of coffee make it perfect for slowing down."],
-        ["Connect to a larger idea:", "It's exactly the kind of place I would love to spend a quiet, rainy afternoon."],
+        [
+          "React emotionally:",
+          "It feels like a charming, comforting retreat from the outside world.",
+        ],
+        [
+          "Make an observation:",
+          "The books, warm lighting, and smell of coffee make it perfect for slowing down.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "It's exactly the kind of place I would love to spend a quiet, rainy afternoon.",
+        ],
       ],
       combined:
-        '"Overall, this space looks like a charming retreat from the outside world. The combination of books, warm lighting, and the smell of coffee would make it the perfect place to slow down and enjoy a quiet afternoon — exactly the kind of place I would love to spend a rainy day."',
+        '"All in all, this space looks like a charming retreat from the outside world. The combination of books, warm lighting, and the smell of coffee would make it the perfect place to slow down and enjoy a quiet afternoon — exactly the kind of place I would love to spend a rainy day."',
       tip: '"slow down" and "quiet moments" contrast well with Bustling — they signal scene-awareness.',
     },
     example: {
@@ -685,7 +755,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, a couple of wooden tables are arranged with small lamps and cups of coffee on them. Customers are sitting quietly — one person is engrossed in a thick novel, while another is working on a laptop. The walls on both sides are lined with floor-to-ceiling wooden bookshelves, tastefully cluttered with books of all sizes. Hanging pendant lights cast a soft, amber glow across the room. In the background, a barista is preparing drinks behind a compact counter, and a chalkboard menu is visible on the wall above."',
       impression:
-        '"Overall, this space looks like a charming retreat from the outside world. The combination of books, warm lighting, and the smell of coffee would make it the perfect place to slow down and enjoy a quiet afternoon — exactly the kind of place I would love to spend a rainy day."',
+        '"All in all, this space looks like a charming retreat from the outside world. The combination of books, warm lighting, and the smell of coffee would make it the perfect place to slow down and enjoy a quiet afternoon — exactly the kind of place I would love to spend a rainy day."',
     },
   },
   {
@@ -728,8 +798,14 @@ export const SCENARIOS = [
     opening: {
       questions: [
         ["Where and when?", "A vast canyon landscape, captured at sunset."],
-        ["What's the overall mood?", "Dramatic and grand, with a powerful sense of natural beauty."],
-        ["One striking detail?", "Layered red rock walls glow beneath a sky of orange, violet, and gold."],
+        [
+          "What's the overall mood?",
+          "Dramatic and grand, with a powerful sense of natural beauty.",
+        ],
+        [
+          "One striking detail?",
+          "Layered red rock walls glow beneath a sky of orange, violet, and gold.",
+        ],
       ],
       combined:
         '"This image captures a breathtaking canyon landscape at sunset. The scene is vast and dramatic, immediately conveying a powerful sense of natural grandeur and raw beauty."',
@@ -737,12 +813,21 @@ export const SCENARIOS = [
     },
     closing: {
       questions: [
-        ["React emotionally:", "It's a truly awe-inspiring scene that leaves you speechless."],
-        ["Make an observation:", "It makes you acutely aware of the immense age and power of nature."],
-        ["Connect to a larger idea:", "The sheer scale, combined with the ethereal sunset light, makes you feel small yet fortunate to witness it."],
+        [
+          "React emotionally:",
+          "It's a truly awe-inspiring scene that leaves you speechless.",
+        ],
+        [
+          "Make an observation:",
+          "It makes you acutely aware of the immense age and power of nature.",
+        ],
+        [
+          "Connect to a larger idea:",
+          "The sheer scale, combined with the ethereal sunset light, makes you feel small yet fortunate to witness it.",
+        ],
       ],
       combined:
-        '"Overall, this is a truly awe-inspiring scene that makes you acutely aware of the immense age and power of nature. The sheer scale of the canyon, combined with the ethereal sunset light, creates an image that I think would leave anyone speechless."',
+        '"All in all, this is a truly awe-inspiring scene that makes you acutely aware of the immense age and power of nature. The sheer scale of the canyon, combined with the ethereal sunset light, creates an image that I think would leave anyone speechless."',
       tip: '"awe-inspiring" and "natural magnificence" are high-band phrases that work perfectly here.',
     },
     example: {
@@ -794,7 +879,7 @@ export const SCENARIOS = [
       details:
         '"In the foreground, the rugged canyon walls are layered in deep shades of red, orange, and burnt sienna — the result of millions of years of erosion. The rock formations are textured and dramatic, with sharp ridges and smooth curves carved by the elements. Far below in the valley, a narrow river is winding its way through the canyon floor, looking almost like a ribbon of silver from this height. Above, the sky is spectacular — sweeping bands of deep orange, violet, and gold are spread across the horizon as the sun disappears. The colours in the sky and on the rocks complement each other beautifully."',
       impression:
-        '"Overall, this is a truly awe-inspiring scene that makes you acutely aware of the immense age and power of nature. The sheer scale of the canyon, combined with the ethereal sunset light, creates an image that I think would leave anyone speechless."',
+        '"All in all, this is a truly awe-inspiring scene that makes you acutely aware of the immense age and power of nature. The sheer scale of the canyon, combined with the ethereal sunset light, creates an image that I think would leave anyone speechless."',
     },
   },
 ];
@@ -865,7 +950,7 @@ export const TEMPLATE_PARTS = [
       ],
       [
         "Make an observation:",
-        '"Overall, it captures a typical day in this community" or "This reflects the local culture well."',
+        '"All in all, it captures a typical day in this community" or "This reflects the local culture well."',
       ],
       [
         "Connect to larger idea:",
@@ -878,7 +963,7 @@ export const TEMPLATE_PARTS = [
     ],
     panelLabel: "My template (used in every sample below)",
     panelItems: [
-      '"Overall, [what the scene captures]. It looks like [your interpretation], and I would [personal reaction]."',
+      '"All in all, [what the scene captures]. It looks like [your interpretation], and I would [personal reaction]."',
     ],
   },
 ];
@@ -930,7 +1015,7 @@ export const TEMPLATE_PHRASES = [
   "In the foreground,",
   "In the middle,",
   "In the background,",
-  "Overall,",
+  "All in all,",
   "It looks like",
   "I would",
   ", and",
@@ -942,60 +1027,146 @@ export const SAMPLES = [
     scenarioColor: "text-gold",
     imagePrompt:
       '"A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot."',
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260611/celpip/bustling_market.png",
     setting:
       '"This image shows a vibrant outdoor market scene, taken during the day. The atmosphere looks bustling and lively, and the colours immediately stand out."',
     details:
       '"In the foreground, there are colourful fruit and vegetable stalls overflowing with fresh produce, and the vendors are wearing traditional clothing as they arrange their items. In the middle, customers are browsing and selecting goods, and some are carrying shopping bags, with vibrant blues, reds, yellows, and greens everywhere. In the background, more stalls are visible, and there are tall buildings rising above the crowd."',
     impression:
-      '"Overall, the scene captures the energy and vibrancy of a bustling marketplace. It looks like a place full of life and cultural richness, and I would really enjoy visiting somewhere like this."',
+      '"All in all, the scene captures the energy and vibrancy of a bustling marketplace. It looks like a place full of life and cultural richness, and I would really enjoy visiting somewhere like this."',
   },
   {
     scenario: "Scenario 2 · Peaceful beach sunset",
     scenarioColor: "text-sapphire",
     imagePrompt:
       '"A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting."',
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260868/celpip/peaceful_beach_sunset.png",
     setting:
       '"This image shows a quiet, serene beach at sunset, taken during the evening. The atmosphere looks warm and peaceful, and the sky is glowing in shades of orange and pink."',
     details:
       '"In the foreground, there is golden sand where a few people are walking slowly along the shore. In the middle, the water is a calm blue colour, and it reflects the warm light of the setting sun, while some palm trees sway gently to the left. In the background, I can see small beach huts and a few scattered clouds in the sky, and everything looks soft and still."',
     impression:
-      '"Overall, this is a very peaceful, serene moment. The combination of the sunset colours and the relaxed atmosphere would make it an ideal place to unwind after a long day, and I would love to spend an evening here."',
+      '"All in all, this is a very peaceful, serene moment. The combination of the sunset colours and the relaxed atmosphere would make it an ideal place to unwind after a long day, and I would love to spend an evening here."',
   },
   {
     scenario: "Scenario 3 · Cozy café interior",
     scenarioColor: "text-emerald2",
     imagePrompt:
       '"A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones."',
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260912/celpip/cozy_cafe.png",
     setting:
       '"This image shows a cozy café interior, taken during the day. The atmosphere looks warm and welcoming, and the lighting is soft."',
     details:
       '"In the foreground, there are several small tables where customers are sitting and enjoying beverages or food, with chairs in different colours and styles. In the middle, more seating areas are visible to the left and right, with some people reading books and others working on laptops, and the walls are decorated with paintings and warm lighting fixtures. In the background, staff members are preparing drinks behind the counter, and natural light is coming through the large windows."',
     impression:
-      '"Overall, the café looks like a cozy retreat where people can relax and socialise. It looks like a pleasant place to spend an afternoon, and I would love to settle in here with a good book."',
+      '"All in all, the café looks like a cozy retreat where people can relax and socialise. It looks like a pleasant place to spend an afternoon, and I would love to settle in here with a good book."',
   },
   {
     scenario: "Scenario 4 · Mountain landscape",
     scenarioColor: "text-amber2",
     imagePrompt:
       '"A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot."',
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260973/celpip/Landscape.png",
     setting:
       '"This image shows a breathtaking mountain landscape, taken during the day. The atmosphere looks vast, fresh, and very peaceful."',
     details:
       '"In the foreground, there are tall green pine trees and some large rocks scattered across the ground. In the middle, a wide valley stretches out, and I can see a winding river running through it. In the background, there are tall, snow-capped peaks rising into a clear blue sky with a few white clouds, and the colours range from deep greens to soft greys and bright whites, which gives the scene a real sense of scale."',
     impression:
-      '"Overall, the landscape looks calm and majestic. It reminds me of peaceful hiking trips, and I would love to escape here from the noise of the city."',
+      '"All in all, the landscape looks calm and majestic. It reminds me of peaceful hiking trips, and I would love to escape here from the noise of the city."',
   },
   {
     scenario: "Scenario 5 · Street festival",
     scenarioColor: "text-rose2",
     imagePrompt:
       '"A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view."',
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783261055/celpip/Street_festival.png",
     setting:
       '"This image shows a lively street festival or cultural celebration, taken during the day. The atmosphere looks joyful and energetic, and the whole street is full of colour."',
     details:
       '"In the foreground, large crowds of people are celebrating, and many of them are smiling and taking photos, with colourful decorations and banners hanging across the street. In the middle, performers in traditional costumes are dancing, while food stalls line both sides of the road. In the background, I can see festive lights and even more people gathered together, and the bright colours really stand out against the busy scene."',
     impression:
-      '"Overall, the scene captures the excitement and community spirit of a cultural festival. It looks like the kind of event where people of all ages come together, and I would love to experience it in person."',
+      '"All in all, the scene captures the excitement and community spirit of a cultural festival. It looks like the kind of event where people of all ages come together, and I would love to experience it in person."',
+  },
+];
+
+// ─── ATMOSPHERE & MOOD FLIP-CARD CHALLENGE ───
+// A self-test: the learner studies each image (or its prompt) and writes the
+// atmosphere and mood they think it portrays, then flips the card to check.
+// Reuses the sample images above; each card maps to exactly one scenario type,
+// and the atmosphere/mood answers are drawn from that scenario's vocab.
+export const MOOD_CHALLENGE = [
+  {
+    scenario: "Bustling outdoor market",
+    scenarioColor: "text-gold",
+    scenarioType: "Bustling / Lively",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260611/celpip/bustling_market.png",
+    imagePrompt:
+      "A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot.",
+    atmosphere: ["Bustling", "Congested", "Hustle and bustle"],
+    mood: ["Vibrant", "Animated", "Energetic"],
+  },
+  {
+    scenario: "Peaceful beach sunset",
+    scenarioColor: "text-sapphire",
+    scenarioType: "Serene / Peaceful",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260868/celpip/peaceful_beach_sunset.png",
+    imagePrompt:
+      "A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting.",
+    atmosphere: ["Tranquil", "Pristine", "Golden hour"],
+    mood: ["Serene", "Idyllic", "Placid"],
+  },
+  {
+    scenario: "Cozy café interior",
+    scenarioColor: "text-emerald2",
+    scenarioType: "Cosy / Intimate",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260912/celpip/cozy_cafe.png",
+    imagePrompt:
+      "A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones.",
+    atmosphere: ["Ambient", "Muted tones", "Homely"],
+    mood: ["Intimate", "Inviting", "Snug"],
+  },
+  {
+    scenario: "Mountain landscape",
+    scenarioColor: "text-amber2",
+    scenarioType: "Awe-Inspiring / Dramatic",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260973/celpip/Landscape.png",
+    imagePrompt:
+      "A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot.",
+    atmosphere: ["Vast", "Panoramic", "Ethereal"],
+    mood: ["Majestic", "Breathtaking", "Imposing"],
+  },
+  {
+    scenario: "Street festival",
+    scenarioColor: "text-rose2",
+    scenarioType: "Joyful / Festive",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783261055/celpip/Street_festival.png",
+    imagePrompt:
+      "A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view.",
+    atmosphere: ["Festive", "Colourful", "Revelry"],
+    mood: ["Exuberant", "Jubilant", "Radiant"],
+  },
+  {
+    // New scenario — the one scenario type not yet covered by the samples above
+    // (Livid / Tense / Intense). No imageLink yet; generate one from the prompt.
+    scenario: "Intense football match",
+    scenarioColor: "text-rose2",
+    scenarioType: "Livid / Tense / Intense",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783262414/celpip/Intense_football.png",
+    imagePrompt:
+      "A packed football stadium during a high-stakes match, players sprinting for the ball in the foreground, faces tense with concentration, a roaring crowd waving flags and scarves in the stands, dramatic floodlights cutting through the evening air, motion blur on the action, charged and competitive atmosphere, photorealistic, wide dynamic shot.",
+    atmosphere: ["Charged atmosphere", "Ominous", "High-stakes"],
+    mood: ["Intense", "Agitated", "Gripping"],
   },
 ];
 

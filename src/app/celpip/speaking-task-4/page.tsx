@@ -422,7 +422,7 @@ export default function CelpipSpeakingTask4Page() {
               </li>
               <li className="flex gap-2">
                 <span className="text-gold shrink-0">✦</span>
-                <strong>Use conditional recap.</strong> "Overall, the scene will
+                <strong>Use conditional recap.</strong> "Ultimately, the scene will
                 likely look very different in an hour because..."{" "}
               </li>
               <li className="flex gap-2">
@@ -522,6 +522,14 @@ export default function CelpipSpeakingTask4Page() {
                 >
                   {sample.scenario}
                 </p>
+                {sample.imageLink && (
+                  <img
+                    src={sample.imageLink}
+                    alt={sample.scenario}
+                    loading="lazy"
+                    className="w-full rounded-lg border border-mist object-cover"
+                  />
+                )}
                 <div className="bg-white rounded-lg border border-mist p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     🖼️ Image generation prompt

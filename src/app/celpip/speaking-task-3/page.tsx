@@ -23,12 +23,12 @@ import {
   TEMPLATE_PARTS,
   SPATIAL_TOOLKIT,
   SAMPLES,
+  MOOD_CHALLENGE,
   TEMPLATE_PHRASES,
   TIP_FILTERS,
   TIPS,
   KEY_INSIGHT,
 } from "./data";
-
 
 const VocabCard = ({ word }) => (
   <div className="bg-fog rounded-xl p-3">
@@ -79,14 +79,148 @@ const Triad = ({ setting, details, impression, highlight = false }) => {
   );
 };
 
+// Atmosphere & Mood self-test. The front shows the image (or its prompt when no
+// image exists yet); clicking flips the card in 3D to reveal the answer chips.
+const FlipCard = ({ item }) => {
+  const [flipped, setFlipped] = useState(false);
+  const toggle = () => setFlipped((f) => !f);
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-pressed={flipped}
+      onClick={toggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggle();
+        }
+      }}
+      className="relative w-full cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-xl"
+      style={{ perspective: "1200px" }}
+    >
+      <div
+        className="relative w-full h-80 sm:h-96 transition-transform duration-500"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
+      >
+        {/* FRONT — the picture (or prompt) to interpret */}
+        <div
+          className="absolute inset-0 rounded-xl overflow-hidden border border-mist bg-fog"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+          }}
+        >
+          {item.imageLink ? (
+            <img
+              src={item.imageLink}
+              alt={item.scenario}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full p-4 flex flex-col">
+              <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
+                🖼️ Image prompt
+              </p>
+              <p className="text-sm text-ink italic leading-relaxed overflow-auto">
+                "{item.imagePrompt}"
+              </p>
+            </div>
+          )}
+          <div className="absolute bottom-0 inset-x-0 bg-ink/70 text-white text-xs font-medium py-2 px-3 flex items-center justify-between gap-2">
+            <span className="opacity-80 shrink-0">Tap to reveal ↺</span>
+          </div>
+        </div>
+
+        {/* BACK — the atmosphere & mood answer */}
+        <div
+          className="absolute inset-0 rounded-xl border border-mist bg-white p-4 flex flex-col justify-center gap-3"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+          }}
+        >
+          <p
+            className={`text-xs font-semibold uppercase tracking-widest ${item.scenarioColor}`}
+          >
+            {item.scenarioType}
+          </p>
+          <div>
+            <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-1.5">
+              Atmosphere
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {item.atmosphere.map((w) => (
+                <span
+                  key={w}
+                  className="text-xs bg-sapphire-light text-sapphire-dark rounded-full px-2.5 py-1"
+                >
+                  {w}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-1.5">
+              Mood
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {item.mood.map((w) => (
+                <span
+                  key={w}
+                  className="text-xs bg-amber2-light text-amber2-dark rounded-full px-2.5 py-1"
+                >
+                  {w}
+                </span>
+              ))}
+            </div>
+          </div>
+          <span className="text-xs text-slate/70 mt-1">Tap to flip back ↺</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function CelpipSpeakingTask3Page() {
   const [activeTab, setActiveTab] = useState("overview");
   const [vocabFilter, setVocabFilter] = useState("all");
   const [tipFilter, setTipFilter] = useState("all");
 
+  // Mood Challenge — one card at a time, navigated with prev/next.
+  const challengeTotal = MOOD_CHALLENGE.length;
+  const [challengeOrder, setChallengeOrder] = useState(() =>
+    MOOD_CHALLENGE.map((_, i) => i),
+  );
+  const [challengePos, setChallengePos] = useState(0);
+
   useEffect(() => {
     document.title = "CELPIP Speaking — Task 3 Study Guide";
   }, []);
+
+  // Reshuffle the deck on every page load. Done client-side (not in the
+  // useState initializer) so the server and first client render agree —
+  // otherwise React would flag a hydration mismatch.
+  useEffect(() => {
+    const order = MOOD_CHALLENGE.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    setChallengeOrder(order);
+    setChallengePos(0);
+  }, []);
+
+  const goPrevChallenge = () =>
+    setChallengePos((p) => (p - 1 + challengeTotal) % challengeTotal);
+  const goNextChallenge = () =>
+    setChallengePos((p) => (p + 1) % challengeTotal);
+  const currentChallenge = MOOD_CHALLENGE[challengeOrder[challengePos]];
 
   const task3Words = useMemo(() => VOCAB.filter((v) => v.task === "3"), []);
   const vocabTypes = useMemo(
@@ -107,12 +241,34 @@ export default function CelpipSpeakingTask3Page() {
       {/* ─── HERO ─── */}
       <Hero
         eyebrow={<>Speaking · Task 3 of 8</>}
-        title={<>Describe a <span className="hero-line italic">scene</span></>}
-        description={<>Everything you need to score 9+ on Task 3 — structure, vocab,
-            scoring rubric, practice scenarios, and delivery tips.</>}
+        title={
+          <>
+            Describe a <span className="hero-line italic">scene</span>
+          </>
+        }
+        description={
+          <>
+            Everything you need to score 9+ on Task 3 — structure, vocab,
+            scoring rubric, practice scenarios, and delivery tips.
+          </>
+        }
         stats={[
-          { label: "Speaking time", value: <>60<span className="text-lg">s</span></> },
-          { label: "Prep time", value: <>30<span className="text-lg">s</span></> },
+          {
+            label: "Speaking time",
+            value: (
+              <>
+                60<span className="text-lg">s</span>
+              </>
+            ),
+          },
+          {
+            label: "Prep time",
+            value: (
+              <>
+                30<span className="text-lg">s</span>
+              </>
+            ),
+          },
           { label: "Score scale", value: <>1–12</> },
           { label: "Target band", value: <>8–10</> },
         ]}
@@ -121,7 +277,7 @@ export default function CelpipSpeakingTask3Page() {
       {/* ─── MAIN CONTENT ─── */}
       <main className="max-w-6xl mx-auto px-6 pb-24">
         {/* TAB BAR */}
-<TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
+        <TabBar tabs={TABS} active={activeTab} onChange={setActiveTab} />
 
         {/* ══════════════════════════════════════════
                PANE: OVERVIEW
@@ -148,9 +304,9 @@ export default function CelpipSpeakingTask3Page() {
             </p>
           </div>
 
-<ScoreCriteria items={SCORE_CRITERIA} />
+          <ScoreCriteria items={SCORE_CRITERIA} />
 
-<Blueprint title="The 60-second blueprint" steps={BLUEPRINT} />
+          <Blueprint title="The 60-second blueprint" steps={BLUEPRINT} />
 
           {/* The detail trap — the #1 reason test-takers never reach the conclusion */}
           <div className="bg-white rounded-2xl border border-mist p-6">
@@ -178,7 +334,6 @@ export default function CelpipSpeakingTask3Page() {
               </ol>
             </div>
           </div>
-
         </div>
 
         {/* ══════════════════════════════════════════
@@ -293,7 +448,9 @@ export default function CelpipSpeakingTask3Page() {
                       {sc.opening.combined}
                     </p>
                   </div>
-                  <p className="text-xs text-slate mt-2">Tip: {sc.opening.tip}</p>
+                  <p className="text-xs text-slate mt-2">
+                    Tip: {sc.opening.tip}
+                  </p>
                 </div>
                 <div className="bg-amber2-light rounded-xl p-4">
                   <p className="text-xs font-semibold text-amber2-dark uppercase tracking-wider mb-3">
@@ -318,7 +475,9 @@ export default function CelpipSpeakingTask3Page() {
                       {sc.closing.combined}
                     </p>
                   </div>
-                  <p className="text-xs text-slate mt-2">Tip: {sc.closing.tip}</p>
+                  <p className="text-xs text-slate mt-2">
+                    Tip: {sc.closing.tip}
+                  </p>
                 </div>
               </div>
 
@@ -564,7 +723,6 @@ export default function CelpipSpeakingTask3Page() {
               ))}
             </div>
           </Accordion>
-
         </div>
 
         <div
@@ -612,6 +770,14 @@ export default function CelpipSpeakingTask3Page() {
                 >
                   {sample.scenario}
                 </p>
+                {sample.imageLink && (
+                  <img
+                    src={sample.imageLink}
+                    alt={sample.scenario}
+                    loading="lazy"
+                    className="w-full rounded-lg border border-mist object-cover"
+                  />
+                )}
                 <div className="bg-white rounded-lg border border-mist p-4">
                   <p className="text-xs font-semibold text-slate uppercase tracking-wider mb-2">
                     🖼️ Image generation prompt
@@ -637,14 +803,111 @@ export default function CelpipSpeakingTask3Page() {
         </div>
 
         {/* ══════════════════════════════════════════
+               PANE: MOOD CHALLENGE
+          ══════════════════════════════════════════ */}
+        <div
+          id="pane-challenge"
+          className={`pane ${activeTab === "challenge" ? "active" : ""} space-y-6`}
+        >
+          <div className="bg-white rounded-2xl border border-mist p-6">
+            <p className="text-xs font-semibold text-slate uppercase tracking-widest mb-3">
+              Test your eye for atmosphere & mood
+            </p>
+            <p className="text-sm leading-relaxed text-ink">
+              Study each picture and jot down the <strong>atmosphere</strong>{" "}
+              (the overall feel of the setting) and the <strong>mood</strong>{" "}
+              (the emotion it evokes) you would use to describe it. When you're
+              ready, <strong>tap the card</strong> to flip it and reveal strong
+              vocabulary choices. Your answers aren't graded — this is just to
+              train instant recognition during your 30-second prep.
+            </p>
+          </div>
+
+          <div className="max-w-xl mx-auto">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-semibold text-slate uppercase tracking-wider">
+                Card {challengePos + 1} of {challengeTotal}
+              </span>
+              <span className="text-xs text-slate/70">
+                Shuffled each refresh
+              </span>
+            </div>
+
+            {/* key forces a fresh card (flip reset + cleared inputs) on navigation */}
+            <div
+              key={challengeOrder[challengePos]}
+              className="bg-fog rounded-xl p-5 space-y-3"
+            >
+              <FlipCard item={currentChallenge} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-sapphire-dark uppercase tracking-wider mb-1.5">
+                    Atmosphere
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. tranquil, bustling…"
+                    className="w-full text-sm rounded-lg border border-mist bg-white px-3 py-2 text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-sapphire/40"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-amber2-dark uppercase tracking-wider mb-1.5">
+                    Mood
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. serene, energetic…"
+                    className="w-full text-sm rounded-lg border border-mist bg-white px-3 py-2 text-ink placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-amber2/40"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-3 mt-4">
+              <button
+                type="button"
+                onClick={goPrevChallenge}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink bg-white border border-mist rounded-lg px-4 py-2 hover:bg-fog transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                ← Previous
+              </button>
+              <div className="flex items-center gap-1.5">
+                {MOOD_CHALLENGE.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === challengePos ? "w-5 bg-gold" : "w-1.5 bg-mist"
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={goNextChallenge}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink bg-white border border-mist rounded-lg px-4 py-2 hover:bg-fog transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════
                PANE: VOCAB BANK
           ══════════════════════════════════════════ */}
-<VocabPane words={filteredVocab} types={vocabTypes} filter={vocabFilter} onFilter={setVocabFilter} active={activeTab} variant="labeled" />
+        <VocabPane
+          words={filteredVocab}
+          types={vocabTypes}
+          filter={vocabFilter}
+          onFilter={setVocabFilter}
+          active={activeTab}
+          variant="labeled"
+        />
 
         {/* ══════════════════════════════════════════
                PANE: PRO TIPS
           ══════════════════════════════════════════ */}
-<TipsPane tips={filteredTips} active={activeTab} />
+        <TipsPane tips={filteredTips} active={activeTab} />
       </main>
 
       <footer className="max-w-6xl mx-auto px-6 py-12 border-t border-mist mt-12">

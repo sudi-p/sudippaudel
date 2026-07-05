@@ -171,9 +171,9 @@ export const SCENARIO_TYPES = [
         "Right now, the market is absolutely bustling — vendors are calling out to passing shoppers and every stall is packed with customers.",
     },
     closing: {
-      hint: 'Reference a natural wind-down trigger (closing time, darkness, fatigue). Use "overall" or "in conclusion" to signal the wrap-up.',
+      hint: 'Reference a natural wind-down trigger (closing time, darkness, fatigue). Use "ultimately" or "in conclusion" to signal the wrap-up.',
       example:
-        "Overall, the scene will look quite different in an hour — the crowd will have dispersed and the vendors will be packing up, because busy places always wind down once the day's peak is over.",
+        "Ultimately, the scene will look quite different in an hour — the crowd will have dispersed and the vendors will be packing up, because busy places always wind down once the day's peak is over.",
     },
     responseLabel: "Busy Market",
     recap:
@@ -181,7 +181,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that the crowd will surge even larger in the next twenty minutes because it is the peak evening shopping hour. The vendors will probably start lowering their prices to clear the last of their stock before closing time. Meanwhile, some early shoppers who have already filled their bags might begin to disperse toward the exit. Eventually, the crowd will thin out as the busiest stalls sell out and people head home for dinner.",
     reasoning:
-      "Overall, the scene will look quite different in an hour, because busy markets always wind down once daylight disappears and the shoppers leave.",
+      "Ultimately, the scene will look quite different in an hour, because busy markets always wind down once daylight disappears and the shoppers leave.",
   },
   {
     n: "2",
@@ -251,7 +251,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that the temperature will drop noticeably as the sun sets lower because the warmth fades quickly after dusk. The visitors will probably start gathering their belongings to head back home. Meanwhile, a few couples might linger a little longer to watch the stars appear. Eventually, the beach will fall completely quiet as the last visitors leave.",
     reasoning:
-      "Overall, the serene mood will deepen into total stillness as nightfall arrives, because peaceful places like this naturally empty once daylight fades.",
+      "Ultimately, the serene mood will deepen into total stillness as nightfall arrives, because peaceful places like this naturally empty once daylight fades.",
   },
   {
     n: "3",
@@ -313,7 +313,7 @@ export const SCENARIO_TYPES = [
     closing: {
       hint: "Predict resolution or escalation and give a human-behaviour reason. Avoid extremes — a measured, realistic prediction scores higher.",
       example:
-        "Overall, I believe the tension will gradually defuse once a senior colleague steps in, because most workplace conflicts resolve when a neutral third party helps both sides feel heard.",
+        "Ultimately, I believe the tension will gradually defuse once a senior colleague steps in, because most workplace conflicts resolve when a neutral third party helps both sides feel heard.",
     },
     responseLabel: "Tense Office Argument",
     recap:
@@ -321,7 +321,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that the confrontation will escalate a little further before it improves because neither side wants to back down first. A senior colleague will probably step in to calm things down and ask both parties to take a break to cool off. Meanwhile, the rest of the team might feel uncomfortable and try to distance themselves from the argument. Eventually, once they talk it out in private, the two colleagues will reach a compromise and patch things up.",
     reasoning:
-      "Overall, I believe the situation will be resolved within the hour, because most workplace conflicts defuse once a neutral party steps in and people are no longer arguing in public.",
+      "Ultimately, I believe the situation will be resolved within the hour, because most workplace conflicts defuse once a neutral party steps in and people are no longer arguing in public.",
   },
   {
     n: "4",
@@ -393,7 +393,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that the crowd will swell even larger as the evening goes on because people will join the celebration after work. Once the lights come on, the atmosphere will probably feel even more electric and lively. Meanwhile, the food vendors might start running low on popular items as visitors grab a bite from the stalls. Eventually, the celebration will peak with an evening performance before the festivities wind down.",
     reasoning:
-      "Overall, the celebration will build toward a night-time climax and then gradually taper off, because festivals always follow this natural arc as the crowd disperses and energy fades.",
+      "Ultimately, the celebration will build toward a night-time climax and then gradually taper off, because festivals always follow this natural arc as the crowd disperses and energy fades.",
   },
   {
     n: "5",
@@ -459,7 +459,7 @@ export const SCENARIO_TYPES = [
     closing: {
       hint: "Connect your predictions to a logical workplace outcome (meeting ends, work resumes, team disperses). Show you understand professional routines.",
       example:
-        "Overall, the meeting will likely wrap up within the hour, with the team delegating tasks and returning to their individual work — because productive teams move quickly from discussion to action.",
+        "Ultimately, the meeting will likely wrap up within the hour, with the team delegating tasks and returning to their individual work — because productive teams move quickly from discussion to action.",
     },
     responseLabel: "Office Meeting",
     recap:
@@ -467,7 +467,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that the manager will wrap up the meeting soon and begin assigning tasks to the team because clear direction is needed before the deadline. A few colleagues will probably step out to make calls based on what was decided. Meanwhile, the more junior staff might return to their desks to get back to work. Eventually, the whole team will knuckle down on the project once the key decisions have been made.",
     reasoning:
-      "Overall, the meeting will adjourn within the hour and the team will shift from collaborative planning back to individual work, because proficient teams move quickly from discussion to action.",
+      "Ultimately, the meeting will adjourn within the hour and the team will shift from collaborative planning back to individual work, because proficient teams move quickly from discussion to action.",
   },
   {
     n: "6",
@@ -534,7 +534,7 @@ export const SCENARIO_TYPES = [
     closing: {
       hint: "Predict a gentle shift — more customers trickling in, or the space gradually emptying as closing time nears. Avoid dramatic language; the tone should stay soft and natural throughout.",
       example:
-        "Overall, the intimate atmosphere will be maintained as long as the space stays quiet — but once the after-work crowd begins to trickle in, the cosy calm will slowly give way to a livelier, more social energy.",
+        "Ultimately, the intimate atmosphere will be maintained as long as the space stays quiet — but once the after-work crowd begins to trickle in, the cosy calm will slowly give way to a livelier, more social energy.",
     },
     responseLabel: "Cosy Café Interior",
     recap:
@@ -542,7 +542,7 @@ export const SCENARIO_TYPES = [
     predictions:
       "Looking ahead, I predict that more customers will trickle in after work because the afternoon lull is ending, so the café will gradually grow busier. The baristas will probably pick up the pace behind the counter to keep up with the new orders. Meanwhile, some of the current customers who have worked for hours might pack up and leave to make room. Eventually, small groups of friends will settle in for the evening and turn the quiet space into a more social one.",
     reasoning:
-      "Overall, the cosy, intimate atmosphere will give way to something livelier as the evening crowd arrives, because cafés like this naturally shift from a quiet workspace by day to a relaxed social venue by night.",
+      "Ultimately, the cosy, intimate atmosphere will give way to something livelier as the evening crowd arrives, because cafés like this naturally shift from a quiet workspace by day to a relaxed social venue by night.",
   },
 ];
 
@@ -591,7 +591,7 @@ export const PREDICTION_EXAMPLES = [
 ];
 
 export const CLOSING_TEMPLATES = [
-  "Overall, [how the scene will change in an hour], because [a real-world reason — time of day, weather, or human nature].",
+  "Ultimately, [how the scene will change in an hour], because [a real-world reason — time of day, weather, or human nature].",
 ];
 
 export const PREDICTION_TOOLKIT = [
@@ -657,7 +657,7 @@ export const TEMPLATE_PHRASES = [
   "Looking ahead, I predict that",
   "will probably",
   "Eventually,",
-  "Overall,",
+  "Ultimately,",
   "because",
 ];
 
@@ -665,6 +665,8 @@ export const SAMPLE_ANSWERS = [
   {
     accent: "text-gold",
     scenario: "Scenario 1 · Bustling outdoor market",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260611/celpip/bustling_market.png",
     imagePrompt:
       "A vibrant outdoor street market during the day, colourful fruit and vegetable stalls overflowing with fresh produce, vendors in traditional clothing arranging goods, customers browsing and carrying shopping bags, tall buildings in the background, bright natural sunlight, busy and energetic atmosphere, photorealistic, wide-angle shot.",
     recap:
@@ -672,11 +674,13 @@ export const SAMPLE_ANSWERS = [
     predictions:
       "Looking ahead, I predict that in the next 30 minutes the crowd will become even larger because it's the evening shopping rush. The vendors will probably lower some prices to encourage final purchases before closing. Meanwhile, some visitors might start heading home with their full shopping bags. Eventually, the market will become much quieter as the vendors begin to pack up their stalls.",
     reasoning:
-      "Overall, the scene will look quite different in an hour, because markets naturally wind down once it gets dark and people return home for dinner.",
+      "Ultimately, the scene will look quite different in an hour, because markets naturally wind down once it gets dark and people return home for dinner.",
   },
   {
     accent: "text-sapphire",
     scenario: "Scenario 2 · Peaceful beach sunset",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260868/celpip/peaceful_beach_sunset.png",
     imagePrompt:
       "A serene beach at sunset, golden sand in the foreground with a few people walking along the shore, calm blue ocean reflecting warm orange and pink sunset colours, palm trees and small beach huts in the background, scattered clouds in a glowing sky, peaceful and relaxing mood, photorealistic, soft warm lighting.",
     recap:
@@ -684,11 +688,13 @@ export const SAMPLE_ANSWERS = [
     predictions:
       "Looking ahead, I predict that as the sun sets lower the temperature will drop noticeably, and people will probably start gathering their belongings. The swimmers are going to come out of the water soon because it will get too dark to swim safely. Some families might turn on lights or build small fires to keep enjoying the evening. Eventually, the beach will become much quieter as most visitors leave for home.",
     reasoning:
-      "Overall, the atmosphere will shift from relaxed and active to calm and almost empty, because nightfall makes the beach colder and harder to enjoy.",
+      "Ultimately, the atmosphere will shift from relaxed and active to calm and almost empty, because nightfall makes the beach colder and harder to enjoy.",
   },
   {
     accent: "text-emerald2",
     scenario: "Scenario 3 · Cozy café interior",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260912/celpip/cozy_cafe.png",
     imagePrompt:
       "A cozy café interior with warm lighting, several small wooden tables where customers are drinking coffee, reading books, and working on laptops, decorative paintings on the walls, baristas preparing drinks behind a counter, large windows letting in natural light, calm and inviting atmosphere, photorealistic, soft warm tones.",
     recap:
@@ -696,11 +702,13 @@ export const SAMPLE_ANSWERS = [
     predictions:
       "Looking ahead, I predict that later in the evening the atmosphere will change. More people might arrive after finishing work, so the café could become busier than it is now. The staff will probably be getting more coffee ready in preparation for the rush. Some of the current customers are going to leave to make room for new ones. Eventually, the quiet, relaxed mood will shift into something more lively and social.",
     reasoning:
-      "Overall, the café's energy will rise as the day goes on, because cafés tend to fill up once the workday ends and people look for a place to unwind.",
+      "Ultimately, the café's energy will rise as the day goes on, because cafés tend to fill up once the workday ends and people look for a place to unwind.",
   },
   {
     accent: "text-amber2",
     scenario: "Scenario 4 · Mountain landscape",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783260973/celpip/Landscape.png",
     imagePrompt:
       "A scenic mountain landscape, green pine trees and rocks in the foreground, a wide valley with a winding river in the mid-ground, tall snow-capped peaks in the background, clear blue sky with a few white clouds, crisp natural daylight, vast and peaceful atmosphere, photorealistic, wide panoramic shot.",
     recap:
@@ -708,11 +716,13 @@ export const SAMPLE_ANSWERS = [
     predictions:
       "Looking ahead, I predict that the weather in the mountains will change quickly, as it often does at high altitude. Clouds will likely roll in over the peaks, and the temperature is going to drop in the late afternoon. The hikers will probably start descending soon to reach safety before dark. Eventually, the light will fade, and the snow-capped peaks might be hidden behind mist.",
     reasoning:
-      "Overall, the scene will become colder and less visible within a few hours, because mountain weather is unpredictable and daylight disappears fast in the valleys.",
+      "Ultimately, the scene will become colder and less visible within a few hours, because mountain weather is unpredictable and daylight disappears fast in the valleys.",
   },
   {
     accent: "text-rose2",
     scenario: "Scenario 5 · Street festival",
+    imageLink:
+      "https://res.cloudinary.com/dtqxwjmwn/image/upload/v1783261055/celpip/Street_festival.png",
     imagePrompt:
       "A lively street festival or cultural celebration, colourful decorations and banners hanging across the street, large crowds of people celebrating, performers in traditional costumes, food stalls along the sides, bright colours and festive lights, joyful and energetic atmosphere, photorealistic, daytime, wide street view.",
     recap:
@@ -720,7 +730,7 @@ export const SAMPLE_ANSWERS = [
     predictions:
       "Looking ahead, I predict that as the day turns into evening the festival will become even more crowded because more people will arrive after work. The festive lights will be switched on, and the atmosphere is going to feel more dramatic and exciting. The performers will probably move on to bigger shows, while the food stalls might start selling out of popular items. Eventually, families with young children will begin heading home.",
     reasoning:
-      "Overall, the celebration will peak in the evening and then gradually wind down, because festivals naturally build toward a night-time climax before the crowds disperse.",
+      "Ultimately, the celebration will peak in the evening and then gradually wind down, because festivals naturally build toward a night-time climax before the crowds disperse.",
   },
 ];
 
