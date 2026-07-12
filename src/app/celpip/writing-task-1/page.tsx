@@ -12,6 +12,7 @@ import { ScoreCriteria, Blueprint } from "../components/OverviewCards";
 import { TipsPane } from "../components/TipsPane";
 import { VocabPane } from "../components/VocabPane";
 import { Hero } from "../components/Hero";
+import { MistakeFinder } from "../components/MistakeFinder";
 import {
   TABS,
   SCORE_CRITERIA,
@@ -21,6 +22,7 @@ import {
   TEMPLATE_PHRASES,
   TIPS,
   TIP_FILTERS,
+  writing_repsonse_with_mistakes,
 } from "./data";
 
 
@@ -1667,6 +1669,15 @@ export default function CelpipWritingTask1Page() {
             </div>
           </Accordion>
         </div>
+
+        {/* ══════════════════════════════════════════
+             PANE: FIND MY MISTAKES
+        ══════════════════════════════════════════ */}
+<MistakeFinder
+  responses={writing_repsonse_with_mistakes}
+  active={activeTab}
+  blurb="Each email below is a real Task 1 answer with several slips — grammar and formal-tone (register) errors a rater would flag."
+/>
 
         {/* ══════════════════════════════════════════
              PANE: VOCAB BANK

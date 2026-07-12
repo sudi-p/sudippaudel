@@ -4,8 +4,72 @@
 export const TABS = [
   { id: "overview", label: "Overview and Template" },
   { id: "structure", label: "Sample" },
+  { id: "mistakes", label: "Find My Mistakes" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
+];
+
+// Real, imperfect Task 1 email answers. `mistakes` lists what a rater would flag
+// (grammar + formal-register slips). Rendered by the shared MistakeFinder in the
+// "Find My Mistakes" tab: `text` is matched as a sequence of whole words
+// (surrounding punctuation ignored). More responses to be added later.
+export const writing_repsonse_with_mistakes = [
+  {
+    topic: "Complaint email — received the wrong hat order",
+    response:
+      "Dear Support Team, I am writing regarding an incorrect order that I received recently from your store. I ordered a hat from your website last week, but it was not the same item that I received. When I was browsing your website, I came across this red woolen beanie which immediately grabbed my attention. The moment I saw it, I ordered it. I was extremely eager to try it out and looking forward to its delivery. But when I received the item, it was neither the same style nor the same color. Moreover, I realized that the received order didn't even match the original order details. The correct order number is #ONHT354 under the name of Susan Hope; however, the order I received is #ONH534 under the name of Michael. I have attached the invoice and a photograph of the product that I received for your reference. Therefore, I would like to request you to arrange the delivery of the correct product. I would also appreciate if you could tell me the procedure for return of the hat that I mistakenly received. I am hoping to hear from you soon. Thanks,",
+    mistakes: [
+      {
+        text: "this red woolen beanie",
+        correct: "a red woolen beanie",
+        type: "Word Choice",
+        reason:
+          "When introducing something for the first time in formal writing, use 'a', not the conversational 'this': 'I came across a red woolen beanie…'.",
+      },
+      {
+        text: "didn't",
+        correct: "did not",
+        type: "Register – Contraction",
+        reason:
+          "Formal emails avoid contractions. Write it in full: 'the received order did not even match…'.",
+      },
+      {
+        text: "request you to",
+        correct: "request that you / ask you to",
+        type: "Word Choice",
+        reason:
+          "'Request you to' is non-standard. Use 'request that you arrange…' or 'ask you to arrange…'.",
+      },
+      {
+        text: "appreciate if",
+        correct: "appreciate it if",
+        type: "Grammar – Missing object",
+        reason:
+          "'Appreciate' needs the object 'it' before the clause: 'I would also appreciate it if you could tell me…'.",
+      },
+      {
+        text: "procedure for return",
+        correct: "procedure for the return",
+        type: "Article",
+        reason:
+          "'Return' is a specific action here, so it needs 'the': 'the procedure for the return of the hat' (or 'the return procedure').",
+      },
+      {
+        text: "I am hoping to hear",
+        correct: "I look forward to hearing",
+        type: "Register – Closing",
+        reason:
+          "The standard, more polished formal closing is 'I look forward to hearing from you soon.'",
+      },
+      {
+        text: "Thanks",
+        correct: "Sincerely, / Best regards,",
+        type: "Register – Sign-off",
+        reason:
+          "'Thanks' is too casual for a formal complaint to a support team. Close with 'Sincerely,' or 'Best regards,' followed by your name.",
+      },
+    ],
+  },
 ];
 
 export const SCORE_CRITERIA = [
@@ -396,7 +460,11 @@ export const SCENARIOS = [
     ],
     template: [
       ["Dear ", { h: "[Ms. Rodriguez]" }, ","],
-      ["I am writing to express my appreciation for ", { h: "[their help]" }, "."],
+      [
+        "I am writing to express my appreciation for ",
+        { h: "[their help]" },
+        ".",
+      ],
       [{ h: "[What exactly they did]" }],
       ["I am sincerely grateful, as ", { h: "[the difference it made]" }, "."],
       ["I hope ", { h: "[to work together again / future wish]" }, "."],
@@ -447,7 +515,9 @@ export const SCENARIOS = [
       },
       {
         label: "Point 3 → Paragraph 3 (request):",
-        body: ['use-case "Suggestion / resolution" — a constructive recommendation.'],
+        body: [
+          'use-case "Suggestion / resolution" — a constructive recommendation.',
+        ],
       },
       {
         label: "Closing:",
@@ -519,13 +589,25 @@ export const SCENARIOS = [
       },
       {
         label: "Closing:",
-        body: ['offer to help + semi-formal closing sentence + "Best regards,".'],
+        body: [
+          'offer to help + semi-formal closing sentence + "Best regards,".',
+        ],
       },
     ],
     template: [
       ["Dear ", { h: "[Mr. Bennett / Chairperson]" }, ","],
-      ["I am writing to suggest ", { h: "[two activities + supply ideas]" }, "."],
-      ["Firstly, ", { h: "[activity 1]" }, ". Secondly, ", { h: "[activity 2]" }, "."],
+      [
+        "I am writing to suggest ",
+        { h: "[two activities + supply ideas]" },
+        ".",
+      ],
+      [
+        "Firstly, ",
+        { h: "[activity 1]" },
+        ". Secondly, ",
+        { h: "[activity 2]" },
+        ".",
+      ],
       [
         "I believe these would benefit ",
         { h: "[young people and families]" },

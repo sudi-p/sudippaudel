@@ -100,32 +100,35 @@ const MistakeCard = ({ head, wrong, right, why }) => (
 /* ───────────────────────── reference data ───────────────────────── */
 
 const INT_SCALE = [
-  { word: "barely", bg: "#eff6ff", border: "#bfdbfe", color: "#1d4ed8" },
   { word: "slightly", bg: "#eff6ff", border: "#bfdbfe", color: "#1d4ed8" },
-  { word: "a little", bg: "#f0f9ff", border: "#bae6fd", color: "#0369a1" },
-  { word: "somewhat", bg: "#f0f9ff", border: "#bae6fd", color: "#0369a1" },
-  { word: "fairly", bg: "#f5f3ff", border: "#ddd6fe", color: "#4f46e5" },
-  { word: "rather", bg: "#f5f3ff", border: "#ddd6fe", color: "#4f46e5" },
-  { word: "quite", bg: "#ede9fe", border: "#c4b5fd", color: "#4f46e5" },
-  { word: "pretty", bg: "#ede9fe", border: "#c4b5fd", color: "#4f46e5" },
-  { word: "very", bg: "#e0e7ff", border: "#a5b4fc", color: "#3730a3" },
-  { word: "really", bg: "#e0e7ff", border: "#a5b4fc", color: "#3730a3" },
-  { word: "highly", bg: "#ddd6fe", border: "#8b5cf6", color: "#3730a3" },
+  { word: "fairly", bg: "#f0f9ff", border: "#bae6fd", color: "#0369a1" },
+  { word: "quite", bg: "#f5f3ff", border: "#ddd6fe", color: "#4f46e5" },
+  { word: "very", bg: "#ede9fe", border: "#c4b5fd", color: "#4f46e5" },
+  { word: "highly", bg: "#e0e7ff", border: "#a5b4fc", color: "#3730a3" },
   { word: "extremely", bg: "#ddd6fe", border: "#8b5cf6", color: "#3730a3" },
   { word: "incredibly", bg: "#c4b5fd", border: "#7c3aed", color: "#fff" },
-  { word: "remarkably", bg: "#c4b5fd", border: "#7c3aed", color: "#fff" },
-  { word: "absolutely", bg: "#7c3aed", border: "#6d28d9", color: "#fff" },
-  { word: "utterly", bg: "#4f46e5", border: "#3730a3", color: "#fff" },
-  { word: "completely", bg: "#3730a3", border: "#312e81", color: "#fff" },
+  { word: "firmly", bg: "#7c3aed", border: "#6d28d9", color: "#fff" },
+  { word: "completely", bg: "#4f46e5", border: "#3730a3", color: "#fff" },
+  { word: "absolutely", bg: "#3730a3", border: "#312e81", color: "#fff" },
 ];
 
 const INT_TYPES = [
-  { head: "🔊 Amplifiers — increase intensity", headClass: "bg-indigo-600 text-white", words: [["very", "The exam was <em>very</em> challenging."], ["extremely", "It was <em>extremely</em> cold that morning."], ["highly", "She is <em>highly</em> motivated."], ["deeply", "I was <em>deeply</em> moved by the story."], ["remarkably", "The results were <em>remarkably</em> consistent."], ["incredibly", "The view was <em>incredibly</em> breathtaking."], ["exceptionally", "She was <em>exceptionally</em> well-prepared."]] },
-  { head: "🔝 Maximizers — signal the absolute limit", headClass: "bg-violet-600 text-white", note: 'Used with extreme (non-gradable) adjectives only. Never with "very."', words: [["absolutely", "It was <em>absolutely</em> perfect."], ["completely", "I was <em>completely</em> exhausted."], ["utterly", "The plan was <em>utterly</em> flawed."], ["totally", "She was <em>totally</em> unprepared."], ["purely", "It was <em>purely</em> coincidental."], ["entirely", "That is <em>entirely</em> unacceptable."]] },
-  { head: "🔉 Downtoners — reduce intensity", headClass: "bg-cyan-600 text-white", words: [["slightly", "The result was <em>slightly</em> disappointing."], ["somewhat", "I was <em>somewhat</em> surprised."], ["a little", "It was <em>a little</em> overwhelming at first."], ["barely", "The room was <em>barely</em> adequate."], ["hardly", "It was <em>hardly</em> noticeable."], ["mildly", "She seemed <em>mildly</em> concerned."]] },
-  { head: "〰️ Approximators — express nearness to a degree", headClass: "bg-teal-700 text-white", words: [["almost", "It was <em>almost</em> impossible to focus."], ["nearly", "The task was <em>nearly</em> complete."], ["practically", "It was <em>practically</em> invisible."], ["virtually", "The area was <em>virtually</em> deserted."], ["essentially", "The two plans are <em>essentially</em> identical."]] },
-  { head: "⚡ Boosters — formal / academic amplifiers", headClass: "bg-amber-700 text-white", note: "Use these in CELPIP Writing Task 2 to sound formal and precise.", words: [["significantly", "Costs have become <em>significantly</em> higher."], ["considerably", "Option A is <em>considerably</em> more efficient."], ["substantially", "Risks are <em>substantially</em> reduced."], ["notably", "The outcome was <em>notably</em> different."], ["overwhelmingly", "The response was <em>overwhelmingly</em> positive."], ["undeniably", "This is <em>undeniably</em> the better approach."]] },
-  { head: "🌫️ Diminishers — polite / hedged weakeners", headClass: "bg-slate-600 text-white", note: "Use in Task 6 (difficult situation) to sound diplomatic, not aggressive.", words: [["fairly", "The response was <em>fairly</em> reasonable."], ["rather", "I found it <em>rather</em> inconvenient."], ["quite", "The delay was <em>quite</em> unexpected."], ["pretty", "That was <em>pretty</em> difficult to handle."], ["moderately", "I was <em>moderately</em> satisfied with the result."]] },
+  { head: "🔉 Downtoners — soften your point", headClass: "bg-cyan-600 text-white", note: "Great for Task 6 (difficult situation) — they keep a complaint polite, not aggressive.", words: [["slightly", "The apartment was <em>slightly</em> smaller than the listing showed."], ["fairly", "The neighbourhood is <em>fairly</em> quiet and safe."]] },
+  { head: "🎚️ Moderate — a balanced, natural strength", headClass: "bg-violet-600 text-white", words: [["quite", "The training session was <em>quite</em> helpful."], ["very", "The staff were <em>very</em> friendly and professional."]] },
+  { head: "🔊 Amplifiers — strengthen your point", headClass: "bg-indigo-600 text-white", note: 'All three work in speaking; "highly / extremely" also suit formal Writing Task 2.', words: [["highly", "I would <em>highly</em> recommend this restaurant."], ["extremely", "The deadline was <em>extremely</em> tight."], ["incredibly", "The view from the trail was <em>incredibly</em> beautiful."]] },
+  { head: "💪 Conviction booster — state opinions with force", headClass: "bg-rose-600 text-white", note: "Modifies verbs of belief (believe, oppose, support). Perfect for opinion tasks.", words: [["firmly", "I <em>firmly</em> believe remote work benefits everyone."]] },
+  { head: "🔝 Maximizers — the absolute limit", headClass: "bg-amber-700 text-white", note: 'Use only with extreme (non-gradable) adjectives. Never say "very" with these.', words: [["completely", "By the end of the shift I was <em>completely</em> exhausted."], ["absolutely", "The dinner they cooked was <em>absolutely</em> delicious."]] },
+];
+
+/* how the 10 intensifiers strengthen specific CELPIP tasks */
+const TASK_USES = [
+  { icon: "💡", head: "Speaking Task 1 — Giving Advice", how: "Make your recommendation land with authority.", ex: 'I would <em>highly</em> recommend booking early — it’s <em>quite</em> affordable that way.' },
+  { icon: "🗣️", head: "Speaking Task 2 — Personal Experience", how: "Add emotion and vividness to your story.", ex: 'It was <em>incredibly</em> memorable, and by the end I was <em>absolutely</em> thrilled.' },
+  { icon: "🔮", head: "Speaking Task 4 — Making Predictions", how: "Show conviction about what will happen.", ex: 'I <em>firmly</em> believe attendance will be <em>extremely</em> high this year.' },
+  { icon: "🤝", head: "Speaking Task 6 — Difficult Situation", how: "Soften a complaint so you sound diplomatic, not aggressive.", ex: 'I was <em>slightly</em> concerned, and the wait was <em>quite</em> long. (not “absolutely furious”)' },
+  { icon: "🖼️", head: "Speaking Task 8 — Unusual Scene", how: "Paint a vivid picture with strong description.", ex: 'The room looks <em>extremely</em> crowded and the decorations are <em>incredibly</em> colourful.' },
+  { icon: "✉️", head: "Writing Task 1 — Email", how: "Match intensity to your reader and purpose.", ex: 'I would be <em>very</em> grateful for a refund; the delay was <em>quite</em> inconvenient.' },
+  { icon: "📝", head: "Writing Task 2 — Survey / Opinion Essay", how: "State your position formally and forcefully.", ex: 'I <em>firmly</em> believe this option is <em>highly</em> effective and <em>extremely</em> beneficial.' },
 ];
 
 const GRAD_BOXES = [
@@ -133,45 +136,48 @@ const GRAD_BOXES = [
     boxClass: "bg-violet-100 border border-violet-300",
     titleColor: "text-indigo-600",
     title: "🎚️ Gradable adjectives",
-    sub: "Use: very, extremely, fairly, quite, rather, slightly, somewhat, incredibly…",
-    rows: ["<em>very tired</em> / <em>extremely busy</em>", "<em>fairly cold</em> / <em>quite expensive</em>", "<em>slightly nervous</em> / <em>rather unusual</em>", "<em>incredibly fast</em> / <em>remarkably calm</em>"],
+    sub: "Use: slightly, fairly, quite, very, highly, extremely, incredibly…",
+    rows: ["<em>very friendly</em> / <em>extremely busy</em>", "<em>fairly quiet</em> / <em>quite expensive</em>", "<em>slightly late</em> / <em>highly recommended</em>", "<em>incredibly helpful</em> / <em>firmly convinced</em>"],
   },
   {
     boxClass: "bg-fuchsia-50 border border-purple-200",
     titleColor: "text-violet-700",
     title: "🔝 Non-gradable (extreme) adjectives",
-    sub: 'Use: absolutely, completely, utterly, totally, entirely, purely — NEVER "very"',
-    rows: ['<em>absolutely furious</em> ✅ / <em style="color:#dc2626">very furious</em> ❌', '<em>completely exhausted</em> ✅ / <em style="color:#dc2626">very exhausted</em> ❌', '<em>utterly devastated</em> ✅ / <em style="color:#dc2626">very devastated</em> ❌', '<em>totally frozen</em> ✅ / <em style="color:#dc2626">very frozen</em> ❌'],
+    sub: 'Use: completely, absolutely (the maximizers) — NEVER "very"',
+    rows: ['<em>completely exhausted</em> ✅ / <em style="color:#dc2626">very exhausted</em> ❌', '<em>absolutely delicious</em> ✅ / <em style="color:#dc2626">very delicious</em> ❌', '<em>absolutely freezing</em> ✅ / <em style="color:#dc2626">very freezing</em> ❌', '<em>completely certain</em> ✅ / <em style="color:#dc2626">very certain</em> ❌'],
   },
 ];
 
 const INT_COLLOCATIONS = [
-  ["<strong>deeply</strong>", "<em>concerned, moved, troubled, rooted, committed, disappointed, grateful</em>", 'deeply tall, deeply cold <span style="color:#dc2626">(physical adjectives)</span>'],
-  ["<strong>highly</strong>", "<em>skilled, motivated, recommended, competitive, effective, regarded, trained</em>", 'highly hot, highly tired <span style="color:#dc2626">(emotion/sensation adjectives)</span>'],
-  ["<strong>bitterly</strong>", "<em>cold, disappointed, divided, resentful, ironic, contested</em>", "bitterly happy, bitterly large"],
-  ["<strong>perfectly</strong>", "<em>clear, normal, reasonable, capable, valid, understandable, acceptable</em>", "perfectly angry, perfectly difficult"],
-  ["<strong>terribly</strong>", "<em>sorry, wrong, important, difficult, upset, worried, embarrassed</em>", "terribly tall, terribly fast"],
-  ["<strong>strongly</strong>", "<em>opposed, committed, influenced, built, worded, suggested, held</em>", "strongly tired, strongly cold"],
-  ["<strong>considerably</strong>", "<em>more/less + adj, larger, smaller, faster, older, cheaper, better</em>", "considerably furious, considerably afraid"],
-  ["<strong>genuinely</strong>", "<em>surprised, concerned, impressed, happy, confused, thankful, interested</em>", "genuinely enormous, genuinely freezing"],
+  ["<strong>slightly</strong>", "<em>late, different, smaller, higher, better, delayed</em>", 'slightly perfect, slightly exhausted <span style="color:#dc2626">(extreme adjectives)</span>'],
+  ["<strong>fairly</strong>", "<em>common, easy, reliable, quiet, affordable, straightforward</em>", "fairly exhausted, fairly furious"],
+  ["<strong>quite</strong>", "<em>helpful, expensive, popular, difficult, impressive, busy</em>", "quite perfect, quite freezing"],
+  ["<strong>very</strong>", "<em>friendly, useful, important, busy, professional, clear</em>", 'very exhausted, very freezing <span style="color:#dc2626">(extreme adjectives)</span>'],
+  ["<strong>highly</strong>", "<em>recommend, effective, skilled, likely, motivated, regarded</em>", 'highly cold, highly tired <span style="color:#dc2626">(sensation adjectives)</span>'],
+  ["<strong>extremely</strong>", "<em>important, tight (deadline), rare, helpful, competitive, useful</em>", "extremely perfect, extremely unique"],
+  ["<strong>incredibly</strong>", "<em>beautiful, generous, convenient, grateful, talented, kind</em>", "keeps its impact — don't overuse it"],
+  ["<strong>firmly</strong>", "<em>believe, oppose, support, convinced, committed, established</em>", 'firmly cold, firmly delicious <span style="color:#dc2626">(everyday adjectives)</span>'],
+  ["<strong>completely</strong>", "<em>exhausted, different, certain, unaware, satisfied, understandable</em>", 'completely good, completely important <span style="color:#dc2626">(gradable adjectives)</span>'],
+  ["<strong>absolutely</strong>", "<em>exhausted, delicious, certain, freezing, perfect, essential</em>", 'absolutely good, absolutely nice <span style="color:#dc2626">(gradable adjectives)</span>'],
 ];
 
 const INT_TIPS = [
-  { icon: "🔁", body: '<strong>Never repeat "very" twice in a row.</strong> Rotate through the scale. ❌ "It was very, very good." → ✅ "It was remarkably good" or "It was exceptionally well done."' },
-  { icon: "🎯", body: '<strong>Match intensifier strength to context.</strong> In Task 6 (complaints), use downtoners to sound polite: <em>"I was rather disappointed"</em> not <em>"I was absolutely furious"</em> — even if you are.' },
-  { icon: "📝", body: '<strong>In Writing Task 2, prefer formal boosters.</strong> Replace <em>"very different"</em> with <em>"considerably different"</em> or <em>"notably distinct."</em> Informal intensifiers like <em>"pretty"</em> or <em>"really"</em> lower your register score in essays.' },
-  { icon: "🎙️", body: '<strong>In Speaking, stress the intensifier — not the adjective.</strong> Native speakers say <em>"abSOlutely perfect"</em> and <em>"inCREDibly helpful."</em> This stress pattern signals fluency to the examiner.' },
-  { icon: "🧊", body: '<strong>Never use "very" before an extreme adjective.</strong> ❌ "very starving / very freezing / very furious" → ✅ "absolutely starving / utterly freezing / completely furious." This is the single most common intensifier error on CELPIP.' },
-  { icon: "🤝", body: '<strong>Learn collocations as chunks.</strong> Don\'t build intensifier + adjective pairs from scratch — memorise natural chunks: <em>deeply committed, highly skilled, bitterly cold, perfectly reasonable, strongly opposed, terribly sorry.</em>' },
+  { icon: "🔁", body: '<strong>Never repeat "very" in a row.</strong> Rotate through the scale. ❌ "very good, very helpful, very nice" → ✅ "highly effective, extremely useful, incredibly kind." Range lifts your Vocabulary score.' },
+  { icon: "🎯", body: '<strong>In Task 6, use downtoners to stay polite.</strong> Say <em>"I was slightly disappointed"</em> rather than <em>"I was absolutely furious"</em> — even if you are. Diplomacy scores higher than raw emotion.' },
+  { icon: "💪", body: '<strong>Use "firmly" to state opinions.</strong> In Writing Task 2 and Speaking Tasks 2 & 4, <em>"I firmly believe…"</em> sounds far more confident than <em>"I think."</em> It modifies your verb of belief, not an adjective.' },
+  { icon: "📝", body: '<strong>Watch register in Writing Task 2.</strong> Prefer <em>very, extremely, highly</em> in essays. Casual boosters like <em>"pretty"</em> or <em>"really"</em> lower your register — swap <em>"really good results"</em> for <em>"extremely positive results."</em>' },
+  { icon: "🎙️", body: '<strong>In Speaking, stress the intensifier — not the adjective.</strong> Native speakers say <em>"abSOlutely delicious"</em> and <em>"inCREDibly helpful."</em> This stress pattern signals fluency to the examiner.' },
+  { icon: "🧊", body: '<strong>Never use "very" before an extreme adjective.</strong> ❌ "very exhausted / very freezing / very delicious" → ✅ "absolutely exhausted / absolutely freezing / absolutely delicious." This is the most common intensifier error on CELPIP.' },
+  { icon: "🤝", body: '<strong>Learn collocations as chunks.</strong> Memorise natural pairs instead of building them word by word: <em>highly recommend, absolutely exhausted, extremely important, firmly believe, fairly quiet.</em>' },
 ];
 
 const INT_MISTAKES = [
-  { head: '⚠️ "very" with a non-gradable adjective', wrong: '"The soup was very boiling."', right: '"The soup was absolutely boiling."', why: "Boiling is extreme — it has no degrees. Use a maximizer." },
-  { head: "⚠️ Formal intensifier in casual speech", wrong: '"The pizza was substantially delicious."', right: '"The pizza was incredibly delicious."', why: '"Substantially" is for formal comparisons, not everyday compliments.' },
-  { head: "⚠️ Casual intensifier in formal writing", wrong: '"The policy is pretty controversial."', right: '"The policy is considerably controversial."', why: '"Pretty" is too informal for CELPIP Writing Task 2 essays.' },
-  { head: "⚠️ Wrong collocation", wrong: '"She was deeply tall." / "He was highly angry."', right: '"She was remarkably tall." / "He was deeply angry."', why: "Intensifiers collocate selectively — learn them as fixed pairs." },
-  { head: "⚠️ Repeating the same intensifier", wrong: '"It was very busy, very loud, and very tiring."', right: '"It was incredibly busy, remarkably loud, and utterly tiring."', why: "Repetition signals a limited vocabulary range — the examiner notices." },
+  { head: '⚠️ "very" with an extreme adjective', wrong: '"I was very exhausted after work."', right: '"I was absolutely exhausted after work."', why: "Exhausted is extreme — it has no degrees. Use the maximizer absolutely." },
   { head: '⚠️ "absolutely" with a gradable adjective', wrong: '"It was absolutely cold outside."', right: '"It was extremely cold" / "absolutely freezing."', why: '"Cold" is gradable — save "absolutely" for the extreme form "freezing."' },
+  { head: "⚠️ Wrong collocation with “highly”", wrong: '"I was highly tired." ', right: '"I was extremely tired." / "She is highly skilled."', why: '"Highly" pairs with skill and likelihood, not physical sensations.' },
+  { head: "⚠️ Casual intensifier in formal writing", wrong: '"The survey results were really good."', right: '"The survey results were extremely positive."', why: '"Really" is too informal for a CELPIP Writing Task 2 essay.' },
+  { head: "⚠️ Repeating the same intensifier", wrong: '"It was very busy, very loud, and very tiring."', right: '"It was extremely busy, incredibly loud, and completely exhausting."', why: "Repetition signals a limited vocabulary range — the examiner notices." },
+  { head: "⚠️ Downtoner where you mean a compliment", wrong: '"The food was slightly delicious."', right: '"The food was absolutely delicious."', why: '"Slightly" weakens praise — it sounds like a hidden complaint.' },
 ];
 
 /* ───────────────────────────── reference panel ───────────────────────────── */
@@ -181,7 +187,7 @@ function ReferencePanel() {
     <div>
       <Section
         title="Intensifiers — Make Your Adjectives More Powerful"
-        intro='An <strong>intensifier</strong> is a word placed before an adjective (or adverb) to <em>strengthen or weaken</em> its meaning. Native speakers rely on intensifiers constantly to add nuance and emotion. In CELPIP, using varied intensifiers instead of repeating <em>"very"</em> is one of the fastest ways to improve your <strong>Vocabulary</strong> and <strong>Listenability</strong> scores.'
+        intro='An <strong>intensifier</strong> is a word placed before an adjective, adverb, or verb to <em>strengthen or weaken</em> its meaning. This page focuses on the <strong>10 highest-value intensifiers for CELPIP</strong> — master these instead of overusing <em>"very,"</em> and you will lift your <strong>Vocabulary</strong> and <strong>Listenability</strong> scores in both Speaking and Writing.'
       >
         <SubTitle>The Intensity Scale</SubTitle>
         <div className="mb-6">
@@ -204,7 +210,7 @@ function ReferencePanel() {
           </div>
         </div>
 
-        <SubTitle>6 Types of Intensifiers</SubTitle>
+        <SubTitle>The 10 Intensifiers, Grouped by Strength</SubTitle>
         <div className={`${CARD_GRID} mb-6`}>
           {INT_TYPES.map((c, i) => (
             <div key={i} className="bg-white border border-gray-200 rounded-[14px] overflow-hidden">
@@ -224,6 +230,26 @@ function ReferencePanel() {
                     />
                   </div>
                 ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <SubTitle>Strengthening Specific CELPIP Tasks</SubTitle>
+        <p className="text-[13px] text-slate-600 leading-relaxed mb-3.5 max-w-[720px]">
+          The same intensifier does different work depending on the task. Here is how to deploy
+          these 10 words to make each Speaking and Writing response stronger.
+        </p>
+        <div className={`${CARD_GRID} mb-6`}>
+          {TASK_USES.map((t, i) => (
+            <div key={i} className="bg-white border border-gray-200 rounded-[14px] overflow-hidden flex flex-col">
+              <div className="px-4 py-2.5 text-[13px] font-extrabold text-gray-900 bg-gray-50 border-b border-gray-100 flex items-center gap-2">
+                <span className="text-base">{t.icon}</span>
+                {t.head}
+              </div>
+              <div className="px-5 py-4 flex flex-col gap-2.5">
+                <div className="text-[12.5px] text-slate-600 leading-relaxed">{t.how}</div>
+                <Ex html={`“${t.ex}”`} />
               </div>
             </div>
           ))}
@@ -265,7 +291,7 @@ function ReferencePanel() {
           />
         </div>
 
-        <SubTitle>How to Use Intensifiers Naturally — 6 Rules</SubTitle>
+        <SubTitle>How to Use Intensifiers Naturally</SubTitle>
         <div className="grid gap-[0.85rem] [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))] max-[600px]:grid-cols-1 mb-6">
           {INT_TIPS.map((t, i) => (
             <Tip key={i} {...t} />
@@ -300,10 +326,10 @@ const inputStateCls = (mk) =>
 /* ───────────────────────────── intensifiers quiz ───────────────────────────── */
 
 const AINT_GROUPS = [
-  { key: "downtoners", icon: "🔉", label: "Downtoners", sub: "weakest end", headBg: "#e0f2fe", headColor: "#0369a1", head: "🔉 Downtoners — weakest end of the scale", pointer: "12%", color: "#0369a1", scaleText: "🔉 Downtoners — weakest end", btnIn: "border-sky-200", btnAc: "bg-sky-100 text-sky-800 border-sky-700", items: [{ num: "1 — weakest", answer: "barely" }, { num: "2", answer: "slightly" }, { num: "3", answer: "a little" }, { num: "4", answer: "somewhat" }] },
-  { key: "midrange", icon: "🎚️", label: "Mid-range", sub: "moderately strong", headBg: "#ede9fe", headColor: "#4f46e5", head: "🎚️ Mid-range — moderately strong", pointer: "37%", color: "#4f46e5", scaleText: "🎚️ Mid-range — moderately strong", btnIn: "border-violet-300", btnAc: "bg-violet-100 text-indigo-600 border-indigo-600", items: [{ num: "5", answer: "fairly" }, { num: "6", answer: "rather" }, { num: "7", answer: "quite" }, { num: "8", answer: "pretty" }] },
-  { key: "amplifiers", icon: "🔊", label: "Amplifiers", sub: "strong", headBg: "#e0e7ff", headColor: "#3730a3", head: "🔊 Amplifiers — strong", pointer: "63%", color: "#3730a3", scaleText: "🔊 Amplifiers — strong", btnIn: "border-indigo-300", btnAc: "bg-indigo-100 text-indigo-800 border-indigo-800", items: [{ num: "9", answer: "very" }, { num: "10", answer: "really" }, { num: "11", answer: "highly" }, { num: "12", answer: "extremely" }] },
-  { key: "maximizers", icon: "🔝", label: "Maximizers", sub: "strongest / absolute", headBg: "#ddd6fe", headColor: "#4c1d95", head: "🔝 Maximizers — strongest / absolute", pointer: "88%", color: "#4c1d95", scaleText: "🔝 Maximizers — strongest / absolute", btnIn: "border-violet-200", btnAc: "bg-violet-200 text-violet-900 border-violet-900", items: [{ num: "13", answer: "incredibly" }, { num: "14", answer: "remarkably" }, { num: "15", answer: "absolutely" }, { num: "16", answer: "utterly" }, { num: "17 — strongest", answer: "completely" }] },
+  { key: "downtoners", icon: "🔉", label: "Downtoners", sub: "weakest end", headBg: "#e0f2fe", headColor: "#0369a1", head: "🔉 Downtoners — weakest end of the scale", pointer: "12%", color: "#0369a1", scaleText: "🔉 Downtoners — weakest end", btnIn: "border-sky-200", btnAc: "bg-sky-100 text-sky-800 border-sky-700", items: [{ num: "1 — weakest", answer: "slightly" }, { num: "2", answer: "fairly" }] },
+  { key: "midrange", icon: "🎚️", label: "Mid-range", sub: "moderately strong", headBg: "#ede9fe", headColor: "#4f46e5", head: "🎚️ Mid-range — moderately strong", pointer: "37%", color: "#4f46e5", scaleText: "🎚️ Mid-range — moderately strong", btnIn: "border-violet-300", btnAc: "bg-violet-100 text-indigo-600 border-indigo-600", items: [{ num: "3", answer: "quite" }, { num: "4", answer: "very" }] },
+  { key: "amplifiers", icon: "🔊", label: "Amplifiers", sub: "strong", headBg: "#e0e7ff", headColor: "#3730a3", head: "🔊 Amplifiers — strong", pointer: "63%", color: "#3730a3", scaleText: "🔊 Amplifiers — strong", btnIn: "border-indigo-300", btnAc: "bg-indigo-100 text-indigo-800 border-indigo-800", items: [{ num: "5", answer: "highly" }, { num: "6", answer: "extremely" }, { num: "7", answer: "incredibly" }] },
+  { key: "maximizers", icon: "🔝", label: "Strongest", sub: "boosters / absolute", headBg: "#ddd6fe", headColor: "#4c1d95", head: "🔝 Strongest — boosters & maximizers", pointer: "88%", color: "#4c1d95", scaleText: "🔝 Strongest — boosters & maximizers", btnIn: "border-violet-200", btnAc: "bg-violet-200 text-violet-900 border-violet-900", items: [{ num: "8", answer: "firmly" }, { num: "9", answer: "completely" }, { num: "10 — strongest", answer: "absolutely" }] },
 ];
 
 const AINT_ANSWERS = [];

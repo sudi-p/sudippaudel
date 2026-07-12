@@ -4,8 +4,229 @@
 export const TABS = [
   { id: "overview", label: "Overview and Template" },
   { id: "structure", label: "Sample" },
+  { id: "mistakes", label: "Find My Mistakes" },
   { id: "vocab", label: "Vocab Bank" },
   { id: "tips", label: "Pro Tips" },
+];
+
+// Each response below is a real, imperfect Task 2 answer. `mistakes` lists the
+// errors a rater would flag. In the "Find My Mistakes" tab the learner clicks a
+// word: if it belongs to a flagged phrase we reveal the correction + reason,
+// otherwise we confirm "No mistake". `text` is matched against the response as a
+// sequence of whole words (surrounding punctuation ignored), so every listed
+// occurrence of a genuinely repeated error is caught.
+export const writing_repsonse_with_mistakes = [
+  {
+    topic: "Keeping the free company cafeteria vs. a $150 gift card",
+    response:
+      "It is great that the company is surveying before making any decision regarding the lunch benefit. I strongly believe that employee should continue getting the access to free company cafeteria. Firstly, with the current setup employees are getting high-quality food in the office without the hassle of travelling to get the food as there are no restaurants nearby. If this option is removed, people will have to spend more than half of their break time commuting or might bring food from home. People genuinely appreciate the office lunch benefit and will be grateful if the company continue doing so. Additionally, it will be a financial strain to the staff if they have to get food from restaurant everyday as the food are expensive in the restaurants. Admittedly, a $150 gift card upfront looks amazing. However, this is next to nothing if we have to order food from restaurant everyday. This will lead to reduction in motivation, productivity and efficiency eventually affecting the company’s output. In conclusion, for the productivity and keeping up the motivation of all staff, I strongly believe that company should continue the office lunch benefit.",
+    mistakes: [
+      {
+        text: "employee",
+        correct: "employees",
+        type: "Number",
+        reason:
+          "When you mean staff in general, use the plural 'employees'. A singular 'employee' would need an article (e.g. 'an employee').",
+      },
+      {
+        text: "the access",
+        correct: "access",
+        type: "Article",
+        reason:
+          "'Access' is an uncountable noun here, so it does not take 'the': '…continue getting access to the free company cafeteria.'",
+      },
+      {
+        text: "company continue",
+        correct: "company continues",
+        type: "Subject–Verb Agreement",
+        reason:
+          "'The company' is third-person singular, so the present-tense verb needs -s: 'if the company continues doing so'.",
+      },
+      {
+        text: "restaurant",
+        correct: "a restaurant / restaurants",
+        type: "Article",
+        reason:
+          "'Restaurant' is a singular countable noun and needs an article: 'from a restaurant' — or make it plural: 'from restaurants'. (Both times it appears.)",
+      },
+      {
+        text: "everyday",
+        correct: "every day",
+        type: "Word Form",
+        reason:
+          "'Everyday' (one word) is an adjective meaning 'ordinary'. To mean 'each day' use two words: 'every day'. (Both times it appears.)",
+      },
+      {
+        text: "food are",
+        correct: "food is",
+        type: "Subject–Verb Agreement",
+        reason:
+          "'Food' is an uncountable noun and takes a singular verb: 'the food is expensive in the restaurants'.",
+      },
+      {
+        text: "that company should",
+        correct: "that the company should",
+        type: "Article",
+        reason:
+          "You are referring to one specific company, so it needs the article: 'that the company should continue…'.",
+      },
+    ],
+  },
+  {
+    topic: "Building a picnic area vs. a basketball court on empty land",
+    response:
+      "It is great that the landlord is planning to utilize the empty space and considering options that are benefitial to the residents. I strongly believe that a picnic area should be created on that space. First of all, picnic area would provide a space to the tenants to hangout during their leisure time. Specifically, it will be a common area for residents to communicate with each other and for special occasions like get together and meetings. As a result, it will bring the residents together and increases the bonding among each other. Admittedly, a basketball court would be useful to exercise for physically active members. However, a picnic area could be utilized by all age groups i.e. from children to elderly people. Thus, the idea of a space that can benefit majority of the people makes this option more appealing. In conclusion, I think building a picnic area on the empty space makes more sense because it offers benefits like improved relationship among the community members and an intiative that promotes inclusiveness.",
+    mistakes: [
+      {
+        text: "benefitial",
+        correct: "beneficial",
+        type: "Spelling",
+        reason: "Misspelling — the correct spelling is 'beneficial'.",
+      },
+      {
+        text: "picnic area would",
+        correct: "a picnic area would",
+        type: "Article",
+        reason:
+          "A singular countable noun needs an article: 'a picnic area would provide…'.",
+      },
+      {
+        text: "hangout",
+        correct: "hang out",
+        type: "Word Form",
+        reason:
+          "'Hangout' (one word) is a noun. The verb is two words: 'a space… to hang out'.",
+      },
+      {
+        text: "get together",
+        correct: "get-togethers",
+        type: "Word Form",
+        reason:
+          "As a noun for social gatherings, use the hyphenated (and here plural) form: 'occasions like get-togethers and meetings'.",
+      },
+      {
+        text: "increases",
+        correct: "increase",
+        type: "Parallel Structure",
+        reason:
+          "This verb shares the earlier 'will': 'it will bring the residents together and increase…'. After 'will', use the base form 'increase'.",
+      },
+      {
+        text: "the bonding",
+        correct: "bonding",
+        type: "Article",
+        reason:
+          "'Bonding' is uncountable here, so drop 'the': '…and increase bonding among…'.",
+      },
+      {
+        text: "benefit majority",
+        correct: "benefit the majority",
+        type: "Article",
+        reason: "'The majority of' requires the article: 'benefit the majority of the people'.",
+      },
+      {
+        text: "improved relationship",
+        correct: "improved relationships",
+        type: "Number",
+        reason:
+          "Multiple community members means multiple relationships — use the plural 'relationships'.",
+      },
+      {
+        text: "intiative",
+        correct: "initiative",
+        type: "Spelling",
+        reason: "Misspelling — the correct spelling is 'initiative'.",
+      },
+    ],
+  },
+  {
+    topic: "Fixed nine-to-five hours vs. flexible working hours",
+    response:
+      "After carefully considering both alternatives, in my view, a fixed nine-to-five hours is a better option for a more practical, consistent, and clear routine. Firstly, having a fixed schedule creates a fair sense of responsibility for employees, which is crucial in improving productivity. Since everyone works during the same hours, employees have equal opportunities to complete their daily tasks and meet deadlines. As a result, projects can be completed on time. Although introducing a flexible hour might give time to handle personal commitments, it could be difficult to attend meetings and collaborate with teammates. Whereas a standard work hour encourages discipline and consistency in the office. When employees follow a routine, they are more likely to stay focused on their responsibilities and develop productive work habits. In conclusion, I firmly support maintaining fixed nine-to-five working hours because they promote fairness, improve teamwork, and encourage greater productivity.",
+    mistakes: [
+      {
+        text: "a fixed nine-to-five hours",
+        correct: "a fixed nine-to-five schedule",
+        type: "Agreement",
+        reason:
+          "'A' is singular but 'hours' is plural, so they clash. Use a singular noun ('a fixed nine-to-five schedule') or drop the article ('fixed nine-to-five hours are…').",
+      },
+      {
+        text: "a flexible hour",
+        correct: "flexible hours",
+        type: "Number",
+        reason:
+          "The concept is 'flexible hours' (plural). 'A flexible hour' sounds like a single hour.",
+      },
+      {
+        text: "Whereas",
+        correct: "In contrast,",
+        type: "Sentence Fragment",
+        reason:
+          "'Whereas' is a subordinating conjunction, so starting a stand-alone sentence with it creates a fragment. Use 'In contrast,' or join it to the previous sentence with a comma.",
+      },
+      {
+        text: "a standard work hour",
+        correct: "standard working hours",
+        type: "Number",
+        reason:
+          "Refer to the schedule in the plural: 'standard working hours encourage discipline…'.",
+      },
+    ],
+  },
+  {
+    topic: "Assigning specific days per language vs. mixing them naturally",
+    response:
+      "I strongly believe that we should specify days for each language as it provides a proper way to motivate children to learn both languages. First of all, I am a true believer of needing a clear structure when it comes to learning new things. Specifically, if we have a clear idea and roadmap of how to teach our children learn both languages, they are going to learn it faster and remain enthusiastic. Having certain days for each language provides that structure to the children. If everyone from the family speaks a language, every child will be interested in speaking the same language. Admittedly, we should mix the languages naturally as it would match the daily conversations; however, this will confuse the children and they might be inclined towards a specific language and ignore the other one completly. Similar thing happened with John's children as they only speak english and don't know how to speak in french at all. He is worried that his children are not interested in the background he comes from. In conclusion, allocating days for each language looks more appealing to me since it provides a structure and maintains the enthusiasm for both languages.",
+    mistakes: [
+      {
+        text: "believer of",
+        correct: "believer in",
+        type: "Preposition",
+        reason:
+          "The fixed collocation is 'a believer in': 'I am a true believer in needing a clear structure…'.",
+      },
+      {
+        text: "children learn",
+        correct: "children to learn",
+        type: "Infinitive",
+        reason:
+          "After 'teach someone', use the infinitive: 'teach our children to learn both languages' (or simply 'teach our children both languages').",
+      },
+      {
+        text: "learn it",
+        correct: "learn them",
+        type: "Pronoun Agreement",
+        reason:
+          "The pronoun refers to 'both languages' (plural), so use 'them': 'they are going to learn them faster'.",
+      },
+      {
+        text: "completly",
+        correct: "completely",
+        type: "Spelling",
+        reason: "Misspelling — the correct spelling is 'completely'.",
+      },
+      {
+        text: "Similar thing",
+        correct: "A similar thing",
+        type: "Article",
+        reason:
+          "This singular countable noun phrase needs an article: 'A similar thing happened with John's children.'",
+      },
+      {
+        text: "english",
+        correct: "English",
+        type: "Capitalization",
+        reason: "Names of languages are proper nouns and must be capitalized: 'English'.",
+      },
+      {
+        text: "french",
+        correct: "French",
+        type: "Capitalization",
+        reason: "Names of languages are proper nouns and must be capitalized: 'French'.",
+      },
+    ],
+  },
 ];
 
 export const SCORE_CRITERIA = [
@@ -108,8 +329,7 @@ export const SCORE_BANDS = [
         "Organization is weak or absent. Difficult to follow. No clear paragraph structure.",
       Vocabulary:
         "Very basic vocabulary. Not academic in register. Heavy repetition.",
-      Grammar:
-        "Frequent and serious errors. Meaning is sometimes unclear.",
+      Grammar: "Frequent and serious errors. Meaning is sometimes unclear.",
     },
   },
 ];
@@ -131,23 +351,41 @@ export const ESSAYS = [
   {
     title: "Essay 1 — Remote vs. Office Work",
     template: [
-      { badge: "Intro", badgeClass: "bg-sapphire-light text-sapphire-dark", text: "Position: remote work is the superior choice for companies and staff." },
-      { badge: "Reason 1", badgeClass: "bg-emerald2-light text-emerald2-dark", text: "It significantly boosts productivity." },
-      { badge: "Reason 2 + concession", badgeClass: "bg-amber2-light text-amber2-dark", text: "It improves well-being — concede office collaboration, but modern tools replace it." },
-      { badge: "Conclusion", badgeClass: "bg-violet2-light text-violet2-dark", text: "Restate and urge companies to embrace the flexible model." },
+      {
+        badge: "Intro",
+        badgeClass: "bg-sapphire-light text-sapphire-dark",
+        text: "Position: remote work is the superior choice for companies and staff.",
+      },
+      {
+        badge: "Reason 1",
+        badgeClass: "bg-emerald2-light text-emerald2-dark",
+        text: "It significantly boosts productivity.",
+      },
+      {
+        badge: "Reason 2 + concession",
+        badgeClass: "bg-amber2-light text-amber2-dark",
+        text: "It improves well-being — concede office collaboration, but modern tools replace it.",
+      },
+      {
+        badge: "Conclusion",
+        badgeClass: "bg-violet2-light text-violet2-dark",
+        text: "Restate and urge companies to embrace the flexible model.",
+      },
     ],
     ideas: [
       {
         title: "Reason 1 — Productivity",
         who: "Employees & companies",
         what: "Sharper focus and higher efficiency",
-        detail: "No commute or distractions → faster, more accurate work and less turnover",
+        detail:
+          "No commute or distractions → faster, more accurate work and less turnover",
       },
       {
         title: "Reason 2 — Well-being",
         who: "Employees & their families",
         what: "Better work-life balance, less burnout",
-        detail: "Autonomy builds loyalty; video tools replace office collaboration without commuting",
+        detail:
+          "Autonomy builds loyalty; video tools replace office collaboration without commuting",
       },
     ],
     essay: [
@@ -160,23 +398,41 @@ export const ESSAYS = [
   {
     title: "Essay 2 — University vs. Practical Training",
     template: [
-      { badge: "Intro", badgeClass: "bg-sapphire-light text-sapphire-dark", text: "Position: practical training is more valuable in today's job market." },
-      { badge: "Reason 1", badgeClass: "bg-emerald2-light text-emerald2-dark", text: "It gives immediately applicable, job-ready skills." },
-      { badge: "Reason 2 + concession", badgeClass: "bg-amber2-light text-amber2-dark", text: "It is far more affordable — concede university's breadth, but it is costly with no job guarantee." },
-      { badge: "Conclusion", badgeClass: "bg-violet2-light text-violet2-dark", text: "Restate; it is the smarter choice for most students." },
+      {
+        badge: "Intro",
+        badgeClass: "bg-sapphire-light text-sapphire-dark",
+        text: "Position: practical training is more valuable in today's job market.",
+      },
+      {
+        badge: "Reason 1",
+        badgeClass: "bg-emerald2-light text-emerald2-dark",
+        text: "It gives immediately applicable, job-ready skills.",
+      },
+      {
+        badge: "Reason 2 + concession",
+        badgeClass: "bg-amber2-light text-amber2-dark",
+        text: "It is far more affordable — concede university's breadth, but it is costly with no job guarantee.",
+      },
+      {
+        badge: "Conclusion",
+        badgeClass: "bg-violet2-light text-violet2-dark",
+        text: "Restate; it is the smarter choice for most students.",
+      },
     ],
     ideas: [
       {
         title: "Reason 1 — Job-ready skills",
         who: "Graduates & employers",
         what: "Faster employment and earnings",
-        detail: "Contribute from day one → faster promotions and stronger long-term earnings",
+        detail:
+          "Contribute from day one → faster promotions and stronger long-term earnings",
       },
       {
         title: "Reason 2 — Affordability",
         who: "Students & their families",
         what: "Less debt, greater financial security",
-        detail: "Far cheaper than tuition; degrees cost years of time and money with no guaranteed job",
+        detail:
+          "Far cheaper than tuition; degrees cost years of time and money with no guaranteed job",
       },
     ],
     essay: [
@@ -189,23 +445,41 @@ export const ESSAYS = [
   {
     title: "Essay 3 — Company Uniforms",
     template: [
-      { badge: "Intro", badgeClass: "bg-sapphire-light text-sapphire-dark", text: "Position: introducing company uniforms is a good idea." },
-      { badge: "Reason 1", badgeClass: "bg-emerald2-light text-emerald2-dark", text: "They project professionalism and a cohesive image." },
-      { badge: "Reason 2 + concession", badgeClass: "bg-amber2-light text-amber2-dark", text: "They foster equality and team spirit — concede personal expression, but unity and convenience win." },
-      { badge: "Conclusion", badgeClass: "bg-violet2-light text-violet2-dark", text: "Restate; uniforms are a practical investment." },
+      {
+        badge: "Intro",
+        badgeClass: "bg-sapphire-light text-sapphire-dark",
+        text: "Position: introducing company uniforms is a good idea.",
+      },
+      {
+        badge: "Reason 1",
+        badgeClass: "bg-emerald2-light text-emerald2-dark",
+        text: "They project professionalism and a cohesive image.",
+      },
+      {
+        badge: "Reason 2 + concession",
+        badgeClass: "bg-amber2-light text-amber2-dark",
+        text: "They foster equality and team spirit — concede personal expression, but unity and convenience win.",
+      },
+      {
+        badge: "Conclusion",
+        badgeClass: "bg-violet2-light text-violet2-dark",
+        text: "Restate; uniforms are a practical investment.",
+      },
     ],
     ideas: [
       {
         title: "Reason 1 — Professional image",
         who: "Clients/customers & the company",
         what: "Stronger reputation and sales",
-        detail: "Clients instantly recognise staff and trust a coordinated, competent team",
+        detail:
+          "Clients instantly recognise staff and trust a coordinated, competent team",
       },
       {
         title: "Reason 2 — Equality & team spirit",
         who: "Employees & colleagues",
         what: "Inclusive, focused environment and higher morale",
-        detail: "No fashion comparisons; also saves staff time and money every morning",
+        detail:
+          "No fashion comparisons; also saves staff time and money every morning",
       },
     ],
     essay: [
@@ -218,23 +492,41 @@ export const ESSAYS = [
   {
     title: "Essay 4 — Public Swimming Pool vs. Community Garden",
     template: [
-      { badge: "Intro", badgeClass: "bg-sapphire-light text-sapphire-dark", text: "Position: a community garden is the better investment than a pool." },
-      { badge: "Reason 1", badgeClass: "bg-emerald2-light text-emerald2-dark", text: "It serves every resident year-round." },
-      { badge: "Reason 2 + concession", badgeClass: "bg-amber2-light text-amber2-dark", text: "It strengthens community bonds — concede a pool's exercise value, but pools are costly and seasonal." },
-      { badge: "Conclusion", badgeClass: "bg-violet2-light text-violet2-dark", text: "Restate; the garden is the wiser long-term choice." },
+      {
+        badge: "Intro",
+        badgeClass: "bg-sapphire-light text-sapphire-dark",
+        text: "Position: a community garden is the better investment than a pool.",
+      },
+      {
+        badge: "Reason 1",
+        badgeClass: "bg-emerald2-light text-emerald2-dark",
+        text: "It serves every resident year-round.",
+      },
+      {
+        badge: "Reason 2 + concession",
+        badgeClass: "bg-amber2-light text-amber2-dark",
+        text: "It strengthens community bonds — concede a pool's exercise value, but pools are costly and seasonal.",
+      },
+      {
+        badge: "Conclusion",
+        badgeClass: "bg-violet2-light text-violet2-dark",
+        text: "Restate; the garden is the wiser long-term choice.",
+      },
     ],
     ideas: [
       {
         title: "Reason 1 — Inclusivity",
         who: "All residents — elderly, children, non-swimmers",
         what: "Public money benefits the whole community",
-        detail: "Fresh produce and gentle activity year-round, not just for swimmers",
+        detail:
+          "Fresh produce and gentle activity year-round, not just for swimmers",
       },
       {
         title: "Reason 2 — Community bonds",
         who: "Diverse neighbours across the area",
         what: "Stronger social cohesion and food security",
-        detail: "Shared cultivation unites residents; the garden runs continuously, unlike a seasonal pool",
+        detail:
+          "Shared cultivation unites residents; the garden runs continuously, unlike a seasonal pool",
       },
     ],
     essay: [
