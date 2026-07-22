@@ -9,6 +9,7 @@ export const GRAMMAR_TABS = [
   { id: "conjunctions", label: "Conjunctions" },
   { id: "prepositions", label: "Prepositions" },
   { id: "positional-relations", label: "Positional Relations" },
+  { id: "body-positions", label: "Body Positions" },
   { id: "phonetics", label: "Phonetics" },
   { id: "voice", label: "Active & Passive" },
 ];
