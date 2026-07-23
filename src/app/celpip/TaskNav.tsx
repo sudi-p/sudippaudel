@@ -7,6 +7,7 @@ const SPEAKING = [
   { n: 1, label: "Advice" },
   { n: 2, label: "Personal Experience" },
   { n: 3, label: "Describe Image" },
+  { n: "3+4", label: "Image + Predict", href: "/celpip/speaking-task-3-4" },
   { n: 4, label: "Predictions" },
   { n: 5, label: "Compare & Persuade" },
   { n: 6, label: "Difficult Situation" },
@@ -54,7 +55,7 @@ export default function TaskNav() {
           Speaking
         </span>
         {SPEAKING.map((t) => {
-          const href = `/celpip/speaking-task-${t.n}`;
+          const href = t.href ?? `/celpip/speaking-task-${t.n}`;
           return (
             <Pill key={t.n} href={href} active={pathname === href}>
               {t.n}. {t.label}
