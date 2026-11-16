@@ -348,3 +348,25 @@
 .nb-root .counter.ok { color: var(--good); }
 .nb-root .bigq { display: grid; gap: 8px; }
 @media (prefers-reduced-motion: no-preference) { .nb-root { scroll-behavior: smooth; } }
+/* System design interviews */
+.nb-root .sd-topics { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.nb-root .sd-topic { text-align: left; font: inherit; color: inherit; cursor: pointer; display: block; width: 100%; transition: border-color .15s, transform .15s; }
+.nb-root .sd-topic:hover { border-color: var(--model); transform: translateY(-1px); }
+.nb-root .sd-topic[aria-pressed="true"] { border-color: var(--model); box-shadow: 0 0 0 2px var(--model-bg); }
+.nb-root .sd-topic .tag { --c: var(--model); --cbg: var(--model-bg); }
+.nb-root .sd-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; margin-top: 28px; }
+.nb-root .sd-head .eyebrow { flex-basis: 100%; margin: 0 0 -6px; }
+.nb-root .sd-head h2 { margin: 0; }
+.nb-root .sd-sub { margin: 8px 0 0; }
+.nb-root .sd-toc { margin-top: 14px; }
+.nb-root .sd-secs { display: grid; gap: 14px; margin-top: 14px; }
+.nb-root .sd-sec { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; min-width: 0; scroll-margin-top: 64px; }
+.nb-root .sd-sec-title { font-size: 20px; margin: 0 0 10px; }
+.nb-root .sd-sec h3:not(.sd-sec-title) { margin-top: 16px; }
+.nb-root .sd-h4 { font-family: var(--display); font-size: 15px; margin: 14px 0 6px; }
+.nb-root .sd-p { margin: 8px 0; line-height: 1.6; max-width: 80ch; }
+.nb-root .sd-list { margin: 8px 0; padding-left: 22px; line-height: 1.6; max-width: 80ch; }
+.nb-root .sd-list li { margin: 4px 0; }
+.nb-root .sd-sec code { font-size: 0.9em; background: var(--surface2); border-radius: 4px; padding: 1px 5px; }
+.nb-root .sd-sec pre.code code { background: none; padding: 0; font-size: inherit; }
+.nb-root .sd-sec table { min-width: 560px; }

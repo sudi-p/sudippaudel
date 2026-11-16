@@ -4,6 +4,8 @@
 // JS that renders into #tabs / #view, so it is started from a client effect in
 // page.tsx and torn down on unmount.
 
+import { SD_TOPICS } from "./system-design";
+
 export function startNotebook(rootEl: HTMLElement) {
 /* ---------- Tabs ---------- */
 var TABS = [
@@ -21,6 +23,7 @@ var TABS = [
     palmer: ["L1 unit tests have no LLM. L2 suites boot a Temporal server and run the real entry flow.",
              "Mock mode routes the model deterministically. Real-LLM mode costs about two cents a test.",
              "MORSE_EVAL_DEBUG_MOCK=1 traces the mock's routing decisions."] },
+  { id: "system-design", label: "System design interviews", status: "ready" },
   { id: "durable-execution", label: "Durable execution", status: "ready",
     blurb: "Running long conversations reliably when processes restart and calls fail.",
     palmer: ["Flows must be deterministic. Nodes do the I/O and run as retryable activities.",
@@ -4284,6 +4287,87 @@ function initDurable() {
   document.getElementById("fileList").innerHTML = filesHtml(DUR_FILES);
 }
 
+/* ---------- System design interviews ---------- */
+var sdState = { topic: -1, view: "answer" };
+function sdInline(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/\*([^*]+)\*/g, "<i>$1</i>");
+}
+function sdBlock(b) {
+  if (b.t === "h3") return "<h3>" + sdInline(b.x) + "</h3>";
+  if (b.t === "h4") return '<h4 class="sd-h4">' + sdInline(b.x) + "</h4>";
+  if (b.t === "h2") return "<h3>" + sdInline(b.x) + "</h3>";
+  if (b.t === "p") return '<p class="sd-p">' + sdInline(b.x) + "</p>";
+  if (b.t === "ul" || b.t === "ol") return "<" + b.t + ' class="sd-list">' + b.x.map(function (i) { return "<li>" + sdInline(i) + "</li>"; }).join("") + "</" + b.t + ">";
+  if (b.t === "table") {
+    return '<div class="tbl-wrap"><table><thead><tr>' + b.head.map(function (h) { return "<th>" + sdInline(h) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      b.rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + sdInline(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+  }
+  if (b.t === "code") return '<pre class="code"><code>' + esc(b.x) + "</code></pre>";
+  return "";
+}
+// Split blocks into boxes. A lone leading h2 is the page title, so box on h3 then.
+function sdSections(blocks) {
+  var h2s = blocks.filter(function (b) { return b.t === "h2"; }).length;
+  var lone = h2s === 1 && blocks[0] && blocks[0].t === "h2";
+  var level = lone ? "h3" : "h2";
+  var out = [], cur = null, title = lone ? blocks[0].x : null;
+  blocks.forEach(function (b, i) {
+    if (lone && i === 0) return;
+    if (b.t === level) { cur = { title: b.x, body: [] }; out.push(cur); return; }
+    if (!cur) { cur = { title: null, body: [] }; out.push(cur); }
+    cur.body.push(b);
+  });
+  return { title: title, sections: out };
+}
+function sdBody() {
+  var t = SD_TOPICS[sdState.topic];
+  if (!t) return '<div class="callout"><b>Pick a topic above.</b> Each box opens the interview question guide and the full worked answer.</div>';
+  var blocks = sdState.view === "question" ? t.question : t.answer;
+  var parts = sdSections(blocks);
+  var chips = parts.sections.map(function (s, i) {
+    return s.title ? '<button type="button" data-sd-jump="' + i + '">' + sdInline(s.title) + "</button>" : "";
+  }).join("");
+  return '<div class="sd-head"><div class="eyebrow">' + esc(t.tag) + "</div><h2>" + esc(t.title) + "</h2>" +
+    '<div class="seg" role="group" aria-label="View">' +
+    '<button type="button" data-sd-view="question" aria-pressed="' + (sdState.view === "question") + '">Question</button>' +
+    '<button type="button" data-sd-view="answer" aria-pressed="' + (sdState.view === "answer") + '">Answer</button></div></div>' +
+    (parts.title ? '<p class="muted sd-sub">' + sdInline(parts.title) + "</p>" : "") +
+    '<div class="toc sd-toc">' + chips + "</div>" +
+    '<div class="sd-secs">' + parts.sections.map(function (s, i) {
+      return '<section class="sd-sec" id="sd-sec-' + i + '">' + (s.title ? "<h3 class=\"sd-sec-title\">" + sdInline(s.title) + "</h3>" : "") + s.body.map(sdBlock).join("") + "</section>";
+    }).join("") + "</div>";
+}
+function sdPage() {
+  return '<div class="eyebrow">AI engineering / ' + String(TABS.indexOf(TABS.filter(function (t) { return t.id === "system-design"; })[0]) + 1).padStart(2, "0") + "</div>" +
+    "<h1>System design interviews</h1>" +
+    '<p class="lede">Six AI-engineer system design questions, each with the interviewer guide (Question) and a full worked solution (Answer): requirements, capacity math, architecture, deep dives, bottlenecks and tradeoffs.</p>' +
+    '<div class="grid sd-topics">' + SD_TOPICS.map(function (t, i) {
+      return '<button type="button" class="card sd-topic" data-sd-topic="' + i + '" aria-pressed="' + (i === sdState.topic) + '"><span class="tag">' + esc(t.tag) + "</span><h3>" + esc(t.title) + "</h3><p>" + esc(t.blurb) + "</p></button>";
+    }).join("") + "</div>" + '<div id="sdBody">' + sdBody() + "</div>";
+}
+function initSd() {
+  var view = document.getElementById("view");
+  view.onclick = function (e) {
+    var el = e.target.closest ? e.target.closest("[data-sd-topic],[data-sd-view],[data-sd-jump]") : null;
+    if (!el) return;
+    if (el.hasAttribute("data-sd-topic")) {
+      sdState.topic = +el.getAttribute("data-sd-topic");
+      Array.prototype.forEach.call(view.querySelectorAll("[data-sd-topic]"), function (b) { b.setAttribute("aria-pressed", String(b === el)); });
+      document.getElementById("sdBody").innerHTML = sdBody();
+      document.getElementById("sdBody").scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (el.hasAttribute("data-sd-view")) {
+      sdState.view = el.getAttribute("data-sd-view");
+      document.getElementById("sdBody").innerHTML = sdBody();
+    } else {
+      var target = document.getElementById("sd-sec-" + el.getAttribute("data-sd-jump"));
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+}
+
 /* ---------- Routing ---------- */
 function renderTabs(active) {
   document.getElementById("tabs").innerHTML = TABS.map(function (t) {
@@ -4302,6 +4386,7 @@ function route() {
   var tab = TABS.filter(function (t) { return t.id === id; })[0] || TABS[0];
   renderTabs(tab.id);
   var view = document.getElementById("view");
+  view.onclick = null;
   if (tab.id === "tool-calling") {
     view.innerHTML = toolCallingPage();
     seqState.sc = 0; seqState.step = 0;
@@ -4327,6 +4412,9 @@ function route() {
   } else if (tab.id === "evals") {
     view.innerHTML = evalsPage();
     initEvals(); initQuiz(EV_QUIZ, "aien.evals.score"); initToc();
+  } else if (tab.id === "system-design") {
+    view.innerHTML = sdPage();
+    initSd();
   } else if (tab.id === "durable-execution") {
     view.innerHTML = durablePage();
     initDurable(); initQuiz(DUR_QUIZ, "aien.durable.score"); initToc();
