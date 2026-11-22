@@ -217,13 +217,12 @@ export function startTracker(root: HTMLElement) {
   // ---- private "my timeline" section (data comes from the password-checked API) ----
   // Community medians over everyone, so I can see where I am against typical times.
   const allStats = Object.fromEntries(SPANS.map((s) => [s.key, summarize(people.map((p) => p[s.key]))]));
-  // Estimates use only applicants like me: CEC, general (or no category given), Inland.
-  const peers = people.filter(
-    (p) =>
-      p.stream === "CEC" &&
-      (!p.category || p.category.toLowerCase() === "general") &&
-      (p.inland_outland || "").toLowerCase().startsWith("inland")
-  );
+  // Estimates use only CEC applicants with no category or "general", inland or outland.
+  // For outland applicants PPR is the same step as P1 for inland, so PPR fills in a missing P1.
+  const asP1 = (p) => (p.p1_date || !p.ppr_date ? p : { ...p, p1_date: p.ppr_date });
+  const peers = people
+    .filter((p) => p.stream === "CEC" && (!p.category || p.category.toLowerCase() === "general"))
+    .map((p) => enrich(asP1(p)));
   const peerStats = Object.fromEntries(SPANS.map((s) => [s.key, summarize(peers.map((p) => p[s.key]))]));
   const addDays = (d, n) => new Date(new Date(d + "T00:00:00").getTime() + n * DAY).toISOString().slice(0, 10);
   const fmtDur = (n) => {
@@ -250,8 +249,9 @@ export function startTracker(root: HTMLElement) {
         st ? `community median ${st.median}d · n=${st.n}` : "");
     }).join("");
 
-    // What's next: estimate dates from CEC general Inland medians, starting from my latest reached milestone.
-    const next = ["fd_date", "p1_date", "ecopr_date"].filter((k) => !me[k]).map((k) => {
+    // What's next: estimate dates from CEC general medians, starting from my latest reached milestone.
+    const reached = asP1(me);
+    const next = ["fd_date", "p1_date", "ecopr_date"].filter((k) => !reached[k]).map((k) => {
       const base = ["bil_date", "aor_date"].find((b) => fullDate(me[b]) && peerStats[`${b}>${k}`]);
       const st = base && peerStats[`${base}>${k}`];
       if (!st) return "";
@@ -273,8 +273,8 @@ export function startTracker(root: HTMLElement) {
       `</div>` +
       `<h3>Time between steps</h3><div class="grid">${gaps}</div>` +
       `<h3>Time since each step</h3><div class="grid">${since}</div>` +
-      `<h3>Rough estimates (CEC general · Inland medians, ${peers.length} applicants)</h3>` +
-      (next ? `<div class="grid">${next}</div>` : `<p class="muted">Not enough CEC general Inland data yet.</p>`);
+      `<h3>Rough estimates (CEC general medians, inland + outland, PPR counted as P1, ${peers.length} applicants)</h3>` +
+      (next ? `<div class="grid">${next}</div>` : `<p class="muted">Not enough CEC general data yet.</p>`);
   }
 
   const onToggle = () => {
