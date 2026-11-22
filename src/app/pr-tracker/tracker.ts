@@ -40,9 +40,12 @@ const COLUMNS = [
   { key: "program", label: "Program" },
   { key: "inland_outland", label: "In/Out" },
   { key: "stage", label: "Stage" },
+  // AOR and BIL dates sit up front, next to "Days since AOR", so they aren't repeated below.
+  { key: "aor_date", label: "AOR", date: true },
+  { key: "bil_date", label: "BIL", date: true },
   { key: "waiting", label: "Days since AOR", span: true },
   ...SPANS.filter((s) => s.table).map((s) => ({ key: s.key, label: s.label, span: true })),
-  ...MILESTONES.map(([key, label]) => ({ key, label, date: true })),
+  ...MILESTONES.filter(([key]) => key !== "aor_date" && key !== "bil_date").map(([key, label]) => ({ key, label, date: true })),
   { key: "eligibility", label: "Eligibility" },
   { key: "background_check", label: "Background" },
   { key: "pvo_svo", label: "PVO/SVO" },
@@ -56,6 +59,19 @@ const fullDate = (d) => typeof d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d);
 const days = (a, b) => (fullDate(a) && fullDate(b) ? Math.round((new Date(b) - new Date(a)) / DAY) : null);
 const prettyDate = (d) =>
   fullDate(d) ? new Date(d + "T00:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) : d;
+
+// "2026-08-09" -> "9 Aug 2026", "2026-08" -> "Aug 2026". Fixed English month names so
+// every browser shows the same thing. Anything else is returned unchanged.
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const dayMonYear = (d) => {
+  const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(d || "");
+  if (!m) return d;
+  const mon = MONTHS[Number(m[2]) - 1];
+  return m[3] ? `${Number(m[3])} ${mon} ${m[1]}` : `${mon} ${m[1]}`;
+};
+
+// CEC with no category given, or category "general".
+const isCecGeneral = (p) => p.stream === "CEC" && (!p.category || p.category.toLowerCase() === "general");
 
 function summarize(values) {
   const v = values.filter((x) => x != null && x >= 0).sort((a, b) => a - b);
@@ -136,8 +152,30 @@ export function startTracker(root: HTMLElement) {
         `<small>longest ${waitSt.max}d · n=${waitSt.n}</small></div>`
       : "";
 
+    // The 5 latest AOR dates among CEC general applicants who already got FD or P1
+    // (PPR counts as P1 for outland).
+    const dateCell = (d) => (d ? `<td class="date">${esc(dayMonYear(d))}</td>` : `<td class="na">—</td>`);
+    const recent = list
+      .filter(isCecGeneral)
+      .filter((p) => fullDate(p.aor_date) && (p.fd_date || p.p1_date || p.ppr_date))
+      .sort((a, b) => b.aor_date.localeCompare(a.aor_date))
+      .slice(0, 5);
+    const recentTable = recent.length
+      ? `<div class="table-wrap"><table><thead><tr>` +
+        `<th>User</th><th>AOR</th><th>BIL</th><th>FD</th><th>P1 / PPR</th><th class="span-col">BIL → FD</th>` +
+        `</tr></thead><tbody>` +
+        recent.map((p) => {
+          const gap = days(p.bil_date, p.fd_date);
+          return `<tr><td>u/${esc(p.username)}</td>${dateCell(p.aor_date)}${dateCell(p.bil_date)}` +
+            `${dateCell(p.fd_date)}${dateCell(p.p1_date || p.ppr_date)}` +
+            (gap != null ? `<td class="num">${gap}d</td>` : `<td class="na">—</td>`) + `</tr>`;
+        }).join("") +
+        `</tbody></table></div>`
+      : `<p class="muted">Nobody in this view has FD or P1 yet.</p>`;
+
     $("stats").innerHTML =
       `<h2>Overview</h2><div class="grid">${counts}</div>` +
+      `<h2>Latest CEC general AORs with FD or P1</h2>${recentTable}` +
       `<h2>Processing times</h2><div class="grid">${spans}${waiting}</div>`;
   }
 
@@ -176,7 +214,8 @@ export function startTracker(root: HTMLElement) {
     if (c.key === "stage") return `<td><span class="badge ${v === "eCOPR" || v === "PR card" ? "final" : ""}">${esc(v)}</span></td>`;
     if (v == null || v === "") return `<td class="na">—</td>`;
     if (c.span) return `<td class="num${c.key === "waiting" ? " wait" : ""}">${v}d</td>`;
-    if (c.date) return `<td class="date">${esc(v)}</td>`;
+    // Shown as "9 Aug 2026"; sorting still uses the raw YYYY-MM-DD value.
+    if (c.date) return `<td class="date">${esc(dayMonYear(v))}</td>`;
     return `<td>${esc(v)}</td>`;
   }
 
@@ -221,7 +260,7 @@ export function startTracker(root: HTMLElement) {
   // For outland applicants PPR is the same step as P1 for inland, so PPR fills in a missing P1.
   const asP1 = (p) => (p.p1_date || !p.ppr_date ? p : { ...p, p1_date: p.ppr_date });
   const peers = people
-    .filter((p) => p.stream === "CEC" && (!p.category || p.category.toLowerCase() === "general"))
+    .filter(isCecGeneral)
     .map((p) => enrich(asP1(p)));
   const peerStats = Object.fromEntries(SPANS.map((s) => [s.key, summarize(peers.map((p) => p[s.key]))]));
   const addDays = (d, n) => new Date(new Date(d + "T00:00:00").getTime() + n * DAY).toISOString().slice(0, 10);
