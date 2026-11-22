@@ -214,6 +214,105 @@ export function startTracker(root: HTMLElement) {
       .join("");
   }
 
+  // ---- private "my timeline" section (data comes from the password-checked API) ----
+  // Community medians over everyone, so I can see where I am against typical times.
+  const allStats = Object.fromEntries(SPANS.map((s) => [s.key, summarize(people.map((p) => p[s.key]))]));
+  // Estimates use only applicants like me: CEC, general (or no category given), Inland.
+  const peers = people.filter(
+    (p) =>
+      p.stream === "CEC" &&
+      (!p.category || p.category.toLowerCase() === "general") &&
+      (p.inland_outland || "").toLowerCase().startsWith("inland")
+  );
+  const peerStats = Object.fromEntries(SPANS.map((s) => [s.key, summarize(peers.map((p) => p[s.key]))]));
+  const addDays = (d, n) => new Date(new Date(d + "T00:00:00").getTime() + n * DAY).toISOString().slice(0, 10);
+  const fmtDur = (n) => {
+    if (n == null) return "–";
+    const w = Math.floor(n / 7), r = n % 7;
+    return `${n}d` + (n >= 7 ? ` <em>(${w}w${r ? ` ${r}d` : ""})</em>` : "");
+  };
+
+  function renderMine(me) {
+    const steps = MILESTONES.filter(([k]) => fullDate(me[k])).map(([k, label]) => ({ k, label, date: me[k] }));
+    if (!steps.length) return `<p class="muted">No dates saved yet.</p>`;
+    const first = steps[0], last = steps[steps.length - 1];
+    const tile = (big, label, small = "") =>
+      `<div class="stat"><b>${big}</b><span>${label}</span>${small ? `<small>${small}</small>` : ""}</div>`;
+
+    // Days since each milestone.
+    const since = steps.map((s) => tile(fmtDur(days(s.date, TODAY)), `since ${s.label}`, esc(prettyDate(s.date)))).join("");
+
+    // Gap between each consecutive milestone, compared with the community median when we track that span.
+    const gaps = steps.slice(1).map((s, i) => {
+      const prev = steps[i];
+      const st = allStats[`${prev.k}>${s.k}`];
+      return tile(fmtDur(days(prev.date, s.date)), `${prev.label} → ${s.label}`,
+        st ? `community median ${st.median}d · n=${st.n}` : "");
+    }).join("");
+
+    // What's next: estimate dates from CEC general Inland medians, starting from my latest reached milestone.
+    const next = ["fd_date", "p1_date", "ecopr_date"].filter((k) => !me[k]).map((k) => {
+      const base = ["bil_date", "aor_date"].find((b) => fullDate(me[b]) && peerStats[`${b}>${k}`]);
+      const st = base && peerStats[`${base}>${k}`];
+      if (!st) return "";
+      const eta = addDays(me[base], st.median);
+      const left = days(TODAY, eta);
+      return tile(esc(prettyDate(eta)), `estimated ${LABEL[k]}`,
+        `${LABEL[base]} + median ${st.median}d (n=${st.n}) · ${left >= 0 ? `${left}d to go` : `${-left}d past median`}`);
+    }).join("");
+
+    return `<h2>My timeline</h2>` +
+      `<div class="journey">` + steps.map((s, i) =>
+        (i ? `<span class="gap">${days(steps[i - 1].date, s.date)}d</span>` : "") +
+        `<span class="step"><b>${s.label}</b>${esc(s.date)}</span>`).join("") +
+      `<span class="gap">${days(last.date, TODAY)}d</span><span class="step today"><b>Today</b>${TODAY}</span></div>` +
+      `<div class="grid">` +
+      tile(fmtDur(days(first.date, TODAY)), `total since ${first.label}`) +
+      (first.k !== "aor_date" && fullDate(me.aor_date) ? tile(fmtDur(days(me.aor_date, TODAY)), "total since AOR") : "") +
+      tile(esc(last.label), "latest step", `${days(last.date, TODAY)}d ago`) +
+      `</div>` +
+      `<h3>Time between steps</h3><div class="grid">${gaps}</div>` +
+      `<h3>Time since each step</h3><div class="grid">${since}</div>` +
+      `<h3>Rough estimates (CEC general · Inland medians, ${peers.length} applicants)</h3>` +
+      (next ? `<div class="grid">${next}</div>` : `<p class="muted">Not enough CEC general Inland data yet.</p>`);
+  }
+
+  const onToggle = () => {
+    const fields = $("unlock-fields");
+    if (!$("mine").hidden) {
+      // Lock again: hide and forget the data.
+      $("mine").hidden = true;
+      $("mine").innerHTML = "";
+      $("unlock-toggle").textContent = "🔒 My timeline";
+      return;
+    }
+    fields.hidden = !fields.hidden;
+    if (!fields.hidden) $("unlock-pw").focus();
+  };
+  const onUnlock = async (e) => {
+    e.preventDefault();
+    const pw = $("unlock-pw").value;
+    if (!pw) return;
+    $("unlock-msg").textContent = "Checking…";
+    try {
+      const res = await fetch("/api/pr-tracker/me", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error || `Error ${res.status}`);
+      $("mine").innerHTML = renderMine(body.timeline || {});
+      $("mine").hidden = false;
+      $("unlock-fields").hidden = true;
+      $("unlock-pw").value = "";
+      $("unlock-msg").textContent = "";
+      $("unlock-toggle").textContent = "🔓 Hide my timeline";
+    } catch (err) {
+      $("unlock-msg").textContent = err.message;
+    }
+  };
+
   // ---- initial render ----
   $("thread-info").innerHTML =
     (lastProcessed ? `<span class="updated">Data last processed: <b>${esc(prettyDate(lastProcessed))}</b></span> ` : "") +
@@ -249,8 +348,12 @@ export function startTracker(root: HTMLElement) {
   $("head").addEventListener("click", onHead);
   $("rows").addEventListener("click", onRows);
   inputs.forEach((el) => el.addEventListener("input", render));
+  $("unlock-toggle").addEventListener("click", onToggle);
+  $("unlock-form").addEventListener("submit", onUnlock);
 
   return function cleanup() {
+    $("unlock-toggle")?.removeEventListener("click", onToggle);
+    $("unlock-form")?.removeEventListener("submit", onUnlock);
     $("head")?.removeEventListener("click", onHead);
     $("rows")?.removeEventListener("click", onRows);
     inputs.forEach((el) => el?.removeEventListener("input", render));

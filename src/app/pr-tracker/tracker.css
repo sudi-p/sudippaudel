@@ -113,3 +113,26 @@
   padding: 24px; text-align: center; color: var(--muted);
 }
 .prt-root .empty code { background: var(--olive-soft); padding: 1px 5px; border-radius: 4px; }
+
+/* Private "my timeline" section */
+.prt-root .mine { margin: 0 0 24px; }
+.prt-root .unlock { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.prt-root .unlock span[data-el="unlock-fields"]:not([hidden]) { display: inline-flex; gap: 8px; }
+.prt-root .unlock button, .prt-root .unlock input {
+  font: inherit; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text);
+}
+.prt-root .unlock button { cursor: pointer; border-color: var(--olive); color: var(--olive); font-weight: 500; }
+.prt-root .unlock button[type="submit"] { background: var(--olive); color: #fff; }
+.prt-root .unlock-msg { color: var(--brown); font-size: 13px; }
+.prt-root [data-el="mine"] {
+  margin-top: 12px; padding: 4px 16px 16px; background: var(--card);
+  border: 1px solid var(--olive); border-radius: 10px;
+}
+.prt-root [data-el="mine"] h2 { font: 600 17px Lora, Georgia, serif; color: var(--olive); margin: 14px 0 8px; }
+.prt-root [data-el="mine"] h3 { font: 600 14px "DM Sans", sans-serif; color: var(--muted); margin: 16px 0 8px; }
+.prt-root [data-el="mine"] .grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px;
+}
+.prt-root [data-el="mine"] .stat b em { font: 400 13px "DM Sans", sans-serif; color: var(--muted); }
+.prt-root .journey .step.today { border-color: var(--olive); background: var(--olive-soft); }

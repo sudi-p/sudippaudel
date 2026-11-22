@@ -11,6 +11,12 @@ environment, so nothing is scraped.
 - `tracker.css` holds all the styles, scoped under `.prt-root`.
 - `data.json` is the only data store. It is imported at build time, so a data
   update shows up on the live site after the next deploy.
+- The user's own timeline is in `my-timeline.ts`, not `data.json`. Only
+  `src/app/api/pr-tracker/me/route.ts` imports it, and only returns it after
+  checking the `PR_TRACKER_PASSWORD` env var. Never import `my-timeline.ts`
+  from `page.tsx` or `tracker.ts`, or the dates would ship to the browser.
+  When the user gives new dates of their own (FD, P1, eCOPR…), update
+  `my-timeline.ts`.
 - Run locally with `npm run dev` from the repo root, then open
   http://localhost:3000/pr-tracker.
 

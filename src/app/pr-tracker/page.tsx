@@ -33,6 +33,18 @@ export default function PrTrackerPage() {
 
         <section className="stats" data-el="stats"></section>
 
+        <section className="mine">
+          <form className="unlock" data-el="unlock-form">
+            <button type="button" data-el="unlock-toggle">🔒 My timeline</button>
+            <span data-el="unlock-fields" hidden>
+              <input data-el="unlock-pw" type="password" placeholder="Password" autoComplete="current-password" />
+              <button type="submit">Unlock</button>
+            </span>
+            <span className="unlock-msg" data-el="unlock-msg"></span>
+          </form>
+          <div data-el="mine" hidden></div>
+        </section>
+
         <section className="filters">
           <input data-el="search" type="search" placeholder="Search username, country, notes…" />
           <select data-el="f-stream">
