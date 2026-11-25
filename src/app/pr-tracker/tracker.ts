@@ -70,7 +70,8 @@ const dayMonYear = (d) => {
   return m[3] ? `${Number(m[3])} ${mon} ${m[1]}` : `${mon} ${m[1]}`;
 };
 
-// CEC with no category given, or category "general".
+// CEC General. data.json stores every CEC entry without a named category draw as
+// category "General" (see CLAUDE.md); a missing category is still accepted just in case.
 const isCecGeneral = (p) => p.stream === "CEC" && (!p.category || p.category.toLowerCase() === "general");
 
 function summarize(values) {

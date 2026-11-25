@@ -66,6 +66,12 @@ being asked. Follow these rules every time.
   "BIL" or "BIL request" goes in `bil_date`. "COPR" goes in `ecopr_date`.
   Eligibility and background statuses go into the `eligibility` and
   `background_check` text fields.
+- **CEC is always CEC General unless a category is named.** If the stream is
+  CEC and the comment names no category draw (French, Healthcare, Trades,
+  Transport, STEM, etc.), set `stream: "CEC"` and `category: "General"`. Never
+  leave a CEC entry with `category: null`. There is no plain "CEC" category.
+  The page shows these as "CEC · General", and the estimates and the "Latest
+  CEC general AORs" table count them.
 - Anything useful that has no field of its own (ADR details, "PAL", "ghost
   update", passport sent) goes in `notes`. Append to existing notes and don't
   overwrite them.
